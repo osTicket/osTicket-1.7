@@ -158,7 +158,8 @@ $(document).ready(function(){
      });
 
 
-    /* advanced search dynamic CSS */
+    /* advanced search */
+
     $("#overlay").css({
         opacity : 0.3,
         top     : 0,
@@ -172,6 +173,15 @@ $(document).ready(function(){
         left : ($(window).width() / 2 - 300)
     });
 
+
+    $('#go-advanced').click(function(e) {
+        e.preventDefault();
+        $('#overlay').show(function() {
+            $('#advanced-search').show();
+        });
+    });
+
+    /* ------ */
 
     /* global inits */
 
