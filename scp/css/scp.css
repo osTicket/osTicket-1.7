@@ -1056,6 +1056,7 @@ h2 .reload {
     background:#000;
     position:absolute;
     display:none;
+    z-index:1000;
 }
 
 /* really should make these global at some point, but it means redoing a lot */
@@ -1073,6 +1074,7 @@ h2 .reload {
     background:#fff;
     border:1px solid #2a67ac;
     display:none;
+    z-index:1200;
 }
 
 #advanced-search h3 {

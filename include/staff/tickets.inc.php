@@ -545,7 +545,9 @@ $basic_display=!isset($_REQUEST['advance_search'])?true:false;
             </select>
             <label for="status">Status:</label>
             <select id="status" name="status">
-                <option value="0">&mdash; Any Status &mdash;</option>
+                <option value="">&mdash; Any Status &mdash;</option>
+                <option vlaue="open">Open</option>
+                <option value="closed">Closed</option>
             </select>
         </fieldset>
         <fieldset class="owner">

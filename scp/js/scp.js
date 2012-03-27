@@ -173,13 +173,50 @@ $(document).ready(function(){
         left : ($(window).width() / 2 - 300)
     });
 
-
     $('#go-advanced').click(function(e) {
         e.preventDefault();
-        $('#overlay').show(function() {
-            $('#advanced-search').show();
-        });
+        $('#overlay').show();
+        $('#advanced-search').show();
     });
+
+    $('#advanced-search').delegate('a.close', 'click', function(e) {
+        e.preventDefault();
+        $('#advanced-search').hide()
+        $('#overlay').hide();
+    }).delegate('input[type=reset]', 'click', function() {
+        $('#advanced-search').hide()
+        $('#overlay').hide();
+    }).delegate('#status', 'change', function() {
+        status = $(this).val();
+        if(status==='closed') {
+            $('#advanced-search .assigned_to').hide();
+            $('#advanced-search .closed_by').show();
+        } else {
+            $('#advanced-search .closed_by').hide();
+            $('#advanced-search .assigned_to').show();
+        }
+    }).delegate('select, input', 'change', function() {
+        // TODO: Actual AJAX queries....
+        // FAKING IT FOR NOW!
+        response = {
+            success:"There are 3 tickets matching these criteria."
+        }
+
+        $elem = $('#advanced-search');
+        $('#result-count').html('');
+        $('.buttons', $elem).hide();
+        $('.spinner', $elem).show();
+        setTimeout(function() {
+            if(response.success) {
+                $('#result-count').html('<div class="success">' + response.success +'</div>');
+            } else if (response.fail) {
+                $('#result-count').html('<div class="fail">' + response.fail +'</div>');
+            }
+            $('.spinner', $elem).hide();
+            $('.buttons', $elem).show();
+        }, 1000);
+    });
+
 
     /* ------ */
 
