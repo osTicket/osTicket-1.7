@@ -12,7 +12,7 @@ $searchTerm='';
 //make sure the search query is 3 chars min...defaults to no query with warning message
 if($search) {
   $searchTerm=$_REQUEST['query'];
-  if( ($_REQUEST['query'] && strlen($_REQUEST['query'])<3) 
+  if( ($_REQUEST['query'] && strlen($_REQUEST['query'])<3)
       || (!$_REQUEST['query'] && isset($_REQUEST['basic_search'])) ){ //Why do I care about this crap...
       $search=false; //Instead of an error page...default back to regular query..with no search.
       $errors['err']='Search term must be more than 3 chars';
@@ -54,12 +54,12 @@ switch(strtolower($_REQUEST['status'])){ //Status is overloaded
 }
 
 $qwhere ='';
-/* 
+/*
    STRICT DEPARTMENTS BASED PERMISSION!
    User can also see tickets assigned to them regardless of the ticket's dept.
 */
 
-$depts=$thisstaff->getDepts();    
+$depts=$thisstaff->getDepts();
 $qwhere =' WHERE ( '
         .'  ticket.dept_id IN ('.($depts?implode(',',$depts):0).') OR ticket.staff_id='.$thisstaff->getId();
 if(($teams=$thisstaff->getTeams()) && count(array_filter($teams)))
@@ -68,7 +68,7 @@ $qwhere .= ' )';
 
 //STATUS
 if($status){
-    $qwhere.=' AND status='.db_input(strtolower($status));    
+    $qwhere.=' AND status='.db_input(strtolower($status));
 }
 
 //Overloaded sub-statuses  - you've got to just have faith!
@@ -88,7 +88,7 @@ if($staffId && ($staffId==$thisstaff->getId())) { //Staff's assigned tickets.
 if(!($cfg->showAssignedTickets() || $thisstaff->showAssignedTickets()) && strcasecmp($status,'closed'))
     $sql.=' AND (ticket.staff_id=0 OR ticket.staff_id='.db_input($thisstaff->getId()).') ';
 
-//Search?? Somebody...get me some coffee 
+//Search?? Somebody...get me some coffee
 $deep_search=false;
 if($search):
     $qstr.='&a='.urlencode($_REQUEST['a']);
@@ -106,8 +106,8 @@ if($search):
         }elseif(strpos($searchTerm,'@') && Validator::is_email($searchTerm)){ //pulling all tricks!
             $qwhere.=" AND ticket.email='$queryterm'";
         }else{//Deep search!
-            //This sucks..mass scan! search anything that moves! 
-            
+            //This sucks..mass scan! search anything that moves!
+
             $deep_search=true;
             if($_REQUEST['stype'] && $_REQUEST['stype']=='FT') { //Using full text on big fields.
                 $qwhere.=" AND ( ticket.email LIKE '%$queryterm%'".
@@ -153,7 +153,7 @@ if($search):
         if($startTime){
             $qwhere.=' AND ticket.created>=FROM_UNIXTIME('.$startTime.')';
             $qstr.='&startDate='.urlencode($_REQUEST['startDate']);
-                        
+
         }
         if($endTime){
             $qwhere.=' AND ticket.created<=FROM_UNIXTIME('.$endTime.')';
@@ -226,7 +226,7 @@ $qselect.=' ,count(attach.attach_id) as attachments '
          .' ,IF(staff.staff_id IS NULL,team.name,CONCAT_WS(" ", staff.lastname, staff.firstname)) as assigned ';
 
 $qfrom.=' LEFT JOIN '.TICKET_PRIORITY_TABLE.' pri ON (ticket.priority_id=pri.priority_id) '
-       .' LEFT JOIN '.TICKET_LOCK_TABLE.' tlock ON (ticket.ticket_id=tlock.ticket_id AND tlock.expire>NOW() 
+       .' LEFT JOIN '.TICKET_LOCK_TABLE.' tlock ON (ticket.ticket_id=tlock.ticket_id AND tlock.expire>NOW()
                AND tlock.staff_id!='.db_input($thisstaff->getId()).') '
        .' LEFT JOIN '.TICKET_ATTACHMENT_TABLE.' attach ON (ticket.ticket_id=attach.ticket_id) '
        .' LEFT JOIN '.TICKET_MESSAGE_TABLE.' message ON (ticket.ticket_id=message.ticket_id) '
@@ -256,6 +256,7 @@ $basic_display=!isset($_REQUEST['advance_search'])?true:false;
         <tr>
             <td><input type="text" id="query" name="query" size=30 value="<?php echo Format::htmlchars($_REQUEST['query']); ?>"></td>
             <td><input type="submit" name="basic_search" class="button" value="Search"></td>
+            <td><a href="" id="go-advanced">[advanced]</a></td>
         </tr>
     </table>
     </form>
@@ -273,7 +274,7 @@ $basic_display=!isset($_REQUEST['advance_search'])?true:false;
                 $sql='SELECT dept_id,dept_name FROM '.DEPT_TABLE;
                 if(!$thisstaff->isadmin())
                     $sql.=' WHERE dept_id IN ('.implode(',',$thisstaff->getDepts()).')';
-                
+
                 $depts= db_query($sql);
                 while (list($deptId,$deptName) = db_fetch_row($depts)){
                 $selected = ($_GET['dept']==$deptId)?'selected':''; ?>
@@ -283,7 +284,7 @@ $basic_display=!isset($_REQUEST['advance_search'])?true:false;
             </select>
         </td>
         <td>Status is:</td><td>
-    
+
         <select name="status">
             <option value='any' selected >Any status</option>
             <option value="open" <?php echo !strcasecmp($_REQUEST['status'],'Open')?'selected':''; ?>>Open</option>
@@ -295,11 +296,11 @@ $basic_display=!isset($_REQUEST['advance_search'])?true:false;
     </table>
     <div>
         Date Span:
-        &nbsp;From&nbsp;<input id="sd" name="startDate" value="<?php echo Format::htmlchars($_REQUEST['startDate']); ?>" 
+        &nbsp;From&nbsp;<input id="sd" name="startDate" value="<?php echo Format::htmlchars($_REQUEST['startDate']); ?>"
                 onclick="event.cancelBubble=true;calendar(this);" autocomplete=OFF>
             <a href="#" onclick="event.cancelBubble=true;calendar(getObj('sd')); return false;"><img src='images/cal.png'border=0 alt=""></a>
             &nbsp;&nbsp; to &nbsp;&nbsp;
-            <input id="ed" name="endDate" value="<?php echo Format::htmlchars($_REQUEST['endDate']); ?>" 
+            <input id="ed" name="endDate" value="<?php echo Format::htmlchars($_REQUEST['endDate']); ?>"
                 onclick="event.cancelBubble=true;calendar(this);" autocomplete=OFF >
                 <a href="#" onclick="event.cancelBubble=true;calendar(getObj('ed')); return false;"><img src='images/cal.png'border=0 alt=""></a>
             &nbsp;&nbsp;
@@ -307,12 +308,12 @@ $basic_display=!isset($_REQUEST['advance_search'])?true:false;
     <table>
     <tr>
        <td>Type:</td>
-       <td>       
+       <td>
         <select name="stype">
             <option value="LIKE" <?php echo (!$_REQUEST['stype'] || $_REQUEST['stype'] == 'LIKE') ?'selected':''; ?>>Scan (%)</option>
             <option value="FT"<?php echo  $_REQUEST['stype'] == 'FT'?'selected':''; ?>>Fulltext</option>
         </select>
- 
+
 
        </td>
        <td>Sort by:</td><td>
@@ -362,13 +363,13 @@ $basic_display=!isset($_REQUEST['advance_search'])?true:false;
 	        <th width="8px">&nbsp;</th>
             <?php } ?>
 	        <th width="70">
-                <a <?php echo $id_sort; ?> href="tickets.php?sort=ID&order=<?php echo $negorder; ?><?php echo $qstr; ?>" 
+                <a <?php echo $id_sort; ?> href="tickets.php?sort=ID&order=<?php echo $negorder; ?><?php echo $qstr; ?>"
                     title="Sort By Ticket ID <?php echo $negorder; ?>">Ticket</a></th>
 	        <th width="70">
-                <a  <?php echo $date_sort; ?> href="tickets.php?sort=date&order=<?php echo $negorder; ?><?php echo $qstr; ?>" 
+                <a  <?php echo $date_sort; ?> href="tickets.php?sort=date&order=<?php echo $negorder; ?><?php echo $qstr; ?>"
                     title="Sort By Date <?php echo $negorder; ?>">Date</a></th>
 	        <th width="280">
-                 <a <?php echo $subj_sort; ?> href="tickets.php?sort=subj&order=<?php echo $negorder; ?><?php echo $qstr; ?>" 
+                 <a <?php echo $subj_sort; ?> href="tickets.php?sort=subj&order=<?php echo $negorder; ?><?php echo $qstr; ?>"
                     title="Sort By Subject <?php echo $negorder; ?>">Subject</a></th>
             <th width="170">
                 <a <?php echo $name_sort; ?> href="tickets.php?sort=name&order=<?php echo $negorder; ?><?php echo $qstr; ?>"
@@ -381,22 +382,22 @@ $basic_display=!isset($_REQUEST['advance_search'])?true:false;
             <?php
             } else { ?>
                 <th width="60" <?=$pri_sort?>>
-                    <a <?php echo $pri_sort; ?> href="tickets.php?sort=pri&order=<?php echo $negorder; ?><?php echo $qstr; ?>" 
+                    <a <?php echo $pri_sort; ?> href="tickets.php?sort=pri&order=<?php echo $negorder; ?><?php echo $qstr; ?>"
                         title="Sort By Priority <?php echo $negorder; ?>">Priority</a></th>
             <?php
             }
 
             if($showassigned){ ?>
             <th width="150">
-                <a <?php echo $assignee_sort; ?> href="tickets.php?sort=assignee&order=<?php echo $negorder; ?><?php echo $qstr; ?>" 
+                <a <?php echo $assignee_sort; ?> href="tickets.php?sort=assignee&order=<?php echo $negorder; ?><?php echo $qstr; ?>"
                     title="Sort By Assignee <?php echo $negorder;?>">Assigned To</a></th>
             <?}elseif(!strcasecmp($status,'closed')){?>
             <th width="150">
-                <a <?php echo $staff_sort; ?> href="tickets.php?sort=staff&order=<?php echo $negorder; ?><?php echo $qstr; ?>" 
+                <a <?php echo $staff_sort; ?> href="tickets.php?sort=staff&order=<?php echo $negorder; ?><?php echo $qstr; ?>"
                     title="Sort By Closing Staff Name <?php echo $negorder; ?>">Closed By</a></th>
             <?}else{?>
             <th width="150">
-                <a <?=$dept_sort?> href="tickets.php?sort=dept&order=<?=$negorder?><?=$qstr?>" 
+                <a <?=$dept_sort?> href="tickets.php?sort=dept&order=<?=$negorder?><?=$qstr?>"
                     title="Sort By Department <?=$negorder?>">Department</a></th>
             <?}?>
         </tr>
@@ -439,17 +440,17 @@ $basic_display=!isset($_REQUEST['advance_search'])?true:false;
                 </td>
                 <?php } ?>
                 <td align="center" title="<?php echo $row['email']; ?>" nowrap>
-                  <a class="Icon <?php echo strtolower($row['source']); ?>Ticket ticketPreview" title="Preview Ticket" 
+                  <a class="Icon <?php echo strtolower($row['source']); ?>Ticket ticketPreview" title="Preview Ticket"
                     href="tickets.php?id=<?php echo $row['ticket_id']; ?>"><?php echo $tid; ?></a></td>
                 <td align="center" nowrap><?php echo Format::db_date($row['created']); ?></td>
-                <td><a <?php if($flag) { ?> class="Icon <?php echo $flag; ?>Ticket" title="<?php echo ucfirst($flag); ?> Ticket" <?php } ?> 
+                <td><a <?php if($flag) { ?> class="Icon <?php echo $flag; ?>Ticket" title="<?php echo ucfirst($flag); ?> Ticket" <?php } ?>
                     href="tickets.php?id=<?php echo $row['ticket_id']; ?>"><?php echo $subject; ?></a>
                      &nbsp;
                      <?php echo ($threadcount>1)?" <small>($threadcount)</small>&nbsp;":''?>
                      <?php echo $row['attachments']?"<span class='Icon file'>&nbsp;</span>":''; ?>
                 </td>
                 <td nowrap>&nbsp;<?php echo Format::truncate($row['name'],22,strpos($row['name'],'@')); ?>&nbsp;</td>
-                <?php 
+                <?php
                 if($search && !$status){
                     $displaystatus=ucfirst($row['status']);
                     if(!strcasecmp($row['status'],'open'))
@@ -459,14 +460,14 @@ $basic_display=!isset($_REQUEST['advance_search'])?true:false;
                 <td class="nohover" align="center" style="background-color:<?php echo $row['priority_color']; ?>;">
                     <?php echo $row['priority_desc']; ?></td>
                 <?php
-                } 
+                }
                 ?>
                 <td nowrap>&nbsp;<?php echo $lc; ?></td>
             </tr>
             <?php
             } //end of while.
         else: //not tickets found!! set fetch error.
-            $ferror='Query returned 0 results.';  
+            $ferror='Query returned 0 results.';
         endif; ?>
     </tbody>
     <tfoot>
@@ -490,7 +491,7 @@ $basic_display=!isset($_REQUEST['advance_search'])?true:false;
     ?>
         <?php
          if($thisstaff->canManageTickets()) { ?>
-           <p class="centered">  
+           <p class="centered">
             <?php
             $status=$_REQUEST['status']?$_REQUEST['status']:$status;
             switch (strtolower($status)) {
@@ -518,7 +519,7 @@ $basic_display=!isset($_REQUEST['advance_search'])?true:false;
             <?php
             }
             if($thisstaff->canDeleteTickets()) { ?>
-                <input class="button" type="submit" name="delete" value="Delete" 
+                <input class="button" type="submit" name="delete" value="Delete"
                     onClick=' return confirm("Are you sure you want to DELETE selected tickets?");'>
             <?php } ?>
         </p>
@@ -526,4 +527,73 @@ $basic_display=!isset($_REQUEST['advance_search'])?true:false;
        }
     } ?>
     </form>
+</div>
+<div id="overlay"></div>
+<div id="advanced-search">
+    <h3>Advanced Search</h3>
+    <a class="close" href="">&times;</a>
+
+    <form action="" method="post">
+        <fieldset class="query">
+            <label for="query">Query:</label>
+            <input id="query" name="query" size="20" type="search">
+        </fieldset>
+        <fieldset class="department-status">
+            <label for="department">Department:</label>
+            <select id="department" name="department">
+                <option value="0">&mdash; All Departments &mdash;</option>
+            </select>
+            <label for="status">Status:</label>
+            <select id="status" name="status">
+                <option value="0">&mdash; Any Status &mdash;</option>
+            </select>
+        </fieldset>
+        <fieldset class="owner">
+            <div class="assigned_to">
+                <label for="assigned_to">Assigned To:</label>
+                <select id="assigned_to" name="assigned_to">
+                    <option value="0">&mdash; Anyone &mdash;</option>
+                </select>
+            </div>
+            <div class="closed_by">
+                <label for="closed_by">Closed By:</label>
+                <select id="closed_by" name="closed_by">
+                    <option value="0">&mdash; Anyone &mdash;</option>
+                </select>
+            </div>
+        </fieldset>
+        <fieldset class="date_range">
+            <label>Date Range:</label>
+            <input type="date" size="20" name="start_date"><i></i>
+            <span>TO</span>
+            <input type="date" size="20" name="end_date"><i></i>
+        </fieldset>
+        <fieldset class="sorting">
+            <label>Sorting:</label>
+            <select name="sort_by">
+                <option value="0">Department</option>
+            </select>
+            <select name="sort_direction">
+                <option value="asc">Ascending</option>
+                <option value="desc">Descending</option>
+            </select>
+            <select name="per_page">
+                <option value="25">25 records/page</option>
+                <option value="50">50 records/page</option>
+                <option value="75">75 records/page</option>
+                <option value="100">100 records/page</option>
+            </select>
+        </fieldset>
+        <p>
+            <span class="buttons">
+                <input type="reset" value="Cancel">
+                <input type="submit" value="Search">
+            </span>
+            <span class="spinner">
+                <img src="./images/ajax-loader.gif" width="16" height="16">
+            </span>
+        </p>
+    </form>
+    <div id="result-count">
+    </div>
 </div>

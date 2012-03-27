@@ -1,9 +1,9 @@
-/* 
+/*
    scp.js
 
    osTicket SCP
    Copyright (c) osTicket.com
- 
+
  */
 
 function selectAll(formObj,task,highlight){
@@ -158,6 +158,19 @@ $(document).ready(function(){
      });
 
 
+    /* advanced search dynamic CSS */
+    $("#overlay").css({
+        opacity : 0.3,
+        top     : 0,
+        left    : 0,
+        width   : $(window).width(),
+        height  : $(window).height()
+    });
+
+    $("#advanced-search").css({
+        top  : ($(window).height() / 10),
+        left : ($(window).width() / 2 - 300)
+    });
 
 
     /* global inits */
