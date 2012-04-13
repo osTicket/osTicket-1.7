@@ -300,25 +300,25 @@ $basic_display=!isset($_REQUEST['advance_search'])?true:false;
                         title="Sort By Status <?php echo $negorder; ?>">Status</a></th>
             <?php
             } else { ?>
-                <th width="60" <?=$pri_sort?>>
+                <th width="60" <?php echo $pri_sort?>>
                     <a <?php echo $pri_sort; ?> href="tickets.php?sort=pri&order=<?php echo $negorder; ?><?php echo $qstr; ?>" 
                         title="Sort By Priority <?php echo $negorder; ?>">Priority</a></th>
             <?php
             }
 
-            if($showassigned){ ?>
+            if($showassigned): ?>
             <th width="150">
                 <a <?php echo $assignee_sort; ?> href="tickets.php?sort=assignee&order=<?php echo $negorder; ?><?php echo $qstr; ?>" 
                     title="Sort By Assignee <?php echo $negorder;?>">Assigned To</a></th>
-            <?}elseif(!strcasecmp($status,'closed')){?>
+            <?php elseif(!strcasecmp($status,'closed')): ?>
             <th width="150">
                 <a <?php echo $staff_sort; ?> href="tickets.php?sort=staff&order=<?php echo $negorder; ?><?php echo $qstr; ?>" 
                     title="Sort By Closing Staff Name <?php echo $negorder; ?>">Closed By</a></th>
-            <?}else{?>
+            <?php else: ?>
             <th width="150">
-                <a <?=$dept_sort?> href="tickets.php?sort=dept&order=<?=$negorder?><?=$qstr?>" 
-                    title="Sort By Department <?=$negorder?>">Department</a></th>
-            <?}?>
+                <a <?php echo $dept_sort?> href="tickets.php?sort=dept&order=<?php echo $negorder?><?php echo $qstr?>" 
+                    title="Sort By Department <?php echo $negorder?>">Department</a></th>
+            <?php endif; ?>
         </tr>
      </thead>
      <tbody>
