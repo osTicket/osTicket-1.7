@@ -39,6 +39,13 @@ class Filter {
         
         $this->ht=db_fetch_array($res);
         $this->id=$this->ht['id'];
+
+        $res = db_query('SELECT setting, value FROM '
+            .EMAIL_FILTER_SETTING_TABLE.' WHERE filter_id='
+            .db_input($id));
+        $this->settings = array();
+        while ($row=db_fetch_row($res))
+            $this->settings[$row[0]] = $row[1];
         
         return true;
     }
@@ -79,24 +86,33 @@ class Filter {
         return !strcasecmp($this->getName(),'SYSTEM BAN LIST');
     }
 
+    function _getSetting($name, $default=null) {
+        return (isset($this->settings[$name])) ? $this->settings[$name]
+                : $default;
+    }
+
     function getDeptId(){
-        return $this->ht['dept_id'];
+        return (int)$this->_getSetting('department', 0);
     }
 
     function getPriorityId(){
-        return $this->ht['priority_id'];
+        return (int)$this->_getSetting('priority', 0);
     }
 
     function getSLAId(){
-        return $this->ht['sla_id'];
+        return (int)$this->_getSetting('sla', 0);
     }
 
     function getStaffId(){
-        return $this->ht['staff_id'];
+        return (int)$this->_getSetting('assignee:staff', 0);
     }
 
     function getTeamId(){
-        return $this->ht['team_id'];
+        return (int)$this->_getSetting('assignee:team', 0);
+    }
+
+    function getEmailId(){
+        return (int)$this->_getSetting('system-email', 0);
     }
 
     function stopOnMatch(){
@@ -112,11 +128,11 @@ class Filter {
     }
 
     function useReplyToEmail(){
-        return ($this->ht['use_replyto_email']);
+        return $this->_getSetting('return-email', 0) == 'reply-to';
     }
 
     function disableAlerts(){
-        return ($this->ht['disable_autoresponder']);
+        return $this->_getSetting('auto-response', 0) == 'disable';
     }
      
     function sendAlerts(){
@@ -292,6 +308,7 @@ class Filter {
         $sql='DELETE FROM '.EMAIL_FILTER_TABLE.' WHERE id='.db_input($id).' LIMIT 1';
         if(db_query($sql) && ($num=db_affected_rows())){
             db_query('DELETE FROM '.EMAIL_FILTER_RULE_TABLE.' WHERE filter_id='.db_input($id));
+            db_query('DELETE FROM '.EMAIL_FILTER_SETTING_TABLE.' WHERE filter_id='.db_input($id));
         }
 
         return $num;
@@ -386,26 +403,11 @@ class Filter {
              ',isactive='.db_input($vars['isactive']).
              ',name='.db_input($vars['name']).
              ',execorder='.db_input($vars['execorder']).
-             ',email_id='.db_input($vars['email_id']).
-             ',dept_id='.db_input($vars['dept_id']).
-             ',priority_id='.db_input($vars['priority_id']).
-             ',sla_id='.db_input($vars['sla_id']).
              ',match_all_rules='.db_input($vars['match_all_rules']).
              ',stop_onmatch='.db_input(isset($vars['stop_onmatch'])?1:0).
              ',reject_email='.db_input(isset($vars['reject_email'])?1:0).
-             ',use_replyto_email='.db_input(isset($vars['use_replyto_email'])?1:0).
-             ',disable_autoresponder='.db_input(isset($vars['disable_autoresponder'])?1:0).
              ',notes='.db_input($vars['notes']);
        
-
-        //Auto assign ID is overloaded...
-        if($vars['assign'] && $vars['assign'][0]=='s')
-             $sql.=',team_id=0,staff_id='.db_input(preg_replace("/[^0-9]/", "",$vars['assign']));
-        elseif($vars['assign'] && $vars['assign'][0]=='t')
-            $sql.=',staff_id=0,team_id='.db_input(preg_replace("/[^0-9]/", "",$vars['assign']));
-        else
-            $sql.=',staff_id=0,team_id=0 '; //no auto-assignment!
-
         if($id) {
             $sql='UPDATE '.EMAIL_FILTER_TABLE.' SET '.$sql.' WHERE id='.db_input($id);
             if(!db_query($sql))
@@ -414,6 +416,31 @@ class Filter {
             $sql='INSERT INTO '.EMAIL_FILTER_TABLE.' SET '.$sql.',created=NOW() ';
             if(!db_query($sql) || !($id=db_insert_id()))
                 $errors['err']='Unable to add filter. Internal error';
+        }
+
+        # Add settings for this email filter
+        db_query('DELETE FROM '.EMAIL_FILTER_SETTING_TABLE
+            .' WHERE filter_id='.db_input($id));
+        $vars['return-email'] = $vars['use_replyto_email'] 
+            ? 'reply-to' : 'from';
+        $vars['auto-response'] = $vars['disable_autoresponder'] 
+            ? 'disable' : 'enable';
+        $vars['staff_id'] = $vars['assign'][0] == 's' ? substr($vars, 1) : 0;
+        $vars['team_id'] = $vars['assign'][0] == 't' ? substr($vars, 1) : 0;
+        $settings = array('department' => 'dept_id',
+                          'priority' => 'priority_id',
+                          'sla' => 'sla_id',
+                          'assignee:staff' => 'staff_id',
+                          'assignee:team' => 'team_id',
+                          'system-email' => 'email_id',
+                          'auto-response' => 'auto-response',
+                          'return-email' => 'return-email');
+        foreach ($settings as $setting=>$key) {
+            if (!$vars[$key]) continue;
+            db_query('INSERT INTO '.EMAIL_FILTER_SETTING_TABLE
+                .' SET filter_id='.db_input($id)
+                    .',setting='.db_input($setting)
+                    .',value='.db_input($vars[$key]));
         }
 
         if($errors || !$id) return false;

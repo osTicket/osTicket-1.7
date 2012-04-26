@@ -146,6 +146,7 @@
     define('EMAIL_TEMPLATE_TABLE',TABLE_PREFIX.'email_template');
     define('EMAIL_FILTER_TABLE',TABLE_PREFIX.'email_filter');
     define('EMAIL_FILTER_RULE_TABLE',TABLE_PREFIX.'email_filter_rule');
+    define('EMAIL_FILTER_SETTING_TABLE',TABLE_PREFIX.'email_filter_setting');
     define('BANLIST_TABLE',TABLE_PREFIX.'email_banlist'); //Not in use anymore....as of v 1.7
 
     define('SLA_TABLE',TABLE_PREFIX.'sla');
