@@ -81,7 +81,7 @@ $info=Format::htmlchars(($errors && $_POST)?$_POST:$info);
                     $sql='SELECT email_id,email,name FROM '.EMAIL_TABLE.' email ORDER by name';
                     if(($res=db_query($sql)) && db_num_rows($res)){
                         while(list($id,$email,$name)=db_fetch_row($res)){
-                            $selected=($info['email_id'] && $id==$info['email_id'])?'selected="selected"':'';
+                            $selected=($filter->getEmailId() && $id==$filter->getEmailId())?'selected="selected"':'';
                             if($name)
                                 $email=Format::htmlchars("$name <$email>");
                             echo sprintf('<option value="%d" %s>%s</option>',$id,$selected,$email);
@@ -168,7 +168,7 @@ $info=Format::htmlchars(($errors && $_POST)?$_POST:$info);
                 Reply-To Email:
             </td>
             <td>
-                <input type="checkbox" name="use_replyto_email" value="1" <?php echo $info['use_replyto_email']?'checked="checked"':''; ?> >
+                <input type="checkbox" name="use_replyto_email" value="1" <?php echo $filter->useReplyToEmail()?'checked="checked"':''; ?> >
                     <strong>Use</strong> Reply-To Email <em>(if available)</em>
             </td>
         </tr>
@@ -177,7 +177,7 @@ $info=Format::htmlchars(($errors && $_POST)?$_POST:$info);
                 Ticket auto-response:
             </td>
             <td>
-                <input type="checkbox" name="disable_autoresponder" value="1" <?php echo $info['disable_autoresponder']?'checked="checked"':''; ?> >
+                <input type="checkbox" name="disable_autoresponder" value="1" <?php echo $filter->disableAlerts()?'checked="checked"':''; ?> >
                     <strong>Disable</strong> auto-response. <em>(Overwrites Dept. settings)</em>
             </td>
         </tr>
@@ -192,7 +192,7 @@ $info=Format::htmlchars(($errors && $_POST)?$_POST:$info);
                     $sql='SELECT dept_id,dept_name FROM '.DEPT_TABLE.' dept ORDER by dept_name';
                     if(($res=db_query($sql)) && db_num_rows($res)){
                         while(list($id,$name)=db_fetch_row($res)){
-                            $selected=($info['dept_id'] && $id==$info['dept_id'])?'selected="selected"':'';
+                            $selected=($filter->getDeptId() && $id==$filter->getDeptId())?'selected="selected"':'';
                             echo sprintf('<option value="%d" %s>%s</option>',$id,$selected,$name);
                         }
                     }
@@ -212,7 +212,7 @@ $info=Format::htmlchars(($errors && $_POST)?$_POST:$info);
                     $sql='SELECT priority_id,priority_desc FROM '.PRIORITY_TABLE.' pri ORDER by priority_urgency DESC';
                     if(($res=db_query($sql)) && db_num_rows($res)){
                         while(list($id,$name)=db_fetch_row($res)){
-                            $selected=($info['priority_id'] && $id==$info['priority_id'])?'selected="selected"':'';
+                            $selected=($filter->getPriorityId() && $id==$filter->getPriorityId())?'selected="selected"':'';
                             echo sprintf('<option value="%d" %s>%s</option>',$id,$selected,$name);
                         }
                     }
@@ -233,7 +233,7 @@ $info=Format::htmlchars(($errors && $_POST)?$_POST:$info);
                     $sql='SELECT id,name FROM '.SLA_TABLE.' sla ORDER by name';
                     if(($res=db_query($sql)) && db_num_rows($res)){
                         while(list($id,$name)=db_fetch_row($res)){
-                            $selected=($info['sla_id'] && $id==$info['sla_id'])?'selected="selected"':'';
+                            $selected=($filter->getSLAId() && $id==$filter->getSLAId())?'selected="selected"':'';
                             echo sprintf('<option value="%d" %s>%s</option>',$id,$selected,$name);
                         }
                     }
@@ -262,7 +262,7 @@ $info=Format::htmlchars(($errors && $_POST)?$_POST:$info);
                         echo '<OPTGROUP label="Staff Members">';
                         while (list($id,$name) = db_fetch_row($res)){
                             $k="s$id";
-                            $selected = ($info['assign']==$k || $info['staff_id']==$id)?'selected="selected"':'';
+                            $selected = ($info['assign']==$k || $filter->getStaffId()==$id)?'selected="selected"':'';
                             ?>
                             <option value="<?php echo $k; ?>"<?php echo $selected; ?>><?php echo $name; ?></option>
 
@@ -275,7 +275,7 @@ $info=Format::htmlchars(($errors && $_POST)?$_POST:$info);
                         echo '<OPTGROUP label="Teams">';
                         while (list($id,$name) = db_fetch_row($res)){
                             $k="t$id";
-                            $selected = ($info['assign']==$k || $info['team_id']==$id)?'selected="selected"':'';
+                            $selected = ($info['assign']==$k || $filter->getTeamId()==$id)?'selected="selected"':'';
                             ?>
                             <option value="<?php echo $k; ?>"<?php echo $selected; ?>><?php echo $name; ?></option>
                         <?php
