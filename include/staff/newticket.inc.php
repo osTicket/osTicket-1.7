@@ -39,7 +39,7 @@ $info=($_POST && $errors)?Format::input($_POST):array(); //on error...use the po
             &nbsp;Ext&nbsp;<input type="text" name="phone_ext" size="6" value="<?php echo $info['phone_ext']; ?>">
             <font class="error">&nbsp;<?php echo $errors['phone']; ?></font></td>
     </tr>
-    <tr height=2px><td align="left" colspan=2 >&nbsp;</td</tr>
+    <tr height=2px><td align="left" colspan=2 >&nbsp;</td></tr>
     <tr>
         <td align="left"><b>Ticket Source:</b></td>
         <td>
@@ -198,7 +198,7 @@ $info=($_POST && $errors)?Format::input($_POST):array(); //on error...use the po
             </div>
         </td>
     </tr>
-    <tr height=2px><td align="left" colspan=2 >&nbsp;</td</tr>
+    <tr height=2px><td align="left" colspan=2 >&nbsp;</td></tr>
     <tr>
         <td></td>
         <td>
