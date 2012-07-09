@@ -20,7 +20,10 @@ $lock  = $ticket->getLock();  //Ticket lock obj
 $id    = $ticket->getId();    //Ticket ID.
 
 //Useful warnings and errors the user might want to know!
-if($ticket->isAssigned() && $staff->getId()!=$thisstaff->getId())
+if($ticket->isAssigned() && (
+            ($staff && $staff->getId()!=$thisstaff->getId())
+         || ($team && !$team->hasMember($thisstaff))
+        ))
     $warn.='&nbsp;&nbsp;<span class="Icon assignedTicket">Ticket is assigned to '.implode('/', $ticket->getAssignees()).'</span>';
 if(!$errors['err'] && ($lock && $lock->getStaffId()!=$thisstaff->getId()))
     $errors['err']='This ticket is currently locked by '.$lock->getStaffName();
@@ -236,12 +239,13 @@ if(!$cfg->showNotesInline()) { ?>
             <tr>
                 <th width="200"><?php echo Format::db_datetime($entry['created']);?></th>
                 <th width="440"><span><?php echo Format::htmlchars($entry['title']); ?></span></th>
-                <th width="300" class="tmeta"><?php echo Format::htmlchars($entry['poster']); ?></th></tr>
-            <tr><td colspan=2><?php echo Format::display($entry['body']); ?></td></tr>
+                <th width="300" class="tmeta"><?php echo Format::htmlchars($entry['poster']); ?></th>
+            </tr>
+            <tr><td colspan=3><?php echo Format::display($entry['body']); ?></td></tr>
             <?php
             if($entry['attachments'] && ($links=$ticket->getAttachmentsLinks($entry['id'], $entry['thread_type']))) {?>
             <tr>
-                <td class="info" colspan=2><?php echo $links; ?></td>
+                <td class="info" colspan=3><?php echo $links; ?></td>
             </tr>
             <?php
             }?>
