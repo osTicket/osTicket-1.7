@@ -114,6 +114,8 @@ class Format {
     }
 
     function striptags($var) {
+        //removing no-break space, cause leads to failures in some cases
+        $var = str_replace('&nbsp;', ' ',$var);
         return is_array($var)?array_map(array('Format','striptags'),$var):strip_tags(html_entity_decode($var)); //strip all tags ...no mercy!
     }
 
