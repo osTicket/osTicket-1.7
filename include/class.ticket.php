@@ -1579,9 +1579,13 @@ class Ticket{
        
        @file is a mixed var - can be ID or file hash.
      */
-    function saveAttachment($file, $refid, $type) {
+    function saveAttachment($filename, $file, $refid, $type) {
 
-        if(!$refid || !$type || !($fileId=is_numeric($file)?$file:AttachmentFile::save($file)))
+        if(!$refid || !$type || !($fileId=is_numeric($file)?$file:AttachmentFile::save(array(
+        'type' => $type,
+        'name' => $filename,
+        'data' => $file,
+        ))))
             return 0;
 
         $sql ='INSERT INTO '.TICKET_ATTACHMENT_TABLE.' SET created=NOW() '
