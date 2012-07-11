@@ -1605,6 +1605,28 @@ class Ticket{
 
         return $deleted;
     }
+    
+    function inlineAttachments($text)
+    {
+	$attachments = $this->getAttachmentUrls(0,'M');
+	$text = preg_replace("/\[cid\:(.*\.(png|jpg|jpeg))@.*\]/e", 
+			     '"<img src=\"" . $attachments["$1"]."\" >"',$text);
+	return $text;
+    }
+    
+    function getAttachmentUrls($refId, $type) {
+
+        $array=array();
+        foreach($this->getAttachments($refId, $type) as $attachment ) {
+            /* The has here can be changed  but must match validation in attachment.php */
+            $hash=md5($attachment['file_id'].session_id().$attachment['file_hash']); 
+            $file_name = $attachment['name'];
+            $array[$file_name] = sprintf('attachment.php?id=%d&h=%s',
+                    $attachment['attach_id'], $hash);                
+        }
+
+        return $array;
+    }
 
 
     function delete(){
