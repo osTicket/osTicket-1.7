@@ -1611,6 +1611,8 @@ class Ticket{
 	$attachments = $this->getAttachmentUrls(0,'M');
 	$text = preg_replace("/\[cid\:(.*\.(png|jpg|jpeg))@.*\]/e", 
 			     '"<img src=\"" . $attachments["$1"]."\" >"',$text);
+	$text = preg_replace("/\(Embedded image moved to file:\s(.*\.(png|jpg|jpeg))\)/e", 
+			     '"<img src=\"" . $attachments["$1"]."\" >"',$text);
 	return $text;
     }
     
