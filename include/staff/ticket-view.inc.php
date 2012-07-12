@@ -245,7 +245,7 @@ if(!$cfg->showNotesInline()) { ?>
                 <th width="440"><span><?php echo Format::htmlchars($entry['title']); ?></span></th>
                 <th width="300" class="tmeta"><?php echo Format::htmlchars($entry['poster']); ?></th>
             </tr>
-            <tr><td colspan=3><?php echo $ticket->inlineAttachments(Format::display($entry['body'])); ?></td></tr>
+            <tr><td colspan=3><?php echo $ticket->inlineAttachments(Format::display($entry['body']), $entry['id']); ?></td></tr>
             <?php
             if($entry['attachments'] && ($links=$ticket->getAttachmentsLinks($entry['id'], $entry['thread_type']))) {?>
             <tr>
