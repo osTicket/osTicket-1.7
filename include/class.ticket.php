@@ -1609,9 +1609,9 @@ class Ticket{
     function inlineAttachments($text, $ref_id=0)
     {
 	$attachments = $this->getAttachmentUrls($ref_id,'M');
-	$text = preg_replace("/\[cid\:(.*\.(png|jpg|jpeg))@.*\]/e", 
+	$text = preg_replace("/\[cid\:(.*\.(png|jpg|jpeg|gif))@.*\]/e", 
 			     '"<a href=\"" . $attachments["$1"]."\"><img class=\"ineline_image\" src=\"" . $attachments["$1"]."\" ></a>"',$text);
-	$text = preg_replace("/\(Embedded image moved to file:\s(.*\.(png|jpg|jpeg))\)/e", 
+	$text = preg_replace("/\(Embedded image moved to file:\s(.*\.(png|jpg|jpeg|gif))\)/e", 
 			     '"<a href=\"" . $attachments["$1"]."\"><img class=\"ineline_image\" src=\"" . $attachments["$1"]."\" ></a>"',$text);
 	return $text;
     }
