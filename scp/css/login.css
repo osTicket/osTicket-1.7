@@ -1,138 +1,151 @@
+
 * {
-    box-sizing: border-box;
-    position: relative;
-    -moz-box-sizing: border-box;
-    -webkit-box-sizing: border-box;
+	box-sizing: border-box;
+	position: relative;
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
 }
 
 *:focus {
-    outline-color: rgb(207,16,118);
-    outline-style: auto;
-    outline-width: 5px;
-    z-index:1000;
+	outline-color: rgb(207,16,118);
+	outline-style: auto;
+	outline-width: 5px;
+	z-index: 1000;
 }
 
 :-webkit-input-placeholder {
-    color:#888;
-    font-style:italic;
+	color: #888;
+	font-style: italic;
 }
 
 :-moz-placeholder {
-    color:#888;
-    font-style:italic;
+	color: #888;
+	font-style: italic;
 }
 
 html {
-    height:100%;
-    font-size: 100%;
-    overflow-y: scroll;
-    -webkit-text-size-adjust: 100%;
-    -ms-text-size-adjust: 100%;
+	height: 100%;
+	font-size: 100%;
+	overflow-y: scroll;
+	-webkit-text-size-adjust: 100%;
+	-ms-text-size-adjust: 100%;
 }
 
 body {
-    -webkit-font-smoothing:antialiased;
-    background:url(../images/login-background.jpg) top left repeat-x #fff;
-    font-size: 16px;
-    font-smoothing:antialiased;
-    height:100%;
-    line-height: 1.5em;
-    margin: 0;
-    text-align: center;
+	-webkit-font-smoothing: antialiased;
+	background: url(../images/login-background.jpg) top left repeat-x #fff;
+	font-size: 16px;
+	font-smoothing: antialiased;
+	height: 100%;
+	line-height: 1.5em;
+	margin: 0;
+	text-align: center;
 }
 
 body, input {
-    font-family: helvetica, arial, sans-serif;
-    font-size: 100%/1.5;
-    color: #000;
+	font-family: helvetica, arial, sans-serif;
+	font-size: 100%/1.5;
+	color: #000;
 }
 
 input[type=reset], input[type=submit], input[type=button] {
-    display: inline-block;
-    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-    -moz-tap-highlight-color: rgba(0, 0, 0, 0);
-    -o-tap-highlight-color: rgba(0, 0, 0, 0);
-    tap-highlight-color: rgba(0, 0, 0, 0);
+	display: inline-block;
+	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+	-moz-tap-highlight-color: rgba(0, 0, 0, 0);
+	-o-tap-highlight-color: rgba(0, 0, 0, 0);
+	tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
 #loginBox {
-    border:1px solid #2a67ac;
-    border-right:2px solid #2a67ac;
-    border-bottom:3px solid #2a67ac;
-    background:#fff;
-    width:400px;
-    margin:10% auto 0 auto;
-    padding:1em;
-    text-align:center;
+	border: 2px solid #2a67ac;
+	background: #fff;
+	width: 400px;
+	margin: 10% auto 0 auto;
+	padding: 1em;
+	text-align: center;
+	border-radius: 10px;
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+	box-shadow: 3px 3px 7px #bbc;
+	-moz-box-shadow: 3px 3px 7px #bbc;
+	-webkit-box-shadow: 3px 3px 7px #bbc;
 }
 
 h1 {
-    margin:0;
+	margin: 0;
 }
 
 #logo a {
-    display:block;
-    width:180px;
-    height:72px;
-    text-decoration:none;
-    text-indent:-9999px;
-    background:url(../images/login-logo.png);
-    margin:0 auto 1em auto;
+	display: block;
+	width: 180px;
+	height: 72px;
+	text-decoration: none;
+	text-indent: -9999px;
+	background: url(../images/login-logo.png);
+	margin: 0 auto 1em auto;
 }
 
 h3 {
-    margin:1em 0;
-    text-align:center;
-    font-size:0.8em;
-    font-weight:normal;
-    color:#d00;
+	margin: 1em 0;
+	text-align: center;
+	font-size: 0.8em;
+	font-weight: normal;
+	color: #d00;
 }
 
 form {
-    width:220px;
-    margin:0 auto;
-    overflow:hidden;
+	width: 220px;
+	margin: 0 auto;
+	overflow: hidden;
 }
 
 fieldset {
-    border:none;
-    margin:0;
-    padding:0;
+	border: none;
+	margin: 0;
+	padding: 0;
 }
 
 fieldset input {
-    display:block;
-    width:100%;
-    margin-bottom:1em;
-    border:1px solid #ccc;
-    background:#fff;
-    padding:2px;
+	display: block;
+	width: 100%;
+	margin-bottom: 1em;
+	border: 1px solid #ccc;
+	background: #fafafa;
+	padding: 2px 4px;
+	line-height: 120%;
+	font-size: 130%;
+	border-radius: 3px;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
 }
 
 input.submit {
-    display:inline-block;
-    float:right;
-    margin:0;
-    height:24px;
-    line-height:24px;
-    font-weight:bold;
-    border:1px solid #666666;
-    padding:0 10px;
-    background: url('../images/grey_btn_bg.png?1312910883') top left repeat-x;
-    color: #333;
+	display: inline-block;
+	float: right;
+	margin: 0;
+	height: 24px;
+	line-height: 24px;
+	font-weight: bold;
+	border: 1px solid #666666;
+	padding: 0 15px;
+	background: url('../images/grey_btn_bg.png?1312910883') top left repeat-x;
+	color: #333;
+	border-radius: 3px;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
 }
 
 input.submit:hover, input.submit:active {
-    background-position:bottom left;
+	background-position: bottom left;
 }
 
 #copyRights {
-    font-size:0.7em;
-    color:#888;
-    padding:1em;
-    text-align:center;
+	font-size: 0.7em;
+	color: #888;
+	padding: 1em;
+	text-align: center;
 }
 
 #copyRights a {
-    color:#888;
+	color: #888;
 }
