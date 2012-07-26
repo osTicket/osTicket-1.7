@@ -1526,7 +1526,7 @@ class Ticket{
             $body=$this->replaceTemplateVars($msg['body']);
             $subj=$this->replaceTemplateVars($msg['subj']);
             $body = str_replace('%note',"$title\n\n$note",$body);
-            $body = str_replace('%assigner',$poster,$body);
+            $body = str_replace('%poster',$poster,$body);
 
             // Alert recipients    
             $recipients=array();

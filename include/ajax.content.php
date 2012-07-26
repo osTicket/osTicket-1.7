@@ -69,6 +69,7 @@ class ContentAjaxAPI extends AjaxController {
                                     <tr><td>%staff</td><td>Staff\'s name (alert/notices)</td></tr>
                                     <tr><td>%assignee</td><td>Assigned staff</td></tr>
                                     <tr><td>%assigner</td><td>Staff assigning the ticket</td></tr>
+                                    <tr><td>%poster</td><td>Staff posting the note</td></tr>
                                     <tr><td>%url</td><td>osTicket\'s base url (FQDN)</td></tr>
 
                                 </table>
