@@ -74,7 +74,7 @@ $(document).ready(function(){
         $('.inactive').mouseenter(function() {
             var elem = $(this);
             var ie_shadow = $('<div>').addClass('ieshadow').css({
-                height:$('ul', elem).height()
+                height:$('ul', elem).outerHeight()
             });
             elem.append(ie_shadow);
         }).mouseleave(function() {

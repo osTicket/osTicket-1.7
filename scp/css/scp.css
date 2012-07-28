@@ -1,4 +1,3 @@
-
 /*
 Main SCP stylesheet
 */
@@ -192,7 +191,7 @@ a {
 #nav {
 	padding-top: 8px;
 	height: 29px;
-	line-height: 26px;
+	line-height: 29px;
 	margin-bottom: -1px;
 
 background: rgb(247,247,249);
@@ -292,14 +291,14 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f7f7f9', end
 }
 
 .ieshadow {
-	width: 230px;
+	width: 200px;
 	background: #000;
 	filter: progid:DXImageTransform.Microsoft.Blur(PixelRadius=3,MakeShadow=true,ShadowOpacity=0.30);
 	-ms-filter: "progid:DXImageTransform.Microsoft.Blur(PixelRadius=3,MakeShadow=true,ShadowOpacity=0.30)";
 	zoom: 1;
-	z-index: 300;
+	z-index: 198;
 	position: absolute;
-	top: 24px;
+	top: 29px;
 	left: 0;
 }
 
@@ -1226,6 +1225,7 @@ h2 .reload {
 	padding: 10px 10px;
 	background: #f9f9f9;
 	border: 1px solid #aaa;
+	margin-top: -1px;
 	border-radius: 3px;
 	-moz-border-radius: 3px;
 	-webkit-border-radius: 3px;
@@ -1238,7 +1238,7 @@ h2 .reload {
 	padding: 4px 0 0 190px;
 	margin: 0;
 	text-align: center;
-	height: 29px;
+	overflow: hidden;
 }
 
 #response_options li {
