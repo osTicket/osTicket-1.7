@@ -97,6 +97,12 @@ if($_POST){
 		}
 		
 	}
+	elseif($_POST['form']=='fetch'){
+        require_once(INCLUDE_DIR.'class.mailfetch.php');
+        MailFetcher::fetchMail(true); //Force Fetch mail...
+    	$ost->logDebug('Manual Fetch', 'Manually fetched by ['.$thisstaff->getUserName().']');
+		$msg='All mails accounts have been successfully fetched';
+	}
 	else{
 		$errors['err']='Unknown Error';
 	}
@@ -192,19 +198,26 @@ $(document).ready(function(){
 	
 	*/
 
-	$('.jsForm2').hide();
+	$('.jsForm').hide();
+	$('.jsForm1').show();
+	
 	$(".jsFormTabsNav A").click(function(event){
-		var rel=$(this).attr('rel');
-		$('.jsFormTabsNav A').each(function(){
-			$(this).closest('LI').removeClass("selected");
+		/* Select tab*/
+		$('.jsFormTabsNav LI').each(function(){
+			$(this).removeClass("selected");
 		});
 		$(this).closest('LI').addClass("selected");
+		
+		/* show selected pane, hide others*/
+		$('.jsForm').hide();
+		var rel=$(this).attr('rel');
 		if(rel=='jsForm2'){
-			$('.jsForm1').hide();
 			$('.jsForm2').show();
 		}
+		else if(rel=='jsForm3'){
+			$('.jsForm3').show();			
+		}
 		else{
-			$('.jsForm2').hide();
 			$('.jsForm1').show();
 		}
 	});
@@ -218,11 +231,12 @@ $(document).ready(function(){
 		<ul class="jsFormTabsNav" >
 			<li class="selected"><a href="#emailtest_form1" rel="jsForm1">Test Outgoing Email</a></li> 
 			<li><a href="#emailtest_form2" rel="jsForm2">Test Incoming Email</a></li>
+			<li><a href="#emailtest_form3" rel="jsForm3">Fetch Emails Accounts</a></li>
 		</ul>
 		<div class="form_tabs_nav_bottom"></div>
 	</div>
 
-	<div id="emailtest_form1" class="form_div jsForm1">
+	<div id="emailtest_form1" class="form_div jsForm jsForm1">
 		<h2>Test Outgoing Email</h2>
 		<form action="emailtest.php" method="post" id="emailtest">
 			<?php csrf_token(); ?>
@@ -274,8 +288,7 @@ $(document).ready(function(){
 		</form>
 	</div>
 
-	<a name="form2"></a>
-	<div id="emailtest_form2" class="form_div jsForm2">
+	<div id="emailtest_form2" class="form_div jsForm jsForm2">
 		<h2>Test Incoming Email</h2>
 		<form action="emailtest.php" method="post" id="emailtest">
 			<?php csrf_token(); ?>
@@ -326,7 +339,24 @@ $(document).ready(function(){
 			</p>
 		</form>
 	</div>
+
+	<div id="emailtest_form3" class="form_div jsForm jsForm3">
+		<h2>Fetch Emails Accounts</h2>
+		<form action="emailtest.php" method="post" id="emailtest">
+			<?php csrf_token(); ?>
+			<input type="hidden" name="form" value="fetch">
+			<p>
+				Click the following button to force fetching emails account immediatly regardless of cron settings.
+			</p>
+			<p class='form_buttons'>
+				<input type="submit" name="submit" value="Fetch Mails">
+				<input type="button" name="cancel" value="Cancel" onclick='window.location.href="emails.php"'>
+			</p>
+		</form>
+	</div>
+
 </div>
+
 
 <div id="emailtest_help" class="form_help">
 Emails can be formated as "<i>user@domain.com</i>" or "<i>Name &lt;user@email.com&gt;</i>"

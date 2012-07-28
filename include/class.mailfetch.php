@@ -369,7 +369,7 @@ class MailFetcher {
         return $msgs;
     }
 
-    function fetchMail(){
+    function fetchMail($force_mode=false){
         global $ost, $cfg;
       
         if(!$cfg->canFetchMail())
@@ -385,8 +385,9 @@ class MailFetcher {
         $MAX_ERRORS=5; //Max errors before we start delayed fetch attempts - hardcoded for now.
 
         $sql=' SELECT email_id,mail_host,mail_port,mail_protocol,mail_encryption,mail_delete,mail_archivefolder,mail_errors,userid,userpass FROM '.EMAIL_TABLE.
-             ' WHERE mail_active=1 AND (mail_errors<='.$MAX_ERRORS.' OR (TIME_TO_SEC(TIMEDIFF(NOW(),mail_lasterror))>5*60) )'.
-             ' AND (mail_lastfetch IS NULL OR TIME_TO_SEC(TIMEDIFF(NOW(),mail_lastfetch))>mail_fetchfreq*60) ';
+             ' WHERE mail_active=1 AND (mail_errors<='.$MAX_ERRORS.' OR (TIME_TO_SEC(TIMEDIFF(NOW(),mail_lasterror))>5*60) )';
+		$force_mode or $sql .=  ' AND (mail_lastfetch IS NULL OR TIME_TO_SEC(TIMEDIFF(NOW(),mail_lastfetch))>mail_fetchfreq*60) ';
+
         //echo $sql;
         if(!($accounts=db_query($sql)) || !db_num_rows($accounts))
             return;
