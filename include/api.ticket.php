@@ -33,11 +33,10 @@ class TicketController extends ApiController {
         $autorespond = $data['autorespond'] ? $data['autorespond'] : true;
         $source = $data['source'] ? $data['source'] : 'API';
 
-		# we need to have an attachements array in order to create a ticket
-       if(!is_array($data["attachments"])){$data["attachments"]=array();}
+        $attachments = $data['attachments'] ? $data['attachments'] : array();
 
 		# TODO: Handle attachment encoding (base64)
-        foreach ($data["attachments"] as $filename=>&$info) {
+        foreach ($attachments as $filename=>&$info) {
             if ($info["encoding"] == "base64") {
                 # XXX: May fail on large inputs. See
                 #      http://us.php.net/manual/en/function.base64-decode.php#105512
@@ -63,7 +62,7 @@ class TicketController extends ApiController {
         }
 
         # Save attachment(s)
-        foreach ($data["attachments"] as &$info)
+        foreach ($attachments as &$info)
             $ticket->saveAttachment($info, $ticket->getLastMsgId(), "M");
 
         # All done. Return HTTP/201 --> Created
