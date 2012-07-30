@@ -1526,7 +1526,8 @@ class Ticket{
             $body=$this->replaceTemplateVars($msg['body']);
             $subj=$this->replaceTemplateVars($msg['subj']);
             $body = str_replace('%note',"$title\n\n$note",$body);
-            $body = str_replace('%poster',$poster,$body);
+            //TODO: Choose a tag to assign the poster to
+            //$body = str_replace('%xxx',$poster,$body);
 
             // Alert recipients    
             $recipients=array();
