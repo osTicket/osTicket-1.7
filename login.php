@@ -21,6 +21,14 @@ define('OSTCLIENTINC',TRUE); //make includes happy
 require_once(INCLUDE_DIR.'class.client.php');
 require_once(INCLUDE_DIR.'class.ticket.php');
 //We are ready baby
+
+
+if($_GET['e'] and $_GET['t']){
+	$_POST['lemail']=$_GET['e'];
+	$_POST['lticket']=$_GET['t'];
+}
+
+
 $loginmsg='Authentication Required';
 if($_POST && (!empty($_POST['lemail']) && !empty($_POST['lticket']))):
     $loginmsg='Authentication Required';
