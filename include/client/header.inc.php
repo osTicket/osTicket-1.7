@@ -16,7 +16,12 @@ header("Content-Type: text/html; charset=UTF-8\r\n");
     <script src="<?php echo ROOT_PATH; ?>js/jquery.multifile.js"></script>
     <script src="<?php echo ROOT_PATH; ?>js/osticket.js"></script>
 </head>
-<body>
+<?php
+	//TODO: fix cfg not defined in login page include
+	if(is_object($cfg)) $css_body_id=str_replace('/','_',preg_replace('#'. preg_replace('#http(s)?://([^/]+[/]?)#i',"$2",$cfg->getUrl()) .'([^\.]+)(\.php)?$#','$1',$_SERVER['HTTP_HOST'].$_SERVER['SCRIPT_NAME']));
+	else $css_body_id='login';
+?>
+<body id="page_<?php echo $css_body_id; ?>">
     <div id="container">
         <div id="header">
             <a id="logo" href="<?php echo ROOT_PATH; ?>index.php" title="Support Center"><img src="<?php echo ASSETS_PATH; ?>images/logo.png" border=0 alt="Support Center"></a>
