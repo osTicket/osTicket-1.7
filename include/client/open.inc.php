@@ -86,7 +86,7 @@ $info=($_POST && $errors)?Format::htmlchars($_POST):$info;
     <tr class="required tr_message">
         <th>Message:</td>
         <td>
-            <div>
+            <div class="textarea_desc">
 				<em>Please provide as much details as possible so we can best assist you.</em> 
 				<span class="error">* <?php echo $errors['message']; ?></span>
 			</div>
