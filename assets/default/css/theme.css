@@ -1,8 +1,7 @@
-
 /* Based on Normalize.css - with tags we won't use removed. */
 
 /* @group Normalise
--------------------------------------------------------- */
+------------------------------------------------------------------- */
 
 html {
 	font-size: 100%;
@@ -124,166 +123,11 @@ h1, h2, h3, h4, h5, h6, form, fieldset {
 
 /* @end */
 
-/* @group Typography
------------------------------------------- */
 
-a {
-	color: #0072bc;
-	text-decoration: none;
-}
-
-h1 {
-	color: #00AEEF;
-	font-weight: normal;
-	font-size: 20px;
-}
-
-h3 {
-	font-size: 16px;
-}
-
-h2 {
-	font-size: 16px;
-	color: #999;
-}
-
-/* @end */
-
-/* @group Helpers
------------------------------------------- */
-
-.centered {
-	text-align: center;
-}
-
-.clear {
-	clear: both;
-	height: 1px;
-	visibility: none;
-}
-
-.hidden {
-	display: none;
-}
-
-.faded {
-	color: #666;
-}
-
-/* @end */
-
-/* @group Pagination
------------------------------------------- */
-
-#pagination {
-	border: 0;
-	margin: 0 0 40px 0;
-	padding: 0;
-}
-
-#pagination li {
-	border: 0;
-	margin: 0;
-	padding: 0;
-	font-size: 11px;
-	list-style: none;
-	display: inline;
-}
-
-#pagination a {
-	margin-right: 2px;
-	display: block;
-	float: left;
-	padding: 3px 6px;
-	text-decoration: none;
-}
-
-#pagination a:hover {
-	color: #ff0084;
-}
-
-#pagination .previousOff, #pagination .nextOff {
-	color: #666;
-	display: block;
-	float: left;
-	font-weight: bold;
-	padding: 3px 4px;
-}
-
-#pagination .next a, #pagination .previous a {
-	font-weight: bold;
-}
-
-#pagination .active {
-	color: #000;
-	font-weight: bold;
-	margin-right: 2px;
-	display: block;
-	float: left;
-	padding: 3px 6px;
-	text-decoration: none;
-}
-
-/* @end */
-
-
-/* @group Alerts & Notices
------------------------------------------- */
-
-#msg_notice {
-	margin: 0;
-	padding: 5px 10px 5px 36px;
-	height: 16px;
-	line-height: 16px;
-	margin-bottom: 10px;
-	border: 1px solid #0a0;
-	background: url('../images/icons/ok.png') 10px 50% no-repeat #e0ffe0;
-}
-
-#msg_warning {
-	margin: 0;
-	padding: 5px 10px 5px 36px;
-	height: 16px;
-	line-height: 16px;
-	margin-bottom: 10px;
-	border: 1px solid #f26522;
-	background: url('../images/icons/alert.png') 10px 50% no-repeat #ffffdd;
-}
-
-#msg_error {
-	margin: 0;
-	padding: 5px 10px 5px 36px;
-	height: 16px;
-	line-height: 16px;
-	margin-bottom: 10px;
-	border: 1px solid #a00;
-	background: url('../images/icons/error.png') 10px 50% no-repeat #fff0f0;
-}
-
-.warning {
-	background: #ffc;
-	font-style: italic;
-}
-
-.warning strong {
-	text-transform: uppercase;
-	color: #a00;
-	font-style: normal;
-}
-
-.error {
-	color: #f00;
-}
-
-.error input {
-	border: 1px solid #f00;
-}
-
-/* @end */
 
 
 /* @group Main layout
------------------------------------------- */
+------------------------------------------------------------------- */
 
 body {
 	background: url('../images/page_bg.png') top left repeat-x #c8c8c8;
@@ -350,6 +194,9 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d2d2d8', end
 
 }
 
+/* @group Navigation
+++++++++++++++++++++++++ */
+
 #nav li {
 	margin: 0;
 	padding: 0;
@@ -410,9 +257,9 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d2d2d8', end
 	background-image: url('../images/icons/tix.png');
 }
 
+/* @end */
 #content {
-	padding: 20px 0;
-	margin: 0 20px;
+	padding: 20px 30px 30px 30px;
 	height: auto !important;
 	height: 350px;
 	min-height: 350px;
@@ -445,8 +292,346 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d2d2d8', end
 /* @end */
 
 
-/* @group Landing page
------------------------------------------- */
+/* @group Globals
+------------------------------------------------------------------- */
+
+a {
+	color: #0072bc;
+	text-decoration: none;
+}
+
+h1 {
+	color: #00AEEF;
+	font-weight: normal;
+	font-size: 22px;
+	line-height: 120%;
+	margin-bottom: 15px;
+	text-shadow: 1px 1px 1px rgba(100,100,100,0.1);
+}
+
+h3 {
+	font-size: 16px;
+}
+
+h2 {
+	font-size: 16px;
+	color: #999;
+}
+
+.intro{
+	margin: 0 0 10px 0;
+	color: #444;
+}
+.info{
+	margin: 40px 0 0 0;
+	color: #444;
+	font-style: italic;
+}
+
+
+/* @group Helpers
+++++++++++++++++++++++++ */
+
+.centered {
+	text-align: center;
+}
+.clear {
+	clear: both;
+	height: 1px;
+	visibility: none;
+}
+.hidden {
+	display: none;
+}
+.faded {
+	color: #666;
+}
+
+.error {
+	color: #f00;
+}
+.error input {
+	border: 1px solid #f00;
+}
+
+.warning {
+	background: #ffc;
+	font-style: italic;
+}
+.warning strong {
+	text-transform: uppercase;
+	color: #a00;
+	font-style: normal;
+}
+
+/* @end */
+
+
+/* @group Messages
+++++++++++++++++++++++++ */
+
+#msg_notice {
+	margin: 0;
+	padding: 5px 10px 5px 36px;
+	height: 16px;
+	line-height: 16px;
+	margin-bottom: 10px;
+	border: 1px solid #0a0;
+	background: url('../images/icons/ok.png') 10px 50% no-repeat #e0ffe0;
+}
+
+#msg_warning {
+	margin: 0;
+	padding: 5px 10px 5px 36px;
+	height: 16px;
+	line-height: 16px;
+	margin-bottom: 10px;
+	border: 1px solid #f26522;
+	background: url('../images/icons/alert.png') 10px 50% no-repeat #ffffdd;
+}
+
+#msg_error {
+	margin: 0;
+	padding: 5px 10px 5px 36px;
+	height: 16px;
+	line-height: 16px;
+	margin-bottom: 10px;
+	border: 1px solid #a00;
+	background: url('../images/icons/error.png') 10px 50% no-repeat #fff0f0;
+}
+/* @end */
+
+/* @group Buttons
+++++++++++++++++++++++++ */
+
+.button, .button:visited {
+    background: #222;
+    display: inline-block;
+    font-size: 16px;
+    padding: 8px 16px 6px 16px;
+    width:160px;
+    text-align:center;
+    color: #fff;
+    font-weight:bold;
+    text-decoration: none;
+    border-radius: 5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.5);
+    -moz-box-shadow: 0 1px 3px rgba(0,0,0,0.5);
+    -webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.5);
+    text-shadow: 0 -1px 1px rgba(0,0,0,0.25);
+    border: 0;
+    border-bottom: 1px solid rgba(0,0,0,0.25);
+    position: relative;
+    cursor: pointer;
+    font-family:helvetica, arial, sans-serif;
+}
+
+
+.uploads {
+    display:inline-block;
+    padding-right:20px;
+}
+
+.uploads label { 
+	padding:3px;
+	padding-right:10px;
+	width: auto !important
+}
+
+.button:hover{
+	background-color: #111;
+	color: #fff;
+}
+.button:active{
+	top: 1px;
+	box-shadow:none;
+	-moz-box-shadow:none;
+	-webkit-box-shadow:none;
+}
+
+.button:hover {
+	background-color: #111;
+	color: #fff;
+}
+
+.button:active {
+	top: 1px;
+	box-shadow: none;
+	-moz-box-shadow: none;
+	-webkit-box-shadow: none;
+}
+
+.button,
+.button:visited,
+.green.button,
+.green.button:visited {
+	background-color: #91bd09;
+}
+
+.button:hover,
+.green.button:hover {
+	background-color: #749a02;
+}
+
+.blue.button, .blue.button:visited {
+	background-color: #00AEEF;
+}
+
+.blue.button:hover {
+	background-color: #0299d2;
+}
+
+/* @end */
+
+
+/* @group Forms
+++++++++++++++++++++++++ */
+.form_row{
+	overflow: hidden;
+	margin-bottom: 5px;
+	padding: 3px 0;
+}
+.form_row label {
+	display: block;
+	width: 140px;
+	float: left;
+	text-align: right;
+	padding-right: 10px;
+	color: #555;
+}
+
+.form_title{
+	margin-bottom: 25px;
+	font-size: 16px;
+	color: #666;
+	font-weight: bold;
+	text-align: center;
+	text-shadow: 1px 1px 1px rgba(255,255,255,0.9);
+}
+.form_buttons{
+	overflow: hidden;
+	margin: 30px 0 0 0;
+	padding: 5px;
+	text-align: center;
+}
+.form_buttons .button{
+}
+
+.form_box{
+	margin-top: 30px;
+	padding: 20px 0;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+	-moz-box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+	-webkit-box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+/* @end */
+
+
+/* @group Pagination
+++++++++++++++++++++++++ */
+#pagination {
+	border: 0;
+	margin: 0 0 40px 0;
+	padding: 0;
+}
+
+#pagination li {
+	border: 0;
+	margin: 0;
+	padding: 0;
+	font-size: 11px;
+	list-style: none;
+	display: inline;
+}
+
+#pagination a {
+	margin-right: 2px;
+	display: block;
+	float: left;
+	padding: 3px 6px;
+	text-decoration: none;
+}
+
+#pagination a:hover {
+	color: #ff0084;
+}
+
+#pagination .previousOff, #pagination .nextOff {
+	color: #666;
+	display: block;
+	float: left;
+	font-weight: bold;
+	padding: 3px 4px;
+}
+
+#pagination .next a, #pagination .previous a {
+	font-weight: bold;
+}
+
+#pagination .active {
+	color: #000;
+	font-weight: bold;
+	margin-right: 2px;
+	display: block;
+	float: left;
+	padding: 3px 6px;
+	text-decoration: none;
+}
+
+/* @end */
+
+/* @end */
+
+
+
+/* ####################### Pages ###################################*/
+
+
+
+/* @group Page: Login
+------------------------------------------------------------------- */
+#clientLogin .form_row {
+	margin-bottom: 20px;
+}
+#clientLogin {
+	width: 520px;
+	background: url('../images/lock.png') 530px 40% no-repeat #f6f6f6;
+	padding-right: 100px;
+}
+#clientLogin .form_row{
+	line-height: 25px;
+}
+#clientLogin .form_row INPUT{
+	padding: 2px 5px;
+	line-height: 21px;
+	font-size: 16px;
+	background: #FFF;
+	border-radius: 3px;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	box-shadow: -1px -1px 2px rgba(0,0,0,0.2);
+	-moz-box-shadow: -1px -1px 2px rgba(0,0,0,0.2);
+	-webkit-box-shadow: -1px -1px 2px rgba(0,0,0,0.2);
+}
+#clientLogin #email {
+	width: 300px;
+}
+#clientLogin #ticketno {
+	width: 120px;
+}
+/* @end */
+
+
+
+/* @group Page: Landing
+------------------------------------------------------------------- */
 
 #landing_page #new_ticket {
 	margin-top: 40px;
@@ -532,8 +717,8 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d2d2d8', end
 /* @end */
 
 
-/* @group Knowledgebase
------------------------------------------- */
+/* @group Page: Knowledgebase
+------------------------------------------------------------------- */
 
 #kb {
 	margin: 2px 0;
@@ -628,22 +813,22 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d2d2d8', end
 /* @end */
 
 
-/* @group New Ticket & Log In Forms
------------------------------------------- */
+/* @group Page: Ticket
+------------------------------------------------------------------- */
 
-#ticketForm div, #clientLogin div {
+#ticketForm div{
 	clear: both;
 	padding: 3px 0;
 	overflow: hidden;
 }
 
-#ticketForm div label, #clientLogin div label {
+#ticketForm div label{
 	display: block;
 	width: 140px;
 	float: left;
 }
 
-#ticketForm div input, #ticketForm div textarea, #clientLogin div input, #clientLogin div textarea {
+#ticketForm div input, #ticketForm div textarea {
 	width: auto;
 	border: 1px solid #aaa;
 	background: #fff;
@@ -656,19 +841,19 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d2d2d8', end
   border: 0;
 }
 
-#ticketForm div select, #clientLogin div select {
+#ticketForm div select {
 	display: block;
 	float: left;
 }
 
-#ticketForm td textarea, #clientLogin div textarea {
+#ticketForm td textarea {
   width: 600px;
 }
 
-#ticketForm td em, #clientLogin div em {
+#ticketForm td em {
   color: #777;
 }
-#ticketForm td .captcha, #clientLogin div .captcha {
+#ticketForm td .captcha {
   width: 88px;
   height: 31px;
   background: #000;
@@ -676,7 +861,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d2d2d8', end
   float: left;
   margin-right: 20px;
 }
-#ticketForm td label.inline, #clientLogin div label.inline {
+#ticketForm td label.inline{
   width: auto;
   padding: 0 10px;
 }
@@ -687,30 +872,30 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d2d2d8', end
   text-align: left;
 }
 
-#ticketForm table th.required, #ticketForm table td.required, #clientLogin div label.required {
+#ticketForm table th.required, #ticketForm table td.required {
   font-weight: bold;
   text-align: left;
 }
 
 
 
-#ticketForm tr.captchaRow, #clientLogin div.captchaRow {
+#ticketForm tr.captchaRow{
   line-height: 31px;
 }
 
-.captchaRow td input, #clientLogin div.captchaRow input {
+.captchaRow td input{
   position: relative;
   top: 6px;
 }
-#ticketForm div textarea, #clientLogin div textarea {
+#ticketForm div textarea{
 	width: 600px;
 }
 
-#ticketForm div em, #clientLogin div em {
+#ticketForm div em{
 	color: #777;
 }
 
-#ticketForm div .captcha, #clientLogin div .captcha {
+#ticketForm div .captcha{
 	width: 88px;
 	height: 31px;
 	background: #000;
@@ -719,67 +904,38 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d2d2d8', end
 	margin-right: 20px;
 }
 
-#ticketForm div label.inline, #clientLogin div label.inline {
+#ticketForm div label.inline {
 	width: auto;
 	padding: 0 10px;
 }
 
-#ticketForm div label.required, #clientLogin div label.required {
+#ticketForm div label.required {
 	font-weight: bold;
 }
 
-#ticketForm div.captchaRow, #clientLogin div.captchaRow {
+#ticketForm div.captchaRow {
 	line-height: 31px;
 }
 
-#ticketForm div.captchaRow input, #clientLogin div.captchaRow input {
+#ticketForm div.captchaRow input {
 	position: relative;
 	top: 6px;
 }
 
-#ticketForm div.error input, #clientLogin div.error input {
+#ticketForm div.error input {
 	border: 1px solid #a00;
 }
 
-#ticketForm div.error label, #clientLogin div.error label {
+#ticketForm div.error label {
 	color: #a00;
 }
 
-#clientLogin p {
-	clear: both;
-	text-align: center;
-}
-
-#clientLogin {
-	width: 400px;
-	margin-top: 20px;
-	padding: 10px 100px 10px 10px;
-	border: 1px solid #ccc;
-	background: url('../images/lock.png?1319655200') 440px 50% no-repeat #f6f6f6;
-}
-
-#clientLogin strong {
-	font-size: 11px;
-	color: #d00;
-	display: block;
-	padding-left: 140px;
-}
-
-#clientLogin #email {
-	width: 250px;
-	margin-right: 0;
-}
-
-#clientLogin #ticketno {
-	width: 120px;
-	margin-right: 0;
-}
 
 /* @end */
 
 
-/* @group Ticket List
------------------------------------------- */
+/* @group Page: Ticket List
+------------------------------------------------------------------- */
 
 .Icon {
 	width: auto;
@@ -994,84 +1150,3 @@ a.refresh {
 /* @end */
 
 
-/* @group Buttons
------------------------------------------- */
-
-.button, .button:visited {
-    background: #222;
-    display: inline-block;
-    font-size: 16px;
-    padding: 8px 16px 6px 16px;
-    width:160px;
-    text-align:center;
-    color: #fff;
-    font-weight:bold;
-    text-decoration: none;
-    border-radius: 5px;
-    -moz-border-radius: 5px;
-    -webkit-border-radius: 5px;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.5);
-    -moz-box-shadow: 0 1px 3px rgba(0,0,0,0.5);
-    -webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.5);
-    text-shadow: 0 -1px 1px rgba(0,0,0,0.25);
-    border-bottom: 1px solid rgba(0,0,0,0.25);
-    position: relative;
-    cursor: pointer;
-    font-family:helvetica, arial, sans-serif;
-}
-
-
-.uploads {
-    display:inline-block;
-    padding-right:20px;
-}
-
-.uploads label { 
-	padding:3px;
-	padding-right:10px;
-	width: auto !important
-}
-
-.button:hover{
-	background-color: #111;
-	color: #fff;
-}
-.button:active{
-	top: 1px;
-	box-shadow:none;
-	-moz-box-shadow:none;
-	-webkit-box-shadow:none;
-}
-
-.button:hover {
-	background-color: #111;
-	color: #fff;
-}
-
-.button:active {
-	top: 1px;
-	box-shadow: none;
-	-moz-box-shadow: none;
-	-webkit-box-shadow: none;
-}
-
-.button,
-.button:visited,
-.green.button,
-.green.button:visited {
-	background-color: #91bd09;
-}
-
-.green.button:hover {
-	background-color: #749a02;
-}
-
-.blue.button, .blue.button:visited {
-	background-color: #00AEEF;
-}
-
-.blue.button:hover {
-	background-color: #0299d2;
-}
-
-/* @end */
