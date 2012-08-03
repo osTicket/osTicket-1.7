@@ -89,8 +89,8 @@ $negorder=$order=='DESC'?'ASC':'DESC'; //Negate the sorting
 
 ?>
 <h1>My Tickets</h1>
-<br>
-<form action="tickets.php" method="get" id="ticketSearchForm">
+
+<form action="tickets.php" method="get" id="ticketSearchForm" class="form_search">
     <input type="hidden" name="a"  value="search">
     <input type="text" name="q" size="20" value="<?php echo Format::htmlchars($_REQUEST['q']); ?>">
     <select name="status">
@@ -100,27 +100,31 @@ $negorder=$order=='DESC'?'ASC':'DESC'; //Negate the sorting
     </select>
     <input type="submit" value="Go">
 </form>
-<a class="refresh" href="<?php echo $_SERVER['REQUEST_URI']; ?>">Refresh</a>
-<table id="ticketTable" width="800" border="0" cellspacing="0" cellpadding="0">
+
+<div class="buttons_small">
+	<a class="refresh" href="<?php echo $_SERVER['REQUEST_URI']; ?>">Refresh</a>
+</div>
+
+<table id="ticketTable" cellspacing="0" cellpadding="0" class="table_list">
     <caption><?php echo $showing; ?></caption>
     <thead>
         <tr>
-            <th width="70" nowrap>
+            <th class="ticket">
                 <a href="tickets.php?sort=ID&order=<?php echo $negorder; ?><?php echo $qstr; ?>" title="Sort By Ticket ID">Ticket #</a>
             </th>
-            <th width="100">
+            <th class="date">
                 <a href="tickets.php?sort=date&order=<?php echo $negorder; ?><?php echo $qstr; ?>" title="Sort By Date">Create Date</a>
             </th>
-            <th width="80">
+            <th class="status">
                 <a href="tickets.php?sort=status&order=<?php echo $negorder; ?><?php echo $qstr; ?>" title="Sort By Status">Status</a>
             </th>
-            <th width="240">
+            <th class="subject">
                 <a href="tickets.php?sort=subj&order=<?php echo $negorder; ?><?php echo $qstr; ?>" title="Sort By Subject">Subject</a>
             </th>
-            <th width="150">
+            <th class="dept">
                 <a href="tickets.php?sort=dept&order=<?php echo $negorder; ?><?php echo $qstr; ?>" title="Sort By Department">Department</a>
             </th>
-            <th width="150">Phone Number</th>
+            <th class="phone">Phone Number</th>
         </tr>
     </thead>
     <tbody>
@@ -128,6 +132,7 @@ $negorder=$order=='DESC'?'ASC':'DESC'; //Negate the sorting
      if($res && ($num=db_num_rows($res))) {
         $defaultDept=Dept::getDefaultDeptName(); //Default public dept.
         while ($row = db_fetch_array($res)) {
+			$i++; if($i%2){$tr_class="tr_a";}else{$tr_class="tr_b";}
             $dept=$row['ispublic']?$row['dept_name']:$defaultDept;
             $subject=Format::htmlchars(Format::truncate($row['subject'],40));
             if($row['attachments'])
@@ -142,18 +147,18 @@ $negorder=$order=='DESC'?'ASC':'DESC'; //Negate the sorting
             if($row['phone_ext'])
                 $phone.=' '.$row['phone_ext'];
             ?>
-            <tr id="<?php echo $row['ticketID']; ?>">
-                <td class="centered">
+            <tr id="<?php echo $row['ticketID']; ?>" class="<?php echo $tr_class ?> status_<?=$row['status']?>">
+                <td class="ticket">
                 <a class="Icon <?php echo strtolower($row['source']); ?>Ticket" title="<?php echo $row['email']; ?>" 
                     href="tickets.php?id=<?php echo $row['ticketID']; ?>"><?php echo $ticketID; ?></a>
                 </td>
-                <td>&nbsp;<?php echo Format::db_date($row['created']); ?></td>
-                <td>&nbsp;<?php echo ucfirst($row['status']); ?></td>
-                <td>
+                <td class="date"><?php echo Format::db_date($row['created'])?></td>
+                <td class="status"><?php echo ucfirst($row['status'])?></td>
+                <td class="subject">
                     <a href="tickets.php?id=<?php echo $row['ticketID']; ?>"><?php echo $subject; ?></a>
                 </td>
-                <td>&nbsp;<?php echo Format::truncate($dept,30); ?></td>
-                <td><?php echo $phone; ?></td>
+                <td class="dept"><?php echo Format::truncate($dept,30)?></td>
+                <td class="phone"><?php echo $phone; ?></td>
             </tr>
         <?php
         }
@@ -166,6 +171,6 @@ $negorder=$order=='DESC'?'ASC':'DESC'; //Negate the sorting
 </table>
 <?php
 if($res && $num>0) { 
-    echo '<div>&nbsp;Page:'.$pageNav->getPageLinks().'&nbsp;</div>';
+    echo '<div class="pagination">Page:'.$pageNav->getPageLinks().'</div>';
 }
 ?>

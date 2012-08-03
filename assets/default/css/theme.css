@@ -402,7 +402,48 @@ h2 {
 }
 /* @end */
 
-/* @group Buttons
+/* @group Small Buttons
++++++++++++++++++++++ */
+.buttons_small {
+	float: right;
+	overflow: hidden;
+	padding: 3px;
+}
+.buttons_small A{
+	display: inline-block;
+	height: 20px;
+	line-height: 20px;
+	border: 1px solid #aaa;
+	margin-left: 10px;
+	text-align: center;	
+	padding: 0 10px;
+	background-repeat: no-repeat;
+	background-color: #eee;
+    font-size: 12px;
+    border-radius: 3px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    box-shadow: 1px 1px 2px rgba(100,100,100,0.3);
+    -moz-box-shadow: 1px 1px 2px rgba(100,100,100,0.3);
+    -webkit-box-shadow: 1px 1px 2px rgba(100,100,100,0.3);
+}
+.buttons_small A:hover{
+    box-shadow: -1px -1px 2px rgba(100,100,100,0.3);
+    -moz-box-shadow: -1px -1px 2px rgba(100,100,100,0.3);
+    -webkit-box-shadow: -1px -1px 2px rgba(100,100,100,0.3);	
+	background-color: #ddd;
+	color: #000;
+}
+.buttons_small a.refresh {
+	padding-left: 25px;
+	background-position: 5px 50%;
+	background-image: url('../images/icons/refresh.png');
+}
+
+/* @end */
+
+
+/* @group Big Buttons
 ++++++++++++++++++++++++ */
 
 .button, .button:visited {
@@ -592,9 +633,52 @@ h2 {
 
 /* @end */
 
+/* @group Table List
+++++++++++++++++++++ */
+
+.table_list{
+	clear: both;
+	border: 1px solid #aaa;
+	width: 100%;
+	margin-bottom: 10px;
+}
+.table_list caption {
+	text-align: left;
+	color: #666;
+	padding-bottom: 9px;
+	font-size: 12px;
+	
+}
+.table_list th {
+	background: #e1f2ff;
+	border-bottom: 1px solid #aaa;
+	border-left: 1px solid #aaa;
+	font-size: 12px;
+	padding: 4px 5px;
+	white-space: nowrap;
+}
+.table_list th a {
+	color: #000;
+}
+.table_list td {
+	padding: 3px 5px;
+	border-bottom: 1px solid #ccc;
+	border-left: 1px solid #ccc;
+}
+.table_list .tr_b td {
+	background: #f9f9f9;
+}
+
+/* @end */
+
 
 /* @group Pagination
 ++++++++++++++++++++++++ */
+.pagination{
+	color: #666;
+	font-size: 12px;
+}
+/*
 #pagination {
 	border: 0;
 	margin: 0 0 40px 0;
@@ -643,6 +727,7 @@ h2 {
 	padding: 3px 6px;
 	text-decoration: none;
 }
+*/
 
 /* @end */
 
@@ -1056,7 +1141,25 @@ h2 {
 
 /* @group Page: Ticket List
 ------------------------------------------------------------------- */
+.form_search SELECT,
+.form_search INPUT{
+	margin-right: 8px;
+}
+.form_search {
+	display: inline-block;
+	float: left;
+	margin-bottom: 20px;
+}
 
+#ticketTable TD A{
+	line-height: 16px;
+	display: inline-block;
+}
+
+/* @end */
+
+/* @group Icons
+--------------------------------------------------------------- */
 .Icon {
 	width: auto;
 	padding-left: 20px;
@@ -1108,69 +1211,4 @@ a.Icon:hover {
 	background-image: url('../images/icons/thread.gif?1319556657');
 }
 
-#ticketTable {
-	border: 1px solid #aaa;
-	border-left: none;
-	border-bottom: none;
-}
-
-#ticketTable caption {
-	padding: 5px;
-	text-align: left;
-	color: #000;
-	background: #ddd;
-	border: 1px solid #aaa;
-	border-bottom: none;
-	font-weight: bold;
-}
-
-#ticketTable th {
-	height: 24px;
-	line-height: 24px;
-	background: #e1f2ff;
-	border: 1px solid #aaa;
-	border-right: none;
-	border-top: none;
-}
-
-#ticketTable th a {
-	color: #000;
-}
-
-#ticketTable td {
-	padding: 2px;
-	border: 1px solid #aaa;
-	border-right: none;
-	border-top: none;
-}
-
-#ticketTable tr.alt td {
-	background: #f9f9f9;
-}
-
-#ticketSearchForm {
-	display: inline-block;
-	float: left;
-	padding: 0 0 5px 0;
-}
-
-a.refresh {
-	display: block;
-	width: auto;
-	float: right;
-	height: 20px;
-	line-height: 20px;
-	text-align: center;
-	padding: 0 10px 0 28px;
-	border: 1px solid #aaa;
-	margin-left: 10px;
-	color: #333;
-	background-position: 5px 50%;
-	background-repeat: no-repeat;
-	background-image: url('../images/icons/refresh.png?1319653435');
-}
-
-
 /* @end */
-
-
