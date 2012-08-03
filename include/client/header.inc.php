@@ -22,8 +22,8 @@ header("Content-Type: text/html; charset=UTF-8\r\n");
 	else $css_body_id='login';
 ?>
 <body id="page_<?php echo $css_body_id; ?>">
-    <div id="container">
-        <div id="header">
+    <div id="wrapper">
+        <div id="header" class="wrapper">
             <a id="logo" href="<?php echo ROOT_PATH; ?>index.php" title="Support Center"><img src="<?php echo ASSETS_PATH; ?>images/logo.png" border=0 alt="Support Center"></a>
             <p>
              <?php
@@ -43,27 +43,29 @@ header("Content-Type: text/html; charset=UTF-8\r\n");
              } ?>
             </p>
         </div>
+
+        <div id="container" class="wrapper">
         <?php
         if($nav){ ?>
-        <ul id="nav">
+            <ul id="nav">
             <?php
             if($nav && ($navs=$nav->getNavLinks()) && is_array($navs)){
                 foreach($navs as $name =>$nav) {
                     echo sprintf('<li><a class="%s %s" href="%s">%s</a></li>%s',$nav['active']?'active':'',$name,(ROOT_PATH.$nav['href']),$nav['desc'],"\n");
                 }
             } ?>
-        </ul>
+           </ul>
         <?php
         }else{ ?>
-         <hr>
+           <hr>
         <?php
         } ?>
-        <div id="content">
+           <div id="content">
 
          <?php if($errors['err']) { ?>
-            <div id="msg_error"><?php echo $errors['err']; ?></div>
+               <div id="msg_error"><?php echo $errors['err']; ?></div>
          <?php }elseif($msg) { ?>
-            <div id="msg_notice"><?php echo $msg; ?></div>
+               <div id="msg_notice"><?php echo $msg; ?></div>
          <?php }elseif($warn) { ?>
-            <div id="msg_warning"><?php echo $warn; ?></div>
+               <div id="msg_warning"><?php echo $warn; ?></div>
          <?php } ?>
