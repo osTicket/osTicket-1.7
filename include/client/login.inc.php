@@ -3,7 +3,20 @@ if(!defined('OSTCLIENTINC')) die('Kwaheri');
 
 $email=Format::input($_POST['lemail']?$_POST['lemail']:$_GET['e']);
 $ticketid=Format::input($_POST['lticket']?$_POST['lticket']:$_GET['t']);
+
+if($_GET['e'] && $_GET['t']){
 ?>
+	<script language="javascript">
+	$(document).ready(function(){
+		if($('#email').val() && $('#ticketno').val()){
+			$('#clientLogin').submit();
+		}
+	});
+	</script>
+<?php
+}
+?>
+
 <h1>Check Ticket Status</h1>
 <p>To view the status of a ticket, provide us with the login details below.</p>
 <form action="login.php" method="post" id="clientLogin">
