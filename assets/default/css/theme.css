@@ -1,3 +1,4 @@
+
 /* Based on Normalize.css - with tags we won't use removed. */
 
 /* @group Normalise
@@ -395,7 +396,7 @@ h2 {
 	padding: 5px 10px 5px 36px;
 	height: 16px;
 	line-height: 16px;
-	margin-bottom: 10px;
+	margin-bottom: 15px;
 	border: 1px solid #a00;
 	background: url('../images/icons/error.png') 10px 50% no-repeat #fff0f0;
 }
@@ -405,7 +406,6 @@ h2 {
 ++++++++++++++++++++++++ */
 
 .button, .button:visited {
-    background: #222;
     display: inline-block;
     font-size: 16px;
     padding: 8px 16px 6px 16px;
@@ -428,20 +428,7 @@ h2 {
     font-family:helvetica, arial, sans-serif;
 }
 
-
-.uploads {
-    display:inline-block;
-    padding-right:20px;
-}
-
-.uploads label { 
-	padding:3px;
-	padding-right:10px;
-	width: auto !important
-}
-
 .button:hover{
-	background-color: #111;
 	color: #fff;
 }
 .button:active{
@@ -451,34 +438,26 @@ h2 {
 	-webkit-box-shadow:none;
 }
 
-.button:hover {
-	background-color: #111;
-	color: #fff;
-}
-
-.button:active {
-	top: 1px;
-	box-shadow: none;
-	-moz-box-shadow: none;
-	-webkit-box-shadow: none;
-}
-
 .button,
-.button:visited,
+.button:visited{
+    background: #AAA;
+}
+.button:hover {
+	background-color: #666;
+}
+
 .green.button,
 .green.button:visited {
 	background-color: #91bd09;
 }
-
-.button:hover,
 .green.button:hover {
 	background-color: #749a02;
 }
 
-.blue.button, .blue.button:visited {
+.blue.button,
+.blue.button:visited {
 	background-color: #00AEEF;
 }
-
 .blue.button:hover {
 	background-color: #0299d2;
 }
@@ -488,18 +467,45 @@ h2 {
 
 /* @group Forms
 ++++++++++++++++++++++++ */
+.table_form{
+	margin-top: 30px;
+}
+
 .form_row{
 	overflow: hidden;
 	margin-bottom: 5px;
 	padding: 3px 0;
 }
-.form_row label {
+.form_row label,
+.table_form TBODY TH {
 	display: block;
 	width: 140px;
 	float: left;
 	text-align: right;
 	padding-right: 10px;
 	color: #555;
+	line-height: 22px;
+}
+.table_form TBODY TD{
+	vertical-align: top;
+	padding-bottom: 8px;
+}
+.table_form TBODY INPUT{
+	padding: 1px 5px ;
+	line-height: 18px;
+	font-size: 13px;
+	background: #fff;
+	margin-right: 8px;
+	color: #000;
+}
+.table_form TBODY SELECT{
+	margin-top: 3px;
+}
+.table_form TBODY .tr_padding{
+	height: 15px;
+}
+.table_form TBODY .required TH{
+	font-weight: bold;
 }
 
 .form_title{
@@ -517,6 +523,22 @@ h2 {
 	text-align: center;
 }
 .form_buttons .button{
+	margin: 0 3px;
+	width: auto;
+}
+.form_buttons .submit{
+	background-color: #778;
+}
+.form_buttons .submit:hover{
+	background-color: #556;
+}
+.field_desc{
+	font-size: 11px;
+	color: #888;
+}
+
+.table_form .error{
+	font-size: 12px;
 }
 
 .form_box{
@@ -530,6 +552,8 @@ h2 {
 	-moz-box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
 	-webkit-box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
 }
+
+
 
 /* @end */
 
@@ -605,7 +629,7 @@ h2 {
 	background: url('../images/lock.png') 530px 40% no-repeat #f6f6f6;
 	padding-right: 100px;
 }
-#clientLogin .form_row{
+#clientLogin .form_row LABEL{
 	line-height: 25px;
 }
 #clientLogin .form_row INPUT{
@@ -815,8 +839,72 @@ h2 {
 
 /* @group Page: Ticket
 ------------------------------------------------------------------- */
+#ticketForm .tr_message TH,
+#ticketForm .tr_message TD{
+	padding-bottom: 20px;
+}
+#ticketForm .tr_message DIV{
+	color: #888;
+	padding-bottom: 8px;
+	margin-top: 4px;
+}
+#ticketForm .tr_message TEXTAREA{
+	width: 550px;
+	height: 140px;
+	padding: 5px;
+}
 
-#ticketForm div{
+#ticketForm .tr_message TH,
+#ticketForm .tr_message TD,
+#ticketForm .tr_captcha TH,
+#ticketForm .tr_captcha TD{
+	padding-top: 5px;
+}
+
+
+#ticketForm .uploads{
+	display: block;
+	float: left;
+	overflow: hidden;
+	width: 290px;
+	font-size: 11px;
+	color: #000;
+	padding: 0 20px 0 0;
+}
+#ticketForm .uploads LABEL{
+	display: block;
+	background: #F5F5F5 url('../images/icons/attachment.gif?1319556657') 5px 1px no-repeat;
+	padding: 2px 0 2px 25px;
+	margin-top: 2px;
+	margin-bottom: 5px;
+	border: 1px solid #ddd;
+	border-color: #ddd #eee #eee #ddd;
+	border-radius: 3px;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+}
+#ticketForm .uploads INPUT{
+	margin-top: 1px;
+	margin-right: 5px;
+}
+
+#ticketForm .tr_captcha .captcha{
+	display: inline-block;
+	margin: 0;
+	padding: 0;
+	margin-right: 10px;
+	border: 1px solid #aaa;
+	line-height: 100%;
+}
+#ticketForm .tr_captcha INPUT{
+	margin-right: 5px;
+}
+#ticketForm .tr_captcha TH,
+#ticketForm .tr_captcha TD{
+	line-height: 30px;
+	padding: 0;
+}
+/*#ticketForm div{
 	clear: both;
 	padding: 3px 0;
 	overflow: hidden;
@@ -928,7 +1016,7 @@ h2 {
 
 #ticketForm div.error label {
 	color: #a00;
-}
+}*/
 
 
 /* @end */
