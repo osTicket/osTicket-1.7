@@ -358,6 +358,8 @@ class MailFetcher {
                 $body=str_replace(array("<br>", "<br />", "<BR>", "<BR />"), "\n", $body);
                 $body=Format::html($body); //Balance html tags before stripping.
                 $body=Format::striptags($body); //Strip tags??
+                //removing no-break space, cause leads to failures in some cases
+		$body = str_replace('&nbsp;', ' ',$body);
             }
         }
 
