@@ -617,20 +617,25 @@ class Ticket{
         return $attachments;
     }
 
-    function getAttachmentsLinks($refId, $type, $separator=' ',$target='') {
+    function getAttachmentsLinks($refId, $type, $separator=' ',$target='', $urlsOnly=False) {
 
-        $str='';
+        $return = ($urlsOnly === False) ? '' : array();
         foreach($this->getAttachments($refId, $type) as $attachment ) {
             /* The has here can be changed  but must match validation in attachment.php */
             $hash=md5($attachment['file_id'].session_id().$attachment['file_hash']); 
             if($attachment['size'])
                 $size=sprintf('<em>(%s)</em>', Format::file_size($attachment['size']));
-                
-            $str.=sprintf('<a class="Icon file" href="attachment.php?id=%d&h=%s" target="%s">%s</a>%s&nbsp;%s',
-                    $attachment['attach_id'], $hash, $target, Format::htmlchars($attachment['name']), $size, $separator);
+            if($urlsOnly === True){ 
+                $file_name = $attachment['name'];
+                $return[$file_name] = sprintf('attachment.php?id=%d&h=%s',
+                    $attachment['attach_id'], $hash);                
+            }else{
+                $return.=sprintf('<a class="Icon file" href="attachment.php?id=%d&h=%s" target="%s">%s</a>%s&nbsp;%s',
+                    $attachment['attach_id'], $hash, $target, Format::htmlchars($attachment['name']), $size, $separator); 
+            }
         }
 
-        return $str;
+        return $return;
     }
 
     /* -------------------- Setters --------------------- */
@@ -1634,7 +1639,7 @@ class Ticket{
     
     function inlineAttachments($text, $ref_id=0)
     {
-	$attachments = $this->getAttachmentUrls($ref_id,'M');
+	$attachments = $this->getAttachmentUrls($ref_id,'M',"","", True);
 	$text = preg_replace("/\[.*cid\:(.*\.(png|jpg|jpeg|gif))@.*\]/e", 
 			     '"<a href=\"" . $attachments["$1"]."\"><img class=\"inline_image\" src=\"" . $attachments["$1"]."\" ></a>"',$text);
 	$text = preg_replace("/\(Embedded image moved to file:\s(.*\.(png|jpg|jpeg|gif))\)/e", 
@@ -1642,19 +1647,6 @@ class Ticket{
 	return $text;
     }
     
-    function getAttachmentUrls($refId, $type) {
-
-        $array=array();
-        foreach($this->getAttachments($refId, $type) as $attachment ) {
-            /* The has here can be changed  but must match validation in attachment.php */
-            $hash=md5($attachment['file_id'].session_id().$attachment['file_hash']); 
-            $file_name = $attachment['name'];
-            $array[$file_name] = sprintf('attachment.php?id=%d&h=%s',
-                    $attachment['attach_id'], $hash);                
-        }
-
-        return $array;
-    }
 
 
     function delete(){
