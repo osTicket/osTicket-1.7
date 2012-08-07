@@ -1319,6 +1319,10 @@ time {
     border:1px solid #a00;
 }
 
+.inline_image {
+  max-width: 900px; 
+}
+
 /* Custom css for datepicker */
 .ui-datepicker-trigger {
     display:inline-block;
