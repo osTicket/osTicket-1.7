@@ -1639,7 +1639,7 @@ class Ticket{
     
     function inlineAttachments($text, $ref_id=0)
     {
-	$attachments = $this->getAttachmentLinks($ref_id,'M',"","", True);
+	$attachments = $this->getAttachmentsLinks($ref_id,'M',"","", True);
 	$text = preg_replace("/\[.*cid\:(.*\.(png|jpg|jpeg|gif))@.*\]/e", 
 			     '"<a href=\"" . $attachments["$1"]."\"><img class=\"inline_image\" src=\"" . $attachments["$1"]."\" ></a>"',$text);
 	$text = preg_replace("/\(Embedded image moved to file:\s(.*\.(png|jpg|jpeg|gif))\)/e", 
