@@ -1931,6 +1931,8 @@ class Ticket{
         # function
         if (isset($vars['autorespond'])) $autorespond=$vars['autorespond'];
 
+        $vars['recipient_email'] = (isset($vars['recipient_email'])) ? $vars['recipient_email'] : '' ;
+
         //Any error above is fatal.
         if($errors)  return 0;
         
@@ -1971,6 +1973,7 @@ class Ticket{
             .' ,topic_id='.db_input($topicId)
             .' ,priority_id='.db_input($priorityId)
             .' ,email='.db_input($vars['email'])
+            .' ,recipient_email='.db_input($vars['recipient_email'])
             .' ,name='.db_input(Format::striptags($vars['name']))
             .' ,subject='.db_input(Format::striptags($vars['subject']))
             .' ,phone="'.db_input($vars['phone'],false).'"'
