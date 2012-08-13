@@ -235,11 +235,13 @@ class MailFetcher {
             return null;
 
         $sender=$headerinfo->from[0];
+        $recipient=$headerinfo->to[0];
         //Just what we need...
-        $header=array('name'  =>@$sender->personal,
-                      'email' =>(strtolower($sender->mailbox).'@'.$sender->host),
-                      'subject'=>@$headerinfo->subject,
-                      'mid'    =>$headerinfo->message_id
+        $header=array('name'    =>@$sender->personal,
+                      'email'   =>(strtolower($sender->mailbox).'@'.$sender->host),
+                      'recipient_email'=>(strtolower($recipient->mailbox).'@'.$recipient->host),
+                      'subject' =>@$headerinfo->subject,
+                      'mid'     =>$headerinfo->message_id
                       );
 
         return $header;
@@ -386,6 +388,7 @@ class MailFetcher {
 
         $var['name']=$this->mime_decode($mailinfo['name']);
         $var['email']=$mailinfo['email'];
+        $var['recipient_email']=$mailinfo['recipient_email'];
         $var['subject']=$mailinfo['subject']?$this->mime_decode($mailinfo['subject']):'[No Subject]';
         $var['message']=Format::stripEmptyLines($this->getBody($mid));
         $var['header']=$this->getHeader($mid);
