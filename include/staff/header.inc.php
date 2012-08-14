@@ -24,11 +24,14 @@
     if($ost && ($headers=$ost->getExtraHeaders())) {
         echo "\n\t".implode("\n\t", $headers)."\n";
     }
+
+	$css_body_id=str_replace('/','_',preg_replace('#^'. preg_replace('#^\.+#','',ROOT_PATH) .'([^\.]+)(\.php)?$#','$1',$_SERVER['SCRIPT_NAME']));
+
     ?>
 </head>
-<body onunload="">
-<div id="container">
-    <div id="header">
+<body id="page_<?php echo $css_body_id; ?>">
+<div id="wrapper">
+  <div id="header" class="wrapper">
         <a href="index.php" id="logo">osTicket - Customer Support System</a>
         <p id="info">Howdy, <strong><?php echo $thisstaff->getUserName(); ?></strong>
            <?php
@@ -40,7 +43,9 @@
             | <a href="profile.php">My Preferences</a> 
             | <a href="logout.php?auth=<?php echo md5($ost->getCSRFToken().SECRET_SALT.session_id()); ?>">Log Out</a>
         </p>
-    </div>
+  </div>
+
+  <div id="container" class="wrapper">
     <ul id="nav">
         <?php
         if(($tabs=$nav->getTabs()) && is_array($tabs)){

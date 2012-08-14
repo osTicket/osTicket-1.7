@@ -36,7 +36,7 @@ if($ticket->isOverdue())
     $warn.='&nbsp;&nbsp;<span class="Icon overdueTicket">Marked overdue!</span>';
 
 ?>
-<table width="910" cellpadding="2" cellspacing="0" border="0">
+<table width="100%" cellpadding="2" cellspacing="0" border="0">
     <tr>
         <td width="50%">
              <h2>Ticket #<?php echo $ticket->getExtId(); ?>
@@ -52,9 +52,9 @@ if($ticket->isOverdue())
         </td>
     </tr>
 </table>
-<table class="ticket_info" cellspacing="0" cellpadding="0" width="940" border="0">
+<table class="ticket_info" cellspacing="0" cellpadding="0" width="100%" border="0">
     <tr>
-        <td width="50">
+        <td width="50%">
             <table border="0" cellspacing="" cellpadding="4" width="100%">
                 <tr>
                     <th width="100">Status:</th>
@@ -106,7 +106,7 @@ if($ticket->isOverdue())
     </tr>
 </table>
 <br>
-<table class="ticket_info" cellspacing="0" cellpadding="0" width="940" border="0">
+<table class="ticket_info" cellspacing="0" cellpadding="0" width="100%" border="0">
     <tr>
         <td width="50%">
             <table cellspacing="0" cellpadding="4" width="100%" border="0">

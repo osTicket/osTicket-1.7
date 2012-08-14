@@ -11,33 +11,36 @@ if($thisclient && $thisclient->isValid()) {
 $info=($_POST && $errors)?Format::htmlchars($_POST):$info;
 ?>
 <h1>Open a New Ticket</h1>
-<p>Please fill in the form below to open a new ticket.</p>
+<p class="intro">Please fill in the form below to open a new ticket.</p>
+
 <form id="ticketForm" method="post" action="open.php" enctype="multipart/form-data">
   <?php csrf_token(); ?>
   <input type="hidden" name="a" value="open">
-  <table width="800" cellpadding="1" cellspacing="0" border="0">
-    <tr>
-        <th class="required" width="160">Full Name:</th>
+
+  <table cellpadding="0" cellspacing="0" class="table_form">
+   <tbody>
+    <tr class="required">
+        <th>Full Name:</th>
         <td>
             <?php
             if($thisclient && $thisclient->isValid()) {
                 echo $thisclient->getName();
             } else { ?>
-                <input id="name" type="text" name="name" size="30" value="<?php echo $info['name']; ?>">
-                <font class="error">*&nbsp;<?php echo $errors['name']; ?></font>
+                <input id="name" type="text" name="name" size="30" value="<?php echo $info['name']; ?>" />
+                <span class="error">* <?php echo $errors['name']; ?></span>
             <?php
             } ?>
         </td>
     </tr>
-    <tr>
-        <th class="required" width="160">Email Address:</th>
+    <tr class="required">
+        <th>Email Address:</th>
         <td>
             <?php
             if($thisclient && $thisclient->isValid()) { 
                 echo $thisclient->getEmail();
             } else { ?>
-                <input id="email" type="text" name="email" size="30" value="<?php echo $info['email']; ?>">
-                <font class="error">*&nbsp;<?php echo $errors['email']; ?></font>
+                <input id="email" type="text" name="email" size="30" value="<?php echo $info['email']; ?>" />
+                <span class="error">* <?php echo $errors['email']; ?></span>
             <?php
             } ?>
         </td>
@@ -45,16 +48,17 @@ $info=($_POST && $errors)?Format::htmlchars($_POST):$info;
     <tr>
         <th>Telephone:</th>
         <td>
-
-            <input id="phone" type="text" name="phone" size="17" value="<?php echo $info['phone']; ?>">
+            <input id="phone" type="text" name="phone" size="17" value="<?php echo $info['phone']; ?>" />
             <label for="ext" class="inline">Ext.:</label>
-            <input id="ext" type="text" name="phone_ext" size="3" value="<?php echo $info['phone_ext']; ?>">
-            <font class="error">&nbsp;<?php echo $errors['phone']; ?>&nbsp;&nbsp;<?php echo $errors['phone_ext']; ?></font>
+            <input id="ext" type="text" name="phone_ext" size="3" value="<?php echo $info['phone_ext']; ?>" />
+            <span class="error"><?php echo $errors['phone']; ?>&nbsp;&nbsp;<?php echo $errors['phone_ext']; ?></span>
         </td>   
     </tr>
-    <tr><td colspan=2>&nbsp;</td></tr>
-    <tr>
-        <td class="required">Help Topic:</td>
+
+    <tr class="tr_padding"><td colspan=2></td></tr>
+
+    <tr class="required">
+        <th>Help Topic:</th>
         <td>
             <select id="topicId" name="topicId">
                 <option value="" selected="selected">&mdash; Select a Help Topics &mdash;</option>
@@ -69,40 +73,45 @@ $info=($_POST && $errors)?Format::htmlchars($_POST):$info;
                 <?php
                 } ?>
             </select>
-            <font class="error">*&nbsp;<?php echo $errors['topicId']; ?></font>
+            <span class="error">* <?php echo $errors['topicId']; ?></span>
         </td>
     </tr>
-    <tr>
-        <td class="required">Subject:</td>
+    <tr class="required">
+        <th>Subject:</th>
         <td>
-            <input id="subject" type="text" name="subject" size="40" value="<?php echo $info['subject']; ?>">
-            <font class="error">*&nbsp;<?php echo $errors['subject']; ?></font>
+            <input id="subject" type="text" name="subject" size="40" value="<?php echo $info['subject']; ?>" />
+            <span class="error">* <?php echo $errors['subject']; ?></span>
         </td>
     </tr>
-    <tr>
-        <td class="required">Message:</td>
+    <tr class="required tr_message">
+        <th>Message:</th>
         <td>
-            <div><em>Please provide as much details as possible so we can best assist you.</em> <font class="error">*&nbsp;<?php echo $errors['message']; ?></font></div>
-            <textarea id="message" cols="60" rows="8" name="message"><?php echo $info['message']; ?></textarea>
+            <div class="textarea_desc">
+				<em>Please provide as much details as possible so we can best assist you.</em> 
+				<span class="error">* <?php echo $errors['message']; ?></span>
+			</div>
+            <textarea id="message" name="message"><?php echo $info['message']; ?></textarea>
         </td>
     </tr>
 
     <?php if(($cfg->allowOnlineAttachments() && !$cfg->allowAttachmentsOnlogin())
             || ($cfg->allowAttachmentsOnlogin() && ($thisclient && $thisclient->isValid()))) { ?>
     <tr>
-        <td>Attachments:</td>
+        <th>Attachments:</th>
         <td>
-            <div class="uploads"></div><br>
+            <div class="uploads"></div>
             <input type="file" class="multifile" name="attachments[]" id="attachments" size="30" value="" />
-            <font class="error">&nbsp;<?php echo $errors['attachments']; ?></font>
+            <span class="error">&nbsp;<?php echo $errors['attachments']; ?></span>
         </td>
     </tr>
-    <tr><td colspan=2>&nbsp;</td></tr>
+
+    <tr class="tr_padding"><td colspan=2></td></tr>
+
     <?php } ?>
     <?php
     if($cfg->allowPriorityChange() && ($priorities=Priority::getPriorities())) { ?>
     <tr>
-        <td>Ticket Priority:</td>
+        <th>Ticket Priority:</th>
         <td>
             <select id="priority" name="priorityId">
                 <?php
@@ -115,7 +124,7 @@ $info=($_POST && $errors)?Format::htmlchars($_POST):$info;
                     }
                 ?>
             </select>
-            <font class="error">&nbsp;<?php echo $errors['priorityId']; ?></font>
+            <span class="error"><?php echo $errors['priorityId']; ?></span>
         </td>
     </tr>
     <?php
@@ -126,23 +135,26 @@ $info=($_POST && $errors)?Format::htmlchars($_POST):$info;
         if($_POST && $errors && !$errors['captcha'])
             $errors['captcha']='Please re-enter the text again';
         ?>
-    <tr class="captchaRow">
-        <td class="required">CAPTCHA Text:</td>
+    <tr class="required tr_captcha">
+        <th>CAPTCHA Text:</th>
         <td>
-            <span class="captcha"><img src="captcha.php" border="0" align="left"></span>
-            &nbsp;&nbsp;
+            <span class="captcha"><img src="captcha.php" /></span>
             <input id="captcha" type="text" name="captcha" size="6">
-            <em>Enter the text shown on the image.</em>
-            <font class="error">*&nbsp;<?php echo $errors['captcha']; ?></font>
+            <span class='field_desc'>Enter the text shown on the image.</span>
+            <span class="error">* <?php echo $errors['captcha']; ?></span>
         </td>
     </tr>
     <?php
     } ?>
-    <tr><td colspan=2>&nbsp;</td></tr>
+
+    <tr class="tr_padding"><td colspan=2></td></tr>
+
+   </tbody>
   </table>
-  <p style="padding-left:150px;">
-        <input type="submit" value="Create Ticket">
-        <input type="reset" value="Reset">
-        <input type="button" value="Cancel" onClick='window.location.href="index.php"'>
+
+  <p class="form_buttons">
+        <input class='button submit' type="submit" value="Create Ticket">
+        <input class='button reset' type="reset" value="Reset">
+        <input class='button cancel' type="button" value="Cancel" onClick='window.location.href="index.php"'>
   </p>
 </form>
