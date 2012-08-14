@@ -58,7 +58,7 @@ $info=($_POST && $errors)?Format::htmlchars($_POST):$info;
     <tr class="tr_padding"><td colspan=2></td></tr>
 
     <tr class="required">
-        <th>Help Topic:</td>
+        <th>Help Topic:</th>
         <td>
             <select id="topicId" name="topicId">
                 <option value="" selected="selected">&mdash; Select a Help Topics &mdash;</option>
@@ -77,14 +77,14 @@ $info=($_POST && $errors)?Format::htmlchars($_POST):$info;
         </td>
     </tr>
     <tr class="required">
-        <th>Subject:</td>
+        <th>Subject:</th>
         <td>
             <input id="subject" type="text" name="subject" size="40" value="<?php echo $info['subject']; ?>" />
             <span class="error">* <?php echo $errors['subject']; ?></span>
         </td>
     </tr>
     <tr class="required tr_message">
-        <th>Message:</td>
+        <th>Message:</th>
         <td>
             <div class="textarea_desc">
 				<em>Please provide as much details as possible so we can best assist you.</em> 
@@ -97,7 +97,7 @@ $info=($_POST && $errors)?Format::htmlchars($_POST):$info;
     <?php if(($cfg->allowOnlineAttachments() && !$cfg->allowAttachmentsOnlogin())
             || ($cfg->allowAttachmentsOnlogin() && ($thisclient && $thisclient->isValid()))) { ?>
     <tr>
-        <th>Attachments:</td>
+        <th>Attachments:</th>
         <td>
             <div class="uploads"></div>
             <input type="file" class="multifile" name="attachments[]" id="attachments" size="30" value="" />
@@ -111,7 +111,7 @@ $info=($_POST && $errors)?Format::htmlchars($_POST):$info;
     <?php
     if($cfg->allowPriorityChange() && ($priorities=Priority::getPriorities())) { ?>
     <tr>
-        <th>Ticket Priority:</td>
+        <th>Ticket Priority:</th>
         <td>
             <select id="priority" name="priorityId">
                 <?php
@@ -136,7 +136,7 @@ $info=($_POST && $errors)?Format::htmlchars($_POST):$info;
             $errors['captcha']='Please re-enter the text again';
         ?>
     <tr class="required tr_captcha">
-        <th>CAPTCHA Text:</td>
+        <th>CAPTCHA Text:</th>
         <td>
             <span class="captcha"><img src="captcha.php" /></span>
             <input id="captcha" type="text" name="captcha" size="6">
