@@ -25,7 +25,8 @@
         echo "\n\t".implode("\n\t", $headers)."\n";
     }
 
-	$css_body_id=str_replace('/','_',preg_replace('#'. preg_replace('#http(s)?://([^/]+[/]?)#i',"$2",$cfg->getUrl()) .'([^\.]+)(\.php)?$#','$1',$_SERVER['HTTP_HOST'].$_SERVER['SCRIPT_NAME']));
+	$css_body_id=str_replace('/','_',preg_replace('#^'. preg_replace('#^\.+#','',ROOT_PATH) .'([^\.]+)(\.php)?$#','$1',$_SERVER['SCRIPT_NAME']));
+
     ?>
 </head>
 <body id="page_<?php echo $css_body_id; ?>">

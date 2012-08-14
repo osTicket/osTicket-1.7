@@ -17,9 +17,7 @@ header("Content-Type: text/html; charset=UTF-8\r\n");
     <script src="<?php echo ROOT_PATH; ?>js/osticket.js"></script>
 </head>
 <?php
-	//TODO: fix cfg not defined in login page include
-	if(is_object($cfg)) $css_body_id=str_replace('/','_',preg_replace('#'. preg_replace('#http(s)?://([^/]+[/]?)#i',"$2",$cfg->getUrl()) .'([^\.]+)(\.php)?$#','$1',$_SERVER['HTTP_HOST'].$_SERVER['SCRIPT_NAME']));
-	else $css_body_id='login';
+	$css_body_id=str_replace('/','_',preg_replace('#^'. preg_replace('#^\.+#','',ROOT_PATH) .'([^\.]+)(\.php)?$#','$1',$_SERVER['SCRIPT_NAME']));
 ?>
 <body id="page_<?php echo $css_body_id; ?>">
     <div id="wrapper">
