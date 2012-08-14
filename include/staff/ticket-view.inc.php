@@ -36,6 +36,13 @@ if($ticket->isOverdue())
     $warn.='&nbsp;&nbsp;<span class="Icon overdueTicket">Marked overdue!</span>';
 
 ?>
+<script language="javascript">
+$(document).ready(function(){
+	var entry=1;
+	if( $('#entry_2').length ){entry=2;}
+	$(window).scrollTop( $('#entry_'+entry).position().top);
+});
+</script>
 <table width="910" cellpadding="2" cellspacing="0" border="0">
     <tr>
         <td width="50%">
@@ -237,9 +244,10 @@ if(!$cfg->showNotesInline()) { ?>
     $threadTypes=array('M'=>'message','R'=>'response', 'N'=>'note');
     /* -------- Messages & Responses & Notes (if inline)-------------*/
     if(($thread=$ticket->getThread($cfg->showNotesInline()))) {
+       $thread_count=count($thread);
        foreach($thread as $entry) {
            ?>
-        <table class="<?php echo $threadTypes[$entry['thread_type']]; ?>" cellspacing="0" cellpadding="1" width="940" border="0">
+        <table class="<?php echo $threadTypes[$entry['thread_type']]; ?>" cellspacing="0" cellpadding="1" width="940" border="0" id="entry_<?php echo $thread_count; ?>">
             <tr>
                 <th width="200"><?php echo Format::db_datetime($entry['created']);?></th>
                 <th width="440"><span><?php echo Format::htmlchars($entry['title']); ?></span></th>
@@ -257,6 +265,7 @@ if(!$cfg->showNotesInline()) { ?>
         <?php
         if($entry['thread_type']=='M')
             $msgId=$entry['id'];
+        $thread_count--;
        }
     } else {
         echo '<p>Error fetching ticket thread - get technical help.</p>';
