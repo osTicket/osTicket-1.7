@@ -1,0 +1,5102 @@
+# Greek translation for osticketplus
+# Copyright (c) 2010 Rosetta Contributors and Canonical Ltd 2010
+# This file is distributed under the same license as the osticketplus package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2010.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: osticketplus\n"
+"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2010-10-27 23:47-0300\n"
+"PO-Revision-Date: 2010-11-16 07:39+0000\n"
+"Last-Translator: Alexandre Haguiar <Unknown>\n"
+"Language-Team: Greek <el@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Launchpad-Export-Date: 2010-11-17 05:22+0000\n"
+"X-Generator: Launchpad (build Unknown)\n"
+
+#: scp/admin.php:27
+#, php-format
+msgid "The script is version %s while the database is version %s."
+msgstr "Το script είναι έκδοση %s, ενώ η βάση δεδομένων είναι έκδοση %s."
+
+#: scp/admin.php:29
+msgid ""
+"Possibly caused by incomplete <a href=\"../setup/upgrade.php\">upgrade</a>."
+msgstr ""
+"Πιθανόν προκαλούνται από ελλιπή <a "
+"href=\"../setup/upgrade.php\">Ενημέρωση</a>."
+
+#: scp/admin.php:34
+msgid ""
+"Please take a minute to delete <strong>setup/install</strong> directory for "
+"security reasons."
+msgstr ""
+"Παρακαλούμε ασχοληθείτε ένα λεπτό για να διαγράψετε τον κατάλογο "
+"<strong>setup/install</strong> για λόγους ασφαλείας."
+
+#: scp/admin.php:42
+#, php-format
+msgid ""
+"Please change permission of config file (%s) to remove write access. e.g "
+"<i>chmod 644 %s</i>"
+msgstr ""
+"Παρακαλούμε αλλάξτε τα δικαιώματα πρόσβασης του αρχείου ρυθμίσεων (%s) ώστε "
+"να για να μην επιτρέπεται η εγγραφή π.χ. <i>chmod 644 %s</i>"
+
+#: scp/admin.php:48
+msgid "Please consider turning off register globals if possible"
+msgstr ""
+"Παρακαλούμε απενεργοποιήστε την επιλογή register globals αν είναι δυνατόν"
+
+#: scp/admin.php:71
+msgid "Preferences Updated Successfully"
+msgstr "Οι Προτιμήσεις ενημερώθηκαν με επιτυχία"
+
+#: scp/admin.php:74 include/class.staff.php:256 include/class.msgtpl.php:82
+msgid "Internal Error"
+msgstr "Εσωτερικό σφάλμα"
+
+#: scp/admin.php:84
+msgid "Directory must be valid and writeable"
+msgstr "Ο κατάλογος πρέπει να είναι έγκυρος και εγγράψιμος"
+
+#: scp/admin.php:86
+msgid "Invalid upload dir"
+msgstr "Μη έγκυρος κατάλογος upload"
+
+#: scp/admin.php:88
+msgid "The 'file_uploads' directive is disabled in php.ini"
+msgstr "Η οδηγία 'file_uploads' είναι απενεργοποιημένη στο php.ini"
+
+#: scp/admin.php:92
+msgid "Maximum file size required"
+msgstr "Tο μέγιστο μέγεθος αρχείου απαιτείται"
+
+#: scp/admin.php:95
+msgid "Allowed file extentions required"
+msgstr "Οι επιτρεπόμενες καταλήξεις αρχείου απαιτούνται"
+
+#: scp/admin.php:110
+msgid "Attachments settings updated"
+msgstr "Οι ρυθμίσεις των συνημμένων ενημερώθηκαν"
+
+#: scp/admin.php:112
+msgid "Update error!"
+msgstr "Σφάλμα Ενημέρωσης!"
+
+#: scp/admin.php:115
+msgid "Error occured. See error messages below."
+msgstr "Προέκυψε σφάλμα Δείτε παρακάτω τα μηνύματα λάθους."
+
+#: scp/admin.php:123
+#, php-format
+msgid "Key created successfully for %s"
+msgstr "Το κλειδί δημιουργήθηκε με επιτυχία για το %s"
+
+#: scp/admin.php:125
+msgid "Error adding the IP. Try again"
+msgstr "Σφάλμα κατά την προσθήκη της IP. Προσπαθήστε ξανά."
+
+#: scp/admin.php:129
+msgid "API passphrase updated successfully"
+msgstr "Η φράση κλειδί API ενημερώθηκε με επιτυχία"
+
+#: scp/admin.php:131
+msgid "Error updating passphrase. Try again"
+msgstr "Σφάλμα κατά την ενημέρωση της φράσης κλειδί. Δοκιμάστε ξανά"
+
+#: scp/admin.php:135
+msgid "You must select at least one entry to process"
+msgstr "Πρέπει να επιλέξετε τουλάχιστον μία εγγραφή για επεξεργασία"
+
+#: scp/admin.php:143
+#, php-format
+msgid "%s of %s selected key(s) updated"
+msgstr "%s από %s επιλεγμένο(α) κλειδι(ά) ενημερώθηκαν"
+
+#: scp/admin.php:145
+msgid "Unable to delete selected keys."
+msgstr "Αδύνατη η διαγραφή των επιλεγμένων κλειδιών."
+
+#: scp/admin.php:150
+#, php-format
+msgid "%s of %s selected key(s) deleted"
+msgstr "%s από %s επιλεγμένο(α) κλειδι(ά) διαγράφηκαν"
+
+#: scp/admin.php:152
+msgid "Unable to delete selected key(s). Try again"
+msgstr "Αδύνατη η διαγραφή των επιλεγμένων κλειδιών. Προσπαθήστε ξανά."
+
+#: scp/admin.php:155 scp/admin.php:237 scp/admin.php:290
+msgid "Unknown command"
+msgstr "Άγνωστη εντολή"
+
+#: scp/admin.php:160
+#, php-format
+msgid "Unknown action %s"
+msgstr "Άγνωστη ενέργεια %s"
+
+#: scp/admin.php:168
+msgid "Please enter a valid email."
+msgstr "Παρακαλούμε εισάγετε ένα έγκυρο email."
+
+#: scp/admin.php:170
+msgid "Email already banned"
+msgstr "Το Email έχει ήδη απαγορευθεί"
+
+#: scp/admin.php:173
+msgid "Email added to banlist"
+msgstr "Το Email προστέθηκε στη λίστα των απαγορευμένων (banlist)"
+
+#: scp/admin.php:175
+msgid "Unable to add email to banlist. Try again"
+msgstr ""
+"Αδύνατη η προσθήκη Email στη λίστα των απαγορευμένων (banlist). Προσπαθήστε "
+"ξανά."
+
+#: scp/admin.php:180
+msgid "You must select at least one email"
+msgstr "Πρέπει να επιλέξετε τουλάχιστον ένα e-mail"
+
+#: scp/admin.php:185
+#, php-format
+msgid "%s of %s selected emails removed from banlist"
+msgstr "%s από %s επιλεγμένα e-mail διαγράφηκαν από τη banlist"
+
+#: scp/admin.php:187
+msgid "Unable to make remove selected emails. Try again."
+msgstr "Αδυναμία να αφαιρέσετε τα επιλεγμένα Email. Προσπαθήστε ξανά."
+
+#: scp/admin.php:191
+msgid "Uknown banlist command!"
+msgstr "Άγνωστη εντολή της λίστας των απαγορευμένων!"
+
+#: scp/admin.php:202
+msgid "Email updated successfully"
+msgstr "Το Email ενημερώθηκε με επιτυχία"
+
+#: scp/admin.php:204
+msgid "Error updating email"
+msgstr "Σφάλμα κατά την ενημέρωση e-mail"
+
+#: scp/admin.php:206 scp/admin.php:311 scp/admin.php:412 scp/admin.php:469
+msgid "Internal error"
+msgstr "Εσωτερικό σφάλμα"
+
+#: scp/admin.php:211
+msgid "Email added successfully"
+msgstr "Το Email προστέθηκε με επιτυχία"
+
+#: scp/admin.php:213 include/class.email.php:384
+msgid "Unable to add email. Internal error"
+msgstr "Αδύνατη η προσθήκη Email. Εσωτερικό σφάλμα."
+
+#: scp/admin.php:217
+msgid "You must select at least one email to process"
+msgstr "Πρέπει να επιλέξετε τουλάχιστον ένα e-mail για  επεξεργασία"
+
+#: scp/admin.php:224
+msgid ""
+"One or more of the selected emails is being used by a Dept. Remove "
+"association first."
+msgstr ""
+"Ένα ή περισσότερα από τα επιλεγμένα Email χρησιμοποιείται από κάποιο Τμήμα. "
+"Καταργήστε πρώτα τη συσχέτιση."
+
+#: scp/admin.php:232
+#, php-format
+msgid "%s of %s selected email(s) deleted"
+msgstr "%s από %s επιλεγμένα e-mail διαγράφηκαν"
+
+#: scp/admin.php:234
+msgid "Unable to delete selected email(s)."
+msgstr "Αδύνατη η διαγραφή των επιλεγμένων e-mail (s)."
+
+#: scp/admin.php:242 scp/admin.php:348
+msgid "Unknown topic action!"
+msgstr "Άγνωστη ενέργεια θέματος!"
+
+#: scp/admin.php:252
+msgid "Template created successfully"
+msgstr "Πρότυπο που δημιουργήθηκε με επιτυχία"
+
+#: scp/admin.php:254
+msgid "Error creating the template - try again"
+msgstr "Σφάλμα στη δημιουργία του προτύπου - προσπαθήστε ξανά"
+
+#: scp/admin.php:263 include/class.msgtpl.php:179
+msgid "Unknown template"
+msgstr "Άγνωστο πρότυπο"
+
+#: scp/admin.php:265
+msgid "Template updated successfully"
+msgstr "Το πρότυπο ενημερώθηκε με επιτυχία"
+
+#: scp/admin.php:267
+msgid "Error updating the template. Try again"
+msgstr "Σφάλμα κατά την ενημέρωση του προτύπου. Προσπαθήστε ξανά."
+
+#: scp/admin.php:273
+msgid "You must select at least one template"
+msgstr "Πρέπει να επιλέξετε τουλάχιστον ένα πρότυπο"
+
+#: scp/admin.php:275
+msgid "You can not delete default template"
+msgstr "Δεν μπορείτε να διαγράψετε το προεπιλεγμένο πρότυπο"
+
+#: scp/admin.php:282
+msgid ""
+"One or more of the selected templates is being used by a Dept. Remove "
+"association first."
+msgstr ""
+"Ένα ή περισσότερα από τα επιλεγμένα πρότυπα χρησιμοποιείται από κάποιο "
+"Τμήμα. Καταργήστε πρώτα τη συσχέτιση."
+
+#: scp/admin.php:286
+#, php-format
+msgid "%s of %s selected templates(s) deleted"
+msgstr "%s από %s επιλεγμένα πρότυπα διαγράφηκαν"
+
+#: scp/admin.php:288
+msgid "Unable to delete selected templates(s)."
+msgstr "Αδύνατη η διαγραφή των επιλεγμένων προτύπων."
+
+#: scp/admin.php:295 scp/tickets.php:325 scp/kb.php:96
+msgid "Unknown action"
+msgstr "Άγνωστη ενέργεια"
+
+#: scp/admin.php:307
+msgid "Topic updated successfully"
+msgstr "Το Θέμα ενημερώθηκε με επιτυχία"
+
+#: scp/admin.php:309
+msgid "Error updating the topic"
+msgstr "Σφάλμα κατά την ενημέρωση του θέματος"
+
+#: scp/admin.php:316
+msgid "Help topic created successfully"
+msgstr "Το θέμα Βοήθειας δημιουργήθηκε με επιτυχία"
+
+#: scp/admin.php:318 include/class.topic.php:144
+msgid "Unable to create the topic. Internal error"
+msgstr "Αδυναμία δημιουργίας του θέματος. Εσωτερικό σφάλμα"
+
+#: scp/admin.php:322
+msgid "You must select at least one topic"
+msgstr "Πρέπει να επιλέξετε τουλάχιστον ένα θέμα"
+
+#: scp/admin.php:329
+#, php-format
+msgid "%s of %s selected services enabled"
+msgstr "%s από %s επιλεγμένες υπηρεσίες ενεργοποιήθηκαν"
+
+#: scp/admin.php:331
+msgid "Unable to complete the action."
+msgstr "Αδύνατη η ολοκλήρωση της ενέργειας."
+
+#: scp/admin.php:335
+#, php-format
+msgid "%s of %s selected topics disabled"
+msgstr "%s από %s επιλεγμένα θέματα απενεργοποιήθηκαν"
+
+#: scp/admin.php:337
+msgid "Unable to disable selected topics"
+msgstr "Αδύνατη η απενεργοποίηση επιλεγμένα θέματα"
+
+#: scp/admin.php:341
+#, php-format
+msgid "%s of %s selected topics deleted!"
+msgstr "%s από %s επιλεγμένα θέματα διαγράφκαν!"
+
+#: scp/admin.php:343
+msgid "Unable to delete selected topics"
+msgstr "Αδύνατη η διαγραφή των επιλεγμένων θεμάτων"
+
+#: scp/admin.php:357
+#, php-format
+msgid "Group %s updated successfully"
+msgstr "Η ομάδα %s ενημερώθηκε με επιτυχία"
+
+#: scp/admin.php:359 scp/admin.php:366
+msgid "Error(s) occured. Try again."
+msgstr "Σφάλμα(τα) εμφανίστηκε(αν). Προσπαθήστε ξανά."
+
+#: scp/admin.php:364
+#, php-format
+msgid "Group %s created successfully"
+msgstr "Η ομάδα %s δημιουργήθηκε με επιτυχία"
+
+#: scp/admin.php:387
+msgid ""
+"One or more of the selected groups have users. Only empty groups can be "
+"deleted."
+msgstr ""
+"Μία ή περισσότερες από τις επιλεγμένες ομάδες περιέχουν χρήστες. Μόνο κενές "
+"ομάδες μπορούν να διαγραφούν."
+
+#: scp/admin.php:390
+#, php-format
+msgid "%s of %s selected groups Deleted"
+msgstr "%s από %s επιλεγμένες ομάδες διαγράφηκαν"
+
+#: scp/admin.php:393 scp/admin.php:447 scp/admin.php:454 scp/admin.php:531
+msgid "Uknown command!"
+msgstr "Άγνωστη εντολή!"
+
+#: scp/admin.php:396
+msgid "No groups selected."
+msgstr "Δεν επιλέχθηκαν ομάδες."
+
+#: scp/admin.php:408
+msgid "Staff profile updated successfully"
+msgstr "Το προφίλ του Προσωπικού ενημερώθηκε με επιτυχία"
+
+#: scp/admin.php:410
+msgid "Error updating the user"
+msgstr "Σφάλμα κατά την ενημέρωση του χρήστη"
+
+#: scp/admin.php:417
+#, php-format
+msgid "%s %s added successfully"
+msgstr "%s %s προστέθηκε με επιτυχία"
+
+#: scp/admin.php:419
+msgid "Unable to add the user. Internal error"
+msgstr "Αδύνατη η προσθήκη του χρήστη. Εσωτερικό σφάλμα."
+
+#: scp/admin.php:429
+#, php-format
+msgid "%s of  %s selected users enabled"
+msgstr "%s από %s σε επιλεγμένους χρήστες τη δυνατότητα"
+
+#: scp/admin.php:432
+msgid "You can not lock or delete yourself!"
+msgstr "Δεν μπορείτε να κλειδώσετε ή να διαγράψετε τον εαυτό σας!"
+
+#: scp/admin.php:437
+#, php-format
+msgid "%s of %s selected users locked"
+msgstr "%s από %s επιλεγμένοι χρήστες κλειδώθηκαν"
+
+#: scp/admin.php:442
+#, php-format
+msgid "%s of %s selected users deleted"
+msgstr "%s από %s επιλεγμένοι χρήστες διαγράφηκαν"
+
+#: scp/admin.php:450
+msgid "No users selected."
+msgstr "Δεν επιλέχθηκαν χρήστες."
+
+#: scp/admin.php:465
+msgid "Dept updated successfully"
+msgstr "Το Τμήμα ενημερώθηκε με επιτυχία"
+
+#: scp/admin.php:467
+msgid "Error updating the department"
+msgstr "Σφάλμα κατά την ενημέρωση του τμήματος"
+
+#: scp/admin.php:476
+msgid "Unable to add department. Internal error"
+msgstr "Αδύνατη η προσθήκη τμήματος. Εσωτερικό σφάλμα."
+
+#: scp/admin.php:480
+msgid "You must select at least one department"
+msgstr "Πρέπει να επιλέξετε τουλάχιστον ένα τμήμα"
+
+#: scp/admin.php:482
+msgid ""
+"You can not disable/delete a default department. Remove default Dept and try "
+"again."
+msgstr ""
+"Δεν μπορείτε να απενεργοποιήσετε/διαγράψετε ένα προεπιλεγμένο τμήμα.  "
+"Καταργήστε το προεπιλεγμένο Τμήμα και προσπαθήστε ξανά."
+
+#: scp/admin.php:489
+#, php-format
+msgid "%s of %s selected departments made public"
+msgstr "%s από %s επιλεγμένα τμήματα έγιναν Δημόσια"
+
+#: scp/admin.php:491
+msgid "Unable to make depts public."
+msgstr "Αδυναμία μετατροπής των τμημάτων σε Δημόσια."
+
+#: scp/admin.php:495
+#, php-format
+msgid "%s of %s selected departments made private"
+msgstr "%s από %s επιλεγμένα τμήματα έγιναν ιδιωτικά"
+
+#: scp/admin.php:497
+msgid ""
+"Unable to make selected department(s) private. Possibly already private!"
+msgstr ""
+"Αδυναμία μετατροπής των επιλεγμένων τμημάτων σε ιδιωτικά. Ενδεχομένως είναι "
+"ήδη ιδιωτικά.!"
+
+#: scp/admin.php:505
+msgid "Can not delete Dept. with members. Move staff first."
+msgstr ""
+"Δεν είναι δυνατή η διαγραφή Τμήματος που περιέχει μέλη του προσωπικού. "
+"Μετακινήστε πρώτα το Προσωπικό."
+
+#: scp/admin.php:507
+msgid ""
+"Can not delete Dept. associated with a help topics. Remove association first."
+msgstr ""
+"Δεν είναι δυνατή η διαγραφή Τμήματος που σχετίζεται με κάποιο θέμα βοήθειας. "
+"Αφαιρέστε πρώτα τη συσχέτιση."
+
+#: scp/admin.php:518
+#, php-format
+msgid "%s of %s selected departments deleted"
+msgstr "%s από %s επιλεγμένα τμήματα διαγράφηκαν"
+
+#: scp/admin.php:520
+msgid "Unable to delete selected departments."
+msgstr "Αδύνατη η διαγραφή των επιλεγμένων τμημάτων."
+
+#: scp/admin.php:527
+msgid "Unknown Dept action"
+msgstr "Άγνωστη ενέργεια Τμήματος"
+
+#: scp/admin.php:547 scp/profile.php:134
+msgid "Preferences"
+msgstr "Προτιμήσεις"
+
+#: scp/admin.php:548
+msgid "Attachments"
+msgstr "Συνημμένα"
+
+#: scp/admin.php:549
+msgid "API"
+msgstr "API"
+
+#: scp/admin.php:565 include/staff/syslogs.inc.php:80
+msgid "System Logs"
+msgstr "System Logs"
+
+#: scp/admin.php:572
+msgid "Email Addresses"
+msgstr "Διευθύνσεις e-mail"
+
+#: scp/admin.php:573
+msgid "Add New Email"
+msgstr "Προσθήκη νέου E-mail"
+
+#: scp/admin.php:574
+msgid "Templates"
+msgstr "Πρότυπα"
+
+#: scp/admin.php:574 include/staff/templates.inc.php:35
+#: include/staff/template.inc.php:5
+msgid "Email Templates"
+msgstr "Πρότυπα Email"
+
+#: scp/admin.php:575
+msgid "Banlist"
+msgstr "Banlist"
+
+#: scp/admin.php:575
+msgid "Banned Email"
+msgstr "Απαγορευμένα Email"
+
+#: scp/admin.php:585
+#, php-format
+msgid "Unable to fetch info on template ID#"
+msgstr "Αδύνατη η ανάκτηση πληροφορίας για το πρότυπο με ID#"
+
+#: scp/admin.php:602
+#, php-format
+msgid "Unable to fetch info on email ID#%s"
+msgstr "Αδύνατη η ανάκτηση πληροφορίας για το e-mail με ID#%s"
+
+#: scp/admin.php:612 include/staff/helptopics.inc.php:10
+#: include/class.nav.php:33
+msgid "Help Topics"
+msgstr "θέματα Βοήθειας"
+
+#: scp/admin.php:613
+msgid "Add New Topic"
+msgstr "Προσθήκη νέου θέματος"
+
+#: scp/admin.php:618
+#, php-format
+msgid "Unable to fetch info on topic #%s"
+msgstr "Αδύνατη η ανάκτηση πληροφορίας για το θέμα #%s"
+
+#: scp/admin.php:630 scp/directory.php:20 scp/directory.php:77
+#: include/staff/staffmembers.inc.php:16 include/class.nav.php:34
+msgid "Staff Members"
+msgstr "Μέλη του Προσωπικού"
+
+#: scp/admin.php:631
+msgid "Add New User"
+msgstr "Προσθήκη Νέου Χρήστη"
+
+#: scp/admin.php:632
+msgid "User Groups"
+msgstr "Ομάδες Χρηστών"
+
+#: scp/admin.php:633 include/staff/group.inc.php:9
+msgid "Add New Group"
+msgstr "Προσθήκη Νέας ομάδας"
+
+#: scp/admin.php:641
+#, php-format
+msgid "Unable to fetch info on group ID#%s"
+msgstr "Αδύνατη η ανάκτηση πληροφορίας για την ομάδα με ID#%s"
+
+#: scp/admin.php:651
+#, php-format
+msgid "Unable to fetch info on rep ID#%s"
+msgstr ""
+
+#: scp/admin.php:668
+#, php-format
+msgid "Unable to fetch info on Dept ID#%s"
+msgstr "Αδύνατη η ανάκτηση πληροφορίας για το Τμήμα με  ID#%s"
+
+#: scp/admin.php:673 include/staff/depts.inc.php:11 include/class.nav.php:35
+msgid "Departments"
+msgstr "Τμήματα"
+
+#: scp/admin.php:674
+msgid "Add New Dept."
+msgstr "Προσθήκη Νέου Τμήματος"
+
+#: scp/admin.php:705
+msgid "Problems loading requested admin page."
+msgstr "Προβλήματα κατά τη φόρτωση της Σελίδας Διαχειριστή."
+
+#: scp/admin.php:706
+msgid ""
+"Possibly access denied, if you believe this is in error please get technical "
+"support."
+msgstr ""
+"Πιθανόν δεν επιτρέπεται η πρόσβαση, εάν πιστεύετε ότι αυτό είναι λάθος "
+"παρακαλώ ζητήστε τεχνική υποστήριξη."
+
+#: scp/ajax.php:24
+msgid "config error"
+msgstr "config error"
+
+#: scp/ajax.php:27
+#, php-format
+msgid "Access Denied. IP %s"
+msgstr "Μη επιτρεπτή πρόσβαση. IP %s"
+
+#: scp/ajax.php:33
+msgid "Invalid params"
+msgstr "Μη έγκυρες παράμετροι"
+
+#: scp/ajax.php:40
+msgid "invalid method"
+msgstr "Άκυρη μέθοδος"
+
+#: scp/ajax.php:48
+#, php-format
+msgid "This is secure ajax assjax %s"
+msgstr "Αυτό είναι ασφαλές ajax assjax %s"
+
+#: scp/ajax.php:54
+#, php-format
+msgid "invalid method/call %s"
+msgstr ""
+
+#: scp/profile.php:21
+msgid "Internal Error. Action Denied"
+msgstr "Εσωτερικό σφάλμα. Μη επιτρεπτή ενέργεια"
+
+#: scp/profile.php:28
+msgid "Invalid auto refresh value."
+msgstr "Άκυρη τιμή αυτόματης ανανέωσης."
+
+#: scp/profile.php:43
+msgid "Preference Updated Successfully"
+msgstr "Η προτίμηση ενημερώθηκε με επιτυχία"
+
+#: scp/profile.php:45
+msgid "Preference update error."
+msgstr "Σφάλμα κατά την ενημέρωση της Προτίμησης."
+
+#: scp/profile.php:51
+msgid "Current password required"
+msgstr "Ο τρέχων κωδικός πρόσβασης απαιτείται"
+
+#: scp/profile.php:53
+msgid "New password required"
+msgstr "Ο νέος κωδικός πρόσβασης απαιτείται"
+
+#: scp/profile.php:55
+msgid "Must be atleast 6 characters"
+msgstr "Πρέπει να είναι τουλάχιστον 6 χαρακτήρες"
+
+#: scp/profile.php:57
+msgid "Confirm new password"
+msgstr "Επιβεβαίωση νέου κωδικού πρόσβασης"
+
+#: scp/profile.php:60
+msgid "Valid password required"
+msgstr "Ένας έγκυρος κωδικός πρόσβασης απαιτείται"
+
+#: scp/profile.php:62
+msgid "New password(s) don't match"
+msgstr "Οι νέοι κωδικοί πρόσβασης δεν ταιριάζουν"
+
+#: scp/profile.php:64
+msgid "New password is same as old password"
+msgstr "Ο νέος κωδικός πρόσβασης είναι ίδιος με τον παλιό κωδικό πρόσβασης"
+
+#: scp/profile.php:72
+msgid "Password Changed Successfully"
+msgstr "Ο κωδικός σας άλλαξε με επιτυχία"
+
+#: scp/profile.php:74
+msgid "Unable to complete password change. Internal error."
+msgstr ""
+"Αδύνατη η ολοκλήρωση της αλλαγής του κωδικού πρόσβασης. Εσωτερικό σφάλμα."
+
+#: scp/profile.php:81
+msgid "First name required"
+msgstr "Το Όνομα απαιτείται"
+
+#: scp/profile.php:84
+msgid "Last name required"
+msgstr "Το Επώνυμο απαιτείται"
+
+#: scp/profile.php:87 include/class.config.php:469
+#: include/class.ticket.php:1166 include/class.staff.php:274
+#: include/class.email.php:265
+msgid "Valid email required"
+msgstr "Ένα έγκυρο Email απαιτείται"
+
+#: scp/profile.php:90 scp/profile.php:93
+msgid "Enter a valid number"
+msgstr "Εισάγετε έναν έγκυρο αριθμό"
+
+#: scp/profile.php:97
+msgid "Invalid ext."
+msgstr "Άκυρο εσωτ."
+
+#: scp/profile.php:112
+msgid "Profile Updated Successfully"
+msgstr "Το Προφίλ ενημερώθηκε με επιτυχία"
+
+#: scp/profile.php:114
+msgid "Error(s) occured. Profile NOT updated"
+msgstr "Σφάλμα(τα) εμφανίστηκαν. Το προφίλ ΔΕΝ ενημερώθηκε."
+
+#: scp/profile.php:117
+msgid "Error(s) below occured. Try again"
+msgstr "Τα παρακάτω Σφάλμα(τα) εμφανίστηκαν. Προσπαθήστε ξανά."
+
+#: scp/profile.php:121 tickets.php:76
+msgid "Uknown action"
+msgstr "Άγνωστη ενέργεια"
+
+#: scp/profile.php:133 include/class.nav.php:42
+msgid "My Profile"
+msgstr "Το Προφίλ μου"
+
+#: scp/profile.php:135 include/staff/changepasswd.inc.php:5
+msgid "Change Password"
+msgstr "Αλλαγή κωδικού πρόσβασης"
+
+#: scp/profile.php:138
+msgid ""
+"Welcome back! You are listed as 'on vacation' Please let admin or your "
+"manager know that you are back."
+msgstr ""
+"Καλώς ήρθατε και πάλι. Είστε δηλωμένος ως 'σε διακοπές'. Παρακαλούμε "
+"ενημερώστε το διαχειριστή ή προϊστάμενό σας ότι είστε ξανά πίσω."
+
+#: scp/profile.php:158
+msgid "You must change your password to continue."
+msgstr "Πρέπει να αλλάξετε τον κωδικό σας για να συνεχίσετε."
+
+#: scp/staff.inc.php:21 secure.inc.php:18 login.php:18
+msgid "Fatal Error"
+msgstr "Fatal Error"
+
+#: scp/staff.inc.php:26
+msgid "Fatal error"
+msgstr "Fatal error"
+
+#: scp/staff.inc.php:69
+msgid "System Offline"
+msgstr "Σύστημα Χωρίς Σύνδεση"
+
+#: scp/staff.inc.php:74
+msgid "Access Denied. Contact Admin"
+msgstr "Μη επιτρεπτή πρόσβαση. Εποικοινωνήστε με το Διαχειριστή."
+
+#: scp/staff.inc.php:94
+#, php-format
+msgid "The script is version %s while the database is version %s"
+msgstr "Το script είναι έκδοση %s, ενώ η βάση δεδομένων είναι έκδοση %s"
+
+#: scp/staff.inc.php:96
+msgid ""
+"<strong>System is set to offline mode</strong> - Client interface is "
+"disabled and ONLY admins can access staff control panel."
+msgstr ""
+"<strong> Το Σύστημα έχει τεθεί σε κατάσταση λειτουργίας χωρίς σύνδεση</ "
+"strong> - Η διεπαφή των χρηστών έχει απενεργοποιηθεί και ΜΟΝΟ οι "
+"διαχειριστές μπορούν να έχουν πρόσβαση στον πίνακα ελέγχου του Προσωπικού."
+
+#: scp/staff.inc.php:97 include/staff/dept.inc.php:119
+#: include/staff/dept.inc.php:125 include/staff/helptopics.inc.php:70
+#: include/staff/preference.inc.php:412 include/staff/preference.inc.php:418
+#: include/staff/preference.inc.php:424 include/staff/preference.inc.php:430
+#: include/staff/preference.inc.php:443 include/staff/preference.inc.php:453
+#: include/staff/preference.inc.php:463 include/staff/preference.inc.php:473
+#: include/staff/api.inc.php:98 include/staff/staffmembers.inc.php:80
+#: include/staff/email.inc.php:102 include/staff/email.inc.php:163
+#: include/staff/premade.inc.php:145 include/staff/groups.inc.php:66
+msgid "Enable"
+msgstr "Ενεργοποίηση"
+
+#: scp/directory.php:64
+msgid "All Department"
+msgstr "Όλα τα Τμήματα"
+
+#: scp/directory.php:80 include/staff/templates.inc.php:47
+#: include/staff/template.inc.php:16
+msgid "Name"
+msgstr "Όνομα"
+
+#: scp/directory.php:81 include/staff/preference.inc.php:74
+#: include/staff/staff.inc.php:52 include/staff/staffmembers.inc.php:31
+#: include/staff/email.inc.php:69 include/staff/topic.inc.php:68
+msgid "Dept"
+msgstr "Τμήμα"
+
+#: scp/directory.php:82 include/staff/newticket.inc.php:49
+#: include/staff/filters.inc.php:87 include/staff/banlist.inc.php:87
+#: include/client/tickets.inc.php:98
+msgid "Email"
+msgstr "Email"
+
+#: scp/directory.php:83 include/staff/newticket.inc.php:48
+msgid "Phone"
+msgstr "Τηλέφωνο"
+
+#: scp/directory.php:84
+msgid "Mobile"
+msgstr "Κινητό"
+
+#: scp/directory.php:106
+msgid "Problems displaying directory"
+msgstr "Προβλήματα στην προβολή του καταλόγου"
+
+#: scp/login.php:22 login.php:25 login.php:27
+msgid "Authentication Required"
+msgstr "Απαιτείται ο έλεγχος ταυτότητας"
+
+#: scp/login.php:25 login.php:33
+msgid "Invalid login"
+msgstr "Μη έγκυρη είσοδος"
+
+#: scp/login.php:28 login.php:36
+msgid "Excessive failed login attempts"
+msgstr "Υπερβολικές αποτυχημένες προσπάθειες εισόδου"
+
+#: scp/login.php:29
+msgid "You've reached maximum failed login attempts allowed."
+msgstr ""
+"Έχετε φτάσει στο μέγιστο αριθμό αποτυχημένων προσπαθειών εισόδου που "
+"επιτρέπονται."
+
+#: scp/login.php:59 scp/attachment.php:28 scp/kb.php:17 tickets.php:19
+#: include/staff/group.inc.php:2 include/staff/header.inc.php:1
+#: include/staff/dept.inc.php:2 include/staff/tickets.inc.php:2
+#: include/staff/templates.inc.php:2 include/staff/reply.inc.php:2
+#: include/staff/depts.inc.php:2 include/staff/helptopics.inc.php:2
+#: include/staff/preference.inc.php:2 include/staff/newticket.inc.php:2
+#: include/staff/api.inc.php:2 include/staff/staff.inc.php:2
+#: include/staff/staffmembers.inc.php:2 include/staff/filters.inc.php:2
+#: include/staff/banlist.inc.php:2 include/staff/syslogs.inc.php:2
+#: include/staff/email.inc.php:3 include/staff/emails.inc.php:2
+#: include/staff/viewticket.inc.php:4 include/staff/template.inc.php:2
+#: include/staff/editticket.inc.php:2 include/staff/premade.inc.php:3
+#: include/staff/groups.inc.php:2 include/staff/attachment.inc.php:2
+#: include/staff/topic.inc.php:2 include/client/viewticket.inc.php:4
+msgid "Access Denied"
+msgstr "Μη επιτρεπτή πρόσβαση"
+
+#: scp/login.php:60
+msgid "Forgot your login info? Contact IT Dept."
+msgstr ""
+"Ξεχάσατε τα συνθηματικά πρόσβασης; Επικοινωνήστε με το Τμήμα Υποστήριξης του "
+"Συστήματος"
+
+#: scp/login.php:62
+msgid "Excessive login attempts by a staff member?"
+msgstr "Υπερβολικές προσπάθειες σύνδεσης από έναν υπάλληλο;"
+
+#: scp/login.php:63 scp/login.php:67 include/staff/staffmembers.inc.php:28
+#: include/staff/email.inc.php:84 include/staff/smtp.inc.php:45
+#: include/staff/login.tpl.php:19
+msgid "Username"
+msgstr "Όνομα Χρήστη"
+
+#: scp/login.php:64 scp/login.php:68 login.php:79 login.php:83
+msgid "Attempts #"
+msgstr "Απόπειρες #"
+
+#: scp/login.php:64
+msgid "minutes"
+msgstr "λεπτά"
+
+#: scp/login.php:65
+msgid "Excessive login attempts (staff)"
+msgstr "Υπερβολικές προσπάθειες σύνδεσης (Προσωπικό)"
+
+#: scp/login.php:68 login.php:83
+msgid "TIME:"
+msgstr "ΩΡΑ:"
+
+#: scp/login.php:69
+msgid "Failed login attempt (staff)"
+msgstr "Αποτυχημένη προσπάθεια σύνδεσης (Προσωπικό)"
+
+#: scp/attachment.php:30
+msgid "You do not have access to the ticket"
+msgstr "Δεν έχετε πρόσβαση στο δελτίο"
+
+#: scp/tickets.php:26
+msgid "Unknown ticket ID#"
+msgstr "Άγνωστο δελτίο με ID#"
+
+#: scp/tickets.php:28
+msgid "Access denied. Contact admin if you believe this is in error"
+msgstr ""
+"Δεν επιτρέπεται η πρόσβαση. Επικοινωνήστε με το Διαχειριστή αν πιστεύετε ότι "
+"αυτό είναι λάθος."
+
+#: scp/tickets.php:37
+msgid ""
+"Access denied. You are not allowed to edit this ticket. Contact admin if you "
+"believe this is in error"
+msgstr ""
+"Δεν επιτρέπεται η πρόσβαση.  Δεν επιτρέπεται να επεξεργαστείτε αυτό το "
+"δελτίο. Επικοινωνήστε με το Διαχειριστή αν πιστεύετε ότι αυτό είναι λάθος."
+
+#: scp/tickets.php:54
+msgid "Missing message ID"
+msgstr "Λείπει το ID του μηνύματος"
+
+#: scp/tickets.php:55
+msgid "Response message required"
+msgstr "Το μήνυμα απάντησης απαιτείται"
+
+#: scp/tickets.php:62
+msgid "Action Denied. Ticket is locked by someone else!"
+msgstr "Μη επιτρεπτή ενέργεια. Το δελτίο είναι κλειδωμένο από κάποιον άλλο!"
+
+#: scp/tickets.php:67
+msgid "Invalid attachment"
+msgstr "Μή έγκυρο συνημμένο"
+
+#: scp/tickets.php:69
+msgid "upload dir invalid. Contact admin."
+msgstr ""
+"Ο κατάλογος upload δεν είναι έγκυρος. Επικοινωνήστε με το Διαχειριστή."
+
+#: scp/tickets.php:71 include/class.ticket.php:1216
+msgid "Invalid file type"
+msgstr "Μη έγκυρος τύπος αρχείου"
+
+#: scp/tickets.php:76
+msgid "Email is in banlist. Must be removed to reply"
+msgstr ""
+"Το email είναι στη λίστα απαγορευμένων διευθύνσεων (banlist). Πρέπει να "
+"απομακρυνθεί από τη λίστα για να απαντήσετε"
+
+#: scp/tickets.php:80
+msgid "Response Posted Successfully"
+msgstr "Η απάντηση δημοσιεύτηκε με επιτυχία"
+
+#: scp/tickets.php:85
+#, php-format
+msgid "%s %s the ticket on reply"
+msgstr "%s %s το δελτίο για απάντηση"
+
+#: scp/tickets.php:85
+msgid "reopened"
+msgstr "ανοιγμένα εκ νεου"
+
+#: scp/tickets.php:85 scp/tickets.php:179
+msgid "closed"
+msgstr "κλειστά"
+
+#: scp/tickets.php:86
+#, php-format
+msgid "Ticket status changed to %s"
+msgstr "Η κατάσταση των δελτίων άλλαξε σε %s"
+
+#: scp/tickets.php:86 include/staff/tickets.inc.php:300
+msgid "Open"
+msgstr "Ανοικτά"
+
+#: scp/tickets.php:86 include/staff/tickets.inc.php:302
+msgid "Closed"
+msgstr "Κλειστά"
+
+#: scp/tickets.php:101
+msgid "Unable to post the response."
+msgstr "Αδυναμία αποστολής της απάντησης."
+
+#: scp/tickets.php:106 include/staff/newticket.inc.php:59
+#: include/staff/staff.inc.php:48 include/staff/email.inc.php:65
+#: include/staff/topic.inc.php:64
+msgid "Select Department"
+msgstr "Επιλογή Τμήματος"
+
+#: scp/tickets.php:107
+msgid "Note/Message required"
+msgstr "Η Σημείωση/Μήνυμα απαιτείται"
+
+#: scp/tickets.php:114
+msgid "Ticket already in the Dept."
+msgstr "Το δελτίο βρίσκεται ήδη στο Τμήμα"
+
+#: scp/tickets.php:117
+msgid "Action Denied. You are not allowed to transfer tickets."
+msgstr "Μη επιτρεπτή πρόσβαση. Δεν σας επιτρέπεται να μεταφέρετε δελτία."
+
+#: scp/tickets.php:123
+#, php-format
+msgid "Dept. Transfer from %s to %s"
+msgstr "Μεταφορά Τμήματος από %s σε %s"
+
+#: scp/tickets.php:125
+#, php-format
+msgid "Ticket transfered sucessfully to %s Dept."
+msgstr "Το δελτίο μεταφέρθηκε με επιτυχία στο Τμήμα %s"
+
+#: scp/tickets.php:132
+msgid "Unable to complete the transfer"
+msgstr "Δεν ήταν δυνατή η ολοκλήρωση της μεταφοράς"
+
+#: scp/tickets.php:137
+msgid "Select assignee"
+msgstr "Επιλέξτε εκδοχέα"
+
+#: scp/tickets.php:138 tickets.php:50 include/class.ticket.php:1168
+msgid "Message required"
+msgstr "Το Μήνυμα απαιτείται"
+
+#: scp/tickets.php:145 scp/tickets.php:151
+msgid "Ticket already assigned to the staff."
+msgstr "Το δελτία έχει ήδη ανατεθεί στο Προσωπικό."
+
+#: scp/tickets.php:154
+msgid ""
+"Ticket already assigned. You do not have permission to re-assign assigned "
+"tickets"
+msgstr ""
+"Το δελτίο έχει ήδη ανατεθεί. Δεν επιτρέπεται να κάνετε ανάθεση σε ήδη "
+"ανατεθιμένα δελτία."
+
+#: scp/tickets.php:158
+msgid "Ticket Assigned to"
+msgstr "Το δελτίο Ανατέθηκε σε"
+
+#: scp/tickets.php:158
+msgid "staff"
+msgstr "προσωπικό"
+
+#: scp/tickets.php:164
+msgid "Unable to assign the ticket"
+msgstr "Αδυναμία ανάθεσης του δελτίου"
+
+#: scp/tickets.php:169
+msgid "Title required"
+msgstr "Ο Τίτλος απαιτείται"
+
+#: scp/tickets.php:170
+msgid "Note message required"
+msgstr "Το μήνυμα σημείωσης απαιτείται"
+
+#: scp/tickets.php:176
+msgid "Internal note posted"
+msgstr "Η εσωτερική σημείωση δημοσιεύτηκε"
+
+#: scp/tickets.php:179 scp/tickets.php:245 scp/tickets.php:275
+msgid "and status set to"
+msgstr "και η κατάσταση τέθηκε σε"
+
+#: scp/tickets.php:179
+msgid "open"
+msgstr "ανοικτό"
+
+#: scp/tickets.php:186
+msgid "Error(s) occured. Unable to post the note."
+msgstr "Εμφανίστηκε Σφάλμα. Αδύνατη η αποστολή της σημείωσης."
+
+#: scp/tickets.php:192
+msgid "Perm. Denied. You are not allowed to edit tickets"
+msgstr "Μη επιτρεπτή ενέργεια. Δεν έχετε δικαίωμα να επεξεργαστείτε δελτία"
+
+#: scp/tickets.php:194
+msgid "Ticket updated successfully"
+msgstr "Το δελτίο ενημερώθηκε με επιτυχία"
+
+#: scp/tickets.php:197
+msgid "Error(s) occured! Try again."
+msgstr "Εμφανίστηκαν σφάλματα. Δοκιμάστε ξανά!"
+
+#: scp/tickets.php:205
+msgid "Perm. Denied. You are not allowed to change ticket's priority"
+msgstr ""
+"Μη επιτρεπτή ενέργεια. Δεν σας επιτρέπεται να αλλάξετε την προτεραιότητα του "
+"δελτίου."
+
+#: scp/tickets.php:207
+msgid "You must select priority"
+msgstr "Πρέπει να επιλέξετε προτεραιότητα"
+
+#: scp/tickets.php:211
+msgid "Priority Changed Successfully"
+msgstr "Η προτεραιότητα άλλαξε με επιτυχία"
+
+#: scp/tickets.php:213
+#, php-format
+msgid "Ticket priority set to \"%s\" by %s"
+msgstr "Η προτεραιότητα του δελτίου έχει τεθεί σε  \"%s\" από %s"
+
+#: scp/tickets.php:214
+msgid "Priority Changed"
+msgstr "Η προτεραιότητα άλλαξε"
+
+#: scp/tickets.php:216
+msgid "Problems changing priority. Try again"
+msgstr "Προβλήματα αλλαγή προτεραιότητας Προσπαθήστε ξανά."
+
+#: scp/tickets.php:222
+msgid "Perm. Denied. You are not allowed to close tickets."
+msgstr "Μη επιτρεπτή ενέργεια. Δεν έχετε δικαίωμα να κλείσετε δελτία."
+
+#: scp/tickets.php:225
+#, php-format
+msgid "Ticket #%s status set to CLOSED"
+msgstr "Η κατάσταση του Δελτίου #%s τέθηκε σε ΚΛΕΙΣΤΟ"
+
+#: scp/tickets.php:226
+#, php-format
+msgid "Ticket closed without response by %s"
+msgstr "Το δελτίο έκλεισε χωρίς απάντηση από %s"
+
+#: scp/tickets.php:227 scp/tickets.php:291 scp/tickets.php:364
+msgid "Ticket Closed"
+msgstr "Το δελτίο Έκλεισε"
+
+#: scp/tickets.php:230
+msgid "Problems closing the ticket. Try again"
+msgstr "Προβλήματα κατά το κλείσιμο του δελτίου. Προσπαθήστε ξανά."
+
+#: scp/tickets.php:237
+msgid "Perm. Denied. You are not allowed to reopen tickets."
+msgstr ""
+"Μη επιτρεπτή ενέργεια. Δεν έχετε δικαίωμα να ανοίξετε εκ νέου δελτία."
+
+#: scp/tickets.php:240
+msgid "Ticket status set to OPEN"
+msgstr "Η κατάσταση του δελτίου τέθηκε σε ΑΝΟΙΚΤΟ"
+
+#: scp/tickets.php:241
+msgid "Ticket reopened (without comments)"
+msgstr "Το δελτίο άνοιξε ξανά (χωρίς σχόλια)"
+
+#: scp/tickets.php:248 scp/tickets.php:353
+msgid "Ticket Reopened"
+msgstr "Το δελτίο άνοιξε ξανά"
+
+#: scp/tickets.php:250
+msgid "Problems reopening the ticket. Try again"
+msgstr "Προβλήματα κατά το εκ νέου άνοιγμα του δελτίου. Προσπαθήστε ξανά."
+
+#: scp/tickets.php:256
+msgid "Ticket is not assigned!"
+msgstr "Το δελτίο δεν έχει ανατεθεί!"
+
+#: scp/tickets.php:258
+#, php-format
+msgid "Ticket released (unassigned) from %s by %s"
+msgstr "Το δελτίο αποδεσμεύτηκε (αναιρέθηκε η ανάθεσή του) από %s από %s"
+
+#: scp/tickets.php:260
+msgid "Ticket unassigned"
+msgstr "Το δελτίο είναι ανεκχώρητο"
+
+#: scp/tickets.php:262
+msgid "Problems releasing the ticket. Try again"
+msgstr "Προβλήματα κατά την έκδοση του δελτίου. Προσπαθήστε ξανά."
+
+#: scp/tickets.php:267
+msgid "Perm. Denied. You are not allowed to flag tickets overdue"
+msgstr ""
+"Μη επιτρεπτή ενέργεια. Δεν επιτρέπεται να επισημάνετε δελτία ως εκπρόθεσμα."
+
+#: scp/tickets.php:270
+msgid "Ticket flagged as overdue"
+msgstr "Το δελτίο επισημάνθηκε ως εκπρόθεσμο"
+
+#: scp/tickets.php:278 scp/tickets.php:376 include/class.ticket.php:1553
+msgid "Ticket Marked Overdue"
+msgstr "Το δελτίο σημειώθηκε ως Εκπρόθεσμο"
+
+#: scp/tickets.php:280
+msgid "Problems marking the the ticket overdue. Try again"
+msgstr ""
+"Προβλήματα κατά τη σήμανση του δελτίου ως εκπρόθεσμο. Προσπαθήστε ξανά."
+
+#: scp/tickets.php:286
+msgid "Perm. Denied. You are not allowed to ban emails"
+msgstr ""
+"Μη επιτρεπτή ενέργεια. Δεν έχετε δικαίωμα να απαγορεύσει μηνύματα "
+"ηλεκτρονικού ταχυδρομείου."
+
+#: scp/tickets.php:288
+#, php-format
+msgid "Email (%s) added to banlist"
+msgstr "Το Email (%s) προστέθηκε στη λίστα των απαγορευμένων (banlist)"
+
+#: scp/tickets.php:290
+msgid "& ticket status set to closed"
+msgstr "& η κατάσταση του δελτίου τέθηκε σε ΚΛΕΙΣΤΟ"
+
+#: scp/tickets.php:295
+msgid "Unable to add the email to banlist"
+msgstr "Αδύνατη η προσθήκη του Email στη λίστα των απαγορευμένων"
+
+#: scp/tickets.php:300
+msgid "Perm. Denied. You are not allowed to remove emails from banlist."
+msgstr ""
+"Μη επιτρεπτή ενέργεια. Δεν έχετε δικαίωμα να αφαιρέσετε Emails από τη λίστα "
+"των απαγορευμένων."
+
+#: scp/tickets.php:302
+msgid "Email removed from banlist"
+msgstr "Το Email διαγράφηκε από τη λίστα των απαγορευμένων"
+
+#: scp/tickets.php:304
+msgid "Unable to remove the email from banlist. Try again."
+msgstr ""
+"Αδύνατη η διαγραφή του Email από το τη λίστα των απαγορευμένων. Προσπαθήστε "
+"ξανά."
+
+#: scp/tickets.php:309
+msgid "Perm. Denied. You are not allowed to DELETE tickets!!"
+msgstr "Μη επιτρεπτή ενέργεια. Δεν επιτρέπεται να ΔΙΑΓΡΑΨΕΤΕ δελτία!!"
+
+#: scp/tickets.php:313
+msgid "Ticket Deleted Forever"
+msgstr "Το δελτίο διαγράφηκε δια παντός"
+
+#: scp/tickets.php:316
+msgid "Problems deleting the ticket. Try again"
+msgstr "Προβλήματα κατά τη διαγραφή του δελτίου. Προσπαθήστε ξανά."
+
+#: scp/tickets.php:321
+msgid "You must select action to perform"
+msgstr "Πρέπει να επιλέξετε μια ενέργεια για εκτέλεση"
+
+#: scp/tickets.php:334
+msgid ""
+"You do not have permission to mass manage tickets. Contact admin for such "
+"access"
+msgstr ""
+"Δεν έχετε δικαίωμα μαζικής διαχείρισης δελτίων. Επικοινωνήστε με το "
+"Διαχειριστή για τέτοιου είδους πρόσβαση"
+
+#: scp/tickets.php:336
+msgid "No tickets selected. You must select at least one ticket."
+msgstr "Δεν επιλέχθηκαν δελτία. Πρέπει να επιλέξετε τουλάχιστον ένα δελτίο."
+
+#: scp/tickets.php:338
+msgid "You do not have permission to close/reopen tickets"
+msgstr "Δεν έχετε δικαίωμα για να κλείσετε/ανοίξετε εκ νέου δελτία"
+
+#: scp/tickets.php:340
+msgid "You do not have permission to delete tickets"
+msgstr "Δεν έχετε άδεια να διαγράψετε τα δελτία"
+
+#: scp/tickets.php:342
+msgid "You must select at least one ticket"
+msgstr "Πρέπει να επιλέξετε τουλάχιστον ένα δελτίο"
+
+#: scp/tickets.php:348
+msgid "Ticket reopened by"
+msgstr "Δελτία που άνοιξαν εκ νέου από"
+
+#: scp/tickets.php:356 scp/tickets.php:367 scp/tickets.php:379
+#: scp/tickets.php:387
+msgid "of"
+msgstr "από"
+
+#: scp/tickets.php:356
+msgid "selected tickets reopened"
+msgstr "επιλεγμένα δελτία άνοιξαν εκ νέου"
+
+#: scp/tickets.php:359
+msgid "Ticket closed without response by"
+msgstr "Το δελτίο έκλεισε χωρίς απάντηση από"
+
+#: scp/tickets.php:367
+msgid "selected tickets closed"
+msgstr "επιλεγμένα δελτία κλειστά"
+
+#: scp/tickets.php:370
+msgid "Ticket flagged as overdue by"
+msgstr "Το δελτίο επισημανθεί ως εκπρόθεσμο από"
+
+#: scp/tickets.php:379
+msgid "selected tickets marked overdue"
+msgstr "επιλεγμένα δελτία σημειωμένα εκπρόθεσμα"
+
+#: scp/tickets.php:387
+msgid "selected tickets deleted"
+msgstr "επιλεγμένα δελτία διαγράφηκαν"
+
+#: scp/tickets.php:396
+msgid "Ticket created successfully"
+msgstr "Το δελτίο δημιουργήθηκε με επιτυχία"
+
+#: scp/tickets.php:406 include/class.ticket.php:1526
+msgid "Unable to create the ticket. Correct the error(s) and try again"
+msgstr ""
+"Αδύνατη η δημιουργία του δελτίου. Διορθώστε το(α) λάθος(η) και προσπαθήστε "
+"ξανά."
+
+#: scp/tickets.php:433
+#, php-format
+msgid "Open (%s)"
+msgstr "Άνοιγμα ( %s)"
+
+#: scp/tickets.php:434 scp/tickets.php:437
+msgid "Open Tickets"
+msgstr "Ανοικτά δελτία"
+
+#: scp/tickets.php:437
+#, php-format
+msgid "Open Tickets (%s)"
+msgstr "Ανοικτά Δελτία ( %s)"
+
+#: scp/tickets.php:439
+#, php-format
+msgid "Answered (%s)"
+msgstr "Απαντημένα ( %s)"
+
+#: scp/tickets.php:440 include/staff/tickets.inc.php:47
+#: include/staff/tickets.inc.php:60
+msgid "Answered Tickets"
+msgstr "Απαντημένα δελτία"
+
+#: scp/tickets.php:446
+msgid "assigned to you!"
+msgstr "ανατέθηκε σε εσάς!"
+
+#: scp/tickets.php:448
+#, php-format
+msgid "My Tickets (%s)"
+msgstr "Τα δελτία μου ( %s)"
+
+#: scp/tickets.php:448
+msgid "Assigned Tickets"
+msgstr "Ανατεθιμένα δελτία"
+
+#: scp/tickets.php:453
+#, php-format
+msgid "Overdue (%s)"
+msgstr "Εκπρόθεσμα ( %s)"
+
+#: scp/tickets.php:453
+msgid "Stale Tickets"
+msgstr "Παλαιά Δελτία"
+
+#: scp/tickets.php:457
+msgid "overdue tickets!"
+msgstr "εκπρόθεσμα δελτία!"
+
+#: scp/tickets.php:460 include/staff/tickets.inc.php:63
+msgid "Closed Tickets"
+msgstr "Κλειστά Δελτία"
+
+#: scp/tickets.php:464 include/class.ticket.php:1520
+#: include/client/header.inc.php:27
+msgid "New Ticket"
+msgstr "Νέο Δελτίο"
+
+#: scp/autocron.php:39
+#, php-format
+msgid "cron job executed [%s]"
+msgstr "περιοδική εργασία εκτελέστηκε [%s]"
+
+#: scp/kb.php:27
+msgid "Unknown ID#"
+msgstr "Άγνωστο ID#"
+
+#: scp/kb.php:39 include/class.group.php:34
+msgid "Missing or invalid group ID"
+msgstr "Άκυρο ή λείπει το ID της ομάδας"
+
+#: scp/kb.php:42
+msgid "Title/subject required"
+msgstr "Ο τίτλος/θέμα απαιτείται"
+
+#: scp/kb.php:45
+msgid "Reply required"
+msgstr "Η απάντηση απαιτείται"
+
+#: scp/kb.php:55
+msgid "Unable to create the reply. Internal error"
+msgstr "Αδυναμία δημιουργίας της απάντησης. Εσωτερικό σφάλμα"
+
+#: scp/kb.php:61
+msgid "Premade reply updated"
+msgstr "Η προκατασκευασμένη απάντηση ενημερώθηκε"
+
+#: scp/kb.php:65
+msgid "Internal update error occured. Try again"
+msgstr "Εσωτερικό σφάλμα ενημέρωσης. Προσπαθήστε ξανά."
+
+#: scp/kb.php:68
+msgid "Title already exists!"
+msgstr "Ο Τίτλος υπάρχει ήδη!"
+
+#: scp/kb.php:70
+msgid "Error(s) occured. Try again"
+msgstr "Εμφανίστηκε Σφάλμα. Προσπαθήστε ξανά."
+
+#: scp/kb.php:75
+msgid "You must select at least one item"
+msgstr "Πρέπει να επιλέξετε τουλάχιστον ένα στοιχείο"
+
+#: scp/kb.php:92
+msgid "Error occured. Try again"
+msgstr "Προέκυψε σφάλμα Προσπαθήστε ξανά."
+
+#: scp/kb.php:106
+msgid "Premade Replies"
+msgstr "Προκατασκευασμένες Απαντήσεις"
+
+#: scp/kb.php:107
+msgid "New Premade Reply"
+msgstr "Νέα Προκατασκευασμένη Απάντηση"
+
+#: secure.inc.php:17 client.inc.php:17 include/ost-config.php:20
+#: include/ost-config.sample.php:20 include/staff/mypref.inc.php:2
+#: include/staff/myprofile.inc.php:2 include/client/open.inc.php:2
+#: include/client/tickets.inc.php:2 include/client/thankyou.inc.php:2
+#: include/client/viewticket.inc.php:2 include/client/login.inc.php:2
+msgid "Kwaheri rafiki!"
+msgstr "Kwaheri Rafiki!"
+
+#: index.php:27
+msgid "Welcome to the support center"
+msgstr "Καλώς ήρθατε στο κέντρο υποστήριξης"
+
+#: index.php:28
+msgid ""
+"In order to streamline support requests and better serve you, we utilize a "
+"support ticket system. Every support request is assigned a unique ticket "
+"number which you can use to track the progress and responses online. For "
+"your reference we provide complete archives and history of all your support "
+"requests. A valid email address is required."
+msgstr ""
+"Για να βελτιστοποιήσετε τα αιτήματα υποστήριξης και για την καλύτερη "
+"εξυπηρέτησή σας, χρησιμοποιούμε ένα σύστημα δελτίων υποστήριξης. Σε κάθε "
+"αίτημα υποστήριξης αποδίδεται ένας μοναδικός αριθμός δελτίου που μπορείτε να "
+"χρησιμοποιήσετε για την online παρακολούθηση της προόδου και των απαντήσεων. "
+"Για τη δική σας αναφορά, σας παρέχουμε πλήρη αρχεία και ιστορικό όλων των "
+"αιτήσεων σας. Μια έγκυρη διεύθυνση email είναι απαραίτητη."
+
+#: index.php:33
+msgid "Open A New Ticket"
+msgstr "Άνοιγμα Νέου Δελτίου"
+
+#: index.php:34
+msgid ""
+"Please provide as much detail as possible so we can best assist you. To "
+"update a previously submitted ticket, please use the form to the right."
+msgstr ""
+"Παρακαλούμε δώστε όσο το δυνατόν λεπτομερέστερα στοιχεία ώστε να μπορέσουμε "
+"να σας βοηθήσουμε καλύτερα. Για να ενημερώσετε ένα δελτίο που υποβλήθηκε στο "
+"παρελθόν, παρακαλούμε χρησιμοποιήστε την φόρμα στα δεξιά."
+
+#: index.php:37
+msgid "Open New Ticket"
+msgstr "Άνοιγμα Νέου Δελτίου"
+
+#: index.php:42
+msgid "Check Ticket Status"
+msgstr "Έλεγχος Κατάστασης Δελτίων"
+
+#: index.php:42
+msgid ""
+"We provide archives and history of all your support requests complete with "
+"responses."
+msgstr ""
+"Παρέχουμε αρχεία και την ιστορικό όλων των αιτήσεων υποστήριξής σας "
+"συμπληρωμένα με τις απαντήσεις."
+
+#: index.php:46 login.php:77 login.php:82 include/staff/filters.inc.php:71
+#: include/staff/banlist.inc.php:71 include/staff/viewticket.inc.php:67
+#: include/client/viewticket.inc.php:40
+msgid "Email:"
+msgstr "Email:"
+
+#: index.php:50 login.php:77 login.php:82
+msgid "Ticket #:"
+msgstr "Δελτίο #:"
+
+#: index.php:55
+msgid "Check Status"
+msgstr "Έλεγχος Κατάστασης"
+
+#: offline.php:26
+msgid "Support Ticket System"
+msgstr "Σύστημα Δελτίων Υποστήριξης"
+
+#: offline.php:33
+msgid "Support Ticket System Offline"
+msgstr "Σύστημα Δελτίων Υποστήριξης χωρίς σύνδεση"
+
+#: offline.php:35
+msgid "Thank you for your interest in contacting us."
+msgstr "Σας ευχαριστούμε για το ενδιαφέρον σας να επικοινωνήσετε μαζί μας."
+
+#: offline.php:36
+msgid ""
+"Our helpdesk is offline at the moment, please check back at a later time."
+msgstr ""
+"Το helpdesk είναι εκτός σύνδεσης αυτή τη στιγμή, παρακαλούμε ελέγξτε ξανά "
+"αργότερα."
+
+#: main.inc.php:78
+msgid "Error loading settings. Contact admin."
+msgstr ""
+"Σφάλμα κατά τη φόρτωση των ρυθμίσεων. Επικοινωνήστε με το Διαχειριστή"
+
+#: main.inc.php:146
+msgid "Unable to connect to the database"
+msgstr "Αδύνατη η σύνδεση με τη βάση δεδομένων"
+
+#: main.inc.php:148
+msgid "Unable to load config info from DB. Get tech support."
+msgstr ""
+"Αδύνατη η φόρτωση πληροφοριών ρυθμίσεων από την βάση δεδομένων. Λάβετε "
+"τεχνική υποστήριξη."
+
+#: main.inc.php:150
+msgid "Short open tag disabled! - osTicket requires it turned ON."
+msgstr ""
+"Η Σύντομη ανοικτή ετικέτα είναι απενεργοποιημένη - Το osTicket την απαιτεί "
+"ενεργοποιημένη!"
+
+#: main.inc.php:155
+msgid "Fatal Error:"
+msgstr "Fatal Error:"
+
+#: main.inc.php:155
+msgid "Contact system adminstrator."
+msgstr "Επικοινωνήστε με το διαχειριστή του συστήματος."
+
+#: login.php:37
+msgid ""
+"You've reached maximum failed login attempts allowed. Try again later or <a "
+"href=\"open.php\">open a new ticket</a>"
+msgstr ""
+"Έχετε φτάσει στο μέγιστο των αποτυχημένων προσπαθειών σύνδεσης. Προσπαθήστε "
+"ξανά αργότερα ή <a href=\"open.php\">ανοίξτε ένα νέο δελτίο</a>"
+
+#: login.php:74
+msgid ""
+"Forgot your login info? Please <a href=\"open.php\">open a new ticket</a>."
+msgstr ""
+"Ξέχασες τα συνθηματικά σας; Παρακαλούμε <a href=\"open.php\">ανοίξτε ένα νέο "
+"δελτίο</a>;"
+
+#: login.php:76
+msgid "Excessive login attempts by a client?"
+msgstr "Υπερβολικές προσπάθειες σύνδεσης από έναν χρήστη;"
+
+#: login.php:78
+msgid "IP:"
+msgstr "IP"
+
+#: login.php:78
+msgid "Time:"
+msgstr "Χρόνος:"
+
+#: login.php:80
+msgid "Excessive login attempts (client)"
+msgstr "Υπερβολικές προσπάθειες σύνδεσης (client)"
+
+#: login.php:84
+msgid "Failed login attempt (client)"
+msgstr "Αποτυχημένη προσπάθεια σύνδεσης (client)"
+
+#: client.inc.php:37
+msgid "System is offline for an upgrade."
+msgstr "Το σύστημα είναι offline για μια αναβάθμιση."
+
+#: tickets.php:30 tickets.php:45
+msgid "Access Denied. Possibly invalid ticket ID"
+msgstr "Μη επιτρεπτή πρόσβαση. Ενδεχομένως άκυρο ID δελτίου."
+
+#: tickets.php:32
+msgid ""
+"Security violation. Repeated violations will result in your account being "
+"locked."
+msgstr ""
+"Παραβίαση ασφαλείας. Επανειλημμένες παραβιάσεις θα έχουν ως αποτέλεσμα το "
+"κλείδωμα του λογαριασμού σας."
+
+#: tickets.php:58
+#, php-format
+msgid "File is too big. Max %s bytes allowed"
+msgstr "Το αρχείο είναι πολύ μεγάλο. Μέγιστος αριθμός %s bytes επιτρέπονται."
+
+#: tickets.php:67
+msgid "Message Posted Successfully"
+msgstr "Το Μήνυμα Δημοσιεύτηκε με επιτυχία"
+
+#: tickets.php:69
+msgid "Unable to post the message. Try again"
+msgstr "Αδύνατη η αποστολή του μηνύματος. Προσπαθήστε ξανά."
+
+#: tickets.php:72
+msgid "Error(s) occured. Please try again"
+msgstr "Εμφανίστηκε Σφάλμα. Παρακαλούμε δοκιμάστε ξανά."
+
+#: include/class.topic.php:111
+msgid "Internal error. Try again"
+msgstr "Εσωτερικό σφάλμα. Δοκιμάστε ξανά"
+
+#: include/class.topic.php:114
+msgid "Help topic required"
+msgstr "Το θέμα της Βοήθειας απαιτείται"
+
+#: include/class.topic.php:116
+msgid "Topic is too short. 5 chars minimum"
+msgstr ""
+"Το θέμα είναι πάρα πολύ μικρό. Πρέπει να είναι 5 χαρακτήρες τουλάχιστον."
+
+#: include/class.topic.php:122
+msgid "Topic already exists"
+msgstr "Το Θέμα υπάρχει ήδη"
+
+#: include/class.topic.php:126
+msgid "You must select a department"
+msgstr "Πρέπει να επιλέξετε ένα τμήμα"
+
+#: include/class.topic.php:129 include/class.email.php:281
+msgid "You must select a priority"
+msgstr "Πρέπει να επιλέξετε μια προτεραιότητα"
+
+#: include/class.topic.php:140
+msgid "Unable to update topic. Internal error occured"
+msgstr "Αδύνατη η ενημέρωση του θέματος.  Εμφανίστηκε εσωτερικό σφάλμα"
+
+#: include/class.validator.php:43
+msgid "Invalid input"
+msgstr "Μη έγκυρη καταχώρηση"
+
+#: include/class.validator.php:45
+msgid "No fields setup"
+msgstr "Δεν τέθηκαν πεδία"
+
+#: include/class.validator.php:109
+msgid "(5 chars min)"
+msgstr "(5 τουλάχιστον χαρακτήρες)"
+
+#: include/class.validator.php:113
+msgid "(3 chars min)"
+msgstr "(3 τουλάχιστον χαρακτήρες)"
+
+#: include/class.validator.php:120
+msgid "(type not set)"
+msgstr "(δεν έχει οριστεί τύπος)"
+
+#: include/ost-config.php:25 include/ost-config.sample.php:25
+msgid "Error: Contact system admin."
+msgstr "Σφάλμα: Επικοινωνήστε με το Διαχειριστή Συστήματος."
+
+#: include/class.config.php:458
+msgid "Helpdesk URl required"
+msgstr "Το Helpdesk URL απαιτείται"
+
+#: include/class.config.php:459
+msgid "Helpdesk title required"
+msgstr "Ο τίτλος του Helpdesk απαιτείται"
+
+#: include/class.config.php:460
+msgid "Default Dept. required"
+msgstr "Το Προεπιλεγμένο Τμήμα απαιτείται"
+
+#: include/class.config.php:461
+msgid "Default email required"
+msgstr "Η Προεπιλεγμένη διεύθυνση email απαιτείται"
+
+#: include/class.config.php:462
+msgid "You must select template."
+msgstr "Πρέπει να επιλέξετε πρότυπο."
+
+#: include/class.config.php:463 include/class.config.php:464
+msgid "Enter idle time in minutes"
+msgstr "Εισάγετε αδρανή χρόνο σε λεπτά"
+
+#: include/class.config.php:465
+msgid "Time format required"
+msgstr "Η Μορφή ώρας απαιτείται"
+
+#: include/class.config.php:466
+msgid "Date format required"
+msgstr "Η Μορφή ημερομηνίας απαιτείται"
+
+#: include/class.config.php:467
+msgid "Datetime format required"
+msgstr "Η μορφή Ημερομηνίας/Ώρας απαιτείται"
+
+#: include/class.config.php:468
+msgid "Day, Datetime format required"
+msgstr "Η μορφή της Ημέρας, Ημερομηνίας/Ώρας απαιτείται"
+
+#: include/class.config.php:470
+msgid "Enter lock time in minutes"
+msgstr "Εισάγετε το χρόνο κλειδώματος σε λεπτά"
+
+#: include/class.config.php:484 include/class.config.php:490
+#: include/class.config.php:497
+msgid "No target recipient(s) selected"
+msgstr "Δεν επιλέχθηκαν παραλήπτες"
+
+#: include/class.config.php:501
+msgid "Reply separator required (?)"
+msgstr "Ο διαχωριστής Απάντησης απαιτείται (;)"
+
+#: include/class.config.php:505
+msgid "The GD extension required"
+msgstr "Η επέκταση GD απαιτείται"
+
+#: include/class.config.php:507
+msgid "PNG support required for Image Captcha"
+msgstr "Η υποστήριξη PNG απαιτείται για την εικόνα CAPTCHA"
+
+#: include/class.config.php:511
+msgid "Email already setup as system email"
+msgstr "Το Email έχει ήδη οριστεί ως Email συστήματος"
+
+#: include/staff/group.inc.php:6
+#, php-format
+msgid "Edit Group: %s"
+msgstr "Επεξεργασία Ομάδας: %s"
+
+#: include/staff/group.inc.php:26
+msgid ""
+"Group permissions set below applies cross all group members, but don't apply "
+"to adminstrators and Dept. managers in some cases."
+msgstr ""
+"Τα δικαιώματα της ομάδας που ορίζονται παρακάτω εφαρμόζονται σε όλα τα μέλη "
+"της ομάδας, αλλά δεν ισχύουν για Διαχειριστές και Προϊστάμενους Τμημάτων, σε "
+"ορισμένες περιπτώσεις."
+
+#: include/staff/group.inc.php:28
+msgid "Group Name:"
+msgstr "Όνομα Ομάδας:"
+
+#: include/staff/group.inc.php:35
+msgid "Group Status:"
+msgstr "Κατάσταση Ομάδας:"
+
+#: include/staff/group.inc.php:37 include/staff/topic.inc.php:35
+msgid "Enabled"
+msgstr "Ενεργοποιημένο"
+
+#: include/staff/group.inc.php:38 include/staff/topic.inc.php:36
+msgid "Disabled"
+msgstr "Απενεργοποιημένο"
+
+#: include/staff/group.inc.php:42
+msgid "Dept Access"
+msgstr "Πρόσβαση Τμήματος"
+
+#: include/staff/group.inc.php:43
+msgid ""
+"Select departments group members are allowed to access in addition to thier "
+"own department."
+msgstr ""
+"Επιλέξτε Τμήματα όπου μέλη της ομάδας έχουν δικαίωμα πρόσβασης, πέρα από τα "
+"ίδια τα τμήματά τους."
+
+#: include/staff/group.inc.php:54
+msgid "Select All"
+msgstr "Επιλογή Όλων"
+
+#: include/staff/group.inc.php:55
+msgid "Select None"
+msgstr "Επιλογή Κανενός"
+
+#: include/staff/group.inc.php:58
+msgid "Can <b>Create</b> Tickets"
+msgstr "Μπορεί να <b>Δημιουργεί</b> Δελτία"
+
+#: include/staff/group.inc.php:60 include/staff/group.inc.php:67
+#: include/staff/group.inc.php:74 include/staff/group.inc.php:81
+#: include/staff/group.inc.php:88 include/staff/group.inc.php:95
+#: include/staff/group.inc.php:102 include/staff/email.inc.php:182
+#: include/staff/smtp.inc.php:21
+msgid "Yes"
+msgstr "Ναι"
+
+#: include/staff/group.inc.php:61 include/staff/group.inc.php:68
+#: include/staff/group.inc.php:75 include/staff/group.inc.php:82
+#: include/staff/group.inc.php:89 include/staff/group.inc.php:96
+#: include/staff/group.inc.php:103 include/staff/helptopics.inc.php:43
+#: include/staff/email.inc.php:184 include/staff/smtp.inc.php:22
+msgid "No"
+msgstr "Όχι"
+
+#: include/staff/group.inc.php:62
+msgid "Ability to open tickets on behalf of users!"
+msgstr "Δυνατότητα να ανοίγει δελτία εκ μέρους χρηστών!"
+
+#: include/staff/group.inc.php:65
+msgid "Can <b>Edit</b> Tickets"
+msgstr "Μπορεί να <b>Επεξεργάζεται</b> Δελτία"
+
+#: include/staff/group.inc.php:69
+msgid ""
+"Ability to edit tickets. Admins & Dept managers are allowed by default."
+msgstr ""
+"Δυνατότητα επεξεργασίας δελτίων. Στους Διαχειριστές & Προϊστάμενοι Τμημάτων "
+"επιτρέπεται εξ ορισμού."
+
+#: include/staff/group.inc.php:72
+msgid "Can <b>Close</b> Tickets"
+msgstr "Μπορεί να <b>Κλείνει</b> Δελτία"
+
+#: include/staff/group.inc.php:76
+msgid ""
+"<b>Mass Close Only:</b> Staff can still close one ticket at a time when set "
+"to No"
+msgstr ""
+"<b>Μαζικό Κλείσιμο Μόνο:</b> Το Προσωπικό μπορεί ακόμη να κλείνει ένα δελτίο "
+"τη φορά όταν επιλέγετε Όχι"
+
+#: include/staff/group.inc.php:79
+msgid "Can <b>Transfer</b> Tickets"
+msgstr "Μπορεί να <b>Μεταφέρει</b> Δελτία"
+
+#: include/staff/group.inc.php:83
+msgid "Ability to transfer tickets from one dept to another."
+msgstr "Δυνατότητα μεταφοράς δελτίων από το ένα τμήμα στο άλλο."
+
+#: include/staff/group.inc.php:86
+msgid "Can <b>Delete</b> Tickets"
+msgstr "Μπορεί να <b>Διαγράφει</b> Δελτία"
+
+#: include/staff/group.inc.php:90
+msgid "Deleted tickets can't be recovered!"
+msgstr "Τα διαγραμμέννα δελτία δεν μπορούν να ανακτηθούν!"
+
+#: include/staff/group.inc.php:93
+msgid "Can Ban Emails"
+msgstr "Μπορεί να Απαγορεύει Emails"
+
+#: include/staff/group.inc.php:97
+msgid "Ability to add/remove emails from banlist via tickets interface."
+msgstr ""
+"Δυνατότητα να προσθέσετε / αφαιρέσετε τα μηνύματα από banlist μέσω δελτία "
+"διεπαφή."
+
+#: include/staff/group.inc.php:100
+msgid "Can Manage Premade"
+msgstr "Μπορεί να Διαχειρίζεται Προκατασκευασμένα"
+
+#: include/staff/group.inc.php:104
+msgid "Ability to add/update/disable/delete premade responses."
+msgstr ""
+"Δυνατότητα προσθήκης/ενημέρωσης/απενεργοποίησης/διαγραφής προκατασκευασμένων "
+"απαντήσεων."
+
+#: include/staff/group.inc.php:109 include/staff/dept.inc.php:155
+#: include/staff/reply.inc.php:63 include/staff/changepasswd.inc.php:30
+#: include/staff/mypref.inc.php:57 include/staff/api.inc.php:142
+#: include/staff/staff.inc.php:151 include/staff/email.inc.php:194
+#: include/staff/viewticket.inc.php:384 include/staff/smtp.inc.php:70
+#: include/staff/topic.inc.php:76
+msgid "Submit"
+msgstr "Υποβολή"
+
+#: include/staff/group.inc.php:110 include/staff/dept.inc.php:156
+#: include/staff/reply.inc.php:64 include/staff/changepasswd.inc.php:31
+#: include/staff/mypref.inc.php:58 include/staff/newticket.inc.php:206
+#: include/staff/staff.inc.php:152 include/staff/email.inc.php:195
+#: include/staff/viewticket.inc.php:343 include/staff/viewticket.inc.php:385
+#: include/staff/viewticket.inc.php:423 include/staff/viewticket.inc.php:470
+#: include/staff/editticket.inc.php:136 include/staff/smtp.inc.php:71
+#: include/staff/myprofile.inc.php:49 include/staff/topic.inc.php:77
+#: include/client/open.inc.php:129 include/client/viewticket.inc.php:138
+msgid "Reset"
+msgstr "Επαναφορά"
+
+#: include/staff/group.inc.php:111 include/staff/dept.inc.php:157
+#: include/staff/reply.inc.php:65 include/staff/changepasswd.inc.php:32
+#: include/staff/mypref.inc.php:59 include/staff/newticket.inc.php:207
+#: include/staff/staff.inc.php:153 include/staff/email.inc.php:196
+#: include/staff/viewticket.inc.php:344 include/staff/viewticket.inc.php:386
+#: include/staff/viewticket.inc.php:424 include/staff/viewticket.inc.php:471
+#: include/staff/editticket.inc.php:137 include/staff/smtp.inc.php:72
+#: include/staff/myprofile.inc.php:50 include/staff/topic.inc.php:78
+#: include/client/open.inc.php:130 include/client/viewticket.inc.php:139
+msgid "Cancel"
+msgstr "Ακύρωση"
+
+#: include/staff/header.inc.php:34
+msgid "Welcome back"
+msgstr "Καλώς ήρθατε και πάλι"
+
+#: include/staff/header.inc.php:37
+msgid "Admin Panel"
+msgstr "Πίνακας Ελέγχου Διαχειριστή"
+
+#: include/staff/header.inc.php:39
+msgid "Staff Panel"
+msgstr "Πίνακας Ελέγχου Προσωπικού"
+
+#: include/staff/header.inc.php:41 include/staff/header.inc.php:51
+msgid "My Preference"
+msgstr "Η προτίμησή μου"
+
+#: include/staff/header.inc.php:41 include/client/header.inc.php:22
+msgid "Log Out"
+msgstr "Έξοδος"
+
+#: include/staff/header.inc.php:51 include/class.nav.php:42
+msgid "My Account"
+msgstr "Ο λογαριασμός μου"
+
+#: include/staff/dept.inc.php:6
+msgid "Update Department"
+msgstr "Ενημέρωση Τμήματος"
+
+#: include/staff/dept.inc.php:10
+msgid "New Department"
+msgstr "Νέο Τμήμα"
+
+#: include/staff/dept.inc.php:28 include/staff/tickets.inc.php:398
+#: include/staff/templates.inc.php:147 include/staff/helptopics.inc.php:22
+#: include/staff/emails.inc.php:21 include/client/tickets.inc.php:97
+msgid "Department"
+msgstr "Τμήμα"
+
+#: include/staff/dept.inc.php:29
+msgid ""
+"Dept depends on email &amp; help topics settings for incoming tickets."
+msgstr ""
+"Το Τμήμα εξαρτάται από τις ρυθμίσεις του e-mail &amp; και των θεμάτων "
+"βοήθειας σε ό,τι αφορά τα εισερχόμενα δελτία."
+
+#: include/staff/dept.inc.php:30
+msgid "Dept Name:"
+msgstr "Ονομασία Τμήματος:"
+
+#: include/staff/dept.inc.php:37
+msgid "Dept Email:"
+msgstr "Email Τμήματος:"
+
+#: include/staff/dept.inc.php:40 include/staff/dept.inc.php:133
+#: include/staff/preference.inc.php:347 include/staff/preference.inc.php:370
+#: include/staff/preference.inc.php:385 include/staff/newticket.inc.php:154
+msgid "Select One"
+msgstr "Επιλέξτε Ένα"
+
+#: include/staff/dept.inc.php:59
+msgid "Dep Manager:"
+msgstr "Προϊστάμενος Τμήματος:"
+
+#: include/staff/dept.inc.php:63
+msgid "-------None-------"
+msgstr "------- Κανένα-------"
+
+#: include/staff/dept.inc.php:64
+msgid "Select Manager (optional)"
+msgstr "Επιλογή Προϊστάμενου (προαιρετικό)"
+
+#: include/staff/dept.inc.php:72
+msgid "No Users (Add Users)"
+msgstr "Κανένας Χρήστης (Προσθήκη Χρηστών)"
+
+#: include/staff/dept.inc.php:79
+msgid "Dept Type"
+msgstr "Τύπος Τμήματος"
+
+#: include/staff/dept.inc.php:81
+msgid "Public"
+msgstr "Δημόσιο"
+
+#: include/staff/dept.inc.php:82
+msgid "Private (Hidden)"
+msgstr "Ιδιωτικό (Κρυφό)"
+
+#: include/staff/dept.inc.php:87
+msgid "Dept Signature:"
+msgstr "Υπογραφή Τμήματος:"
+
+#: include/staff/dept.inc.php:89
+msgid "Required when Dept is public"
+msgstr "Απαιτείται όταν το Τμήματ είναι δημόσιο"
+
+#: include/staff/dept.inc.php:93
+msgid ""
+"can be appended to responses.&nbsp;(available as a choice for public "
+"departments)"
+msgstr ""
+"μπορεί να προσαρτηθεί απαντήσεις (διαθέσιμο ως επιλογή για τις δημόσιες "
+"υπηρεσίες)."
+
+#: include/staff/dept.inc.php:96
+msgid "Email Templates:"
+msgstr "Πρότυπα Email:"
+
+#: include/staff/dept.inc.php:99
+msgid "Select Template"
+msgstr "Επιλογή Προτύπου"
+
+#: include/staff/dept.inc.php:100
+msgid "System Default"
+msgstr "Προεπιλογή Συστήματος"
+
+#: include/staff/dept.inc.php:109
+msgid "Used for outgoing emails,alerts and notices to user and staff."
+msgstr ""
+"Χρησιμοποιείται για εξερχόμενα emails, ειδοποιήσεις και ανακοινώσεις προς το "
+"χρήστη και το προσωπικό."
+
+#: include/staff/dept.inc.php:112
+msgid "Autoresponders"
+msgstr "Αυτόματες Απαντήσεις"
+
+#: include/staff/dept.inc.php:114
+msgid ""
+"Global auto-response settings in preference section must be enabled for Dept "
+"'Enable' setting to take effect."
+msgstr ""
+
+#: include/staff/dept.inc.php:117 include/staff/preference.inc.php:410
+msgid "New Ticket:"
+msgstr "Νέο Δελτίο:"
+
+#: include/staff/dept.inc.php:120 include/staff/dept.inc.php:126
+#: include/staff/helptopics.inc.php:72 include/staff/preference.inc.php:413
+#: include/staff/preference.inc.php:419 include/staff/preference.inc.php:425
+#: include/staff/preference.inc.php:431 include/staff/preference.inc.php:444
+#: include/staff/preference.inc.php:454 include/staff/preference.inc.php:464
+#: include/staff/preference.inc.php:474 include/staff/api.inc.php:104
+#: include/staff/email.inc.php:103 include/staff/email.inc.php:164
+#: include/staff/premade.inc.php:147 include/staff/groups.inc.php:68
+msgid "Disable"
+msgstr "Απενεργοποίηση"
+
+#: include/staff/dept.inc.php:123 include/staff/preference.inc.php:422
+msgid "New Message:"
+msgstr "Νέο Μήνυμα:"
+
+#: include/staff/dept.inc.php:130
+msgid "Auto Response Email:"
+msgstr "Αυτόματη Απάντηση e-mail:"
+
+#: include/staff/dept.inc.php:134
+msgid "Dept Email (above)"
+msgstr "Email Τμήματος (παραπάνω)"
+
+#: include/staff/dept.inc.php:149
+msgid "Email address used to send auto-responses, if enabled."
+msgstr ""
+"Διεύθυνση Email που χρησιμοποιείται για την αποστολή αυτόματων απαντήσεων, "
+"αν ενεργοποιηθεί."
+
+#: include/staff/tickets.inc.php:20 include/staff/banlist.inc.php:10
+#: include/staff/premade.inc.php:12
+msgid "Search term must be more than 3 chars"
+msgstr "Ο όρος αναζήτησης πρέπει να είναι περισσότερο από 3 χαρακτήρες"
+
+#: include/staff/tickets.inc.php:38
+msgid "Overdue Tickets"
+msgstr "Εκπρόθεσμα Δελτία"
+
+#: include/staff/tickets.inc.php:266 include/staff/tickets.inc.php:279
+#: include/staff/filters.inc.php:61 include/staff/banlist.inc.php:61
+msgid "Query:"
+msgstr "Ερώτημα:"
+
+#: include/staff/tickets.inc.php:268 include/staff/tickets.inc.php:354
+#: include/staff/filters.inc.php:63 include/staff/banlist.inc.php:63
+msgid "Search"
+msgstr "Αναζήτηση"
+
+#: include/staff/tickets.inc.php:269
+msgid "Advanced"
+msgstr "Για προχωρημένους"
+
+#: include/staff/tickets.inc.php:280
+msgid "Dept:"
+msgstr "Τμήμα:"
+
+#: include/staff/tickets.inc.php:281 include/staff/reply.inc.php:44
+#: include/staff/premade.inc.php:74
+msgid "All Departments"
+msgstr "Όλα τα τμήματα"
+
+#: include/staff/tickets.inc.php:296
+msgid "Status is:"
+msgstr "Η κατάσταση είναι:"
+
+#: include/staff/tickets.inc.php:299
+msgid "Any status"
+msgstr "Οποιαδήποτε κατάσταση"
+
+#: include/staff/tickets.inc.php:301 include/staff/tickets.inc.php:479
+msgid "Overdue"
+msgstr "Εκπρόθεσμο"
+
+#: include/staff/tickets.inc.php:308 include/staff/syslogs.inc.php:85
+msgid "Date Span:"
+msgstr "Χρονικό Διάστημα:"
+
+#: include/staff/tickets.inc.php:309 include/staff/tickets.inc.php:401
+#: include/staff/syslogs.inc.php:86
+msgid "From"
+msgstr "Από"
+
+#: include/staff/tickets.inc.php:312
+msgid "to"
+msgstr "σε"
+
+#: include/staff/tickets.inc.php:320 include/staff/syslogs.inc.php:94
+msgid "Type:"
+msgstr "Τύπος:"
+
+#: include/staff/tickets.inc.php:323
+msgid "Scan"
+msgstr "Αναζήτηση"
+
+#: include/staff/tickets.inc.php:324
+msgid "Fulltext"
+msgstr "Πλήρες κείμενο"
+
+#: include/staff/tickets.inc.php:329
+msgid "Sort by:"
+msgstr "Ταξινόμηση ανά:"
+
+#: include/staff/tickets.inc.php:334 include/staff/viewticket.inc.php:31
+#: include/client/tickets.inc.php:91
+msgid "Ticket #"
+msgstr "Δελτίο #"
+
+#: include/staff/tickets.inc.php:335 include/staff/tickets.inc.php:400
+#: include/staff/templates.inc.php:146 include/staff/helptopics.inc.php:23
+#: include/staff/emails.inc.php:22
+msgid "Priority"
+msgstr "Προτεραιότητα"
+
+#: include/staff/tickets.inc.php:336 include/staff/tickets.inc.php:395
+msgid "Date"
+msgstr "Ημερομηνία"
+
+#: include/staff/tickets.inc.php:337
+msgid "Dept."
+msgstr "Τμήμα"
+
+#: include/staff/tickets.inc.php:340
+msgid "Descending"
+msgstr "Φθίνουσα"
+
+#: include/staff/tickets.inc.php:341
+msgid "Ascending"
+msgstr "Αύξουσα"
+
+#: include/staff/tickets.inc.php:344
+msgid "Results Per Page:"
+msgstr "Αποτελέσματα ανά σελίδα:"
+
+#: include/staff/tickets.inc.php:355
+msgid "Basic"
+msgstr "Βασική"
+
+#: include/staff/tickets.inc.php:393 include/client/tickets.inc.php:91
+msgid "Sort By Ticket ID"
+msgstr "Ταξινόμηση ανά Δελτίο ID"
+
+#: include/staff/tickets.inc.php:393 include/staff/tickets.inc.php:431
+#: include/staff/tickets.inc.php:434
+msgid "Ticket"
+msgstr "Δελτίο"
+
+#: include/staff/tickets.inc.php:395 include/client/tickets.inc.php:93
+msgid "Sort By Date"
+msgstr "Ταξινόμηση ανά Ημερομηνία"
+
+#: include/staff/tickets.inc.php:396 include/staff/templates.inc.php:142
+#: include/staff/template.inc.php:36 include/staff/template.inc.php:51
+#: include/staff/template.inc.php:66 include/staff/template.inc.php:82
+#: include/staff/template.inc.php:97 include/staff/template.inc.php:113
+#: include/staff/template.inc.php:126 include/staff/template.inc.php:141
+#: include/staff/template.inc.php:155 include/staff/template.inc.php:168
+#: include/client/tickets.inc.php:95
+msgid "Subject"
+msgstr "Θέμα"
+
+#: include/staff/tickets.inc.php:398 include/client/tickets.inc.php:97
+msgid "Sort By Category"
+msgstr "Ταξινόμηση ανά Κατηγορία"
+
+#: include/staff/tickets.inc.php:400
+msgid "Sort By Priority"
+msgstr "Ταξινόμηση ανά Προτεραιότητα"
+
+#: include/staff/tickets.inc.php:431
+msgid "Ticket:"
+msgstr "Δελτίο:"
+
+#: include/staff/tickets.inc.php:445 include/staff/syslogs.inc.php:141
+msgid "Query returned 0 results."
+msgstr "Το ερώτημα επέστρεψε 0 αποτελέσματα."
+
+#: include/staff/tickets.inc.php:455 include/staff/depts.inc.php:71
+#: include/staff/helptopics.inc.php:62 include/staff/staffmembers.inc.php:73
+#: include/staff/filters.inc.php:126 include/staff/banlist.inc.php:126
+#: include/staff/emails.inc.php:65 include/staff/premade.inc.php:138
+#: include/staff/groups.inc.php:58
+msgid "Select:"
+msgstr "Επιλέξτε:"
+
+#: include/staff/tickets.inc.php:456 include/staff/depts.inc.php:72
+#: include/staff/helptopics.inc.php:63 include/staff/staffmembers.inc.php:74
+#: include/staff/filters.inc.php:127 include/staff/banlist.inc.php:127
+#: include/staff/syslogs.inc.php:96 include/staff/emails.inc.php:66
+#: include/staff/premade.inc.php:139 include/staff/groups.inc.php:59
+msgid "All"
+msgstr "Όλα"
+
+#: include/staff/tickets.inc.php:457 include/staff/depts.inc.php:73
+#: include/staff/helptopics.inc.php:64 include/staff/newticket.inc.php:193
+#: include/staff/staffmembers.inc.php:76 include/staff/filters.inc.php:129
+#: include/staff/banlist.inc.php:129 include/staff/email.inc.php:131
+#: include/staff/emails.inc.php:67 include/staff/viewticket.inc.php:321
+#: include/staff/editticket.inc.php:107 include/staff/premade.inc.php:141
+#: include/staff/groups.inc.php:61 include/staff/smtp.inc.php:39
+msgid "None"
+msgstr "Κανένα"
+
+#: include/staff/tickets.inc.php:458 include/staff/depts.inc.php:74
+#: include/staff/helptopics.inc.php:65 include/staff/staffmembers.inc.php:75
+#: include/staff/filters.inc.php:128 include/staff/banlist.inc.php:128
+#: include/staff/emails.inc.php:68 include/staff/premade.inc.php:140
+#: include/staff/groups.inc.php:60
+msgid "Toggle"
+msgstr "Εναλλαγή"
+
+#: include/staff/tickets.inc.php:460 include/staff/filters.inc.php:130
+#: include/staff/banlist.inc.php:130 include/staff/syslogs.inc.php:149
+#: include/staff/premade.inc.php:142
+msgid "page:"
+msgstr "σελίδα"
+
+#: include/staff/tickets.inc.php:471 include/staff/tickets.inc.php:489
+msgid "Reopen"
+msgstr "Άνοιγμα ξανά"
+
+#: include/staff/tickets.inc.php:472 include/staff/tickets.inc.php:490
+msgid "Are you sure you want to reopen selected tickets?"
+msgstr "Είστε σίγουροι ότι θέλετε να ανοίξετε ξανά τα επιλεγμένα δελτία;"
+
+#: include/staff/tickets.inc.php:480
+msgid "Are you sure you want to mark selected tickets overdue/stale?"
+msgstr ""
+"Είστε σίγουροι ότι θέλετε να επισημάνετε τα επιλεγμένα δελτία "
+"εκπρόθεσμα/παλαιά;"
+
+#: include/staff/tickets.inc.php:481 include/staff/tickets.inc.php:487
+#: include/staff/viewticket.inc.php:177
+msgid "Close"
+msgstr "Κλείσιμο"
+
+#: include/staff/tickets.inc.php:482 include/staff/tickets.inc.php:488
+msgid "Are you sure you want to close selected tickets?"
+msgstr "Είστε σίγουροι ότι θέλετε να κλείσετε τα επιλεγμένα δελτία;"
+
+#: include/staff/tickets.inc.php:494 include/staff/helptopics.inc.php:74
+#: include/staff/api.inc.php:108 include/staff/staffmembers.inc.php:84
+#: include/staff/premade.inc.php:149 include/staff/groups.inc.php:70
+msgid "Delete"
+msgstr "Διαγραφή"
+
+#: include/staff/tickets.inc.php:495
+msgid "Are you sure you want to DELETE selected tickets?"
+msgstr "Είστε σίγουροι ότι θέλετε να ΔΙΑΓΡΑΨΕΤΕ τα επιλεγμένα δελτία;"
+
+#: include/staff/templates.inc.php:47
+msgid "Sort by name"
+msgstr "Ταξινόμηση ανά Όνομα"
+
+#: include/staff/templates.inc.php:48
+msgid "In-Use"
+msgstr "Σε χρήση"
+
+#: include/staff/templates.inc.php:50 include/staff/api.inc.php:50
+#: include/staff/filters.inc.php:90 include/staff/banlist.inc.php:90
+msgid "Sort By Create Date"
+msgstr "Ταξινόμηση ανά Ημερομηνία Δημιουργίας"
+
+#: include/staff/templates.inc.php:50
+msgid "Last Update"
+msgstr "Τελευταία Ενημέρωση"
+
+#: include/staff/templates.inc.php:51 include/staff/api.inc.php:50
+#: include/staff/staffmembers.inc.php:32
+msgid "Created"
+msgstr "Δημιουργήθηκε"
+
+#: include/staff/templates.inc.php:85 include/staff/depts.inc.php:61
+#: include/staff/helptopics.inc.php:52 include/staff/api.inc.php:85
+#: include/staff/staffmembers.inc.php:63 include/staff/filters.inc.php:116
+#: include/staff/banlist.inc.php:116 include/staff/emails.inc.php:55
+#: include/staff/premade.inc.php:130 include/staff/groups.inc.php:49
+msgid "Query returned 0 results"
+msgstr "Το ερώτημα επέστρεψε 0 αποτελέσματα"
+
+#: include/staff/templates.inc.php:85 include/staff/api.inc.php:85
+#: include/staff/filters.inc.php:116 include/staff/banlist.inc.php:116
+msgid "Index list"
+msgstr "Λίστα Ευρετηρίου"
+
+#: include/staff/templates.inc.php:95
+msgid "Delete Template(s)"
+msgstr "Διαγραφή Προτύπου(-ων)"
+
+#: include/staff/templates.inc.php:96
+msgid "Are you sure you want to DELETE selected template(s)?"
+msgstr "Είστε σίγουροι ότι θέλετε να ΔΙΑΓΡΑΨΕΤΕ τα επιλεγμένα πρότυπα;"
+
+#: include/staff/templates.inc.php:105
+msgid "Add New Template"
+msgstr "Προσθήκη Νέου Προτύπου"
+
+#: include/staff/templates.inc.php:108
+msgid ""
+"To add a new template - select existing template and edit it thereafter."
+msgstr ""
+"Για να προσθέσετε ένα νέο πρότυπο - επιλέξτε ένα υπάρχον πρότυπο και να το "
+"επεξεργαστείτε το στη συνέχεια."
+
+#: include/staff/templates.inc.php:117
+msgid "Select Template to Copy"
+msgstr "Επιλέξτε Πρότυπο για να Αντιγράψετε"
+
+#: include/staff/templates.inc.php:125 include/staff/api.inc.php:128
+#: include/staff/filters.inc.php:73 include/staff/banlist.inc.php:73
+msgid "Add"
+msgstr "Προσθήκη"
+
+#: include/staff/templates.inc.php:129
+msgid "Variables"
+msgstr "Μεταβλητές"
+
+#: include/staff/templates.inc.php:132
+msgid ""
+"Variables are used on email templates as placeholders. Please note that non-"
+"base variables depends on the context in question."
+msgstr ""
+"Οι μεταβλητές χρησιμοποιούνται στα πρότυπα e-mail ως σύμβολα κράτησης θέσης. "
+"Παρακαλούμε σημειώστε ότι οι μη βασικές μεταβλητές εξαρτώνται από τα κατά "
+"περίπτωση συμφραζόμενα."
+
+#: include/staff/templates.inc.php:134
+msgid "Base Variables"
+msgstr "Βασικές Μεταβλητές"
+
+#: include/staff/templates.inc.php:134
+msgid "Other Variables"
+msgstr "Άλλες μεταβλητές"
+
+#: include/staff/templates.inc.php:138
+msgid "Ticket ID (internal ID)"
+msgstr "ID Δελτίου (εσωτερικό ID)"
+
+#: include/staff/templates.inc.php:139
+msgid "Ticket number (external ID)"
+msgstr "Αριθμός δελτιου (εξωτερικό ID)"
+
+#: include/staff/templates.inc.php:140
+msgid "Email address"
+msgstr "Διεύθυνση Email"
+
+#: include/staff/templates.inc.php:141
+msgid "Full name"
+msgstr "Ονοματεπώνυμο"
+
+#: include/staff/templates.inc.php:143
+msgid "Help topic (web only)"
+msgstr "θέμα Βοήθειας (μόνο στο web)"
+
+#: include/staff/templates.inc.php:144
+msgid "Phone number | ext"
+msgstr "Αριθμός τηλεφώνου | εσωτ."
+
+#: include/staff/templates.inc.php:145 include/staff/helptopics.inc.php:20
+#: include/staff/staffmembers.inc.php:29 include/staff/email.inc.php:100
+#: include/staff/email.inc.php:161 include/staff/premade.inc.php:97
+#: include/client/tickets.inc.php:94
+msgid "Status"
+msgstr "Κατάσταση"
+
+#: include/staff/templates.inc.php:148
+msgid "Assigned staff (if any)"
+msgstr "Ανάθεση σε Υπάλληλο (Αν υπάρχει)"
+
+#: include/staff/templates.inc.php:149
+msgid "Date created"
+msgstr "Ημερομηνία δημιουργίας"
+
+#: include/staff/templates.inc.php:150
+msgid "Due date"
+msgstr "Καταληκτική ημερομηνία"
+
+#: include/staff/templates.inc.php:151
+msgid "Date closed"
+msgstr "Ημερομηνία κλεισίματος"
+
+#: include/staff/templates.inc.php:156
+msgid "Message (incoming)"
+msgstr "Μήνυμα (εισερχόμενο)"
+
+#: include/staff/templates.inc.php:157
+msgid "Response (outgoing)"
+msgstr "Απάντηση (εξερχόμενη)"
+
+#: include/staff/templates.inc.php:158
+msgid "Internal note"
+msgstr "Εσωτερική σημείωση"
+
+#: include/staff/templates.inc.php:159
+msgid "Staff's name (alert/notices)"
+msgstr "Όνομα υπαλλήλου (ειδοποίησεις/ανακοινώσεις)"
+
+#: include/staff/templates.inc.php:160
+msgid "Assigned staff"
+msgstr "Ανάθεση σε υπάλληλο"
+
+#: include/staff/templates.inc.php:161
+msgid "Staff assigning the ticket"
+msgstr "Υπάλληλος που αναθέτει το δελτίο"
+
+#: include/staff/templates.inc.php:162
+msgid "osTicket's base url (FQDN)"
+msgstr "Βασικό url της βάσης του osTicket (FQDN)"
+
+#: include/staff/reply.inc.php:5
+msgid "Edit Premade Reply"
+msgstr "Επεξεργασία Προκατασκευασμένης Απάντησης"
+
+#: include/staff/reply.inc.php:8
+msgid "Add New Premade Reply"
+msgstr "Προσθήκη Νέας Προκατασκευασμένης Απάντησης"
+
+#: include/staff/reply.inc.php:34 include/staff/viewticket.inc.php:43
+msgid "Status:"
+msgstr "Κατάσταση:"
+
+#: include/staff/reply.inc.php:36 include/staff/helptopics.inc.php:42
+#: include/staff/api.inc.php:47 include/staff/staff.inc.php:124
+msgid "Active"
+msgstr "Ενεργή"
+
+#: include/staff/reply.inc.php:37
+msgid "Inactive"
+msgstr "Ανενεργή"
+
+#: include/staff/reply.inc.php:41
+msgid "Category:"
+msgstr "Κατηγορία:"
+
+#: include/staff/reply.inc.php:42
+msgid "Department under which the 'answer' will be made available."
+msgstr "Τμήμα στο οποίο η 'απάντηση' θα είναι διαθέσιμη."
+
+#: include/staff/reply.inc.php:55
+msgid "Answer:"
+msgstr "Απάντηση:"
+
+#: include/staff/reply.inc.php:56
+msgid "Premade Reply - Ticket's base variables are supported."
+msgstr ""
+"Προκατασκευασμένη Απάντηση - Οι βασικές μεταβλητές των δελτίων "
+"υποστηρίζονται."
+
+#: include/staff/footer.inc.php:4
+#, php-format
+msgid ""
+"Copyright &copy; 2006-%s&nbsp;osTicket.com. &nbsp;All Rights Reserved."
+msgstr ""
+"Copyright &copy; 2006-%s&nbsp;osTicket.com. &nbsp;All Rights Reserved."
+
+#: include/staff/changepasswd.inc.php:11
+msgid "Current Password:"
+msgstr "Τρέχων Κωδικός:"
+
+#: include/staff/changepasswd.inc.php:17
+msgid "New Password:"
+msgstr "Νέος Κωδικός:"
+
+#: include/staff/changepasswd.inc.php:23
+msgid "Verify Password:"
+msgstr "Επιβεβαίωση Κωδικού:"
+
+#: include/staff/mypref.inc.php:4
+msgid "My Preferences"
+msgstr "Οι Προτιμήσεις μου"
+
+#: include/staff/mypref.inc.php:10
+msgid "Maximum Page size:"
+msgstr "Μέγιστο Μέγεθος Σελίδας:"
+
+#: include/staff/mypref.inc.php:18
+msgid "Tickets/items per page."
+msgstr "Δελτία/στοιχεία ανά σελίδα."
+
+#: include/staff/mypref.inc.php:22
+msgid "Auto Refresh Rate:"
+msgstr "Ρυθμός Αυτόματης Ανανέωσης:"
+
+#: include/staff/mypref.inc.php:25
+msgid ""
+"in Mins. (<i>Tickets page refresh rate in minutes. Enter 0 to disable</i>)"
+msgstr ""
+"σε Λεπτά. (<i>Ρυθμός ανανέωσης Σελίδας Δελτίων σε λεπτά. Εισάγετε 0 για "
+"απενεργοποίηση</i>)"
+
+#: include/staff/mypref.inc.php:29
+msgid "Preferred Timezone:"
+msgstr "Προτιμώμενη Ζώνη Ώρας:"
+
+#: include/staff/mypref.inc.php:46
+msgid "Daylight Savings:"
+msgstr "Θερινή Ώρα"
+
+#: include/staff/mypref.inc.php:48
+msgid "Observe daylight saving"
+msgstr "Τήρηση θερινής ώρας"
+
+#: include/staff/mypref.inc.php:51
+msgid "Current Time:"
+msgstr "Τρέχουσα Ώρα:"
+
+#: include/staff/depts.inc.php:19
+msgid "Dept. Name"
+msgstr "Όνομα Τμήματος"
+
+#: include/staff/depts.inc.php:20
+msgid "Type"
+msgstr "Τύπος"
+
+#: include/staff/depts.inc.php:21
+msgid "Users"
+msgstr "Χρήστες"
+
+#: include/staff/depts.inc.php:22
+msgid "Primary Outgoing Email"
+msgstr "Πρωτεύον Εξερχόμενο Email"
+
+#: include/staff/depts.inc.php:23
+msgid "Manager"
+msgstr "Προϊστάμενος"
+
+#: include/staff/depts.inc.php:79
+msgid "Make Public"
+msgstr "Δημοσιοποίηση"
+
+#: include/staff/depts.inc.php:80
+msgid "Are you sure you want to make selected depts(s) public?"
+msgstr "Είστε σίγουροι ότι θέλετε να κάνετε τα επιλεγμένα τμήματα δημόσια;"
+
+#: include/staff/depts.inc.php:81
+msgid "Make Private"
+msgstr "Ιδιωτικοποίηση"
+
+#: include/staff/depts.inc.php:82
+msgid "Are you sure you want to make selected depts(s) private?"
+msgstr "Είστε σίγουροι ότι θέλετε να κάνετε τα επιλεγμένα τμήματα ιδιωτικά;"
+
+#: include/staff/depts.inc.php:83
+msgid "Delete Dept(s)"
+msgstr "Διαγραφή Τμήματος(-ων)"
+
+#: include/staff/depts.inc.php:84
+msgid "Are you sure you want to DELETE selected depts(s)?"
+msgstr "Είστε σίγουροι ότι θέλετε να ΔΙΑΓΡΑΨΕΤΕ τα επιλεγμένα τμήματα;"
+
+#: include/staff/helptopics.inc.php:19
+msgid "Help Topic"
+msgstr "Θέμα Βοήθειας"
+
+#: include/staff/helptopics.inc.php:21 include/staff/emails.inc.php:20
+msgid "AutoResp."
+msgstr "Αυτόματη Απάντηση."
+
+#: include/staff/helptopics.inc.php:24 include/staff/emails.inc.php:23
+#: include/staff/premade.inc.php:100 include/staff/groups.inc.php:22
+msgid "Last Updated"
+msgstr "Τελευταία Ενημέρωση"
+
+#: include/staff/helptopics.inc.php:42
+msgid "<b>Disabled</b>"
+msgstr "<b>Απενεργοποιημένα</b>"
+
+#: include/staff/helptopics.inc.php:43
+msgid "<b>Yes</b>"
+msgstr "<b>Ναι</b>"
+
+#: include/staff/helptopics.inc.php:71
+msgid "Are you sure you want to make selected services active?"
+msgstr ""
+"Είστε σίγουροι ότι θέλετε να κάνετε τις επιλεγμένες υπηρεσίες ενεργές;"
+
+#: include/staff/helptopics.inc.php:73
+msgid "Are you sure you want to DISABLE selected services?"
+msgstr ""
+"Είστε σίγουροι ότι θέλετε να ΑΠΕΝΕΡΓΟΠΟΙΗΣΕΤΕ τις επιλεγμένες υπηρεσίες;"
+
+#: include/staff/helptopics.inc.php:75
+msgid "Are you sure you want to DELETE selected services?"
+msgstr "Είστε σίγουροι ότι θέλετε να ΔΙΑΓΡΑΨΕΤΕ τις επιλεγμένες υπηρεσίες;"
+
+#: include/staff/preference.inc.php:9
+msgid "You need to setup upload dir."
+msgstr "Θα πρέπει να ορίσετε κατάλογο για upload."
+
+#: include/staff/preference.inc.php:12
+msgid "*Attachments Disabled."
+msgstr "*Τα Συνημμένα είναι Απενεργοποιημένα."
+
+#: include/staff/preference.inc.php:14
+msgid "<br>*Attachments Disabled."
+msgstr "<br>*Τα Συνημμένα είναι Απενεργοποιημένα."
+
+#: include/staff/preference.inc.php:18
+msgid "GD required for captcha to work"
+msgstr "Η GD απαιτείται για τη λειτουργία του CAPTCHA"
+
+#: include/staff/preference.inc.php:23
+msgid "Possible errors detected, please check the warnings below"
+msgstr ""
+"Πιθανά σφάλματα διαπιστώθηκαν, παρακαλούμε να ελέγξετε τις παρακάτω "
+"ειδοποιήσεις"
+
+#: include/staff/preference.inc.php:29
+msgid "System Preferences and Settings"
+msgstr "Προτιμήσεις Συστήματος και Ρυθμίσεις"
+
+#: include/staff/preference.inc.php:35
+msgid "General Settings"
+msgstr "Γενικές Ρυθμίσεις"
+
+#: include/staff/preference.inc.php:37
+msgid ""
+"Offline mode will disable client interface and <b>only</b> allow <b>super "
+"admins</b> to login to Staff Control Panel"
+msgstr ""
+"Η λειτουργία χωρίς σύνδεση θα απενεργοποιήσει τη διεπαφή του χρήστη και θα "
+"επιτρέπει <b>μόνο</b> στους Super Admins να συνδεθoύν στον Πίνακα Ελέγχου "
+"του Προσωπικού"
+
+#: include/staff/preference.inc.php:39
+msgid "Helpdesk Status"
+msgstr "Κατάσταση Helpdesk"
+
+#: include/staff/preference.inc.php:41
+msgid "Online"
+msgstr "Online"
+
+#: include/staff/preference.inc.php:41
+msgid "(Active)"
+msgstr "(Ενεργό)"
+
+#: include/staff/preference.inc.php:42
+msgid "Offline"
+msgstr "Offline"
+
+#: include/staff/preference.inc.php:42
+msgid "(Inactive)"
+msgstr "(Ανενεργό)"
+
+#: include/staff/preference.inc.php:43
+msgid "osTicket offline"
+msgstr "osTicket offline"
+
+#: include/staff/preference.inc.php:46
+msgid "Helpdesk URL:"
+msgstr "Helpdesk URL:"
+
+#: include/staff/preference.inc.php:51
+msgid "Helpdesk Name/Title:"
+msgstr "Όνομα/Τίτλος Helpdesk:"
+
+#: include/staff/preference.inc.php:54
+msgid "Default Email Templates:"
+msgstr "Προεπιλεγμένα Πρότυπα Email:"
+
+#: include/staff/preference.inc.php:57
+msgid "Select Default Template"
+msgstr "Επιλέξτε Προεπιλεγμένο Πρότυπο"
+
+#: include/staff/preference.inc.php:67
+msgid "Default Department:"
+msgstr "Προεπιλεγμένο Τμήμα:"
+
+#: include/staff/preference.inc.php:70
+msgid "Select Default Dept"
+msgstr "Επιλέξτε Προεπιλογμένο Τμήμα"
+
+#: include/staff/preference.inc.php:80
+msgid "Default Page Size:"
+msgstr "Προεπιλεγμένη Μέγεθος Σελίδας:"
+
+#: include/staff/preference.inc.php:93
+msgid "System Log Level:"
+msgstr "System Log Level:"
+
+#: include/staff/preference.inc.php:96
+msgid "None (Disable Logger)"
+msgstr "Κανένα (Απενεργοποίηση Logger)"
+
+#: include/staff/preference.inc.php:97
+msgid "DEBUG"
+msgstr "DEBUG"
+
+#: include/staff/preference.inc.php:98
+msgid "WARN"
+msgstr "WARN"
+
+#: include/staff/preference.inc.php:99
+msgid "ERROR"
+msgstr "ERROR"
+
+#: include/staff/preference.inc.php:101
+msgid "Purge logs after"
+msgstr "Εκκαθάριση logs μετά"
+
+#: include/staff/preference.inc.php:103
+msgid "None (Disable)"
+msgstr "Κανένα (Απενεργοποίηση)"
+
+#: include/staff/preference.inc.php:107
+msgid "Months"
+msgstr "Μήνες"
+
+#: include/staff/preference.inc.php:107
+msgid "Month"
+msgstr "Μήνας"
+
+#: include/staff/preference.inc.php:113
+msgid "Staff Excessive Logins:"
+msgstr "Υπερβολικά Logins Προσωπικού:"
+
+#: include/staff/preference.inc.php:121 include/staff/preference.inc.php:154
+msgid "attempt(s) allowed"
+msgstr "επιτρεπόμενες προσπάθειες"
+
+#: include/staff/preference.inc.php:122 include/staff/preference.inc.php:155
+msgid "before a"
+msgstr "πριν από"
+
+#: include/staff/preference.inc.php:129 include/staff/preference.inc.php:162
+msgid "min. timeout (penalty in minutes)"
+msgstr "λεπτά για τη λήξη χρόνου (ποινή σε λεπτά)."
+
+#: include/staff/preference.inc.php:132
+msgid "Staff Session Timeout:"
+msgstr "Διάρκεια Συνόδου για το Προσωπικό:"
+
+#: include/staff/preference.inc.php:135
+msgid "Staff's max Idle time in minutes. Enter 0 to disable timeout"
+msgstr ""
+"Μέγιστος χρόνος Αδράνειας σε λεπτά, για το Προσωπικό. Εισάγετε 0 για να "
+"απενεργοποιήσετε τη λήξη χρόνου"
+
+#: include/staff/preference.inc.php:138
+msgid "Bind Staff Session to IP:"
+msgstr "Σύνδεση Συνόδου Προσωπικού με IP:"
+
+#: include/staff/preference.inc.php:141
+msgid "Bind staff's session to login IP."
+msgstr "Σύνδεση Συνόδου Προσωπικού με την IP κατά την είσοδο (login)."
+
+#: include/staff/preference.inc.php:145
+msgid "Client Excessive Logins:"
+msgstr "Υπερβολικά Login Χρήστη:"
+
+#: include/staff/preference.inc.php:166
+msgid "Client Session Timeout:"
+msgstr "Λήξη χρόνου Συνόδου Χρήστη:"
+
+#: include/staff/preference.inc.php:169
+msgid "Client's max Idle time in minutes. Enter 0 to disable timeout"
+msgstr ""
+"Μέγιστος χρόνος Αδράνειας Χρήστη σε λεπτά. Εισάγετε 0 για να "
+"απενεργοποιήσετε τη λήξη χρόνου."
+
+#: include/staff/preference.inc.php:172
+msgid "Clickable URLs:"
+msgstr "Προσβάσιμα URLs:"
+
+#: include/staff/preference.inc.php:175
+msgid "Make URLs clickable"
+msgstr "Κάντε τα URLs προσβάσιμα"
+
+#: include/staff/preference.inc.php:178
+msgid "Enable Auto Cron:"
+msgstr "Ενεργοποίηση Auto Cron:"
+
+#: include/staff/preference.inc.php:181
+msgid "Enable cron call on staff's activity"
+msgstr "Ενεργοποίηση κλήσης cron κατά τη δραστηριότητα του προσωπικού"
+
+#: include/staff/preference.inc.php:187
+msgid "Date &amp; Time"
+msgstr "Ημερομηνία &amp; Ώρα"
+
+#: include/staff/preference.inc.php:189
+msgid ""
+"Please refer to <a href=\"http://php.net/date\" target=\"_blank\">PHP "
+"Manual</a> for supported parameters."
+msgstr ""
+"Παρακαλούμε ανατρέξτε στο <a href=\"http://php.net/date\" "
+"target=\"_blank\">PHP Manual</a> για τις υποστηριζόμενες παραμέτρους."
+
+#: include/staff/preference.inc.php:191
+msgid "Time Format:"
+msgstr "Μορφή Ώρας:"
+
+#: include/staff/preference.inc.php:197
+msgid "Date Format:"
+msgstr "Μορφή Ημερομηνίας:"
+
+#: include/staff/preference.inc.php:203
+msgid "Date &amp; Time Format:"
+msgstr "Μορφή Ημερομηνίας &amp; Ώρας :"
+
+#: include/staff/preference.inc.php:209
+msgid "Day, Date &amp; Time Format:"
+msgstr "Μορφή Ημέρας, Ημερομηνίας &amp; Ώρας:"
+
+#: include/staff/preference.inc.php:215
+msgid "Default Timezone:"
+msgstr "Προεπιλεγμένη Ζώνη Ώρας:"
+
+#: include/staff/preference.inc.php:233
+msgid "Daylight Saving:"
+msgstr "Θερινή Ώρα:"
+
+#: include/staff/preference.inc.php:235
+msgid "Observe daylight savings"
+msgstr "Τήρηση Θερινής Ώρας"
+
+#: include/staff/preference.inc.php:241
+msgid "Ticket Options &amp; Settings"
+msgstr "Επιλογές &amp; Ρυθμίσεις Δελτίων"
+
+#: include/staff/preference.inc.php:242
+msgid "If enabled ticket lock get auto-renewed on form activity."
+msgstr ""
+"Αν είναι ενεργοποιημένο, το κλείδωμα των δελτίων ανανεώνεται αυτόματα κατά "
+"τη δραστηριότητα στη φόρμα."
+
+#: include/staff/preference.inc.php:243
+msgid "Ticket IDs:"
+msgstr "ID Δελτίων:"
+
+#: include/staff/preference.inc.php:245
+msgid "Sequential"
+msgstr "Διαδοχικά"
+
+#: include/staff/preference.inc.php:246
+msgid "Random  (recommended)"
+msgstr "Τυχαία (συνιστάται)"
+
+#: include/staff/preference.inc.php:249
+msgid "Ticket Priority:"
+msgstr "Προτεραιότητα Δελτίων:"
+
+#: include/staff/preference.inc.php:258
+msgid "Default priority"
+msgstr "Προεπιλεγμένη προτεραιότητα"
+
+#: include/staff/preference.inc.php:260
+msgid "Allow user to overwrite/set priority (new web tickets)"
+msgstr ""
+"Να επιτρέπεται στο χρήστη να αντικαταστήσει/θέσει την προτεραιότητα (νέα "
+"δελτία μέσω web)"
+
+#: include/staff/preference.inc.php:262
+msgid "Use email priority when available (new emailed tickets)"
+msgstr ""
+"Χρήση προτεραιότητας email όταν είναι διαθέσιμο (νέα δελτία μέσω email)"
+
+#: include/staff/preference.inc.php:266
+msgid "Maximum <b>Open</b> Tickets:"
+msgstr "Μέγιστος αριθμός <b>Ανοικτών</b> Δελτίων:"
+
+#: include/staff/preference.inc.php:269
+msgid ""
+"per email. (<i>Helps with spam and flood control. Enter 0 for unlimited</i>)"
+msgstr ""
+"ανά email. (<i> Βοηθά για τον έλεγχο των spam και του κατακλυσμού μηνυμάτων. "
+"Εισάγετε 0 για απεριόριστα</i>)."
+
+#: include/staff/preference.inc.php:272
+msgid "Auto-Lock Time:"
+msgstr "Ώρα Αυτόματου Κλειδώματος:"
+
+#: include/staff/preference.inc.php:276
+msgid ""
+"(<i>Minutes to lock a ticket on activity. Enter 0 to disable locking</i>)"
+msgstr ""
+"(<i>Λεπτά για το κλείδωμα ενός ενεργού δελτίου. Εισάγετε 0 για να "
+"απενεργοποιήσετε το κλείδωμα</i>.)"
+
+#: include/staff/preference.inc.php:279
+msgid "Ticket Grace Period:"
+msgstr "Περίοδος Χάριτος Δελτίου:"
+
+#: include/staff/preference.inc.php:282
+msgid ""
+"(<i>Hours before ticket is marked overdue. Enter 0 to disable aging.</i>)"
+msgstr ""
+"(<i>Ώρες πριν σημειωθεί το δελτίο εκπρόθεσμο. Εισάγετε 0 για να "
+"απενεργοποιήσετε τη λειτουργία λήξης χρόνου ζωής του δελτίου</i>.)"
+
+#: include/staff/preference.inc.php:285
+msgid "Reopened Tickets:"
+msgstr "Εκ νέου Ανοικτά Δελτία:"
+
+#: include/staff/preference.inc.php:288
+msgid ""
+"Auto-assign reopened tickets to last respondent 'available'. (<i> 3 months "
+"limit</i>)"
+msgstr ""
+"Αυτόματη ανάθεση ξανανοιγμένων δελτίων στον τελευταίο 'διαθέσιμο' εκπρόσωπο "
+"που τα απάντησε. (<i>όριο 3 μήνες</i>)."
+
+#: include/staff/preference.inc.php:291
+msgid "Assigned Tickets:"
+msgstr "Δελτία που Ανατέθηκαν:"
+
+#: include/staff/preference.inc.php:294
+msgid "Show assigned tickets on open queue."
+msgstr "Προβολή Ανατιθέμενων Δελτίων σε ανοικτή ουρά."
+
+#: include/staff/preference.inc.php:297
+msgid "Answered Tickets:"
+msgstr "Απαντημένα Δελτία:"
+
+#: include/staff/preference.inc.php:300
+msgid "Show answered tickets on open queue."
+msgstr "Προβολή Απαντημένων Δελτίων σε ανοιχτή ουρά."
+
+#: include/staff/preference.inc.php:303
+msgid "Ticket Activity Log:"
+msgstr "Μητρώο Καταγραφής Δραστηριότητας Δελτίων:"
+
+#: include/staff/preference.inc.php:306
+msgid "Log ticket's activity as internal notes."
+msgstr "Καταγραφή της δραστηριότητας των δελτίων ως εσωτερικές σημειώσεις."
+
+#: include/staff/preference.inc.php:309
+msgid "Staff Identity:"
+msgstr "Ταυτότητα Υπαλλήλου:"
+
+#: include/staff/preference.inc.php:312
+msgid "Hide staff's name on responses."
+msgstr "Απόκρυψη του ονόματος του Υπαλλήλου κατά τις απαντήσεις."
+
+#: include/staff/preference.inc.php:315
+msgid "Human Verification:"
+msgstr "Ανθρώπινη Επαλήθευση:"
+
+#: include/staff/preference.inc.php:322
+msgid "Enable captcha on new web tickets."
+msgstr "Ενεργοποίηση CAPTCHA σε νέα δελτία μέσω web."
+
+#: include/staff/preference.inc.php:328 include/class.nav.php:32
+msgid "Email Settings"
+msgstr "Ρυθμίσεις Email"
+
+#: include/staff/preference.inc.php:329
+msgid "Note that global settings can be disabled at dept/email level."
+msgstr ""
+"Σημειώστε ότι οι καθολικές ρυθμίσεις μπορεί να απενεργοποιηθούν σε επίπεδο "
+"τμήματος/email."
+
+#: include/staff/preference.inc.php:330
+msgid "Incoming Emails"
+msgstr "Εισερχόμενα Emails"
+
+#: include/staff/preference.inc.php:331
+msgid ""
+"For mail fetcher (POP/IMAP) to work you must set a cron job or simply enable "
+"auto-cron"
+msgstr ""
+"Για τη λειτουργία του κομιστή mail (POP / IMAP) πρέπει να ορίσετε μια "
+"εργασία cron ή απλά να ενεργοποιήσετε το auto-cron"
+
+#: include/staff/preference.inc.php:332
+msgid "Enable POP/IMAP email fetch"
+msgstr "Ενεργοποίηση κομιστή email POP/IMAP"
+
+#: include/staff/preference.inc.php:333
+msgid "Global setting which can be disabled at email level"
+msgstr "Καθολική ρύθμιση η οποία μπορεί να απενεργοποιηθεί σε επίπεδο email"
+
+#: include/staff/preference.inc.php:334
+msgid "Enable email piping"
+msgstr "Ενεργοποίηση email piping"
+
+#: include/staff/preference.inc.php:335
+msgid "You pipe we accept policy"
+msgstr "You pipe we accept policy"
+
+#: include/staff/preference.inc.php:337
+msgid "Strip quoted reply (<i>depends on the tag below</i>)"
+msgstr ""
+"Αφαίρεση της απάντησης με εισαγωγικά (<i>εξαρτάται από την παρακάτω "
+"ετικέτα</i>)"
+
+#: include/staff/preference.inc.php:338
+msgid "Reply Separator Tag"
+msgstr "Διαχωριστική Ετικέτα Απάντησης"
+
+#: include/staff/preference.inc.php:342
+msgid "Outgoing Emails"
+msgstr "Εξερχόμενα Emails"
+
+#: include/staff/preference.inc.php:344
+msgid "Default Email:"
+msgstr "Προεπιλεγμένο Email:"
+
+#: include/staff/preference.inc.php:344
+msgid "Only applies to outgoing emails with no SMTP settings."
+msgstr "Ισχύει μόνο για εξερχόμενα emails χωρίς τις ρυθμίσεις SMTP."
+
+#: include/staff/preference.inc.php:348
+msgid "None: Use PHP mail function"
+msgstr "Κανένα: Χρήση της συνάρτησης mail της PHP"
+
+#: include/staff/preference.inc.php:363
+msgid "Allow spoofing (No Overwrite)."
+msgstr "Να επιτρέπεται η πλαστογράφηση (Όχι Αντικατάσταση)."
+
+#: include/staff/preference.inc.php:367
+msgid "Default System Email:"
+msgstr "Προεπιλογμένο Email Συστήματος:"
+
+#: include/staff/preference.inc.php:382
+msgid "Default Alert Email:"
+msgstr "Προεπιλεγμένο Email Ειδοποίησης:"
+
+#: include/staff/preference.inc.php:386
+msgid "Use Default System Email (above)"
+msgstr "Χρήση του Προεπιλεγμένου Email Ειδοποίησης (παραπάνω)"
+
+#: include/staff/preference.inc.php:397
+msgid "Used to send out alerts and notices to staff."
+msgstr ""
+"Χρησιμοποιείται για να αποστέλλει ειδοποιήσεις και ανακοινώσεις προς το "
+"προσωπικό"
+
+#: include/staff/preference.inc.php:400
+msgid "System Admin Email Address:"
+msgstr "Διεύθυνση Email Διαχειριστή Συστήματος:"
+
+#: include/staff/preference.inc.php:408
+msgid "Autoresponders &nbsp;(Global Setting)"
+msgstr "Αυτόματες Απαντήσεις &nbsp;(Καθολική Ρϋθμιση)"
+
+#: include/staff/preference.inc.php:409
+msgid "This is global setting which can be disabled at department level."
+msgstr ""
+"Αυτό είναι καθολική ρύθμιση, η οποία μπορεί να απενεργοποιηθεί σε επίπεδο "
+"τμήματος."
+
+#: include/staff/preference.inc.php:411
+msgid ""
+"Autoresponse includes the ticket ID required to check status of the ticket"
+msgstr ""
+"Η αυτόματη απάντηση περιλαμβάνει το ID του Δελτίου που απαιτείται για να "
+"ελέγχθεί η κατάσταση του δελτίου"
+
+#: include/staff/preference.inc.php:416
+msgid "New Ticket by Staff:"
+msgstr "Νέο Δελτίο από το Προσωπικό:"
+
+#: include/staff/preference.inc.php:417
+msgid ""
+"Notice sent when staff creates a ticket on behalf of the user (Staff can "
+"disable)"
+msgstr ""
+"Ανακοίνωση που αποστέλλεται όταν το προσωπικό δημιουργεί ένα δελτίο για "
+"λογαριασμό του χρήστη (Το Προσωπικό μπορεί να την απενεργοποιήσει)"
+
+#: include/staff/preference.inc.php:423
+msgid "Message appended to an existing ticket confirmation"
+msgstr "Μήνυμα που επισυνάπτεται σε μια υπάρχουσα επιβεβαίωση δελτίου"
+
+#: include/staff/preference.inc.php:428
+msgid "Overlimit notice:"
+msgstr ""
+
+#: include/staff/preference.inc.php:429
+msgid ""
+"Ticket denied notice sent <b>only once</b> on limit violation to the user."
+msgstr ""
+
+#: include/staff/preference.inc.php:432
+msgid "<b>Note:</b> Admin gets alerts on ALL denials by default."
+msgstr ""
+"<b>Σημείωση:</b>Ο Διαχειριστής λαμβάνει ειδοποιήσεις για ΟΛΕΣ τις απορρίψεις "
+"εξ ορισμού."
+
+#: include/staff/preference.inc.php:437
+msgid "Alerts &amp; Notices"
+msgstr "Ειδοποιήσεις & Ανακοινώσεις"
+
+#: include/staff/preference.inc.php:439
+msgid ""
+"Notices sent to user use 'No Reply Email' whereas alerts to staff use 'Alert "
+"Email' set above as FROM address respectively."
+msgstr ""
+"Οι ανακοινώσεις που αποστέλλονται στο χρήστη θέτουν ως αποστολέα τη φράση "
+"'No Reply Email', ενώ οι ειδοποιήσεις στο Προσωπικό θέτουν ως αποστολέα τη "
+"φράση 'Alert Email' στην κεφαλίδα FROM του μηνύματος."
+
+#: include/staff/preference.inc.php:441
+msgid "New Ticket Alert:"
+msgstr "Νέα Ειδοποίηση Δελτίου:"
+
+#: include/staff/preference.inc.php:445 include/staff/preference.inc.php:455
+#: include/staff/preference.inc.php:465
+msgid "Select recipients"
+msgstr "Επιλέξτε παραλήπτες"
+
+#: include/staff/preference.inc.php:446
+msgid "Admin Email"
+msgstr "Email Διαχειριστή"
+
+#: include/staff/preference.inc.php:447 include/staff/preference.inc.php:477
+msgid "Department Manager"
+msgstr "Προϊστάμενος Τμήματος"
+
+#: include/staff/preference.inc.php:448 include/staff/preference.inc.php:478
+msgid "Department Members (spammy)"
+msgstr "Μέλη Τμήματος (spammy)"
+
+#: include/staff/preference.inc.php:451
+msgid "New Message Alert:"
+msgstr "Νέα Ειδοποίηση Μηνύματος:"
+
+#: include/staff/preference.inc.php:456 include/staff/preference.inc.php:466
+msgid "Last Respondent"
+msgstr "Τελευταίος Υπάλληλος που απάντησε"
+
+#: include/staff/preference.inc.php:457 include/staff/preference.inc.php:467
+#: include/staff/preference.inc.php:476
+msgid "Assigned Staff"
+msgstr "Ανάθεση σε Υπάλληλο"
+
+#: include/staff/preference.inc.php:458 include/staff/preference.inc.php:468
+msgid "Department Manager (spammy)"
+msgstr "Προϊστάμενος Τμήματος (spammy)"
+
+#: include/staff/preference.inc.php:461
+msgid "New Internal Note Alert:"
+msgstr "Νέα Εσωτερική Ειδοποίηση Σημείωσης:"
+
+#: include/staff/preference.inc.php:471
+msgid "Overdue Ticket Alert:"
+msgstr "Ειδοποίηση Εκπρόθεσμων Δελτίων:"
+
+#: include/staff/preference.inc.php:475
+msgid ""
+"Admin Email gets an alert by default. Select additional recipients below"
+msgstr ""
+"Το Email του Διαχειριστή λαμβάνει μια ειδοποίηση εξ ορισμού. Επιλέξτε "
+"παρακάτω περαιτέρω παραλήπτες."
+
+#: include/staff/preference.inc.php:481
+msgid "System Errors:"
+msgstr "Σφάλματα Συστήματος:"
+
+#: include/staff/preference.inc.php:482
+msgid "Enabled errors are sent to admin email set above"
+msgstr ""
+"Τα ενεργοποιημένα λάθη στάλθηκαν στο email του Διαχειριστή που ορίστηκε "
+"παραπάνω"
+
+#: include/staff/preference.inc.php:483
+msgid "System Errors"
+msgstr "Σφάλματα Συστήματος"
+
+#: include/staff/preference.inc.php:484
+msgid "SQL errors"
+msgstr "Σφάλματα SQL"
+
+#: include/staff/preference.inc.php:485
+msgid "Excessive Login attempts"
+msgstr "Υπερβολικές προσπάθειες Login"
+
+#: include/staff/preference.inc.php:493 include/staff/template.inc.php:181
+#: include/staff/attachment.inc.php:78
+msgid "Save Changes"
+msgstr "Αποθήκευση αλλαγών"
+
+#: include/staff/preference.inc.php:494 include/staff/template.inc.php:182
+#: include/staff/attachment.inc.php:79
+msgid "Reset Changes"
+msgstr "Επαναφορά Αλλαγών"
+
+#: include/staff/newticket.inc.php:17 include/client/open.inc.php:15
+msgid "Please fill in the form below to open a new ticket."
+msgstr ""
+"Παρακαλούμε συμπληρώστε την παρακάτω φόρμα για να ανοίξετε ένα νέο δελτίο."
+
+#: include/staff/newticket.inc.php:19 include/staff/staff.inc.php:80
+#: include/staff/editticket.inc.php:40 include/staff/myprofile.inc.php:25
+#: include/client/open.inc.php:31
+msgid "Email Address:"
+msgstr "Διεύθυνση Email:"
+
+#: include/staff/newticket.inc.php:25
+msgid "Send alert to user."
+msgstr "Αποστολή ειδοποίησης στο χρήστη."
+
+#: include/staff/newticket.inc.php:30 include/staff/editticket.inc.php:47
+#: include/client/open.inc.php:19
+msgid "Full Name:"
+msgstr "Ονοματεπώνυμο:"
+
+#: include/staff/newticket.inc.php:37 include/staff/editticket.inc.php:61
+#: include/client/open.inc.php:43
+msgid "Telephone:"
+msgstr "Τηλέφωνο:"
+
+#: include/staff/newticket.inc.php:39 include/staff/editticket.inc.php:63
+#: include/staff/myprofile.inc.php:32
+msgid "Ext"
+msgstr "Εσωτ"
+
+#: include/staff/newticket.inc.php:44
+msgid "Ticket Source:"
+msgstr "Προέλευση Δελτίου:"
+
+#: include/staff/newticket.inc.php:47
+msgid "Select Source"
+msgstr "Επιλέξτε Προέλευση"
+
+#: include/staff/newticket.inc.php:50
+msgid "Other"
+msgstr "Λοιπά"
+
+#: include/staff/newticket.inc.php:56 include/staff/staff.inc.php:45
+#: include/staff/viewticket.inc.php:51 include/staff/viewticket.inc.php:403
+#: include/client/viewticket.inc.php:24
+msgid "Department:"
+msgstr "Τμήμα:"
+
+#: include/staff/newticket.inc.php:72 include/staff/viewticket.inc.php:88
+#: include/staff/editticket.inc.php:54 include/client/open.inc.php:70
+#: include/client/viewticket.inc.php:51
+msgid "Subject:"
+msgstr "Θέμα:"
+
+#: include/staff/newticket.inc.php:79
+msgid "Issue Summary:"
+msgstr "Περίληψη Θεμάτων:"
+
+#: include/staff/newticket.inc.php:81
+msgid "Visible to client/customer."
+msgstr "Ορατό στον χρήστη/πελάτη."
+
+#: include/staff/newticket.inc.php:87
+msgid "Premade:"
+msgstr "Προκατασκευασμένα:"
+
+#: include/staff/newticket.inc.php:90
+msgid "Select a premade reply/issue"
+msgstr "Επιλέξτε μια προκατασκευασμένη απάντηση/θέμα"
+
+#: include/staff/newticket.inc.php:94 include/staff/viewticket.inc.php:303
+msgid "Append"
+msgstr "Προσάρτηση"
+
+#: include/staff/newticket.inc.php:101 include/client/open.inc.php:106
+msgid "Attachment:"
+msgstr "Συνημμένο:"
+
+#: include/staff/newticket.inc.php:108 include/staff/editticket.inc.php:126
+msgid "Internal Note:"
+msgstr "Εσωτερικό Σημείωμα:"
+
+#: include/staff/newticket.inc.php:110
+msgid "Optional Internal note(s)."
+msgstr "Προαιρετικό Εσωτερικό Σημείωμα."
+
+#: include/staff/newticket.inc.php:115 include/staff/viewticket.inc.php:103
+#: include/staff/editticket.inc.php:68
+msgid "Due Date:"
+msgstr "Ημερομηνία Λήξης:"
+
+#: include/staff/newticket.inc.php:117
+#, php-format
+msgid "Time is based on your time zone (GM %s)"
+msgstr "Ο χρόνος έχει βάση τη ζώνη ώρας σας (GM %s)"
+
+#: include/staff/newticket.inc.php:135 include/staff/viewticket.inc.php:47
+#: include/staff/viewticket.inc.php:187 include/staff/editticket.inc.php:88
+#: include/client/open.inc.php:87
+msgid "Priority:"
+msgstr "Προτεραιότητα"
+
+#: include/staff/newticket.inc.php:151 include/staff/viewticket.inc.php:119
+#: include/staff/editticket.inc.php:104 include/staff/topic.inc.php:29
+#: include/client/open.inc.php:50
+msgid "Help Topic:"
+msgstr "Θέμα Βοήθειας:"
+
+#: include/staff/newticket.inc.php:168
+msgid "Assign To:"
+msgstr "Ανάθεση Προς:"
+
+#: include/staff/newticket.inc.php:171
+msgid "-Assign To Staff-"
+msgstr "-Ανάθεση σε Υπάλληλο-"
+
+#: include/staff/newticket.inc.php:183
+msgid "Send alert to assigned staff."
+msgstr "Αποστολή ειδοποίησης στον υπεύθυνο Υπάλληλο."
+
+#: include/staff/newticket.inc.php:187 include/staff/staff.inc.php:98
+#: include/staff/myprofile.inc.php:43
+msgid "Signature:"
+msgstr "Υπογραφή:"
+
+#: include/staff/newticket.inc.php:190
+msgid "none"
+msgstr "Κανένας"
+
+#: include/staff/newticket.inc.php:195 include/staff/viewticket.inc.php:323
+msgid "My signature"
+msgstr "Η υπογραφή μου"
+
+#: include/staff/newticket.inc.php:197
+msgid "Dept Signature (if any)"
+msgstr "Υπογραφή Τμήματος (αν υπάρχει)"
+
+#: include/staff/newticket.inc.php:205 include/client/open.inc.php:128
+msgid "Submit Ticket"
+msgstr "Υποβολή Δελτίου"
+
+#: include/staff/api.inc.php:46
+msgid "API Key"
+msgstr "Κλειδί API"
+
+#: include/staff/api.inc.php:48
+msgid "IP Address"
+msgstr "Διεύθυνση IP"
+
+#: include/staff/api.inc.php:99
+msgid "Are you sure you want to ENABLE selected keys?"
+msgstr "Είστε σίγουροι ότι θέλετε να ΕΝΕΡΓΟΠΟΙΗΣΕΤΕ τα επιλεγμένα κλειδιά;"
+
+#: include/staff/api.inc.php:105
+msgid "Are you sure you want to DISABLE selected keys?"
+msgstr "Είστε σίγουροι ότι θέλετε να ΑΠΕΝΕΡΓΟΠΟΙΗΣΕΤΕ τα επιλεγμένα κλειδιά;"
+
+#: include/staff/api.inc.php:109
+msgid "Are you sure you want to DELETE selected keys?"
+msgstr "Είστε σίγουροι ότι θέλετε να ΔΙΑΓΡΑΨΕΤΕ τα επιλεγμένα κλειδιά;"
+
+#: include/staff/api.inc.php:118
+msgid "Add New IP"
+msgstr "Προσθήκη Νέας IP"
+
+#: include/staff/api.inc.php:121
+msgid "Add a new IP address."
+msgstr "Προσθήκη νέας IP διεύθυνσης."
+
+#: include/staff/api.inc.php:132
+msgid "API Passphrase"
+msgstr "API Φράση Κλειδί"
+
+#: include/staff/api.inc.php:135
+msgid ""
+"Passphrase must be at least 3 words. Required to generate the api keys."
+msgstr ""
+"Η φράση κλειδί πρέπει να περιλαμβάνει τουλάχιστον 3 λέξεις. Απαιτούνται για "
+"τη δημιουργία των κλειδιών api"
+
+#: include/staff/api.inc.php:139
+msgid "Phrase:"
+msgstr "Φράση:"
+
+#: include/staff/api.inc.php:145
+msgid ""
+"Please note that changing the passprase does NOT invalidate existing keys. "
+"To regerate a key you need to delete and readd it."
+msgstr ""
+"Παρακαλούμε σημειώστε ότι η αλλαγή της φράσης κλειδί ΔΕΝ αναιρεί τα "
+"υφιστάμενα κλειδιά. Για να αναπαράγετε ένα κλειδί θα πρέπει να το διαγράψετε "
+"και να το ξαναπροσθέσετε."
+
+#: include/staff/staff.inc.php:8
+#, php-format
+msgid "Update: %s %s"
+msgstr "Ενημέρωση: %s %s"
+
+#: include/staff/staff.inc.php:10
+msgid "To reset the password enter a new one below"
+msgstr "Για να επαναφέρετε τον κωδικό πρόσβασης εισάγετε ένα νέο παρακάτω"
+
+#: include/staff/staff.inc.php:13
+msgid "New Staff Member"
+msgstr "Νέος Υπάλληλος"
+
+#: include/staff/staff.inc.php:14 include/class.staff.php:286
+msgid "Temp password required"
+msgstr "Ένας προσωρινός κωδικός απαιτείται"
+
+#: include/staff/staff.inc.php:37
+msgid "User Account"
+msgstr "Λογαριασμός Χρήστη"
+
+#: include/staff/staff.inc.php:38
+msgid "Account information"
+msgstr "Πληροφορίες Λογαριασμού"
+
+#: include/staff/staff.inc.php:40 include/staff/myprofile.inc.php:11
+msgid "Username:"
+msgstr "Όνομα Χρήστη:"
+
+#: include/staff/staff.inc.php:59
+msgid "User Group:"
+msgstr "Ομάδα Χρηστών:"
+
+#: include/staff/staff.inc.php:62
+msgid "Select Group"
+msgstr "Επιλογή Ομάδας"
+
+#: include/staff/staff.inc.php:73
+msgid "Name (First,Last):"
+msgstr "Ονοματεπώνυμο (Όνομα, Επώνυμο):"
+
+#: include/staff/staff.inc.php:85 include/staff/myprofile.inc.php:30
+msgid "Office Phone:"
+msgstr "Τηλέφωνο Γραφείου:"
+
+#: include/staff/staff.inc.php:92
+msgid "Mobile Phone:"
+msgstr "Κινητό:"
+
+#: include/staff/staff.inc.php:102
+msgid "Password:"
+msgstr "Κωδικός Πρόσβασης:"
+
+#: include/staff/staff.inc.php:109
+msgid "Password (confirm):"
+msgstr "Κωδικός Πρόσβασης (επιβεβαίωση):"
+
+#: include/staff/staff.inc.php:114
+msgid "Forced Password Change:"
+msgstr "Αναγκαστική Αλλαγή Κωδικού Πρόσβασης:"
+
+#: include/staff/staff.inc.php:116
+msgid "Require a change of password in the next login"
+msgstr "Απαιτείται η αλλαγή του κωδικού πρόσβασης στην επόμενη είσοδο"
+
+#: include/staff/staff.inc.php:118
+msgid "Account Permission, status &amp; Settings"
+msgstr "Δικαιώματα Λογαριασμού, κατάσταση &amp; Ρυθμίσεις"
+
+#: include/staff/staff.inc.php:120
+msgid ""
+"Staff's permission is also based on the assigned group. <b>Admin is not "
+"restricted by group settings.</b>"
+msgstr ""
+"Τα δικαιώματα του Προσωπικού βασίζονται επίσης στην ομάδα που ανήκουν εντός "
+"της εφαρμογής. <b> Ο Διαχειριστής δεν περιορίζεται από τις ρυθμίσεις της "
+"ομάδας.</b>"
+
+#: include/staff/staff.inc.php:122
+msgid "Account Status"
+msgstr "Κατάσταση Λογαριασμού"
+
+#: include/staff/staff.inc.php:125
+msgid "Locked"
+msgstr "Κλειδωμένο"
+
+#: include/staff/staff.inc.php:129
+msgid "Account Type"
+msgstr "Είδος Λογαριασμού"
+
+#: include/staff/staff.inc.php:131
+msgid "Admin"
+msgstr "Διαχειριστής"
+
+#: include/staff/staff.inc.php:132 include/staff/template.inc.php:108
+#: include/class.nav.php:34
+msgid "Staff"
+msgstr "Προσωπικό"
+
+#: include/staff/staff.inc.php:136
+msgid "Directory Listing"
+msgstr "Λίστα Καταλόγου"
+
+#: include/staff/staff.inc.php:138
+msgid "Show the user on staff's directory"
+msgstr "Προβολή του χρήστη μέσα στον κατάλογο του προσωπικού"
+
+#: include/staff/staff.inc.php:141
+msgid "Vacation Mode"
+msgstr "Σε Διακοπές"
+
+#: include/staff/staff.inc.php:144
+msgid "Staff on vacation mode."
+msgstr "Προσωπικό σε Διακοπές."
+
+#: include/staff/staff.inc.php:144
+msgid "No ticket assignment or Alerts"
+msgstr "Δεν υπάρχουν Αναθέσεις Δελτίων ή Ειδοποιήσεις"
+
+#: include/staff/staffmembers.inc.php:16
+#, php-format
+msgid ""
+"No staff found. <a href='admin.php?t=staff&a=new&dept=%s'>Add New User</a>."
+msgstr ""
+
+#: include/staff/staffmembers.inc.php:27
+msgid "Full Name"
+msgstr "Ονοματεπώνυμο"
+
+#: include/staff/staffmembers.inc.php:30
+msgid "Group"
+msgstr "Ομάδα"
+
+#: include/staff/staffmembers.inc.php:33
+msgid "Last Login"
+msgstr "Τελευταίο Login"
+
+#: include/staff/staffmembers.inc.php:81
+msgid "Are you sure you want to ENABLE selected user(s)?"
+msgstr ""
+"Είστε σίγουροι ότι θέλετε να ΕΝΕΡΓΟΠΟΙΗΣΕΤΕ τους επιλεγμένους χρήστες;"
+
+#: include/staff/staffmembers.inc.php:82
+msgid "Lock"
+msgstr "Κλείδωμα"
+
+#: include/staff/staffmembers.inc.php:83
+msgid "Are you sure you want to LOCK selected user(s)?"
+msgstr "Είστε σίγουροι ότι θέλετε να ΚΛΕΙΔΩΣΕΤΕ τους επιλεγμένους χρήστες;"
+
+#: include/staff/staffmembers.inc.php:85
+msgid "Are you sure you want to DELETE selected user(s)?"
+msgstr "Είστε σίγουροι ότι θέλετε να ΔΙΑΓΡΑΨΕΤΕ τους επιλεγμένους χρήστες;"
+
+#: include/staff/filters.inc.php:53 include/staff/banlist.inc.php:53
+#: include/staff/premade.inc.php:54
+msgid "Search Results"
+msgstr "Αποτελέσματα Αναζήτησης"
+
+#: include/staff/filters.inc.php:53 include/staff/banlist.inc.php:53
+msgid "Banned Email Addresses"
+msgstr "Διευθύνσεις Απαγορευμένων Email"
+
+#: include/staff/filters.inc.php:64
+msgid "(Add)"
+msgstr "(Προσθήκη)"
+
+#: include/staff/filters.inc.php:74
+msgid "(Search)"
+msgstr "(Αναζήτηση)"
+
+#: include/staff/filters.inc.php:87 include/staff/banlist.inc.php:87
+msgid "Sort by email"
+msgstr "Ταξινόμηση κατά Email"
+
+#: include/staff/filters.inc.php:88 include/staff/banlist.inc.php:88
+msgid "Submitter"
+msgstr "Υποβολέας"
+
+#: include/staff/filters.inc.php:90 include/staff/banlist.inc.php:90
+msgid "Date Added"
+msgstr "Ημερομηνία Προσθήκης"
+
+#: include/staff/banlist.inc.php:136
+msgid "Remove From List"
+msgstr "Διαγραφή από τη Λίστα"
+
+#: include/staff/banlist.inc.php:137
+msgid "Are you sure you want to REMOVE selected email from ban list?"
+msgstr ""
+"Είστε σίγουροι ότι θέλετε να ΔΙΑΓΡΑΨΕΤΕ το επιλεγμένο Email από τη λίστα των "
+"απαγορευμένων;"
+
+#: include/staff/syslogs.inc.php:13 include/staff/syslogs.inc.php:97
+msgid "Errors"
+msgstr "Errors"
+
+#: include/staff/syslogs.inc.php:17 include/staff/syslogs.inc.php:98
+msgid "Warnings"
+msgstr "Warnings"
+
+#: include/staff/syslogs.inc.php:21
+msgid "Debug logs"
+msgstr "Debug logs"
+
+#: include/staff/syslogs.inc.php:26
+msgid "All logs"
+msgstr "All logs"
+
+#: include/staff/syslogs.inc.php:40
+msgid "Entered date span is invalid. Selection ignored."
+msgstr ""
+"Το χρονικό διάστημα που εισάγατε δεν είναι έγκυρο. Η επιλογή αγνοείται."
+
+#: include/staff/syslogs.inc.php:99
+msgid "Debug"
+msgstr "Debug"
+
+#: include/staff/syslogs.inc.php:102
+msgid "Go!"
+msgstr "Εμπρός!"
+
+#: include/staff/email.inc.php:2 include/staff/smtp.inc.php:2
+msgid "Habari/Jambo rafiki? "
+msgstr "Habari/Jambo rafiki? "
+
+#: include/staff/email.inc.php:7
+msgid "Edit Email"
+msgstr "Επεξεργασία Email"
+
+#: include/staff/email.inc.php:15
+msgid "New Email"
+msgstr "Νέο Email"
+
+#: include/staff/email.inc.php:34
+msgid "Email Info"
+msgstr "Πληροφορίες Email"
+
+#: include/staff/email.inc.php:36
+msgid ""
+"Settings are mainly for emailed tickets. For online/web tickets see help "
+"topics."
+msgstr ""
+"Οι ρυθμίσεις ισχύουν κυρίως για τα δελτία μέσω Email. Για online/web δελτία "
+"ανατρέξτε στα θέματα βοήθειας."
+
+#: include/staff/email.inc.php:38 include/staff/emails.inc.php:19
+#: include/staff/smtp.inc.php:55
+msgid "Email Address"
+msgstr "Διεύθυνση Email"
+
+#: include/staff/email.inc.php:43 include/staff/smtp.inc.php:61
+msgid "Email Name:"
+msgstr "Όνομα Email:"
+
+#: include/staff/email.inc.php:46 include/staff/smtp.inc.php:64
+msgid "Optional email's FROM name."
+msgstr "Προαιρετικό όνομα ΑΠΟΣΤΟΛΕΑ Email."
+
+#: include/staff/email.inc.php:49
+msgid "New Ticket Priority"
+msgstr "Νέα Προτεραιότητα Δελτίου"
+
+#: include/staff/email.inc.php:52 include/staff/topic.inc.php:50
+msgid "Select Priority"
+msgstr "Επιλογή Προτεραιότητας"
+
+#: include/staff/email.inc.php:62
+msgid "New Ticket Dept."
+msgstr "Νέο Τμήμα Δελτίων"
+
+#: include/staff/email.inc.php:75
+msgid "Auto Response"
+msgstr "Αυτόματη Απάντηση"
+
+#: include/staff/email.inc.php:77
+msgid "<b>Disable</b> autoresponse for this email."
+msgstr "<b>Απενεργοποίηση</b> αυτόματης απάντησης για αυτό το email."
+
+#: include/staff/email.inc.php:78
+msgid "Overwrite Dept setting"
+msgstr "Ρύθμιση Αντικατάσταση Τμήματος"
+
+#: include/staff/email.inc.php:82
+msgid ""
+"<b>Login info (optional)</b>: Required when IMAP/POP and/or SMTP are enabled."
+msgstr ""
+"<b>Πληροφορίες Login (προαιρετικά)</b>:Απαιτείται όταν IMAP/POP ή/και SMTP "
+"είναι ενεργοποιημένα"
+
+#: include/staff/email.inc.php:89 include/staff/smtp.inc.php:50
+#: include/staff/login.tpl.php:20
+msgid "Password"
+msgstr "Κωδικός Πρόσβασης"
+
+#: include/staff/email.inc.php:95
+msgid "Mail Account (Optional)"
+msgstr "Λογαριασμός Email (Προαιρετικά)"
+
+#: include/staff/email.inc.php:97
+msgid ""
+"Setting for fetching incoming emails. Mail fetching must be enabled with "
+"autocron active or external cron setup."
+msgstr ""
+"Ρύθμιση για λήψη εισερχόμενων Email. Η λήψη Email πρέπει να ενεργοποιηθεί με "
+"το autocron ενεργό ή με εξωτερική εγκατάσταση cron."
+
+#: include/staff/email.inc.php:98
+msgid ""
+"Please be patient, the system will try to login to mail server to validate "
+"the entered login info."
+msgstr ""
+"Παρακαλούμε περιμένετε, το σύστημα θα προσπαθήσει να συνδεθεί με το "
+"διακομιστή αλληλογραφίας για να πιστοποιήσει τα συνθηματικά σας."
+
+#: include/staff/email.inc.php:107
+msgid "Host"
+msgstr "Κεντρικός Υπολογιστής"
+
+#: include/staff/email.inc.php:112
+msgid "Port"
+msgstr "Θύρα"
+
+#: include/staff/email.inc.php:117
+msgid "Protocol"
+msgstr "Πρωτόκολλο"
+
+#: include/staff/email.inc.php:120
+msgid "Select"
+msgstr "Επιλέξτε"
+
+#: include/staff/email.inc.php:121
+msgid "POP"
+msgstr "POP"
+
+#: include/staff/email.inc.php:122
+msgid "IMAP"
+msgstr "IMAP"
+
+#: include/staff/email.inc.php:128 include/staff/email.inc.php:188
+#: include/staff/smtp.inc.php:36
+msgid "Encryption"
+msgstr "Κρυπτογράφηση"
+
+#: include/staff/email.inc.php:133
+msgid "SSL"
+msgstr "SSL"
+
+#: include/staff/email.inc.php:137
+msgid "Fetch Frequency"
+msgstr "Συχνότητα Λήψης"
+
+#: include/staff/email.inc.php:139
+msgid "Delay intervals in minutes"
+msgstr "Χρονικά διαστήματα καθυστέρησης σε λεπτά"
+
+#: include/staff/email.inc.php:143
+msgid "Maximum Emails Per Fetch"
+msgstr "Μέγιστος Αριθμός Μηνυμάτων ανά Λήψη"
+
+#: include/staff/email.inc.php:145
+msgid "Maximum emails to process per fetch."
+msgstr "Μέγιστος αριθμός Email που επεξεργάζονται ανά Λήψη."
+
+#: include/staff/email.inc.php:149
+msgid "Delete Messages"
+msgstr "Διαγραφή Μηνυμάτων"
+
+#: include/staff/email.inc.php:152
+msgid "Delete fetched message(s) (<i>recommended when using POP</i>)"
+msgstr ""
+"Διαγραφή ληφθέντων μηνυμάτων (<i>συνιστάται όταν χρησιμοποιείται POP</i>)"
+
+#: include/staff/email.inc.php:156
+msgid "SMTP Settings (Optional)"
+msgstr "Ρυθμίσεις SMTP (Προαιρετικά)"
+
+#: include/staff/email.inc.php:158
+msgid ""
+"When enabled the <b>email account</b> will use SMTP server instead of "
+"internal PHP mail() function for outgoing emails.<br>"
+msgstr ""
+"Όταν είναι ενεργοποιημένο, ο <b>λογαριασμός Email</b> θα χρησιμοποιήσει το "
+"διακομιστή SMTP αντί της συνάρτησηq mail() της PHP για τα εξερχόμενα Email."
+
+#: include/staff/email.inc.php:159 include/staff/smtp.inc.php:18
+msgid ""
+"Please be patient, the system will try to login to SMTP server to validate "
+"the entered login info."
+msgstr ""
+"Παρακαλούμε περιμένετε, το σύστημα θα προσπαθήσει να συνδεθεί στο διακομιστή "
+"SMTP για να επιβεβαιώσει τα συνθηματικά σας."
+
+#: include/staff/email.inc.php:168 include/staff/smtp.inc.php:26
+msgid "SMTP Host"
+msgstr "Κεντρικός Υπολογιστής SMTP"
+
+#: include/staff/email.inc.php:173 include/staff/smtp.inc.php:31
+msgid "SMTP Port"
+msgstr "Θύρα SMTP"
+
+#: include/staff/email.inc.php:178
+msgid "Authentication Required?"
+msgstr "Απαιτείται Έλεγχος Ταυτότητας;"
+
+#: include/staff/email.inc.php:189
+msgid ""
+"Best available authentication method is auto-selected based on what the "
+"sever supports."
+msgstr ""
+"Η καλύτερη διαθέσιμη μέθοδος πιστοποίησης ταυτότητας επιλέγεται αυτόματα με "
+"βάση τις δυνατότητες του διακομιστή."
+
+#: include/staff/emails.inc.php:10 include/class.nav.php:32
+msgid "Emails"
+msgstr "Emails"
+
+#: include/staff/emails.inc.php:73
+msgid "Delete Selected Emails"
+msgstr "Διαγραφή Επιλεγμένων Emails"
+
+#: include/staff/emails.inc.php:74
+msgid "Are you sure you want to DELETE selected emails?"
+msgstr "Είστε σίγουροι ότι θέλετε να ΔΙΑΓΡΑΨΕΤΕ τα επιλεγμένα emails;"
+
+#: include/staff/viewticket.inc.php:3 include/staff/login.tpl.php:1
+msgid "Invalid path"
+msgstr "Άκυρη διαδρομή"
+
+#: include/staff/viewticket.inc.php:10
+msgid "Unable to obtain a lock on the ticket"
+msgstr "Αδυναμία κλειδώματος του δελτίου"
+
+#: include/staff/viewticket.inc.php:19
+#, php-format
+msgid "Ticket is assigned to %s"
+msgstr "Το δελτίο έχει ανατεθεί στον/στην %s"
+
+#: include/staff/viewticket.inc.php:21
+msgid "This ticket is currently locked by another staff member!"
+msgstr "Αυτό το δελτίο είναι προσωρινά κλειδωμένο από άλλον υπάλληλο!"
+
+#: include/staff/viewticket.inc.php:23
+msgid "Email is in banlist! Must be removed before any reply/response"
+msgstr ""
+"Το Email είναι στη λίστα των απαγορευμένων. Θα πρέπει να αφαιρεθεί πριν από "
+"οποιαδήποτε απάντηση/απόκριση!"
+
+#: include/staff/viewticket.inc.php:25
+msgid "Marked overdue!"
+msgstr "Σημειώθηκε εκπρόθεσμο!"
+
+#: include/staff/viewticket.inc.php:31 include/client/viewticket.inc.php:15
+msgid "Reload"
+msgstr "Ανανέωση"
+
+#: include/staff/viewticket.inc.php:35
+msgid "Edit Ticket"
+msgstr "Επεξεργασία Δελτίου"
+
+#: include/staff/viewticket.inc.php:55 include/client/viewticket.inc.php:28
+msgid "Create Date:"
+msgstr "Ημερομηνία Δημιουργίας:"
+
+#: include/staff/viewticket.inc.php:63 include/client/viewticket.inc.php:36
+msgid "Name:"
+msgstr "Όνομα:"
+
+#: include/staff/viewticket.inc.php:71
+#, php-format
+msgid "Related Tickets"
+msgstr "Σχετικά Δελτία"
+
+#: include/staff/viewticket.inc.php:78 include/client/viewticket.inc.php:44
+msgid "Phone:"
+msgstr "Τηλέφωνο:"
+
+#: include/staff/viewticket.inc.php:82
+msgid "Source:"
+msgstr "Προέλευση:"
+
+#: include/staff/viewticket.inc.php:93
+msgid "Assigned Staff:"
+msgstr "Ανάθεση στον Υπάλληλο:"
+
+#: include/staff/viewticket.inc.php:97
+msgid "Last Response:"
+msgstr "Τελευταία Απάντηση:"
+
+#: include/staff/viewticket.inc.php:109
+msgid "Close Date:"
+msgstr "Ημερομηνία Κλεισίματος:"
+
+#: include/staff/viewticket.inc.php:127
+msgid "IP Address:"
+msgstr "Διεύθυνση IP:"
+
+#: include/staff/viewticket.inc.php:130
+msgid "Last Message:"
+msgstr "Τελευταίο Μήνυμα:"
+
+#: include/staff/viewticket.inc.php:154
+msgid "Action:"
+msgstr "Ενέργεια"
+
+#: include/staff/viewticket.inc.php:157
+msgid "Select Action"
+msgstr "Επιλέξτε Ενέργειας"
+
+#: include/staff/viewticket.inc.php:158
+msgid "Change Priority"
+msgstr "Αλλαγή Προτεραιότητας"
+
+#: include/staff/viewticket.inc.php:160
+msgid "Mark Overdue"
+msgstr "Σήμανση ως Εκπρόθεσμο"
+
+#: include/staff/viewticket.inc.php:163
+msgid "Release (unassign)"
+msgstr "Αποδέσμευση (Αναίρεση Ανάθεσης)"
+
+#: include/staff/viewticket.inc.php:169 include/staff/viewticket.inc.php:376
+msgid "Close Ticket"
+msgstr "Κλείσιμο Δελτίου"
+
+#: include/staff/viewticket.inc.php:171 include/staff/viewticket.inc.php:378
+msgid "Reopen Ticket"
+msgstr "Άνοιγμα ξανά του Δελτίου"
+
+#: include/staff/viewticket.inc.php:177
+msgid "Ban Email"
+msgstr "Απαγόρευση Email"
+
+#: include/staff/viewticket.inc.php:179
+msgid "Un-Ban Email"
+msgstr "Άρση απαγόρευσης Email"
+
+#: include/staff/viewticket.inc.php:184
+msgid "Delete Ticket"
+msgstr "Διαγραφή Δελτίου"
+
+#: include/staff/viewticket.inc.php:189
+msgid "-Unchanged-"
+msgstr "-Αμετάβλητο-"
+
+#: include/staff/viewticket.inc.php:198 include/staff/premade.inc.php:84
+msgid "GO"
+msgstr "ΕΜΠΡΟΣ"
+
+#: include/staff/viewticket.inc.php:212
+msgid "Internal Notes"
+msgstr "Εσωτερικά Σημειώματα"
+
+#: include/staff/viewticket.inc.php:217
+msgid "posted by"
+msgstr "δημοσιεύτηκε από"
+
+#: include/staff/viewticket.inc.php:228 include/client/viewticket.inc.php:61
+msgid "Ticket Thread"
+msgstr "Νήμα Δελτίων"
+
+#: include/staff/viewticket.inc.php:282 include/staff/viewticket.inc.php:342
+#: include/client/viewticket.inc.php:137
+msgid "Post Reply"
+msgstr "Δημοσίευση Απάντησης"
+
+#: include/staff/viewticket.inc.php:296
+msgid "Canned Response:"
+msgstr "Τυποποιημένη Απάντηση:"
+
+#: include/staff/viewticket.inc.php:299
+msgid "Select a premade reply"
+msgstr "Επιλέξτε μια προκατασκευασμένη απάντηση"
+
+#: include/staff/viewticket.inc.php:309
+msgid "Attach File:"
+msgstr "Επισύναψη Αρχείου:"
+
+#: include/staff/viewticket.inc.php:320
+msgid "Append Signature:"
+msgstr "Προσάρτηση Υπογραφής:"
+
+#: include/staff/viewticket.inc.php:326
+msgid "Dept Signature"
+msgstr "Υπογραφή Τμήματος"
+
+#: include/staff/viewticket.inc.php:331 include/staff/viewticket.inc.php:372
+#: include/client/viewticket.inc.php:20
+msgid "Ticket Status:"
+msgstr "Κατάσταση Δελτίου:"
+
+#: include/staff/viewticket.inc.php:335
+msgid "Close on Reply"
+msgstr "Κλείσιμο με την Απάντηση"
+
+#: include/staff/viewticket.inc.php:337
+msgid "Reopen on Reply"
+msgstr "Ανοίγμα ξανά με την απάντηση"
+
+#: include/staff/viewticket.inc.php:351
+msgid "Post Internal Note"
+msgstr "Δημοσίευση Εσωτερικού Σημειώματος"
+
+#: include/staff/viewticket.inc.php:357
+msgid "Note Title:"
+msgstr "Τίτλος Σημειώματος:"
+
+#: include/staff/viewticket.inc.php:362
+msgid "Enter note content."
+msgstr "Εισάγετε περιεχόμενο σημειώματος."
+
+#: include/staff/viewticket.inc.php:396
+msgid "Dept. Transfer"
+msgstr "Μεταφορά Τμήματος"
+
+#: include/staff/viewticket.inc.php:405
+msgid "-Select Target Dept.-"
+msgstr "-Επιλέξτε Τμήμα Προορισμού -"
+
+#: include/staff/viewticket.inc.php:416
+msgid "Comments/Reasons for the transfer. &nbsp;(<i>Internal note</i>)"
+msgstr "Σχόλια/Λόγοι για τη μεταφορά. &nbsp;(<i>Εσωτερικό σημείωμα</i>)"
+
+#: include/staff/viewticket.inc.php:422
+msgid "Transfer"
+msgstr "Μεταφορά"
+
+#: include/staff/viewticket.inc.php:437
+msgid "Re Assign Ticket"
+msgstr "Ανάθεση ξανά Δελτίου"
+
+#: include/staff/viewticket.inc.php:437
+msgid "Assign to Staff"
+msgstr "Ανάθεση στο Προσωπικό"
+
+#: include/staff/viewticket.inc.php:443
+msgid "Staff Member:"
+msgstr "Υπάλληλος:"
+
+#: include/staff/viewticket.inc.php:445
+msgid "-Select Staff Member.-"
+msgstr "-Επιλέξτε Προσωπικό κράτος .-"
+
+#: include/staff/viewticket.inc.php:462
+msgid "Comments/message for assignee. &nbsp;(<i>Saved as internal note</i>)"
+msgstr ""
+"Σχόλια/Μήνυμα για τον εκδοχέα του δελτίου (<i>Αποθηκεύεται ως εσωτερικό "
+"σημείωμα</i>)"
+
+#: include/staff/viewticket.inc.php:469
+msgid "Assign"
+msgstr "Ανάθεση"
+
+#: include/staff/template.inc.php:13
+msgid "Template Info"
+msgstr "Πληροφορίες Προτύπου"
+
+#: include/staff/template.inc.php:14
+msgid "Last updated on"
+msgstr "Τελευταία ενημέρωση"
+
+#: include/staff/template.inc.php:22
+msgid "Internal notes:"
+msgstr "Εσωτερικά σημειώματα:"
+
+#: include/staff/template.inc.php:23
+msgid "Administrative notes"
+msgstr "Διαχειριστικά σημειώματα"
+
+#: include/staff/template.inc.php:28
+msgid "User"
+msgstr "Χρήστης"
+
+#: include/staff/template.inc.php:30
+msgid "New Ticket Autoresponse"
+msgstr "Νέο Αυτόματη Απάντηση Δελτίου"
+
+#: include/staff/template.inc.php:32
+msgid "Autoresponse sent to user on new ticket if enabled."
+msgstr ""
+"Η αυτόματη απάντηση που αποστέλλεται στο χρήστη κατά τη δημιουργία νέου "
+"δελτίου, αν είναι ενεργή."
+
+#: include/staff/template.inc.php:33
+msgid ""
+"Meant to give the user the ticket ID which can be used to check the status "
+"online."
+msgstr ""
+"Έχει σκοπό να δώσει στο χρήστη το ID του δελτίου, το οποίο μπορεί να "
+"χρησιμοποιηθεί για να ελεγχθεί η κατάστασή του online."
+
+#: include/staff/template.inc.php:42 include/staff/template.inc.php:57
+#: include/staff/template.inc.php:72 include/staff/template.inc.php:88
+#: include/staff/template.inc.php:103 include/staff/template.inc.php:119
+#: include/staff/template.inc.php:132 include/staff/template.inc.php:147
+#: include/staff/template.inc.php:161 include/staff/template.inc.php:174
+msgid "Message Body:"
+msgstr "Σώμα Mηνύματος:"
+
+#: include/staff/template.inc.php:46
+msgid "New Message Autoresponse"
+msgstr "Νέο Mήνυμα Αυτόματης Απάντησης"
+
+#: include/staff/template.inc.php:48
+msgid ""
+"Confirmation sent to user when a new message is appended to an existing "
+"ticket. (email and web replies)"
+msgstr ""
+"Μια επιβεβαίωση αποστέλλεται στο χρήστη όταν ένα νέο μήνυμα επισυνάπτεται σε "
+"ένα υπάρχον δελτίο (απαντήσεις μέσω Email και web)."
+
+#: include/staff/template.inc.php:61
+msgid "New Ticket Notice"
+msgstr "Aνακοίνωση Νέου Δελτίου"
+
+#: include/staff/template.inc.php:63
+msgid ""
+"Notice sent to user, if enabled, on new ticket <b>created by staff</b> on "
+"their behalf."
+msgstr ""
+"Μια ανακοίνωση αποστέλλεται στο χρήστη, αν είναι ενεργή, όταν ένα νέο δελτίο "
+"<b>δημιουργείται από το προσωπικό</b> για λογαριασμό τους."
+
+#: include/staff/template.inc.php:76
+msgid "Over Ticket limit Notice"
+msgstr "Ανακοίνωση υπέρβασης ορίου δελτίων"
+
+#: include/staff/template.inc.php:78
+msgid ""
+"A one time notice sent when user has reached the max allowed open tickets "
+"defined in preferences."
+msgstr ""
+"Μια ανακοίνωση αποστέλλεται μια φορά, όταν ο χρήστης έχει φτάσει τα μέγιστα "
+"επιτρεπόμενα ανοικτά δελτία, όπως ορίζεται στις προτιμήσεις."
+
+#: include/staff/template.inc.php:79
+msgid "Admin email gets alert each time a support ticket request is denied."
+msgstr ""
+"Το Email του Διαχειριστή λαμβάνει ειδοποίηση κάθε φορά που ένα δελτίο "
+"υποστήριξης απορρίπτεται."
+
+#: include/staff/template.inc.php:92
+msgid "Ticket Response/Reply"
+msgstr "Δελτίο Απάντησης/Απόκρισης"
+
+#: include/staff/template.inc.php:94
+msgid ""
+"Message template used when responding to a ticket or simply alerting the "
+"user about a response/answer availability."
+msgstr ""
+"Μήνυμα πρότυπο που χρησιμοποιείται όταν απαντά σε ένα δελτίο ή απλώς "
+"ειδοποιεί το χρήστη σχετικά με την ύπαρξη κάποιας απάντησης/απόκρισης."
+
+#: include/staff/template.inc.php:110
+msgid "New Ticket Alert"
+msgstr "Ειδοποίηση Νέου Δελτίου"
+
+#: include/staff/template.inc.php:111
+msgid "Alert sent to staff ( if enabled) on new ticket."
+msgstr ""
+"Ειδοποίηση αποστέλλεται προς το προσωπικό (εάν είναι ενεργοποιημένο) με ένα "
+"νέο δελτίο."
+
+#: include/staff/template.inc.php:123
+msgid "New Message Alert"
+msgstr "Ειδοποίηση Νέου Μηνύματος"
+
+#: include/staff/template.inc.php:124
+msgid ""
+"Alert sent to staff ( if enabled) when user replies to an existing ticket."
+msgstr ""
+"Ειδοποίηση αποστέλλεται προς το προσωπικό (εάν είναι ενεργοποιημένο) όταν ο "
+"χρήστης απαντά σε ένα υπάρχον δελτίο."
+
+#: include/staff/template.inc.php:138
+msgid "New Internal Note Alert"
+msgstr "Νέα Ειδοποίηση Εσωτερικού Σημειώματος"
+
+#: include/staff/template.inc.php:139
+msgid ""
+"Alert sent to selected staff ( if enabled) when an internal note is appended "
+"to a ticket."
+msgstr ""
+"Ειδοποίηση αποστέλλεται στον επιλεγμένο Υπάλληλο (εάν είναι ενεργοποιημένο) "
+"όταν ένα εσωτερικό σημείωμα επισυνάπτεται σε ένα δελτίο."
+
+#: include/staff/template.inc.php:152
+msgid "Ticket Assigned Alert/Notice"
+msgstr "Ειδοποίηση/Ανακοίνωση 'Το Δελτίο Ανατέθηκε'"
+
+#: include/staff/template.inc.php:153
+msgid "Alert sent to staff on ticket assignment."
+msgstr ""
+"Ειδοποίηση αποστέλλεται προς το προσωπικό κατά την ανάθεση ενός δελτίου."
+
+#: include/staff/template.inc.php:165
+msgid "Overdue/Stale Ticket Alert/Notice"
+msgstr "Ειδοποίηση/Ανακοίνωση Εκπρόθεσμων/Παλαιών Δελτίων"
+
+#: include/staff/template.inc.php:166
+msgid "Alert sent to staff on stale or overdue tickets."
+msgstr ""
+"Ειδοποίηση αποστέλλεται στο προσωπικό κατά το χαρακτηρισμό με παλαιών ή "
+"εκπρόθεσμων δελτίων."
+
+#: include/staff/template.inc.php:183
+msgid "Cancel Edit"
+msgstr "Ακύρωση Επεξεργασίας"
+
+#: include/staff/editticket.inc.php:4
+msgid "Access Denied. Perm error."
+msgstr "Μη επιτρεπτή πρόσβαση. Σφάλμα δικαιωμάτων."
+
+#: include/staff/editticket.inc.php:38
+msgid "Update Ticket #"
+msgstr "Ενημέρωση Δελτίου #"
+
+#: include/staff/editticket.inc.php:38
+msgid "View Ticket"
+msgstr "Προβολή Δελτίου"
+
+#: include/staff/editticket.inc.php:70
+#, php-format
+msgid "Time is based on your time zone GM %s"
+msgstr "Ο χρόνος έχει βάση τη ζώνη ώρας σας GM %s"
+
+#: include/staff/editticket.inc.php:109
+msgid "(deleted)"
+msgstr "(διαγραμμένο)"
+
+#: include/staff/editticket.inc.php:120
+msgid "(optional)"
+msgstr "(προαιρετικό)"
+
+#: include/staff/editticket.inc.php:128
+msgid "Reasons for the edit."
+msgstr "Λόγοι για την επεξεργασία."
+
+#: include/staff/editticket.inc.php:135
+msgid "Update Ticket"
+msgstr "Ενημέρωση Δελτίου"
+
+#: include/staff/premade.inc.php:54
+msgid "Premade/Canned Replies"
+msgstr "Προκατασκευασμένες/Τυποποιημένες Απαντήσεις"
+
+#: include/staff/premade.inc.php:71
+msgid "Search for:"
+msgstr "Αναζήτηση για:"
+
+#: include/staff/premade.inc.php:72
+msgid "category"
+msgstr "κατηγορία"
+
+#: include/staff/premade.inc.php:96
+msgid "Sort By Title"
+msgstr "Ταξινόμηση ανά Τίτλο"
+
+#: include/staff/premade.inc.php:96
+msgid "Reply Title"
+msgstr "Τίτλος Απάντησης"
+
+#: include/staff/premade.inc.php:98
+msgid "Category/Dept"
+msgstr "Κατηγορία/Τμήμ`"
+
+#: include/staff/premade.inc.php:100
+msgid "Sort By Update Date"
+msgstr "Ταξινόμηση ανά Ημερομηνία Ενημέρωσης"
+
+#: include/staff/premade.inc.php:146
+msgid "Are you sure you want to ENABLE selected entries?"
+msgstr ""
+"Είστε σίγουροι ότι θέλετε να ΕΝΕΡΓΟΠΟΙΗΣΕΤΕ τις επιλεγμένες καταχωρήσεις;"
+
+#: include/staff/premade.inc.php:148
+msgid "Are you sure you want to DISABLE selected entries?"
+msgstr ""
+"Είστε σίγουροι ότι θέλετε να ΑΠΕΝΕΡΓΟΠΟΙΗΣΕΤΕ τις επιλεγμένες καταχωρήσεις;"
+
+#: include/staff/premade.inc.php:150
+msgid "Are you sure you want to DELETE selected entries?"
+msgstr ""
+"Είστε σίγουροι ότι θέλετε να ΔΙΑΓΡΑΨΕΤΕ τις επιλεγμένες καταχωρήσεις;"
+
+#: include/staff/groups.inc.php:18
+msgid "Group Name"
+msgstr "Όνομα Ομάδας"
+
+#: include/staff/groups.inc.php:19
+msgid "Group Status"
+msgstr "Κατάσταση Ομάδας"
+
+#: include/staff/groups.inc.php:20
+msgid "Members"
+msgstr "Μέλη"
+
+#: include/staff/groups.inc.php:21 include/client/tickets.inc.php:93
+msgid "Create Date"
+msgstr "Ημερομηνία Δημιουργίας"
+
+#: include/staff/groups.inc.php:67
+msgid "Are you sure you want to ENABLE selected group(s)"
+msgstr "Είστε σίγουροι ότι θέλετε να ΕΝΕΡΓΟΠΟΙΗΣΕΤΕ τις επιλεγμένες ομάδες"
+
+#: include/staff/groups.inc.php:69
+msgid "Are you sure you want to DISABLE selected group(s)"
+msgstr "Είστε σίγουροι ότι θέλετε να ΑΠΕΝΕΡΓΟΠΟΙΗΣΕΤΕ τις επιλεγμένες ομάδες"
+
+#: include/staff/groups.inc.php:71
+msgid "Are you sure you want to DELETE selected group(s)"
+msgstr "Είστε σίγουροι ότι θέλετε να ΔΙΑΓΡΑΨΕΤΕ τις επιλεγμένες ομάδες"
+
+#: include/staff/smtp.inc.php:14
+msgid "SMTP Server Setting (Optional)"
+msgstr "Ρύθμιση Διακομιστή SMTP (Προαιρετικά)"
+
+#: include/staff/smtp.inc.php:16
+msgid ""
+"When enabled the system will use an SMTP server rather than the internal PHP "
+"mail() function for outgoing emails."
+msgstr ""
+"Όταν είναι ενεργοποιημένο το σύστημα θα χρησιμοποιεί ένα διακομιστή SMTP και "
+"όχι την εσωτερική αλληλογραφία της PHP () συνάρτηση για εξερχόμενα μηνύματα "
+"ηλεκτρονικού ταχυδρομείου."
+
+#: include/staff/smtp.inc.php:17
+msgid ""
+"Leave the username and password empty of the SMTP server doesn't require "
+"authentication"
+msgstr ""
+"Αφήστε το username και το password του διακομιστή SMTP κενά, εάν δεν "
+"απαιτείται έλεγχος ταυτότητας"
+
+#: include/staff/smtp.inc.php:19
+msgid "Enable SMTP"
+msgstr "Ενεργοποίηση SMTP"
+
+#: include/staff/smtp.inc.php:41
+msgid "TLS (secure)"
+msgstr "TLS (secure)"
+
+#: include/staff/myprofile.inc.php:5
+msgid "My Profile Info"
+msgstr "Πληροφορίες του Προφίλ μου"
+
+#: include/staff/myprofile.inc.php:15
+msgid "First Name:"
+msgstr "Όνομα:"
+
+#: include/staff/myprofile.inc.php:20
+msgid "Last Name:"
+msgstr "Επώνυμο:"
+
+#: include/staff/myprofile.inc.php:38
+msgid "Cell Phone:"
+msgstr "Κινητό Τηλέφωνο"
+
+#: include/staff/myprofile.inc.php:48
+msgid "Save"
+msgstr "Αποθήκευση"
+
+#: include/staff/attachment.inc.php:13
+msgid "Attachments Settings"
+msgstr "Ρυθμίσεις Συνημμένων"
+
+#: include/staff/attachment.inc.php:17
+msgid ""
+"Before enabling attachments make sure you understand the security settings "
+"and issues related to file uploads."
+msgstr ""
+"Προτού ενεργοποιήσετε τα συνημμένα αρχεία, βεβαιωθείτε ότι έχετε κατανοήσει "
+"τις ρυθμίσεις ασφαλείας και τα θέματα που σχετίζονται με το ανέβασμα αρχείων."
+
+#: include/staff/attachment.inc.php:20 include/staff/attachment.inc.php:22
+msgid "Allow Attachments"
+msgstr "Να επιτρέπονται Συνημμένα"
+
+#: include/staff/attachment.inc.php:23
+msgid "Global Setting"
+msgstr "Καθολική Ρύθμιση"
+
+#: include/staff/attachment.inc.php:28
+msgid "Emailed Attachments:"
+msgstr "Συνημμένα σε Email:"
+
+#: include/staff/attachment.inc.php:30
+msgid "Accept emailed files"
+msgstr "Αποδοχή αρχείων μέσω Email"
+
+#: include/staff/attachment.inc.php:35
+msgid "Online Attachments:"
+msgstr "Online Συνημμένα:"
+
+#: include/staff/attachment.inc.php:38
+msgid "Allow online attachments upload"
+msgstr "Να επιτρέπεται το ανέβασμα συνημμένων online"
+
+#: include/staff/attachment.inc.php:40
+msgid "Authenticated users Only."
+msgstr "Πιστοποιημένοι χρήστες Μόνο."
+
+#: include/staff/attachment.inc.php:40
+msgid "User must be logged in to upload files"
+msgstr "Ο χρήστης πρέπει να κάνει login για να ανεβάσει αρχεία"
+
+#: include/staff/attachment.inc.php:45
+msgid "Staff Response Files:"
+msgstr "Αρχεία Απαντήσεων Προσωπικού:"
+
+#: include/staff/attachment.inc.php:47
+msgid "Email attachments to the user"
+msgstr "Συνημμένα σε Email προς το χρήστη"
+
+#: include/staff/attachment.inc.php:51
+msgid "Maximum File Size:"
+msgstr "Μέγιστο Μέγεθος Αρχείου:"
+
+#: include/staff/attachment.inc.php:53
+msgid "bytes"
+msgstr "bytes"
+
+#: include/staff/attachment.inc.php:58
+msgid "Attachment Folder:"
+msgstr "Φάκελλος Συνημμένων:"
+
+#: include/staff/attachment.inc.php:60
+msgid "Web user (e.g apache) must have write access to the folder."
+msgstr ""
+"Ο χρήστης Web (π.χ. apache) πρέπει να έχει δικαιώματα εγγραφής στο φάκελο."
+
+#: include/staff/attachment.inc.php:68
+msgid "Accepted File Types:"
+msgstr "Αποδεκτοί Τύποι Αρχείων:"
+
+#: include/staff/attachment.inc.php:70
+msgid ""
+"Enter file extensions allowed separated by a comma. e.g <i>.doc, .pdf, </i>"
+msgstr ""
+"Εισάγετε τις επιτρεπτές καταλήξεις αρχείων, χωρισμένες μεταξύ τους με κόμμα, "
+"π.χ. <i>.doc, .pdf, </i>"
+
+#: include/staff/attachment.inc.php:71
+msgid ""
+"To accept all files enter wildcard <b><i>.*</i></b>&nbsp;&nbsp;i.e dotStar "
+"(NOT recommended)."
+msgstr ""
+"Για την αποδοχή όλων των αρχείων εισάγετε χαρακτήρα μπαλαντέρ <b><i> "
+".*</i></b>&nbsp;&nbsp; δηλαδή τελεία-αστερίσκο (ΔΕΝ συνιστάται)"
+
+#: include/staff/topic.inc.php:6
+msgid "Edit Topic"
+msgstr "Διόρθωση Θέματος"
+
+#: include/staff/topic.inc.php:10
+msgid "New Help Topic"
+msgstr "Νέο Θέμα βοήθειας"
+
+#: include/staff/topic.inc.php:26
+msgid "Disabling auto response will overwrite dept settings."
+msgstr ""
+"Η απενεργοποίηση τηςαυτόματης απάντησης θα αντικαταστήσει τις ρυθμίσεις "
+"τμήματος."
+
+#: include/staff/topic.inc.php:33
+msgid "Topic Status"
+msgstr "Κατάσταση Θέματος"
+
+#: include/staff/topic.inc.php:40
+msgid "Auto Response:"
+msgstr "Αυτόματη απάντηση:"
+
+#: include/staff/topic.inc.php:43
+msgid ""
+"<b>Disable</b> autoresponse for this topic.   (<i>Overwrite Dept setting</i>)"
+msgstr ""
+"<b>Απενεργοποίηση</b> αυτόματης απάντησης για αυτό το θέμα. "
+"(<i>Αντικατάσταση Ρυθμίσεων Τμήματος</i>)."
+
+#: include/staff/topic.inc.php:47
+msgid "New Ticket Priority:"
+msgstr "Προτεραιότητα Νέου Δελτίου:"
+
+#: include/staff/topic.inc.php:61
+msgid "New Ticket Department:"
+msgstr "Τμήμα για το Νέο Δελτίο:"
+
+#: include/staff/login.tpl.php:5
+msgid "osTicket:: SCP Login"
+msgstr "osTicket:: SCP Login"
+
+#: include/staff/login.tpl.php:13
+msgid "osTicket Staff Control Panel"
+msgstr "osTicket Πίνακας Ελέγχου Προσωπικού"
+
+#: include/staff/login.tpl.php:21
+msgid "Login"
+msgstr "Σύνδεση"
+
+#: include/staff/login.tpl.php:25
+msgid ""
+"Copyright &copy; <a href=\"http://www.osticket.com\" "
+"target=\"_blank\">osTicket.com</a>"
+msgstr ""
+"Copyright &copy; <a href=\"http://www.osticket.com\" "
+"target=\"_blank\">osTicket.com</a>"
+
+#: include/class.api.php:26
+msgid "API passphrase missing."
+msgstr "Η φράση κλειδί API λείπει."
+
+#: include/class.api.php:29
+msgid "Valid IP required"
+msgstr "Έγκυρη IP απαιτείται"
+
+#: include/class.api.php:31
+msgid "API key for the IP already exists"
+msgstr "Το κλειδί API για την IP υπάρχει ήδη"
+
+#: include/class.api.php:51
+msgid "Required"
+msgstr "Απαιτείται"
+
+#: include/class.api.php:53
+msgid "Must be at least 3 words long."
+msgstr "Πρέπει να είναι τουλάχιστον 3 λέξεις."
+
+#: include/class.api.php:55
+msgid "Already set"
+msgstr "Υπάρχει ήδη"
+
+#: include/class.ticket.php:574 include/class.ticket.php:669
+#: include/class.ticket.php:712 include/class.ticket.php:861
+#: include/class.ticket.php:1378 include/class.ticket.php:1428
+msgid "Template Fetch Error"
+msgstr "Σφάλμα Λήψης Προτύπου"
+
+#: include/class.ticket.php:574
+msgid "Unable to fetch 'assigned' alert template #"
+msgstr "Αδύνατη η λήψη 'εκχωρημένου' προτύπου ειδοποίησης #"
+
+#: include/class.ticket.php:577
+msgid "Ticket assigned"
+msgstr "Το δελτίο ανατέθηκε"
+
+#: include/class.ticket.php:579
+#, php-format
+msgid "Ticket Assigned to %s"
+msgstr "Το δελτίο ανατέθηκε στον/στην %s"
+
+#: include/class.ticket.php:669
+msgid "Unable to fetch 'new message' auto response template #"
+msgstr "Αδυναμία λήψης 'Νέου Μηνύματος' - προτύπου αυτόματης απάντησης #"
+
+#: include/class.ticket.php:712
+msgid "Unable to fetch 'new message' alert template #"
+msgstr "Αδυναμία λήψης 'Νέου Μηνύματος' - προτύπου ειδοποίησης #"
+
+#: include/class.ticket.php:790
+#, php-format
+msgid ""
+"Problems fetching response template for ticket# %s  Possible config error - "
+"template # %s"
+msgstr ""
+"Προβλήματα προέκυψαν κατά τη λήψη του προτύπου για το δελτίο # %s. Πιθανό "
+"σφάλμα ρύθμισης (config) - πρότυπο # %s"
+
+#: include/class.ticket.php:791 include/class.ticket.php:1503
+msgid "System Error"
+msgstr "Σφάλμα Συστήματος"
+
+#: include/class.ticket.php:861
+msgid "Unable to fetch 'new note' alert template #"
+msgstr "Αδυναμία λήψης 'Νέου Σημειώματος' - προτύπου ειδοποίησης #"
+
+#: include/class.ticket.php:1078 include/class.ticket.php:1165
+#: include/class.msgtpl.php:83
+msgid "Name required"
+msgstr "Το Όνομα απαιτείται"
+
+#: include/class.ticket.php:1079
+msgid "Email is required"
+msgstr "Το Email απαιτείται"
+
+#: include/class.ticket.php:1080
+msgid "Reason for the update required"
+msgstr "Η αιτία για την ενημέρωση απαιτείται"
+
+#: include/class.ticket.php:1081 include/class.ticket.php:1167
+#: include/class.msgtpl.php:85 include/class.msgtpl.php:87
+#: include/class.msgtpl.php:89 include/class.msgtpl.php:91
+#: include/class.msgtpl.php:93 include/class.msgtpl.php:96
+#: include/class.msgtpl.php:98 include/class.msgtpl.php:100
+#: include/class.msgtpl.php:102 include/class.msgtpl.php:104
+msgid "Subject required"
+msgstr "Το Θέμα απαιτείται"
+
+#: include/class.ticket.php:1082
+msgid "Invalid Selection"
+msgstr "Άκυρη Επιλογή"
+
+#: include/class.ticket.php:1083 include/class.ticket.php:1178
+msgid "Invalid Priority"
+msgstr "Άκυρη Προτεραιότητα"
+
+#: include/class.ticket.php:1084 include/class.ticket.php:1179
+msgid "Valid phone # required"
+msgstr "Ένας έγκυρος αριθμός τηλεφώνου απαιτείται"
+
+#: include/class.ticket.php:1085 include/class.ticket.php:1174
+msgid "Invalid date - must be MM/DD/YY"
+msgstr "Άκυρη ημερομηνία - πρέπει να είναι MM/DD/YY"
+
+#: include/class.ticket.php:1095
+msgid "Duedate can NOT be set on a closed ticket"
+msgstr "Η ημερομηνία λήξης ΔΕΝ πρέπει να τίθεται σε ένα κλειστό δελτίο"
+
+#: include/class.ticket.php:1097 include/class.ticket.php:1206
+msgid "Select time"
+msgstr "Επιλέξτε ώρα"
+
+#: include/class.ticket.php:1099 include/class.ticket.php:1208
+msgid "Invalid duedate"
+msgstr "Άκυρη ημερομηνία λήξης"
+
+#: include/class.ticket.php:1101 include/class.ticket.php:1210
+msgid "Due date must be in the future"
+msgstr "Η ημερομηνία λήξης πρέπει να είναι στο μέλλον"
+
+#: include/class.ticket.php:1107 include/class.ticket.php:1198
+msgid "Invalid phone ext."
+msgstr "Άκυρο εσωτ. τηλέφωνο"
+
+#: include/class.ticket.php:1109 include/class.ticket.php:1200
+msgid "Phone number required"
+msgstr "Ο αριθμός τηλεφώνου απαιτείται"
+
+#: include/class.ticket.php:1170
+msgid "Select help topic"
+msgstr "Επιλέξτε θέμα βοήθειας"
+
+#: include/class.ticket.php:1172
+msgid "Dept. required"
+msgstr "Το Τμήμα απαιτείται"
+
+#: include/class.ticket.php:1173
+msgid "Indicate source"
+msgstr "Αναφέρετε προέλευση"
+
+#: include/class.ticket.php:1176
+msgid "Email unknown"
+msgstr "Άγνωστο Email"
+
+#: include/class.ticket.php:1189
+msgid "Ticket denied"
+msgstr "Το δελτίο απορρίφθηκε"
+
+#: include/class.ticket.php:1189
+msgid "Banned email - "
+msgstr "Απαγορευμένο email - "
+
+#: include/class.ticket.php:1193
+msgid "Email mismatch."
+msgstr "Αναντιστοιχία Email."
+
+#: include/class.ticket.php:1218
+msgid "File is too big. Max"
+msgstr "Το αρχείο είναι πολύ μεγάλο. Το πολύ"
+
+#: include/class.ticket.php:1218
+msgid "bytes allowed"
+msgstr "bytes επιτρέπονται"
+
+#: include/class.ticket.php:1226
+msgid "You've reached the maximum open tickets allowed."
+msgstr "Έχετε φτάσει τα μέγιστα επιτρεπόμενα ανοικτά δελτία."
+
+#: include/class.ticket.php:1252
+#, php-format
+msgid ""
+"Support ticket request denied for %s\\nOpen ticket: %s\\nMax Allowed: %s\\n\\"
+"nNotice only sent once"
+msgstr ""
+
+#: include/class.ticket.php:1253
+msgid "Overlimit Notice"
+msgstr "Ανακοίνωση Υπέρβασης Ορίου"
+
+#: include/class.ticket.php:1378
+msgid "Unable to fetch autoresponse template #"
+msgstr "Αδύνατη η λήψη του προτύπου αυτόματης απάντησης #"
+
+#: include/class.ticket.php:1428
+msgid "Unable to fetch 'new ticket' alert template #"
+msgstr "Αδυναμία η λήψη 'Νέου Δελτίου' - προτύπου ειδοποίησης #"
+
+#: include/class.ticket.php:1440
+msgid "Permission denied"
+msgstr "Μη επιτρεπτή πρόσβαση"
+
+#: include/class.ticket.php:1443
+msgid "Summary of the issue required"
+msgstr "Η Περίληψη του θέματος απαιτείται"
+
+#: include/class.ticket.php:1445
+msgid "Invalid source - "
+msgstr "Άκυρη προέλευση - "
+
+#: include/class.ticket.php:1448
+msgid "Ticket created by staff"
+msgstr "Δελτίο που δημιουργήθηκε από το Προσωπικό"
+
+#: include/class.ticket.php:1502
+msgid "Problems fetching response template for ticket#"
+msgstr "Προβλήματα κατά τη λήψη προτύπου για το δελτίο #"
+
+#: include/class.ticket.php:1502
+msgid "Possible config error - template #"
+msgstr "Πιθανό σφάλμα ρύθμισης (config) - πρότυπο #"
+
+#: include/class.ticket.php:1514
+msgid "Internal error - message/response post error."
+msgstr "Εσωτερικό σφάλμα - Μήνυμα / λάθους μετά την απάντηση."
+
+#: include/class.ticket.php:1522
+msgid "New Ticket by Staff"
+msgstr "Νέο Δελτίο από το Προσωπικό"
+
+#: include/class.ticket.php:1522
+msgid "Ticket created by staff -"
+msgstr "Δελτίο που δημιουργήθηκε από το προσωπικό -"
+
+#: include/class.ticket.php:1553
+msgid "Ticket flagged as overdue by the system."
+msgstr "Το Δελτίο επισημάνθηκε ως εκπρόθεσμο από το σύστημα."
+
+#: include/client/open.inc.php:63
+msgid "General Inquiry"
+msgstr "Γενική Ερώτηση"
+
+#: include/client/open.inc.php:77
+msgid "Message:"
+msgstr "Μήνυμα:"
+
+#: include/client/open.inc.php:117
+msgid "Captcha Text:"
+msgstr "Κείμενο Captcha:"
+
+#: include/client/open.inc.php:119
+msgid "Enter the text shown on the image."
+msgstr "Εισάγετε το κείμενο που εμφανίζεται στην εικόνα."
+
+#: include/client/header.inc.php:2
+msgid "osTicket :: Support Ticket System"
+msgstr "osTicket:: Σύστημα Δελτίων Υποστήριξης"
+
+#: include/client/header.inc.php:16
+msgid "Support Center"
+msgstr "Κέντρο Υποστήριξης"
+
+#: include/client/header.inc.php:17
+msgid "<span>SUPPORT TICKET</span> SYSTEM"
+msgstr "ΣΥΣΤΗΜΑ <span>ΔΕΛΤΙΩΝ ΥΠΟΣΤΗΡΙΞΗΣ</p>"
+
+#: include/client/header.inc.php:23
+msgid "My Tickets"
+msgstr "Τα δελτία μου"
+
+#: include/client/header.inc.php:25
+msgid "Ticket Status"
+msgstr "Κατάσταση Δελτίων"
+
+#: include/client/header.inc.php:28
+msgid "Home"
+msgstr "Αρχική"
+
+#: include/client/tickets.inc.php:80
+msgid "View Open"
+msgstr "Προβολή Ανοικτών"
+
+#: include/client/tickets.inc.php:81
+msgid "View Closed"
+msgstr "Προβολή Κλειστών"
+
+#: include/client/tickets.inc.php:82
+msgid "Refresh"
+msgstr "Ανανέωση"
+
+#: include/client/tickets.inc.php:129
+msgid "NO tickets found."
+msgstr "ΔΕΝ βρέθηκαν δελτία."
+
+#: include/client/footer.inc.php:3
+msgid "Copyright &copy; osTicket.com. All rights reserved"
+msgstr ""
+"Πνευματικά δικαιώματα &copy; osTicket.com. Επιφύλαξη παντός δικαιώματος."
+
+#: include/client/footer.inc.php:5
+msgid "Powered by osTicket"
+msgstr "Powered by osTicket"
+
+#: include/client/thankyou.inc.php:18
+msgid ""
+"Thank you for contacting us.<br>A support ticket request has been created "
+"and a representative will be getting back to you shortly if necessary."
+msgstr ""
+
+#: include/client/thankyou.inc.php:22
+#, php-format
+msgid ""
+"An email with the ticket number has been sent to <b>%s</b>.You'll need the "
+"ticket number along with your email to view status and progress online."
+msgstr ""
+"Ένα Email με τον αριθμό του δελτίου έχει σταλεί στο <b>%s</b>. Θα "
+"χρειαστείτε τον αριθμό του δελτίου μαζί με το Email σας για να δείτε την "
+"κατάσταση του και την πρόοδο του online."
+
+#: include/client/thankyou.inc.php:25
+msgid ""
+"If you wish to send additional comments or information regarding same issue, "
+"please follow the instructions on the email."
+msgstr ""
+"Αν επιθυμείτε να στείλετε πρόσθετα σχόλια ή πληροφορίες σχετικά με το ίδιο "
+"θέμα, παρακαλώ ακολουθήστε τις οδηγίες που προβάλλονται στο Email."
+
+#: include/client/thankyou.inc.php:28
+msgid "Support Team"
+msgstr "Ομάδα Υποστήριξης"
+
+#: include/client/viewticket.inc.php:120
+msgid "Ticket will be reopened on message post"
+msgstr "Το δελτίο θα ξανανοίξει κατά τη δημοσίευση του μηνύματος"
+
+#: include/client/viewticket.inc.php:127
+msgid "Enter Message"
+msgstr "Εισάγετε Μήνυμα"
+
+#: include/client/viewticket.inc.php:132
+msgid "Attach File"
+msgstr "Επισύναψη Αρχείου"
+
+#: include/client/login.inc.php:16
+msgid ""
+"To view the status of a ticket, provide us with your login details "
+"below.<br/>If this is your first time contacting us or you've lost the "
+"ticket ID, please <a href='open.php'>click here</a> to open a new ticket."
+msgstr ""
+"Για να δείτε την κατάσταση ενός δελτίου, δώστε μας παρακάτω τα συνθηματικά "
+"εισόδου σας.<br/>Αν επικοινωνείτε για πρώτη φορά μαζί μας ή χάσατε το ID του "
+"δελτίου, παρακαλούμε <a href='open.php'>κάνετε κλικ εδώ</a> για να ανοίξετε "
+"ένα νέο δελτίο."
+
+#: include/client/login.inc.php:22
+msgid "E-Mail:"
+msgstr "E-Mail:"
+
+#: include/client/login.inc.php:23
+msgid "Ticket ID:"
+msgstr "ID Δελτίου:"
+
+#: include/client/login.inc.php:24
+msgid "View Status"
+msgstr "Προβολή Κατάστασης"
+
+#: include/class.staff.php:259
+msgid "First and last name required"
+msgstr "Το όνομα και το επώνυμο απαιτούνται"
+
+#: include/class.staff.php:262
+msgid "Username required"
+msgstr "Το Όνομα Χρήστη απαιτείται"
+
+#: include/class.staff.php:270
+msgid "Username already in-use"
+msgstr "Το Όνομα Χρήστη χρησιμοποιείται ήδη"
+
+#: include/class.staff.php:276
+msgid "Already in-use system email"
+msgstr "Το Email του συστήματος χρησιμοποιείται ήδη"
+
+#: include/class.staff.php:279 include/class.staff.php:282
+msgid "Valid number required"
+msgstr "Ένας έγκυρος αριθμός απαιτείται"
+
+#: include/class.staff.php:288
+msgid "Password(s) do not match"
+msgstr "Οι Κωδικοί δεν ταιριάζουν"
+
+#: include/class.staff.php:290
+msgid "Must be at least 6 characters"
+msgstr "Πρέπει να είναι τουλάχιστον 6 χαρακτήρες"
+
+#: include/class.staff.php:294
+msgid "Department required"
+msgstr "Το Τμήμα απαιτείται"
+
+#: include/class.staff.php:297
+msgid "Group required"
+msgstr "Η Ομάδα απαιτείται"
+
+#: include/class.staff.php:327
+msgid "Unable to update the user. Internal error occured"
+msgstr "Αδύνατη η ενημέρωση του χρήστη. Εσωτερικό σφάλμα"
+
+#: include/class.staff.php:333
+msgid "Unable to create user. Internal error"
+msgstr "Αδύνατη η δημιουργία χρήστη. Εσωτερικό σφάλμα."
+
+#: include/class.group.php:37
+msgid "Group name required"
+msgstr "Το Όνομα Ομάδας απαιτείται"
+
+#: include/class.group.php:39
+msgid "Group name must be at least 5 chars."
+msgstr "Το όνομα της Ομάδας πρέπει να είναι τουλάχιστον 5 χαρακτήρες."
+
+#: include/class.group.php:46
+msgid "Group name already exists"
+msgstr "Το Όνομα της Ομάδας υπάρχει ήδη"
+
+#: include/class.group.php:65
+msgid "Internal error occured"
+msgstr "Προέκυψε Εσωτερικό Σφάλμα"
+
+#: include/class.group.php:71
+msgid "Unable to create the group. Internal error"
+msgstr "Αδύνατη η δημιουργία της ομάδας. Εσωτερικό σφάλμα"
+
+#: include/mysql.php:64
+msgid "DB Error #"
+msgstr "Σφάλμα ΒΔ #"
+
+#: include/class.msgtpl.php:86 include/class.msgtpl.php:88
+#: include/class.msgtpl.php:90 include/class.msgtpl.php:92
+#: include/class.msgtpl.php:94 include/class.msgtpl.php:97
+#: include/class.msgtpl.php:99 include/class.msgtpl.php:101
+#: include/class.msgtpl.php:103 include/class.msgtpl.php:105
+msgid "Template message required"
+msgstr "Το μήνυμα προτύπου απαιτείται"
+
+#: include/class.msgtpl.php:146
+msgid "Unable to update. Internal error occured"
+msgstr "Αδυναμία ενημέρωσης. Προέκυψε εσωτερικό σφάλμα."
+
+#: include/class.msgtpl.php:172
+msgid "Name already in use"
+msgstr "Το Όνομα χρησιμοποιείται ήδη"
+
+#: include/class.msgtpl.php:211
+msgid "Unable to create the template. Internal error occured"
+msgstr "Αδυναμία δημιουργίας του προτύπου. Προέκυψε εσωτερικό σφάλμα"
+
+#: include/class.nav.php:30
+msgid "Dashboard"
+msgstr "Ταμπλό"
+
+#: include/class.nav.php:30
+msgid "Admin Dashboard"
+msgstr "Ταμπλό Διαχειριστή"
+
+#: include/class.nav.php:31
+msgid "Settings"
+msgstr "Ρυθμίσεις"
+
+#: include/class.nav.php:31
+msgid "System Settings"
+msgstr "Ρυθμίσεις Συστήματος"
+
+#: include/class.nav.php:37
+msgid "Tickets"
+msgstr "Δελτία"
+
+#: include/class.nav.php:37
+msgid "Ticket Queue"
+msgstr "Ουρά Δελτίων"
+
+#: include/class.nav.php:39
+msgid "Knowledge Base"
+msgstr "Βάση γνώσεων"
+
+#: include/class.nav.php:39
+msgid "Knowledge Base: Premade"
+msgstr "Βάση Γνώσεων: προκατασκευασμένες"
+
+#: include/class.nav.php:41
+msgid "Directory"
+msgstr "Κατάλογος"
+
+#: include/class.nav.php:41
+msgid "Staff Directory"
+msgstr "Κατάλογος Προσωπικού"
+
+#: include/class.email.php:262
+msgid "Internal error."
+msgstr "Εσωτερικό σφάλμα."
+
+#: include/class.email.php:267
+msgid "Email already exits"
+msgstr "Το Email υπάρχει ήδη"
+
+#: include/class.email.php:269
+msgid "Email already used as admin email!"
+msgstr "Το Email χρησιμοποιείται ήδη ως email διαχειριστή!"
+
+#: include/class.email.php:273
+msgid "Email in-use by a staff member"
+msgstr "Το Email χρησιμοποιείται ήδη από κάποιον υπάλληλο"
+
+#: include/class.email.php:278
+msgid "You must select a Dept."
+msgstr "Πρέπει να επιλέξετε ένα Τμήμα"
+
+#: include/class.email.php:285
+msgid "Username missing"
+msgstr "Λείπει το Όνομα Χρήστη"
+
+#: include/class.email.php:288
+msgid "Password required"
+msgstr "Ο Κωδικός Πρόσβασης απαιτείται"
+
+#: include/class.email.php:294
+msgid "IMAP doesn't exist. PHP must be compiled with IMAP enabled."
+msgstr ""
+"Το πρωτόκολλο IMAP δεν υπάρχει. Η PHP πρέπει να μεταγλωττιστεί με το "
+"πρωτόκολλο IMAP ενεργοποιημένο."
+
+#: include/class.email.php:296 include/class.email.php:310
+msgid "Host name required"
+msgstr "Το όνομα του κεντρικού υπολογιστή απαιτείται"
+
+#: include/class.email.php:298 include/class.email.php:312
+msgid "Port required"
+msgstr "Η θύρα απαιτείται"
+
+#: include/class.email.php:300
+msgid "Select protocol"
+msgstr "Επιλέξτε Πρωτόκολλο"
+
+#: include/class.email.php:302
+msgid "Fetch interval required"
+msgstr "Το χρονικό διάστημα λήψης απαιτείται"
+
+#: include/class.email.php:304
+msgid "Maximum emails required"
+msgstr "Μέγιστο emails που απαιτείται"
+
+#: include/class.email.php:321
+msgid "Another department using host/username combination."
+msgstr ""
+"Ένα άλλο τμήμα χρησιμοποιεί τον ίδιο συνδυασμό Κεντρικού Υπολογιστή/Ονόματος "
+"Χρήστη."
+
+#: include/class.email.php:330
+#, php-format
+msgid "Invalid login. Check %s settings"
+msgstr "Μη έγκυρο login. Ελέγξτε %s τις ρυθμίσεις"
+
+#: include/class.email.php:348
+msgid "Unable to login. Check SMTP settings."
+msgstr "Αδυναμία login. Ελέγξτε τις ρυθμίσεις SMTP."
+
+#: include/class.email.php:380
+msgid "Unable to update email. Internal error occured"
+msgstr "Αδύνατη η ενημέρωση email. Προέκυψε εσωτερικό σφάλμα"
+
+#: include/class.email.php:390
+msgid "Error(s) Occured. Try again"
+msgstr "Προέκυψαν Σφάλματα. Προσπαθήστε ξανά"
+
+#: include/class.dept.php:208
+msgid "Missing or invalid Dept ID"
+msgstr "Άκυρο ή λείπει το ID του Τμήματος"
+
+#: include/class.dept.php:211
+msgid "Dept email required"
+msgstr "Το Email του Τμήματος απαιτείται"
+
+#: include/class.dept.php:214
+msgid "Template required"
+msgstr "Το Πρότυπο απαιτείται"
+
+#: include/class.dept.php:217
+msgid "Dept name required"
+msgstr "Το όνομα του Τμήματος απαιτείται"
+
+#: include/class.dept.php:219
+msgid "Dept name must be at least 4 chars."
+msgstr "Το όνομα του Τμήματος πρέπει να είναι τουλάχιστον 4 χαρακτήρες"
+
+#: include/class.dept.php:226
+msgid "Department already exist"
+msgstr "Το Τμήμα υπάρχει ήδη"
+
+#: include/class.dept.php:230
+msgid "Signature required"
+msgstr "Η Υπογραφή απαιτείται"
+
+#: include/class.dept.php:233
+msgid "Default department can not be private"
+msgstr "Το προεπιλεγμένο τμήμα δεν μπορεί να είναι ιδιωτικό"
+
+#: include/class.dept.php:252
+msgid "Unable to update "
+msgstr "Αδυναμία ενημέρωσης "
+
+#: include/class.dept.php:252
+msgid " Dept. Error occured"
+msgstr " Προέκυψε Σφάλμα για το Τμήμα"
+
+#: include/class.dept.php:258
+msgid "Unable to create department. Internal error"
+msgstr "Αδυναμία δημιουργίας Τμήματος. Εσωτερικό σφάλμα"
+
+#: include/class.pagenate.php:76
+msgid "Showing"
+msgstr "Εμφάνιση"
+
+#: setup/inc/install.inc.php:34
+msgid "System Language:"
+msgstr "Γλώσσα Συστήματος:"
+
+#: open.php:25
+msgid "Enter text shown on the image"
+msgstr "Εισάγετε το κείμενο που εμφανίζεται στην εικόνα"
+
+#: open.php:27
+msgid "Invalid - try again!"
+msgstr "Άκυρο - προσπαθήστε ξανά!"
+
+#: open.php:31
+msgid "Support ticket request created"
+msgstr "Ένα αίτημα για δελτίο υποστήριξης δημιουργήθηκε"
+
+#: open.php:37
+msgid "Unable to create a ticket. Please correct errors below and try again!"
+msgstr ""
+"Αδυναμία δημιουργίας δελτίου. Διορθώστε τα παρακάτω λάθη και δοκιμάστε ξανά!"
