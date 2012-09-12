@@ -44,4 +44,6 @@ define('DBPASS','%CONFIG-DBPASS');
 #Table prefix
 define('TABLE_PREFIX','%CONFIG-PREFIX');
 
+#Defines the language used for internationalization
+define('LANG','pt_BR');
 ?>
