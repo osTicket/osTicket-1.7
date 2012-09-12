@@ -199,4 +199,14 @@
         $_GET=Format::strip_slashes($_GET);
         $_REQUEST=Format::strip_slashes($_REQUEST);
     }
+
+    #Internationalization variables
+    putenv('LC_ALL=' . LANG);
+    setlocale(LC_ALL, LANG . '.UTF-8');
+    bindtextdomain('i18n', 'i18n');
+    bindtextdomain('i18n', '../i18n');
+
+    // Choose domain
+    textdomain("i18n");
+
 ?>
