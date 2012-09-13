@@ -267,23 +267,23 @@ class UserNav {
 
             $navs = array();
             $user = $this->user;
-            $navs['home']=array('desc'=>'Support&nbsp;Center&nbsp;Home','href'=>'index.php','title'=>'');
+            $navs['home']=array('desc'=>_('Support&nbsp;Center&nbsp;Home'),'href'=>'index.php','title'=>'');
             if($cfg && $cfg->isKnowledgebaseEnabled())
                 $navs['kb']=array('desc'=>'Knowledgebase','href'=>'kb/index.php','title'=>'');
 
-            $navs['new']=array('desc'=>'Open&nbsp;New&nbsp;Ticket','href'=>'open.php','title'=>'');
+            $navs['new']=array('desc'=>_('Open&nbsp;New&nbsp;Ticket'),'href'=>'open.php','title'=>'');
             if($user && $user->isValid()) {
                 if($cfg && $cfg->showRelatedTickets()) {
                     $navs['tickets']=array('desc'=>sprintf('My&nbsp;Tickets&nbsp;(%d)',$user->getNumTickets()),
                                            'href'=>'tickets.php',
-                                            'title'=>'Show all tickets');
+                                            'title'=>_('Show all tickets'));
                 } else {
                     $navs['tickets']=array('desc'=>'View&nbsp;Ticket&nbsp;Thread',
                                            'href'=>sprintf('tickets.php?id=%d',$user->getTicketID()),
                                            'title'=>'View ticket status');
                 }
             } else {
-                $navs['status']=array('desc'=>'Check Ticket Status','href'=>'view.php','title'=>'');
+                $navs['status']=array('desc'=>_('Check Ticket Status'),'href'=>'view.php','title'=>'');
             }
             $this->navs=$navs;
         }

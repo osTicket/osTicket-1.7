@@ -299,43 +299,43 @@ $negorder=$order=='DESC'?'ASC':'DESC'; //Negate the sorting..
             <?php } ?>
 	        <th width="70">
                 <a <?php echo $id_sort; ?> href="tickets.php?sort=ID&order=<?php echo $negorder; ?><?php echo $qstr; ?>" 
-                    title="Sort By Ticket ID <?php echo $negorder; ?>">Ticket</a></th>
+                    title="Sort By Ticket ID <?php echo $negorder; ?>"><?= _('Ticket') ?></a></th>
 	        <th width="70">
                 <a  <?php echo $date_sort; ?> href="tickets.php?sort=date&order=<?php echo $negorder; ?><?php echo $qstr; ?>" 
-                    title="Sort By Date <?php echo $negorder; ?>">Date</a></th>
+                    title="Sort By Date <?php echo $negorder; ?>"><?= _('Date') ?></a></th>
 	        <th width="280">
                  <a <?php echo $subj_sort; ?> href="tickets.php?sort=subj&order=<?php echo $negorder; ?><?php echo $qstr; ?>" 
-                    title="Sort By Subject <?php echo $negorder; ?>">Subject</a></th>
+                    title="Sort By Subject <?php echo $negorder; ?>"><?= _('Subject') ?></a></th>
             <th width="170">
                 <a <?php echo $name_sort; ?> href="tickets.php?sort=name&order=<?php echo $negorder; ?><?php echo $qstr; ?>"
-                     title="Sort By Name <?php echo $negorder; ?>">From</a></th>
+                     title="Sort By Name <?php echo $negorder; ?>"><?= _('From') ?></a></th>
             <?php
             if($search && !$status) { ?>
                 <th width="60">
                     <a <?php echo $status_sort; ?> href="tickets.php?sort=status&order=<?php echo $negorder; ?><?php echo $qstr; ?>"
-                        title="Sort By Status <?php echo $negorder; ?>">Status</a></th>
+                        title="Sort By Status <?php echo $negorder; ?>"><?= _('Status') ?></a></th>
             <?php
             } else { ?>
                 <th width="60" <?php echo $pri_sort;?>>
                     <a <?php echo $pri_sort; ?> href="tickets.php?sort=pri&order=<?php echo $negorder; ?><?php echo $qstr; ?>" 
-                        title="Sort By Priority <?php echo $negorder; ?>">Priority</a></th>
+                        title="Sort By Priority <?php echo $negorder; ?>"><?= _('Priority') ?></a></th>
             <?php
             }
 
             if($showassigned){ ?>
             <th width="150">
                 <a <?php echo $assignee_sort; ?> href="tickets.php?sort=assignee&order=<?php echo $negorder; ?><?php echo $qstr; ?>" 
-                    title="Sort By Assignee <?php echo $negorder;?>">Assigned To</a></th>
+                    title="Sort By Assignee <?php echo $negorder;?>"><?= _('Assigned To') ?></a></th>
             <?php 
             } elseif(!strcasecmp($status,'closed')) { ?>
             <th width="150">
                 <a <?php echo $staff_sort; ?> href="tickets.php?sort=staff&order=<?php echo $negorder; ?><?php echo $qstr; ?>" 
-                    title="Sort By Closing Staff Name <?php echo $negorder; ?>">Closed By</a></th>
+                    title="Sort By Closing Staff Name <?php echo $negorder; ?>"><?= _('Closed By') ?></a></th>
             <?php 
             } else { ?>
             <th width="150">
                 <a <?php echo $dept_sort; ?> href="tickets.php?sort=dept&order=<?php echo $negorder;?><?php echo $qstr; ?>" 
-                    title="Sort By Department <?php echo $negorder; ?>">Department</a></th>
+                    title="Sort By Department <?php echo $negorder; ?>"><?= _('Department') ?></a></th>
             <?php
             } ?>
         </tr>
