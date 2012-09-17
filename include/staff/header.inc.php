@@ -19,7 +19,7 @@
     <script type="text/javascript" src="./js/scp.js"></script>
     <link rel="stylesheet" href="./css/scp.css" media="screen">
     <link rel="stylesheet" href="./css/typeahead.css" media="screen">
-    <link type="text/css" href="../css/ui-lightness/jquery-ui-1.8.18.custom.css" rel="stylesheet" />   
+    <link type="text/css" href="../css/ui-lightness/jquery-ui-1.8.18.custom.css" rel="stylesheet" />
     <?php
     if($ost && ($headers=$ost->getExtraHeaders())) {
         echo "\n\t".implode("\n\t", $headers)."\n";
@@ -28,6 +28,9 @@
 </head>
 <body onunload="">
 <div id="container">
+    <div id="notice_bar">This is a sample notice bar.</div>
+    <div id="warning_bar">This is a sample warning bar.</div>
+    <div id="error_bar">This is a sample error bar.</div>
     <div id="header">
         <a href="index.php" id="logo">osTicket - Customer Support System</a>
         <p id="info">Howdy, <strong><?php echo $thisstaff->getUserName(); ?></strong>
@@ -37,7 +40,7 @@
             <?php }else{ ?>
             | <a href="index.php">Staff Panel</a>
             <?php } ?>
-            | <a href="profile.php">My Preferences</a> 
+            | <a href="profile.php">My Preferences</a>
             | <a href="logout.php?auth=<?php echo md5($ost->getCSRFToken().SECRET_SALT.session_id()); ?>">Log Out</a>
         </p>
     </div>
@@ -67,8 +70,8 @@
             foreach($subnav as $k=> $item) {
                 if($item['droponly']) continue;
                 $class=$item['iconclass'];
-                if ($activeMenu && $k+1==$activeMenu 
-                        or (!$activeMenu 
+                if ($activeMenu && $k+1==$activeMenu
+                        or (!$activeMenu
                             && (strpos(strtoupper($item['href']),strtoupper(basename($_SERVER['SCRIPT_NAME']))) !== false
                                 or ($item['urls']
                                     && in_array(basename($_SERVER['SCRIPT_NAME']),$item['urls'])
