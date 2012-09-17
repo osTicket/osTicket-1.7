@@ -13,14 +13,14 @@
 
     vim: expandtab sw=4 ts=4 sts=4:
 **********************************************************************/
-if(basename($_SERVER['SCRIPT_NAME'])==basename(__FILE__)) die('Access denied'); //Say hi to our friend..
+if(basename($_SERVER['SCRIPT_NAME'])==basename(__FILE__)) die(_('Access denied')); //Say hi to our friend..
 
-if(!file_exists('../main.inc.php')) die('Fatal error... get technical support');
+if(!file_exists('../main.inc.php')) die(_('Fatal error... get technical support'));
 
 define('ROOT_PATH','../'); //Path to the root dir.
 require_once('../main.inc.php');
 
-if(!defined('INCLUDE_DIR')) die('Fatal error... invalid setting.');
+if(!defined('INCLUDE_DIR')) die(_('Fatal error... invalid setting.'));
 
 /*Some more include defines specific to staff only */
 define('STAFFINC_DIR',INCLUDE_DIR.'staff/');
@@ -59,7 +59,7 @@ if(!function_exists('staffLoginPage')) { //Ajax interface can pre-declare the fu
 $thisstaff = new StaffSession($_SESSION['_staff']['userID']); //Set staff object.
 //1) is the user Logged in for real && is staff.
 if(!$thisstaff || !is_object($thisstaff) || !$thisstaff->getId() || !$thisstaff->isValid()){
-    $msg=(!$thisstaff || !$thisstaff->isValid())?'Authentication Required':'Session timed out due to inactivity';
+    $msg=(!$thisstaff || !$thisstaff->isValid())?_('Authentication Required'):_('Session timed out due to inactivity');
     staffLoginPage($msg);
     exit;
 }
@@ -67,13 +67,13 @@ if(!$thisstaff || !is_object($thisstaff) || !$thisstaff->getId() || !$thisstaff-
 if(!$thisstaff->isAdmin()) {
     //Check for disabled staff or group!
     if(!$thisstaff->isactive() || !$thisstaff->isGroupActive()) {
-        staffLoginPage('Access Denied. Contact Admin');
+        staffLoginPage(_('Access Denied. Contact Admin'));
         exit;
     }
 
     //Staff are not allowed to login in offline mode!!
     if(!$ost->isSystemOnline() || $ost->isUpgradePending()) {
-        staffLoginPage('System Offline');
+        staffLoginPage(_('System Offline'));
         exit;
     }
 }
@@ -106,12 +106,12 @@ $submenu=array();
 $exempt = in_array(basename($_SERVER['SCRIPT_NAME']), array('logout.php', 'ajax.php', 'logs.php', 'upgrade.php'));
 
 if($ost->isUpgradePending() && !$exempt) {
-    $errors['err']=$sysnotice='System upgrade is pending <a href="upgrade.php">Upgrade Now</a>';
+    $errors['err']=$sysnotice=_('System upgrade is pending').' <a href="upgrade.php">'._('Upgrade Now').'</a>';
     require('upgrade.php');
     exit;
 } elseif($cfg->isHelpDeskOffline()) {
-    $sysnotice='<strong>System is set to offline mode</strong> - Client interface is disabled and ONLY admins can access staff control panel.';
-    $sysnotice.=' <a href="settings.php">Enable</a>.';
+    $sysnotice='<strong>'._('System is set to offline mode').'</strong> - '._('Client interface is disabled and ONLY admins can access staff control panel.');
+    $sysnotice.=' <a href="settings.php">'._('Enable').'</a>.';
 }
 
 $nav = new StaffNav($thisstaff);

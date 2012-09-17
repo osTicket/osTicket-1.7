@@ -18,7 +18,7 @@ $ticketid=Format::input($_POST['lticket']?$_POST['lticket']:$_GET['t']);
         <input id="ticketno" type="text" name="lticket" size="16" value="<?php echo $ticketid; ?>"></td>
     </div>
     <p>
-        <input class="btn" type="submit" value="View Status">
+        <input class="btn" type="submit" value="<?= _('View Status')?>">
     </p>
 </form>
 <br>

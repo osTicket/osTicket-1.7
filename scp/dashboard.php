@@ -28,25 +28,25 @@ require(STAFFINC_DIR.'header.inc.php');
 <link rel="stylesheet" type="text/css" href="css/bootstrap.css"/>
 <link rel="stylesheet" type="text/css" href="css/dashboard.css"/>
 
-<h2>Ticket Activity</h2>
-<p>Select the starting time and period for the system activity graph</p>
+<h2><?= _('Ticket Activity')?></h2>
+<p><?= _('Select the starting time and period for the system activity graph')?></p>
 <form class="well form-inline" id="timeframe-form">
     <label>
-        Report timeframe:
+        <?= _('Report timeframe')?>:
         <input type="text" class="dp input-medium search-query"
-            name="start" placeholder="Last month"/>
+            name="start" placeholder="<?= _('Last month')?>"/>
     </label>
     <label>
-        period:
+        <?= _('period')?>:
         <select name="period">
-            <option value="now" selected="selected">Up to today</option>
-            <option value="+7 days">One Week</option>
-            <option value="+14 days">Two Weeks</option>
-            <option value="+1 month">One Month</option>
-            <option value="+3 months">One Quarter</option>
+            <option value="now" selected="selected"><?= _('Up to today')?></option>
+            <option value="+7 days"><?= _('One Week')?></option>
+            <option value="+14 days"><?= _('Two Weeks')?></option>
+            <option value="+1 month"><?= _('One Month')?></option>
+            <option value="+3 months"><?= _('One Quarter')?></option>
         </select>
     </label>
-    <button class="btn" type="submit">Refresh</button>
+    <button class="btn" type="submit"><?= _('Refresh')?></button>
 </form>
 
 <!-- Create a graph and fetch some data to create pretty dashboard -->
@@ -56,9 +56,9 @@ require(STAFFINC_DIR.'header.inc.php');
 </div>
 
 <hr/>
-<h2>Statistics</h2>
-<p>Statistics of tickets organized by department, help topic, and staff
-member.</p>
+<h2><?= _('Statistics')?></h2>
+<p><?= _('Statistics of tickets organized by department, help topic, and staff
+member.')?></p>
 <ul class="nav nav-tabs" id="tabular-navigation"></ul>
 
 <div id="table-here"></div>

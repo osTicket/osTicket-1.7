@@ -20,11 +20,11 @@ require_once(INCLUDE_DIR.'class.attachment.php');
 if(!$thisstaff || !$_GET['id'] || !$_GET['h'] 
         || !($attachment=Attachment::lookup($_GET['id'])) 
         || !($file=$attachment->getFile()))
-    die('Unknown attachment!');
+    die(_('Unknown attachment!'));
 
 //Validate session access hash - we want to make sure the link is FRESH! and the user has access to the parent ticket!!
 $vhash=md5($attachment->getFileId().session_id().$file->getHash());
-if(strcasecmp(trim($_GET['h']),$vhash) || !($ticket=$attachment->getTicket()) || !$ticket->checkStaffAccess($thisstaff)) die('Access Denied');
+if(strcasecmp(trim($_GET['h']),$vhash) || !($ticket=$attachment->getTicket()) || !$ticket->checkStaffAccess($thisstaff)) die(_('Access Denied'));
 
 //Download the file..
 $file->download();

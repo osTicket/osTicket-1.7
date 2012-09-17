@@ -18,16 +18,16 @@
 </head>
 <body id="loginBody">
 <div id="loginBox">
-    <h1 id="logo"><a href="index.php">osTicket Staff Control Panel</a></h1>
+    <h1 id="logo"><a href="index.php"><?= _('osTicket Staff Control Panel')?></a></h1>
     <h3><?php echo Format::htmlchars($msg); ?></h3>
     <form action="login.php" method="post">
         <?php csrf_token(); ?>
         <input type="hidden" name="d"o value="scplogin">
         <fieldset>
-            <input type="text" name="username" id="name" value="" placeholder="username" autocorrect="off" autocapitalize="off">
-            <input type="password" name="passwd" id="pass" placeholder="password" autocorrect="off" autocapitalize="off">
+            <input type="text" name="username" id="name" value="" placeholder="<?= _('username')?>" autocorrect="off" autocapitalize="off">
+            <input type="password" name="passwd" id="pass" placeholder="<?= _('password')?>" autocorrect="off" autocapitalize="off">
         </fieldset>
-        <input class="submit" type="submit" name="submit" value="Log In">
+        <input class="submit" type="submit" name="submit" value="<?= _('Log In')?>">
     </form>
 </div>
 <div id="copyRights">Copyright &copy; <a href='http://www.osticket.com' target="_blank">osTicket.com</a></div>

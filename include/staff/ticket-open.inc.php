@@ -7,20 +7,20 @@ $info=Format::htmlchars(($errors && $_POST)?$_POST:$info);
  <?php csrf_token(); ?>
  <input type="hidden" name="do" value="create">
  <input type="hidden" name="a" value="open">
- <h2>Open New Ticket</h2>
+ <h2><?= _('Open New Ticket') ?></h2>
  <table class="form_table" width="940" border="0" cellspacing="0" cellpadding="2">
     <thead>
         <tr>
             <th colspan="2">
-                <h4>New Ticket</h4>
-                <em><strong>User Information</strong></em>
+                <h4><?= _('New Ticket') ?></h4>
+                <em><strong><?= _('User Information') ?></strong></em>
             </th>
         </tr>
     </thead>
     <tbody>
         <tr>
             <td width="160" class="required">
-                Email Address:
+                <?= _('Email Address') ?>:
             </td>
             <td>
 
@@ -30,14 +30,14 @@ $info=Format::htmlchars(($errors && $_POST)?$_POST:$info);
             <?php 
             if($cfg->notifyONNewStaffTicket()) { ?>
                &nbsp;&nbsp;&nbsp;
-               <input type="checkbox" name="alertuser" <?php echo (!$errors || $info['alertuser'])? 'checked="checked"': ''; ?>>Send alert to user.
+               <input type="checkbox" name="alertuser" <?php echo (!$errors || $info['alertuser'])? 'checked="checked"': ''; ?>><?= _('Send alert to user.') ?>
             <?php 
              } ?>
             </td>
         </tr>
         <tr>
             <td width="160" class="required">
-                Full Name:
+                <?= _('Full Name:') ?>
             </td>
             <td>
                 <input type="text" size="45" name="name" id="name" value="<?php echo $info['name']; ?>">
@@ -46,41 +46,41 @@ $info=Format::htmlchars(($errors && $_POST)?$_POST:$info);
         </tr>
         <tr>
             <td width="160">
-                Phone Number:
+                <?= _('Phone Number:') ?>
             </td>
             <td>
                 <input type="text" size="18" name="phone" id="phone" value="<?php echo $info['phone']; ?>">
                 &nbsp;<span class="error">&nbsp;<?php echo $errors['phone']; ?></span>
-                Ext <input type="text" size="5" name="phone_ext" id="phone_ext" value="<?php echo $info['phone_ext']; ?>">
+                <?= _('Ext') ?><input type="text" size="5" name="phone_ext" id="phone_ext" value="<?php echo $info['phone_ext']; ?>">
                 &nbsp;<span class="error">&nbsp;<?php echo $errors['phone_ext']; ?></span>
             </td>
         </tr>
         <tr>
             <th colspan="2">
-                <em><strong>Ticket Information</strong>:</em>
+                <em><strong><?= _('Ticket Information') ?></strong>:</em>
             </th>
         </tr>
         <tr>
             <td width="160" class="required">
-                Ticket Source:
+                <?= _('Ticket Source:') ?>
             </td>
             <td>
                 <select name="source">
-                    <option value="" selected >&mdash; Select Source &mdash;</option>
-                    <option value="Phone" <?php echo ($info['source']=='Phone')?'selected="selected"':''; ?>>Phone</option>
-                    <option value="Email" <?php echo ($info['source']=='Email')?'selected="selected"':''; ?>>Email</option>
-                    <option value="Other" <?php echo ($info['source']=='Other')?'selected="selected"':''; ?>>Other</option>
+                    <option value="" selected >&mdash; <?= _('Select Source')?> &mdash;</option>
+                    <option value="Phone" <?php echo ($info['source']=='Phone')?'selected="selected"':''; ?>><?= _('Phone') ?></option>
+                    <option value="Email" <?php echo ($info['source']=='Email')?'selected="selected"':''; ?>><?= _('Email') ?></option>
+                    <option value="Other" <?php echo ($info['source']=='Other')?'selected="selected"':''; ?>><?= _('Other') ?></option>
                 </select>
                 &nbsp;<font class="error"><b>*</b>&nbsp;<?php echo $errors['source']; ?></font>
             </td>
         </tr>
         <tr>
             <td width="160" class="required">
-                Department:
+                <?= _('Department:') ?>
             </td>
             <td>
                 <select name="deptId">
-                    <option value="" selected >&mdash; Select Department &mdash;</option>
+                    <option value="" selected >&mdash; <?= _('Select Department') ?> &mdash;</option>
                     <?php
                     if($depts=Dept::getDepartments()) {
                         foreach($depts as $id =>$name) {
@@ -96,11 +96,11 @@ $info=Format::htmlchars(($errors && $_POST)?$_POST:$info);
 
         <tr>
             <td width="160" class="required">
-                Help Topic:
+                <?= _('Help Topic:') ?>
             </td>
             <td>
                 <select name="topicId">
-                    <option value="" selected >&mdash; Select Help Topic &mdash;</option>
+                    <option value="" selected >&mdash; <?= _('Select Help Topic') ?> &mdash;</option>
                     <?php
                     if($topics=Topic::getHelpTopics()) {
                         foreach($topics as $id =>$name) {
@@ -115,7 +115,7 @@ $info=Format::htmlchars(($errors && $_POST)?$_POST:$info);
         </tr>
         <tr>
             <td width="160" class="required">
-                Subject:
+                <?= _('Subject:') ?>
             </td>
             <td>
                  <input type="text" name="subject" size="55" value="<?php echo $info['subject']; ?>">
@@ -124,18 +124,18 @@ $info=Format::htmlchars(($errors && $_POST)?$_POST:$info);
         </tr>
         <tr>
             <th colspan="2">
-                <em><strong>Issue summary</strong>: Detailed summary of the reason(s) of opening the ticket. <font class="error">*&nbsp;<?php echo $errors['issue']; ?></font></em>
+                <em><strong><?= _('Issue summary') ?></strong>: <?= _('Detailed summary of the reason(s) of opening the ticket.') ?> <font class="error">*&nbsp;<?php echo $errors['issue']; ?></font></em>
             </th>
         </tr>
         <tr>
             <td colspan=2>
                 <textarea name="issue" cols="21" rows="8" style="width:80%;"><?php echo $info['issue']; ?></textarea>
-                <br><em>The user will be able to see the summary and any associated responses.</em>
+                <br><em><?= _('The user will be able to see the summary and any associated responses.')?></em>
             </td>
         </tr>
         <tr>
             <th colspan="2">
-                <em><strong>Response</strong>: Optional response to the above issue.</em>
+                <em><strong><?= _('Response') ?></strong>: <?= _('Optional response to the above issue.') ?></em>
             </th>
         </tr>
         <tr>
@@ -146,7 +146,7 @@ $info=Format::htmlchars(($errors && $_POST)?$_POST:$info);
                 <div>
                     Canned Response:&nbsp;
                     <select id="cannedResp" name="cannedResp">
-                        <option value="0" selected="selected">&mdash; Select a canned response &mdash;</option>
+                        <option value="0" selected="selected">&mdash; <?= _('Select a canned response') ?> &mdash;</option>
                         <?php
                         foreach($cannedResponses as $id =>$title) {
                             echo sprintf('<option value="%d">%s</option>',$id,$title);
@@ -154,14 +154,14 @@ $info=Format::htmlchars(($errors && $_POST)?$_POST:$info);
                         ?>
                     </select>
                     &nbsp;&nbsp;&nbsp;
-                    <label><input type='checkbox' value='1' name="append" id="append" checked="checked">Append</label>
+                    <label><input type='checkbox' value='1' name="append" id="append" checked="checked"><?= _('Append') ?></label>
                 </div>
             <?php
             } ?>
                 <textarea name="response" id="response" cols="21" rows="8" style="width:80%;"><?php echo $info['response']; ?></textarea>
             <?php
             if($cfg->allowAttachments()) { ?>
-                <br><em><b>Attachments:</b> Response required when files are attached.</em>
+                <br><em><b><?= _('Attachments:') ?></b> <?= _('Response required when files are attached.') ?></em>
                 <div class="canned_attachments">
                     <?php
                     if($info['cannedattachments']) {
@@ -186,7 +186,7 @@ $info=Format::htmlchars(($errors && $_POST)?$_POST:$info);
 
         <tr>
             <th colspan="2">
-                <em><strong>Internal Note</strong>: Optional internal note (recommended on assignment) <font class="error">&nbsp;<?php echo $errors['note']; ?></font></em>
+                <em><strong><?= _('Internal Note') ?></strong>: <?= _('Optional internal note (recommended on assignment)')?> <font class="error">&nbsp;<?php echo $errors['note']; ?></font></em>
             </th>
         </tr>
         <tr>
@@ -196,12 +196,12 @@ $info=Format::htmlchars(($errors && $_POST)?$_POST:$info);
         </tr>
         <tr>
             <th colspan="2">
-                <em><strong>Ticket Options</strong>: Due date, when set, overwrites SLA grace period.</em>
+                <em><strong><?= _('Ticket Options') ?></strong>: <?= _('Due date, when set, overwrites SLA grace period.') ?></em>
             </th>
         </tr>
         <tr>
             <td width="160">
-                Due Date:
+                <?= _('Due Date:') ?>
             </td>
             <td>
                 <input class="dp" id="duedate" name="duedate" value="<?php echo Format::htmlchars($info['duedate']); ?>" size="12" autocomplete=OFF>
@@ -214,16 +214,16 @@ $info=Format::htmlchars(($errors && $_POST)?$_POST:$info);
                 echo Misc::timeDropdown($hr, $min, 'time');
                 ?>
                 &nbsp;<font class="error">&nbsp;<?php echo $errors['duedate']; ?> &nbsp; <?php echo $errors['time']; ?></font>
-                <em>Time is based on your time zone (GMT <?php echo $thisstaff->getTZoffset(); ?>)</em>
+                <em><?= _('Time is based on your time zone')?> (GMT' <?php echo $thisstaff->getTZoffset(); ?>)</em>
             </td>
         </tr>
         <tr>
             <td width="160">
-                Priority:
+                <?= _('Priority:') ?>
             </td>
             <td>
                 <select name="priorityId">
-                    <option value="0" selected >&mdash; System Default &mdash;</option>
+                    <option value="0" selected >&mdash; <?= _('System Default') ?> &mdash;</option>
                     <?php
                     if($priorities=Priority::getPriorities()) {
                         foreach($priorities as $id =>$name) {
@@ -239,13 +239,13 @@ $info=Format::htmlchars(($errors && $_POST)?$_POST:$info);
         <?php
         if($thisstaff->canAssignTickets()) { ?>
         <tr>
-            <td width="160">Assign To:</td>
+            <td width="160"><?= _('Assign To:') ?></td>
             <td>
                 <select id="assignId" name="assignId">
-                    <option value="0" selected="selected">&mdash; Select Staff Member OR a Team &mdash;</option>
+                    <option value="0" selected="selected">&mdash; <?= _('Select Staff Member OR a Team') ?> &mdash;</option>
                     <?php
                     if(($users=Staff::getAvailableStaffMembers())) {
-                        echo '<OPTGROUP label="Staff Members ('.count($users).')">';
+                        echo '<OPTGROUP label="'._('Staff Members').' ('.count($users).')">';
                         foreach($users as $id => $name) {
                             $k="s$id";
                             echo sprintf('<option value="%s" %s>%s</option>',
@@ -274,31 +274,31 @@ $info=Format::htmlchars(($errors && $_POST)?$_POST:$info);
         if($thisstaff->canCloseTickets()) { ?>
         <tr>
             <td width="160">
-                Ticket Status:
+                <?= _('Ticket Status:') ?>
             </td>
             <td>
                 <input type="checkbox" name="ticket_state" value="closed" <?php echo $info['ticket_state']?'checked="checked"':''; ?>>
-                <b>Close On Response</b>&nbsp;<em>(Only applicable if response is entered)</em>
+                <b><?= _('Close On Response') ?></b>&nbsp;<em><?= _('(Only applicable if response is entered)') ?></em>
             </td>
         </tr>
         <?php
         } ?>
         <tr>
-            <td>Signature:</td>
+            <td><?= _('Signature:') ?></td>
             <td>
                 <?php
                 $info['signature']=$info['signature']?$info['signature']:$thisstaff->getDefaultSignatureType();
                 ?>
-                <label><input type="radio" name="signature" value="none" checked="checked"> None</label>
+                <label><input type="radio" name="signature" value="none" checked="checked"> <?= _('None') ?></label>
                 <?php
                 if($thisstaff->getSignature()) { ?>
                     <label><input type="radio" name="signature" value="mine"
-                        <?php echo ($info['signature']=='mine')?'checked="checked"':''; ?>> My signature</label>
+                        <?php echo ($info['signature']=='mine')?'checked="checked"':''; ?>> <?= _('My signature') ?></label>
                 <?php
                 } ?>
                 <label><input type="radio" name="signature" value="dept"
                     <?php echo ($info['signature']=='dept')?'checked="checked"':''; ?>>
-                    Dept. Signature (if set)</label>
+                    <?= _('Dept. Signature (if set)')?></label>
                 <span style="padding-left:25px;">
             </td>
         </tr>

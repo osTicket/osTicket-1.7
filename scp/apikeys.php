@@ -24,24 +24,24 @@ if($_POST){
     switch(strtolower($_POST['do'])){
         case 'update':
             if(!$api){
-                $errors['err']='Unknown or invalid API key.';
+                $errors['err']=_('Unknown or invalid API key.');
             }elseif($api->update($_POST,$errors)){
-                $msg='API key updated successfully';
+                $msg=_('API key updated successfully');
             }elseif(!$errors['err']){
-                $errors['err']='Error updating API key. Try again!';
+                $errors['err']=_('Error updating API key. Try again!');
             }
             break;
         case 'add':
             if(($id=API::add($_POST,$errors))){
-                $msg='API key added successfully';
+                $msg=_('API key added successfully');
                 $_REQUEST['a']=null;
             }elseif(!$errors['err']){
-                $errors['err']='Unable to add an API key. Correct error(s) below and try again.';
+                $errors['err']=_('Unable to add an API key. Correct error(s) below and try again.');
             }
             break;
         case 'mass_process':
             if(!$_POST['ids'] || !is_array($_POST['ids']) || !count($_POST['ids'])) {
-                $errors['err']='You must select at least one API key';
+                $errors['err']=_('You must select at least one API key');
             }else{
                 $count=count($_POST['ids']);
                 if($_POST['enable']){
@@ -49,22 +49,22 @@ if($_POST){
                         implode(',', db_input($_POST['ids'])).')';
                     if(db_query($sql) && ($num=db_affected_rows())){
                         if($num==$count)
-                            $msg='Selected API keys enabled';
+                            $msg=_('Selected API keys enabled');
                         else
-                            $warn="$num of $count selected API keys enabled";
+                            $warn="$num "._('of'). " $count " . _('selected API keys enabled');
                     }else{
-                        $errors['err']='Unable to enable selected API keys.';
+                        $errors['err']=_('Unable to enable selected API keys.');
                     }
                 }elseif($_POST['disable']){
                     $sql='UPDATE '.API_KEY_TABLE.' SET isactive=0  WHERE id IN ('.
                         implode(',', db_input($_POST['ids'])).')';
                     if(db_query($sql) && ($num=db_affected_rows())) {
                         if($num==$count)
-                            $msg='Selected API keys disabled';
+                            $msg=_('Selected API keys disabled');
                         else
-                            $warn="$num of $count selected API keys disabled";
+                            $warn="$num "._('of')." $count "._("selected API keys disabled");
                     }else{
-                        $errors['err']='Unable to disable selected API keys';
+                        $errors['err']=_('Unable to disable selected API keys');
                     }
 
                 }elseif($_POST['delete']){
@@ -75,19 +75,19 @@ if($_POST){
                     }
 
                     if($i && $i==$count)
-                        $msg='Selected API keys deleted successfully';
+                        $msg=_('Selected API keys deleted successfully');
                     elseif($i>0)
-                        $warn="$i of $count selected API keys deleted";
+                        $warn="$i "._("of")." $count "._("selected API keys deleted");
                     elseif(!$errors['err'])
-                        $errors['err']='Unable to delete selected API keys';
+                        $errors['err']=_('Unable to delete selected API keys');
                     
                 }else {
-                    $errors['err']='Unknown action';
+                    $errors['err']=_('Unknown action');
                 }
             }
             break;
         default:
-            $errors['err']='Unknown action';
+            $errors['err']=_('Unknown action');
             break;
     }
 }

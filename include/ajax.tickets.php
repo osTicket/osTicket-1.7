@@ -280,7 +280,7 @@ class TicketsAjaxAPI extends AjaxController {
 
         echo '<table border="0" cellspacing="" cellpadding="1" width="100%" class="ticket_info">';
 
-        $ticket_state=sprintf('<span>%s</span>',ucfirst($ticket->getStatus()));
+        $ticket_state=sprintf('<span>%s</span>',_(ucfirst($ticket->getStatus())));
         if($ticket->isOpen()) {
             if($ticket->isOverdue())
                 $ticket_state.=' &mdash; <span>Overdue</span>';

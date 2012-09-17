@@ -72,13 +72,13 @@
         $configfile=INCLUDE_DIR.'settings.php';
         //Die gracefully on upgraded v1.6 RC5 installation - otherwise script dies with confusing message. 
         if(!strcasecmp(basename($_SERVER['SCRIPT_NAME']), 'settings.php'))
-            die('Please rename config file include/settings.php to include/ost-config.php to continue!');
+            die(_('Please rename config file include/settings.php to include/ost-config.php to continue!'));
     } elseif(file_exists(INCLUDE_DIR.'ost-config.php')) //NEW config file v 1.6 stable ++
         $configfile=INCLUDE_DIR.'ost-config.php';
     elseif(file_exists(ROOT_DIR.'setup/'))
         header('Location: '.ROOT_PATH.'setup/');
 
-    if(!$configfile || !file_exists($configfile)) die('<b>Error loading settings. Contact admin.</b>');
+    if(!$configfile || !file_exists($configfile)) die('<b>'._('Error loading settings. Contact admin.').'</b>');
 
     require($configfile);
     define('CONFIG_FILE',$configfile); //used in admin.php to check perm.
@@ -172,17 +172,17 @@
     #Connect to the DB && get configuration from database
     $ferror=null;
     if (!db_connect(DBHOST,DBUSER,DBPASS) || !db_select_database(DBNAME)) {
-        $ferror='Unable to connect to the database';
+        $ferror=_('Unable to connect to the database');
     } elseif(!($ost=osTicket::start(1)) || !($cfg = $ost->getConfig())) {
-        $ferror='Unable to load config info from DB. Get tech support.';
+        $ferror=_('Unable to load config info from DB. Get tech support.');
     }
 
     if($ferror) { //Fatal error
         //try alerting admin using email in config file
         $msg=$ferror."\n\n".THISPAGE;
-        Mailer::sendmail(ADMIN_EMAIL, 'osTicket Fatal Error', $msg, sprintf('"osTicket Alerts"<%s>', ADMIN_EMAIL));
+        Mailer::sendmail(ADMIN_EMAIL, _('osTicket Fatal Error'), $msg, sprintf('"osTicket Alerts"<%s>', ADMIN_EMAIL));
         //Display generic error to the user
-        die("<b>Fatal Error:</b> Contact system administrator.");
+        die(_("<b>Fatal Error:</b> Contact system administrator."));
         exit;
     }
     

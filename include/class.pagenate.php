@@ -72,9 +72,9 @@ class PageNate {
         } else {
             $to= $this->total;
         }
-        $html="&nbsp;Showing&nbsp;&nbsp;";
+        $html="&nbsp;"._("Showing")."&nbsp;&nbsp;";
         if ($this->total > 0) {
-            $html .= "$from - $to of " .$this->total;
+            $html .= "$from - $to "._('of')." ".$this->total;
         }else{
             $html .= " 0 ";
         }
