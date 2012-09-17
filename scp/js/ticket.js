@@ -14,7 +14,7 @@
     vim: expandtab sw=4 ts=4 sts=4:
 **********************************************************************/
 var autoLock = {
-    
+
     addEvent: function(elm, evType, fn, useCapture) {
         if(elm.addEventListener) {
             elm.addEventListener(evType, fn, useCapture);
@@ -72,7 +72,7 @@ var autoLock = {
                     break;
                 case 'select-one':
                 case 'select-multiple':
-                    if(fObj.name!='reply') //Bug on double ajax call since select make it's own ajax call. TODO: fix it 
+                    if(fObj.name!='reply') //Bug on double ajax call since select make it's own ajax call. TODO: fix it
                         autoLock.addEvent(fObj[i],'change',autoLock.handleEvent,true);
                     break;
                 default:
@@ -119,7 +119,7 @@ var autoLock = {
         autoLock.resetTimer();
         autoLock.addEvent(window,'unload',autoLock.releaseLock,true); //Release lock regardless of any activity.
     },
-          
+
 
     onSubmit: function(e) {
         if(e.type=='submit') { //Submit. double check!
@@ -141,8 +141,8 @@ var autoLock = {
         }
         return true;
     },
-    
-    acquireLock: function(e,warn) {      
+
+    acquireLock: function(e,warn) {
 
         if(!autoLock.tid) { return false; }
 
@@ -163,16 +163,16 @@ var autoLock = {
             .done(function() { })
             .fail(function() { });
         }
-   
+
         return autoLock.lockId;
     },
 
-    //Renewal only happens on form activity.. 
+    //Renewal only happens on form activity..
     renewLock: function(e) {
-        
+
         if(!autoLock.lockId) { return false; }
-        
-        var now= new Date().getTime(); 
+
+        var now= new Date().getTime();
         if(!autoLock.lastcheckTime || (now-autoLock.lastcheckTime)>=(autoLock.renewFreq*1000)){
             $.ajax({
                 type: 'POST',
@@ -186,8 +186,8 @@ var autoLock = {
             .done(function() {  })
             .fail(function() { });
         }
-    }, 
-     
+    },
+
     releaseLock: function(e) {
         if(!autoLock.tid) { return false; }
 
@@ -197,7 +197,7 @@ var autoLock = {
             data: 'delete',
             cache: false,
             success: function(){
-               
+
             }
         })
         .done(function() { })
@@ -206,7 +206,7 @@ var autoLock = {
 
     setLock: function(lock, action, warn) {
         var warn = warn || false;
-            
+
         if(!lock) return false;
 
         if(lock.id) {
@@ -214,7 +214,7 @@ var autoLock = {
             autoLock.lastcheckTime=new Date().getTime();
         }
         autoLock.lockId=lock.id; //overwrite the lockid.
-        
+
         switch(action){
             case 'renew':
                 if(!lock.id && lock.retry) {
@@ -227,18 +227,18 @@ var autoLock = {
                     autoLock.lockAttempts++;
                     if(warn && (!lock.retry || autoLock.lockAttempts>=autoLock.maxattempts)) {
                         autoLock.retry=false;
-                        alert('Unable to lock the ticket. Someone else could be working on the same ticket.'); 
+                        alert('Unable to lock the ticket. Someone else could be working on the same ticket.');
                     }
-                }   
+                }
                 break;
         }
     },
-    
+
     discardWarning: function(e) {
         e.returnValue="Any changes or info you've entered will be discarded!";
     },
 
-    //TODO: Monitor events and elapsed time and warn user when the lock is about to expire. 
+    //TODO: Monitor events and elapsed time and warn user when the lock is about to expire.
     monitorEvents: function() {
        // warn user when lock is about to expire??;
         //autoLock.resetTimer();
@@ -247,7 +247,7 @@ var autoLock = {
     clearTimer: function() {
         clearTimeout(autoLock.timerId);
     },
-    
+
     resetTimer: function() {
         clearTimeout(autoLock.timerId);
         autoLock.timerId=setTimeout(function () { autoLock.monitorEvents() },30000);
@@ -278,7 +278,7 @@ jQuery(function($) {
     }
 
     $('#reply_tab').click(function() {
-       $(this).removeClass('tell'); 
+       $(this).removeClass('tell');
      });
 
     $('#note_tab').click(function() {
@@ -316,23 +316,31 @@ jQuery(function($) {
             }
         }
      });
-    
+
     //Ticket print options
-    $("#print-options").css({
+    $(".dialog").css({
         top  : ($(window).height() /5),
         left : ($(window).width() / 2 - 300)
     });
 
-    $('a#ticket-print').click(function(e) {
-        e.preventDefault();
-        $('#overlay').show();
-        $('#print-options').show();
-        return false;
+    $('#ticket-quick-actions').change(function(e) {
+        if($(this).find(':selected').data('dialog')=="") {
+            window.location = $(this).val();
+        } else {
+            $('#overlay').show();
+            $('#' + $(this).find(':selected').data('dialog')).show();
+        }
     });
 
-    $('#print-options').delegate('a.close, input.close', 'click', function(e) {
+    $('.dialog').delegate('a.close', 'click', function(e) {
         e.preventDefault();
-        $('#print-options').hide()
+        $(this).parent().hide();
+        $('#overlay').hide();
+    });
+
+    $('.dialog').delegate('input.close', 'click', function(e) {
+        e.preventDefault();
+        $(this).parent().parent().parent().parent().hide();
         $('#overlay').hide();
     });
 

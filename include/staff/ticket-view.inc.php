@@ -36,19 +36,42 @@ if($ticket->isOverdue())
     $warn.='&nbsp;&nbsp;<span class="Icon overdueTicket">Marked overdue!</span>';
 
 ?>
-<table width="910" cellpadding="2" cellspacing="0" border="0">
+<table width="940" cellpadding="2" cellspacing="0" border="0">
     <tr>
         <td width="50%">
-             <h2>Ticket #<?php echo $ticket->getExtId(); ?>
-                <a href="tickets.php?id=<?php echo $ticket->getId(); ?>" title="Reload" class="reload">Reload</a></h2>
+            <h2><a href="tickets.php?id=<?php echo $ticket->getId(); ?>" title="Ticket #<?php echo $ticket->getExtId(); ?>">Ticket #<?php echo $ticket->getExtId(); ?></a>
+            <a href="tickets.php?id=<?php echo $ticket->getId(); ?>" title="Reload" class="reload">Reload</a></h2>
         </td>
         <td width="50%" class="right_align">
-            <a href="tickets.php?id=<?php echo $ticket->getId(); ?>&a=print" title="Print Ticket" class="print" id="ticket-print">Print Ticket</a>
             <?php
-            if($thisstaff->canEditTickets()) { ?>
-             <a href="tickets.php?id=<?php echo $ticket->getId(); ?>&a=edit" title="Edit Ticket" class="edit">Edit Ticket</a>
-            <?php
-            } ?>
+            /*
+                YOU WILL NEED TO EDIT SOME OF THESE VALUES!
+
+                The option's value attribute needs to be the
+                URL to redirect to.
+
+                For options with a confirmation dialog, this URL
+                is overridden by the one set in the dialog form,
+                but it's probably a good idea to include it just
+                in case.
+            */
+            ?>
+            <select name="ticket-quick-actions" id="ticket-quick-actions">
+                <option value="" selected="selected">&mdash; Select Action &mdash;</option>
+                <option class="print" value="tickets.php?id=<?php echo $ticket->getId(); ?>" data-dialog="print-options">Print Ticket</option>
+                <?php if($thisstaff->canEditTickets()): ?>
+                    <option class="edit" value="tickets.php?id=<?php echo $ticket->getId(); ?>&a=edit" data-dialog="">Edit Ticket</option>
+                <?php endif; ?>
+                <?php if($thisstaff->canCloseTickets()): ?>
+                    <option class="close" value="tickets.php?id=<?php echo $ticket->getId(); ?>&a=close" data-dialog="close-confirm">Close Ticket</option>
+                <?php endif; ?>
+                <?php if($thisstaff->canBanEmails()): ?>
+                    <option class="ban" value="tickets.php?id=<?php echo $ticket->getId(); ?>&a=ban" data-dialog="">Ban Email &amp; Close</option>
+                <?php endif; ?>
+                <?php if($thisstaff->canDeleteTickets()): ?>
+                    <option class="delete" value="tickets.php?id=<?php echo $ticket->getId(); ?>&a=delete" data-dialog="delete-confirm">Delete Ticket</option>
+                <?php endif; ?>
+            </select>
         </td>
     </tr>
 </table>
@@ -88,7 +111,7 @@ if($ticket->isOverdue())
                         if(($related=$ticket->getRelatedTicketsCount())) {
                             echo sprintf('&nbsp;&nbsp;<a href="tickets.php?a=search&query=%s" title="Related Tickets">(<b>%d</b>)</a>',
                                     urlencode($ticket->getEmail()),$related);
-                    
+
                         }
                     ?>
                     </td>
@@ -191,14 +214,14 @@ if($cfg->showNotesInline())
     <?php
     }?>
 </ul>
-<?php    
+<?php
 if(!$cfg->showNotesInline()) { ?>
 <div id="ticket_notes">
     <?php
     /* Internal Notes */
     if($ticket->getNumNotes() && ($notes=$ticket->getNotes())) {
         foreach($notes as $note) {
-        
+
         ?>
         <table class="note" cellspacing="0" cellpadding="1" width="940" border="0">
             <tr>
@@ -264,11 +287,11 @@ if(!$cfg->showNotesInline()) { ?>
 </div>
 <div class="clear" style="padding-bottom:10px;"></div>
 <?php if($errors['err']) { ?>
-    <div id="msg_error"><?php echo $errors['err']; ?></div>        
-<?php }elseif($msg) { ?>            
-    <div id="msg_notice"><?php echo $msg; ?></div>    
+    <div id="msg_error"><?php echo $errors['err']; ?></div>
+<?php }elseif($msg) { ?>
+    <div id="msg_notice"><?php echo $msg; ?></div>
 <?php }elseif($warn) { ?>
-    <div id="msg_warning"><?php echo $warn; ?></div>    
+    <div id="msg_warning"><?php echo $warn; ?></div>
 <?php } ?>
 
 <div id="response_options">
@@ -280,7 +303,7 @@ if(!$cfg->showNotesInline()) { ?>
         <li><a id="transfer_tab" href="#transfer">Dept. Transfer</a></li>
         <?php
         }
-        
+
         if($thisstaff->canAssignTickets()) { ?>
         <li><a id="assign_tab" href="#assign"><?php echo $ticket->isAssigned()?'Reassign Ticket':'Assign Ticket'; ?></a></li>
         <?php
@@ -356,14 +379,14 @@ if(!$cfg->showNotesInline()) { ?>
                     <label><input type="radio" name="signature" value="none" checked="checked"> None</label>
                     <?php
                     if($thisstaff->getSignature()) {?>
-                    <label><input type="radio" name="signature" value="mine" 
+                    <label><input type="radio" name="signature" value="mine"
                         <?php echo ($info['signature']=='mine')?'checked="checked"':''; ?>> My signature</label>
                     <?php
                     } ?>
                     <?php
                     if($dept && $dept->canAppendSignature()) { ?>
-                    <label><input type="radio" name="signature" value="dept" 
-                        <?php echo ($info['signature']=='dept')?'checked="checked"':''; ?>> 
+                    <label><input type="radio" name="signature" value="dept"
+                        <?php echo ($info['signature']=='dept')?'checked="checked"':''; ?>>
                         Dept. Signature (<?php echo Format::htmlchars($dept->getName()); ?>)</label>
                     <?php
                     } ?>
@@ -423,11 +446,11 @@ if(!$cfg->showNotesInline()) { ?>
                 <td width="765">
                     <div><span class="faded">Internal note details</span>&nbsp;
                         <span class="error">*&nbsp;<?php echo $errors['internal_note']; ?></span></div>
-                    <textarea name="internal_note" id="internal_note" cols="50" rows="9" wrap="soft" 
+                    <textarea name="internal_note" id="internal_note" cols="50" rows="9" wrap="soft"
                         style="width:600px"><?php echo $info['internal_note']; ?></textarea>
                 </td>
             </tr>
-                       
+
             <?php
             if($cfg->allowAttachments()) { ?>
             <tr>
@@ -462,7 +485,7 @@ if(!$cfg->showNotesInline()) { ?>
                    <?php
                     } elseif($ticket->isAnswered()) { ?>
                         <label>
-                            <input type="checkbox" name="note_ticket_state" id="note_ticket_state" value="Unanswered" 
+                            <input type="checkbox" name="note_ticket_state" id="note_ticket_state" value="Unanswered"
                                 <?php echo $statusChecked; ?>>
                             Mark Unanswered
                         </label>
@@ -544,7 +567,7 @@ if(!$cfg->showNotesInline()) { ?>
             <tr>
                 <td width="160">&nbsp;</td>
                 <td>
-                <?php 
+                <?php
                     if($ticket->isAssigned())
                         echo sprintf('<em>Ticket is currently assigned to <b>%s</b></em>',$ticket->getAssignee());
                 ?>
@@ -609,7 +632,7 @@ if(!$cfg->showNotesInline()) { ?>
     <?php
     } ?>
 </div>
-<div style="display:none;" id="print-options">
+<div style="display:none;" id="print-options" class="dialog">
     <h3>Ticket Print Options</h3>
     <a class="close" href="">&times;</a>
     <hr/>
@@ -643,6 +666,39 @@ if(!$cfg->showNotesInline()) { ?>
             </span>
             <span class="buttons" style="float:right">
                 <input type="submit" value="Print">
+            </span>
+         </p>
+    </form>
+</div>
+<div style="display:none;" id="close-confirm" class="dialog">
+    <h3>Close Ticket</h3>
+    <a class="close" href="">&times;</a>
+    <hr/>
+    <form action="tickets.php?id=<?php echo $ticket->getId(); ?>&a=close" method="post">
+        Are you sure you want to close this ticket?
+        <p class="full-width">
+            <span class="buttons" style="float:left">
+                <input type="button" value="Cancel" class="close">
+            </span>
+            <span class="buttons" style="float:right">
+                <input type="submit" value="Close Ticket">
+            </span>
+         </p>
+    </form>
+</div>
+<div style="display:none;" id="delete-confirm" class="dialog">
+    <h3>Delete Ticket</h3>
+    <a class="close" href="">&times;</a>
+    <hr/>
+    <form action="tickets.php?id=<?php echo $ticket->getId(); ?>&a=delete" method="post">
+        Are you sure you want to close this ticket?<br>
+        <strong class="error">This change cannot be undone.</strong>
+        <p class="full-width">
+            <span class="buttons" style="float:left">
+                <input type="button" value="Cancel" class="close">
+            </span>
+            <span class="buttons" style="float:right">
+                <input type="submit" value="Delete Ticket">
             </span>
          </p>
     </form>
