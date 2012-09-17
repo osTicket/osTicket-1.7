@@ -36,7 +36,7 @@ if($ticket->isOverdue())
     $warn.='&nbsp;&nbsp;<span class="Icon overdueTicket">Marked overdue!</span>';
 
 ?>
-<table width="910" cellpadding="2" cellspacing="0" border="0">
+<table width="940" cellpadding="2" cellspacing="0" border="0">
     <tr>
         <td width="50%">
             <h2><a href="tickets.php?id=<?php echo $ticket->getId(); ?>" title="Ticket #<?php echo $ticket->getExtId(); ?>">Ticket #<?php echo $ticket->getExtId(); ?></a>
@@ -58,18 +58,18 @@ if($ticket->isOverdue())
             ?>
             <select name="ticket-quick-actions" id="ticket-quick-actions">
                 <option value="" selected="selected">&mdash; Select Action &mdash;</option>
-                <option value="tickets.php?id=<?php echo $ticket->getId(); ?>" data-dialog="print-options">Print Ticket</option>
+                <option class="print" value="tickets.php?id=<?php echo $ticket->getId(); ?>" data-dialog="print-options">Print Ticket</option>
                 <?php if($thisstaff->canEditTickets()): ?>
-                    <option value="tickets.php?id=<?php echo $ticket->getId(); ?>&a=edit" data-dialog="">Edit Ticket</option>
+                    <option class="edit" value="tickets.php?id=<?php echo $ticket->getId(); ?>&a=edit" data-dialog="">Edit Ticket</option>
                 <?php endif; ?>
                 <?php if($thisstaff->canCloseTickets()): ?>
-                    <option value="tickets.php?id=<?php echo $ticket->getId(); ?>&a=close" data-dialog="close-confirm">Close Ticket</option>
+                    <option class="close" value="tickets.php?id=<?php echo $ticket->getId(); ?>&a=close" data-dialog="close-confirm">Close Ticket</option>
                 <?php endif; ?>
                 <?php if($thisstaff->canBanEmails()): ?>
-                    <option value="tickets.php?id=<?php echo $ticket->getId(); ?>&a=ban" data-dialog="">Ban Email &amp; Close</option>
+                    <option class="ban" value="tickets.php?id=<?php echo $ticket->getId(); ?>&a=ban" data-dialog="">Ban Email &amp; Close</option>
                 <?php endif; ?>
                 <?php if($thisstaff->canDeleteTickets()): ?>
-                    <option value="tickets.php?id=<?php echo $ticket->getId(); ?>&a=delete" data-dialog="delete-confirm">Delete Ticket</option>
+                    <option class="delete" value="tickets.php?id=<?php echo $ticket->getId(); ?>&a=delete" data-dialog="delete-confirm">Delete Ticket</option>
                 <?php endif; ?>
             </select>
         </td>

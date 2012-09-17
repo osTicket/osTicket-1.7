@@ -1171,6 +1171,18 @@ time {
     z-index:1200;
 }
 
+#ticket-quick-actions option {
+    padding:2px 0 2px 20px;
+    background-position:2px 50%;
+    background-repeat:no-repeat;
+}
+
+option.print  { background-image:url(../images/icons/select-print.gif); }
+option.close  { background-image:url(../images/icons/select-close.gif); }
+option.edit   { background-image:url(../images/icons/select-edit.gif); }
+option.ban    { background-image:url(../images/icons/select-ban.gif); }
+option.delete { background-image:url(../images/icons/select-delete.gif); }
+
 .dialog {
     width:500px;
     height:180px;
