@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: osticket17\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-09-17 13:43-0300\n"
-"PO-Revision-Date: 2012-09-17 13:51-0300\n"
+"POT-Creation-Date: 2012-09-18 08:26-0300\n"
+"PO-Revision-Date: 2012-09-18 08:28-0300\n"
 "Last-Translator: Fabio Rauber <fabior@interlegis.leg.br>\n"
 "Language-Team:  <fabior@interlegis.leg.br>\n"
 "Language: \n"
@@ -201,6 +201,116 @@ msgstr "Estatísticas dos tíquetes, organizadas por departamento, tópico de aj
 msgid "Mail fetcher cron call ["
 msgstr ""
 
+#: scp/teams.php:19
+#, fuzzy
+msgid "Unknown or invalid team ID."
+msgstr "ID do Tíquete desconhecido ou inválido."
+
+#: scp/teams.php:25
+#, fuzzy
+msgid "Unknown or invalid team."
+msgstr "ID do Tíquete desconhecido ou inválido."
+
+#: scp/teams.php:27
+#, fuzzy
+msgid "Team updated successfully"
+msgstr "Tíquete atualizado com sucesso"
+
+#: scp/teams.php:29
+#, fuzzy
+msgid "Unable to update team. Correct any error(s) below and try again!"
+msgstr "Não foi possível designar o tíquete. Corrija os erros abaixo e tente novamente!"
+
+#: scp/teams.php:34
+#: scp/departments.php:34
+#: scp/staff.php:34
+#, fuzzy
+msgid "added successfully"
+msgstr "Chave API adicionada com sucesso"
+
+#: scp/teams.php:37
+#, fuzzy
+msgid "Unable to add team. Correct any error(s) below and try again."
+msgstr "Não foi possível designar o tíquete. Corrija os erros abaixo e tente novamente!"
+
+#: scp/teams.php:42
+#, fuzzy
+msgid "You must select at least one team."
+msgstr "Você deve selecionar ao menos um tíquete"
+
+#: scp/teams.php:50
+#, fuzzy
+msgid "Selected teams activated"
+msgstr "Desabilitadas respostas prontas selecionadas"
+
+#: scp/teams.php:52
+#: scp/teams.php:63
+#: scp/teams.php:76
+#: scp/categories.php:61
+#: scp/categories.php:72
+#: scp/categories.php:86
+#: scp/apikeys.php:54
+#: scp/apikeys.php:65
+#: scp/apikeys.php:80
+#: scp/helptopics.php:54
+#: scp/helptopics.php:65
+#: scp/helptopics.php:80
+#: scp/departments.php:54
+#: scp/departments.php:67
+#: scp/departments.php:88
+#: scp/filters.php:58
+#: scp/filters.php:69
+#: scp/filters.php:84
+#: scp/staff.php:65
+#: scp/staff.php:78
+msgid "of"
+msgstr "de"
+
+#: scp/teams.php:52
+#, fuzzy
+msgid "selected teams activated"
+msgstr "Desabilitadas respostas prontas selecionadas"
+
+#: scp/teams.php:54
+#, fuzzy
+msgid "Unable to activate selected teams"
+msgstr "Não foi possível adicionar o e-mail à lista negra"
+
+#: scp/teams.php:61
+#, fuzzy
+msgid "Selected teams disabled"
+msgstr "Desabilitadas respostas prontas selecionadas"
+
+#: scp/teams.php:63
+#, fuzzy
+msgid "selected teams disabled"
+msgstr "Desabilitadas respostas prontas selecionadas"
+
+#: scp/teams.php:65
+#, fuzzy
+msgid "Unable to disable selected teams"
+msgstr "Não foi possível adicionar o e-mail à lista negra"
+
+#: scp/teams.php:74
+#, fuzzy
+msgid "Selected teams deleted successfully"
+msgstr "Tíquete criado com sucesso"
+
+#: scp/teams.php:76
+#, fuzzy
+msgid "selected teams deleted"
+msgstr "emails selecionados foram deletados"
+
+#: scp/teams.php:78
+#, fuzzy
+msgid "Unable to delete selected teams"
+msgstr "Não foi possível adicionar o e-mail à lista negra"
+
+#: scp/teams.php:80
+#: scp/staff.php:82
+msgid "Unknown action. Get technical help!"
+msgstr "Ação desconhecida. Procure ajuda técnica!"
+
 #: scp/categories.php:28
 msgid "Unknown or invalid category ID."
 msgstr "ID da Categoria desconhecido ou inválido."
@@ -237,21 +347,6 @@ msgstr "Você deve selecionar ao menos um tíquete"
 #: scp/categories.php:59
 msgid "Selected categories made PUBLIC"
 msgstr "Categorias selecionadas configuradas como PÚBLICAS"
-
-#: scp/categories.php:61
-#: scp/categories.php:72
-#: scp/categories.php:86
-#: scp/apikeys.php:54
-#: scp/apikeys.php:65
-#: scp/apikeys.php:80
-#: scp/departments.php:54
-#: scp/departments.php:67
-#: scp/departments.php:88
-#: scp/filters.php:58
-#: scp/filters.php:69
-#: scp/filters.php:84
-msgid "of"
-msgstr "de"
 
 #: scp/categories.php:61
 msgid "selected categories made PUBLIC"
@@ -493,7 +588,7 @@ msgstr "Não foi possível designar o tíquete. Corrija os erros abaixo e tente 
 
 #: scp/tickets.php:132
 msgid "Action Denied. You are not allowed to assign/reassign tickets."
-msgstr ""
+msgstr "Ação Negada. Você não tem permissão para designar tíquetes."
 
 #: scp/tickets.php:137
 msgid "Title required"
@@ -781,6 +876,86 @@ msgstr "Token de pesquisa não encontrado"
 msgid "Internal error: Unable to dump query results"
 msgstr "Erro interno: Não foi possível mostrar os resultados da pesquisa"
 
+#: scp/helptopics.php:21
+#, fuzzy
+msgid "Unknown or invalid help topic ID."
+msgstr "ID do Tíquete desconhecido ou inválido."
+
+#: scp/helptopics.php:27
+#, fuzzy
+msgid "Unknown or invalid help topic."
+msgstr "Categoria desconhecida ou inválida."
+
+#: scp/helptopics.php:29
+#, fuzzy
+msgid "Help topic updated successfully"
+msgstr "FAQ atualizado com sucesso"
+
+#: scp/helptopics.php:31
+#, fuzzy
+msgid "Error updating help topic. Try again!"
+msgstr "Erro ao atualizar email. Tente novamente!"
+
+#: scp/helptopics.php:36
+#, fuzzy
+msgid "Help topic added successfully"
+msgstr "Chave API adicionada com sucesso"
+
+#: scp/helptopics.php:39
+#, fuzzy
+msgid "Unable to add help topic. Correct error(s) below and try again."
+msgstr "Não foi possível designar o tíquete. Corrija os erros abaixo e tente novamente!"
+
+#: scp/helptopics.php:44
+#, fuzzy
+msgid "You must select at least one help topic"
+msgstr "Você deve selecionar ao menos um tíquete"
+
+#: scp/helptopics.php:52
+#, fuzzy
+msgid "Selected help topics enabled"
+msgstr "Habilitadas respostas prontas selecionadas."
+
+#: scp/helptopics.php:54
+#, fuzzy
+msgid "selected help topics enabled"
+msgstr "Habilitadas respostas prontas selecionadas."
+
+#: scp/helptopics.php:56
+#, fuzzy
+msgid "Unable to enable selected help topics."
+msgstr "Não foi possível adicionar o e-mail à lista negra"
+
+#: scp/helptopics.php:63
+#, fuzzy
+msgid "Selected help topics disabled"
+msgstr "Desabilitadas respostas prontas selecionadas"
+
+#: scp/helptopics.php:65
+#, fuzzy
+msgid "selected help topics disabled"
+msgstr "Desabilitadas respostas prontas selecionadas"
+
+#: scp/helptopics.php:67
+#, fuzzy
+msgid "Unable to disable selected help topic(s)"
+msgstr "Não foi possível adicionar o e-mail à lista negra"
+
+#: scp/helptopics.php:78
+#, fuzzy
+msgid "Selected help topics deleted successfully"
+msgstr "Tíquete criado com sucesso"
+
+#: scp/helptopics.php:80
+#, fuzzy
+msgid "selected help topics deleted"
+msgstr "Habilitadas respostas prontas selecionadas."
+
+#: scp/helptopics.php:82
+#, fuzzy
+msgid "Unable to delete selected help topics"
+msgstr "Não foi possível adicionar o e-mail à lista negra"
+
 #: scp/departments.php:19
 #, fuzzy
 msgid "Unknown or invalid department ID."
@@ -800,11 +975,6 @@ msgstr "Tíquete atualizado com sucesso"
 #, fuzzy
 msgid "Error updating department. Try again!"
 msgstr "Problemas ao apagar tíquete. Tente novamente."
-
-#: scp/departments.php:34
-#, fuzzy
-msgid "added successfully"
-msgstr "Chave API adicionada com sucesso"
 
 #: scp/departments.php:37
 #, fuzzy
@@ -949,6 +1119,151 @@ msgstr "respostas prontas selecionadas apagadas"
 msgid "Unable to delete selected filters"
 msgstr "Não foi possível adicionar o e-mail à lista negra"
 
+#: scp/staff.php:19
+#, fuzzy
+msgid "Unknown or invalid staff ID."
+msgstr "ID do Tíquete desconhecido ou inválido."
+
+#: scp/staff.php:25
+#, fuzzy
+msgid "Unknown or invalid staff."
+msgstr "ID do Tíquete desconhecido ou inválido."
+
+#: scp/staff.php:27
+#, fuzzy
+msgid "Staff updated successfully"
+msgstr "Tíquete atualizado com sucesso"
+
+#: scp/staff.php:29
+#, fuzzy
+msgid "Unable to update staff. Correct any error(s) below and try again!"
+msgstr "Não foi possível designar o tíquete. Corrija os erros abaixo e tente novamente!"
+
+#: scp/staff.php:37
+#, fuzzy
+msgid "Unable to add staff. Correct any error(s) below and try again."
+msgstr "Não foi possível designar o tíquete. Corrija os erros abaixo e tente novamente!"
+
+#: scp/staff.php:42
+#, fuzzy
+msgid "You must select at least one staff member."
+msgstr "Você deve selecionar ao menos um tíquete"
+
+#: scp/staff.php:44
+msgid "You can not disable/delete yourself - you could be the only admin!"
+msgstr "Você não pode desabilitar/deletar você mesmo - você pode ser o único admin!"
+
+#: scp/staff.php:52
+#, fuzzy
+msgid "Selected staff activated"
+msgstr "Desabilitadas respostas prontas selecionadas"
+
+#: scp/staff.php:56
+#, fuzzy
+msgid "Unable to activate selected staff"
+msgstr "Não foi possível adicionar o e-mail à lista negra"
+
+#: scp/staff.php:63
+#, fuzzy
+msgid "Selected staff disabled"
+msgstr "Desabilitadas respostas prontas selecionadas"
+
+#: scp/staff.php:65
+#, fuzzy
+msgid "selected staff disabled"
+msgstr "Desabilitadas respostas prontas selecionadas"
+
+#: scp/staff.php:67
+#, fuzzy
+msgid "Unable to disable selected staff"
+msgstr "Não foi possível adicionar o e-mail à lista negra"
+
+#: scp/staff.php:76
+#, fuzzy
+msgid "Selected staff deleted successfully"
+msgstr "Tíquete criado com sucesso"
+
+#: scp/staff.php:78
+#, fuzzy
+msgid "selected staff deleted"
+msgstr "Desabilitadas respostas prontas selecionadas"
+
+#: scp/staff.php:80
+#, fuzzy
+msgid "Unable to delete selected staff."
+msgstr "Não foi possível adicionar o e-mail à lista negra"
+
+#: scp/logout.php:22
+#, fuzzy
+msgid "Staff logout"
+msgstr "Adm. de Pessoal"
+
+#: scp/logout.php:23
+#, php-format
+msgid "%s logged out [%s]"
+msgstr ""
+
+#: scp/settings.php:19
+msgid "System Settings"
+msgstr "Config. do Sistema"
+
+#: scp/settings.php:20
+#, fuzzy
+msgid "Ticket Settings and Options"
+msgstr "Opções do Tíquete"
+
+#: scp/settings.php:21
+msgid "Email Settings"
+msgstr "Config. de E-mail"
+
+#: scp/settings.php:22
+#, fuzzy
+msgid "Knowledgebase Settings"
+msgstr "Base de Dados"
+
+#: scp/settings.php:23
+#, fuzzy
+msgid "Autoresponder Settings"
+msgstr "Respostas Automáticas"
+
+#: scp/settings.php:24
+msgid "Alerts and Notices Settings"
+msgstr ""
+
+#: scp/settings.php:28
+#, fuzzy
+msgid " Updated Successfully"
+msgstr "FAQ atualizado com sucesso"
+
+#: scp/settings.php:31
+msgid "Unable to update settings - correct errors below and try again"
+msgstr "Não foi possível atualizar as configurações - corrija os erros abaixo e tente novamente"
+
+#: scp/logs.php:22
+#, fuzzy
+msgid "You must select at least one log to delete"
+msgstr "Você deve selecionar ao menos um tíquete"
+
+#: scp/logs.php:30
+#, fuzzy
+msgid "Selected logs deleted successfully"
+msgstr "Tíquete criado com sucesso"
+
+#: scp/logs.php:32
+#, fuzzy
+msgid "selected logs deleted"
+msgstr "respostas prontas selecionadas apagadas"
+
+#: scp/logs.php:34
+#, fuzzy
+msgid "Unable to delete selected logs"
+msgstr "Não foi possível adicionar o e-mail à lista negra"
+
+#: scp/logs.php:41
+#, fuzzy
+msgid "Unknown option"
+msgstr "Ação desconhecida"
+
 #: scp/attachment.php:23
 msgid "Unknown attachment!"
 msgstr "Anexo desconhecido!"
@@ -957,13 +1272,128 @@ msgstr "Anexo desconhecido!"
 msgid "Access Denied"
 msgstr "Acesso Negado"
 
+#: scp/profile.php:21
+msgid "Internal Error. Action Denied"
+msgstr "Erro Interno. Ação Negada"
+
+#: scp/profile.php:25
+#, fuzzy
+msgid "Unknown or invalid staff"
+msgstr "ID do Tíquete desconhecido ou inválido."
+
+#: scp/profile.php:27
+#, fuzzy
+msgid "Profile updated successfully"
+msgstr "Tíquete atualizado com sucesso"
+
+#: scp/profile.php:33
+#, fuzzy
+msgid "Profile update error. Try correcting the errors below and try again!"
+msgstr "Não foi possível atualizar o tíquete.Corrija os erros abaixo e tente novamente!"
+
+#: scp/profile.php:38
+#, php-format
+msgid "<b>Hi %s</b> - You must change your password to continue!"
+msgstr ""
+
+#: scp/profile.php:40
+#, php-format
+msgid "<b>Welcome back %s</b>! You are listed as 'on vacation' Please let your manager know that you are back."
+msgstr ""
+
+#: scp/slas.php:21
+#, fuzzy
+msgid "Unknown or invalid API key ID."
+msgstr "ID do Tíquete desconhecido ou inválido."
+
+#: scp/slas.php:27
+#, fuzzy
+msgid "Unknown or invalid SLA plan."
+msgstr "ID do Tíquete desconhecido ou inválido."
+
+#: scp/slas.php:29
+#, fuzzy
+msgid "SLA plan updated successfully"
+msgstr "FAQ atualizado com sucesso"
+
+#: scp/slas.php:31
+#, fuzzy
+msgid "Error updating SLA plan. Try again!"
+msgstr "Problemas ao apagar tíquete. Tente novamente."
+
+#: scp/slas.php:36
+#, fuzzy
+msgid "SLA plan added successfully"
+msgstr "Chave API adicionada com sucesso"
+
+#: scp/slas.php:39
+#, fuzzy
+msgid "Unable to add SLA plan. Correct error(s) below and try again."
+msgstr "Não foi possível designar o tíquete. Corrija os erros abaixo e tente novamente!"
+
+#: scp/slas.php:44
+#, fuzzy
+msgid "You must select at least one plan."
+msgstr "Você deve selecionar ao menos um tíquete"
+
+#: scp/slas.php:52
+#, fuzzy
+msgid "Selected SLA plans enabled"
+msgstr "Habilitadas respostas prontas selecionadas."
+
+#: scp/slas.php:54
+#, fuzzy
+msgid "selected SLA plans enabled"
+msgstr "Habilitadas respostas prontas selecionadas."
+
+#: scp/slas.php:56
+#, fuzzy
+msgid "Unable to enable selected SLA plans."
+msgstr "Não foi possível adicionar o e-mail à lista negra"
+
+#: scp/slas.php:63
+#, fuzzy
+msgid "Selected SLA plans disabled"
+msgstr "Desabilitadas respostas prontas selecionadas"
+
+#: scp/slas.php:65
+#, fuzzy
+msgid "selected SLA plans disabled"
+msgstr "Desabilitadas respostas prontas selecionadas"
+
+#: scp/slas.php:67
+#, fuzzy
+msgid "Unable to disable selected SLA plans"
+msgstr "Não foi possível adicionar o e-mail à lista negra"
+
+#: scp/slas.php:78
+#, fuzzy
+msgid "Selected SLA plans deleted successfully"
+msgstr "Tíquete criado com sucesso"
+
+#: scp/slas.php:80
+#, fuzzy
+msgid "selected SLA plans deleted"
+msgstr "Habilitadas respostas prontas selecionadas."
+
+#: scp/slas.php:82
+#, fuzzy
+msgid "Unable to delete selected SLA plans"
+msgstr "Não foi possível adicionar o e-mail à lista negra"
+
+#: scp/kb.php:20
+#: scp/faq.php:24
+#, fuzzy
+msgid "Unknown or invalid FAQ category"
+msgstr "Categoria desconhecida ou inválida."
+
 #: scp/staff.inc.php:18
 msgid "Fatal error... get technical support"
-msgstr ""
+msgstr "Erro fatal... peça suporte técnico"
 
 #: scp/staff.inc.php:23
 msgid "Fatal error... invalid setting."
-msgstr ""
+msgstr "Erro fatal... configuração inválida."
 
 #: scp/staff.inc.php:62
 #: scp/login.php:23
@@ -972,7 +1402,7 @@ msgstr "Autenticação Requerida"
 
 #: scp/staff.inc.php:62
 msgid "Session timed out due to inactivity"
-msgstr ""
+msgstr "Sessão expirada devido a inatividade."
 
 #: scp/staff.inc.php:70
 #, fuzzy
@@ -986,7 +1416,7 @@ msgstr "Sistema de Tíquetes e Suporte Offline"
 
 #: scp/staff.inc.php:113
 msgid "System is set to offline mode"
-msgstr ""
+msgstr "Sistema foi modificado para modo offline"
 
 #: scp/staff.inc.php:113
 msgid "Client interface is disabled and ONLY admins can access staff control panel."
@@ -995,6 +1425,41 @@ msgstr ""
 #: scp/staff.inc.php:114
 msgid "Enable"
 msgstr "Habilitar"
+
+#: scp/upgrade.php:26
+msgid " Nothing to do! System already upgraded to the current version"
+msgstr "Nada a fazer! Sistema já atualizado para a versão atual."
+
+#: scp/upgrade.php:28
+msgid "The upgrader does NOT support upgrading from the current vesion!"
+msgstr ""
+
+#: scp/upgrade.php:30
+msgid "Minimum requirements not met! Refer to Release Notes for more information"
+msgstr ""
+
+#: scp/upgrade.php:32
+msgid "Config file rename required to continue!"
+msgstr ""
+
+#: scp/upgrade.php:51
+#, fuzzy
+msgid "Unknown action!"
+msgstr "Ação desconhecida"
+
+#: scp/upgrade.php:72
+#, fuzzy
+msgid "Nothing to do! System already upgraded to"
+msgstr "Nada a fazer! Sistema já atualizado para a versão atual."
+
+#: scp/upgrade.php:72
+msgid "with no pending patches to apply."
+msgstr ""
+
+#: scp/upgrade.php:74
+#, php-format
+msgid "The upgrader does NOT support upgrading from the current patch [%s]!"
+msgstr ""
 
 #: scp/groups.php:19
 #, fuzzy
@@ -1071,10 +1536,6 @@ msgstr "respostas prontas selecionadas apagadas"
 msgid "Unable to delete selected groups"
 msgstr "Não foi possível adicionar o e-mail à lista negra"
 
-#: scp/groups.php:80
-msgid "Unknown action. Get technical help!"
-msgstr "Ação desconhecida. Procure ajuda técnica!"
-
 #: scp/banlist.php:21
 msgid "System ban list is empty."
 msgstr "A lista negra do sistema está vazia."
@@ -1096,7 +1557,7 @@ msgstr "Departamento desconhecido ou inválido"
 #: scp/banlist.php:35
 #: scp/banlist.php:54
 msgid "Valid email address required"
-msgstr ""
+msgstr "É requerido endereço de email válido"
 
 #: scp/banlist.php:44
 #: scp/emails.php:29
@@ -1168,7 +1629,7 @@ msgstr "Tíquete criado com sucesso"
 #: scp/banlist.php:105
 #: scp/emails.php:66
 msgid "selected emails deleted"
-msgstr ""
+msgstr "emails selecionados foram deletados"
 
 #: scp/banlist.php:107
 #: scp/emails.php:68
@@ -1331,11 +1792,6 @@ msgstr "Não foi possível apagar as respostas prontas selecionadas"
 msgid "Unknown or invalid FAQ"
 msgstr "ID do Tíquete desconhecido ou inválido."
 
-#: scp/faq.php:24
-#, fuzzy
-msgid "Unknown or invalid FAQ category"
-msgstr "Categoria desconhecida ou inválida."
-
 #: scp/faq.php:32
 #, fuzzy
 msgid "FAQ added successfully"
@@ -1393,6 +1849,90 @@ msgstr "Não foi possível adicionar a mensagem. Tente novamente"
 msgid "Invalid action"
 msgstr "Ação inválida"
 
+#: scp/templates.php:20
+#, fuzzy
+msgid "Unknown or invalid template ID."
+msgstr "ID do E-mail desconhecido ou inválido."
+
+#: scp/templates.php:26
+#: scp/templates.php:36
+#, fuzzy
+msgid "Unknown or invalid template"
+msgstr "Departamento desconhecido ou inválido"
+
+#: scp/templates.php:29
+#, fuzzy
+msgid "Message template updated successfully"
+msgstr "Tíquete atualizado com sucesso"
+
+#: scp/templates.php:31
+#, fuzzy
+msgid "Error updating message template. Try again!"
+msgstr "Problemas ao apagar tíquete. Tente novamente."
+
+#: scp/templates.php:38
+#, fuzzy
+msgid "Template updated successfully"
+msgstr "Tíquete atualizado com sucesso"
+
+#: scp/templates.php:40
+#, fuzzy
+msgid "Error updating template. Try again!"
+msgstr "Erro ao atualizar email. Tente novamente!"
+
+#: scp/templates.php:45
+#, fuzzy
+msgid "Template added successfully"
+msgstr "Chave API adicionada com sucesso"
+
+#: scp/templates.php:48
+#, fuzzy
+msgid "Unable to add template. Correct error(s) below and try again."
+msgstr "Não foi possível designar o tíquete. Corrija os erros abaixo e tente novamente!"
+
+#: scp/templates.php:53
+#, fuzzy
+msgid "You must select at least one template to process."
+msgstr "Você deve selecionar ao menos um tíquete"
+
+#: scp/templates.php:61
+#, fuzzy
+msgid "Selected templates enabled"
+msgstr "Habilitadas respostas prontas selecionadas."
+
+#: scp/templates.php:65
+#, fuzzy
+msgid "Unable to enable selected templates"
+msgstr "Não foi possível adicionar o e-mail à lista negra"
+
+#: scp/templates.php:76
+msgid "Selected templates disabled"
+msgstr "Desabilitados modelos selecionados"
+
+#: scp/templates.php:78
+msgid "selected templates disabled (in-use templates can't be disabled)"
+msgstr ""
+
+#: scp/templates.php:80
+msgid "Unable to disable selected templates (in-use or default template can't be disabled)"
+msgstr ""
+
+#: scp/templates.php:89
+msgid "Selected templates deleted successfully"
+msgstr "Modelos selecionados apagados com sucesso"
+
+#: scp/templates.php:91
+msgid "selected templates deleted"
+msgstr "modelos selecionados apagados"
+
+#: scp/templates.php:93
+msgid "Unable to delete selected templates"
+msgstr "Não foi possível apagar os modelos selecionados"
+
+#: scp/templates.php:96
+msgid "Unknown template action"
+msgstr "Ação desconhecida para o modelo"
+
 #: scp/emails.php:21
 msgid "Unknown or invalid email ID."
 msgstr "ID do E-mail desconhecido ou inválido."
@@ -1410,9 +1950,8 @@ msgid "Email address added successfully"
 msgstr "Endereço de e-mail adicionado com sucesso"
 
 #: scp/emails.php:39
-#, fuzzy
 msgid "Unable to add email. Correct error(s) below and try again."
-msgstr "Não foi possível designar o tíquete. Corrija os erros abaixo e tente novamente!"
+msgstr "Não foi possível adicionar o e-mail. Corrija os erros abaixo e tente novamente."
 
 #: scp/emails.php:44
 msgid "You must select at least one email address"
@@ -1496,10 +2035,6 @@ msgstr "Painel de Adminstração"
 msgid "Settings"
 msgstr "Configurações"
 
-#: include/class.nav.php:176
-msgid "System Settings"
-msgstr "Config. do Sistema"
-
 #: include/class.nav.php:177
 msgid "Manage"
 msgstr "Gerenciar"
@@ -1513,10 +2048,6 @@ msgstr "Gerenciar Opções"
 #: include/class.nav.php:211
 msgid "Emails"
 msgstr "E-mails"
-
-#: include/class.nav.php:178
-msgid "Email Settings"
-msgstr "Config. de E-mail"
 
 #: include/class.nav.php:179
 msgid "Staff"
@@ -1774,7 +2305,7 @@ msgstr "Você precisará do número e e-mail para ver o estado do tíquete onlin
 
 #: include/client/thankyou.inc.php:16
 msgid "If you wish to send additional comments or information regarding same issue, please follow the instructions on the email."
-msgstr ""
+msgstr "Se você quiser mandar comentários adicionais ou informações que dizem respeito ao mesmo problema, por favor siga as instruções do email."
 
 #: include/client/thankyou.inc.php:19
 msgid "Support Team"
@@ -2575,22 +3106,20 @@ msgid "Delete Selected Entries"
 msgstr "Deletar Entradas Selecionadas"
 
 #: include/staff/syslogs.inc.php:167
-#, fuzzy
 msgid "Are you sure you want to DELETE selected log entries?"
-msgstr "Tem certeza que deseja APAGAR os tíquetes selecionados?"
+msgstr "Tem certeza que deseja APAGAR os logs selecionados?"
 
-msgid "High"
-msgstr "Alta"
+#~ msgid "High"
+#~ msgstr "Alta"
 
-msgid "Low"
-msgstr "Baixa"
+#~ msgid "Low"
+#~ msgstr "Baixa"
 
-msgid "Normal"
-msgstr "Normal"
+#~ msgid "Normal"
+#~ msgstr "Normal"
 
-msgid "Warning"
-msgstr "Aviso"
+#~ msgid "Warning"
+#~ msgstr "Aviso"
 
-msgid "Error"
-msgstr "Erro"
-
+#~ msgid "Error"
+#~ msgstr "Erro"

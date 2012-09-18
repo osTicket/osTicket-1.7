@@ -19,7 +19,7 @@ if($_POST){
     switch(strtolower($_POST['do'])){
         case 'mass_process':
             if(!$_POST['ids'] || !is_array($_POST['ids']) || !count($_POST['ids'])) {
-                $errors['err']='You must select at least one log to delete';
+                $errors['err']=_('You must select at least one log to delete');
             }else{
                 $count=count($_POST['ids']);
                 if($_POST['delete']){
@@ -27,18 +27,18 @@ if($_POST){
                         .implode(',', db_input($_POST['ids'])).')';
                     if(db_query($sql) && ($num=db_affected_rows())){
                         if($num==$count)
-                            $msg='Selected logs deleted successfully';
+                            $msg=_('Selected logs deleted successfully');
                         else
-                            $warn="$num of $count selected logs deleted";
+                            $warn="$num "._("of")." $count "._("selected logs deleted");
                     }elseif(!$errors['err'])
-                        $errors['err']='Unable to delete selected logs';
+                        $errors['err']=_('Unable to delete selected logs');
                 }else{
-                    $errors['err']='Unknown command';
+                    $errors['err']=_('Unknown command');
                 }
             }
             break;
         default:
-            $errors['err']='Unknown option';
+            $errors['err']=_('Unknown option');
             break;
     }
 }
