@@ -143,13 +143,13 @@ class Client {
         $auto_login = $_SERVER['REQUEST_METHOD'] == 'GET';
 
         //Check time for last max failed login attempt strike.
-        $loginmsg='Invalid login';
+        $loginmsg=_('Invalid login');
         # XXX: SECURITY: Max attempts is enforced client-side via the PHP
         #      session cookie.
         if($_SESSION['_client']['laststrike']) {
             if((time()-$_SESSION['_client']['laststrike'])<$cfg->getClientLoginTimeout()) {
-                $loginmsg='Excessive failed login attempts';
-                $errors['err']='You\'ve reached maximum failed login attempts allowed. Try again later or <a href="open.php">open a new ticket</a>';
+                $loginmsg=_('Excessive failed login attempts');
+                $errors['err']=_('You\'ve reached maximum failed login attempts allowed. Try again later or').' <a href="open.php">'._('open a new ticket').'</a>';
             }else{ //Timeout is over.
                 //Reset the counter for next round of attempts after the timeout.
                 $_SESSION['_client']['laststrike']=null;
@@ -188,9 +188,9 @@ class Client {
         $_SESSION['_client']['strikes']+=1;
         if(!$errors && $_SESSION['_client']['strikes']>$cfg->getClientMaxLogins()) {
             $loginmsg='Access Denied';
-            $errors['err']='Forgot your login info? Please <a href="open.php">open a new ticket</a>.';
+            $errors['err']=_('Forgot your login info? Please').' <a href="open.php">'._('open a new ticket').'</a>.';
             $_SESSION['_client']['laststrike']=time();
-            $alert='Excessive login attempts by a client?'."\n".
+            $alert=_('Excessive login attempts by a client?')."\n".
                     'Email: '.$_POST['lemail']."\n".'Ticket#: '.$_POST['lticket']."\n".
                     'IP: '.$_SERVER['REMOTE_ADDR']."\n".'Time:'.date('M j, Y, g:i a T')."\n\n".
                     'Attempts #'.$_SESSION['_client']['strikes'];
@@ -198,7 +198,7 @@ class Client {
         }elseif($_SESSION['_client']['strikes']%2==0){ //Log every other failed login attempt as a warning.
             $alert='Email: '.$_POST['lemail']."\n".'Ticket #: '.$_POST['lticket']."\n".'IP: '.$_SERVER['REMOTE_ADDR'].
                    "\n".'TIME: '.date('M j, Y, g:i a T')."\n\n".'Attempts #'.$_SESSION['_client']['strikes'];
-            $ost->logWarning('Failed login attempt (client)', $alert);
+            $ost->logWarning(_('Failed login attempt').' (client)', $alert);
         }
     }
 }

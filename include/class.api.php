@@ -102,9 +102,9 @@ class API {
 
         if(!$id) {
             if(!$vars['ipaddr'] || !Validator::is_ip($vars['ipaddr']))
-                $errors['ipaddr']='Valid IP required';
+                $errors['ipaddr']=_('Valid IP required');
             elseif(API::getKeyByIPAddr($vars['ipaddr']))
-                $errors['ipaddr']='API key for the IP already exists';
+                $errors['ipaddr']=_('API key for the IP already exists');
         }
 
         if($errors) return false;
@@ -119,7 +119,7 @@ class API {
             if(db_query($sql))
                 return true;
 
-            $errors['err']='Unable to update API key. Internal error occurred';
+            $errors['err']=_('Unable to update API key. Internal error occurred');
         }else{
             $sql='INSERT INTO '.API_KEY_TABLE.' SET '.$sql.',created=NOW() '.
                  ',ipaddr='.db_input($vars['ipaddr']).
@@ -127,7 +127,7 @@ class API {
             if(db_query($sql) && ($id=db_insert_id()))
                 return $id;
 
-            $errors['err']='Unable to add API key. Internal error';
+            $errors['err']=_('Unable to add API key. Internal error');
         }
 
         return false;

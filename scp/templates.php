@@ -60,7 +60,7 @@ if($_POST){
                         if($num==$count)
                             $msg=_('Selected templates enabled');
                         else
-                            $warn="$num of $count selected templates enabled";//?
+                            $warn="$num "._("of")." $count "._("selected templates enabled");//Agora sim
                     }else{
                         $errors['err']=_('Unable to enable selected templates');
                     }

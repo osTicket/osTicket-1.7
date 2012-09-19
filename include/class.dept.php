@@ -334,24 +334,24 @@ class Dept {
         global $cfg;
                 
         if($id && $id!=$vars['id'])
-            $errors['err']='Missing or invalid Dept ID (internal error).';
+            $errors['err']=_('Missing or invalid Dept ID (internal error).');
             
         if(!$vars['email_id'] || !is_numeric($vars['email_id']))
-            $errors['email_id']='Email selection required';
+            $errors['email_id']=_('Email selection required');
             
         if(!is_numeric($vars['tpl_id']))
-            $errors['tpl_id']='Template selection required';
+            $errors['tpl_id']=_('Template selection required');
 
         if(!$vars['name']){
-            $errors['name']='Name required';
+            $errors['name']=_('Name required');
         }elseif(strlen($vars['name'])<4) {
-            $errors['name']='Name is too short.';
+            $errors['name']=_('Name is too short.');
         }elseif(($did=Dept::getIdByName($vars['name'])) && $did!=$id){
-            $errors['name']='Department already exist';
+            $errors['name']=_('Department already exist');
         }
         
         if(!$vars['ispublic'] && ($vars['id']==$cfg->getDefaultDeptId()))
-            $errors['ispublic']='System default department can not be private';
+            $errors['ispublic']=_('System default department can not be private');
 
         if($errors) return false;
 
@@ -375,7 +375,7 @@ class Dept {
             if(db_query($sql) && db_affected_rows())
                 return true;
             
-            $errors['err']='Unable to update '.Format::htmlchars($vars['name']).' Dept. Error occurred';
+            $errors['err']=_('Unable to update ').Format::htmlchars($vars['name'])._(' Dept. Error occurred');
            
         }else{
             $sql='INSERT INTO '.DEPT_TABLE.' '.$sql.',created=NOW()';
@@ -383,7 +383,7 @@ class Dept {
                 return $id;
 
             
-            $errors['err']='Unable to create department. Internal error';
+            $errors['err']=_('Unable to create department. Internal error');
             
         }
 

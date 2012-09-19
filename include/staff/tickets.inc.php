@@ -412,7 +412,7 @@ $negorder=$order=='DESC'?'ASC':'DESC'; //Negate the sorting..
      <tr>
         <td colspan="7">
             <?php if($res && $num){ ?>
-            Select:&nbsp;
+            <?= _('Select')?>:&nbsp;
             <a href="#" onclick="return select_all(document.forms['tickets'],true)"><?=_('All')?></a>&nbsp;&nbsp;
             <a href="#" onclick="return reset_all(document.forms['tickets'])"><?=_('None')?></a>&nbsp;&nbsp;
             <a href="#" onclick="return toogle_all(document.forms['tickets'],true)"><?=_('Toggle')?></a>&nbsp;&nbsp;
@@ -427,9 +427,9 @@ $negorder=$order=='DESC'?'ASC':'DESC'; //Negate the sorting..
     </table>
     <?php
     if($num>0){ //if we actually had any tickets returned.
-        echo '<div>&nbsp;Page:'.$pageNav->getPageLinks().'&nbsp;';
+        echo '<div>&nbsp;'._('Page').':'.$pageNav->getPageLinks().'&nbsp;';
         echo '<a class="export-csv" href="?a=export&h='
-            .$hash.'&status='.$_REQUEST['status'] .'">Export</a></div>';
+            .$hash.'&status='.$_REQUEST['status'] .'">'._('Export').'</a></div>';
     ?>
         <?php
          if($thisstaff->canManageTickets()) { ?>

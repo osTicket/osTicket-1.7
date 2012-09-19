@@ -332,18 +332,18 @@ class FAQ {
 
         //validate
         if($id && $id!=$vars['id'])
-            $errors['err'] = 'Internal error. Try again';
+            $errors['err'] = _('Internal error. Try again');
 
         if(!$vars['question'])
-            $errors['question'] = 'Question required';
+            $errors['question'] = _('Question required');
         elseif(($qid=self::findIdByQuestion($vars['question'])) && $qid!=$id)
-            $errors['question'] = 'Question already exists';
+            $errors['question'] = _('Question already exists');
 
         if(!$vars['category_id'] || !($category=Category::lookup($vars['category_id'])))
-            $errors['category_id'] = 'Category is required';
+            $errors['category_id'] = _('Category is required');
 
         if(!$vars['answer'])
-            $errors['answer'] = 'FAQ answer is required';
+            $errors['answer'] = _('FAQ answer is required');
 
         if($errors || $validation) return (!$errors);
 
@@ -360,14 +360,14 @@ class FAQ {
             if(db_query($sql))
                 return true;
            
-            $errors['err']='Unable to update FAQ.';
+            $errors['err']=_('Unable to update FAQ.');
 
         } else {
             $sql='INSERT INTO '.FAQ_TABLE.' SET '.$sql.',created=NOW()';
             if(db_query($sql) && ($id=db_insert_id()))
                 return $id;
 
-            $errors['err']='Unable to create FAQ. Internal error';
+            $errors['err']=_('Unable to create FAQ. Internal error');
         }
 
         return false;

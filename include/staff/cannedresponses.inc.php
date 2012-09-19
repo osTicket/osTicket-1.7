@@ -1,5 +1,5 @@
 <?php
-if(!defined('OSTSCPINC') || !$thisstaff) die('Access Denied');
+if(!defined('OSTSCPINC') || !$thisstaff) die(_('Access Denied'));
 
 $qstr='';
 $sql='SELECT canned.*, count(attach.file_id) as files, dept.dept_name as department '.
@@ -41,16 +41,16 @@ $qstr.='&order='.($order=='DESC'?'ASC':'DESC');
 $query="$sql GROUP BY canned.canned_id ORDER BY $order_by LIMIT ".$pageNav->getStart().",".$pageNav->getLimit();
 $res=db_query($query);
 if($res && ($num=db_num_rows($res)))
-    $showing=$pageNav->showing().' premade responses';
+    $showing=$pageNav->showing().' '._('premade responses');
 else
-    $showing='No premade responses found!';
+    $showing=_('No premade responses found!');
 
 ?>
 <div style="width:700;padding-top:5px; float:left;">
- <h2>Canned Responses</h2>
+ <h2><?= _('Canned Responses')?></h2>
  </div>
 <div style="float:right;text-align:right;padding-top:5px;padding-right:5px;">
-    <b><a href="canned.php?a=add" class="Icon newReply">Add New Response</a></b></div>
+    <b><a href="canned.php?a=add" class="Icon newReply"><?= _('Add New Response')?></a></b></div>
 <div class="clear"></div>
 <form action="canned.php" method="POST" name="canned" onSubmit="return checkbox_checker(this,1,0);">
  <?php csrf_token(); ?>
@@ -60,10 +60,10 @@ else
     <thead>
         <tr>
             <th width="7">&nbsp;</th>
-            <th width="500"><a <?php echo $title_sort; ?> href="canned.php?<?php echo $qstr; ?>&sort=title">Title</a></th>
-            <th width="80"><a  <?php echo $status_sort; ?> href="canned.php?<?php echo $qstr; ?>&sort=status">Status</a></th>
-            <th width="200"><a  <?php echo $dept_sort; ?> href="canned.php?<?php echo $qstr; ?>&sort=dept">Department</a></th>
-            <th width="150" nowrap><a  <?php echo $updated_sort; ?>href="canned.php?<?php echo $qstr; ?>&sort=updated">Last Updated</a></th>
+            <th width="500"><a <?php echo $title_sort; ?> href="canned.php?<?php echo $qstr; ?>&sort=title"><?= _('Title')?></a></th>
+            <th width="80"><a  <?php echo $status_sort; ?> href="canned.php?<?php echo $qstr; ?>&sort=status"><?= _('Status')?></a></th>
+            <th width="200"><a  <?php echo $dept_sort; ?> href="canned.php?<?php echo $qstr; ?>&sort=dept"><?= _('Department')?></a></th>
+            <th width="150" nowrap><a  <?php echo $updated_sort; ?>href="canned.php?<?php echo $qstr; ?>&sort=updated"><?= _('Last Updated')?></a></th>
         </tr>
     </thead>
     <tbody>
@@ -89,8 +89,8 @@ else
                 <td>
                     <a href="canned.php?id=<?php echo $row['canned_id']; ?>"><?php echo Format::truncate($row['title'],200); echo "&nbsp;$files"; ?></a>&nbsp;
                 </td>
-                <td><?php echo $row['isenabled']?'Active':'<b>Disabled</b>'; ?></td>
-                <td><?php echo $row['department']?$row['department']:'-- All Departments --'; ?></td>
+                <td><?php echo $row['isenabled']?'Active':'<b>'._('Disabled').'</b>'; ?></td>
+                <td><?php echo $row['department']?$row['department']:'-- '._('All Departments').' --'; ?></td>
                 <td>&nbsp;<?php echo Format::db_datetime($row['updated']); ?></td>
             </tr>
             <?php
@@ -100,12 +100,12 @@ else
      <tr>
         <td colspan="5">
             <?php if($res && $num){ ?>
-            Select:&nbsp;
-            <a href="#" onclick="return select_all(document.forms['canned'],true)">All</a>&nbsp;&nbsp;
-            <a href="#" onclick="return reset_all(document.forms['canned'])">None</a>&nbsp;&nbsp;
-            <a href="#" onclick="return toogle_all(document.forms['canned'],true)">Toggle</a>&nbsp;&nbsp;
+            <?= _('Select')?>:&nbsp;
+            <a href="#" onclick="return select_all(document.forms['canned'],true)"><?= _('All')?></a>&nbsp;&nbsp;
+            <a href="#" onclick="return reset_all(document.forms['canned'])"><?= _('None')?></a>&nbsp;&nbsp;
+            <a href="#" onclick="return toogle_all(document.forms['canned'],true)"><?= _('Toggle')?></a>&nbsp;&nbsp;
             <?php }else{
-                echo 'No canned responses';
+                echo _('No canned responses');
             } ?>
         </td>
      </tr>
@@ -113,15 +113,15 @@ else
 </table>
 <?php
 if($res && $num): //Show options..
-    echo '<div>&nbsp;Page:'.$pageNav->getPageLinks().'&nbsp;</div>';
+    echo '<div>&nbsp;'._('Page').':'.$pageNav->getPageLinks().'&nbsp;</div>';
 ?>
 <p class="centered">
     <input class="button" type="submit" name="enable" value="Enable"
-                onClick=' return confirm("Are you sure you want to ENABLE selected responses?");'>
+                onClick=' return confirm("<?= _('Are you sure you want to ENABLE selected responses?')?>");'>
     <input class="button" type="submit" name="disable" value="Disable"
-                onClick=' return confirm("Are you sure you want to DISABLE selected responses?");'>
+                onClick=' return confirm("<?= _('Are you sure you want to DISABLE selected responses?')?>");'>
     <input class="button" type="submit" name="delete" value="Delete"
-                onClick=' return confirm("Are you sure you want to DELETE selected responses?");'>
+                onClick=' return confirm("<?= _('Are you sure you want to DELETE selected responses?')?>");'>
 </p>
 <?php
 endif;

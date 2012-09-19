@@ -16,11 +16,11 @@
 if(!strcasecmp(basename($_SERVER['SCRIPT_NAME']),basename(__FILE__))) die('kwaheri rafiki!');
 
 $thisdir=str_replace('\\\\', '/', realpath(dirname(__FILE__))).'/'; 
-if(!file_exists($thisdir.'main.inc.php')) die('Fatal Error.');
+if(!file_exists($thisdir.'main.inc.php')) die(_('Fatal Error.'));
 
 require_once($thisdir.'main.inc.php');
 
-if(!defined('INCLUDE_DIR')) die('Fatal error');
+if(!defined('INCLUDE_DIR')) die(_('Fatal error'));
 
 /*Some more include defines specific to client only */
 define('CLIENTINC_DIR',INCLUDE_DIR.'client/');
@@ -57,7 +57,7 @@ if($thisclient && $thisclient->getId() && $thisclient->isValid()){
 if ($_POST  && !$ost->checkCSRFToken()) {
     @header('Location: index.php');
     //just incase redirect fails
-    die('Action denied (400)!');
+    die(_('Action denied (400)!'));
 }
 
 /* Client specific defaults */
