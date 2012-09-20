@@ -1,19 +1,19 @@
 <?php
-if(!defined('OSTADMININC') || !$thisstaff || !$thisstaff->isAdmin()) die('Access Denied');
+if(!defined('OSTADMININC') || !$thisstaff || !$thisstaff->isAdmin()) die(_('Access Denied'));
 $info=array();
 $qstr='';
 if($group && $_REQUEST['a']!='add'){
-    $title='Update Group';
+    $title=_('Update Group');
     $action='update';
-    $submit_text='Save Changes';
+    $submit_text=_('Save Changes');
     $info=$group->getInfo();
     $info['id']=$group->getId();
     $info['depts']=$group->getDepartments();
     $qstr.='&id='.$group->getId();
 }else {
-    $title='Add New Group';
+    $title=_('Add New Group');
     $action='create';
-    $submit_text='Create Group';
+    $submit_text=_('Create Group');
     $info['isactive']=isset($info['isactive'])?$info['isactive']:1;
     $info['can_create_tickets']=isset($info['can_create_tickets'])?$info['can_create_tickets']:1;
     $qstr.='&a='.$_REQUEST['a'];

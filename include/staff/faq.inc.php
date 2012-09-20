@@ -1,19 +1,19 @@
 <?php
-if(!defined('OSTSCPINC') || !$thisstaff || !$thisstaff->canManageFAQ()) die('Access Denied');
+if(!defined('OSTSCPINC') || !$thisstaff || !$thisstaff->canManageFAQ()) die(_('Access Denied'));
 $info=array();
 $qstr='';
 if($faq){
-    $title='Update FAQ: '.$faq->getQuestion();
+    $title=_('Update FAQ: ').$faq->getQuestion();
     $action='update';
-    $submit_text='Save Changes';
+    $submit_text=_('Save Changes');
     $info=$faq->getHashtable();
     $info['id']=$faq->getId();
     $info['topics']=$faq->getHelpTopicsIds();
     $qstr='id='.$faq->getId();
 }else {
-    $title='Add New FAQ';
+    $title=_('Add New FAQ');
     $action='create';
-    $submit_text='Add FAQ';
+    $submit_text=_('Add FAQ');
     if($category) {
         $qstr='cid='.$category->getId();
         $info['category_id']=$category->getId();

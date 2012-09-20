@@ -1,5 +1,5 @@
 <?php
-if(!defined('OSTADMININC') || !$thisstaff->isAdmin()) die('Access Denied');
+if(!defined('OSTADMININC') || !$thisstaff->isAdmin()) die(_('Access Denied'));
 
 $qstr='';
 $sql='SELECT * FROM '.API_KEY_TABLE.' WHERE 1';
@@ -33,9 +33,9 @@ $qstr.='&order='.($order=='DESC'?'ASC':'DESC');
 $query="$sql ORDER BY $order_by LIMIT ".$pageNav->getStart().",".$pageNav->getLimit();
 $res=db_query($query);
 if($res && ($num=db_num_rows($res)))
-    $showing=$pageNav->showing().' API Keys';
+    $showing=$pageNav->showing()._(' API Keys');
 else
-    $showing='No API keys found!';
+    $showing=_('No API keys found!');
 
 ?>
 
@@ -43,7 +43,7 @@ else
  <h2>API Keys</h2>
 </div>
 <div style="float:right;text-align:right;padding-top:5px;padding-right:5px;">
- <b><a href="apikeys.php?a=add" class="Icon newapi">Add New API Key</a></b></div>
+ <b><a href="apikeys.php?a=add" class="Icon newapi"><?php _('Add New API Key') ?></a></b></div>
 <div class="clear"></div>
 <form action="apikeys.php" method="POST" name="keys" onSubmit="return checkbox_checker(this,1,0);">
  <?php csrf_token(); ?>
@@ -53,11 +53,11 @@ else
     <thead>
         <tr>
             <th width="7">&nbsp;</th>        
-            <th width="150" nowrap><a  <?php echo $date_sort; ?>href="apikeys.php?<?php echo $qstr; ?>&sort=date">Date Added</a></th>
-            <th width="320"><a <?php echo $key_sort; ?> href="apikeys.php?<?php echo $qstr; ?>&sort=key">API Key</a></th>
-            <th width="100"><a  <?php echo $status_sort; ?> href="apikeys.php?<?php echo $qstr; ?>&sort=status">Status</a></th>
-            <th width="120"><a  <?php echo $ip_sort; ?> href="apikeys.php?<?php echo $qstr; ?>&sort=ip">IP Addr.</a></th>
-            <th width="150" nowrap><a  <?php echo $updated_sort; ?>href="apikeys.php?<?php echo $qstr; ?>&sort=updated">Last Updated</a></th>
+            <th width="150" nowrap><a  <?php echo $date_sort; ?>href="apikeys.php?<?php echo $qstr; ?>&sort=date"><?php _('Date Added') ?></a></th>
+            <th width="320"><a <?php echo $key_sort; ?> href="apikeys.php?<?php echo $qstr; ?>&sort=key"><?php _('API Key') ?></a></th>
+            <th width="100"><a  <?php echo $status_sort; ?> href="apikeys.php?<?php echo $qstr; ?>&sort=status"><?php _('Status') ?></a></th>
+            <th width="120"><a  <?php echo $ip_sort; ?> href="apikeys.php?<?php echo $qstr; ?>&sort=ip"><?php _('IP Addr')?>.</a></th>
+            <th width="150" nowrap><a  <?php echo $updated_sort; ?>href="apikeys.php?<?php echo $qstr; ?>&sort=updated"><?php _('Last Updated') ?></a></th>
         </tr>
     </thead>
     <tbody>
@@ -94,7 +94,7 @@ else
             <a href="#" onclick="return reset_all(document.forms['keys'])">None</a>&nbsp;&nbsp;
             <a href="#" onclick="return toogle_all(document.forms['keys'],true)">Toggle</a>&nbsp;&nbsp;
             <?php }else{
-                echo 'No API keys found';
+                echo _('No API keys found');
             } ?>
         </td>
      </tr>
@@ -105,12 +105,12 @@ if($res && $num): //Show options..
     echo '<div>&nbsp;Page:'.$pageNav->getPageLinks().'&nbsp;</div>';
 ?>
 <p class="centered">
-    <input class="button" type="submit" name="enable" value="Enable"
-                onClick=' return confirm("Are you sure you want to ENABLE selected API keys?");'>
-    <input class="button" type="submit" name="disable" value="Disable"
-                onClick=' return confirm("Are you sure you want to DISABLE selected API keys?");'>
-    <input class="button" type="submit" name="delete" value="Delete"
-                onClick=' return confirm("Are you sure you want to DELETE selected API keys?");'>
+    <input class="button" type="submit" name="enable" value="<?php _('Enable') ?>"
+                onClick=' return confirm(<?php _("Are you sure you want to ENABLE selected API keys?")?>);'>
+    <input class="button" type="submit" name="disable" value="<?php _('Disable') ?>"
+                onClick=' return confirm(<?php _("Are you sure you want to DISABLE selected API keys?") ?>);'>
+    <input class="button" type="submit" name="delete" value="<?php _('Delete') ?>"
+                onClick=' return confirm(<?php _("Are you sure you want to DELETE selected API keys?") ?>);'>
 </p>
 <?php
 endif;

@@ -1,5 +1,5 @@
 <?php
-if(!defined('OSTADMININC') || !$thisstaff->isAdmin()) die('Access Denied');
+if(!defined('OSTADMININC') || !$thisstaff->isAdmin()) die(_('Access Denied'));
 $targets = Filter::getTargets();
 $qstr='';
 $sql='SELECT filter.*,count(rule.id) as rules '.
@@ -39,7 +39,7 @@ $res=db_query($query);
 if($res && ($num=db_num_rows($res)))
     $showing=$pageNav->showing().' filters';
 else
-    $showing='No filters found!';
+    $showing=_('No filters found!');
 
 ?>
 

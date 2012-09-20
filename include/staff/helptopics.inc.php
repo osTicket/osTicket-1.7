@@ -1,5 +1,5 @@
 <?php
-if(!defined('OSTADMININC') || !$thisstaff->isAdmin()) die('Access Denied');
+if(!defined('OSTADMININC') || !$thisstaff->isAdmin()) die(_('Access Denied'));
 
 $qstr='';
 $sql='SELECT topic.* '
@@ -44,7 +44,7 @@ $res=db_query($query);
 if($res && ($num=db_num_rows($res)))
     $showing=$pageNav->showing().' help topics';
 else
-    $showing='No help topic found!';
+    $showing=_('No help topic found!');
 
 ?>
 <div style="width:700;padding-top:5px; float:left;">

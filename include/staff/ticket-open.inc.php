@@ -1,5 +1,5 @@
 <?php
-if(!defined('OSTSCPINC') || !$thisstaff || !$thisstaff->canCreateTickets()) die('Access Denied');
+if(!defined('OSTSCPINC') || !$thisstaff || !$thisstaff->canCreateTickets()) die(_('Access Denied'));
 $info=array();
 $info=Format::htmlchars(($errors && $_POST)?$_POST:$info);
 ?>

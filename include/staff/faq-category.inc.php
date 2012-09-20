@@ -1,9 +1,9 @@
 <?php
-if(!defined('OSTSTAFFINC') || !$category || !$thisstaff) die('Access Denied');
+if(!defined('OSTSTAFFINC') || !$category || !$thisstaff) die(_('Access Denied'));
 
 ?>
 <div style="width:700;padding-top:10px; float:left;">
-  <h2>Frequently Asked Questions</h2>
+  <h2>_('Frequently Asked Questions')</h2>
 </div>
 <div style="float:right;text-align:right;padding-top:5px;padding-right:5px;">&nbsp;</div>
 <div class="clear"></div>
@@ -45,6 +45,6 @@ if(($res=db_query($sql)) && db_num_rows($res)) {
     echo '  </ol>
          </div>';
 }else {
-    echo '<strong>Category does not have FAQs</strong>';
+    echo _('<strong>Category does not have FAQs</strong>');
 }
 ?>

@@ -1,18 +1,18 @@
 <?php
-if(!defined('OSTSCPINC') || !$thisstaff || !$thisstaff->canManageFAQ()) die('Access Denied');
+if(!defined('OSTSCPINC') || !$thisstaff || !$thisstaff->canManageFAQ()) die(_('Access Denied'));
 $info=array();
 $qstr='';
 if($category && $_REQUEST['a']!='add'){
-    $title='Update Category :'.$category->getName();
-    $action='update';
+    $title=_('Update Category :').$category->getName();
+    $action=_('update');
     $submit_text='Save Changes';
     $info=$category->getHashtable();
     $info['id']=$category->getId();
     $qstr.='&id='.$category->getId();
 }else {
-    $title='Add New Category';
-    $action='create';
-    $submit_text='Add';
+    $title=_('Add New Category');
+    $action=_('create');
+    $submit_text=_('Add');
     $qstr.='&a='.$_REQUEST['a'];
 }
 $info=Format::htmlchars(($errors && $_POST)?$_POST:$info);

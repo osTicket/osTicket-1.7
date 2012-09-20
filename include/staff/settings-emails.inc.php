@@ -1,5 +1,5 @@
 <?php
-if(!defined('OSTADMININC') || !$thisstaff || !$thisstaff->isAdmin() || !$config) die('Access Denied');
+if(!defined('OSTADMININC') || !$thisstaff || !$thisstaff->isAdmin() || !$config) die(_('Access Denied'));
 ?>
 <h2>Email Settings and Options</h2>
 <form action="settings.php?t=emails" method="post" id="save">

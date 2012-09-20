@@ -3,9 +3,9 @@ if(!defined('OSTADMININC') || !$thisstaff || !$thisstaff->isAdmin()) die('Access
 $info=array();
 $qstr='';
 if($email && $_REQUEST['a']!='add'){
-    $title='Update Email';
+    $title=_('Update Email');
     $action='update';
-    $submit_text='Save Changes';
+    $submit_text=_('Save Changes');
     $info=$email->getInfo();
     $info['id']=$email->getId();
     if($info['mail_delete'])
@@ -15,13 +15,13 @@ if($email && $_REQUEST['a']!='add'){
     else
         $info['postfetch']=''; //nothing.
     if($info['userpass'])
-        $passwdtxt='To change password enter new password above.';
+        $passwdtxt=_('To change password enter new password above.');
 
     $qstr.='&id='.$email->getId();
 }else {
-    $title='Add New Email';
+    $title=_('Add New Email');
     $action='create';
-    $submit_text='Submit';
+    $submit_text=_('Submit');
     $info['ispublic']=isset($info['ispublic'])?$info['ispublic']:1;
     $info['ticket_auto_response']=isset($info['ticket_auto_response'])?$info['ticket_auto_response']:1;
     $info['message_auto_response']=isset($info['message_auto_response'])?$info['message_auto_response']:1;

@@ -1,5 +1,5 @@
 <?php
-if(!defined('OSTADMININC') || !$thisstaff->isAdmin()) die('Access Denied');
+if(!defined('OSTADMININC') || !$thisstaff->isAdmin()) die(_('Access Denied'));
 
 $qstr='';
 $sql='SELECT email.*,dept.dept_name as department,priority_desc as priority '.
@@ -39,7 +39,7 @@ $res=db_query($query);
 if($res && ($num=db_num_rows($res)))
     $showing=$pageNav->showing().' emails';
 else
-    $showing='No emails found!';
+    $showing=_('No emails found!');
 
 ?>
 <div style="width:700;padding-top:5px; float:left;">
@@ -108,7 +108,7 @@ else
             <a href="#" onclick="return reset_all(document.forms['emails'])">None</a>&nbsp;&nbsp;
             <a href="#" onclick="return toogle_all(document.forms['emails'],true)">Toggle</a>&nbsp;&nbsp;
             <?php }else{
-                echo 'No help emails found';
+                echo _('No help emails found');
             } ?>
         </td>
      </tr>
@@ -120,7 +120,7 @@ if($res && $num): //Show options..
 ?>
 <p class="centered">
     <input class="button" type="submit" name="delete" value="Delete Email(s)"
-                onClick=' return confirm("Are you sure you want to DELETE selected emails?");'>
+                onClick=' return confirm(_("Are you sure you want to DELETE selected emails?"));'>
 </p>
 <?php
 endif;

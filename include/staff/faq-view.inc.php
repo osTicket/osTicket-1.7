@@ -1,5 +1,5 @@
 <?php
-if(!defined('OSTSTAFFINC') || !$faq || !$thisstaff) die('Access Denied');
+if(!defined('OSTSTAFFINC') || !$faq || !$thisstaff) die(_('Access Denied'));
 
 $category=$faq->getCategory();
 

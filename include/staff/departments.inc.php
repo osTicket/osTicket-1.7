@@ -1,5 +1,5 @@
 <?php
-if(!defined('OSTADMININC') || !$thisstaff->isAdmin()) die('Access Denied');
+if(!defined('OSTADMININC') || !$thisstaff->isAdmin()) die(_('Access Denied'));
 
 $qstr='';
 $sql='SELECT dept.dept_id,dept_name,email.email_id,email.email,email.name as email_name,ispublic,count(staff.staff_id) as users '.
@@ -37,7 +37,7 @@ $res=db_query($query);
 if($res && ($num=db_num_rows($res)))
     $showing="Showing 1-$num of $num departments";
 else
-    $showing='No departments found!';
+    $showing=_('No departments found!');
 
 ?>
 <div style="width:700;padding-top:5px; float:left;">
@@ -106,7 +106,7 @@ else
             <a href="#" onclick="return reset_all(document.forms['depts'])">None</a>&nbsp;&nbsp;
             <a href="#" onclick="return toogle_all(document.forms['depts'],true)">Toggle</a>&nbsp;&nbsp;
             <?php }else{
-                echo 'No department found';
+                echo _('No department found');
             } ?>
         </td>
      </tr>

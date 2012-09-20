@@ -1,5 +1,5 @@
 <?php
-if(!defined('OSTADMININC') || !$thisstaff || !$thisstaff->isAdmin()) die('Access Denied');
+if(!defined('OSTADMININC') || !$thisstaff || !$thisstaff->isAdmin()) die(_('Access Denied'));
 
 $matches=Filter::getSupportedMatches();
 $match_types=Filter::getSupportedMatchTypes();
@@ -7,16 +7,16 @@ $match_types=Filter::getSupportedMatchTypes();
 $info=array();
 $qstr='';
 if($filter && $_REQUEST['a']!='add'){
-    $title='Update Filter';
+    $title=_('Update Filter');
     $action='update';
-    $submit_text='Save Changes';
+    $submit_text=_('Save Changes');
     $info=array_merge($filter->getInfo(),$filter->getFlatRules());
     $info['id']=$filter->getId();
     $qstr.='&id='.$filter->getId();
 }else {
-    $title='Add New Filter';
+    $title=_('Add New Filter');
     $action='add';
-    $submit_text='Add Filter';
+    $submit_text=_('Add Filter');
     $info['isactive']=isset($info['isactive'])?$info['isactive']:0;
     $qstr.='&a='.urlencode($_REQUEST['a']);
 }

@@ -1,5 +1,5 @@
 <?php
-if(!defined('OSTADMININC') || !$thisstaff || !$thisstaff->isAdmin()) die('Access Denied');
+if(!defined('OSTADMININC') || !$thisstaff || !$thisstaff->isAdmin()) die(_('Access Denied'));
 
 $qstr='';
 
@@ -36,7 +36,7 @@ $res=db_query($query);
 if($res && ($num=db_num_rows($res)))
     $showing="Showing 1-$num of $num groups";
 else
-    $showing='No groups found!';
+    $showing=_('No groups found!');
 
 ?>
 <div style="width:700;padding-top:5px; float:left;">
@@ -115,11 +115,11 @@ if($res && $num): //Show options..
 ?>
 <p class="centered">
     <input class="button" type="submit" name="enable" value="Enable"
-                onClick=' return confirm("Are you sure you want to ENABLE selected groups?");'>
+                onClick=' return confirm(_("Are you sure you want to ENABLE selected groups?"));'>
     <input class="button" type="submit" name="disable" value="Disable"
-                onClick=' return confirm("Are you sure you want to DISABLE selected groups?");'>
+                onClick=' return confirm(_("Are you sure you want to DISABLE selected groups?"));'>
     <input class="button" type="submit" name="delete" value="Delete"
-                onClick=' return confirm("Are you sure you want to DELETE selected groups?");'>
+                onClick=' return confirm(_("Are you sure you want to DELETE selected groups?"));'>
 </p>
 <?php
 endif;

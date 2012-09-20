@@ -1,5 +1,5 @@
 <?php
-if(!defined('OSTADMININC') || !$thisstaff || !$thisstaff->isAdmin() || !$filter) die('Access Denied');
+if(!defined('OSTADMININC') || !$thisstaff || !$thisstaff->isAdmin() || !$filter) die(_('Access Denied'));
 
 $qstr='';
 $select='SELECT rule.* ';
@@ -14,7 +14,7 @@ if($_REQUEST['q'] && strlen($_REQUEST['q'])>3) {
         $where.=' AND rule.val LIKE "%'.db_input($_REQUEST['q'],false).'%"';
 
 }elseif($_REQUEST['q']) {
-    $errors['q']='Term too short!';
+    $errors['q']=_('Term too short!');
 }
 
 //TODO: Add search here..
@@ -55,20 +55,20 @@ $query="$select $from $where ORDER BY $order_by LIMIT ".$pageNav->getStart().","
      <div>
        Query: <input name="q" type="text" size="20" value="<?php echo Format::htmlchars($_REQUEST['q']); ?>">
         &nbsp;&nbsp;
-        <input type="submit" name="submit" value="Search"/>
+        <input type="submit" name="submit" value="<?php _('Search') ?>"/>
      </div>
     </form>
  </div>
-<div style="float:right;text-align:right;padding-right:5px;"><b><a href="banlist.php?a=add" class="Icon newstaff">Ban New Email</a></b></div>
+<div style="float:right;text-align:right;padding-right:5px;"><b><a href="banlist.php?a=add" class="Icon newstaff"><?php _('Ban New Email') ?></a></b></div>
 <div class="clear"></div>
 <?php
 if(($res=db_query($query)) && ($num=db_num_rows($res)))
     $showing=$pageNav->showing();
 else
-    $showing='No banned emails matching the query found!';
+    $showing=_('No banned emails matching the query found!');
 
 if($search)
-    $showing='Search Results: '.$showing;
+    $showing=_('Search Results')." :".$showing;
     
 ?>
 <form action="banlist.php" method="POST" name="banlist" onSubmit="return checkbox_checker(this,1,0);">
@@ -79,10 +79,10 @@ if($search)
     <thead>
         <tr>
             <th width="7px">&nbsp;</th>        
-            <th width="350"><a <?php echo $email_sort; ?> href="staff.php?<?php echo $qstr; ?>&sort=email">Email Address</a></th>
-            <th width="200"><a  <?php echo $status_sort; ?> href="staff.php?<?php echo $qstr; ?>&sort=status">Ban Status</a></th>
-            <th width="120"><a <?php echo $created_sort; ?> href="staff.php?<?php echo $qstr; ?>&sort=created">Date Added</a></th>
-            <th width="120"><a <?php echo $updated_sort; ?> href="staff.php?<?php echo $qstr; ?>&sort=updated">Last Updated</a></th>
+            <th width="350"><a <?php echo $email_sort; ?> href="staff.php?<?php echo $qstr; ?>&sort=email"><?php _('Email Address') ?></a></th>
+            <th width="200"><a  <?php echo $status_sort; ?> href="staff.php?<?php echo $qstr; ?>&sort=status"><?php _('Ban Status') ?></a></th>
+            <th width="120"><a <?php echo $created_sort; ?> href="staff.php?<?php echo $qstr; ?>&sort=created"><?php _('Date Added') ?></a></th>
+            <th width="120"><a <?php echo $updated_sort; ?> href="staff.php?<?php echo $qstr; ?>&sort=updated"><?php _('Last Updated') ?></a></th>
         </tr>
     </thead>
     <tbody>
@@ -101,7 +101,7 @@ if($search)
                   <input type="checkbox" name="ids[]" value="<?php echo $row['id']; ?>" <?php echo $sel?'checked="checked"':''; ?>  
                         onClick="highLight(this.value,this.checked);">
                 <td>&nbsp;<a href="banlist.php?id=<?php echo $row['id']; ?>"><?php echo Format::htmlchars($row['val']); ?></a></td>
-                <td>&nbsp;&nbsp;<?php echo $row['isactive']?'Active':'<b>Disabled</b>'; ?></td>
+                <td>&nbsp;&nbsp;<?php echo $row['isactive']?_('Active'):'<b>'._('Disabled').'</b>'; ?></td>
                 <td><?php echo Format::db_date($row['created']); ?></td>
                 <td><?php echo Format::db_datetime($row['updated']); ?>&nbsp;</td>
                </tr>
@@ -113,11 +113,11 @@ if($search)
         <td colspan="5">
             <?php if($res && $num){ ?>
             Select:&nbsp;
-            <a href="#" onclick="return select_all(document.forms['banlist'],true)">All</a>&nbsp;&nbsp;
-            <a href="#" onclick="return reset_all(document.forms['banlist'])">None</a>&nbsp;&nbsp;
-            <a href="#" onclick="return toogle_all(document.forms['banlist'],true)">Toggle</a>&nbsp;&nbsp;
+            <a href="#" onclick="return select_all(document.forms['banlist'],true)"><?php _('All') ?></a>&nbsp;&nbsp;
+            <a href="#" onclick="return reset_all(document.forms['banlist'])"><?php _('None') ?></a>&nbsp;&nbsp;
+            <a href="#" onclick="return toogle_all(document.forms['banlist'],true)"><?php _('Toggle') ?></a>&nbsp;&nbsp;
             <?php }else{
-                echo 'No banned emails found!';
+                echo _('No banned emails found!');
             } ?>
         </td>
      </tr>
@@ -128,14 +128,14 @@ if($res && $num): //Show options..
     echo '<div>&nbsp;Page:'.$pageNav->getPageLinks().'&nbsp;</div>';
 ?>
 <p class="centered">
-    <input class="button" type="submit" name="enable" value="Enable"
-        onClick=' return confirm("Are you sure you want to ENABLE selected email ban?");'>
+    <input class="button" type="submit" name="enable" value="<?php _('Enable') ?>"
+        onClick=' return confirm(<?php_("Are you sure you want to ENABLE selected email ban?") ?>);'>
     &nbsp;&nbsp;
-    <input class="button" type="submit" name="disable" value="Disable"
-        onClick=' return confirm("Are you sure you want to DISABLE selected emails ban?");'>
+    <input class="button" type="submit" name="disable" value="<?php _('Disable') ?>"
+        onClick=' return confirm(<?php _("Are you sure you want to DISABLE selected emails ban?") ?>);'>
     &nbsp;&nbsp;
     <input class="button" type="submit" name="delete" value="Delete"
-        onClick=' return confirm("Are you sure you want to DELETE selected emails?");'>
+        onClick=' return confirm(<?php _("Are you sure you want to DELETE selected emails?") ?>);'>
 </p>
 <?php
 endif;

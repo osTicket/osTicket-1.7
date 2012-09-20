@@ -4,18 +4,18 @@ $info=array();
 $qstr='';
 if($dept && $_REQUEST['a']!='add') {
     //Editing Department.
-    $title='Update Department';
+    $title=_('Update Department');
     $action='update';
-    $submit_text='Save Changes';
+    $submit_text=_('Save Changes');
     $info=$dept->getInfo();
     $info['id']=$dept->getId();
     $info['groups'] = $dept->getAllowedGroups();
 
     $qstr.='&id='.$dept->getId();
 } else {
-    $title='Add New Department';
+    $title=_('Add New Department');
     $action='create';
-    $submit_text='Create Dept';
+    $submit_text=_('Create Dept');
     $info['ispublic']=isset($info['ispublic'])?$info['ispublic']:1;
     $info['ticket_auto_response']=isset($info['ticket_auto_response'])?$info['ticket_auto_response']:1;
     $info['message_auto_response']=isset($info['message_auto_response'])?$info['message_auto_response']:1;

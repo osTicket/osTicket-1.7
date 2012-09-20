@@ -1,5 +1,5 @@
 <?php
-if(!defined('OSTSCPINC') || !$thisstaff) die('Access Denied');
+if(!defined('OSTSCPINC') || !$thisstaff) die(_('Access Denied'));
 
 $qstr='';
 $sql='SELECT cat.category_id, cat.name, cat.ispublic, cat.updated, count(faq.faq_id) as faqs '.
@@ -37,14 +37,14 @@ $res=db_query($query);
 if($res && ($num=db_num_rows($res)))
     $showing=$pageNav->showing().' categories';
 else
-    $showing='No FAQ categories found!';
+    $showing=_('No FAQ categories found!');
 
 ?>
 <div style="width:700;padding-top:5px; float:left;">
  <h2>FAQ Categories</h2>
  </div>
 <div style="float:right;text-align:right;padding-top:5px;padding-right:5px;">
-    <b><a href="categories.php?a=add" class="Icon newCategory">Add New Category</a></b></div>
+    <b><a href="categories.php?a=add" class="Icon newCategory"><?php _('Add New Category') ?></a></b></div>
 <div class="clear"></div>
 <form action="categories.php" method="POST" name="cat" onSubmit="return checkbox_checker(this,1,0);">
  <?php csrf_token(); ?>
@@ -54,10 +54,10 @@ else
     <thead>
         <tr>
             <th width="7">&nbsp;</th>
-            <th width="500"><a <?php echo $name_sort; ?> href="categories.php?<?php echo $qstr; ?>&sort=name">Name</a></th>
-            <th width="150"><a  <?php echo $type_sort; ?> href="categories.php?<?php echo $qstr; ?>&sort=type">Type</a></th>
+            <th width="500"><a <?php echo $name_sort; ?> href="categories.php?<?php echo $qstr; ?>&sort=name"><?php _('Name') ?></a></th>
+            <th width="150"><a  <?php echo $type_sort; ?> href="categories.php?<?php echo $qstr; ?>&sort=type"><?php ('Type') ?></a></th>
             <th width="80"><a  <?php echo $faqs_sort; ?> href="categories.php?<?php echo $qstr; ?>&sort=faqs">FAQs</a></th>
-            <th width="150" nowrap><a  <?php echo $updated_sort; ?>href="categories.php?<?php echo $qstr; ?>&sort=updated">Last Updated</a></th>
+            <th width="150" nowrap><a  <?php echo $updated_sort; ?>href="categories.php?<?php echo $qstr; ?>&sort=updated"><?php _('Last Updated') ?></a></th>
         </tr>
     </thead>
     <tbody>
@@ -95,11 +95,11 @@ else
         <td colspan="5">
             <?php if($res && $num){ ?>
             Select:&nbsp;
-            <a href="#" onclick="return select_all(document.forms['cat'],true)">All</a>&nbsp;&nbsp;
-            <a href="#" onclick="return reset_all(document.forms['cat'])">None</a>&nbsp;&nbsp;
-            <a href="#" onclick="return toogle_all(document.forms['cat'],true)">Toggle</a>&nbsp;&nbsp;
+            <a href="#" onclick="return select_all(document.forms['cat'],true)"><?php _('All') ?></a>&nbsp;&nbsp;
+            <a href="#" onclick="return reset_all(document.forms['cat'])"><?php _('None') ?></a>&nbsp;&nbsp;
+            <a href="#" onclick="return toogle_all(document.forms['cat'],true)"><?php _('Toggle') ?></a>&nbsp;&nbsp;
             <?php }else{
-                echo 'No FAQ categories found.';
+                echo _('No FAQ categories found.');
             } ?>
         </td>
      </tr>
@@ -110,12 +110,12 @@ if($res && $num): //Show options..
     echo '<div>&nbsp;Page:'.$pageNav->getPageLinks().'&nbsp;</div>';
 ?>
 <p class="centered">
-    <input class="button" type="submit" name="public" value="Make Public"
-                onClick=' return confirm("Are you sure you want to make selected categories PUBLIC?");'>
-    <input class="button" type="submit" name="private" value="Make Internal"
-                onClick=' return confirm("Are you sure you want to make selected categories INTERNAL?");'>
-    <input class="button" type="submit" name="delete" value="Delete"
-                onClick=' return confirm("Are you sure you want to DELETE selected categories - including associated FAQs?");'>
+    <input class="button" type="submit" name="public" value="<?php _('Make Public') ?>"
+                onClick=' return confirm(<?php _("Are you sure you want to make selected categories PUBLIC?") ?>);'>
+    <input class="button" type="submit" name="private" value="<?php _('Make Internal') ?>"
+                onClick=' return confirm(<?php _("Are you sure you want to make selected categories INTERNAL?") ?>);'>
+    <input class="button" type="submit" name="delete" value="<?php _('Delete') ?>"
+                onClick=' return confirm(<?php _("Are you sure you want to DELETE selected categories - including associated FAQs?") ?>);'>
 </p>
 <?php
 endif;

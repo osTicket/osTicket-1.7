@@ -1,19 +1,19 @@
 <?php
-if(!defined('OSTADMININC') || !$thisstaff || !$thisstaff->isAdmin()) die('Access Denied');
+if(!defined('OSTADMININC') || !$thisstaff || !$thisstaff->isAdmin()) die(_('Access Denied'));
 $info=array();
 $qstr='';
 if($topic && $_REQUEST['a']!='add') {
-    $title='Update Help Topic';
+    $title=_('Update Help Topic');
     $action='update';
-    $submit_text='Save Changes';
+    $submit_text=_('Save Changes');
     $info=$topic->getInfo();
     $info['id']=$topic->getId();
     $info['pid']=$topic->getPid();
     $qstr.='&id='.$topic->getId();
 } else {
-    $title='Add New Help Topic';
+    $title=_('Add New Help Topic');
     $action='create';
-    $submit_text='Add Topic';
+    $submit_text=_('Add Topic');
     $info['isactive']=isset($info['isactive'])?$info['isactive']:1;
     $info['ispublic']=isset($info['ispublic'])?$info['ispublic']:1;
     $qstr.='&a='.$_REQUEST['a'];
