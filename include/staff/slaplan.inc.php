@@ -1,18 +1,18 @@
 <?php
-if(!defined('OSTADMININC') || !$thisstaff || !$thisstaff->isAdmin()) die('Access Denied');
+if(!defined('OSTADMININC') || !$thisstaff || !$thisstaff->isAdmin()) die(_('Access Denied'));
 $info=array();
 $qstr='';
 if($sla && $_REQUEST['a']!='add'){
-    $title='Update SLA Plan';
+    $title=_('Update SLA Plan');
     $action='update';
-    $submit_text='Save Changes';
+    $submit_text=_('Save Changes');
     $info=$sla->getInfo();
     $info['id']=$sla->getId();
     $qstr.='&id='.$sla->getId();
 }else {
-    $title='Add New SLA Plan';
+    $title=_('Add New SLA Plan');
     $action='add';
-    $submit_text='Add Plan';
+    $submit_text=_('Add Plan');
     $info['isactive']=isset($info['isactive'])?$info['isactive']:1;
     $info['enable_priority_escalation']=isset($info['enable_priority_escalation'])?$info['enable_priority_escalation']:1;
     $info['disable_overdue_alerts']=isset($info['disable_overdue_alerts'])?$info['disable_overdue_alerts']:1;
@@ -25,20 +25,20 @@ $info=Format::htmlchars(($errors && $_POST)?$_POST:$info);
  <input type="hidden" name="do" value="<?php echo $action; ?>">
  <input type="hidden" name="a" value="<?php echo Format::htmlchars($_REQUEST['a']); ?>">
  <input type="hidden" name="id" value="<?php echo $info['id']; ?>">
- <h2>Service Level Agreement</h2>
+ <h2><?= _('Service Level Agreement')?></h2>
  <table class="form_table" width="940" border="0" cellspacing="0" cellpadding="2">
     <thead>
         <tr>
             <th colspan="2">
                 <h4><?php echo $title; ?></h4>
-                <em>Tickets are marked overdue on grace period violation.</em>
+                <em><?= _('Tickets are marked overdue on grace period violation.')?></em>
             </th>
         </tr>
     </thead>
     <tbody>
         <tr>
             <td width="180" class="required">
-              Name:
+              <?= _('Name')?>:
             </td>
             <td>
                 <input type="text" size="30" name="name" value="<?php echo $info['name']; ?>">
@@ -47,46 +47,46 @@ $info=Format::htmlchars(($errors && $_POST)?$_POST:$info);
         </tr>
         <tr>
             <td width="180" class="required">
-              Grace Period:
+              <?= _('Grace Period')?>:
             </td>
             <td>
                 <input type="text" size="10" name="grace_period" value="<?php echo $info['grace_period']; ?>">
-                <em>( in hours )</em>
+                <em>( <?= _('in hours')?> )</em>
                 &nbsp;<span class="error">*&nbsp;<?php echo $errors['grace_period']; ?></span>
             </td>
         </tr>
         <tr>
             <td width="180" class="required">
-                Status:
+                <?= _('Status')?>:
             </td>
             <td>
-                <input type="radio" name="isactive" value="1" <?php echo $info['isactive']?'checked="checked"':''; ?>><strong>Active</strong>
-                <input type="radio" name="isactive" value="0" <?php echo !$info['isactive']?'checked="checked"':''; ?>>Disabled
+                <input type="radio" name="isactive" value="1" <?php echo $info['isactive']?'checked="checked"':''; ?>><strong><?= _('Active')?></strong>
+                <input type="radio" name="isactive" value="0" <?php echo !$info['isactive']?'checked="checked"':''; ?>><?= _('Disabled')?>
                 &nbsp;<span class="error">*&nbsp;</span>
             </td>
         </tr>
         <tr>
             <td width="180">
-                Priority Escalation:
+                <?= _('Priority Escalation')?>:
             </td>
             <td>
                 <input type="checkbox" name="enable_priority_escalation" value="1" <?php echo $info['enable_priority_escalation']?'checked="checked"':''; ?> >
-                    <strong>Enable</strong> priority escalation on overdue tickets.
+                    <strong><?= _('Enable')?></strong> <?= _('priority escalation on overdue tickets')?>.
             </td>
         </tr>
         <tr>
             <td width="180">
-                Ticket Overdue Alerts:
+                <?= _('Ticket Overdue Alerts')?>:
             </td>
             <td>
                 <input type="checkbox" name="disable_overdue_alerts" value="1" <?php echo $info['disable_overdue_alerts']?'checked="checked"':''; ?> >
-                    <strong>Disable</strong> overdue alerts notices. <em>(Overwrite global setting)</em>
+                    <strong><?= _('Disable')?></strong> <?= _('overdue alerts notices')?>. <em>(<?=_('Overwrite global setting')?>)</em>
             </td>
         </tr>
 
         <tr>
             <th colspan="2">
-                <em><strong>Admin Notes</strong>: Internal notes.&nbsp;</em>
+                <em><strong><?= _('Admin Notes')?></strong>: <?=_('Internal notes')?>.&nbsp;</em>
             </th>
         </tr>
         <tr>
@@ -98,7 +98,7 @@ $info=Format::htmlchars(($errors && $_POST)?$_POST:$info);
 </table>
 <p style="padding-left:225px;">
     <input type="submit" name="submit" value="<?php echo $submit_text; ?>">
-    <input type="reset"  name="reset"  value="Reset">
-    <input type="button" name="cancel" value="Cancel" onclick='window.location.href="slas.php"'>
+    <input type="reset"  name="reset"  value="<?= _('Reset')?>">
+    <input type="button" name="cancel" value="<?= _('Cancel')?>" onclick='window.location.href="slas.php"'>
 </p>
 </form>

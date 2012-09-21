@@ -1,19 +1,19 @@
 <?php
-if(!defined('OSTADMININC') || !$thisstaff || !$thisstaff->isAdmin()) die('Access Denied');
+if(!defined('OSTADMININC') || !$thisstaff || !$thisstaff->isAdmin()) die(_('Access Denied'));
 $info=array();
 $qstr='';
 if($team && $_REQUEST['a']!='add'){
     //Editing Team
-    $title='Update Team';
+    $title=_('Update Team');
     $action='update';
-    $submit_text='Save Changes';
+    $submit_text=_('Save Changes');
     $info=$team->getInfo();
     $info['id']=$team->getId();
     $qstr.='&id='.$team->getId();
 }else {
-    $title='Add New Team';
+    $title=_('Add New Team');
     $action='create';
-    $submit_text='Create Team';
+    $submit_text=_('Create Team');
     $info['isenabled']=1;
     $info['noalerts']=0;
     $qstr.='&a='.$_REQUEST['a'];
@@ -31,14 +31,14 @@ $info=Format::htmlchars(($errors && $_POST)?$_POST:$info);
         <tr>
             <th colspan="2">
                 <h4><?php echo $title; ?></h4>
-                <em><strong>Team Information</strong>: Disabled team won't be availabe for ticket assignment or alerts.</em>
+                <em><strong><?= _('Team Information')?></strong>: <?= _('Disabled team won\'t be availabe for ticket assignment or alerts')?>.</em>
             </th>
         </tr>
     </thead>
     <tbody>
         <tr>
             <td width="180" class="required">
-                Name:
+                <?= _('Name')?>:
             </td>
             <td>
                 <input type="text" size="30" name="name" value="<?php echo $info['name']; ?>">
@@ -47,22 +47,22 @@ $info=Format::htmlchars(($errors && $_POST)?$_POST:$info);
         </tr>
         <tr>
             <td width="180" class="required">
-                Status:
+                <?= _('Status')?>:
             </td>
             <td>
-                <input type="radio" name="isenabled" value="1" <?php echo $info['isenabled']?'checked="checked"':''; ?>><strong>Active</strong>
-                <input type="radio" name="isenabled" value="0" <?php echo !$info['isenabled']?'checked="checked"':''; ?>><strong>Disabled</strong>
+                <input type="radio" name="isenabled" value="1" <?php echo $info['isenabled']?'checked="checked"':''; ?>><strong><?= _('Active')?></strong>
+                <input type="radio" name="isenabled" value="0" <?php echo !$info['isenabled']?'checked="checked"':''; ?>><strong><?= _('Disabled')?></strong>
                 &nbsp;<span class="error">*&nbsp;</span>
             </td>
         </tr>
         <tr>
             <td width="180">
-                Team Lead:
+                <?= _('Team Lead')?>:
             </td>
             <td>
                 <select name="lead_id">
-                    <option value="0">&mdash; None &mdash;</option>
-                    <option value="" disabled="disabled">Select Team Lead (Optional)</option>
+                    <option value="0">&mdash; <?= _('None')?> &mdash;</option>
+                    <option value="" disabled="disabled"><?= _('Select Team Lead (Optional)')?></option>
                     <?php
                     if($team && ($members=$team->getMembers())){
                         foreach($members as $k=>$staff){
@@ -77,18 +77,18 @@ $info=Format::htmlchars(($errors && $_POST)?$_POST:$info);
         </tr>
         <tr>
             <td width="180">
-                Assignment Alerts:
+                <?= _('Assignment Alerts')?>:
             </td>
             <td>
                 <input type="checkbox" name="noalerts" value="1" <?php echo $info['noalerts']?'checked="checked"':''; ?> >
-                <strong>Disable</strong> assignment alerts for this team (<i>overwrite global settings.</i>)
+                <strong><?= _('Disable')?></strong> <?= _('assignment alerts for this team')?> (<i><?= _('overwrite global settings')?>.</i>)
             </td>
         </tr>
         <?php
         if($team && ($members=$team->getMembers())){ ?>
         <tr>
             <th colspan="2">
-                <em><strong>Team Members</strong>: To add additional members go to target member's profile&nbsp;</em>
+                <em><strong><?= _('Team Members')?></strong>: <?= _('To add additional members go to target member\'s profile')?>&nbsp;</em>
             </th>
         </tr>
         <?php
@@ -103,7 +103,7 @@ $info=Format::htmlchars(($errors && $_POST)?$_POST:$info);
         } ?>
         <tr>
             <th colspan="2">
-                <em><strong>Admin Notes</strong>: Internal notes viewable by all admins.&nbsp;</em>
+                <em><strong><?= _('Admin Notes')?></strong>: <?= _('Internal notes viewable by all admins')?>.&nbsp;</em>
             </th>
         </tr>
         <tr>
@@ -115,7 +115,7 @@ $info=Format::htmlchars(($errors && $_POST)?$_POST:$info);
 </table>
 <p style="padding-left:225px;">
     <input type="submit" name="submit" value="<?php echo $submit_text; ?>">
-    <input type="reset"  name="reset"  value="Reset">
-    <input type="button" name="cancel" value="Cancel" onclick='window.location.href="teams.php"'>
+    <input type="reset"  name="reset"  value="<?= _('Reset')?>">
+    <input type="button" name="cancel" value="<?= _('Cancel')?>" onclick='window.location.href="teams.php"'>
 </p>
 </form>

@@ -1,5 +1,5 @@
 <?php
-if(!defined('OSTADMININC') || !$thisstaff->isAdmin()) die('Access Denied');
+if(!defined('OSTADMININC') || !$thisstaff->isAdmin()) die(_('Access Denied'));
 
 $qstr='';
 $sql='SELECT * FROM '.SLA_TABLE.' sla WHERE 1';
@@ -33,17 +33,17 @@ $qstr.='&order='.($order=='DESC'?'ASC':'DESC');
 $query="$sql ORDER BY $order_by LIMIT ".$pageNav->getStart().",".$pageNav->getLimit();
 $res=db_query($query);
 if($res && ($num=db_num_rows($res)))
-    $showing=$pageNav->showing().' SLA plans';
+    $showing=$pageNav->showing().' '._('SLA plans');
 else
-    $showing='No SLA plans found!';
+    $showing=_('No SLA plans found!');
 
 ?>
 
 <div style="width:700;padding-top:5px; float:left;">
- <h2>Service Level Agreements</h2>
+ <h2><?= _('Service Level Agreements')?></h2>
 </div>
 <div style="float:right;text-align:right;padding-top:5px;padding-right:5px;">
- <b><a href="slas.php?a=add" class="Icon newsla">Add New SLA Plan</a></b></div>
+ <b><a href="slas.php?a=add" class="Icon newsla"><?= _('Add New SLA Plan')?></a></b></div>
 <div class="clear"></div>
 <form action="slas.php" method="POST" name="slas" onSubmit="return checkbox_checker(this,1,0);">
  <?php csrf_token(); ?>
@@ -53,11 +53,11 @@ else
     <thead>
         <tr>
             <th width="7">&nbsp;</th>        
-            <th width="320"><a <?php echo $name_sort; ?> href="slas.php?<?php echo $qstr; ?>&sort=name">Name</a></th>
-            <th width="100"><a  <?php echo $status_sort; ?> href="slas.php?<?php echo $qstr; ?>&sort=status">Status</a></th>
-            <th width="130"><a  <?php echo $period_sort; ?> href="slas.php?<?php echo $qstr; ?>&sort=period">Grace Period (hrs)</a></th>
-            <th width="120" nowrap><a  <?php echo $created_sort; ?>href="slas.php?<?php echo $qstr; ?>&sort=created">Date Added</a></th>
-            <th width="150" nowrap><a  <?php echo $updated_sort; ?>href="slas.php?<?php echo $qstr; ?>&sort=updated">Last Updated</a></th>
+            <th width="320"><a <?php echo $name_sort; ?> href="slas.php?<?php echo $qstr; ?>&sort=name"><?= _('Name')?></a></th>
+            <th width="100"><a  <?php echo $status_sort; ?> href="slas.php?<?php echo $qstr; ?>&sort=status"><?= _('Status')?></a></th>
+            <th width="130"><a  <?php echo $period_sort; ?> href="slas.php?<?php echo $qstr; ?>&sort=period"><?= _('Grace Period (hrs)')?></a></th>
+            <th width="120" nowrap><a  <?php echo $created_sort; ?>href="slas.php?<?php echo $qstr; ?>&sort=created"><?= _('Date Added')?></a></th>
+            <th width="150" nowrap><a  <?php echo $updated_sort; ?>href="slas.php?<?php echo $qstr; ?>&sort=updated"><?= _('Last Updated')?></a></th>
         </tr>
     </thead>
     <tbody>
@@ -77,7 +77,7 @@ else
                   <input type="checkbox" name="ids[]" value="<?php echo $row['id']; ?>" 
                             <?php echo $sel?'checked="checked"':''; ?> onClick="highLight(this.value,this.checked);"> </td>
                 <td>&nbsp;<a href="slas.php?id=<?php echo $row['id']; ?>"><?php echo Format::htmlchars($row['name']); ?></a></td>
-                <td><?php echo $row['isactive']?'Active':'<b>Disabled</b>'; ?></td>
+                <td><?php echo $row['isactive']?_('Active'):'<b>'._('Disabled').'</b>'; ?></td>
                 <td style="text-align:right;padding-right:35px;"><?php echo $row['grace_period']; ?>&nbsp;</td>
                 <td>&nbsp;<?php echo Format::db_date($row['created']); ?></td>
                 <td>&nbsp;<?php echo Format::db_datetime($row['updated']); ?></td>
@@ -89,12 +89,12 @@ else
      <tr>
         <td colspan="6">
             <?php if($res && $num){ ?>
-            Select:&nbsp;
-            <a href="#" onclick="return select_all(document.forms['slas'],true)">All</a>&nbsp;&nbsp;
-            <a href="#" onclick="return reset_all(document.forms['slas'])">None</a>&nbsp;&nbsp;
-            <a href="#" onclick="return toogle_all(document.forms['slas'],true)">Toggle</a>&nbsp;&nbsp;
+            <?= _('Select')?>:&nbsp;
+            <a href="#" onclick="return select_all(document.forms['slas'],true)"><?= _('All')?></a>&nbsp;&nbsp;
+            <a href="#" onclick="return reset_all(document.forms['slas'])"><?= _('None')?></a>&nbsp;&nbsp;
+            <a href="#" onclick="return toogle_all(document.forms['slas'],true)"><?= _('Toggle')?></a>&nbsp;&nbsp;
             <?php }else{
-                echo 'No SLA plans found';
+                echo _('No SLA plans found');
             } ?>
         </td>
      </tr>
@@ -102,15 +102,15 @@ else
 </table>
 <?php
 if($res && $num): //Show options..
-    echo '<div>&nbsp;Page:'.$pageNav->getPageLinks().'&nbsp;</div>';
+    echo '<div>&nbsp;'._('Page').':'.$pageNav->getPageLinks().'&nbsp;</div>';
 ?>
 <p class="centered">
-    <input class="button" type="submit" name="enable" value="Enable"
-                onClick=' return confirm("Are you sure you want to ENABLE selected plans?");'>
-    <input class="button" type="submit" name="disable" value="Disable"
-                onClick=' return confirm("Are you sure you want to DISABLE selected plans?");'>
-    <input class="button" type="submit" name="delete" value="Delete"
-                onClick=' return confirm("Are you sure you want to DELETE selected plans?");'>
+    <input class="button" type="submit" name="enable" value="<?= _('Enable')?>"
+                onClick=' return confirm("<?= _('Are you sure you want to ENABLE selected plans?')?>");'>
+    <input class="button" type="submit" name="disable" value="<?= _('Disable')?>"
+                onClick=' return confirm("<?= _('Are you sure you want to DISABLE selected plans?')?>");'>
+    <input class="button" type="submit" name="delete" value="<?= _('Delete')?>"
+                onClick=' return confirm("<?= _('Are you sure you want to DELETE selected plans?')?>");'>
 </p>
 <?php
 endif;

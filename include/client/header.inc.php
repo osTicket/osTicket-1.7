@@ -1,5 +1,5 @@
 <?php
-$title=($cfg && is_object($cfg) && $cfg->getTitle())?$cfg->getTitle():'osTicket :: Support Ticket System';
+$title=($cfg && is_object($cfg) && $cfg->getTitle())?$cfg->getTitle():_('osTicket :: Support Ticket System');
 header("Content-Type: text/html; charset=UTF-8\r\n");
 ?>
 <!DOCTYPE html>

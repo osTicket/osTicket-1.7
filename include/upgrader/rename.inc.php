@@ -1,5 +1,5 @@
 <?php
-if(!defined('OSTSCPINC') || !$thisstaff || !$thisstaff->isAdmin()) die('Access Denied');
+if(!defined('OSTSCPINC') || !$thisstaff || !$thisstaff->isAdmin()) die(_('Access Denied'));
 ?>
 <div id="upgrader">
     <br>

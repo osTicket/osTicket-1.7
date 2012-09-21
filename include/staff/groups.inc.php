@@ -43,7 +43,7 @@ else
  <h2>User Groups</h2>
  </div>
 <div style="float:right;text-align:right;padding-top:5px;padding-right:5px;">
-    <b><a href="groups.php?a=add" class="Icon newgroup">Add New Group</a></b></div>
+    <b><a href="groups.php?a=add" class="Icon newgroup"><?= _('Add New Group')?></a></b></div>
 <div class="clear"></div>
 <form action="groups.php" method="POST" name="groups" onSubmit="return checkbox_checker(this,1,0);">
  <?php csrf_token(); ?>
@@ -53,12 +53,12 @@ else
     <thead>
         <tr>
             <th width="7px">&nbsp;</th>        
-            <th width="200"><a <?php echo $name_sort; ?> href="groups.php?<?php echo $qstr; ?>&sort=name">Group Name</a></th>
-            <th width="80"><a  <?php echo $status_sort; ?> href="groups.php?<?php echo $qstr; ?>&sort=status">Status</a></th>
-            <th width="80" style="text-align:center;"><a  <?php echo $users_sort; ?>href="groups.php?<?php echo $qstr; ?>&sort=users">Members</a></th>
-            <th width="80" style="text-align:center;"><a  <?php echo $depts_sort; ?>href="groups.php?<?php echo $qstr; ?>&sort=depts">Departments</a></th>
-            <th width="100"><a  <?php echo $created_sort; ?> href="groups.php?<?php echo $qstr; ?>&sort=created">Created On</a></th>
-            <th width="120"><a  <?php echo $updated_sort; ?> href="groups.php?<?php echo $qstr; ?>&sort=updated">Last Updated</a></th>
+            <th width="200"><a <?php echo $name_sort; ?> href="groups.php?<?php echo $qstr; ?>&sort=name"><?= _('Group Name')?></a></th>
+            <th width="80"><a  <?php echo $status_sort; ?> href="groups.php?<?php echo $qstr; ?>&sort=status"><?= _('Status')?></a></th>
+            <th width="80" style="text-align:center;"><a  <?php echo $users_sort; ?>href="groups.php?<?php echo $qstr; ?>&sort=users"><?= _('Members')?></a></th>
+            <th width="80" style="text-align:center;"><a  <?php echo $depts_sort; ?>href="groups.php?<?php echo $qstr; ?>&sort=depts"><?= _('Departments')?></a></th>
+            <th width="100"><a  <?php echo $created_sort; ?> href="groups.php?<?php echo $qstr; ?>&sort=created"><?= _('Created On')?></a></th>
+            <th width="120"><a  <?php echo $updated_sort; ?> href="groups.php?<?php echo $qstr; ?>&sort=updated"><?= _('Last Updated')?></a></th>
         </tr>
     </thead>
     <tbody>
@@ -99,12 +99,12 @@ else
      <tr>
         <td colspan="7">
             <?php if($res && $num){ ?>
-            Select:&nbsp;
-            <a href="#" onclick="return select_all(document.forms['groups'],true)">All</a>&nbsp;&nbsp;
-            <a href="#" onclick="return reset_all(document.forms['groups'])">None</a>&nbsp;&nbsp;
-            <a href="#" onclick="return toogle_all(document.forms['groups'],true)">Toggle</a>&nbsp;&nbsp;
+            <?= _('Select')?>:&nbsp;
+            <a href="#" onclick="return select_all(document.forms['groups'],true)"><?= _('All')?></a>&nbsp;&nbsp;
+            <a href="#" onclick="return reset_all(document.forms['groups'])"><?= _('None')?></a>&nbsp;&nbsp;
+            <a href="#" onclick="return toogle_all(document.forms['groups'],true)"><?= _('Toggle')?></a>&nbsp;&nbsp;
             <?php }else{
-                echo 'No groups found!';
+                echo _('No groups found!');
             } ?>
         </td>
      </tr>
@@ -114,12 +114,12 @@ else
 if($res && $num): //Show options..
 ?>
 <p class="centered">
-    <input class="button" type="submit" name="enable" value="Enable"
-                onClick=' return confirm(_("Are you sure you want to ENABLE selected groups?"));'>
-    <input class="button" type="submit" name="disable" value="Disable"
-                onClick=' return confirm(_("Are you sure you want to DISABLE selected groups?"));'>
-    <input class="button" type="submit" name="delete" value="Delete"
-                onClick=' return confirm(_("Are you sure you want to DELETE selected groups?"));'>
+    <input class="button" type="submit" name="enable" value="<?= _('Enable')?>"
+                onClick=' return confirm(<?= _("Are you sure you want to ENABLE selected groups?")?>);'>
+    <input class="button" type="submit" name="disable" value="<?= _('Disable')?>"
+                onClick=' return confirm(<?= _("Are you sure you want to DISABLE selected groups?")?>);'>
+    <input class="button" type="submit" name="delete" value="<?= _('Delete')?>"
+                onClick=' return confirm(<?= _("Are you sure you want to DELETE selected groups?")?>);'>
 </p>
 <?php
 endif;

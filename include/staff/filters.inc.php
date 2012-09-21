@@ -37,17 +37,17 @@ $qstr.='&order='.($order=='DESC'?'ASC':'DESC');
 $query="$sql ORDER BY $order_by LIMIT ".$pageNav->getStart().",".$pageNav->getLimit();
 $res=db_query($query);
 if($res && ($num=db_num_rows($res)))
-    $showing=$pageNav->showing().' filters';
+    $showing=$pageNav->showing().' '._('filters');
 else
     $showing=_('No filters found!');
 
 ?>
 
 <div style="width:700;padding-top:5px; float:left;">
- <h2>Ticket Filters</h2>
+ <h2><?= _('Ticket Filters')?></h2>
 </div>
 <div style="float:right;text-align:right;padding-top:5px;padding-right:5px;">
- <b><a href="filters.php?a=add" class="Icon newEmailFilter">Add New Filter</a></b></div>
+ <b><a href="filters.php?a=add" class="Icon newEmailFilter"><?= _('Add New Filter')?></a></b></div>
 <div class="clear"></div>
 <form action="filters.php" method="POST" name="filters" onSubmit="return checkbox_checker(this,1,0);">
  <?php csrf_token(); ?>
@@ -57,13 +57,13 @@ else
     <thead>
         <tr>
             <th width="7">&nbsp;</th>        
-            <th width="320"><a <?php echo $name_sort; ?> href="filters.php?<?php echo $qstr; ?>&sort=name">Name</a></th>
-            <th width="80"><a  <?php echo $status_sort; ?> href="filters.php?<?php echo $qstr; ?>&sort=status">Status</a></th>
-            <th width="80" style="text-align:center;"><a  <?php echo $order_sort; ?> href="filters.php?<?php echo $qstr; ?>&sort=order">Order</a></th>
-            <th width="80" style="text-align:center;"><a  <?php echo $rules_sort; ?> href="filters.php?<?php echo $qstr; ?>&sort=rules">Rules</a></th>
-            <th width="100"><a  <?php echo $target_sort; ?> href="filters.php?<?php echo $qstr; ?>&sort=target">Target</a></th>
-            <th width="120" nowrap><a  <?php echo $created_sort; ?>href="filters.php?<?php echo $qstr; ?>&sort=created">Date Added</a></th>
-            <th width="150" nowrap><a  <?php echo $updated_sort; ?>href="filters.php?<?php echo $qstr; ?>&sort=updated">Last Updated</a></th>
+            <th width="320"><a <?php echo $name_sort; ?> href="filters.php?<?php echo $qstr; ?>&sort=name"><?= _('Name')?></a></th>
+            <th width="80"><a  <?php echo $status_sort; ?> href="filters.php?<?php echo $qstr; ?>&sort=status"><?= _('Status')?></a></th>
+            <th width="80" style="text-align:center;"><a  <?php echo $order_sort; ?> href="filters.php?<?php echo $qstr; ?>&sort=order"><?= _('Order')?></a></th>
+            <th width="80" style="text-align:center;"><a  <?php echo $rules_sort; ?> href="filters.php?<?php echo $qstr; ?>&sort=rules"><?= _('Rules')?></a></th>
+            <th width="100"><a  <?php echo $target_sort; ?> href="filters.php?<?php echo $qstr; ?>&sort=target"><?= _('Target')?></a></th>
+            <th width="120" nowrap><a  <?php echo $created_sort; ?>href="filters.php?<?php echo $qstr; ?>&sort=created"><?= _('Date Added')?></a></th>
+            <th width="150" nowrap><a  <?php echo $updated_sort; ?>href="filters.php?<?php echo $qstr; ?>&sort=updated"><?= _('Last Updated')?></a></th>
         </tr>
     </thead>
     <tbody>
@@ -83,10 +83,10 @@ else
                   <input type="checkbox" name="ids[]" value="<?php echo $row['id']; ?>" 
                             <?php echo $sel?'checked="checked"':''; ?> onClick="highLight(this.value,this.checked);"> </td>
                 <td>&nbsp;<a href="filters.php?id=<?php echo $row['id']; ?>"><?php echo Format::htmlchars($row['name']); ?></a></td>
-                <td><?php echo $row['isactive']?'Active':'<b>Disabled</b>'; ?></td>
+                <td><?php echo $row['isactive']?_('Active'):'<b>'._('Disabled').'</b>'; ?></td>
                 <td style="text-align:right;padding-right:25px;"><?php echo $row['execorder']; ?>&nbsp;</td>
                 <td style="text-align:right;padding-right:25px;"><?php echo $row['rules']; ?>&nbsp;</td>
-                <td>&nbsp;<?php echo Format::htmlchars($targets[$row['target']]); ?></td>
+                <td>&nbsp;<?php echo _(Format::htmlchars($targets[$row['target']])); ?></td>
                 <td>&nbsp;<?php echo Format::db_date($row['created']); ?></td>
                 <td>&nbsp;<?php echo Format::db_datetime($row['updated']); ?></td>
             </tr>
@@ -97,12 +97,12 @@ else
      <tr>
         <td colspan="8">
             <?php if($res && $num){ ?>
-            Select:&nbsp;
-            <a href="#" onclick="return select_all(document.forms['filters'],true)">All</a>&nbsp;&nbsp;
-            <a href="#" onclick="return reset_all(document.forms['filters'])">None</a>&nbsp;&nbsp;
-            <a href="#" onclick="return toogle_all(document.forms['filters'],true)">Toggle</a>&nbsp;&nbsp;
+            <?= _('Select')?>:&nbsp;
+            <a href="#" onclick="return select_all(document.forms['filters'],true)"><?= _('All')?></a>&nbsp;&nbsp;
+            <a href="#" onclick="return reset_all(document.forms['filters'])"><?= _('None')?></a>&nbsp;&nbsp;
+            <a href="#" onclick="return toogle_all(document.forms['filters'],true)"><?= _('Toggle')?></a>&nbsp;&nbsp;
             <?php }else{
-                echo 'No filters found';
+                echo _('No filters found');
             } ?>
         </td>
      </tr>
@@ -110,15 +110,15 @@ else
 </table>
 <?php
 if($res && $num): //Show options..
-    echo '<div>&nbsp;Page:'.$pageNav->getPageLinks().'&nbsp;</div>';
+    echo '<div>&nbsp;'._('Page').':'.$pageNav->getPageLinks().'&nbsp;</div>';
 ?>
 <p class="centered">
-    <input class="button" type="submit" name="enable" value="Enable"
-                onClick=' return confirm("Are you sure you want to ENABLE selected filters?");'>
-    <input class="button" type="submit" name="disable" value="Disable"
-                onClick=' return confirm("Are you sure you want to DISABLE selected filters?");'>
-    <input class="button" type="submit" name="delete" value="Delete"
-                onClick=' return confirm("Are you sure you want to DELETE selected filters?");'>
+    <input class="button" type="submit" name="enable" value="<?= _('Enable')?>"
+                onClick=' return confirm(<?= _("Are you sure you want to ENABLE selected filters?")?>);'>
+    <input class="button" type="submit" name="disable" value="<?= _('Disable')?>"
+                onClick=' return confirm(<?= _("Are you sure you want to DISABLE selected filters?")?>);'>
+    <input class="button" type="submit" name="delete" value="<?= _('Delete')?>"
+                onClick=' return confirm(<?= _("Are you sure you want to DELETE selected filters?")?>);'>
 </p>
 <?php
 endif;

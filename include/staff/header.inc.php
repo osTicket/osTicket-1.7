@@ -29,7 +29,7 @@
 <body onunload="">
 <div id="container">
     <div id="header">
-        <a href="index.php" id="logo">osTicket - Customer Support System</a>
+        <a href="index.php" id="logo"><?= _('osTicket - Customer Support System')?></a>
         <p id="info"><?= _('Howdy,') ?> <strong><?php echo $thisstaff->getUserName(); ?></strong>
            <?php
             if($thisstaff->isAdmin() && !defined('ADMINPAGE')) { ?>

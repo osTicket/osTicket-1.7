@@ -1,5 +1,5 @@
 <?php
-if(!defined('OSTSCPINC') || !$thisstaff || !$thisstaff->isAdmin()) die('Access Denied');
+if(!defined('OSTSCPINC') || !$thisstaff || !$thisstaff->isAdmin()) die(_('Access Denied'));
 ?>    
 <div id="upgrader">
    <div id="main">
@@ -17,7 +17,7 @@ if(!defined('OSTSCPINC') || !$thisstaff || !$thisstaff->isAdmin()) die('Access D
                 echo sprintf('<li>%s</li>',$error);
             echo '</ul>';
         } else {
-            echo '<b><font color="red">Internal error occurred - get technical help.</font></b>';
+            echo '<b><font color="red">'._('Internal error occurred - get technical help.').'</font></b>';
         }
         ?>
         <p><b>For detailed - please view <a href="logs.php">system logs</a> or check your email.</b></p>

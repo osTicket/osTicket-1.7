@@ -2,9 +2,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: osticket17\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-09-19 17:16-0300\n"
+"POT-Creation-Date: 2012-09-21 12:32-0300\n"
 "PO-Revision-Date: \n"
-"Last-Translator: Alejandro <alejandrobq2005@hotmail.com>\n"
+"Last-Translator: Fabio Rauber <fabior@interlegis.leg.br>\n"
 "Language-Team: Fabio Rauber <fabior@interlegis.leg.br>\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
@@ -12,7 +12,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Poedit-Language: Portuguese\n"
 "X-Poedit-Country: BRAZIL\n"
-"X-Poedit-Basepath: /home/alejandro/.gvfs/SFTP for iladmin on 10.1.2.240/var/www\n"
+"X-Poedit-Basepath: /home/likewise-open/INTERLEGIS/fabior/.gvfs/SFTP para iladmin em 10.1.2.240/var/www\n"
 "X-Poedit-SearchPath-0: .\n"
 
 #: index.php:23
@@ -247,9 +247,8 @@ msgid "added successfully"
 msgstr "adicionada com sucesso"
 
 #: scp/teams.php:37
-#, fuzzy
 msgid "Unable to add team. Correct any error(s) below and try again."
-msgstr "Não foi possível designar o tíquete. Corrija os erros abaixo e tente novamente!"
+msgstr "Não foi possível adicionar o time. Corrija os erros abaixo e tente novamente."
 
 #: scp/teams.php:42
 msgid "You must select at least one team."
@@ -340,9 +339,8 @@ msgid "Category added successfully"
 msgstr "Categoria adicionada com sucesso"
 
 #: scp/categories.php:46
-#, fuzzy
 msgid "Unable to add category. Correct error(s) below and try again."
-msgstr "Não foi possível designar o tíquete. Corrija os erros abaixo e tente novamente!"
+msgstr "Não foi possível adicionar categoria. Corrija os erros abaixo e tente novamente."
 
 #: scp/categories.php:51
 msgid "You must select at least one category"
@@ -357,9 +355,8 @@ msgid "selected categories made PUBLIC"
 msgstr "categorias selecionadas configuradas como PÚBLICAS"
 
 #: scp/categories.php:63
-#, fuzzy
 msgid "Unable to enable selected categories public."
-msgstr "Não foi possível adicionar o e-mail à lista negra"
+msgstr "Não foi possível tornar públicas as categorias selecionadas."
 
 #: scp/categories.php:70
 msgid "Selected categories made PRIVATE"
@@ -398,9 +395,9 @@ msgid "Upgrade Now"
 msgstr "Atualize Agora"
 
 #: scp/admin.inc.php:38
-#, fuzzy, php-format
+#, php-format
 msgid "Please rename config file include/%s to include/ost-config.php to avoid possible conflicts"
-msgstr "Por favor, para continuar, renomeie o arquivo de configurações include/settings.php para incluir include/ost-config.php!"
+msgstr "Por favor, renomeie o arquivo de configurações include/%s para incluir include/ost-config.php para evitar possíveis conflitos"
 
 #: scp/admin.inc.php:45
 msgid "Please take a minute to delete <strong>setup/install</strong> directory (../setup/) for security reasons."
@@ -432,14 +429,12 @@ msgid "API key added successfully"
 msgstr "Chave API adicionada com sucesso"
 
 #: scp/apikeys.php:39
-#, fuzzy
 msgid "Unable to add an API key. Correct error(s) below and try again."
-msgstr "Não foi possível designar o tíquete. Corrija os erros abaixo e tente novamente!"
+msgstr "Não foi possível adicionar uma chave API. Corrija os erros abaixo e tente novamente."
 
 #: scp/apikeys.php:44
-#, fuzzy
 msgid "You must select at least one API key"
-msgstr "Você deve selecionar ao menos um tíquete"
+msgstr "Você deve selecionar ao menos uma chave API"
 
 #: scp/apikeys.php:52
 msgid "Selected API keys enabled"
@@ -466,9 +461,8 @@ msgid "Unable to disable selected API keys"
 msgstr "Não foi possível desabilitar as chaves API selecionadas"
 
 #: scp/apikeys.php:78
-#, fuzzy
 msgid "Selected API keys deleted successfully"
-msgstr "Tíquete atualizado com sucesso"
+msgstr "APIs selecionadas apagadas com sucesso"
 
 #: scp/apikeys.php:80
 msgid "selected API keys deleted"
@@ -874,14 +868,12 @@ msgid "Internal error: Unable to dump query results"
 msgstr "Erro interno: Não foi possível mostrar os resultados da pesquisa"
 
 #: scp/helptopics.php:21
-#, fuzzy
 msgid "Unknown or invalid help topic ID."
-msgstr "ID do Tíquete desconhecido ou inválido."
+msgstr "ID do Tópico de Ajuda desconhecido ou inválido."
 
 #: scp/helptopics.php:27
-#, fuzzy
 msgid "Unknown or invalid help topic."
-msgstr "Categoria desconhecida ou inválida."
+msgstr "Tópico de ajuda desconhecido ou inválido."
 
 #: scp/helptopics.php:29
 msgid "Help topic updated successfully"
@@ -908,39 +900,32 @@ msgid "Selected help topics enabled"
 msgstr "Tópicos de Ajuda selecionados habilitados"
 
 #: scp/helptopics.php:54
-#, fuzzy
 msgid "selected help topics enabled"
-msgstr "Habilitadas respostas prontas selecionadas."
+msgstr "tópicos de ajuda selecionados habilitados"
 
 #: scp/helptopics.php:56
-#, fuzzy
 msgid "Unable to enable selected help topics."
-msgstr "Não foi possível adicionar o e-mail à lista negra"
+msgstr "Não foi possível habilitar os tópicos de ajuda selecionados."
 
 #: scp/helptopics.php:63
-#, fuzzy
 msgid "Selected help topics disabled"
-msgstr "Desabilitadas respostas prontas selecionadas"
+msgstr "Tópicos de ajuda selecionados desabilitados"
 
 #: scp/helptopics.php:65
-#, fuzzy
 msgid "selected help topics disabled"
-msgstr "Desabilitadas respostas prontas selecionadas"
+msgstr "tópicos de ajuda selecionados desabilitados"
 
 #: scp/helptopics.php:67
-#, fuzzy
 msgid "Unable to disable selected help topic(s)"
-msgstr "Não foi possível adicionar o e-mail à lista negra"
+msgstr "Não foi possível desabilitar os tópicos de ajuda selecionados"
 
 #: scp/helptopics.php:78
-#, fuzzy
 msgid "Selected help topics deleted successfully"
-msgstr "Tíquete criado com sucesso"
+msgstr "Tópicos de Ajuda selecionados apagados com sucesso"
 
 #: scp/helptopics.php:80
-#, fuzzy
 msgid "selected help topics deleted"
-msgstr "Habilitadas respostas prontas selecionadas."
+msgstr "tópicos de ajuda selecionados apagados"
 
 #: scp/helptopics.php:82
 msgid "Unable to delete selected help topics"
@@ -963,9 +948,8 @@ msgid "Error updating department. Try again!"
 msgstr "Erro ao atualiar o departamento. Tente novamente!"
 
 #: scp/departments.php:37
-#, fuzzy
 msgid "Unable to add department. Correct error(s) below and try again."
-msgstr "Não foi possível designar o tíquete. Corrija os erros abaixo e tente novamente!"
+msgstr "Não foi possível adicionar departamento. Corrija os erros abaixo e tente novamente."
 
 #: scp/departments.php:42
 msgid "You must select at least one department"
@@ -973,32 +957,27 @@ msgstr "Você deve selecionar ao menos um departamento"
 
 #: scp/departments.php:44
 msgid "You can not disable/delete a default department. Remove default Dept. and try again."
-msgstr ""
+msgstr "Você não pode desabilitar/apagar um departamento padrão. Desconfigure-o como padrão e tente novamente."
 
 #: scp/departments.php:52
-#, fuzzy
 msgid "Selected departments made public"
-msgstr "Selecione o departamento"
+msgstr "Departamentos selecionados publicados"
 
 #: scp/departments.php:54
-#, fuzzy
 msgid "selected departments made public"
-msgstr "Selecione o departamento"
+msgstr "departamentos selecionados publicados"
 
 #: scp/departments.php:56
-#, fuzzy
 msgid "Unable to make selected department public."
-msgstr "Não foi possível adicionar o e-mail à lista negra"
+msgstr "Não foi possível publicar os departamentos selecionados "
 
 #: scp/departments.php:65
-#, fuzzy
 msgid "Selected departments made private"
-msgstr "Selecione o departamento"
+msgstr "Departamentos selecionados marcados como privados"
 
 #: scp/departments.php:67
-#, fuzzy
 msgid "selected departments made private"
-msgstr "Selecione o departamento"
+msgstr "departamentos selecionados marcados como privado"
 
 #: scp/departments.php:69
 msgid "Unable to make selected department(s) private. Possibly already private!"
@@ -1009,19 +988,16 @@ msgid "Dept. with users can not be deleted. Move staff first."
 msgstr "Depto. com usuários não pode ser apagado. Mova os membros primeiro."
 
 #: scp/departments.php:86
-#, fuzzy
 msgid "Selected departments deleted successfully"
-msgstr "Tíquete criado com sucesso"
+msgstr "Departamentos selecionados apagados com sucesso"
 
 #: scp/departments.php:88
-#, fuzzy
 msgid "selected departments deleted"
-msgstr "respostas prontas selecionadas apagadas"
+msgstr "departamentos selecionados apagados"
 
 #: scp/departments.php:90
-#, fuzzy
 msgid "Unable to delete selected departments."
-msgstr "Não foi possível adicionar o e-mail à lista negra"
+msgstr "Não foi possível apagar departamentos selecionados."
 
 #: scp/file.php:27
 msgid "Unknown or invalid file. #"
@@ -1065,9 +1041,8 @@ msgid "Unable to enable selected filters"
 msgstr "Não foi possível habilitar os filtros selecionados"
 
 #: scp/filters.php:67
-#, fuzzy
 msgid "Selected filters disabled"
-msgstr "Desabilitadas respostas prontas selecionadas"
+msgstr "Filtros selecionados desabilitados"
 
 #: scp/filters.php:69
 msgid "selected filters disabled"
@@ -1078,19 +1053,16 @@ msgid "Unable to disable selected filters"
 msgstr "Não foi possível desabilitar filtros selecionados"
 
 #: scp/filters.php:82
-#, fuzzy
 msgid "Selected filters deleted successfully"
-msgstr "Tíquete criado com sucesso"
+msgstr "Filtros selecionados apagados com sucesso"
 
 #: scp/filters.php:84
-#, fuzzy
 msgid "selected filters deleted"
-msgstr "respostas prontas selecionadas apagadas"
+msgstr "filtros selecionados apagados"
 
 #: scp/filters.php:86
-#, fuzzy
 msgid "Unable to delete selected filters"
-msgstr "Não foi possível adicionar o e-mail à lista negra"
+msgstr "Não foi possível apagar filtros selecionados"
 
 #: scp/staff.php:19
 msgid "Unknown or invalid staff ID."
@@ -1105,19 +1077,16 @@ msgid "Staff updated successfully"
 msgstr "Equipe atualizada com sucesso"
 
 #: scp/staff.php:29
-#, fuzzy
 msgid "Unable to update staff. Correct any error(s) below and try again!"
-msgstr "Não foi possível designar o tíquete. Corrija os erros abaixo e tente novamente!"
+msgstr "Não foi possível atualizar membro da equipe. Corrija os erros abaixo e tente novamente!"
 
 #: scp/staff.php:37
-#, fuzzy
 msgid "Unable to add staff. Correct any error(s) below and try again."
-msgstr "Não foi possível designar o tíquete. Corrija os erros abaixo e tente novamente!"
+msgstr "Não foi possível adicionar membro da equipe. Corrija os erros abaixo e tente novamente."
 
 #: scp/staff.php:42
-#, fuzzy
 msgid "You must select at least one staff member."
-msgstr "Você deve selecionar ao menos um tíquete"
+msgstr "Você deve selecionar ao menos um membro da equipe."
 
 #: scp/staff.php:44
 msgid "You can not disable/delete yourself - you could be the only admin!"
@@ -1128,37 +1097,32 @@ msgid "Selected staff activated"
 msgstr "Equipe selecionada ativada"
 
 #: scp/staff.php:56
-#, fuzzy
 msgid "Unable to activate selected staff"
-msgstr "Não foi possível adicionar o e-mail à lista negra"
+msgstr "Não foi possível ativar os membros da equipe selecionados"
 
 #: scp/staff.php:63
 msgid "Selected staff disabled"
 msgstr "Membro da Equipe selecionado desabilitado"
 
 #: scp/staff.php:65
-#, fuzzy
 msgid "selected staff disabled"
-msgstr "Desabilitadas respostas prontas selecionadas"
+msgstr "membros da equipe selecionados desabilitados"
 
 #: scp/staff.php:67
 msgid "Unable to disable selected staff"
 msgstr "Não foi possível desabilitar o membro da equipe selecionado"
 
 #: scp/staff.php:76
-#, fuzzy
 msgid "Selected staff deleted successfully"
-msgstr "Tíquete criado com sucesso"
+msgstr "Membros da equipe selecionados apagados com sucesso"
 
 #: scp/staff.php:78
-#, fuzzy
 msgid "selected staff deleted"
-msgstr "Desabilitadas respostas prontas selecionadas"
+msgstr "membros da equipe selecionados habilitados"
 
 #: scp/staff.php:80
-#, fuzzy
 msgid "Unable to delete selected staff."
-msgstr "Não foi possível adicionar o e-mail à lista negra"
+msgstr "Não foi possível apagar membros da equipe selecionados."
 
 #: scp/logout.php:22
 msgid "Staff logout"
@@ -1210,14 +1174,12 @@ msgid "Selected logs deleted successfully"
 msgstr "Logs selecionados apagados com sucesso"
 
 #: scp/logs.php:32
-#, fuzzy
 msgid "selected logs deleted"
-msgstr "respostas prontas selecionadas apagadas"
+msgstr "logs selecionados apagados"
 
 #: scp/logs.php:34
-#, fuzzy
 msgid "Unable to delete selected logs"
-msgstr "Não foi possível adicionar o e-mail à lista negra"
+msgstr "Não foi possível apagar os logs selecionados"
 
 #: scp/logs.php:41
 msgid "Unknown option"
@@ -1240,9 +1202,8 @@ msgid "Profile updated successfully"
 msgstr "Perfili atualizado com sucesso"
 
 #: scp/profile.php:33
-#, fuzzy
 msgid "Profile update error. Try correcting the errors below and try again!"
-msgstr "Não foi possível atualizar o tíquete.Corrija os erros abaixo e tente novamente!"
+msgstr "Problema ao atualizar perfil. Corrija os erros abaixo e tente novamente!"
 
 #: scp/profile.php:38
 #, php-format
@@ -1255,79 +1216,64 @@ msgid "<b>Welcome back %s</b>! You are listed as 'on vacation' Please let your m
 msgstr "<b>Bem vindo novamente %s</b>! Você está listado como 'de férias'. Favor informar seu superior que você voltou."
 
 #: scp/slas.php:21
-#, fuzzy
 msgid "Unknown or invalid API key ID."
-msgstr "ID do Tíquete desconhecido ou inválido."
+msgstr "ID de Chave API desconhecido ou inválido."
 
 #: scp/slas.php:27
-#, fuzzy
 msgid "Unknown or invalid SLA plan."
-msgstr "ID do Tíquete desconhecido ou inválido."
+msgstr "Plano SLA desconhecido ou inválido."
 
 #: scp/slas.php:29
-#, fuzzy
 msgid "SLA plan updated successfully"
-msgstr "FAQ atualizado com sucesso"
+msgstr "Plano de SLA atualizado com sucesso"
 
 #: scp/slas.php:31
-#, fuzzy
 msgid "Error updating SLA plan. Try again!"
-msgstr "Problemas ao apagar tíquete. Tente novamente."
+msgstr "Erro ao atualiazr plano SLA. Tente novamente!"
 
 #: scp/slas.php:36
-#, fuzzy
 msgid "SLA plan added successfully"
-msgstr "Chave API adicionada com sucesso"
+msgstr "Plano de SLA adicionado com sucesso"
 
 #: scp/slas.php:39
-#, fuzzy
 msgid "Unable to add SLA plan. Correct error(s) below and try again."
-msgstr "Não foi possível designar o tíquete. Corrija os erros abaixo e tente novamente!"
+msgstr "Não foi possível adicionar plano SLA. Corrija os erros abaixo e tente novamente."
 
 #: scp/slas.php:44
-#, fuzzy
 msgid "You must select at least one plan."
-msgstr "Você deve selecionar ao menos um tíquete"
+msgstr "Você deve selecionar ao menos um plano."
 
 #: scp/slas.php:52
-#, fuzzy
 msgid "Selected SLA plans enabled"
-msgstr "Habilitadas respostas prontas selecionadas."
+msgstr "Planos SLA selecionados habilitados"
 
 #: scp/slas.php:54
-#, fuzzy
 msgid "selected SLA plans enabled"
-msgstr "Habilitadas respostas prontas selecionadas."
+msgstr "planos SLA selecionados habilitados"
 
 #: scp/slas.php:56
-#, fuzzy
 msgid "Unable to enable selected SLA plans."
-msgstr "Não foi possível adicionar o e-mail à lista negra"
+msgstr "Não foi possível habilitar os planos SLA selecionados"
 
 #: scp/slas.php:63
-#, fuzzy
 msgid "Selected SLA plans disabled"
-msgstr "Desabilitadas respostas prontas selecionadas"
+msgstr "Desabilitados planos SLA selecionados"
 
 #: scp/slas.php:65
-#, fuzzy
 msgid "selected SLA plans disabled"
-msgstr "Desabilitadas respostas prontas selecionadas"
+msgstr "planos SLA selecionados desabilitados"
 
 #: scp/slas.php:67
-#, fuzzy
 msgid "Unable to disable selected SLA plans"
-msgstr "Não foi possível adicionar o e-mail à lista negra"
+msgstr "Não foi possível desabilitar os planos SLA selecionados"
 
 #: scp/slas.php:78
-#, fuzzy
 msgid "Selected SLA plans deleted successfully"
-msgstr "Tíquete criado com sucesso"
+msgstr "Planos SLA selecionados apagados com sucesso"
 
 #: scp/slas.php:80
-#, fuzzy
 msgid "selected SLA plans deleted"
-msgstr "Habilitadas respostas prontas selecionadas."
+msgstr "planos SLA selecionados apagados"
 
 #: scp/slas.php:82
 msgid "Unable to delete selected SLA plans"
@@ -1421,48 +1367,40 @@ msgid "Group updated successfully"
 msgstr "Grupo atualizado com sucesso"
 
 #: scp/groups.php:29
-#, fuzzy
 msgid "Unable to update group. Correct any error(s) below and try again!"
-msgstr "Não foi possível designar o tíquete. Corrija os erros abaixo e tente novamente!"
+msgstr "Não foi possível atualiar o grupo. Corrija os erros abaixo e tente novamente!"
 
 #: scp/groups.php:37
-#, fuzzy
 msgid "Unable to add group. Correct error(s) below and try again."
-msgstr "Não foi possível designar o tíquete. Corrija os erros abaixo e tente novamente!"
+msgstr "Não foi possível adicionar grupo. Corrija os erros abaixo e tente novamente."
 
 #: scp/groups.php:42
 msgid "You must select at least one group."
 msgstr "Você deve selecionar ao menos um grupo."
 
 #: scp/groups.php:50
-#, fuzzy
 msgid "Selected groups activated"
-msgstr "Desabilitadas respostas prontas selecionadas"
+msgstr "Ativados grupos selecionados"
 
 #: scp/groups.php:52
-#, fuzzy
 msgid "selected groups activated"
-msgstr "respostas prontas selecionadas desabilitadas"
+msgstr "grupos selecionados ativados"
 
 #: scp/groups.php:54
-#, fuzzy
 msgid "Unable to activate selected groups"
-msgstr "Não foi possível adicionar o e-mail à lista negra"
+msgstr "Não foi possível ativar os grupos selecionados"
 
 #: scp/groups.php:61
-#, fuzzy
 msgid "Selected groups disabled"
-msgstr "Desabilitadas respostas prontas selecionadas"
+msgstr "Grupos selecionados desabilitados"
 
 #: scp/groups.php:63
-#, fuzzy
 msgid "selected groups disabled"
-msgstr "respostas prontas selecionadas desabilitadas"
+msgstr "grupos selecionados desabilitados"
 
 #: scp/groups.php:65
-#, fuzzy
 msgid "Unable to disable selected groups"
-msgstr "Não foi possível adicionar o e-mail à lista negra"
+msgstr "Não foi possível desabilitar os grupos selecionados"
 
 #: scp/groups.php:74
 msgid "Selected groups deleted successfully"
@@ -1485,14 +1423,12 @@ msgid "SYSTEM BAN LIST filter is <b>DISABLED</b> - <a href=\"filters.php\">enabl
 msgstr "Filtro da LISTA DE BANIMENTO DO SISTEMA está <b>DESABILITADO </b> - <a href=\"filters.php\">habilite aqui</a>."
 
 #: scp/banlist.php:27
-#, fuzzy
 msgid "Unknown or invalid ban list ID #"
-msgstr "ID do Tíquete desconhecido ou inválido"
+msgstr "ID de regra de banimento desconhecido ou inválido."
 
 #: scp/banlist.php:33
-#, fuzzy
 msgid "Unknown or invalid ban rule."
-msgstr "Departamento desconhecido ou inválido"
+msgstr "Regra de Banimento desconhecida ou inválida."
 
 #: scp/banlist.php:35
 #: scp/banlist.php:54
@@ -1509,23 +1445,20 @@ msgid "Error updating ban rule. Try again!"
 msgstr "Erro ao atualizar regra de banimento. Tente novamente!"
 
 #: scp/banlist.php:52
-#, fuzzy
 msgid "Unknown or invalid ban list"
-msgstr "Departamento desconhecido ou inválido"
+msgstr "Lista Negra desconhecida ou inválida"
 
 #: scp/banlist.php:56
-#, fuzzy
 msgid "Email already in the ban list"
-msgstr "E-mail removido da lista negra"
+msgstr "E-mail já está na lista negra"
 
 #: scp/banlist.php:58
 msgid "Email address added to ban list successfully"
 msgstr "Endereço de e-mail adicionado à lista de banimento com sucesso"
 
 #: scp/banlist.php:62
-#, fuzzy
 msgid "Error creating ban rule. Try again!"
-msgstr "Problemas ao liberar o tíquete. Tente novamente"
+msgstr "Erro ao criar regra de banimento. Tente novamente!"
 
 #: scp/banlist.php:67
 msgid "You must select at least one email to process."
@@ -1533,35 +1466,32 @@ msgstr "Você deve selecionar ao menos um email"
 
 #: scp/banlist.php:77
 msgid "Selected emails ban status set to enabled"
-msgstr ""
+msgstr "E-mails selecionados adicionados à lista negra"
 
 #: scp/banlist.php:79
 msgid "selected emails enabled"
 msgstr "e-mails selecionados habilitados"
 
 #: scp/banlist.php:81
-#, fuzzy
 msgid "Unable to enable selected emails"
-msgstr "Não foi possível adicionar o e-mail à lista negra"
+msgstr "Não foi possível habilitar os e-mails selecionados"
 
 #: scp/banlist.php:90
 msgid "Selected emails ban status set to disabled"
-msgstr ""
+msgstr "E-mails selecionados retirados da lista negra"
 
 #: scp/banlist.php:92
 msgid "selected emails ban status set to disabled"
-msgstr ""
+msgstr "e-mails selecionados adicionados à lista negra"
 
 #: scp/banlist.php:94
-#, fuzzy
 msgid "Unable to disable selected emails"
-msgstr "Não foi possível adicionar o e-mail à lista negra"
+msgstr "Não foi possível desabilitar os e-mails selecionados"
 
 #: scp/banlist.php:103
 #: scp/emails.php:64
-#, fuzzy
 msgid "Selected emails deleted successfully"
-msgstr "Tíquete criado com sucesso"
+msgstr "E-mails selecionados apagados com sucesso"
 
 #: scp/banlist.php:105
 #: scp/emails.php:66
@@ -1651,14 +1581,12 @@ msgid "Login error - try again"
 msgstr "Erro de login - tente novamente"
 
 #: scp/canned.php:28
-#, fuzzy
 msgid "Unknown or invalid canned response ID."
-msgstr "Departamento desconhecido ou inválido"
+msgstr "ID de resposta pronta desconhecido ou inválido."
 
 #: scp/canned.php:34
-#, fuzzy
 msgid "Unknown or invalid canned response."
-msgstr "Departamento desconhecido ou inválido"
+msgstr "Resposta pronta desconhecida ou inválida."
 
 #: scp/canned.php:36
 msgid "Canned response updated successfully"
@@ -1673,9 +1601,8 @@ msgid "Canned response added successfully"
 msgstr "Resposta pronta adicionada com sucesso"
 
 #: scp/canned.php:65
-#, fuzzy
 msgid "Unable to add canned response. Correct error(s) below and try again."
-msgstr "Não foi possível designar o tíquete. Corrija os erros abaixo e tente novamente!"
+msgstr "Não foi possível adicionar a resposta pronta. Corrija os erros abaixo e tente novamente."
 
 #: scp/canned.php:70
 msgid "You must select at least one canned response"
@@ -1747,18 +1674,16 @@ msgid "FAQ published successfully"
 msgstr "FAQ publicada com sucesso"
 
 #: scp/faq.php:59
-#, fuzzy
 msgid "Unable to publish the FAQ. Try editing it."
-msgstr "Não foi possível adicionar a mensagem. Tente novamente"
+msgstr "Não foi possível publicar o FAQ. Tente editá-lo."
 
 #: scp/faq.php:63
 msgid "FAQ unpublished successfully"
 msgstr "FAQ despublicada com sucesso"
 
 #: scp/faq.php:65
-#, fuzzy
 msgid "Unable to unpublish the FAQ. Try editing it."
-msgstr "Não foi possível adicionar a mensagem. Tente novamente"
+msgstr "Não foi possível despublicar o FAQ. Tente editá-lo."
 
 #: scp/faq.php:70
 msgid "FAQ deleted successfully"
@@ -1773,15 +1698,13 @@ msgid "Invalid action"
 msgstr "Ação inválida"
 
 #: scp/templates.php:20
-#, fuzzy
 msgid "Unknown or invalid template ID."
-msgstr "ID do E-mail desconhecido ou inválido."
+msgstr "ID de Modelo desconhecido ou inválido."
 
 #: scp/templates.php:26
 #: scp/templates.php:36
-#, fuzzy
 msgid "Unknown or invalid template"
-msgstr "Departamento desconhecido ou inválido"
+msgstr "Modelo desconhecido ou inválido"
 
 #: scp/templates.php:29
 msgid "Message template updated successfully"
@@ -1829,7 +1752,7 @@ msgstr "Desabilitados modelos selecionados"
 
 #: scp/templates.php:78
 msgid "selected templates disabled (in-use templates can't be disabled)"
-msgstr ""
+msgstr "modelos selecionados desabilitados (modelos em uso não podem ser desabilitados)"
 
 #: scp/templates.php:80
 msgid "Unable to disable selected templates (in-use or default template can't be disabled)"
@@ -1881,7 +1804,7 @@ msgstr "Um ou mais dos emails selecionados estão em uso por outro departamento.
 
 #: api/pipe.php:25
 msgid "Email piping not enabled - check MTA settings."
-msgstr ""
+msgstr "Direcionamento de E-mail para programas não habilitado - cheque as configurações MTA."
 
 #: api/pipe.php:35
 msgid "Email parse failed ["
@@ -1927,6 +1850,74 @@ msgstr "Não foi possível atualizar caregoria de FAQ."
 msgid "Unable to create FAQ category. Internal error"
 msgstr "Não foi possível criar categoria de FAQ. Erro interno"
 
+#: include/class.sla.php:149
+msgid "Grace period required"
+msgstr "Período de Tolerância requerido"
+
+#: include/class.sla.php:151
+msgid "Numeric value required (in hours)"
+msgstr "Valor numérico requerido (em horas)"
+
+#: include/class.sla.php:154
+msgid "Name required"
+msgstr "Nome requerido"
+
+#: include/class.sla.php:156
+msgid "Name already exists"
+msgstr "Nome já existe"
+
+#: include/class.sla.php:173
+msgid "Unable to update SLA. Internal error occurred"
+msgstr "Não foi possível atualizar SLA. Erro interno"
+
+#: include/class.sla.php:179
+msgid "Unable to add SLA. Internal error"
+msgstr "Não foi possível adicionar SLA. Erro interno"
+
+#: include/class.xml.php:42
+#, php-format
+msgid "XML error"
+msgstr "Erro XML"
+
+#: include/class.xml.php:42
+#, php-format
+msgid "at line"
+msgstr "na linha"
+
+#: include/class.misc.php:112
+msgid "Time"
+msgstr "Tempo"
+
+#: include/class.team.php:222
+#, fuzzy
+msgid "Missing or invalid team"
+msgstr "ID do Grupo desconhecido ou inválido"
+
+#: include/class.team.php:225
+#, fuzzy
+msgid "Team name required"
+msgstr "Nome do E-mail requerido"
+
+#: include/class.team.php:227
+#, fuzzy
+msgid "Team name must be at least 3 chars."
+msgstr "Nome do Grupo deve ter no mínimo 3 caracteres."
+
+#: include/class.team.php:229
+#, fuzzy
+msgid "Team name already exists"
+msgstr "Nome do Modelo já existe"
+
+#: include/class.team.php:244
+#, fuzzy
+msgid "Unable to update the team. Internal error"
+msgstr "Não foi possível atualizar o tíquete. Corrija os erros abaixo e tente novamente!"
+
+#: include/class.team.php:250
+#, fuzzy
+msgid "Unable to create the team. Internal error"
+msgstr "Não foi possível criar o grupo. Erro interno"
+
 #: include/class.pagenate.php:75
 msgid "Showing"
 msgstr "Mostrando"
@@ -1948,13 +1939,54 @@ msgid "Group name already exists"
 msgstr "Nome do Grupo já existe"
 
 #: include/class.group.php:220
-#, fuzzy
 msgid "Unable to update group. Internal error occurred."
-msgstr "Não foi possível designar o tíquete. Corrija os erros abaixo e tente novamente!"
+msgstr "Não foi possível atualizar grupo. Ocorreu um erro interno."
 
 #: include/class.group.php:227
 msgid "Unable to create the group. Internal error"
 msgstr "Não foi possível criar o grupo. Erro interno"
+
+#: include/ajax.reports.php:31
+#: include/ajax.reports.php:51
+#: include/class.export.php:43
+msgid "Department"
+msgstr "Departamento"
+
+#: include/ajax.reports.php:31
+msgid "Topics"
+msgstr "Tópicos"
+
+#: include/ajax.reports.php:34
+msgid "Staff"
+msgstr "Equipe"
+
+#: include/ajax.reports.php:58
+msgid "Help Topic"
+msgstr "Tópico de ajuda"
+
+#: include/ajax.reports.php:67
+msgid "Staff Member"
+msgstr "Membro da Equipe"
+
+#: include/ajax.reports.php:117
+msgid "Assigned"
+msgstr "Designado"
+
+#: include/ajax.reports.php:117
+msgid "Closed"
+msgstr "Fechado"
+
+#: include/ajax.reports.php:117
+msgid "Reopened"
+msgstr "Reaberto"
+
+#: include/ajax.reports.php:118
+msgid "Service Time"
+msgstr "Tempo de Serviço"
+
+#: include/ajax.reports.php:118
+msgid "Response Time"
+msgstr "Tempo de Resposta"
 
 #: include/class.export.php:38
 msgid "Ticket Id"
@@ -1967,10 +1999,6 @@ msgstr "Data"
 #: include/class.export.php:42
 msgid "Priority"
 msgstr "Prioridade"
-
-#: include/class.export.php:43
-msgid "Department"
-msgstr "Departamento"
 
 #: include/class.export.php:44
 msgid "Source"
@@ -2071,28 +2099,24 @@ msgid "Invalid or unknown mail folder! >> "
 msgstr "Pasta de e-mail inválida ou desconhecida! >> "
 
 #: include/class.email.php:299
-#, fuzzy
 msgid "Invalid or unknown archive folder!"
-msgstr "FAQ inválida ou desconhecida"
+msgstr "Diretório para Arquivo inválido ou desconhecido!"
 
 #: include/class.email.php:316
 msgid "Unable to login. Check SMTP settings."
 msgstr "Não foi possível autenticar. Cheque as configs. SMTP."
 
 #: include/class.email.php:368
-#, fuzzy
 msgid "Unable to update email. Internal error occurred"
-msgstr "Não foi possível designar o tíquete. Corrija os erros abaixo e tente novamente!"
+msgstr "Não foi possível atualizar e-mail. Erro interno"
 
 #: include/class.email.php:374
-#, fuzzy
 msgid "Unable to add email. Internal error"
-msgstr "Não foi possível designar o tíquete. Corrija os erros abaixo e tente novamente!"
+msgstr "Não foi possível adicionar e-mail. Erro interno."
 
 #: include/class.config.php:573
-#, fuzzy
 msgid "Unknown setting option. Get technical support."
-msgstr "Ação desconhecida. Procure ajuda técnica!"
+msgstr "Opção de configuração desconhecida. Procure ajuda técnica."
 
 #: include/class.config.php:582
 msgid "Helpdesk URl required"
@@ -2294,10 +2318,6 @@ msgid "Emails"
 msgstr "E-mails"
 
 #: include/class.nav.php:179
-msgid "Staff"
-msgstr "Equipe"
-
-#: include/class.nav.php:179
 msgid "Manage Staff"
 msgstr "Gerenciar Equipe"
 
@@ -2432,6 +2452,10 @@ msgstr "Tentativa de login falhou"
 msgid "Internal list for email banning. Do not remove"
 msgstr "Lista interna para banimento de e-mail. Não remova"
 
+#: include/class.template.php:342
+msgid "Template name already exists"
+msgstr "Nome do Modelo já existe"
+
 #: include/class.canned.php:254
 msgid "Title is too short. 3 chars minimum"
 msgstr "Título muito curto. Mínimo de 3 caracteres"
@@ -2445,14 +2469,12 @@ msgid "Response text required"
 msgstr "Texto de resposta requerida"
 
 #: include/class.canned.php:275
-#, fuzzy
 msgid "Unable to update canned response."
-msgstr "Não foi possível habilitar as respostas prontas selecionadas."
+msgstr "Não foi possível atualizar resposta pronta."
 
 #: include/class.canned.php:282
-#, fuzzy
 msgid "Unable to create the canned response. Internal error"
-msgstr "Não foi possível habilitar as respostas prontas selecionadas."
+msgstr "Não foi possível criar a resposta pronta. Erro interno"
 
 #: include/class.api.php:105
 msgid "Valid IP required"
@@ -2467,9 +2489,8 @@ msgid "Unable to update API key. Internal error occurred"
 msgstr "Não foi possível atualizar a chave de API. Erro interno"
 
 #: include/class.api.php:130
-#, fuzzy
 msgid "Unable to add API key. Internal error"
-msgstr "Não foi possível designar o tíquete. Corrija os erros abaixo e tente novamente!"
+msgstr "Não foi possível adicionar chave API. Erro interno"
 
 #: include/ost-config.php:20
 msgid "Kwaheri rafiki!"
@@ -2490,11 +2511,6 @@ msgstr "Seleção de E-mail requerida"
 #: include/class.dept.php:343
 msgid "Template selection required"
 msgstr "Seleçao de modelo requerida"
-
-#: include/class.dept.php:346
-#: include/class.filter.php:428
-msgid "Name required"
-msgstr "Nome requerido"
 
 #: include/class.dept.php:348
 msgid "Name is too short."
@@ -2521,14 +2537,12 @@ msgid "Unable to create department. Internal error"
 msgstr "Não foi possível criar departamento. Erro interno"
 
 #: include/class.filter.php:383
-#, fuzzy
 msgid "Invalid match selection"
-msgstr "Ação inválida"
+msgstr "Seleção de correspondência inválida"
 
 #: include/class.filter.php:385
-#, fuzzy
 msgid "Invalid match type selection"
-msgstr "Ação inválida"
+msgstr "Seleção de tipo de correspondência inválida"
 
 #: include/class.filter.php:387
 msgid "Value required"
@@ -2698,6 +2712,18 @@ msgstr "Anexos"
 msgid "Post Reply"
 msgstr "Adicionar Resposta"
 
+#: include/client/faq-category.inc.php:17
+msgid "Frequently Asked Questions"
+msgstr "Perguntas Frequentes (FAQs)"
+
+#: include/client/faq-category.inc.php:30
+msgid "Category does not have any FAQs."
+msgstr "A Categoria não tem FAQs."
+
+#: include/client/faq-category.inc.php:30
+msgid "Back To Index"
+msgstr "Voltar ao Índice"
+
 #: include/client/thankyou.inc.php:8
 msgid "Thank you for contacting us."
 msgstr "Obrigado pelo seu contato."
@@ -2721,6 +2747,10 @@ msgstr "Se você quiser mandar comentários adicionais ou informações que dize
 #: include/client/thankyou.inc.php:19
 msgid "Support Team"
 msgstr "Centro de Suporte"
+
+#: include/client/header.inc.php:2
+msgid "osTicket :: Support Ticket System"
+msgstr "osTicket :: Sistema de Tíquetes de Suporte"
 
 #: include/client/header.inc.php:22
 msgid "Support Center"
@@ -2779,10 +2809,6 @@ msgstr "Resultados da Pesquisa"
 msgid "Any Status"
 msgstr "Qualquer Status"
 
-#: include/client/tickets.inc.php:99
-msgid "Closed"
-msgstr "Fechado"
-
 #: include/client/tickets.inc.php:101
 msgid "Go"
 msgstr "Ir"
@@ -2797,12 +2823,21 @@ msgstr "Ordenar por Data"
 
 #: include/client/tickets.inc.php:115
 msgid "Sort By Status"
-msgstr "Ordenar por Status"
+msgstr "Ordenar por Estado"
 
 #: include/client/tickets.inc.php:115
 #: include/staff/cannedresponse.inc.php:39
+#: include/staff/settings-alerts.inc.php:16
+#: include/staff/settings-alerts.inc.php:39
+#: include/staff/settings-alerts.inc.php:62
+#: include/staff/settings-alerts.inc.php:86
+#: include/staff/settings-alerts.inc.php:111
+#: include/staff/settings-alerts.inc.php:135
+#: include/staff/teams.inc.php:56
+#: include/staff/team.inc.php:50
+#: include/staff/slaplan.inc.php:60
 msgid "Status"
-msgstr "Status"
+msgstr "Estado"
 
 #: include/client/tickets.inc.php:118
 msgid "Sort By Subject"
@@ -2821,6 +2856,8 @@ msgid "Your query did not match any records"
 msgstr "Sua pesquisa não retornou nenhum resultado"
 
 #: include/client/tickets.inc.php:169
+#: include/staff/categories.inc.php:110
+#: include/staff/emails.inc.php:119
 msgid "Page"
 msgstr "Página"
 
@@ -2858,6 +2895,9 @@ msgstr "Atualizar Respostas Prontas"
 
 #: include/staff/cannedresponse.inc.php:8
 #: include/staff/settings-tickets.inc.php:245
+#: include/staff/settings-alerts.inc.php:175
+#: include/staff/team.inc.php:9
+#: include/staff/slaplan.inc.php:8
 msgid "Save Changes"
 msgstr "Salvar Mudanças"
 
@@ -2880,10 +2920,14 @@ msgid "Canned response settings"
 msgstr "Configs. de respostas prontas"
 
 #: include/staff/cannedresponse.inc.php:41
+#: include/staff/team.inc.php:53
+#: include/staff/slaplan.inc.php:63
 msgid "Active"
 msgstr "Ativo"
 
 #: include/staff/cannedresponse.inc.php:42
+#: include/staff/team.inc.php:54
+#: include/staff/slaplan.inc.php:64
 msgid "Disabled"
 msgstr "Desabilitado"
 
@@ -2920,6 +2964,7 @@ msgid "You can upload up to 10 attachments per canned response."
 msgstr "Você pode subir até 10 anexos por resposta pronta."
 
 #: include/staff/cannedresponse.inc.php:102
+#: include/staff/category.inc.php:65
 msgid "Internal Notes"
 msgstr "Notas Internas"
 
@@ -2960,7 +3005,11 @@ msgid "Default SLA"
 msgstr "SLA Padrão"
 
 #: include/staff/settings-tickets.inc.php:35
+#: include/staff/departments.inc.php:106
 #: include/staff/categories.inc.php:99
+#: include/staff/teams.inc.php:101
+#: include/staff/team.inc.php:64
+#: include/staff/emails.inc.php:108
 msgid "None"
 msgstr "Nenhum"
 
@@ -3046,7 +3095,7 @@ msgstr "Tíquetes Reabertos"
 
 #: include/staff/settings-tickets.inc.php:123
 msgid "Auto-assign reopened tickets to the last available respondent."
-msgstr ""
+msgstr "Auto-designar tíquetes reabertos para a última pessoa que respondeu."
 
 #: include/staff/settings-tickets.inc.php:130
 msgid "Show assigned tickets on open queue."
@@ -3106,9 +3155,8 @@ msgid "Limit to authenticated users only."
 msgstr "Limitar apenas a usuários autenticados."
 
 #: include/staff/settings-tickets.inc.php:180
-#, fuzzy
 msgid "(User must be logged in to upload files)"
-msgstr "Usuário deve estar autenticado para subir arquivos"
+msgstr "(O usuário deve estar autenticado para subir arquivos)"
 
 #: include/staff/settings-tickets.inc.php:185
 msgid "Max. User File Uploads"
@@ -3173,18 +3221,242 @@ msgid "i.e dotStar (NOT Recommended)."
 msgstr ", isto é, ponto asterisco (NÃO recomendado)."
 
 #: include/staff/settings-tickets.inc.php:246
+#: include/staff/settings-alerts.inc.php:176
 msgid "Reset Changes"
 msgstr "Limpar Mudanças"
 
 #: include/staff/departments.inc.php:40
-#, fuzzy
 msgid "No departments found!"
-msgstr "Nenhum modelo encontrado!"
+msgstr "Nenhum departamento encontrado!"
+
+#: include/staff/departments.inc.php:47
+msgid "Add New Department"
+msgstr "Adicionar Novo Departamento"
+
+#: include/staff/departments.inc.php:58
+msgid "Type"
+msgstr "Tipo"
+
+#: include/staff/departments.inc.php:60
+msgid "Email Address"
+msgstr "Endereço de E-mail"
+
+#: include/staff/departments.inc.php:61
+msgid "Dept. Manager"
+msgstr "Gerente do Depto."
+
+#: include/staff/departments.inc.php:77
+msgid "(Default)"
+msgstr "(Padrão)"
+
+#: include/staff/departments.inc.php:85
+#: include/staff/category.inc.php:44
+msgid "Public"
+msgstr "Público"
+
+#: include/staff/departments.inc.php:85
+msgid "Private"
+msgstr "Privado"
+
+#: include/staff/departments.inc.php:104
+#: include/staff/categories.inc.php:97
+#: include/staff/teams.inc.php:99
+#: include/staff/emails.inc.php:106
+msgid "Select"
+msgstr "Selecione"
+
+#: include/staff/departments.inc.php:105
+#: include/staff/categories.inc.php:98
+#: include/staff/teams.inc.php:100
+#: include/staff/emails.inc.php:107
+msgid "All"
+msgstr "Todos"
+
+#: include/staff/departments.inc.php:107
+#: include/staff/categories.inc.php:100
+#: include/staff/teams.inc.php:102
+#: include/staff/emails.inc.php:109
+msgid "Toggle"
+msgstr "Alternar"
 
 #: include/staff/departments.inc.php:109
-#, fuzzy
 msgid "No department found"
-msgstr "Nenhuma modelo encontrado"
+msgstr "Nenhum departamento encontrado"
+
+#: include/staff/departments.inc.php:119
+#: include/staff/categories.inc.php:113
+msgid "Make Public"
+msgstr "Publicar"
+
+#: include/staff/departments.inc.php:120
+msgid "Are you sure you want to make selected departments public?"
+msgstr "Tem certeza que deseja tornar os departamentos selecionados públicos?"
+
+#: include/staff/departments.inc.php:121
+msgid "Make Private"
+msgstr "Tornar Privado"
+
+#: include/staff/departments.inc.php:122
+msgid "Are you sure you want to make selected departments private?"
+msgstr "Tem certeza que deseja tornar os departamentos selecionados privados?"
+
+#: include/staff/departments.inc.php:123
+msgid "Delete Dept(s)"
+msgstr "Apagar Depto(s)"
+
+#: include/staff/departments.inc.php:124
+msgid "Are you sure you want to DELETE selected departments?"
+msgstr "Tem certeza que deseja APAGAR os departamentos selecionados?"
+
+#: include/staff/departments.inc.php:59
+msgid "Users"
+msgstr "Usuários"
+
+#: include/staff/settings-alerts.inc.php:1
+msgid "Alerts and Notices"
+msgstr "Alertas e Avisos"
+
+#: include/staff/settings-alerts.inc.php:9
+msgid "Alerts and Notices sent to staff on ticket \"events\""
+msgstr "Alertas e Avisos enviados a membros da equipe em eventos de tíquete"
+
+#: include/staff/settings-alerts.inc.php:14
+msgid "New Ticket Alert"
+msgstr "Alerta de Novo Tíquete"
+
+#: include/staff/settings-alerts.inc.php:14
+msgid "Alert sent out on new tickets"
+msgstr "Alerta enviado quando novos tíquetes são criados"
+
+#: include/staff/settings-alerts.inc.php:18
+#: include/staff/settings-alerts.inc.php:42
+#: include/staff/settings-alerts.inc.php:65
+#: include/staff/settings-alerts.inc.php:89
+#: include/staff/settings-alerts.inc.php:113
+#: include/staff/settings-alerts.inc.php:137
+#: include/staff/teams.inc.php:116
+#: include/staff/team.inc.php:84
+#: include/staff/slaplan.inc.php:83
+msgid "Disable"
+msgstr "Desabilitar"
+
+#: include/staff/settings-alerts.inc.php:24
+msgid "Admin Email"
+msgstr "E-mail do Adminstrador"
+
+#: include/staff/settings-alerts.inc.php:29
+#: include/staff/settings-alerts.inc.php:57
+#: include/staff/settings-alerts.inc.php:81
+#: include/staff/settings-alerts.inc.php:124
+#: include/staff/settings-alerts.inc.php:148
+msgid "Department Manager"
+msgstr "Gerente do Departamento"
+
+#: include/staff/settings-alerts.inc.php:34
+#: include/staff/settings-alerts.inc.php:130
+#: include/staff/settings-alerts.inc.php:153
+msgid "Department Members"
+msgstr "Membros do Departamento"
+
+#: include/staff/settings-alerts.inc.php:34
+#: include/staff/settings-alerts.inc.php:57
+#: include/staff/settings-alerts.inc.php:81
+#: include/staff/settings-alerts.inc.php:106
+#: include/staff/settings-alerts.inc.php:130
+#: include/staff/settings-alerts.inc.php:153
+msgid "(spammy)"
+msgstr "(muitos e-mails)"
+
+#: include/staff/settings-alerts.inc.php:37
+msgid "New Message Alert"
+msgstr "Alerta de Nova Mensagem"
+
+#: include/staff/settings-alerts.inc.php:37
+msgid "Alert sent out when a new message, from the user, is appended to an existing ticket"
+msgstr "Alertas enviados quando uma nova mensagem, do usuário, é adicionada a um tíquete existente"
+
+#: include/staff/settings-alerts.inc.php:47
+#: include/staff/settings-alerts.inc.php:71
+msgid "Last Respondent"
+msgstr "Último que Respondeu"
+
+#: include/staff/settings-alerts.inc.php:52
+#: include/staff/settings-alerts.inc.php:76
+#: include/staff/settings-alerts.inc.php:95
+msgid "Assigned Staff"
+msgstr "Membro Designado"
+
+#: include/staff/settings-alerts.inc.php:60
+msgid "New Internal Note Alert"
+msgstr "Alerta de nova Nota Interna"
+
+#: include/staff/settings-alerts.inc.php:60
+msgid "Alert sent out when a new internal note is posted."
+msgstr "Alerta enviado quando uma nova nota interna é adicionada."
+
+#: include/staff/settings-alerts.inc.php:84
+msgid "Ticket Assignment Alert"
+msgstr "Alerta de Designação de Tíquete"
+
+#: include/staff/settings-alerts.inc.php:84
+msgid "Alert sent out to staff on ticket assignment."
+msgstr "Alerta enviado ao membro da equipe ao ser designado um tíquete."
+
+#: include/staff/settings-alerts.inc.php:100
+#: include/staff/teams.inc.php:58
+#: include/staff/team.inc.php:60
+msgid "Team Lead"
+msgstr "Líder do Time"
+
+#: include/staff/settings-alerts.inc.php:100
+msgid "(On team assignment)"
+msgstr "(Ao designar o Time)"
+
+#: include/staff/settings-alerts.inc.php:106
+#: include/staff/team.inc.php:91
+msgid "Team Members"
+msgstr "Membros do Time"
+
+#: include/staff/settings-alerts.inc.php:109
+msgid "Ticket Transfer Alert"
+msgstr "Alerta de Transferência de Tíquete"
+
+#: include/staff/settings-alerts.inc.php:109
+msgid "Alert sent out to staff of the target department on ticket transfer."
+msgstr "Alerta enviado ao membro da equipe do departamento de destino nas transferências de tíquete."
+
+#: include/staff/settings-alerts.inc.php:119
+#: include/staff/settings-alerts.inc.php:143
+msgid "Assigned Staff/Team"
+msgstr "Designado para Membro/Time"
+
+#: include/staff/settings-alerts.inc.php:133
+msgid "Overdue Ticket Alert"
+msgstr "Alerta de Tíquetes Atrasados"
+
+#: include/staff/settings-alerts.inc.php:133
+msgid "Alert sent out when a ticket becomes overdue - admin email gets an alert by default."
+msgstr "Alertas enviados quando um tíquete fica atrasado - e-mail do adminstrador recebe um alerta, por padrão."
+
+#: include/staff/settings-alerts.inc.php:156
+msgid "System Alerts"
+msgstr "Alertas do Sistema"
+
+#: include/staff/settings-alerts.inc.php:156
+msgid "Enabled by default. Errors are sent to system admin email"
+msgstr "Habilitado por padrão. Erros são enviados para o e-mail administrador do sistema"
+
+#: include/staff/settings-alerts.inc.php:159
+msgid "System Errors"
+msgstr "Erros do Sistema"
+
+#: include/staff/settings-alerts.inc.php:164
+msgid "SQL errors"
+msgstr "Erros SQL"
+
+#: include/staff/settings-alerts.inc.php:169
+msgid "Excessive Login attempts"
+msgstr "Número excessivo de tentativas de login"
 
 #: include/staff/categories.inc.php:40
 msgid "No FAQ categories found!"
@@ -3196,40 +3468,29 @@ msgid "Add New Category"
 msgstr "Adicionar Nova Categoria"
 
 #: include/staff/categories.inc.php:60
+#: include/staff/teams.inc.php:60
+#: include/staff/emails.inc.php:63
 msgid "Last Updated"
 msgstr "Última Atualização"
-
-#: include/staff/categories.inc.php:98
-msgid "All"
-msgstr "Todos"
-
-#: include/staff/categories.inc.php:100
-msgid "Toggle"
-msgstr "Alternar"
 
 #: include/staff/categories.inc.php:102
 msgid "No FAQ categories found."
 msgstr "Não foram encontradas categorias de FAQs."
 
-#: include/staff/categories.inc.php:113
-msgid "Make Public"
-msgstr "Publicar"
-
 #: include/staff/categories.inc.php:114
-#, fuzzy
 msgid "Are you sure you want to make selected categories PUBLIC?"
-msgstr "Tem certeza que deseja fechar os tíquetes selecionados?"
+msgstr "Tem certeza que deseja tornar as categorias selecionadas PÚBLICAS?"
 
 #: include/staff/categories.inc.php:115
 msgid "Make Internal"
 msgstr "Internalizar"
 
 #: include/staff/categories.inc.php:116
-#, fuzzy
 msgid "Are you sure you want to make selected categories INTERNAL?"
-msgstr "Tem certeza que deseja fechar os tíquetes selecionados?"
+msgstr "Tem certeza que deseja tornar as categorias selecionadas INTERNAS?"
 
 #: include/staff/categories.inc.php:117
+#: include/staff/teams.inc.php:118
 msgid "Delete"
 msgstr "Apagar"
 
@@ -3238,36 +3499,156 @@ msgid "Are you sure you want to DELETE selected categories - including associate
 msgstr "Tem certeza que deseja APAGAR as categorias selecionadas, incluindo as FAQs associadas?"
 
 #: include/staff/category.inc.php:6
-#, fuzzy
 msgid "Update Category :"
-msgstr "Adicionar Nova Categoria"
-
-#: include/staff/category.inc.php:7
-#, fuzzy
-msgid "update"
-msgstr "Atualizar"
-
-#: include/staff/category.inc.php:14
-msgid "create"
-msgstr ""
+msgstr "Atualizar Categoria:"
 
 #: include/staff/category.inc.php:15
 msgid "Add"
-msgstr "AdicionarAdicionar"
+msgstr "Adicionar"
+
+#: include/staff/category.inc.php:38
+msgid "Category information: Public categories are published if it has published FAQ articles."
+msgstr "Informação sobre Categorias: Categorias são publicadas se têm artigos de FAQ publicados."
+
+#: include/staff/category.inc.php:42
+msgid "Category Type"
+msgstr "Tipo de Categoria"
+
+#: include/staff/category.inc.php:44
+msgid "(publish)"
+msgstr "(publicar)"
+
+#: include/staff/category.inc.php:46
+msgid "Private (internal)"
+msgstr "Privado (interno)"
+
+#: include/staff/category.inc.php:52
+msgid "Category Name"
+msgstr "Nome da Categoria"
+
+#: include/staff/category.inc.php:52
+msgid "Short descriptive name."
+msgstr "Texto descritivo curto."
+
+#: include/staff/category.inc.php:57
+msgid "Category Description"
+msgstr "Descrição da Categoria"
+
+#: include/staff/category.inc.php:57
+msgid "Summary of the category."
+msgstr "Sumário da categoria."
+
+#: include/staff/teams.inc.php:38
+#: include/staff/teams.inc.php:104
+msgid "No teams found!"
+msgstr "Não foram encontrados times!"
+
+#: include/staff/teams.inc.php:45
+#: include/staff/team.inc.php:14
+msgid "Add New Team"
+msgstr "Adicionar Novo Time"
+
+#: include/staff/teams.inc.php:55
+msgid "Team Name"
+msgstr "Nome do Time"
+
+#: include/staff/teams.inc.php:57
+msgid "Members"
+msgstr "Membros"
+
+#: include/staff/teams.inc.php:59
+#: include/staff/emails.inc.php:62
+msgid "Created"
+msgstr "Criado"
+
+#: include/staff/teams.inc.php:115
+msgid "Are you sure you want to ENABLE selected teams?"
+msgstr "Tem certeza que deseja HABILITAR os times selecionados?"
+
+#: include/staff/teams.inc.php:117
+msgid "Are you sure you want to DISABLE selected teams?"
+msgstr "Tem certeza que deseja DESABILITAR os times selecionados?"
+
+#: include/staff/teams.inc.php:119
+msgid "Are you sure you want to DELETE selected teams?"
+msgstr "Tem certeza que deseja APAGAR os times selecionados?"
+
+#: include/staff/team.inc.php:7
+msgid "Update Team"
+msgstr "Atualizar Time"
+
+#: include/staff/team.inc.php:16
+msgid "Create Team"
+msgstr "Criar Time"
+
+#: include/staff/team.inc.php:34
+msgid "Team Information"
+msgstr "Informações de Time"
+
+#: include/staff/team.inc.php:34
+msgid "Disabled team won't be availabe for ticket assignment or alerts"
+msgstr "O time desabilitado não estará disponível para designação de tíquetes ou para alertas"
+
+#: include/staff/team.inc.php:65
+msgid "Select Team Lead (Optional)"
+msgstr "Selecione o Líder do Time (Opcional)"
+
+#: include/staff/team.inc.php:80
+msgid "Assignment Alerts"
+msgstr "Alertas de Designação"
+
+#: include/staff/team.inc.php:84
+msgid "assignment alerts for this team"
+msgstr "alertas de designação para este time"
+
+#: include/staff/team.inc.php:84
+msgid "overwrite global settings"
+msgstr "sobrescrever configurações globais"
+
+#: include/staff/team.inc.php:91
+msgid "To add additional members go to target member's profile"
+msgstr "Para adicionar membros, vá ao perfil do membro correspondente."
+
+#: include/staff/team.inc.php:106
+#: include/staff/slaplan.inc.php:89
+msgid "Admin Notes"
+msgstr "Notas Administrativas"
+
+#: include/staff/team.inc.php:106
+msgid "Internal notes viewable by all admins"
+msgstr "Notas internas visíveis por todos os administradores"
+
+#: include/staff/faq-category.inc.php:43
+msgid "Published"
+msgstr "Publicado"
+
+#: include/staff/faq-category.inc.php:43
+msgid "Internal"
+msgstr "Interno"
 
 #: include/staff/faq-category.inc.php:48
-msgid "<strong>Category does not have FAQs</strong>"
-msgstr ""
+msgid "Category does not have FAQs"
+msgstr "A Categoria não tem FAQs"
 
 #: include/staff/emails.inc.php:42
-#, fuzzy
 msgid "No emails found!"
-msgstr "Não foram encontrados e-mails na lista negra!"
+msgstr "Não foram encontrados e-mails!"
+
+#: include/staff/emails.inc.php:49
+msgid "Add New Email"
+msgstr "Adicionar Novo E-mail"
 
 #: include/staff/emails.inc.php:111
-#, fuzzy
 msgid "No help emails found"
-msgstr "Não foram encontrados e-mails na lista negra!"
+msgstr "Não foram encontrados e-mails de ajuda"
+
+#: include/staff/emails.inc.php:122
+msgid "Delete Email(s)"
+msgstr "Apagar E-mail(s)"
+
+#: include/staff/emails.inc.php:123
+msgid "Are you sure you want to DELETE selected emails?"
+msgstr "Tem certeza que deseja APAGAR os e-mails selecionados?"
 
 #: include/staff/login.tpl.php:21
 msgid "osTicket Staff Control Panel"
@@ -3280,6 +3661,58 @@ msgstr "usuário"
 #: include/staff/login.tpl.php:28
 msgid "password"
 msgstr "senha"
+
+#: include/staff/slaplan.inc.php:6
+msgid "Update SLA Plan"
+msgstr "Atualizar Plano SLA"
+
+#: include/staff/slaplan.inc.php:13
+msgid "Add New SLA Plan"
+msgstr "Adicionar Novo Plano SLA"
+
+#: include/staff/slaplan.inc.php:15
+msgid "Add Plan"
+msgstr "Adicionar Plano"
+
+#: include/staff/slaplan.inc.php:28
+msgid "Service Level Agreement"
+msgstr "Acordo de Nível de Serviço"
+
+#: include/staff/slaplan.inc.php:34
+msgid "Tickets are marked overdue on grace period violation."
+msgstr "Os tíquetes são marcados como atrasados ao violar o período de tolerância."
+
+#: include/staff/slaplan.inc.php:50
+msgid "Grace Period"
+msgstr "Período de Tolerância"
+
+#: include/staff/slaplan.inc.php:54
+msgid "in hours"
+msgstr "em horas"
+
+#: include/staff/slaplan.inc.php:70
+msgid "Priority Escalation"
+msgstr "Escalada de Prioridade"
+
+#: include/staff/slaplan.inc.php:74
+msgid "priority escalation on overdue tickets"
+msgstr "escalada de prioridade por tíquetes atrasados"
+
+#: include/staff/slaplan.inc.php:79
+msgid "Ticket Overdue Alerts"
+msgstr "Alertas de Tíquetes Atrasados"
+
+#: include/staff/slaplan.inc.php:83
+msgid "overdue alerts notices"
+msgstr "alertas de tíquetes atrasados"
+
+#: include/staff/slaplan.inc.php:83
+msgid "Overwrite global setting"
+msgstr "Sobrescrever config. global"
+
+#: include/staff/slaplan.inc.php:89
+msgid "Internal notes"
+msgstr "Notas Internas"
 
 #: include/staff/attachment.inc.php:13
 msgid "Attachments Settings"
@@ -3337,6 +3770,14 @@ msgstr "Adicionar Chave de API"
 msgid "Add Key"
 msgstr "Adicionar Chave"
 
+#: include/staff/apikey.inc.php:27
+msgid "API Key"
+msgstr "Chave API"
+
+#: include/staff/apikey.inc.php:33
+msgid "API Key is autogenerated and unique per IP address."
+msgstr "Chave API é gerada automaticamente e é única por endereço IP."
+
 #: include/staff/apikey.inc.php:51
 msgid "IP Address:"
 msgstr "Endereçoo IP:"
@@ -3354,33 +3795,33 @@ msgid " IP Address:"
 msgstr " Endereço IP:"
 
 #: include/staff/apikey.inc.php:76
-msgid "Enabled Services:"
-msgstr "Serviços habilitados:"
+msgid "Enabled Services"
+msgstr "Serviços Habilitados"
 
 #: include/staff/apikey.inc.php:76
-msgid ": Check applicable API services."
-msgstr ": Cheque os serviços API correspondentes."
+msgid "Check applicable API services."
+msgstr "Cheque os serviços API aplicáveis."
 
 #: include/staff/apikey.inc.php:81
-#, fuzzy
 msgid "Email piping:"
-msgstr "Config. de E-mail"
+msgstr "Direcionamento de E-mail:"
 
 #: include/staff/apikey.inc.php:85
 msgid "remote email piping."
-msgstr ""
+msgstr "direcionamento de e-mail remoto."
 
 #: include/staff/apikey.inc.php:90
-msgid "Admin Notes"
-msgstr "Notas Administrativas"
-
-#: include/staff/apikey.inc.php:90
-msgid "Internal notes.&nbsp;"
-msgstr "Notas Internas.&nbsp;"
+#: include/staff/template.inc.php:107
+msgid "Internal notes."
+msgstr "Notas Internas."
 
 #: include/staff/banlist.inc.php:17
 msgid "Term too short!"
 msgstr "Termo muito curto!"
+
+#: include/staff/banlist.inc.php:56
+msgid " Query"
+msgstr " Pesquisa"
 
 #: include/staff/banlist.inc.php:62
 msgid "Ban New Email"
@@ -3388,13 +3829,7 @@ msgstr "Banir Novo E-mail"
 
 #: include/staff/banlist.inc.php:68
 msgid "No banned emails matching the query found!"
-msgstr ""
-
-#: include/staff/banlist.inc.php:82
-#: include/staff/directory.inc.php:100
-#: include/staff/profile.inc.php:50
-msgid "Email Address"
-msgstr "Endereço de E-mail"
+msgstr "Nenhum e-mail banido correponde à pesquisa!"
 
 #: include/staff/banlist.inc.php:83
 msgid "Ban Status"
@@ -3408,35 +3843,169 @@ msgstr "Data de Adição"
 msgid "No banned emails found!"
 msgstr "Não foram encontrados e-mails na lista negra!"
 
-#: include/staff/banlist.inc.php:134
-msgid "Disable"
-msgstr "Desabilitar"
-
 #: include/staff/banlist.inc.php:135
 msgid "Are you sure you want to DISABLE selected emails ban?"
 msgstr "Tem certeza que deseja DESATIVAR o banimento dos e-mail selecionados?"
 
-#: include/staff/banlist.inc.php:138
-msgid "Are you sure you want to DELETE selected emails?"
-msgstr "Tem certeza que deseja APAGAR os e-mails selecionados?"
-
 #: include/staff/group.inc.php:6
-#, fuzzy
 msgid "Update Group"
-msgstr "Atualizar"
+msgstr "Atualizar Grupo"
 
 #: include/staff/group.inc.php:14
-#, fuzzy
 msgid "Add New Group"
-msgstr "Adicionar Chave de API"
+msgstr "Adicionar Novo Grupo"
 
 #: include/staff/group.inc.php:16
-#, fuzzy
 msgid "Create Group"
-msgstr "Data Criação"
+msgstr "Criar Grupo"
+
+#: include/staff/group.inc.php:34
+msgid "Group Information"
+msgstr "Informações do Grupo"
+
+#: include/staff/group.inc.php:34
+msgid "Disabled group will limit staff members access. Admins are exempted."
+msgstr "Desabilitar o grupo limitará o acesso de membros da equipe, com exceção dos Adminstradores ."
+
+#: include/staff/group.inc.php:60
+msgid "Group Permissions"
+msgstr "Permissões de Grupo"
+
+#: include/staff/group.inc.php:60
+msgid "Applies to all group members"
+msgstr "Aplica-se a todos os membros do grupo"
+
+#: include/staff/group.inc.php:63
+#: include/staff/group.inc.php:87
+#: include/staff/group.inc.php:95
+#: include/staff/group.inc.php:103
+msgid "Can"
+msgstr "Pode"
+
+#: include/staff/group.inc.php:63
+msgid "Create"
+msgstr "Criar"
+
+#: include/staff/group.inc.php:65
+#: include/staff/group.inc.php:73
+#: include/staff/group.inc.php:81
+#: include/staff/group.inc.php:89
+#: include/staff/group.inc.php:97
+#: include/staff/group.inc.php:105
+#: include/staff/group.inc.php:113
+#: include/staff/group.inc.php:121
+#: include/staff/group.inc.php:129
+#: include/staff/email.inc.php:228
+msgid "Yes"
+msgstr "Sim"
+
+#: include/staff/group.inc.php:67
+#: include/staff/group.inc.php:75
+#: include/staff/group.inc.php:83
+#: include/staff/group.inc.php:91
+#: include/staff/group.inc.php:99
+#: include/staff/group.inc.php:107
+#: include/staff/group.inc.php:115
+#: include/staff/group.inc.php:123
+#: include/staff/group.inc.php:131
+msgid "No"
+msgstr "Não"
+
+#: include/staff/group.inc.php:68
+msgid "Ability to open tickets on behalf of clients."
+msgstr "Permissão para abrir tíquetes no lugar dos clientes."
+
+#: include/staff/group.inc.php:71
+#: include/staff/group.inc.php:79
+msgid "Can "
+msgstr "Pode"
+
+#: include/staff/group.inc.php:71
+msgid "Edit"
+msgstr "Editar"
+
+#: include/staff/group.inc.php:76
+msgid "Ability to edit tickets."
+msgstr "Permissão para abrir tíquetes."
+
+#: include/staff/group.inc.php:79
+msgid "Close"
+msgstr "Fechar"
+
+#: include/staff/group.inc.php:84
+msgid "Ability to close tickets. Staff can still post a response."
+msgstr "Permissão para fechar tíquetes. Membros da Equipe ainda podem postar respostas."
+
+#: include/staff/group.inc.php:87
+#: include/staff/ticket-view.inc.php:605
+msgid "Assign"
+msgstr "Designar"
+
+#: include/staff/group.inc.php:92
+msgid "Ability to assign tickets to staff members."
+msgstr "Permissão para designar tíquetes para membros da equipe."
+
+#: include/staff/group.inc.php:95
+#: include/staff/ticket-view.inc.php:531
+msgid "Transfer"
+msgstr "Transferência"
+
+#: include/staff/group.inc.php:100
+msgid "Ability to transfer tickets between departments."
+msgstr "Permissão para transferir tíquetes entre departamentos."
+
+#: include/staff/group.inc.php:108
+msgid "Deleted tickets can't be recovered!"
+msgstr "Tíquetes apagados não podem ser recuperados!"
+
+#: include/staff/group.inc.php:111
+msgid "Can Ban Emails"
+msgstr "Pode Banir E-mails"
+
+#: include/staff/group.inc.php:116
+msgid "Ability to add/remove emails from banlist via ticket interface."
+msgstr "Permissão para adicionar/remover e-mails da lista negra via interface de tíquete."
+
+#: include/staff/group.inc.php:119
+msgid "Can Manage Premade"
+msgstr "Pode Gerenciar Pré-pronto"
+
+#: include/staff/group.inc.php:124
+msgid "Ability to add/update/disable/delete canned responses and attachments."
+msgstr "Permissão para adicionar/atualizar/desabilitar/apagar respostas prontas e anexos."
+
+#: include/staff/group.inc.php:127
+msgid "Can Manage FAQ"
+msgstr "Pode Gerenciar FAQ"
+
+#: include/staff/group.inc.php:132
+msgid "Ability to add/update/disable/delete knowledgebase categories and FAQs."
+msgstr "Permissão para adicionar/atualizar/desabilitar/apagar categorias da Base de Conhecimento e FAQs."
+
+#: include/staff/group.inc.php:137
+#: include/staff/department.inc.php:209
+msgid "Department Access"
+msgstr "Acesso ao Departamento"
+
+#: include/staff/group.inc.php:137
+msgid "Check all departments the group members are allowed to access."
+msgstr "Selecione todos os membros do grupo que podem acessar."
+
+#: include/staff/group.inc.php:137
+msgid "Select All"
+msgstr "Selecione Todos"
+
+#: include/staff/group.inc.php:137
+msgid "Select None"
+msgstr "Selecione Nenhum"
+
+#: include/staff/group.inc.php:151
+msgid "Internal notes viewable by all admins."
+msgstr "Notas Internas visíveis por todos os administradores."
 
 #: include/staff/directory.inc.php:63
 #: include/staff/ticket-view.inc.php:563
+#: include/staff/filter.inc.php:292
 msgid "Staff Members"
 msgstr "Membros da Equipe"
 
@@ -3478,10 +4047,6 @@ msgstr "Respostas Prontas"
 msgid "Add New Response"
 msgstr "Adicionar Nova Resposta"
 
-#: include/staff/cannedresponses.inc.php:103
-msgid "Select"
-msgstr "Selecione"
-
 #: include/staff/cannedresponses.inc.php:108
 msgid "No canned responses"
 msgstr "Nenhuma resposta pronta"
@@ -3498,32 +4063,209 @@ msgstr "Tem certeza que deseja DESABILITAR as respostas selecionadas?"
 msgid "Are you sure you want to DELETE selected responses?"
 msgstr "Tem certeza que deseja APAGAR as respostas selecionadas?"
 
-#: include/staff/faq-categories.inc.php:5
-msgid "Frequently Asked Questions"
-msgstr "Perguntas Frequentes (FAQs)"
+#: include/staff/helptopics.inc.php:45
+msgid "help topics"
+msgstr "tópicos de ajuda"
 
 #: include/staff/helptopics.inc.php:47
-#, fuzzy
 msgid "No help topic found!"
-msgstr "Não foram encontrados e-mails na lista negra!"
+msgstr "Não foram encontrados tópicos de ajuda!"
+
+#: include/staff/helptopics.inc.php:51
+msgid "Help Topics"
+msgstr "Tópico de Ajuda"
+
+#: include/staff/helptopics.inc.php:54
+msgid "Add New Help Topic"
+msgstr "Adicionar Tópico de Ajuda"
+
+#: include/staff/helptopics.inc.php:109
+msgid "No help topics found"
+msgstr "Não foram encontrados tópicos de ajuda"
+
+#: include/staff/helptopics.inc.php:121
+msgid "Are you sure you want to ENABLE selected help topics?"
+msgstr "Tem certeza que deseja HABILITAR os tópicos de ajuda selecionados?"
+
+#: include/staff/helptopics.inc.php:123
+msgid "Are you sure you want to DISABLE selected help topics?"
+msgstr "Tem certeza que deseja DESABILITAR os tópicos de ajuda selecionados?"
+
+#: include/staff/helptopics.inc.php:125
+msgid "Are you sure you want to DELETE selected help topics?"
+msgstr "Tem certeza que deseja APAGAR os tópicos de ajuda selecionados?"
 
 #: include/staff/email.inc.php:6
-#, fuzzy
 msgid "Update Email"
-msgstr "Atualizar Regra de Banimento"
+msgstr "Atualizar E-mail"
 
 #: include/staff/email.inc.php:18
 msgid "To change password enter new password above."
-msgstr ""
-
-#: include/staff/email.inc.php:22
-#, fuzzy
-msgid "Add New Email"
-msgstr "Banir Novo E-mail"
+msgstr "Para mudar a senha digite a nova senha abaixo."
 
 #: include/staff/email.inc.php:24
 msgid "Submit"
-msgstr ""
+msgstr "Enviar"
+
+#: include/staff/email.inc.php:43
+msgid "Email Information"
+msgstr "Informações do E-mail"
+
+#: include/staff/email.inc.php:43
+msgid "Login details are optional BUT required when IMAP/POP or SMTP are enabled."
+msgstr "Detalhes de autenticação são opcionais MAS requeridos quando SMTP ou IMAP/POP estão habilitados."
+
+#: include/staff/email.inc.php:59
+msgid "Email Name"
+msgstr "Nome do E-mail"
+
+#: include/staff/email.inc.php:68
+msgid "Login Username"
+msgstr "Nome de Usuário"
+
+#: include/staff/email.inc.php:77
+msgid "Login Password"
+msgstr "Senha para Entrar"
+
+#: include/staff/email.inc.php:87
+msgid "Mail Account"
+msgstr "Conta de E-mail"
+
+#: include/staff/email.inc.php:87
+msgid "Optional setting for fetching incoming emails. Mail fetching must be enabled with autocron active or external cron setup."
+msgstr "Configuração opcinal para buscar e-mails de entrada. A Busca de e-mails deve estar habilitada com autocron ativo ou configuração externa de cron."
+
+#: include/staff/email.inc.php:98
+msgid "Host"
+msgstr "Host"
+
+#: include/staff/email.inc.php:103
+msgid "Port"
+msgstr "Porta"
+
+#: include/staff/email.inc.php:108
+msgid "Protocol"
+msgstr "Protocolo"
+
+#: include/staff/email.inc.php:111
+msgid "Select Mail Protocol"
+msgstr "Selecione Protocolo de E-mail"
+
+#: include/staff/email.inc.php:119
+msgid "Encryption"
+msgstr "Criptografia"
+
+#: include/staff/email.inc.php:128
+msgid "Fetch Frequency"
+msgstr "Frequência de Busca"
+
+#: include/staff/email.inc.php:130
+msgid "Delay intervals in minutes"
+msgstr "Intervalos de Atraso em minutos"
+
+#: include/staff/email.inc.php:134
+msgid "Emails Per Fetch"
+msgstr "E-mails por Busca"
+
+#: include/staff/email.inc.php:136
+msgid "Maximum emails to process per fetch."
+msgstr "Máximo de e-mails para processar por busca."
+
+#: include/staff/email.inc.php:142
+msgid "New Ticket Priority"
+msgstr "Proridade de Novos Tíquetes"
+
+#: include/staff/email.inc.php:146
+msgid "Select Priority"
+msgstr "Selecione Prioridade"
+
+#: include/staff/email.inc.php:162
+msgid "New Ticket Dept."
+msgstr "Depto. de Novos Tíquetes"
+
+#: include/staff/email.inc.php:166
+msgid "Select Department"
+msgstr "Selecione o Departamento"
+
+#: include/staff/email.inc.php:182
+msgid "Auto-response"
+msgstr "Auto-resposta"
+
+#: include/staff/email.inc.php:186
+msgid "new ticket auto-response for this email. Overwrite global and dept. settings."
+msgstr "auto-resposta de novos tíquetes para este e-mail. Sobrescrever configs. globais e do depto."
+
+#: include/staff/email.inc.php:189
+msgid "Fetched Emails"
+msgstr "E-mails buscados"
+
+#: include/staff/email.inc.php:192
+msgid " Move to"
+msgstr " Mover para"
+
+#: include/staff/email.inc.php:192
+msgid " folder."
+msgstr " pasta."
+
+#: include/staff/email.inc.php:195
+msgid "Delete fetched emails"
+msgstr "Apagar e-mails buscados"
+
+#: include/staff/email.inc.php:197
+msgid "Do nothing (Not recommended)"
+msgstr "Não faça nada (Não recomendado)"
+
+#: include/staff/email.inc.php:198
+msgid "Moving fetched emails to a backup folder is highly recommended."
+msgstr "Mover e-mails buscados para uma pasta de backup é altamente recomendado."
+
+#: include/staff/email.inc.php:204
+msgid "SMTP Settings"
+msgstr "Configurações SMTP"
+
+#: include/staff/email.inc.php:204
+msgid "When enabled the"
+msgstr "Quando habilitado, o"
+
+#: include/staff/email.inc.php:204
+msgid " email account"
+msgstr " conta de E-mail"
+
+#: include/staff/email.inc.php:204
+msgid " will use SMTP server instead of internal PHP mail() function for outgoing emails."
+msgstr " irá utilizar o servidor SMTP em vez da função mail() do PHP para e-mails de saída."
+
+#: include/staff/email.inc.php:214
+msgid "SMTP Host"
+msgstr "Host SMTP"
+
+#: include/staff/email.inc.php:219
+msgid "SMTP Port"
+msgstr "Porta SMTP"
+
+#: include/staff/email.inc.php:224
+msgid "Authentication Required?"
+msgstr "Autenticação Requerida?"
+
+#: include/staff/email.inc.php:230
+msgid "NO"
+msgstr "NÃO"
+
+#: include/staff/email.inc.php:235
+msgid "Allow Header Spoofing?"
+msgstr "Permitir Modificação de Cabeçalho?"
+
+#: include/staff/email.inc.php:238
+msgid "Allow email header spoofing "
+msgstr "Permite que o cabeçalho seja modificado do original"
+
+#: include/staff/email.inc.php:238
+msgid "(only applies to emails being sent through this account)"
+msgstr "(somente se aplica a e-mails enviados através desta conta)"
+
+#: include/staff/email.inc.php:243
+msgid "Admin's notes."
+msgstr "Notas do Administrador."
 
 #: include/staff/ticket-view.inc.php:3
 msgid "Invalid path"
@@ -3562,6 +4304,7 @@ msgid "Assigned To"
 msgstr "Designado Para"
 
 #: include/staff/ticket-view.inc.php:122
+#: include/staff/filter.inc.php:282
 msgid "Unassigned"
 msgstr "Não Designado"
 
@@ -3584,10 +4327,6 @@ msgstr "Prazo"
 #: include/staff/ticket-view.inc.php:154
 msgid "Close Date"
 msgstr "Data de Fechamento"
-
-#: include/staff/ticket-view.inc.php:169
-msgid "Help Topic"
-msgstr "Tópico de ajuda"
 
 #: include/staff/ticket-view.inc.php:173
 msgid "Last Message"
@@ -3691,10 +4430,6 @@ msgstr "Comentários"
 msgid "Enter reasons for the transfer."
 msgstr "Digite as razões para a transferência."
 
-#: include/staff/ticket-view.inc.php:531
-msgid "Transfer"
-msgstr "Transferência"
-
 #: include/staff/ticket-view.inc.php:549
 #, php-format
 msgid "Ticket is currently assigned to"
@@ -3708,10 +4443,6 @@ msgstr "Designado Para"
 msgid "Select Staff Member OR a Team"
 msgstr "Selecione um Membro OU um Time "
 
-#: include/staff/ticket-view.inc.php:567
-msgid "Assigned"
-msgstr "Designado"
-
 #: include/staff/ticket-view.inc.php:598
 msgid "Enter reasons for the assignment or instructions."
 msgstr "Digite as razões para a designação ou instruções."
@@ -3719,10 +4450,6 @@ msgstr "Digite as razões para a designação ou instruções."
 #: include/staff/ticket-view.inc.php:605
 msgid "Reassign"
 msgstr "Redesignar"
-
-#: include/staff/ticket-view.inc.php:605
-msgid "Assign"
-msgstr "Designar"
 
 #: include/staff/ticket-view.inc.php:621
 msgid "Print Notes"
@@ -3740,35 +4467,288 @@ msgstr "Tamanho do Papel"
 msgid "Select Print Paper Size"
 msgstr "Selecione o Tamanho do Papel"
 
-#: include/staff/filter.inc.php:10
-#, fuzzy
-msgid "Update Filter"
-msgstr "Atualizar Regra de Banimento"
+#: include/staff/template.inc.php:7
+msgid "Update Template"
+msgstr "Atualizar Modelo"
 
-#: include/staff/filter.inc.php:17
-#, fuzzy
-msgid "Add New Filter"
-msgstr "Banir Novo E-mail"
-
-#: include/staff/filter.inc.php:19
-#, fuzzy
-msgid "Add Filter"
-msgstr "Filtrar"
-
-#: include/staff/department.inc.php:7
-#, fuzzy
-msgid "Update Department"
-msgstr "Departamento Padrão"
-
-#: include/staff/department.inc.php:16
-#, fuzzy
-msgid "Add New Department"
+#: include/staff/template.inc.php:14
+msgid "Add New Template"
 msgstr "Adicionar Novo Modelo"
 
+#: include/staff/template.inc.php:16
+msgid "Add Template"
+msgstr "Adicionar Modelo"
+
+#: include/staff/template.inc.php:27
+msgid "Email Template"
+msgstr "Modelo de E-mail"
+
+#: include/staff/template.inc.php:33
+msgid "Template information."
+msgstr "Informações do modelo."
+
+#: include/staff/template.inc.php:59
+msgid "Language"
+msgstr "Língua"
+
+#: include/staff/template.inc.php:73
+msgid "Template Messages"
+msgstr "Modelos de Mensagens"
+
+#: include/staff/template.inc.php:73
+msgid "Click on the message to edit."
+msgstr "Clique na mensagem para editar."
+
+#: include/staff/template.inc.php:85
+msgid "Template To Clone"
+msgstr "Modelos para Clonar"
+
+#: include/staff/template.inc.php:89
+#: include/staff/filter.inc.php:126
+#: include/staff/filter.inc.php:135
+msgid "Select One"
+msgstr "Selecione Um"
+
+#: include/staff/template.inc.php:101
+msgid "(select an existing template to copy and edit it thereafter)"
+msgstr "(selecione um modelo existente para copiá-lo e editá-lo posteriormente)"
+
+#: include/staff/filter.inc.php:10
+msgid "Update Filter"
+msgstr "Atualizar Filtro"
+
+#: include/staff/filter.inc.php:17
+msgid "Add New Filter"
+msgstr "Adicionar Novo Filtro"
+
+#: include/staff/filter.inc.php:19
+msgid "Add Filter"
+msgstr "Adicionar Filtro"
+
+#: include/staff/filter.inc.php:36
+msgid "Filters are executed based on execution order. Filter can target specific ticket source."
+msgstr "Filtros são executados em ordem, e podem atingir origens de tíquete específicas."
+
+#: include/staff/filter.inc.php:43
+msgid "Filter Name"
+msgstr "Nome do Filtro"
+
+#: include/staff/filter.inc.php:52
+msgid "Execution Order"
+msgstr "Ordem de Execução"
+
+#: include/staff/filter.inc.php:60
+msgid "Stop"
+msgstr "Parar"
+
+#: include/staff/filter.inc.php:60
+msgid "processing further on match!"
+msgstr "processando posteriormente ao corresponder!"
+
+#: include/staff/filter.inc.php:65
+msgid "Filter Status"
+msgstr "Estado do Filtro"
+
+#: include/staff/filter.inc.php:75
+msgid "Target"
+msgstr "Alvo"
+
+#: include/staff/filter.inc.php:79
+msgid "Select a Target"
+msgstr "Selecione um Alvo"
+
+#: include/staff/filter.inc.php:87
+msgid "Specific System Email"
+msgstr "E-mail de Sistema Específico"
+
+#: include/staff/filter.inc.php:104
+msgid "Filter Rules"
+msgstr "Regras do Filtro"
+
+#: include/staff/filter.inc.php:104
+msgid "Rules are applied based on the criteria."
+msgstr "As Regras são aplicadas baseadas em critérios."
+
+#: include/staff/filter.inc.php:109
+msgid "Rules Matching Criteria"
+msgstr "Regras que Correspondem aos Critérios"
+
+#: include/staff/filter.inc.php:111
+msgid "Match All"
+msgstr "Corresponder Todas"
+
+#: include/staff/filter.inc.php:113
+msgid "Match Any"
+msgstr "Corresponder Qualquer"
+
+#: include/staff/filter.inc.php:115
+msgid "(case-insensitive comparison)"
+msgstr "(comparação não distingue maiúsculas de minúsculas)"
+
+#: include/staff/filter.inc.php:160
+msgid "Filter Actions"
+msgstr "Ações do Filtro"
+
+#: include/staff/filter.inc.php:160
+msgid "Can be overwriten by other filters depending on processing order."
+msgstr "Pode ser sobrescrito por outros filtros, dependendo da ordem de processamento."
+
+#: include/staff/filter.inc.php:165
+#: include/staff/filter.inc.php:169
+msgid "Reject Ticket"
+msgstr "Rejeitar Tíquete"
+
+#: include/staff/filter.inc.php:169
+msgid "(All other actions and filters are ignored)"
+msgstr "(Todas as outras ações e filtros são ignorados)"
+
+#: include/staff/filter.inc.php:174
+#: include/staff/filter.inc.php:178
+msgid "Reply-To Email"
+msgstr "E-mail para Resposta"
+
+#: include/staff/filter.inc.php:178
+msgid "Use"
+msgstr "Usar"
+
+#: include/staff/filter.inc.php:178
+msgid "(if available)"
+msgstr "(se disponível)"
+
+#: include/staff/filter.inc.php:183
+msgid "Ticket auto-response"
+msgstr "Auto-resposta de Tíquete"
+
+#: include/staff/filter.inc.php:187
+msgid "auto-response."
+msgstr "auto-resposta."
+
+#: include/staff/filter.inc.php:187
+msgid "(Overwrites Dept. settings)"
+msgstr "(Sobrescreve Configs. do Depto.)"
+
+#: include/staff/filter.inc.php:211
+msgid "(Automatically respond with this canned response)"
+msgstr "(Responder automaticamente com esta resposta pronta)"
+
+#: include/staff/filter.inc.php:220
+#: include/staff/filter.inc.php:240
+#: include/staff/filter.inc.php:261
+msgid "Default"
+msgstr "Padrão"
+
+#: include/staff/filter.inc.php:252
+msgid "(Overwrites department's priority)"
+msgstr "(Sobrescreve a prioridade do departamento)"
+
+#: include/staff/filter.inc.php:257
+msgid "SLA Plan"
+msgstr "Plano SLA"
+
+#: include/staff/filter.inc.php:273
+msgid "(Overwrites department's SLA)"
+msgstr "(Sobrescreve o SLA do departamento)"
+
+#: include/staff/filter.inc.php:278
+msgid "Auto-assign To"
+msgstr "Auto-designar Para"
+
+#: include/staff/department.inc.php:7
+msgid "Update Department"
+msgstr "Atualizar Departamento"
+
 #: include/staff/department.inc.php:18
-#, fuzzy
 msgid "Create Dept"
-msgstr "Data Criação"
+msgstr "Criar Departamento"
+
+#: include/staff/department.inc.php:37
+msgid "Department Information"
+msgstr "Informações do Departamento"
+
+#: include/staff/department.inc.php:57
+msgid "(Internal)"
+msgstr "(Interno)"
+
+#: include/staff/department.inc.php:67
+msgid "Select Department Email"
+msgstr "Selecione o E-mail do Depto."
+
+#: include/staff/department.inc.php:89
+#: include/staff/department.inc.php:109
+msgid "System default"
+msgstr "Padrão do sistema"
+
+#: include/staff/department.inc.php:105
+msgid "SLA"
+msgstr "SLA"
+
+#: include/staff/department.inc.php:127
+msgid "Manager"
+msgstr "Gerente"
+
+#: include/staff/department.inc.php:153
+msgid "Group Membership"
+msgstr "Membros de Grupo"
+
+#: include/staff/department.inc.php:157
+msgid "Extend membership to groups with access."
+msgstr "Estender a qualidade de membro a grupos com acesso."
+
+#: include/staff/department.inc.php:157
+msgid "(Alerts and  notices will include groups)"
+msgstr "(Alertas e avisos incluirão grupos)"
+
+#: include/staff/department.inc.php:162
+msgid "Auto Response Settings"
+msgstr "Configs. de Respostas Automáticas"
+
+#: include/staff/department.inc.php:172
+msgid " new ticket auto-response for this Dept."
+msgstr " auto-resposta de novos tíquetes para este Depto."
+
+#: include/staff/department.inc.php:177
+msgid "New Message"
+msgstr "Nova Mensagem"
+
+#: include/staff/department.inc.php:181
+msgid " new message auto-response for this Dept."
+msgstr " auto-resposta de nova mensagem para este Depto."
+
+#: include/staff/department.inc.php:186
+msgid "Auto Response Email"
+msgstr "E-mail de Resposta Automática"
+
+#: include/staff/department.inc.php:190
+msgid "Select Outgoing  Email"
+msgstr "Selecione E-mail de Saída"
+
+#: include/staff/department.inc.php:191
+msgid " Department Email (Above)"
+msgstr " E-mail do Departamento (Abaixo)"
+
+#: include/staff/department.inc.php:209
+msgid " Check all groups allowed to access this department."
+msgstr " Cheque todos os grupos com permissão para acessar este departamento."
+
+#: include/staff/department.inc.php:212
+msgid "Department manager and primary members will always have access independent of group selection or assignment."
+msgstr "Gerente do Depto. e membros primários sempre podem acessar, independentemente da seleção ou designação de grupo."
+
+#: include/staff/department.inc.php:232
+msgid "Department Signature"
+msgstr "Assinatura do Depto."
+
+#: include/staff/department.inc.php:232
+msgid " Optional signature used on outgoing emails."
+msgstr " Assinatura opcional utilizada em e-mails enviados."
+
+#: include/staff/department.inc.php:238
+msgid "Signature is made available as a choice, for public departments, on ticket reply."
+msgstr "A assinatura fica disponível como uma opção, para deptos. públicos, na hora de responder o tíquete."
+
+#: include/staff/department.inc.php:132
+msgid "Select Department Manager (Optional)"
+msgstr "Selecione o Gerente do Depto. (Opcional)"
 
 #: include/staff/profile.inc.php:12
 msgid "My Account Profile"
@@ -3925,6 +4905,10 @@ msgstr "A assinatura fica disponível como uma opção, na hora de responder o t
 msgid "Cancel Changes"
 msgstr "Cancelar Mudanças"
 
+#: include/staff/header.inc.php:32
+msgid "osTicket - Customer Support System"
+msgstr "osTicket - Sistema de Suporte ao Cliente"
+
 #: include/staff/header.inc.php:33
 msgid "Howdy,"
 msgstr "Olá, "
@@ -3935,7 +4919,7 @@ msgstr "Adm. do Sistema"
 
 #: include/staff/header.inc.php:38
 msgid "Staff Panel"
-msgstr "Adm. de Pessoal"
+msgstr "Painel da Equipe"
 
 #: include/staff/header.inc.php:40
 msgid "My Preferences"
@@ -3946,16 +4930,13 @@ msgid "All Rights Reserved."
 msgstr "Todos os direitos reservados."
 
 #: include/staff/apikeys.inc.php:36
-msgid " API Keys"
-msgstr " Chaves API"
+#: include/staff/apikeys.inc.php:43
+msgid "API Keys"
+msgstr "Chaves API"
 
 #: include/staff/apikeys.inc.php:38
 msgid "No API keys found!"
 msgstr "Nenhuma Chave API encontrada!"
-
-#: include/staff/apikeys.inc.php:57
-msgid "API Key"
-msgstr "Chave API"
 
 #: include/staff/apikeys.inc.php:59
 msgid "IP Addr"
@@ -3976,6 +4957,51 @@ msgstr "Tem certeza que deseja DESABILITAR as chaves API selecionadas?"
 #: include/staff/apikeys.inc.php:113
 msgid "Are you sure you want to DELETE selected API keys?"
 msgstr "Tem certeza que deseja APAGAR as chaves API selecionadas?"
+
+#: include/staff/staffmembers.inc.php:77
+msgid "All Groups"
+msgstr "Todos os Grupos"
+
+#: include/staff/staffmembers.inc.php:92
+msgid "All Teams"
+msgstr "Todos os Times"
+
+#: include/staff/staffmembers.inc.php:109
+#: include/staff/staff.inc.php:17
+msgid "Add New Staff"
+msgstr "Adicionar Novo Membro da Equipe"
+
+#: include/staff/staffmembers.inc.php:116
+msgid "No staff found!"
+msgstr "Não foram encontrados membros da equipe!"
+
+#: include/staff/staffmembers.inc.php:127
+msgid "UserName"
+msgstr "Nome de Usuário"
+
+#: include/staff/staffmembers.inc.php:129
+msgid "Group"
+msgstr "Grupo"
+
+#: include/staff/staffmembers.inc.php:132
+msgid "Last Login"
+msgstr "Último Login"
+
+#: include/staff/staffmembers.inc.php:182
+msgid "Are you sure you want to ENABLE selected users?"
+msgstr "Tem certeza que deseja HABILITAR os usuários selecionados?"
+
+#: include/staff/staffmembers.inc.php:184
+msgid "Lock"
+msgstr "Bloquear"
+
+#: include/staff/staffmembers.inc.php:185
+msgid "Are you sure you want to LOCK selected users?"
+msgstr "Tem certeza que deseja BLOQUAR os usuários selecionados?"
+
+#: include/staff/staffmembers.inc.php:188
+msgid "Are you sure you want to DELETE selected users?"
+msgstr "Tem certeza que deseja APAGAR os usuários selecionados?"
 
 #: include/staff/settings-system.inc.php:6
 msgid "System Settings and Preferences"
@@ -4189,13 +5215,9 @@ msgstr "Atualizar"
 msgid "Add New Email Address to Ban List"
 msgstr "Adicionar Novo End. de E-mail à Lista Negra"
 
-#: include/staff/banrule.inc.php:40
-msgid "Filter Name"
-msgstr "Nome do Filtro"
-
-#: include/staff/banrule.inc.php:65
-msgid "Internal notes"
-msgstr "Notas Internas"
+#: include/staff/banrule.inc.php:27
+msgid "Manage Email Ban List"
+msgstr "Gerenciar Lista Negra"
 
 #: include/staff/banrule.inc.php:65
 msgid "Admin notes"
@@ -4268,11 +5290,6 @@ msgstr "Tem certeza que deseja reabrir os tíquetes selecionados?"
 msgid "Are you sure you want to mark selected tickets overdue/stale?"
 msgstr "Tem certeza que quer marcar os tíquetes selecionados como atrasados?"
 
-#: include/staff/tickets.inc.php:451
-#: include/staff/tickets.inc.php:457
-msgid "Close"
-msgstr "Fechar"
-
 #: include/staff/tickets.inc.php:452
 #: include/staff/tickets.inc.php:458
 msgid "Are you sure you want to close selected tickets?"
@@ -4303,10 +5320,188 @@ msgstr "Intervalo de Data"
 msgid "TO"
 msgstr "ATÉ"
 
+#: include/staff/slaplans.inc.php:36
+msgid "SLA plans"
+msgstr "Planos SLA"
+
+#: include/staff/slaplans.inc.php:38
+msgid "No SLA plans found!"
+msgstr "Nenhum plano SLA encontrado!"
+
+#: include/staff/slaplans.inc.php:43
+msgid "Service Level Agreements"
+msgstr "Acordos de Nível de Serviço (SLAs)"
+
+#: include/staff/slaplans.inc.php:58
+msgid "Grace Period (hrs)"
+msgstr "Período de Tolerância (hrs)"
+
+#: include/staff/slaplans.inc.php:97
+msgid "No SLA plans found"
+msgstr "Nenhum plano SLA encontrado"
+
+#: include/staff/slaplans.inc.php:109
+msgid "Are you sure you want to ENABLE selected plans?"
+msgstr "Tem certeza que deseja HABILITAR os planos selecionados?"
+
+#: include/staff/slaplans.inc.php:111
+msgid "Are you sure you want to DISABLE selected plans?"
+msgstr "Tem certeza que deseja DESABILITAR os planos selecionados?"
+
+#: include/staff/slaplans.inc.php:113
+msgid "Are you sure you want to DELETE selected plans?"
+msgstr "Tem certeza que deseja APAGAR os planos selecionados?"
+
+#: include/staff/staff.inc.php:8
+msgid "Update Staff"
+msgstr "Atualizar Membros da Equipe"
+
+#: include/staff/staff.inc.php:11
+msgid "To reset the password enter a new one below"
+msgstr "Para mudar a senha digite a nova senha abaixo"
+
+#: include/staff/staff.inc.php:19
+msgid "Add Staff"
+msgstr "Adicionar Membro da Equipe"
+
+#: include/staff/staff.inc.php:35
+msgid "Staff Account"
+msgstr "Conta de Equipe"
+
+#: include/staff/staff.inc.php:41
+#: include/staff/ticket-open.inc.php:16
+#: include/staff/ticket-edit.inc.php:17
+msgid "User Information"
+msgstr "Informações do Usuário"
+
+#: include/staff/staff.inc.php:105
+msgid "Account Password"
+msgstr "Senha da Conta"
+
+#: include/staff/staff.inc.php:119
+msgid "Confirm Password"
+msgstr "Confirme a Senha"
+
+#: include/staff/staff.inc.php:129
+msgid "Forced Password Change"
+msgstr "Forçar Troca de Senha"
+
+#: include/staff/staff.inc.php:133
+msgid "Force"
+msgstr "Forçar"
+
+#: include/staff/staff.inc.php:133
+msgid "password change on next login"
+msgstr "mudança de senha no próximo login"
+
+#: include/staff/staff.inc.php:138
+msgid "Staff's Signature"
+msgstr "Assinatura da Equipe"
+
+#: include/staff/staff.inc.php:138
+msgid "Optional signature used on outgoing emails"
+msgstr "Assinatura opcional utilizada em e-mails enviados"
+
+#: include/staff/staff.inc.php:144
+msgid "Signature is made available as a choice, on ticket reply"
+msgstr "A assinatura fica disponível como uma opção, ao responder o tíquete"
+
+#: include/staff/staff.inc.php:149
+msgid "Account Status & Settings"
+msgstr "Estado de Conta e Configs."
+
+#: include/staff/staff.inc.php:149
+msgid "Dept. and assigned group controls access permissions."
+msgstr "O departamento e o grupo designado controlam as permissões de acesso."
+
+#: include/staff/staff.inc.php:154
+msgid "Account Type"
+msgstr "Tipo de Conta"
+
+#: include/staff/staff.inc.php:158
+msgid "Admin"
+msgstr "Administrador"
+
+#: include/staff/staff.inc.php:165
+msgid "Account Status"
+msgstr "Estado da Conta"
+
+#: include/staff/staff.inc.php:169
+msgid "Locked"
+msgstr "Bloqueado"
+
+#: include/staff/staff.inc.php:175
+msgid "Assigned Group"
+msgstr "Grupo Designado"
+
+#: include/staff/staff.inc.php:179
+msgid "Select Group"
+msgstr "Selecione Grupo"
+
+#: include/staff/staff.inc.php:195
+msgid "Primary Department"
+msgstr "Departamento Primário"
+
+#: include/staff/staff.inc.php:215
+msgid "Staff's Time Zone"
+msgstr "Fuso Horário da Equipe"
+
+#: include/staff/staff.inc.php:245
+msgid "Limited Access"
+msgstr "Acesso Limitado"
+
+#: include/staff/staff.inc.php:248
+msgid "Limit ticket access to ONLY assigned tickets"
+msgstr "Limitar acesso a tíquetes APENAS a tíquetes designados"
+
+#: include/staff/staff.inc.php:253
+msgid "Directory Listing"
+msgstr "Listagem do Diretório"
+
+#: include/staff/staff.inc.php:261
+msgid "Vacation Mode"
+msgstr "Modo Férias"
+
+#: include/staff/staff.inc.php:265
+msgid "Staff on vacation mode"
+msgstr "Membro da Equipe no modo férias"
+
+#: include/staff/staff.inc.php:265
+msgid "No ticket assignment or alerts"
+msgstr "Sem designação de tíquetes ou alertas"
+
+#: include/staff/staff.inc.php:274
+msgid "Assigned Teams"
+msgstr "Times Designados"
+
+#: include/staff/staff.inc.php:274
+msgid "Staff will have access to tickets assigned to a team they belong to regardless of the ticket's department"
+msgstr "Membros da equipe terão acesso a tíquetes designados a um time ao qual eles pertençam, independentemente do departamento do tíquete"
+
 #: include/staff/groups.inc.php:39
-#, fuzzy
+#: include/staff/groups.inc.php:107
 msgid "No groups found!"
-msgstr "Nenhum log encontrado!"
+msgstr "Nenhum grupo encontrado!"
+
+#: include/staff/groups.inc.php:56
+msgid "Group Name"
+msgstr "Nome do Grupo"
+
+#: include/staff/groups.inc.php:60
+msgid "Created On"
+msgstr "Criado Em"
+
+#: include/staff/groups.inc.php:118
+msgid "Are you sure you want to ENABLE selected groups?"
+msgstr "Tem certeza que deseja HABILITAR os grupos selecionadas?"
+
+#: include/staff/groups.inc.php:120
+msgid "Are you sure you want to DISABLE selected groups?"
+msgstr "Tem certeza que deseja DESABILITAR os grupos selecionados?"
+
+#: include/staff/groups.inc.php:122
+msgid "Are you sure you want to DELETE selected groups?"
+msgstr "Tem certeza que deseja APAGAR os grupos selecionados?"
 
 #: include/staff/tpl.inc.php:9
 msgid "Email Template Message"
@@ -4344,11 +5539,6 @@ msgstr "Corpo da mensagem de E-mail"
 msgid "Open New Ticket"
 msgstr "Abrir Novo Tíquete"
 
-#: include/staff/ticket-open.inc.php:16
-#: include/staff/ticket-edit.inc.php:17
-msgid "User Information"
-msgstr "Informações do Usuário"
-
 #: include/staff/ticket-open.inc.php:33
 msgid "Send alert to user."
 msgstr "Enviar alerta ao usuário."
@@ -4379,10 +5569,6 @@ msgstr "Outro"
 #: include/staff/ticket-open.inc.php:79
 msgid "Department:"
 msgstr "Departamento:"
-
-#: include/staff/ticket-open.inc.php:83
-msgid "Select Department"
-msgstr "Selecione o Departamento"
 
 #: include/staff/ticket-open.inc.php:103
 #: include/staff/ticket-edit.inc.php:78
@@ -4463,6 +5649,10 @@ msgstr "(Somente se aplica se existir resposta)"
 msgid "Signature:"
 msgstr "Assinatura:"
 
+#: include/staff/ticket-open.inc.php:308
+msgid "Open Ticket"
+msgstr "Abrir Tíquete"
+
 #: include/staff/ticket-edit.inc.php:11
 msgid "Update Ticket"
 msgstr "Atualizar Tíquete"
@@ -4499,14 +5689,6 @@ msgstr "API"
 msgid "Priority Level"
 msgstr "Prioridade"
 
-#: include/staff/ticket-edit.inc.php:97
-msgid "Select Priority"
-msgstr "Selecione Prioridade"
-
-#: include/staff/ticket-edit.inc.php:112
-msgid "SLA"
-msgstr "SLA"
-
 #: include/staff/ticket-edit.inc.php:116
 msgid "Select SLA"
 msgstr "Selecione SLA"
@@ -4519,10 +5701,165 @@ msgstr "Razão para editar o tíquete (requerido)"
 msgid "Save"
 msgstr "Salvar"
 
+#: include/staff/settings-emails.inc.php:4
+msgid "Email Settings and Options"
+msgstr "Opções e Configs. de E-mail"
+
+#: include/staff/settings-emails.inc.php:13
+msgid "Note that some of the global settings can be overwritten at department/email level."
+msgstr "Note que algumas configurações globais podem ser sobrescritas ao nível de departamento/e-mail."
+
+#: include/staff/settings-emails.inc.php:19
+msgid "Default System Email"
+msgstr "E-mail Padrão do Sistema"
+
+#: include/staff/settings-emails.inc.php:38
+msgid "Default Alert Email"
+msgstr "E-mail de Alerta Padrão"
+
+#: include/staff/settings-emails.inc.php:41
+msgid "Use Default System Email (above)"
+msgstr "Use E-mail Padrão do Sistema (acima)"
+
+#: include/staff/settings-emails.inc.php:57
+msgid "Admin's Email Address"
+msgstr "Endereço de E-mail do Administrador"
+
+#: include/staff/settings-emails.inc.php:61
+msgid "System administrator's email"
+msgstr "E-mail do Administrador do Sistema"
+
+#: include/staff/settings-emails.inc.php:64
+msgid "Incoming Emails"
+msgstr "E-mails de Entrada"
+
+#: include/staff/settings-emails.inc.php:64
+msgid "For mail fetcher (polling) to work you must set an external cron job or enable auto-cron"
+msgstr "Para que buscador de e-mail funcione você deve configurar um trabalho de Cron exteno ou habilitar auto-cron"
+
+#: include/staff/settings-emails.inc.php:66
+msgid "Email Polling"
+msgstr "Consulta de E-mail"
+
+#: include/staff/settings-emails.inc.php:67
+msgid "Enable POP/IMAP polling"
+msgstr "Habilitar Consulta POP/IMAP"
+
+#: include/staff/settings-emails.inc.php:70
+msgid "Enable Auto-Cron"
+msgstr "Habilitar Auto-Cron"
+
+#: include/staff/settings-emails.inc.php:70
+msgid "Poll based on staff activity - NOT recommended"
+msgstr "Consultar baseado na atividade dos membros da equipe - NÃO recomendado"
+
+#: include/staff/settings-emails.inc.php:74
+msgid "Email Piping"
+msgstr "Direcionamento de E-mail para programa"
+
+#: include/staff/settings-emails.inc.php:75
+msgid "Enable email piping"
+msgstr "Habilitar direcionamento de e-mail para programas"
+
+#: include/staff/settings-emails.inc.php:76
+msgid "You pipe we accept policy"
+msgstr "Política \"você direciona e-mail, nós aceitamos\""
+
+#: include/staff/settings-emails.inc.php:80
+msgid "Strip Quoted Reply"
+msgstr "Separar Resposta Citada"
+
+#: include/staff/settings-emails.inc.php:83
+msgid "depends on the reply separator tag set below"
+msgstr "depende da marca de separação de resposta configurada abaixo"
+
+#: include/staff/settings-emails.inc.php:88
+msgid "Reply Separator Tag"
+msgstr "Marca de Separação de Resposta"
+
+#: include/staff/settings-emails.inc.php:93
+msgid "Outgoing Emails"
+msgstr "E-mails de Saída"
+
+#: include/staff/settings-emails.inc.php:93
+msgid "Default email only applies to outgoing emails without SMTP setting"
+msgstr "E-mail padrão somente se aplica a e-mails de saída dem configuração SMTP"
+
+#: include/staff/settings-emails.inc.php:94
+msgid "Default Outgoing Email"
+msgstr "E-mail de Saída Padrão"
+
+#: include/staff/settings-emails.inc.php:97
+msgid "None: Use PHP mail function"
+msgstr "Nenhum: Use a função de e-mail do PHP"
+
+#: include/staff/settings-kb.inc.php:4
+msgid "Knowledge Base Settings and Options"
+msgstr "Configs. de Opções da Base de Conhecimento"
+
+#: include/staff/settings-kb.inc.php:12
+msgid "Knowledge Base Settings"
+msgstr "Configs. da Base de Conhecimento"
+
+#: include/staff/settings-kb.inc.php:13
+msgid "Disabling knowledge base disables clients' interface."
+msgstr "Ao desabilitar a Base de Conhecimento a interface do cliente é desabilitada."
+
+#: include/staff/settings-kb.inc.php:19
+msgid "Knowledge base status"
+msgstr "Estado da Base de Conhecimento"
+
+#: include/staff/settings-kb.inc.php:22
+msgid "Enable Knowledge base"
+msgstr "Habilitar Base de Conhecimento"
+
+#: include/staff/settings-kb.inc.php:22
+msgid "(Client interface)"
+msgstr "(interface do cliente)"
+
+#: include/staff/settings-kb.inc.php:30
+msgid "Enable canned responses"
+msgstr "Respostas prontas habilitadas"
+
+#: include/staff/settings-kb.inc.php:30
+msgid "(Available on ticket reply)"
+msgstr "(Disponível ao responder tíquetes)"
+
+#: include/staff/filters.inc.php:40
+msgid "filters"
+msgstr "filtros"
+
 #: include/staff/filters.inc.php:42
-#, fuzzy
 msgid "No filters found!"
-msgstr "Não foram encontrados e-mails na lista negra!"
+msgstr "Não foram encontrados filtros!"
+
+#: include/staff/filters.inc.php:47
+msgid "Ticket Filters"
+msgstr "Filtros de Tíquete"
+
+#: include/staff/filters.inc.php:62
+msgid "Order"
+msgstr "Ordem"
+
+#: include/staff/filters.inc.php:63
+msgid "Rules"
+msgstr "Regras"
+
+#: include/staff/filters.inc.php:105
+msgid "No filters found"
+msgstr "Não foram encontrados filtros"
+
+#: include/staff/filters.inc.php:117
+msgid "Are you sure you want to ENABLE selected filters?"
+msgstr "Tem certeza que deseja HABILITAR os filtros selecionados?"
+
+#: include/staff/filters.inc.php:119
+msgid "Are you sure you want to DISABLE selected filters?"
+msgstr "Tem certeza que deseja DESABILITAR os filtros selecionados?"
+
+#: include/staff/filters.inc.php:121
+msgid "Are you sure you want to DELETE selected filters?"
+msgstr "Tem certeza que deseja APAGAR os filtros selecionados?"
 
 #: include/staff/syslogs.inc.php:11
 #: include/staff/syslogs.inc.php:98
@@ -4557,10 +5894,6 @@ msgstr "Intervalo de Data"
 #: include/staff/syslogs.inc.php:92
 msgid "to"
 msgstr "até"
-
-#: include/staff/syslogs.inc.php:95
-msgid "Type"
-msgstr "Tipo"
 
 #: include/staff/syslogs.inc.php:100
 msgid "Debug"
@@ -4598,20 +5931,85 @@ msgstr "Deletar Entradas Selecionadas"
 msgid "Are you sure you want to DELETE selected log entries?"
 msgstr "Tem certeza que deseja APAGAR os logs selecionados?"
 
-#: include/staff/helptopic.inc.php:6
-#, fuzzy
-msgid "Update Help Topic"
-msgstr "Tópico de ajuda"
+#: include/staff/faq-view.inc.php:14
+msgid "(Published)"
+msgstr "(Publicado)"
 
-#: include/staff/helptopic.inc.php:14
-#, fuzzy
-msgid "Add New Help Topic"
-msgstr "Todos os tópicos de ajuda"
+#: include/staff/faq-view.inc.php:35
+msgid "Last updated"
+msgstr "Última atualização"
+
+#: include/staff/faq-view.inc.php:47
+msgid "Options"
+msgstr "Opções"
+
+#: include/staff/faq-view.inc.php:49
+msgid "Select Action"
+msgstr "Selecione Ação"
+
+#: include/staff/faq-view.inc.php:52
+msgid "Unpublish FAQ"
+msgstr "Despublicar FAQ"
+
+#: include/staff/faq-view.inc.php:55
+msgid "Publish FAQ"
+msgstr "Publicar FAQ"
+
+#: include/staff/faq-view.inc.php:58
+msgid "Edit FAQ"
+msgstr "Editar FAQ"
+
+#: include/staff/faq-view.inc.php:59
+msgid "Delete FAQ"
+msgstr "Apagar FAQ"
+
+#: include/staff/helptopic.inc.php:6
+msgid "Update Help Topic"
+msgstr "Atualizar Tópico de Ajuda"
 
 #: include/staff/helptopic.inc.php:16
-#, fuzzy
 msgid "Add Topic"
-msgstr "Tópico de ajuda"
+msgstr "Adicionar Tópico"
+
+#: include/staff/helptopic.inc.php:34
+msgid "Help Topic Information"
+msgstr "Informações do Tópico de Ajuda"
+
+#: include/staff/helptopic.inc.php:41
+msgid "Topic"
+msgstr "Tópico"
+
+#: include/staff/helptopic.inc.php:64
+msgid "Private/Internal"
+msgstr "Privado/Interno"
+
+#: include/staff/helptopic.inc.php:70
+msgid "Parent Topic"
+msgstr "Tópico Pai"
+
+#: include/staff/helptopic.inc.php:74
+msgid "Select Parent Topic"
+msgstr "Selecione um Tópico Pai"
+
+#: include/staff/helptopic.inc.php:86
+msgid "optional"
+msgstr "opcional"
+
+#: include/staff/helptopic.inc.php:91
+msgid "New ticket options"
+msgstr "Opções de Novo Tíquete"
+
+#: include/staff/helptopic.inc.php:138
+msgid "Department's Default"
+msgstr "Padrão do Departamento"
+
+#: include/staff/helptopic.inc.php:203
+msgid "new ticket auto-response for this topic (Overwrites Dept. settings)."
+msgstr "auto-resposta de novos tíquetes para este tópico (Sobrescreve configs. do depto.)."
+
+#: include/staff/helptopic.inc.php:209
+msgid "Internal notes about the help topic."
+msgstr "Notas internas sobre o tópico de ajuda."
 
 #: include/staff/templates.inc.php:39
 msgid " Templates"
@@ -4621,21 +6019,13 @@ msgstr " Modelos"
 msgid "No templates found!"
 msgstr "Nenhum modelo encontrado!"
 
-#: include/staff/templates.inc.php:49
-msgid "Add New Template"
-msgstr "Adicionar Novo Modelo"
-
 #: include/staff/templates.inc.php:61
 msgid "In-Use"
 msgstr "Em Uso"
 
-#: include/staff/templates.inc.php:88
-msgid "Yes"
-msgstr "Sim"
-
-#: include/staff/templates.inc.php:88
-msgid "No"
-msgstr "Não"
+#: include/staff/templates.inc.php:79
+msgid "(System Default)"
+msgstr "(Padrão do Sistema)"
 
 #: include/staff/templates.inc.php:104
 msgid "No templates found"
@@ -4653,19 +6043,153 @@ msgstr "Tem certeza que deseja DESABILITAR aos modelos selecionados?"
 msgid "Are you sure you want to DELETE selected templates?"
 msgstr "Tem certeza que deseja APAGAR os modelos selecionados?"
 
+#: include/staff/settings-autoresp.inc.php:9
+msgid "Autoresponder Setting"
+msgstr "Configuração de Respostas Automáticas"
+
+#: include/staff/settings-autoresp.inc.php:10
+msgid "Global setting - can be disabled at department or email level."
+msgstr "Configuração global - pode ser desabilitado "
+
+#: include/staff/settings-autoresp.inc.php:22
+msgid "(Autoresponse includes the ticket ID required to check status of the ticket)"
+msgstr "(A Auto-resposta inclui o ID do tíquete, requerido para checar o estado do tíquete)"
+
+#: include/staff/settings-autoresp.inc.php:26
+msgid "New Ticket by staff"
+msgstr "Novo Tíquete pela equipe"
+
+#: include/staff/settings-autoresp.inc.php:31
+msgid "(Notice sent when staff creates a ticket on behalf of the user (Staff can overwrite))"
+msgstr "(Aviso enviado quando um mebro da equipe cria um tíquete no lugar do usuário (Mebro da equipe pode sobrescrever))"
+
+#: include/staff/settings-autoresp.inc.php:40
+msgid "(Confirmation notice sent when a new message is appended to an existing ticket)"
+msgstr "(Aviso enviado confirmando quando uma nova mensagem é adicionada a um tíquete existente)"
+
+#: include/staff/settings-autoresp.inc.php:44
+msgid "Overlimit notice"
+msgstr "Aviso de limite ultrapassado"
+
+#: include/staff/settings-autoresp.inc.php:49
+msgid "(Ticket denied notice sent to user on limit violation. Admin gets alerts on ALL denials by default)"
+msgstr "(Aviso de tíquete negado enviar para o usuário ao violar o limite. Administradores recebem alertas em TODAS as negações, por padrão)"
+
 #: include/staff/faq.inc.php:6
-#, fuzzy
 msgid "Update FAQ: "
-msgstr "Atualizar Chave de API"
+msgstr "Atualizar FAQ:"
 
 #: include/staff/faq.inc.php:14
-#, fuzzy
 msgid "Add New FAQ"
-msgstr "Adicionar Chave de API"
+msgstr "Adicionar Nova FAQ"
 
 #: include/staff/faq.inc.php:16
 msgid "Add FAQ"
-msgstr ""
+msgstr "Adicionar FAQ"
+
+#: include/staff/faq.inc.php:42
+msgid "FAQ Information"
+msgstr "Informações de FAQ"
+
+#: include/staff/faq.inc.php:47
+msgid "Question"
+msgstr "Pergunta"
+
+#: include/staff/faq.inc.php:53
+msgid "Category Listing"
+msgstr "Listagem da Categoria"
+
+#: include/staff/faq.inc.php:53
+msgid "FAQ category the question belongs to."
+msgstr "Categoria de FAQ que a que a pergunta pertence."
+
+#: include/staff/faq.inc.php:55
+msgid "Select FAQ Category"
+msgstr "Selecione a Categoria de FAQ"
+
+#: include/staff/faq.inc.php:74
+msgid "Listing Type"
+msgstr "Tipo de Listagem"
+
+#: include/staff/faq.inc.php:75
+msgid "Published questions are listed on public knowledgebase if the parent category is public."
+msgstr "Questões publicadas são listadas na base de conhecimento pública se a categoria pai é pública."
+
+#: include/staff/faq.inc.php:76
+msgid "Public (publish)"
+msgstr "Público (publicar)"
+
+#: include/staff/faq.inc.php:85
+msgid "Answer"
+msgstr "Resposta"
+
+#: include/staff/faq.inc.php:91
+msgid " (optional)"
+msgstr " (opcional)"
+
+#: include/staff/faq.inc.php:104
+msgid "Select files to upload."
+msgstr "Selecione arquivos para subir."
+
+#: include/staff/faq.inc.php:116
+msgid " Check all help topics related to this FAQ."
+msgstr " Cheque todos os tópicos de ajuda relacionados à este FAQ."
+
+#: include/staff/faq.inc.php:78
+msgid "Internal (private)"
+msgstr "Interno (privado)"
+
+#: include/upgrader/upgrade.inc.php:9
+msgid "Thank you for taking the time to upgrade your osTicket intallation!"
+msgstr "Obrigado por dedicar seu tempo à atualização da sua instalação do osTicket!"
+
+#: include/upgrader/upgrade.inc.php:10
+msgid "Please do not cancel or close the browser, any errors at this stage will be fatal."
+msgstr "Por gentileza, não cancele ou feche o navegador, quaisquer erros neste estágio serão fatais."
+
+#: include/upgrader/upgrade.inc.php:13
+msgid "The upgrade wizard will now attempt to upgrade your database and core settings!"
+msgstr "O assistente de atualização irá agora tentar atualizar sua base de dados e configurações!"
+
+#: include/upgrader/upgrade.inc.php:15
+msgid "Database enhancements"
+msgstr "Melhorias na Base de Dados"
+
+#: include/upgrader/upgrade.inc.php:16
+msgid "New and updated features"
+msgstr "Recursos novos e atualizados "
+
+#: include/upgrader/upgrade.inc.php:17
+msgid "Enhance settings and security"
+msgstr "Melhora segurança e configurações"
+
+#: include/upgrader/upgrade.inc.php:30
+msgid "1. Be patient the process will take a couple of minutes."
+msgstr "1. Seja paciente, o processo irá demorar alguns minutos."
+
+#: include/upgrader/upgrade.inc.php:31
+msgid "2. If you experience any problems, you can always restore your files/database backup."
+msgstr "2. Se você tiver qualquer problema, pode sempre restaurar seus arquivos/base de dados do backup."
+
+#: include/upgrader/upgrade.inc.php:32
+msgid "3. We can help, feel free to"
+msgstr "3. Podemos ajudar, sinta-se à vontade para"
+
+#: include/upgrader/upgrade.inc.php:32
+msgid "contact us"
+msgstr "contactar-nos"
+
+#: include/upgrader/upgrade.inc.php:32
+msgid "for professional help."
+msgstr "ajuda profissional."
+
+#: include/upgrader/upgrade.inc.php:37
+msgid "Please wait... while we upgrade your osTicket installation!"
+msgstr "Favor esperar... enquanto atualizamos sua instalação do osTicket!"
+
+#: include/upgrader/aborted.inc.php:20
+msgid "Internal error occurred - get technical help."
+msgstr "Erro interno. Contate o suporte técnico."
 
 #: setup/install.php:30
 msgid "Installation Guide"
@@ -4703,6 +6227,12 @@ msgstr "Inválido"
 #: setup/install.php:72
 msgid "Check one or more"
 msgstr "Selecione um ou mais"
+
+#~ msgid "Internal notes.&nbsp;"
+#~ msgstr "Notas Internas.&nbsp;"
+
+#~ msgid "Reply-To Email "
+#~ msgstr "E-mail para Resposta"
 
 #~ msgid "Body/Text"
 #~ msgstr "Corpo/Texto"
@@ -4745,3 +6275,41 @@ msgstr "Selecione um ou mais"
 
 #~ msgid "Error"
 #~ msgstr "Erro"
+
+#, fuzzy
+#~ msgid " Select Priority"
+#~ msgstr "Selecione Prioridade"
+
+#, fuzzy
+#~ msgid " Select Department"
+#~ msgstr "Selecione o Departamento"
+
+#~ msgid " Unassigned"
+#~ msgstr " Não Designado"
+
+#, fuzzy
+#~ msgid " Create"
+#~ msgstr "Criado"
+
+#, fuzzy
+#~ msgid " Delete"
+#~ msgstr "Apagar"
+
+#, fuzzy
+#~ msgid " Select One"
+#~ msgstr "Selecione Um"
+
+#, fuzzy
+#~ msgid " Reject Ticket"
+#~ msgstr "Reabrir Tíquete"
+
+#, fuzzy
+#~ msgid " Default "
+#~ msgstr "SLA Padrão"
+
+#, fuzzy
+#~ msgid " Default"
+#~ msgstr "(Padrão)"
+
+#~ msgid "update"
+#~ msgstr "atualiza"

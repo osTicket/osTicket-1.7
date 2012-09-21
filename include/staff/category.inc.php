@@ -4,14 +4,14 @@ $info=array();
 $qstr='';
 if($category && $_REQUEST['a']!='add'){
     $title=_('Update Category :').$category->getName();
-    $action=_('update');
+    $action='update';
     $submit_text='Save Changes';
     $info=$category->getHashtable();
     $info['id']=$category->getId();
     $qstr.='&id='.$category->getId();
 }else {
     $title=_('Add New Category');
-    $action=_('create');
+    $action='create';
     $submit_text=_('Add');
     $qstr.='&a='.$_REQUEST['a'];
 }
@@ -35,26 +35,26 @@ $info=Format::htmlchars(($errors && $_POST)?$_POST:$info);
     <tbody>
         <tr>
             <th colspan="2">
-                <em>Category information: Public categories are published if it has published FAQ articles.</em>
+                <em><?= _('Category information: Public categories are published if it has published FAQ articles.') ?></em>
             </th>
         </tr>
         <tr>
-            <td width="180" class="required">Category Type:</td>
+            <td width="180" class="required"><?= _('Category Type') ?>:</td>
             <td>
-                <input type="radio" name="ispublic" value="1" <?php echo $info['ispublic']?'checked="checked"':''; ?>><b>Public</b> (publish)
+                <input type="radio" name="ispublic" value="1" <?php echo $info['ispublic']?'checked="checked"':''; ?>><b><?= _('Public') ?></b><?= _('(publish)') ?>
                 &nbsp;&nbsp;&nbsp;&nbsp;
-                <input type="radio" name="ispublic" value="0" <?php echo !$info['ispublic']?'checked="checked"':''; ?>>Private (internal)
+                <input type="radio" name="ispublic" value="0" <?php echo !$info['ispublic']?'checked="checked"':''; ?>><?= _('Private (internal)') ?>
                 &nbsp;<span class="error">*&nbsp;<?php echo $errors['ispublic']; ?></span>
             </td>
         </tr>
         <tr>
             <td colspan=2>
-                <div style="padding-top:3px;"><b>Category Name</b>:&nbsp;<span class="faded">Short descriptive name.</span></div>
+                <div style="padding-top:3px;"><b><?= _('Category Name') ?></b>:&nbsp;<span class="faded"><?= _('Short descriptive name.') ?></span></div>
                     <input type="text" size="70" name="name" value="<?php echo $info['name']; ?>">
                     &nbsp;<span class="error">*&nbsp;<?php echo $errors['name']; ?></span>
                 <br>
                 <div style="padding-top:5px;">
-                    <b>Category Description</b>:&nbsp;<span class="faded">Summary of the category.</span>
+                    <b><?= _('Category Description') ?></b>:&nbsp;<span class="faded"><?= _('Summary of the category.') ?></span>
                     &nbsp;
                     <font class="error">*&nbsp;<?php echo $errors['description']; ?></font></div>
                     <textarea class="richtext" name="description" cols="21" rows="12" style="width:98%;"><?php echo $info['description']; ?></textarea>
@@ -62,7 +62,7 @@ $info=Format::htmlchars(($errors && $_POST)?$_POST:$info);
         </tr>
         <tr>
             <th colspan="2">
-                <em>Internal Notes&nbsp;</em>
+                <em><?= _('Internal Notes') ?>&nbsp;</em>
             </th>
         </tr>
         <tr>
@@ -74,7 +74,7 @@ $info=Format::htmlchars(($errors && $_POST)?$_POST:$info);
 </table>
 <p style="padding-left:225px;">
     <input type="submit" name="submit" value="<?php echo $submit_text; ?>">
-    <input type="reset"  name="reset"  value="Reset">
-    <input type="button" name="cancel" value="Cancel" onclick='window.location.href="categories.php"'>
+    <input type="reset"  name="reset"  value="<?= _('Reset') ?>">
+    <input type="button" name="cancel" value="<?= _('Cancel') ?>" onclick='window.location.href="categories.php"'>
 </p>
 </form>

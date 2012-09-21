@@ -28,10 +28,10 @@ include_once(INCLUDE_DIR.'class.ticket.php');
  */
 class OverviewReportAjaxAPI extends AjaxController {
     function enumTabularGroups() {
-        return $this->encode(array("dept"=>"Department", "topic"=>"Topics",
+        return $this->encode(array("dept"=>_("Department"), "topic"=>_("Topics"),
             # XXX: This will be relative to permissions based on the
             # logged-in-staff. For basic staff, this will be 'My Stats'
-            "staff"=>"Staff"));
+            "staff"=>_("Staff")));
     }
 
     function getData() {
@@ -48,14 +48,14 @@ class OverviewReportAjaxAPI extends AjaxController {
                 "pk" => "dept_id",
                 "sort" => 'ORDER BY dept_name',
                 "fields" => 'T1.dept_name',
-                "headers" => array('Department')
+                "headers" => array(_('Department'))
             ),
             "topic" => array(
                 "table" => TOPIC_TABLE,
                 "pk" => "topic_id",
                 "sort" => 'ORDER BY topic',
                 "fields" => "T1.topic",
-                "headers" => array('Help Topic')
+                "headers" => array(_('Help Topic'))
             ),
             # XXX: This will be relative to permissions based on the
             # logged-in-staff
@@ -64,7 +64,7 @@ class OverviewReportAjaxAPI extends AjaxController {
                 "pk" => 'staff_id',
                 "sort" => 'ORDER BY T1.lastname, T1.firstname',
                 "fields" => "CONCAT_WS(' ', T1.firstname, T1.lastname)",
-                "headers" => array('Staff Member')
+                "headers" => array(_('Staff Member'))
             )
         );
         $group = $this->get('group', 'dept');
@@ -114,8 +114,8 @@ class OverviewReportAjaxAPI extends AjaxController {
             }
         }
         return array("columns" => array_merge($info['headers'],
-                        array('Open','Assigned','Overdue','Closed','Reopened',
-                              'Service Time','Response Time')),
+                        array(_('Open'),_('Assigned'),_('Overdue'),_('Closed'),_('Reopened'),
+                              _('Service Time'),_('Response Time'))),
                      "data" => $rows);
     }
 

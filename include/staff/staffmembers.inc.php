@@ -1,5 +1,5 @@
 <?php
-if(!defined('OSTADMININC') || !$thisstaff || !$thisstaff->isAdmin()) die('Access Denied');
+if(!defined('OSTADMININC') || !$thisstaff || !$thisstaff->isAdmin()) die(_('Access Denied'));
 $qstr='';
 $select='SELECT staff.*,CONCAT_WS(" ",firstname,lastname) as name, grp.group_name, dept.dept_name as dept,count(m.team_id) as teams ';
 $from='FROM '.STAFF_TABLE.' staff '.
@@ -54,12 +54,12 @@ $qstr.='&order='.($order=='DESC'?'ASC':'DESC');
 $query="$select $from $where GROUP BY staff.staff_id ORDER BY $order_by LIMIT ".$pageNav->getStart().",".$pageNav->getLimit();
 //echo $query;
 ?>
-<h2>Staff Members</h2>
+<h2><?= _('Staff Members')?></h2>
 <div style="width:700; float:left;">
     <form action="staff.php" method="GET" name="filter">
      <input type="hidden" name="a" value="filter" >
         <select name="did" id="did">
-             <option value="0">&mdash; All Department &mdash;</option>
+             <option value="0">&mdash; <?= _('All Department')?> &mdash;</option>
              <?php
              $sql='SELECT dept.dept_id, dept.dept_name,count(staff.staff_id) as users  '.
                   'FROM '.DEPT_TABLE.' dept '.
@@ -74,7 +74,7 @@ $query="$select $from $where GROUP BY staff.staff_id ORDER BY $order_by LIMIT ".
              ?>
         </select>
         <select name="gid" id="gid">
-            <option value="0">&mdash; All Groups &mdash;</option>
+            <option value="0">&mdash; <?= _('All Groups')?> &mdash;</option>
              <?php
              $sql='SELECT grp.group_id, group_name,count(staff.staff_id) as users '.
                   'FROM '.GROUP_TABLE.' grp '.
@@ -89,7 +89,7 @@ $query="$select $from $where GROUP BY staff.staff_id ORDER BY $order_by LIMIT ".
              ?>
         </select>
         <select name="tid" id="tid">
-            <option value="0">&mdash; All Teams &mdash;</option>
+            <option value="0">&mdash; <?= _('All Teams')?> &mdash;</option>
              <?php
              $sql='SELECT team.team_id, team.name, count(member.staff_id) as users FROM '.TEAM_TABLE.' team '.
                   'INNER JOIN '.TEAM_MEMBER_TABLE.' member ON(member.team_id=team.team_id) '.
@@ -106,14 +106,14 @@ $query="$select $from $where GROUP BY staff.staff_id ORDER BY $order_by LIMIT ".
         <input type="submit" name="submit" value="Apply"/>
     </form>
  </div>
-<div style="float:right;text-align:right;padding-right:5px;"><b><a href="staff.php?a=add" class="Icon newstaff">Add New Staff</a></b></div>
+<div style="float:right;text-align:right;padding-right:5px;"><b><a href="staff.php?a=add" class="Icon newstaff"><?= _('Add New Staff')?></a></b></div>
 <div class="clear"></div>
 <?php
 $res=db_query($query);
 if($res && ($num=db_num_rows($res)))        
     $showing=$pageNav->showing();
 else
-    $showing='No staff found!';
+    $showing=_('No staff found!');
 ?>
 <form action="staff.php" method="POST" name="staff" onSubmit="return checkbox_checker(this,1,0);">
  <?php csrf_token(); ?>
@@ -123,13 +123,13 @@ else
     <thead>
         <tr>
             <th width="7px">&nbsp;</th>        
-            <th width="200"><a <?php echo $name_sort; ?> href="staff.php?<?php echo $qstr; ?>&sort=name">Name</a></th>
-            <th width="100"><a <?php echo $username_sort; ?> href="staff.php?<?php echo $qstr; ?>&sort=username">UserName</a></th>
-            <th width="100"><a  <?php echo $status_sort; ?> href="staff.php?<?php echo $qstr; ?>&sort=status">Status</a></th>
-            <th width="120"><a  <?php echo $group_sort; ?>href="staff.php?<?php echo $qstr; ?>&sort=group">Group</a></th>
-            <th width="150"><a  <?php echo $dept_sort; ?>href="staff.php?<?php echo $qstr; ?>&sort=dept">Department</a></th>
-            <th width="100"><a <?php echo $created_sort; ?> href="staff.php?<?php echo $qstr; ?>&sort=created">Created</a></th>
-            <th width="145"><a <?php echo $login_sort; ?> href="staff.php?<?php echo $qstr; ?>&sort=login">Last Login</a></th>
+            <th width="200"><a <?php echo $name_sort; ?> href="staff.php?<?php echo $qstr; ?>&sort=name"><?= _('Name')?></a></th>
+            <th width="100"><a <?php echo $username_sort; ?> href="staff.php?<?php echo $qstr; ?>&sort=username"><?= _('UserName')?></a></th>
+            <th width="100"><a  <?php echo $status_sort; ?> href="staff.php?<?php echo $qstr; ?>&sort=status"><?= _('Status')?></a></th>
+            <th width="120"><a  <?php echo $group_sort; ?>href="staff.php?<?php echo $qstr; ?>&sort=group"><?= _('Group')?></a></th>
+            <th width="150"><a  <?php echo $dept_sort; ?>href="staff.php?<?php echo $qstr; ?>&sort=dept"><?= _('Department')?></a></th>
+            <th width="100"><a <?php echo $created_sort; ?> href="staff.php?<?php echo $qstr; ?>&sort=created"><?= _('Created')?></a></th>
+            <th width="145"><a <?php echo $login_sort; ?> href="staff.php?<?php echo $qstr; ?>&sort=login"><?= _('Last Login')?></a></th>
         </tr>
     </thead>
     <tbody>
@@ -162,12 +162,12 @@ else
      <tr>
         <td colspan="8">
             <?php if($res && $num){ ?>
-            Select:&nbsp;
-            <a href="#" onclick="return select_all(document.forms['staff'],true)">All</a>&nbsp;&nbsp;
-            <a href="#" onclick="return reset_all(document.forms['staff'])">None</a>&nbsp;&nbsp;
-            <a href="#" onclick="return toogle_all(document.forms['staff'],true)">Toggle</a>&nbsp;&nbsp;
+            <?= _('Select')?>:&nbsp;
+            <a href="#" onclick="return select_all(document.forms['staff'],true)"><?= _('All')?></a>&nbsp;&nbsp;
+            <a href="#" onclick="return reset_all(document.forms['staff'])"><?= _('None')?></a>&nbsp;&nbsp;
+            <a href="#" onclick="return toogle_all(document.forms['staff'],true)"><?= _('Toggle')?></a>&nbsp;&nbsp;
             <?php }else{
-                echo 'No staff members found!';
+                echo _('No staff members found!');
             } ?>
         </td>
      </tr>
@@ -175,17 +175,17 @@ else
 </table>
 <?php
 if($res && $num): //Show options..
-    echo '<div>&nbsp;Page:'.$pageNav->getPageLinks().'&nbsp;</div>';
+    echo '<div>&nbsp;'._('Page').':'.$pageNav->getPageLinks().'&nbsp;</div>';
 ?>
 <p class="centered">
-    <input class="button" type="submit" name="enable" value="Enable"
-        onClick=' return confirm("Are you sure you want to ENABLE selected users?");'>
+    <input class="button" type="submit" name="enable" value="<?= _('Enable')?>"
+        onClick=' return confirm("<?=_('Are you sure you want to ENABLE selected users?')?>");'>
     &nbsp;&nbsp;
-    <input class="button" type="submit" name="disable" value="Lock"
-        onClick=' return confirm("Are you sure you want to LOCK selected users?");'>
+    <input class="button" type="submit" name="disable" value="<?= _('Lock')?>"
+        onClick=' return confirm("<?=_('Are you sure you want to LOCK selected users?')?>");'>
     &nbsp;&nbsp;
-    <input class="button" type="submit" name="delete" value="Delete"
-        onClick=' return confirm("Are you sure you want to DELETE selected users?");'>
+    <input class="button" type="submit" name="delete" value="<?= _('Delete')?>"
+        onClick=' return confirm("<?=_('Are you sure you want to DELETE selected users?')?>");'>
 </p>
 <?php
 endif;

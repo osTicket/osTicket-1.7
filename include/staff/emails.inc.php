@@ -43,10 +43,10 @@ else
 
 ?>
 <div style="width:700;padding-top:5px; float:left;">
- <h2>Email Addresses</h2>
+ <h2><?= _('Email Addresses')?></h2>
  </div>
 <div style="float:right;text-align:right;padding-top:5px;padding-right:5px;">
-    <b><a href="emails.php?a=add" class="Icon newEmail">Add New Email</a></b></div>
+    <b><a href="emails.php?a=add" class="Icon newEmail"><?= _('Add New Email')?></a></b></div>
 <div class="clear"></div>
 <form action="emails.php" method="POST" name="emails" onSubmit="return checkbox_checker(this,1,0);">
  <?php csrf_token(); ?>
@@ -56,11 +56,11 @@ else
     <thead>
         <tr>
             <th width="7">&nbsp;</th>        
-            <th width="400"><a <?php echo $email_sort; ?> href="emails.php?<?php echo $qstr; ?>&sort=email">Email</a></th>
-            <th width="120"><a  <?php echo $priority_sort; ?> href="emails.php?<?php echo $qstr; ?>&sort=priority">Priority</a></th>
-            <th width="250"><a  <?php echo $dept_sort; ?> href="emails.php?<?php echo $qstr; ?>&sort=dept">Department</a></th>
-            <th width="110" nowrap><a  <?php echo $created_sort; ?>href="emails.php?<?php echo $qstr; ?>&sort=created">Created</a></th>
-            <th width="150" nowrap><a  <?php echo $updated_sort; ?>href="emails.php?<?php echo $qstr; ?>&sort=updated">Last Updated</a></th>
+            <th width="400"><a <?php echo $email_sort; ?> href="emails.php?<?php echo $qstr; ?>&sort=email"><?= _('Email')?></a></th>
+            <th width="120"><a  <?php echo $priority_sort; ?> href="emails.php?<?php echo $qstr; ?>&sort=priority"><?= _('Priority')?></a></th>
+            <th width="250"><a  <?php echo $dept_sort; ?> href="emails.php?<?php echo $qstr; ?>&sort=dept"><?= _('Department')?></a></th>
+            <th width="110" nowrap><a  <?php echo $created_sort; ?>href="emails.php?<?php echo $qstr; ?>&sort=created"><?= _('Created')?></a></th>
+            <th width="150" nowrap><a  <?php echo $updated_sort; ?>href="emails.php?<?php echo $qstr; ?>&sort=updated"><?= _('Last Updated')?></a></th>
         </tr>
     </thead>
     <tbody>
@@ -103,10 +103,10 @@ else
      <tr>
         <td colspan="6">
             <?php if($res && $num){ ?>
-            Select:&nbsp;
-            <a href="#" onclick="return select_all(document.forms['emails'],true)">All</a>&nbsp;&nbsp;
-            <a href="#" onclick="return reset_all(document.forms['emails'])">None</a>&nbsp;&nbsp;
-            <a href="#" onclick="return toogle_all(document.forms['emails'],true)">Toggle</a>&nbsp;&nbsp;
+            <?= _('Select')?>:&nbsp;
+            <a href="#" onclick="return select_all(document.forms['emails'],true)"><?= _('All')?></a>&nbsp;&nbsp;
+            <a href="#" onclick="return reset_all(document.forms['emails'])"><?= _('None')?></a>&nbsp;&nbsp;
+            <a href="#" onclick="return toogle_all(document.forms['emails'],true)"><?= _('Toggle')?></a>&nbsp;&nbsp;
             <?php }else{
                 echo _('No help emails found');
             } ?>
@@ -116,11 +116,11 @@ else
 </table>
 <?php
 if($res && $num): //Show options..
-    echo '<div>&nbsp;Page:'.$pageNav->getPageLinks().'&nbsp;</div>';
+    echo '<div>&nbsp;'._('Page').':'.$pageNav->getPageLinks().'&nbsp;</div>';
 ?>
 <p class="centered">
-    <input class="button" type="submit" name="delete" value="Delete Email(s)"
-                onClick=' return confirm(_("Are you sure you want to DELETE selected emails?"));'>
+    <input class="button" type="submit" name="delete" value="<?= _('Delete Email(s)')?>"
+                onClick=' return confirm(<?= _("Are you sure you want to DELETE selected emails?") ?>);'>
 </p>
 <?php
 endif;

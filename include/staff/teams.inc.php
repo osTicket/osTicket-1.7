@@ -1,5 +1,5 @@
 <?php
-if(!defined('OSTADMININC') || !$thisstaff || !$thisstaff->isAdmin()) die('Access Denied');
+if(!defined('OSTADMININC') || !$thisstaff || !$thisstaff->isAdmin()) die(_('Access Denied'));
 
 $qstr='';
 $sql='SELECT team.*,count(m.staff_id) as members,CONCAT_WS(" ",lead.firstname,lead.lastname) as team_lead '.
@@ -35,14 +35,14 @@ $res=db_query($query);
 if($res && ($num=db_num_rows($res)))
     $showing="Showing 1-$num of $num teams";
 else
-    $showing='No teams found!';
+    $showing=_('No teams found!');
 
 ?>
 <div style="width:700;padding-top:5px; float:left;">
  <h2>Teams</h2>
  </div>
 <div style="float:right;text-align:right;padding-top:5px;padding-right:5px;">
-    <b><a href="teams.php?a=add" class="Icon newteam">Add New Team</a></b></div>
+    <b><a href="teams.php?a=add" class="Icon newteam"><?= _('Add New Team')?></a></b></div>
 <div class="clear"></div>
 <form action="teams.php" method="POST" name="teams" onSubmit="return checkbox_checker(this,1,0);">
  <?php csrf_token(); ?>
@@ -52,12 +52,12 @@ else
     <thead>
         <tr>
             <th width="7px">&nbsp;</th>        
-            <th width="250"><a <?php echo $name_sort; ?> href="teams.php?<?php echo $qstr; ?>&sort=name">Team Name</a></th>
-            <th width="80"><a  <?php echo $status_sort; ?> href="teams.php?<?php echo $qstr; ?>&sort=status">Status</a></th>
-            <th width="80"><a  <?php echo $members_sort; ?>href="teams.php?<?php echo $qstr; ?>&sort=members">Members</a></th>
-            <th width="200"><a  <?php echo $lead_sort; ?> href="teams.php?<?php echo $qstr; ?>&sort=lead">Team Lead</a></th>
-            <th width="100"><a  <?php echo $created_sort; ?> href="teams.php?<?php echo $qstr; ?>&sort=created">Created</a></th>
-            <th width="130"><a  <?php echo $updated_sort; ?> href="teams.php?<?php echo $qstr; ?>&sort=updated">Last Updated</a></th>
+            <th width="250"><a <?php echo $name_sort; ?> href="teams.php?<?php echo $qstr; ?>&sort=name"><?= _('Team Name')?></a></th>
+            <th width="80"><a  <?php echo $status_sort; ?> href="teams.php?<?php echo $qstr; ?>&sort=status"><?= _('Status')?></a></th>
+            <th width="80"><a  <?php echo $members_sort; ?>href="teams.php?<?php echo $qstr; ?>&sort=members"><?= _('Members')?></a></th>
+            <th width="200"><a  <?php echo $lead_sort; ?> href="teams.php?<?php echo $qstr; ?>&sort=lead"><?= _('Team Lead')?></a></th>
+            <th width="100"><a  <?php echo $created_sort; ?> href="teams.php?<?php echo $qstr; ?>&sort=created"><?= _('Created')?></a></th>
+            <th width="130"><a  <?php echo $updated_sort; ?> href="teams.php?<?php echo $qstr; ?>&sort=updated"><?= _('Last Updated')?></a></th>
         </tr>
     </thead>
     <tbody>
@@ -96,12 +96,12 @@ else
      <tr>
         <td colspan="7">
             <?php if($res && $num){ ?>
-            Select:&nbsp;
-            <a href="#" onclick="return select_all(document.forms['teams'],true)">All</a>&nbsp;&nbsp;
-            <a href="#" onclick="return reset_all(document.forms['teams'])">None</a>&nbsp;&nbsp;
-            <a href="#" onclick="return toogle_all(document.forms['teams'],true)">Toggle</a>&nbsp;&nbsp;
+            <?= _('Select')?>:&nbsp;
+            <a href="#" onclick="return select_all(document.forms['teams'],true)"><?= _('All')?></a>&nbsp;&nbsp;
+            <a href="#" onclick="return reset_all(document.forms['teams'])"><?= _('None')?></a>&nbsp;&nbsp;
+            <a href="#" onclick="return toogle_all(document.forms['teams'],true)"><?= _('Toggle')?></a>&nbsp;&nbsp;
             <?php }else{
-                echo 'No teams found!';
+                echo _('No teams found!');
             } ?>
         </td>
      </tr>
@@ -111,12 +111,12 @@ else
 if($res && $num): //Show options..
 ?>
 <p class="centered">
-    <input class="button" type="submit" name="enable" value="Enable"
-                onClick=' return confirm("Are you sure you want to ENABLE selected teams?");'>
-    <input class="button" type="submit" name="disable" value="Disable"
-                onClick=' return confirm("Are you sure you want to DISABLE selected teams?");'>
-    <input class="button" type="submit" name="delete" value="Delete"
-                onClick=' return confirm("Are you sure you want to DELETE selected teams?");'>
+    <input class="button" type="submit" name="enable" value="<?= _('Enable')?>"
+                onClick=' return confirm("<?= _('Are you sure you want to ENABLE selected teams?')?>");'>
+    <input class="button" type="submit" name="disable" value="<?= _('Disable')?>"
+                onClick=' return confirm("<?= _('Are you sure you want to DISABLE selected teams?')?>");'>
+    <input class="button" type="submit" name="delete" value="<?= _('Delete')?>"
+                onClick=' return confirm("<?= _('Are you sure you want to DELETE selected teams?')?>");'>
 </p>
 <?php
 endif;
