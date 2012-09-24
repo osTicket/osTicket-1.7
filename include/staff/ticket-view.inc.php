@@ -56,12 +56,13 @@ if($ticket->isOverdue())
                 in case.
             */
             ?>
+            <a class="print-ticket-link" href="tickets.php?id=<?php echo $ticket->getId(); ?>">Print Ticket</a>
+            <?php if($thisstaff->canEditTickets()): ?>
+                <a class="edit-ticket-link" href="tickets.php?id=<?php echo $ticket->getId(); ?>&a=edit">Edit Ticket</a>
+            <?php endif; ?>
+            <i class="cog"></i>
             <select name="ticket-quick-actions" id="ticket-quick-actions">
                 <option value="" selected="selected">&mdash; Select Action &mdash;</option>
-                <option class="print" value="tickets.php?id=<?php echo $ticket->getId(); ?>" data-dialog="print-options">Print Ticket</option>
-                <?php if($thisstaff->canEditTickets()): ?>
-                    <option class="edit" value="tickets.php?id=<?php echo $ticket->getId(); ?>&a=edit" data-dialog="">Edit Ticket</option>
-                <?php endif; ?>
                 <?php if($thisstaff->canCloseTickets()): ?>
                     <option class="close" value="tickets.php?id=<?php echo $ticket->getId(); ?>&a=close" data-dialog="close-confirm">Close Ticket</option>
                 <?php endif; ?>

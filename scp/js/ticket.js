@@ -332,6 +332,12 @@ jQuery(function($) {
         }
     });
 
+    $('.print-ticket-link').click(function(e) {
+        e.preventDefault();
+        $('#overlay').show();
+        $('#print-options').show();
+    });
+
     $('.dialog').delegate('a.close', 'click', function(e) {
         e.preventDefault();
         $(this).parent().hide();

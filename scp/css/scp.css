@@ -1183,6 +1183,39 @@ option.edit   { background-image:url(../images/icons/select-edit.gif); }
 option.ban    { background-image:url(../images/icons/select-ban.gif); }
 option.delete { background-image:url(../images/icons/select-delete.gif); }
 
+.cog,
+.print-ticket-link,
+.edit-ticket-link {
+    display:inline-block;
+    margin-right:1em;
+    width:16px;
+    height:16px;
+    line-height:16px;
+    background-position:top right;
+    background-repeat:no-repeat;
+    white-space:nowrap;
+    overflow:hidden;
+    overflow:none;
+    text-indent:200%;
+    position:relative;
+    top:6px;
+}
+
+.cog {
+    margin-right:0.5em;
+    padding-left:1em;
+    border-left:1px solid #aaa;
+    background-image:url(../images/icons/select-cog.gif);
+}
+
+.print-ticket-link {
+    background-image:url(../images/icons/select-print.gif);
+}
+
+.edit-ticket-link {
+    background-image:url(../images/icons/select-edit.gif);
+}
+
 .dialog {
     width:500px;
     height:180px;
