@@ -2,9 +2,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: osticket17\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-09-21 12:32-0300\n"
+"POT-Creation-Date: 2012-09-21 17:48-0300\n"
 "PO-Revision-Date: \n"
-"Last-Translator: Fabio Rauber <fabior@interlegis.leg.br>\n"
+"Last-Translator: Alejandro <alejandrobq2005@hotmail.com>\n"
 "Language-Team: Fabio Rauber <fabior@interlegis.leg.br>\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
@@ -12,7 +12,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Poedit-Language: Portuguese\n"
 "X-Poedit-Country: BRAZIL\n"
-"X-Poedit-Basepath: /home/likewise-open/INTERLEGIS/fabior/.gvfs/SFTP para iladmin em 10.1.2.240/var/www\n"
+"X-Poedit-Basepath: /home/alejandro/.gvfs/SFTP for iladmin on 10.1.2.240/var/www\n"
 "X-Poedit-SearchPath-0: .\n"
 
 #: index.php:23
@@ -1918,6 +1918,132 @@ msgstr "Não foi possível atualizar o tíquete. Corrija os erros abaixo e tente
 msgid "Unable to create the team. Internal error"
 msgstr "Não foi possível criar o grupo. Erro interno"
 
+#: include/class.ticket.php:1388
+#, fuzzy
+msgid "Missing messageId - internal error"
+msgstr "Faltando ID da mensagem - Erro interno"
+
+#: include/class.ticket.php:1390
+#, fuzzy
+msgid "Response message required"
+msgstr "Nota requerida"
+
+#: include/class.ticket.php:1593
+msgid "File Upload Error"
+msgstr "Erro em upload de arquivo"
+
+#: include/class.ticket.php:1595
+msgid "File Upload Error (Ticket #"
+msgstr ""
+
+#: include/class.ticket.php:1668
+#: include/class.ticket.php:1910
+#, fuzzy
+msgid "Missing or invalid data - check the errors and try again"
+msgstr "Dados inválidos ou faltando. Corrija os erros abaixo e tente novamente!"
+
+#: include/class.ticket.php:1672
+msgid "Duedate can NOT be set on a closed ticket"
+msgstr ""
+
+#: include/class.ticket.php:1674
+#: include/class.ticket.php:1923
+#, fuzzy
+msgid "Select time"
+msgstr "Selecione Um"
+
+#: include/class.ticket.php:1676
+#: include/class.ticket.php:1925
+#, fuzzy
+msgid "Invalid duedate"
+msgstr "Caminho Inválido"
+
+#: include/class.ticket.php:1678
+#: include/class.ticket.php:1927
+msgid "Due date must be in the future"
+msgstr ""
+
+#: include/class.ticket.php:1684
+#: include/class.ticket.php:1915
+msgid "Invalid phone ext."
+msgstr "Extensão de telefone inválida."
+
+#: include/class.ticket.php:1686
+#: include/class.ticket.php:1917
+msgid "Phone number required"
+msgstr "Número de telefone é requerido"
+
+#: include/class.ticket.php:1712
+#, fuzzy, php-format
+msgid "Ticket Updated by %s"
+msgstr "Atualização de Tíquete"
+
+#: include/class.ticket.php:1714
+#, fuzzy
+msgid "Ticket Updated"
+msgstr "Atualização de Tíquete"
+
+#: include/class.ticket.php:1849
+#: include/class.ticket.php:1874
+msgid "Ticket denied. Error #403"
+msgstr ""
+
+#: include/class.ticket.php:1850
+#: include/class.ticket.php:1875
+#, fuzzy
+msgid "Ticket denied"
+msgstr "Tíquete Reaberto"
+
+#: include/class.ticket.php:1850
+#, fuzzy
+msgid "Banned email - "
+msgstr "Banir Novo E-mail"
+
+#: include/class.ticket.php:1860
+#, fuzzy
+msgid "You've reached the maximum open tickets allowed."
+msgstr "Você alcançou o número máximo permitido de tentativas de login. Tente novamente mais tarde, ou"
+
+#: include/class.ticket.php:1861
+#, fuzzy
+msgid "Ticket denied -"
+msgstr "Tíquete Reaberto"
+
+#: include/class.ticket.php:1862
+#, php-format
+msgid "Max open tickets (%d) reached for %s "
+msgstr ""
+
+#: include/class.ticket.php:1876
+#, php-format
+msgid "Ticket rejected ( %s) by filter \"%s\""
+msgstr ""
+
+#: include/class.ticket.php:2075
+#, fuzzy
+msgid "Summary of the issue required"
+msgstr "Sumário da categoria."
+
+#: include/class.ticket.php:2080
+#, fuzzy
+msgid "Invalid source - "
+msgstr "Extensão de telefone inválida."
+
+#: include/class.ticket.php:2103
+#, fuzzy
+msgid "New Ticket by Staff"
+msgstr "Novo Tíquete pela equipe"
+
+#: include/class.ticket.php:2103
+#, fuzzy
+msgid "Ticket created by staff -"
+msgstr "Atualização de Tíquete"
+
+#: include/class.ticket.php:2160
+#, fuzzy
+msgid "Ticket flagged as overdue by the system."
+msgstr "Tíquete marcado como atrasado por"
+
 #: include/class.pagenate.php:75
 msgid "Showing"
 msgstr "Mostrando"
@@ -1946,11 +2072,201 @@ msgstr "Não foi possível atualizar grupo. Ocorreu um erro interno."
 msgid "Unable to create the group. Internal error"
 msgstr "Não foi possível criar o grupo. Erro interno"
 
+#: include/class.topic.php:184
+#, fuzzy
+msgid "Help topic required"
+msgstr "Título do Helpdesk requerido"
+
+#: include/class.topic.php:186
+#, fuzzy
+msgid "Topic is too short. 5 chars minimum"
+msgstr "Título muito curto. Mínimo de 3 caracteres"
+
+#: include/class.topic.php:188
+#, fuzzy
+msgid "Topic already exists"
+msgstr "Títula já existe"
+
+#: include/class.topic.php:191
+#, fuzzy
+msgid "You must select a department"
+msgstr "Você deve selecionar ao menos um departamento"
+
+#: include/class.topic.php:194
+msgid "You must select a priority"
+msgstr "Você deve selecionar a prioridade"
+
+#: include/class.topic.php:222
+#, fuzzy
+msgid "Unable to update topic. Internal error occurred"
+msgstr "Não foi possível atualizar grupo. Ocorreu um erro interno."
+
+#: include/class.topic.php:228
+#, fuzzy
+msgid "Unable to create the topic. Internal error"
+msgstr "Não foi possível criar o grupo. Erro interno"
+
+#: include/class.json.php:40
+#, fuzzy
+msgid "No errors"
+msgstr "Erros SQL"
+
+#: include/class.json.php:41
+msgid "Maximum stack depth exceeded"
+msgstr ""
+
+#: include/class.json.php:42
+msgid "Underflow or the modes mismatch"
+msgstr ""
+
+#: include/class.json.php:43
+msgid "Unexpected control character found"
+msgstr ""
+
+#: include/class.json.php:44
+msgid "Syntax error, malformed JSON"
+msgstr ""
+
+#: include/class.json.php:45
+msgid "Malformed UTF-8 characters, possibly incorrectly encoded"
+msgstr ""
+
+#: include/class.json.php:49
+#, fuzzy
+msgid "Unknown error"
+msgstr "Desconhecido"
+
+#: include/class.json.php:52
+msgid "Unknown JSON parsing error"
+msgstr ""
+
+#: include/class.pdf.php:60
+#, fuzzy
+msgid "Support Ticket System"
+msgstr "Sistema de Tíquetes e Suporte Offline"
+
+#: include/class.pdf.php:68
+#, fuzzy
+msgid "Generated on "
+msgstr "Criado Em"
+
+#: include/class.pdf.php:69
+msgid "Date & Time based on GMT "
+msgstr ""
+
+#: include/class.pdf.php:80
+#, fuzzy
+msgid "Ticket printed by "
+msgstr "Tíquete reaberto por"
+
+#: include/class.pdf.php:116
+msgid "Status"
+msgstr "Estado"
+
+#: include/class.pdf.php:120
+msgid "Name"
+msgstr "Nome"
+
+#: include/class.pdf.php:124
+#: include/class.export.php:42
+msgid "Priority"
+msgstr "Prioridade"
+
+#: include/class.pdf.php:128
+msgid "Email"
+msgstr "E-mail"
+
+#: include/class.pdf.php:132
 #: include/ajax.reports.php:31
 #: include/ajax.reports.php:51
 #: include/class.export.php:43
 msgid "Department"
 msgstr "Departamento"
+
+#: include/class.pdf.php:136
+msgid "Phone"
+msgstr "Telefone"
+
+#: include/class.pdf.php:140
+msgid "Create Date"
+msgstr "Data Criação"
+
+#: include/class.pdf.php:144
+#: include/class.export.php:44
+msgid "Source"
+msgstr "Origem"
+
+#: include/class.pdf.php:151
+msgid "Assigned To"
+msgstr "Designado Para"
+
+#: include/class.pdf.php:160
+msgid "Closed By"
+msgstr "Fechado Por"
+
+#: include/class.pdf.php:170
+msgid "Last Response"
+msgstr "Última Resposta"
+
+#: include/class.pdf.php:174
+#: include/ajax.reports.php:58
+msgid "Help Topic"
+msgstr "Tópico de ajuda"
+
+#: include/class.pdf.php:179
+msgid "Due Date"
+msgstr "Prazo"
+
+#: include/class.pdf.php:183
+msgid "Close Date"
+msgstr "Data de Fechamento"
+
+#: include/class.pdf.php:189
+msgid "Last Message"
+msgstr "Última Mensagem"
+
+#: include/class.pdf.php:217
+msgid ""
+"\n"
+"Files Attached: ["
+msgstr ""
+
+#: include/class.migrater.php:158
+#, php-format
+msgid "%s: Cannot read file contents"
+msgstr ""
+
+#: include/class.migrater.php:173
+#, php-format
+msgid "%s: Unable to migrate attachment"
+msgstr ""
+
+#: include/class.migrater.php:184
+#, fuzzy, php-format
+msgid "%s: Unable to remove file from disk"
+msgstr "Não foi possível remover o e-mail da lista negra. Tente novamente."
+
+#: include/class.migrater.php:214
+msgid "Unable to query DB for attached files to migrate!"
+msgstr ""
+
+#: include/class.migrater.php:216
+msgid "Found "
+msgstr ""
+
+#: include/class.migrater.php:216
+#, fuzzy
+msgid " attachments to migrate"
+msgstr "Enviar anexos para o usuário"
+
+#: include/class.migrater.php:241
+#, fuzzy, php-format
+msgid "%s: Unable to locate attachment file"
+msgstr "Não foi possível apagar filtros selecionados"
+
+#: include/class.migrater.php:280
+msgid "Upgrader: Attachment Migrater"
+msgstr ""
 
 #: include/ajax.reports.php:31
 msgid "Topics"
@@ -1959,10 +2275,6 @@ msgstr "Tópicos"
 #: include/ajax.reports.php:34
 msgid "Staff"
 msgstr "Equipe"
-
-#: include/ajax.reports.php:58
-msgid "Help Topic"
-msgstr "Tópico de ajuda"
 
 #: include/ajax.reports.php:67
 msgid "Staff Member"
@@ -1996,14 +2308,6 @@ msgstr "ID do Tíquete"
 msgid "Date"
 msgstr "Data"
 
-#: include/class.export.php:42
-msgid "Priority"
-msgstr "Prioridade"
-
-#: include/class.export.php:44
-msgid "Source"
-msgstr "Origem"
-
 #: include/class.export.php:45
 msgid "Current Status"
 msgstr "Status Atual"
@@ -2015,6 +2319,43 @@ msgstr "Entrada inválida"
 #: include/class.validator.php:43
 msgid "No fields setup"
 msgstr "Sem configurações de campos"
+
+#: include/class.setup.php:40
+msgid "Error accessing SQL file "
+msgstr ""
+
+#: include/class.setup.php:56
+msgid "Error parsing SQL schema"
+msgstr ""
+
+#: include/class.osticket.php:106
+#, php-format
+msgid "Invalid CSRF token [%s] on %s"
+msgstr ""
+
+#: include/class.osticket.php:108
+#, fuzzy
+msgid "Invalid CSRF Token "
+msgstr "Login inválido"
+
+#: include/class.osticket.php:139
+#, fuzzy
+msgid "Invalid file type for "
+msgstr "Seleção de tipo de correspondência inválida"
+
+#: include/class.osticket.php:141
+#, php-format
+msgid "File (%s) is too big. Maximum of %s allowed"
+msgstr ""
+
+#: include/class.osticket.php:144
+msgid "Invalid or bad upload POST"
+msgstr ""
+
+#: include/class.osticket.php:227
+#, fuzzy, php-format
+msgid "\"osTicket Alerts\"<%s>"
+msgstr "Alerta de Novo Tíquete"
 
 #: include/class.email.php:213
 msgid "Internal error. Get technical help."
@@ -2077,10 +2418,6 @@ msgstr "Máximo de e-mails requerido"
 #: include/class.email.php:251
 msgid "You must select a Dept."
 msgstr "Você deve selecionar um Depto."
-
-#: include/class.email.php:253
-msgid "You must select a priority"
-msgstr "Você deve selecionar a prioridade"
 
 #: include/class.email.php:256
 msgid "Indicate what to do with fetched emails"
@@ -2216,6 +2553,78 @@ msgstr "E-mail já está configurado como e-mail de sistema"
 #: include/class.config.php:756
 msgid "Invalid selection. Must be less than "
 msgstr "Seleção inválida. Deve ser menor que"
+
+#: include/class.mailfetch.php:444
+#, php-format
+msgid "Attachment %s [%s] rejected because of file type"
+msgstr ""
+
+#: include/class.mailfetch.php:445
+#, fuzzy
+msgid "Email Attachment Rejected"
+msgstr "Anexos enviados por e-mail"
+
+#: include/class.mailfetch.php:446
+#, fuzzy
+msgid "Email Attachment Rejected (Ticket #"
+msgstr "Enviar anexos para o usuário"
+
+#: include/class.mailfetch.php:487
+#, php-format
+msgid "Excessive errors processing emails for %s/%s. Please manually check the inbox."
+msgstr ""
+
+#: include/class.mailfetch.php:499
+#, fuzzy
+msgid "Mail Fetcher"
+msgstr "E-mails por Busca"
+
+#: include/class.mailfetch.php:516
+msgid "osTicket requires PHP IMAP extension enabled for IMAP/POP3 email fetch to work!"
+msgstr ""
+
+#: include/class.mailfetch.php:517
+#, fuzzy
+msgid "Mail Fetch Error"
+msgstr "Chamada do cron ao importador de E-mail ["
+
+#: include/class.mailfetch.php:549
+#, fuzzy
+msgid ""
+"\n"
+"User: "
+msgstr "Usuários"
+
+#: include/class.mailfetch.php:550
+#, fuzzy
+msgid ""
+"\n"
+"Host: "
+msgstr "Host"
+
+#: include/class.mailfetch.php:551
+#, fuzzy
+msgid ""
+"\n"
+"Error: "
+msgstr "Erro"
+
+#: include/class.mailfetch.php:554
+msgid "Mail Fetch Failure Alert"
+msgstr ""
+
+#: include/class.mailfetch.php:552
+msgid ""
+"\n"
+"\n"
+" "
+msgstr ""
+
+#: include/class.mailfetch.php:548
+msgid ""
+"\n"
+"osTicket is having trouble fetching emails from the following mail account: \n"
+msgstr ""
 
 #: include/class.knowledgebase.php:71
 msgid "Title is required"
@@ -2423,6 +2832,14 @@ msgstr "Ver&nbsp;Histórico&nbsp;do&nbsp;Tíquete"
 msgid "View ticket status"
 msgstr "Ver estado do tíquete"
 
+#: include/class.mcrypt.php:24
+msgid "Cryptography extension mcrypt is not enabled or installed. Important text/data is being stored as plain text in database."
+msgstr ""
+
+#: include/class.mcrypt.php:25
+msgid "mcrypt module missing"
+msgstr ""
+
 #: include/class.client.php:151
 msgid "Excessive failed login attempts"
 msgstr "Número excessivo de tentativas de login"
@@ -2451,6 +2868,74 @@ msgstr "Tentativa de login falhou"
 #: include/class.banlist.php:55
 msgid "Internal list for email banning. Do not remove"
 msgstr "Lista interna para banimento de e-mail. Não remova"
+
+#: include/class.upgrader.php:55
+#, fuzzy
+msgid "Upgrader Error"
+msgstr "Atualize Agora"
+
+#: include/class.upgrader.php:140
+#, fuzzy
+msgid "Upgrade osTicket to "
+msgstr "Atualizar Tíquete"
+
+#: include/class.upgrader.php:201
+#: include/class.upgrader.php:257
+#, fuzzy
+msgid "Upgrader"
+msgstr "Atualize Agora"
+
+#: include/class.upgrader.php:201
+#, php-format
+msgid "There are %d pending upgrade tasks"
+msgstr ""
+
+#: include/class.upgrader.php:240
+msgid "Upgrader - Patch applied"
+msgstr ""
+
+#: include/class.upgrader.php:257
+#, php-format
+msgid "Found %d tasks to be executed for %s"
+msgstr ""
+
+#: include/class.upgrader.php:273
+msgid "Migrating attachments to database, it might take a while depending on the number of files."
+msgstr ""
+
+#: include/class.upgrader.php:275
+msgid "Transitioning to db-backed sessions"
+msgstr ""
+
+#: include/class.upgrader.php:279
+msgid "Migrating API keys to a new table"
+msgstr ""
+
+#: include/class.upgrader.php:283
+msgid "Migrating group's department access to a new table"
+msgstr ""
+
+#: include/class.upgrader.php:291
+msgid "Post-upgrade cleanup!"
+msgstr ""
+
+#: include/class.upgrader.php:311
+#, fuzzy, php-format
+msgid "%s: Unable to process cleanup file"
+msgstr "Não foi possível apagar filtros selecionados"
+
+#: include/class.mailer.php:153
+#, php-format
+msgid ""
+"Unable to email via SMTP:%s:%d [%s]\n"
+"\n"
+"%s\n"
+msgstr ""
+
+#: include/class.mailer.php:167
+#, fuzzy
+msgid "Mailer Error"
+msgstr "Chamada do cron ao importador de E-mail ["
 
 #: include/class.template.php:342
 msgid "Template name already exists"
@@ -2676,22 +3161,6 @@ msgstr "Recarregar"
 msgid "Ticket Status"
 msgstr "Status do Tíquete"
 
-#: include/client/view.inc.php:33
-msgid "Create Date"
-msgstr "Data Criação"
-
-#: include/client/view.inc.php:41
-msgid "Name"
-msgstr "Nome"
-
-#: include/client/view.inc.php:45
-msgid "Email"
-msgstr "E-mail"
-
-#: include/client/view.inc.php:49
-msgid "Phone"
-msgstr "Telefone"
-
 #: include/client/view.inc.php:59
 msgid "Ticket Thread"
 msgstr "Histórico do Tíquete"
@@ -2824,20 +3293,6 @@ msgstr "Ordenar por Data"
 #: include/client/tickets.inc.php:115
 msgid "Sort By Status"
 msgstr "Ordenar por Estado"
-
-#: include/client/tickets.inc.php:115
-#: include/staff/cannedresponse.inc.php:39
-#: include/staff/settings-alerts.inc.php:16
-#: include/staff/settings-alerts.inc.php:39
-#: include/staff/settings-alerts.inc.php:62
-#: include/staff/settings-alerts.inc.php:86
-#: include/staff/settings-alerts.inc.php:111
-#: include/staff/settings-alerts.inc.php:135
-#: include/staff/teams.inc.php:56
-#: include/staff/team.inc.php:50
-#: include/staff/slaplan.inc.php:60
-msgid "Status"
-msgstr "Estado"
 
 #: include/client/tickets.inc.php:118
 msgid "Sort By Subject"
@@ -4299,38 +4754,14 @@ msgstr "Imprimir Tíquete"
 msgid "Edit Ticket"
 msgstr "Editar Tíquete"
 
-#: include/staff/ticket-view.inc.php:116
-msgid "Assigned To"
-msgstr "Designado Para"
-
 #: include/staff/ticket-view.inc.php:122
 #: include/staff/filter.inc.php:282
 msgid "Unassigned"
 msgstr "Não Designado"
 
-#: include/staff/ticket-view.inc.php:129
-msgid "Closed By"
-msgstr "Fechado Por"
-
 #: include/staff/ticket-view.inc.php:135
 msgid "Unknown"
 msgstr "Desconhecido"
-
-#: include/staff/ticket-view.inc.php:142
-msgid "Last Response"
-msgstr "Última Resposta"
-
-#: include/staff/ticket-view.inc.php:148
-msgid "Due Date"
-msgstr "Prazo"
-
-#: include/staff/ticket-view.inc.php:154
-msgid "Close Date"
-msgstr "Data de Fechamento"
-
-#: include/staff/ticket-view.inc.php:173
-msgid "Last Message"
-msgstr "Última Mensagem"
 
 #: include/staff/ticket-view.inc.php:230
 msgid "No internal notes found."
@@ -6228,6 +6659,10 @@ msgstr "Inválido"
 msgid "Check one or more"
 msgstr "Selecione um ou mais"
 
+#, fuzzy
+#~ msgid "migrateAttachments2DB"
+#~ msgstr "Anexos enviados por e-mail"
+
 #~ msgid "Internal notes.&nbsp;"
 #~ msgstr "Notas Internas.&nbsp;"
 
@@ -6272,9 +6707,6 @@ msgstr "Selecione um ou mais"
 
 #~ msgid "Warning"
 #~ msgstr "Aviso"
-
-#~ msgid "Error"
-#~ msgstr "Erro"
 
 #, fuzzy
 #~ msgid " Select Priority"

@@ -155,7 +155,7 @@ class AttachmentMigrater {
         if (!($info['data'] = @file_get_contents($info['path']))) {
             # Continue with next file
             return $this->skip($info['attachId'],
-                sprintf('%s: Cannot read file contents', $info['path']));
+                sprintf('%s: '._('Cannot read file contents'), $info['path']));
         }
         # Get the mime/type of each file
         # XXX: Use finfo_buffer for PHP 5.3+
@@ -170,7 +170,7 @@ class AttachmentMigrater {
 
         if (!($fileId = AttachmentFile::save($info))) {
             return $this->skip($info['attachId'],
-                sprintf('%s: Unable to migrate attachment', $info['path']));
+                sprintf('%s: '._('Unable to migrate attachment'), $info['path']));
         }
         # Update the ATTACHMENT_TABLE record to set file_id
         db_query('update '.TICKET_ATTACHMENT_TABLE
@@ -181,7 +181,7 @@ class AttachmentMigrater {
         # TICKET_ATTACHMENT_TABLE has a nonzero value now
         if (!@unlink($info['path'])) //XXX: what should we do on failure?
             $this->error(
-                sprintf('%s: Unable to remove file from disk',
+                sprintf('%s: '.('Unable to remove file from disk'),
                 $info['path']));
         # TODO: Log an internal note to the ticket?
         return true;
@@ -211,15 +211,15 @@ class AttachmentMigrater {
 
         //XXX: Do a hard fail or error querying the database?
         if(!($res=db_query($sql)))
-            return $this->error('Unable to query DB for attached files to migrate!');
+            return $this->error(_('Unable to query DB for attached files to migrate!'));
 
-        $ost->logDebug('Found '.db_num_rows($res).' attachments to migrate');
+        $ost->logDebug(_('Found').' '.db_num_rows($res).' '._('attachments to migrate'));
         if(!db_num_rows($res))
             return 0;  //Nothing else to do!!
 
         $dir=$cfg->getUploadDir();
         if(!$dir || !is_dir($dir)) //XXX: Abort the upgrade??? Attachments are obviously critical!
-            return $this->error("Attachment directory [$dir] is invalid - aborting attachment migration");
+            return $this->error(_("Attachment directory [$dir] is invalid - aborting attachment migration"));
 
         //Clear queue
         $this->queue = array();
@@ -238,7 +238,7 @@ class AttachmentMigrater {
             } else {
                 # XXX Cannot find file for attachment
                 $this->skip($id,
-                        sprintf('%s: Unable to locate attachment file',
+                        sprintf('%s: '._('Unable to locate attachment file'),
                             $name));
                 # No need to further process this file
                 continue;
@@ -277,7 +277,7 @@ class AttachmentMigrater {
 
         $this->errors++;
         $this->errorList[] = $what;
-        $ost->logDebug('Upgrader: Attachment Migrater', $what);
+        $ost->logDebug(_('Upgrader: Attachment Migrater'), $what);
         # Assist in returning FALSE for inline returns with this method
         return false;
     }

@@ -378,7 +378,7 @@ class MailFetcher {
 	    //Is the email address banned?
         if($mailinfo['email'] && TicketFilter::isBanned($mailinfo['email'])) {
 	        //We need to let admin know...
-            $ost->logWarning('Ticket denied', 'Banned email - '.$mailinfo['email']);
+            $ost->logWarning(_('Ticket denied'), _('Banned email').' - '.$mailinfo['email']);
 	        return true; //Report success (moved or delete)
         }
 
@@ -441,9 +441,9 @@ class MailFetcher {
                 } else {
                     //This should be really a comment on message - NoT an internal note.
                     //TODO: support comments on Messages and Responses.
-                    $error = sprintf('Attachment %s [%s] rejected because of file type', $a['name'], $a['mime']);
-                    $ticket->postNote('Email Attachment Rejected', $error, false);
-                    $ost->logDebug('Email Attachment Rejected (Ticket #'.$ticket->getExtId().')', $error);
+                    $error = sprintf(_('Attachment %s [%s] rejected because of file type'), $a['name'], $a['mime']);
+                    $ticket->postNote(_('Email Attachment Rejected'), $error, false);
+                    $ost->logDebug(_('Email Attachment Rejected (Ticket #').$ticket->getExtId().')', $error);
                 }
             }
         }
@@ -484,7 +484,7 @@ class MailFetcher {
 
         //Warn on excessive errors
         if($errors>$msgs) {
-            $warn=sprintf('Excessive errors processing emails for %s/%s. Please manually check the inbox.',
+            $warn=sprintf(_('Excessive errors processing emails for %s/%s. Please manually check the inbox.'),
                     $this->getHost(), $this->getUsername());
             $this->log($warn);
         }
@@ -496,7 +496,7 @@ class MailFetcher {
 
     function log($error) {
         global $ost;
-        $ost->logWarning('Mail Fetcher', $error);
+        $ost->logWarning(_('Mail Fetcher'), $error);
     }
 
     /*
@@ -513,8 +513,8 @@ class MailFetcher {
         //We require imap ext to fetch emails via IMAP/POP3
         //We check here just in case the extension gets disabled post email config...
         if(!function_exists('imap_open')) {
-            $msg='osTicket requires PHP IMAP extension enabled for IMAP/POP3 email fetch to work!';
-            $ost->logWarning('Mail Fetch Error', $msg);
+            $msg=_('osTicket requires PHP IMAP extension enabled for IMAP/POP3 email fetch to work!');
+            $ost->logWarning(_('Mail Fetch Error'), $msg);
             return;
         }
 
@@ -545,13 +545,13 @@ class MailFetcher {
                 db_query('UPDATE '.EMAIL_TABLE.' SET mail_errors=mail_errors+1, mail_lasterror=NOW() WHERE email_id='.db_input($emailId));
                 if(++$errors>=$MAXERRORS) {
                     //We've reached the MAX consecutive errors...will attempt logins at delayed intervals
-                    $msg="\nosTicket is having trouble fetching emails from the following mail account: \n".
-                        "\nUser: ".$fetcher->getUsername().
-                        "\nHost: ".$fetcher->getHost().
-                        "\nError: ".$fetcher->getLastError().
-                        "\n\n ".$errors.' consecutive errors. Maximum of '.$MAXERRORS. ' allowed'.
-                        "\n\n This could be connection issues related to the mail server. Next delayed login attempt in aprox. $TIMEOUT minutes";
-                    $ost->alertAdmin('Mail Fetch Failure Alert', $msg, true);
+                    $msg="\n"._("osTicket is having trouble fetching emails from the following mail account").": \n".
+                         "\n"._("User").": ".$fetcher->getUsername().
+                         "\n"._("Host").": ".$fetcher->getHost().
+                         "\n"._("Error").": ".$fetcher->getLastError().
+                         "\n\n ".$errors._(' consecutive errors. Maximum of').' '.$MAXERRORS. ' '._('allowed').
+                         "\n\n "._("This could be connection issues related to the mail server. Next delayed login attempt in aprox.")." ".$TIMEOUT." "._("minutes");
+                    $ost->alertAdmin(_('Mail Fetch Failure Alert'), $msg, true);
                 }
             }
         } //end while.

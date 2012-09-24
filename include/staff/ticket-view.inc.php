@@ -610,7 +610,7 @@ if(!$cfg->showNotesInline()) { ?>
     } ?>
 </div>
 <div style="display:none;" id="print-options">
-    <h3>Ticket Print Options</h3>
+    <h3><?= _('Ticket Print Options') ?></h3>
     <a class="close" href="">&times;</a>
     <hr/>
     <form action="tickets.php?id=<?php echo $ticket->getId(); ?>" method="post" id="print-form" name="print-form">
@@ -638,11 +638,11 @@ if(!$cfg->showNotesInline()) { ?>
         <hr style="margin-top:3em"/>
         <p class="full-width">
             <span class="buttons" style="float:left">
-                <input type="reset" value="Reset">
-                <input type="button" value="Cancel" class="close">
+                <input type="reset" value="<?= _('Reset')?>">
+                <input type="button" value="<?= _('Cancel')?>" class="close">
             </span>
             <span class="buttons" style="float:right">
-                <input type="submit" value="Print">
+                <input type="submit" value="<?= _('Print')?>">
             </span>
          </p>
     </form>
