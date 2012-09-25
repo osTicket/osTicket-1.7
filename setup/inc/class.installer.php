@@ -45,19 +45,19 @@ class Installer extends SetupWizard {
 
         $this->errors=$f=array();
         
-        $f['name']          = array('type'=>'string',   'required'=>1, 'error'=>'Name required');
-        $f['email']         = array('type'=>'email',    'required'=>1, 'error'=>'Valid email required');
-        $f['fname']         = array('type'=>'string',   'required'=>1, 'error'=>'First name required');
-        $f['lname']         = array('type'=>'string',   'required'=>1, 'error'=>'Last name required');
-        $f['admin_email']   = array('type'=>'email',    'required'=>1, 'error'=>'Valid email required');
-        $f['username']      = array('type'=>'username', 'required'=>1, 'error'=>'Username required');
-        $f['passwd']        = array('type'=>'password', 'required'=>1, 'error'=>'Password required');
-        $f['passwd2']       = array('type'=>'string',   'required'=>1, 'error'=>'Confirm password');
-        $f['prefix']        = array('type'=>'string',   'required'=>1, 'error'=>'Table prefix required');
-        $f['dbhost']        = array('type'=>'string',   'required'=>1, 'error'=>'Hostname required');
-        $f['dbname']        = array('type'=>'string',   'required'=>1, 'error'=>'Database name required');
-        $f['dbuser']        = array('type'=>'string',   'required'=>1, 'error'=>'Username required');
-        $f['dbpass']        = array('type'=>'string',   'required'=>1, 'error'=>'password required');
+        $f['name']          = array('type'=>'string',   'required'=>1, 'error'=>_('Name required'));
+        $f['email']         = array('type'=>'email',    'required'=>1, 'error'=>_('Valid email required'));
+        $f['fname']         = array('type'=>'string',   'required'=>1, 'error'=>_('First name required'));
+        $f['lname']         = array('type'=>'string',   'required'=>1, 'error'=>_('Last name required'));
+        $f['admin_email']   = array('type'=>'email',    'required'=>1, 'error'=>_('Valid email required'));
+        $f['username']      = array('type'=>'username', 'required'=>1, 'error'=>_('Username required'));
+        $f['passwd']        = array('type'=>'password', 'required'=>1, 'error'=>_('Password required'));
+        $f['passwd2']       = array('type'=>'string',   'required'=>1, 'error'=>_('Confirm password'));
+        $f['prefix']        = array('type'=>'string',   'required'=>1, 'error'=>_('Table prefix required'));
+        $f['dbhost']        = array('type'=>'string',   'required'=>1, 'error'=>_('Hostname required'));
+        $f['dbname']        = array('type'=>'string',   'required'=>1, 'error'=>_('Database name required'));
+        $f['dbuser']        = array('type'=>'string',   'required'=>1, 'error'=>_('Username required'));
+        $f['dbpass']        = array('type'=>'string',   'required'=>1, 'error'=>_('password required'));
         
 
         if(!Validator::process($f,$vars,$this->errors) && !$this->errors['err'])

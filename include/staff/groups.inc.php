@@ -40,7 +40,7 @@ else
 
 ?>
 <div style="width:700;padding-top:5px; float:left;">
- <h2>User Groups</h2>
+ <h2><?=_('User Groups')?></h2>
  </div>
 <div style="float:right;text-align:right;padding-top:5px;padding-right:5px;">
     <b><a href="groups.php?a=add" class="Icon newgroup"><?= _('Add New Group')?></a></b></div>

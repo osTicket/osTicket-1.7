@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: osticket17\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-09-24 09:49-0300\n"
+"POT-Creation-Date: 2012-09-25 10:06-0300\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Fabio Rauber <fabior@interlegis.leg.br>\n"
 "Language-Team: Fabio Rauber <fabior@interlegis.leg.br>\n"
@@ -2606,7 +2606,7 @@ msgstr "Host"
 
 #: include/class.mailfetch.php:551
 msgid "Error"
-msgstr "ErroErro"
+msgstr "Erro"
 
 #: include/class.mailfetch.php:552
 msgid " consecutive errors. Maximum of"
@@ -2976,6 +2976,46 @@ msgstr "Não foi possível atualizar a chave de API. Erro interno"
 msgid "Unable to add API key. Internal error"
 msgstr "Não foi possível adicionar chave API. Erro interno"
 
+#: include/class.http.php:20
+msgid "200 OK"
+msgstr "200 OK"
+
+#: include/class.http.php:21
+msgid "201 Created"
+msgstr "201 Criado"
+
+#: include/class.http.php:22
+msgid "204 NoContent"
+msgstr "204 Sem conteúdo"
+
+#: include/class.http.php:23
+msgid "400 Bad Request"
+msgstr "400 Pedido Inválido"
+
+#: include/class.http.php:24
+msgid "401 Unauthorized"
+msgstr "401 Não Autorizado"
+
+#: include/class.http.php:25
+msgid "403 Forbidden"
+msgstr "403 Proibido"
+
+#: include/class.http.php:26
+msgid "404 Not Found"
+msgstr "404 Não Encontradoi="
+
+#: include/class.http.php:27
+msgid "405 Method Not Allowed"
+msgstr "405 Método não permitido"
+
+#: include/class.http.php:28
+msgid "416 Requested Range Not Satisfiable"
+msgstr "416 Intervalo Solicitado Não Satisfatório"
+
+#: include/class.http.php:29
+msgid "500 Internal Server Error"
+msgstr "500 Erro Interno do Servidor"
+
 #: include/ost-config.php:20
 msgid "Kwaheri rafiki!"
 msgstr "Kwaheri rafiki!"
@@ -3019,6 +3059,148 @@ msgstr " Erro no Departamento"
 #: include/class.dept.php:386
 msgid "Unable to create department. Internal error"
 msgstr "Não foi possível criar departamento. Erro interno"
+
+#: include/class.staff.php:385
+#: include/class.staff.php:627
+msgid "Internal Error"
+msgstr "Erro Interno"
+
+#: include/class.staff.php:388
+#: include/class.staff.php:630
+msgid "First name required"
+msgstr "Primeiro nome requerido"
+
+#: include/class.staff.php:391
+#: include/class.staff.php:632
+msgid "Last name required"
+msgstr "Sobrenome requerido"
+
+#: include/class.staff.php:396
+msgid "Already in-use as system email"
+msgstr "E-mail já está em uso como email do sistema"
+
+#: include/class.staff.php:398
+#: include/class.staff.php:644
+msgid "Email already in-use by another staff member"
+msgstr "E-mail já em uso por outro membro da equipe"
+
+#: include/class.staff.php:401
+#: include/class.staff.php:404
+#: include/class.staff.php:647
+#: include/class.staff.php:650
+msgid "Valid number required"
+msgstr "Número válido requerido"
+
+#: include/class.staff.php:409
+msgid "New password required"
+msgstr "Nova senha requerida"
+
+#: include/class.staff.php:411
+#: include/class.staff.php:657
+msgid "Must be at least 6 characters"
+msgstr "Mínimo de 6 caracteres"
+
+#: include/class.staff.php:413
+#: include/class.staff.php:659
+msgid "Password(s) do not match"
+msgstr "Senha(s) não conferem"
+
+#: include/class.staff.php:416
+msgid "Current password required"
+msgstr "Senha atual requerida"
+
+#: include/class.staff.php:418
+msgid "Invalid current password!"
+msgstr "Senha atual inválida!"
+
+#: include/class.staff.php:420
+msgid "New password MUST be different from the current password!"
+msgstr "Nova senha PRECISA ser diferente da senha atual!"
+
+#: include/class.staff.php:424
+#: include/class.staff.php:670
+msgid "Time zone required"
+msgstr "Fuso Horário Padrão requerido"
+
+#: include/class.staff.php:427
+msgid "You don't have a signature"
+msgstr "Você não tem assinatura"
+
+#: include/class.staff.php:558
+msgid "You've reached maximum failed login attempts allowed."
+msgstr "Você alcançou o número máximo permitido de tentativas de login."
+
+#: include/class.staff.php:596
+msgid "Forgot your login info? Contact Admin."
+msgstr "Esqueceu seu usuário ou senha? Por favor contacte o Admin"
+
+#: include/class.staff.php:598
+msgid "Excessive login attempts by a staff member?"
+msgstr "Tentativas excessivas de login por um membro da equipe?"
+
+#: include/class.staff.php:599
+#: include/class.staff.php:604
+msgid "Username"
+msgstr "Usuário"
+
+#: include/class.staff.php:599
+#: include/class.staff.php:604
+msgid "IP"
+msgstr "IP"
+
+#: include/class.staff.php:599
+#: include/class.staff.php:605
+msgid "TIME"
+msgstr "HORA"
+
+#: include/class.staff.php:600
+#: include/class.staff.php:605
+msgid "Attempts"
+msgstr "Tentativas"
+
+#: include/class.staff.php:600
+msgid "Timeout"
+msgstr "Tempo limite excedido"
+
+#: include/class.staff.php:601
+msgid "Excessive login attempts"
+msgstr "Número excessivo de tentativas de login"
+
+#: include/class.staff.php:606
+msgid "Failed staff login attempt"
+msgstr "Tentativa de login de membro da equipe falhou"
+
+#: include/class.staff.php:635
+msgid "Username required"
+msgstr "Nome de usuário requerido"
+
+#: include/class.staff.php:637
+msgid "Username already in-use"
+msgstr "Nome já está em uso"
+
+#: include/class.staff.php:642
+msgid "Already in-use system email"
+msgstr "E-mail já está configurado como e-mail de sistema"
+
+#: include/class.staff.php:654
+msgid "Temp. password required"
+msgstr "Senha temporária requerida"
+
+#: include/class.staff.php:664
+msgid "Department required"
+msgstr "Departamento requerido"
+
+#: include/class.staff.php:667
+msgid "Group required"
+msgstr "Nome do grupo requerido"
+
+#: include/class.staff.php:706
+msgid "Unable to update the user. Internal error occurred"
+msgstr "Não foi possível atualizar o usuário. Erro interno"
+
+#: include/class.staff.php:712
+msgid "Unable to create user. Internal error"
+msgstr "Não foi possível criar usuário. Erro interno"
 
 #: include/class.filter.php:383
 msgid "Invalid match selection"
@@ -3685,6 +3867,10 @@ msgstr "Adicionar Novo Departamento"
 msgid "Type"
 msgstr "Tipo"
 
+#: include/staff/departments.inc.php:59
+msgid "Users"
+msgstr "Usuários"
+
 #: include/staff/departments.inc.php:60
 msgid "Email Address"
 msgstr "Endereço de E-mail"
@@ -3711,7 +3897,7 @@ msgstr "Privado"
 #: include/staff/teams.inc.php:99
 #: include/staff/emails.inc.php:106
 msgid "Select"
-msgstr "Selecione"
+msgstr "Selecionar"
 
 #: include/staff/departments.inc.php:105
 #: include/staff/categories.inc.php:98
@@ -3755,10 +3941,6 @@ msgstr "Apagar Depto(s)"
 #: include/staff/departments.inc.php:124
 msgid "Are you sure you want to DELETE selected departments?"
 msgstr "Tem certeza que deseja APAGAR os departamentos selecionados?"
-
-#: include/staff/departments.inc.php:59
-msgid "Users"
-msgstr "Usuários"
 
 #: include/staff/settings-alerts.inc.php:1
 msgid "Alerts and Notices"
@@ -4029,6 +4211,10 @@ msgstr "Atualizar Time"
 msgid "Create Team"
 msgstr "Criar Time"
 
+#: include/staff/team.inc.php:28
+msgid "Team"
+msgstr "Time"
+
 #: include/staff/team.inc.php:34
 msgid "Team Information"
 msgstr "Informações de Time"
@@ -4267,6 +4453,10 @@ msgstr "Notas Internas."
 msgid "Term too short!"
 msgstr "Termo muito curto!"
 
+#: include/staff/banlist.inc.php:51
+msgid "Banned Email Addresses"
+msgstr "Endereços de E-mail Banidos (Lista Negra)"
+
 #: include/staff/banlist.inc.php:56
 msgid " Query"
 msgstr " Pesquisa"
@@ -4307,6 +4497,10 @@ msgstr "Adicionar Novo Grupo"
 msgid "Create Group"
 msgstr "Criar Grupo"
 
+#: include/staff/group.inc.php:28
+msgid "User Group"
+msgstr "Grupo de Usuário"
+
 #: include/staff/group.inc.php:34
 msgid "Group Information"
 msgstr "Informações do Grupo"
@@ -4324,6 +4518,8 @@ msgid "Applies to all group members"
 msgstr "Aplica-se a todos os membros do grupo"
 
 #: include/staff/group.inc.php:63
+#: include/staff/group.inc.php:71
+#: include/staff/group.inc.php:79
 #: include/staff/group.inc.php:87
 #: include/staff/group.inc.php:95
 #: include/staff/group.inc.php:103
@@ -4362,11 +4558,6 @@ msgstr "Não"
 #: include/staff/group.inc.php:68
 msgid "Ability to open tickets on behalf of clients."
 msgstr "Permissão para abrir tíquetes no lugar dos clientes."
-
-#: include/staff/group.inc.php:71
-#: include/staff/group.inc.php:79
-msgid "Can "
-msgstr "Pode"
 
 #: include/staff/group.inc.php:71
 msgid "Edit"
@@ -5101,6 +5292,10 @@ msgstr "(Interno)"
 msgid "Select Department Email"
 msgstr "Selecione o E-mail do Depto."
 
+#: include/staff/department.inc.php:85
+msgid "Template"
+msgstr "Modelo"
+
 #: include/staff/department.inc.php:89
 #: include/staff/department.inc.php:109
 msgid "System default"
@@ -5113,6 +5308,10 @@ msgstr "SLA"
 #: include/staff/department.inc.php:127
 msgid "Manager"
 msgstr "Gerente"
+
+#: include/staff/department.inc.php:132
+msgid "Select Department Manager (Optional)"
+msgstr "Selecione o Gerente do Depto. (Opcional)"
 
 #: include/staff/department.inc.php:153
 msgid "Group Membership"
@@ -5129,6 +5328,10 @@ msgstr "(Alertas e avisos incluirão grupos)"
 #: include/staff/department.inc.php:162
 msgid "Auto Response Settings"
 msgstr "Configs. de Respostas Automáticas"
+
+#: include/staff/department.inc.php:162
+msgid "Overwrite global auto-response settings for tickets routed to the Dept."
+msgstr "Sobrescrever configurações globais de auto-resposta para tíquetes roteados para o Depto."
 
 #: include/staff/department.inc.php:172
 msgid " new ticket auto-response for this Dept."
@@ -5174,10 +5377,6 @@ msgstr " Assinatura opcional utilizada em e-mails enviados."
 msgid "Signature is made available as a choice, for public departments, on ticket reply."
 msgstr "A assinatura fica disponível como uma opção, para deptos. públicos, na hora de responder o tíquete."
 
-#: include/staff/department.inc.php:132
-msgid "Select Department Manager (Optional)"
-msgstr "Selecione o Gerente do Depto. (Opcional)"
-
 #: include/staff/profile.inc.php:12
 msgid "My Account Profile"
 msgstr "Meu Perfil"
@@ -5189,10 +5388,6 @@ msgstr "Informações de Conta"
 #: include/staff/profile.inc.php:18
 msgid "Contact information."
 msgstr "Informações de contato."
-
-#: include/staff/profile.inc.php:25
-msgid "Username"
-msgstr "Usuário"
 
 #: include/staff/profile.inc.php:32
 msgid "First Name"
@@ -5394,6 +5589,10 @@ msgstr "Todos os Grupos"
 msgid "All Teams"
 msgstr "Todos os Times"
 
+#: include/staff/staffmembers.inc.php:106
+msgid "Apply"
+msgstr "Aplicar"
+
 #: include/staff/staffmembers.inc.php:109
 #: include/staff/staff.inc.php:17
 msgid "Add New Staff"
@@ -5414,6 +5613,11 @@ msgstr "Grupo"
 #: include/staff/staffmembers.inc.php:132
 msgid "Last Login"
 msgstr "Último Login"
+
+#: include/staff/staffmembers.inc.php:152
+#: include/staff/staff.inc.php:169
+msgid "Locked"
+msgstr "Bloqueado"
 
 #: include/staff/staffmembers.inc.php:182
 msgid "Are you sure you want to ENABLE selected users?"
@@ -5727,6 +5931,10 @@ msgstr "Tem certeza que deseja fechar os tíquetes selecionados?"
 msgid "Are you sure you want to DELETE selected tickets?"
 msgstr "Tem certeza que deseja APAGAR os tíquetes selecionados?"
 
+#: include/staff/tickets.inc.php:475
+msgid "Advanced Ticket Search"
+msgstr "Pesquisa Avançada de Tíquetes"
+
 #: include/staff/tickets.inc.php:480
 msgid "Keyword"
 msgstr "Palavra-chave"
@@ -5854,10 +6062,6 @@ msgstr "Administrador"
 msgid "Account Status"
 msgstr "Estado da Conta"
 
-#: include/staff/staff.inc.php:169
-msgid "Locked"
-msgstr "Bloqueado"
-
 #: include/staff/staff.inc.php:175
 msgid "Assigned Group"
 msgstr "Grupo Designado"
@@ -5886,6 +6090,10 @@ msgstr "Limitar acesso a tíquetes APENAS a tíquetes designados"
 msgid "Directory Listing"
 msgstr "Listagem do Diretório"
 
+#: include/staff/staff.inc.php:256
+msgid "Show the user on staff's directory"
+msgstr "Mostrar o usuário no diretório da equipe"
+
 #: include/staff/staff.inc.php:261
 msgid "Vacation Mode"
 msgstr "Modo Férias"
@@ -5910,6 +6118,10 @@ msgstr "Membros da equipe terão acesso a tíquetes designados a um time ao qual
 #: include/staff/groups.inc.php:107
 msgid "No groups found!"
 msgstr "Nenhum grupo encontrado!"
+
+#: include/staff/groups.inc.php:43
+msgid "User Groups"
+msgstr "Grupos de Usuário"
 
 #: include/staff/groups.inc.php:56
 msgid "Group Name"
@@ -6655,6 +6867,32 @@ msgstr "Inválido"
 #: setup/install.php:72
 msgid "Check one or more"
 msgstr "Selecione um ou mais"
+
+#: setup/inc/class.installer.php:55
+msgid "Confirm password"
+msgstr "Confirme a senha"
+
+#: setup/inc/class.installer.php:56
+msgid "Table prefix required"
+msgstr "Prefixo da tabela requerido"
+
+#: setup/inc/class.installer.php:57
+msgid "Hostname required"
+msgstr "Nome do host requerido"
+
+#: setup/inc/class.installer.php:58
+msgid "Database name required"
+msgstr "Nome da Base de Dados requerido"
+
+#: setup/inc/class.installer.php:60
+msgid "password required"
+msgstr "senha requerida"
+
+msgid "Username: "
+msgstr "Usuário:"
+
+msgid "Can "
+msgstr "Pode"
 
 #, fuzzy
 msgid "Ticket denied -"

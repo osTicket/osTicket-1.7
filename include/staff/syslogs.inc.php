@@ -94,7 +94,7 @@ else
             &nbsp;&nbsp;
             &nbsp;<?= _('Type')?>:
             <select name='type'>
-                <option value="" selected>All</option>
+                <option value="" selected><?= _('All')?></option>
                 <option value="Error" <?php echo ($type=='Error')?'selected="selected"':''; ?>><?= _('Errors')?></option>
                 <option value="Warning" <?php echo ($type=='Warning')?'selected="selected"':''; ?>><?= _('Warnings')?></option>
                 <option value="Debug" <?php echo ($type=='Debug')?'selected="selected"':''; ?>><?= _('Debug')?></option>

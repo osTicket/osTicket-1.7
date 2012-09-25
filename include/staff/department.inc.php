@@ -28,7 +28,7 @@ $info=Format::htmlchars(($errors && $_POST)?$_POST:$info);
  <input type="hidden" name="do" value="<?php echo $action; ?>">
  <input type="hidden" name="a" value="<?php echo Format::htmlchars($_REQUEST['a']); ?>">
  <input type="hidden" name="id" value="<?php echo $info['id']; ?>">
- <h2>Department</h2>
+ <h2><?=_('Department')?></h2>
  <table class="form_table" width="940" border="0" cellspacing="0" cellpadding="2">
     <thead>
         <tr>
@@ -41,7 +41,7 @@ $info=Format::htmlchars(($errors && $_POST)?$_POST:$info);
     <tbody>
         <tr>
             <td width="180" class="required">
-                Name:
+                <?=_('Name')?>:
             </td>
             <td>
                 <input type="text" size="30" name="name" value="<?php echo $info['name']; ?>">
@@ -50,7 +50,7 @@ $info=Format::htmlchars(($errors && $_POST)?$_POST:$info);
         </tr>
         <tr>
             <td width="180" class="required">
-                Type:
+                <?=_('Type')?>:
             </td>
             <td>
                 <input type="radio" name="ispublic" value="1" <?php echo $info['ispublic']?'checked="checked"':''; ?>><strong><?= _('Public') ?></strong>
@@ -60,7 +60,7 @@ $info=Format::htmlchars(($errors && $_POST)?$_POST:$info);
         </tr>
         <tr>
             <td width="180" class="required">
-                Email:
+                <?=_('Email')?>:
             </td>
             <td>
                 <select name="email_id">
@@ -82,7 +82,7 @@ $info=Format::htmlchars(($errors && $_POST)?$_POST:$info);
         </tr>
         <tr>
             <td width="180" class="required">
-                Template:
+                <?=_('Template')?>:
             </td>
             <td>
                 <select name="tpl_id">
@@ -129,7 +129,7 @@ $info=Format::htmlchars(($errors && $_POST)?$_POST:$info);
             <td>
                 <select name="manager_id">
                     <option value="0">&mdash; None &mdash;</option>
-                    <option value="0" disabled="disabled"><?= _('Select Department Manager (Optional)'?></option>
+                    <option value="0" disabled="disabled"><?= _('Select Department Manager (Optional)')?></option>
                     <?php
                     $sql='SELECT staff_id,CONCAT_WS(", ",lastname, firstname) as name '
                         .' FROM '.STAFF_TABLE.' staff '
@@ -159,7 +159,7 @@ $info=Format::htmlchars(($errors && $_POST)?$_POST:$info);
         </tr>
         <tr>
             <th colspan="2">
-                <em><strong><?= _('Auto Response Settings')?></strong>:<?php_(' Overwrite global auto-response settings for tickets routed to the Dept.')?></em>
+                <em><strong><?= _('Auto Response Settings')?></strong>: <?= _('Overwrite global auto-response settings for tickets routed to the Dept.')?></em>
             </th>
         </tr>
         <tr>
@@ -178,7 +178,7 @@ $info=Format::htmlchars(($errors && $_POST)?$_POST:$info);
             </td>
             <td>
                 <input type="checkbox" name="message_auto_response" value="0" <?php echo !$info['message_auto_response']?'checked="checked"':''; ?> >
-                    <strong><?= _('Disable')?></strong><? _(' new message auto-response for this Dept.')?>
+                    <strong><?= _('Disable')?></strong><?= _(' new message auto-response for this Dept.')?>
             </td>
         </tr>
         <tr>

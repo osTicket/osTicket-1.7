@@ -245,7 +245,7 @@ $info=Format::htmlchars(($errors && $_POST)?$_POST:$info);
                 <?= _('Limited Access')?>:
             </td>
             <td>
-                <input type="checkbox" name="assigned_only" value="1" <?php echo $info['assigned_only']?'checked="checked"':''; ?>><?= _('Limit ticket access to ONLY assigned tickets')?>.
+                <input type="checkbox" name="assigned_only" value="1" <?php echo $info['assigned_only']?'checked="checked"':''; ?>> <?= _('Limit ticket access to ONLY assigned tickets')?>.
             </td>
         </tr>
         <tr>
@@ -253,7 +253,7 @@ $info=Format::htmlchars(($errors && $_POST)?$_POST:$info);
                 <?= _('Directory Listing')?>:
             </td>
             <td>
-                <input type="checkbox" name="isvisible" value="1" <?php echo $info['isvisible']?'checked="checked"':''; ?>><?= ('Show the user on staff\'s directory')?>
+                <input type="checkbox" name="isvisible" value="1" <?php echo $info['isvisible']?'checked="checked"':''; ?>> <?= _('Show the user on staff\'s directory')?>
             </td>
         </tr>
         <tr>

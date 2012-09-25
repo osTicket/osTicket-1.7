@@ -48,7 +48,7 @@ $qstr.='&order='.($order=='DESC'?'ASC':'DESC');
 $query="$select $from $where ORDER BY $order_by LIMIT ".$pageNav->getStart().",".$pageNav->getLimit();
 //echo $query;
 ?>
-<h2>Banned Email Addresses</h2>
+<h2><?=_('Banned Email Addresses')?></h2>
 <div style="width:600; float:left;padding-top:5px;">
     <form action="banlist.php" method="GET" name="filter">
      <input type="hidden" name="a" value="filter" >

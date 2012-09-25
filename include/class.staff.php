@@ -382,49 +382,49 @@ class Staff {
         $vars['signature']=Format::striptags($vars['signature']);
 
         if($this->getId()!=$vars['id'])
-            $errors['err']='Internal Error';
+            $errors['err']=_('Internal Error');
 
         if(!$vars['firstname'])
-            $errors['firstname']='First name required';
+            $errors['firstname']=_('First name required');
         
         if(!$vars['lastname'])
-            $errors['lastname']='Last name required';
+            $errors['lastname']=_('Last name required');
 
         if(!$vars['email'] || !Validator::is_email($vars['email']))
-            $errors['email']='Valid email required';
+            $errors['email']=_('Valid email required');
         elseif(Email::getIdByEmail($vars['email']))
-            $errors['email']='Already in-use as system email';
+            $errors['email']=_('Already in-use as system email');
         elseif(($uid=Staff::getIdByEmail($vars['email'])) && $uid!=$this->getId())
-            $errors['email']='Email already in-use by another staff member';
+            $errors['email']=_('Email already in-use by another staff member');
 
         if($vars['phone'] && !Validator::is_phone($vars['phone']))
-            $errors['phone']='Valid number required';
+            $errors['phone']=_('Valid number required');
 
         if($vars['mobile'] && !Validator::is_phone($vars['mobile']))
-            $errors['mobile']='Valid number required';
+            $errors['mobile']=_('Valid number required');
 
         if($vars['passwd1'] || $vars['passwd2'] || $vars['cpasswd']) {
 
             if(!$vars['passwd1'])
-                $errors['passwd1']='New password required';
+                $errors['passwd1']=_('New password required');
             elseif($vars['passwd1'] && strlen($vars['passwd1'])<6)
-                $errors['passwd1']='Must be at least 6 characters';
+                $errors['passwd1']=_('Must be at least 6 characters');
             elseif($vars['passwd1'] && strcmp($vars['passwd1'], $vars['passwd2']))
-                $errors['passwd2']='Password(s) do not match';
+                $errors['passwd2']=_('Password(s) do not match');
             
             if(!$vars['cpasswd'])
-                $errors['cpasswd']='Current password required';
+                $errors['cpasswd']=_('Current password required');
             elseif(!$this->cmp_passwd($vars['cpasswd']))
-                $errors['cpasswd']='Invalid current password!';
+                $errors['cpasswd']=_('Invalid current password!');
             elseif(!strcasecmp($vars['passwd1'], $vars['cpasswd']))
-                $errors['passwd1']='New password MUST be different from the current password!';
+                $errors['passwd1']=_('New password MUST be different from the current password!');
         }
 
         if(!$vars['timezone_id'])
-            $errors['timezone_id']='Time zone required';
+            $errors['timezone_id']=_('Time zone required');
 
         if($vars['default_signature_type']=='mine' && !$vars['signature'])
-            $errors['default_signature_type'] = "You don't have a signature";
+            $errors['default_signature_type'] = _("You don't have a signature");
 
         if($errors) return false;
 
@@ -555,7 +555,7 @@ class Staff {
 
         if($_SESSION['_staff']['laststrike']) {
             if((time()-$_SESSION['_staff']['laststrike'])<$cfg->getStaffLoginTimeout()) {
-                $errors['err']='You\'ve reached maximum failed login attempts allowed.';
+                $errors['err']=_('You\'ve reached maximum failed login attempts allowed.');
             } else { //Timeout is over.
                 //Reset the counter for next round of attempts after the timeout.
                 $_SESSION['_staff']['laststrike']=null;
@@ -593,17 +593,17 @@ class Staff {
         //If we get to this point we know the login failed.
         $_SESSION['_staff']['strikes']+=1;
         if(!$errors && $_SESSION['_staff']['strikes']>$cfg->getStaffMaxLogins()) {
-            $errors['err']='Forgot your login info? Contact Admin.';
+            $errors['err']=_('Forgot your login info? Contact Admin.');
             $_SESSION['_staff']['laststrike']=time();
-            $alert='Excessive login attempts by a staff member?'."\n".
-                   'Username: '.$_POST['username']."\n".'IP: '.$_SERVER['REMOTE_ADDR']."\n".'TIME: '.date('M j, Y, g:i a T')."\n\n".
-                   'Attempts #'.$_SESSION['_staff']['strikes']."\n".'Timeout: '.($cfg->getStaffLoginTimeout()/60)." minutes \n\n";
-            $ost->logWarning('Excessive login attempts ('.$_POST['username'].')', $alert, ($cfg->alertONLoginError()));
+            $alert=_('Excessive login attempts by a staff member?')."\n".
+                   _('Username').': '.$_POST['username']."\n"._('IP').': '.$_SERVER['REMOTE_ADDR']."\n"._('TIME').': '.date('M j, Y, g:i a T')."\n\n".
+                   _('Attempts').' #'.$_SESSION['_staff']['strikes']."\n"._('Timeout').': '.($cfg->getStaffLoginTimeout()/60)." "._("minutes")." \n\n";
+            $ost->logWarning(_('Excessive login attempts').' ('.$_POST['username'].')', $alert, ($cfg->alertONLoginError()));
     
         } elseif($_SESSION['_staff']['strikes']%2==0) { //Log every other failed login attempt as a warning.
-            $alert='Username: '.$_POST['username']."\n".'IP: '.$_SERVER['REMOTE_ADDR'].
-                   "\n".'TIME: '.date('M j, Y, g:i a T')."\n\n".'Attempts #'.$_SESSION['_staff']['strikes'];
-            $ost->logWarning('Failed staff login attempt ('.$_POST['username'].')', $alert, false);
+            $alert=_('Username').': '.$_POST['username']."\n"._('IP').': '.$_SERVER['REMOTE_ADDR'].
+                   "\n"._('TIME').': '.date('M j, Y, g:i a T')."\n\n"._('Attempts').' #'.$_SESSION['_staff']['strikes'];
+            $ost->logWarning(_('Failed staff login attempt').' ('.$_POST['username'].')', $alert, false);
         }
 
         return false;
@@ -624,50 +624,50 @@ class Staff {
         $vars['signature']=Format::striptags($vars['signature']);
 
         if($id && $id!=$vars['id'])
-            $errors['err']='Internal Error';
+            $errors['err']=_('Internal Error');
             
         if(!$vars['firstname'])
-            $errors['firstname']='First name required';
+            $errors['firstname']=_('First name required');
         if(!$vars['lastname'])
-            $errors['lastname']='Last name required';
+            $errors['lastname']=_('Last name required');
             
         if(!$vars['username'] || strlen($vars['username'])<2)
-            $errors['username']='Username required';
+            $errors['username']=_('Username required');
         elseif(($uid=Staff::getIdByUsername($vars['username'])) && $uid!=$id)
-            $errors['username']='Username already in-use';
+            $errors['username']=_('Username already in-use');
         
         if(!$vars['email'] || !Validator::is_email($vars['email']))
-            $errors['email']='Valid email required';
+            $errors['email']=_('Valid email required');
         elseif(Email::getIdByEmail($vars['email']))
-            $errors['email']='Already in-use system email';
+            $errors['email']=_('Already in-use system email');
         elseif(($uid=Staff::getIdByEmail($vars['email'])) && $uid!=$id)
-            $errors['email']='Email already in-use by another staff member';
+            $errors['email']=_('Email already in-use by another staff member');
 
         if($vars['phone'] && !Validator::is_phone($vars['phone']))
-            $errors['phone']='Valid number required';
+            $errors['phone']=_('Valid number required');
         
         if($vars['mobile'] && !Validator::is_phone($vars['mobile']))
-            $errors['mobile']='Valid number required';
+            $errors['mobile']=_('Valid number required');
 
         if($vars['passwd1'] || $vars['passwd2'] || !$id) {
             if(!$vars['passwd1'] && !$id) {
-                $errors['passwd1']='Temp. password required';
+                $errors['passwd1']=_('Temp. password required');
                 $errors['temppasswd']='Required';
             } elseif($vars['passwd1'] && strlen($vars['passwd1'])<6) {
-                $errors['passwd1']='Must be at least 6 characters';
+                $errors['passwd1']=_('Must be at least 6 characters');
             } elseif($vars['passwd1'] && strcmp($vars['passwd1'], $vars['passwd2'])) {
-                $errors['passwd2']='Password(s) do not match';
+                $errors['passwd2']=_('Password(s) do not match');
             }
         }
         
         if(!$vars['dept_id'])
-            $errors['dept_id']='Department required';
+            $errors['dept_id']=_('Department required');
             
         if(!$vars['group_id'])
-            $errors['group_id']='Group required';
+            $errors['group_id']=_('Group required');
 
         if(!$vars['timezone_id'])
-            $errors['timezone_id']='Time zone required';
+            $errors['timezone_id']=_('Time zone required');
 
         if($errors) return false;
 
@@ -703,13 +703,13 @@ class Staff {
             if(db_query($sql) && db_affected_rows())
                 return true;
                 
-            $errors['err']='Unable to update the user. Internal error occurred';
+            $errors['err']=_('Unable to update the user. Internal error occurred');
         } else {
             $sql='INSERT INTO '.STAFF_TABLE.' '.$sql.', created=NOW()';
             if(db_query($sql) && ($uid=db_insert_id()))
                 return $uid;
                 
-            $errors['err']='Unable to create user. Internal error';
+            $errors['err']=_('Unable to create user. Internal error');
         }
 
         return false;

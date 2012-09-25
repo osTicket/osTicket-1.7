@@ -17,16 +17,16 @@ class Http {
     
     function header_code_verbose($code) {
         switch($code):
-        case 200: return '200 OK';
-        case 201: return '201 Created';
-        case 204: return '204 NoContent';
-        case 400: return '400 Bad Request';
-        case 401: return '401 Unauthorized';
-        case 403: return '403 Forbidden';
-        case 404: return '404 Not Found';
-        case 405: return '405 Method Not Allowed';
-        case 416: return '416 Requested Range Not Satisfiable';
-        default:  return '500 Internal Server Error';
+        case 200: return _('200 OK');
+        case 201: return _('201 Created');
+        case 204: return _('204 NoContent');
+        case 400: return _('400 Bad Request');
+        case 401: return _('401 Unauthorized');
+        case 403: return _('403 Forbidden');
+        case 404: return _('404 Not Found');
+        case 405: return _('405 Method Not Allowed');
+        case 416: return _('416 Requested Range Not Satisfiable');
+        default:  return _('500 Internal Server Error');
         endswitch;
     }
     

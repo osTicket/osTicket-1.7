@@ -56,7 +56,7 @@ else
             <th width="7px">&nbsp;</th>        
             <th width="180"><a <?php echo $name_sort; ?> href="departments.php?<?php echo $qstr; ?>&sort=name"><?= _('Name')?></a></th>
             <th width="80"><a  <?php echo $type_sort; ?> href="departments.php?<?php echo $qstr; ?>&sort=type"><?= _('Type')?></a></th>
-            <th width="70"><a  <?php echo $users_sort; ?>href="departments.php?<?php echo $qstr; ?>&sort=users"><?= _('Users'?></a></th>
+            <th width="70"><a  <?php echo $users_sort; ?>href="departments.php?<?php echo $qstr; ?>&sort=users"><?= _('Users')?></a></th>
             <th width="300"><a  <?php echo $email_sort; ?> href="departments.php?<?php echo $qstr; ?>&sort=email"><?= _('Email Address')?></a></th>
             <th width="200"><a  <?php echo $manager_sort; ?> href="departments.php?<?php echo $qstr; ?>&sort=manager"><?= _('Dept. Manager')?></a></th>
         </tr>

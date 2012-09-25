@@ -25,7 +25,7 @@ $info=Format::htmlchars(($errors && $_POST)?$_POST:$info);
  <input type="hidden" name="do" value="<?php echo $action; ?>">
  <input type="hidden" name="a" value="<?php echo Format::htmlchars($_REQUEST['a']); ?>">
  <input type="hidden" name="id" value="<?php echo $info['id']; ?>">
- <h2>User Group</h2>
+ <h2><?=_('User Group')?></h2>
  <table class="form_table" width="940" border="0" cellspacing="0" cellpadding="2">
     <thead>
         <tr>
@@ -68,7 +68,7 @@ $info=Format::htmlchars(($errors && $_POST)?$_POST:$info);
                 &nbsp;&nbsp;<i><?= _('Ability to open tickets on behalf of clients.')?></i>
             </td>
         </tr>
-        <tr><td><?= _('Can ')?><b><?= _('Edit')?></b> <?= _('Tickets')?></td>
+        <tr><td><?= _('Can')?> <b><?= _('Edit')?></b> <?= _('Tickets')?></td>
             <td>
                 <input type="radio" name="can_edit_tickets"  value="1"   <?php echo $info['can_edit_tickets']?'checked="checked"':''; ?> /><?= _('Yes')?>
                 &nbsp;&nbsp;
@@ -76,7 +76,7 @@ $info=Format::htmlchars(($errors && $_POST)?$_POST:$info);
                 &nbsp;&nbsp;<i><?= _('Ability to edit tickets.')?></i>
             </td>
         </tr>
-        <tr><td><?= _('Can ')?><b><?= _('Close')?></b> <?= _('Tickets')?></td>
+        <tr><td><?= _('Can')?> <b><?= _('Close')?></b> <?= _('Tickets')?></td>
             <td>
                 <input type="radio" name="can_close_tickets"  value="1" <?php echo $info['can_close_tickets']?'checked="checked"':''; ?> /><?= _('Yes')?>
                 &nbsp;&nbsp;

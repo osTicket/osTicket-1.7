@@ -103,7 +103,7 @@ $query="$select $from $where GROUP BY staff.staff_id ORDER BY $order_by LIMIT ".
              ?>
         </select>
         &nbsp;&nbsp;
-        <input type="submit" name="submit" value="Apply"/>
+        <input type="submit" name="submit" value="<?= _('Apply')?>"/>
     </form>
  </div>
 <div style="float:right;text-align:right;padding-right:5px;"><b><a href="staff.php?a=add" class="Icon newstaff"><?= _('Add New Staff')?></a></b></div>
@@ -149,7 +149,7 @@ else
                         onClick="highLight(this.value,this.checked);">
                 <td><a href="staff.php?id=<?php echo $row['staff_id']; ?>"><?php echo Format::htmlchars($row['name']); ?></a>&nbsp;</td>
                 <td><?php echo $row['username']; ?></td>
-                <td><?php echo $row['isactive']?'Active':'<b>Locked</b>'; ?>&nbsp;<?php echo $row['onvacation']?'<small>(<i>vacation</i>)</small>':''; ?></td>
+                <td><?php echo $row['isactive']?_('Active'):'<b>'._('Locked').'</b>'; ?>&nbsp;<?php echo $row['onvacation']?'<small>(<i>vacation</i>)</small>':''; ?></td>
                 <td><a href="groups.php?id=<?php echo $row['group_id']; ?>"><?php echo Format::htmlchars($row['group_name']); ?></a></td>
                 <td><a href="departments.php?id=<?php echo $row['dept_id']; ?>"><?php echo Format::htmlchars($row['dept']); ?></a></td>
                 <td><?php echo Format::db_date($row['created']); ?></td>

@@ -472,7 +472,7 @@ $negorder=$order=='DESC'?'ASC':'DESC'; //Negate the sorting..
 </div>
 <div id="search_overlay"></div>
 <div style="display:none;" id="advanced-search">
-    <h3>Advanced Ticket Search</h3>
+    <h3><?= _('Advanced Ticket Search')?></h3>
     <a class="close" href="">&times;</a>
     <form action="tickets.php" method="post" id="search" name="search">
         <input type="hidden" name="a" value="search">
@@ -544,9 +544,9 @@ $negorder=$order=='DESC'?'ASC':'DESC'; //Negate the sorting..
         </fieldset>
         <p>
             <span class="buttons">
-                <input type="submit" value="Search">
-                <input type="reset" value="Reset">
-                <input type="button" value="Cancel" class="close">
+                <input type="submit" value="<?=_('Search')?>">
+                <input type="reset" value="<?=_('Reset')?>">
+                <input type="button" value="<?=_('Cancel')?>" class="close">
             </span>
             <span class="spinner">
                 <img src="./images/ajax-loader.gif" width="16" height="16">
