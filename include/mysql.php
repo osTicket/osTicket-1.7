@@ -32,7 +32,6 @@
         //set desired encoding just in case mysql charset is not UTF-8 - Thanks to FreshMedia
         @mysql_query('SET NAMES "utf8"');
         @mysql_query('SET COLLATION_CONNECTION=utf8_general_ci');
-        @mysql_query('SET CHARACTER SET "utf8"');
 
         @db_set_variable('sql_mode', '');
 
@@ -181,8 +180,10 @@
         return ($quote)?"'$val'":$val;
     }
 
-    function db_input($var, $quote=true) {
-
+    function db_input($var, $quote=true, $encode=false) {
+       
+        if(!$encode)
+            $var = (mb_detect_encoding($var, 'UTF-8', TRUE)) ? $var : utf8_encode($var) ; 
         if(is_array($var))
             return array_map('db_input', $var, array_fill(0, count($var), $quote));
         elseif($var && preg_match("/^\d+(\.\d+)?$/", $var))
