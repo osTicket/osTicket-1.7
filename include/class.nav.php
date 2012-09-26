@@ -194,16 +194,16 @@ class AdminNav extends StaffNav{
                     break;
                 case 'settings':
                     $subnav[]=array('desc'=>_('System&nbsp;Preferences'),'href'=>'settings.php?t=system','iconclass'=>'preferences');
-                    $subnav[]=array('desc'=>_('Tickets'),'href'=>'settings.php?t=tickets','iconclass'=>'preferences');
-                    $subnav[]=array('desc'=>_('Emails'),'href'=>'settings.php?t=emails','iconclass'=>'preferences');
-                    $subnav[]=array('desc'=>_('Knowledgebase'),'href'=>'settings.php?t=kb','iconclass'=>'preferences');
-                    $subnav[]=array('desc'=>_('Autoresponder'),'href'=>'settings.php?t=autoresp','iconclass'=>'preferences');
-                    $subnav[]=array('desc'=>_('Alerts&nbsp;&amp;&nbsp;Notices'),'href'=>'settings.php?t=alerts','iconclass'=>'preferences');
+                    $subnav[]=array('desc'=>_('Tickets'),'href'=>'settings.php?t=tickets','iconclass'=>'ticket-settings');
+                    $subnav[]=array('desc'=>_('Emails'),'href'=>'settings.php?t=emails','iconclass'=>'email-settings');
+                    $subnav[]=array('desc'=>_('Knowledgebase'),'href'=>'settings.php?t=kb','iconclass'=>'kb-settings');
+                    $subnav[]=array('desc'=>_('Autoresponder'),'href'=>'settings.php?t=autoresp','iconclass'=>'email-autoresponders');
+                    $subnav[]=array('desc'=>_('Alerts&nbsp;&amp;&nbsp;Notices'),'href'=>'settings.php?t=alerts','iconclass'=>'alert-settings');
                     break;
                 case 'manage':
                     $subnav[]=array('desc'=>_('Help&nbsp;Topics'),'href'=>'helptopics.php','iconclass'=>'helpTopics');
                     $subnav[]=array('desc'=>_('Ticket&nbsp;Filters'),'href'=>'filters.php',
-                                        'title'=>_('Ticket&nbsp;Filters'),'iconclass'=>'emailFilters');
+                                        'title'=>_('Ticket&nbsp;Filters'),'iconclass'=>'ticketFilters');
                     $subnav[]=array('desc'=>_('SLA&nbsp;Plans'),'href'=>'slas.php','iconclass'=>'sla');
                     $subnav[]=array('desc'=>_('API&nbsp;Keys'),'href'=>'apikeys.php','iconclass'=>'api');
                     break;
