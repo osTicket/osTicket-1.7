@@ -170,7 +170,7 @@ class AttachmentFile {
 
         foreach (str_split($file['data'], 1024*100) as $chunk) {
             $sql='UPDATE '.FILE_TABLE
-                .' SET filedata = CONCAT(filedata,'.db_input($chunk).')'
+                .' SET filedata = CONCAT(filedata,"'.db_input($chunk, false, true).'")'
                 .' WHERE id='.db_input($id);
             if(!db_query($sql)) {
                 db_query('DELETE FROM '.FILE_TABLE.' WHERE id='.db_input($id).' LIMIT 1');
