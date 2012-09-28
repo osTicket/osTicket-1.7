@@ -61,34 +61,34 @@ class Installer extends SetupWizard {
         
 
         if(!Validator::process($f,$vars,$this->errors) && !$this->errors['err'])
-            $this->errors['err']='Missing or invalid data - correct the errors and try again.';
+            $this->errors['err']=_('Missing or invalid data - correct the errors and try again.');
 
 
         //Staff's email can't be same as system emails.
         if($vars['admin_email'] && $vars['email'] && !strcasecmp($vars['admin_email'],$vars['email']))
-            $this->errors['admin_email']='Conflicts with system email above';
+            $this->errors['admin_email']=_('Conflicts with system email above');
         //Admin's pass confirmation. 
         if(!$this->errors && strcasecmp($vars['passwd'],$vars['passwd2']))
-            $this->errors['passwd2']='passwords to not match!';
+            $this->errors['passwd2']=_('passwords to not match!');
         //Check table prefix underscore required at the end!
         if($vars['prefix'] && substr($vars['prefix'], -1)!='_')
-            $this->errors['prefix']='Bad prefix. Must have underscore (_) at the end. e.g \'ost_\'';
+            $this->errors['prefix']=_('Bad prefix. Must have underscore (_) at the end. e.g \'ost_\'');
 
         //Make sure admin username is not very predictable. XXX: feels dirty but necessary 
         if(!$this->errors['username'] && in_array(strtolower($vars['username']),array('admin','admins','username','osticket')))
-            $this->errors['username']='Bad username';
+            $this->errors['username']=_('Bad username');
 
         //MYSQL: Connect to the DB and check the version & database (create database if it doesn't exist!)
         if(!$this->errors) {
             if(!db_connect($vars['dbhost'],$vars['dbuser'],$vars['dbpass']))
-                $this->errors['db']='Unable to connect to MySQL server. Possibly invalid login info.';
+                $this->errors['db']=_('Unable to connect to MySQL server. Possibly invalid login info.');
             elseif(db_version()< $this->getMySQLVersion())
-                $this->errors['db']=sprintf('osTicket requires MySQL %s or better!',$this->getMySQLVersion());
+                $this->errors['db']=sprintf(_('osTicket requires MySQL %s or better!'),$this->getMySQLVersion());
             elseif(!db_select_database($vars['dbname']) && !db_create_database($vars['dbname'])) {
-                $this->errors['dbname']='Database doesn\'t exist';
-                $this->errors['db']='Unable to create the database.';
+                $this->errors['dbname']=_('Database doesn\'t exist');
+                $this->errors['db']=_('Unable to create the database.');
             } elseif(!db_select_database($vars['dbname'])) {
-                $this->errors['dbname']='Unable to select the database';
+                $this->errors['dbname']=_('Unable to select the database');
             }
         }
 
@@ -104,15 +104,15 @@ class Installer extends SetupWizard {
 
         //Last minute checks.
         if(!file_exists($schemaFile))
-            $this->errors['err']='Internal Error - please make sure your download is the latest (#1)';
+            $this->errors['err']=_('Internal Error - please make sure your download is the latest (#1)');
         elseif(!($signature=trim(file_get_contents("$schemaFile.md5"))) || strcasecmp($signature, md5_file($schemaFile)))
-            $this->errors['err']='Unknown or invalid schema signature ('.$signature.' .. '.md5_file($schemaFile).')';
+            $this->errors['err']=_('Unknown or invalid schema signature').' ('.$signature.' .. '.md5_file($schemaFile).')';
         elseif(!file_exists($this->getConfigFile()) || !($configFile=file_get_contents($this->getConfigFile())))
-            $this->errors['err']='Unable to read config file. Permission denied! (#2)';
+            $this->errors['err']=_('Unable to read config file. Permission denied! (#2)');
         elseif(!($fp = @fopen($this->getConfigFile(),'r+')))
-            $this->errors['err']='Unable to open config file for writing. Permission denied! (#3)';
+            $this->errors['err']=_('Unable to open config file for writing. Permission denied! (#3)');
         elseif(!$this->load_sql_file($schemaFile,$vars['prefix'], true, $debug))
-            $this->errors['err']='Error parsing SQL schema! Get help from developers (#4)';
+            $this->errors['err']=_('Error parsing SQL schema! Get help from developers (#4)');
               
         if(!$this->errors) {
             //Create admin user.
@@ -124,7 +124,7 @@ class Installer extends SetupWizard {
                 .', username='.db_input($vars['username'])
                 .', passwd='.db_input(Passwd::hash($vars['passwd']));
             if(!mysql_query($sql) || !($uid=mysql_insert_id()))
-                $this->errors['err']='Unable to create admin user (#6)';
+                $this->errors['err']=_('Unable to create admin user (#6)');
         }
 
         if(!$this->errors) {
@@ -154,7 +154,7 @@ class Installer extends SetupWizard {
         $configFile= str_replace('%CONFIG-PREFIX',$vars['prefix'],$configFile);
         $configFile= str_replace('%CONFIG-SIRI',Misc::randcode(32),$configFile);
         if(!$fp || !ftruncate($fp,0) || !fwrite($fp,$configFile)) {
-            $this->errors['err']='Unable to write to config file. Permission denied! (#5)';
+            $this->errors['err']=_('Unable to write to config file. Permission denied! (#5)');
             return false;
         }
         @fclose($fp);
@@ -191,7 +191,7 @@ class Installer extends SetupWizard {
         //TODO: create another personalized ticket and assign to admin??
                     
         //Log a message.
-        $msg="Congratulations osTicket basic installation completed!\n\nThank you for choosing osTicket!";
+        $msg=_("Congratulations osTicket basic installation completed!\n\nThank you for choosing osTicket!");
         $sql='INSERT INTO '.PREFIX.'syslog SET created=NOW(), updated=NOW(), log_type="Debug" '
             .', title="osTicket installed!"'
             .', log='.db_input($msg)

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: osticket17\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-09-25 10:06-0300\n"
+"POT-Creation-Date: 2012-09-28 09:01-0300\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Fabio Rauber <fabior@interlegis.leg.br>\n"
 "Language-Team: Fabio Rauber <fabior@interlegis.leg.br>\n"
@@ -3060,145 +3060,150 @@ msgstr " Erro no Departamento"
 msgid "Unable to create department. Internal error"
 msgstr "Não foi possível criar departamento. Erro interno"
 
-#: include/class.staff.php:385
-#: include/class.staff.php:627
+#: include/class.staff.php:105
+#: include/class.staff.php:117
+msgid "Couldn't connect to LDAP!"
+msgstr "Não foi possível contactar ao LDAP!"
+
+#: include/class.staff.php:404
+#: include/class.staff.php:646
 msgid "Internal Error"
 msgstr "Erro Interno"
 
-#: include/class.staff.php:388
-#: include/class.staff.php:630
+#: include/class.staff.php:407
+#: include/class.staff.php:649
 msgid "First name required"
 msgstr "Primeiro nome requerido"
 
-#: include/class.staff.php:391
-#: include/class.staff.php:632
+#: include/class.staff.php:410
+#: include/class.staff.php:651
 msgid "Last name required"
 msgstr "Sobrenome requerido"
 
-#: include/class.staff.php:396
+#: include/class.staff.php:415
 msgid "Already in-use as system email"
 msgstr "E-mail já está em uso como email do sistema"
 
-#: include/class.staff.php:398
-#: include/class.staff.php:644
+#: include/class.staff.php:417
+#: include/class.staff.php:663
 msgid "Email already in-use by another staff member"
 msgstr "E-mail já em uso por outro membro da equipe"
 
-#: include/class.staff.php:401
-#: include/class.staff.php:404
-#: include/class.staff.php:647
-#: include/class.staff.php:650
+#: include/class.staff.php:420
+#: include/class.staff.php:423
+#: include/class.staff.php:666
+#: include/class.staff.php:669
 msgid "Valid number required"
 msgstr "Número válido requerido"
 
-#: include/class.staff.php:409
+#: include/class.staff.php:428
 msgid "New password required"
 msgstr "Nova senha requerida"
 
-#: include/class.staff.php:411
-#: include/class.staff.php:657
+#: include/class.staff.php:430
+#: include/class.staff.php:676
 msgid "Must be at least 6 characters"
 msgstr "Mínimo de 6 caracteres"
 
-#: include/class.staff.php:413
-#: include/class.staff.php:659
+#: include/class.staff.php:432
+#: include/class.staff.php:678
 msgid "Password(s) do not match"
 msgstr "Senha(s) não conferem"
 
-#: include/class.staff.php:416
+#: include/class.staff.php:435
 msgid "Current password required"
 msgstr "Senha atual requerida"
 
-#: include/class.staff.php:418
+#: include/class.staff.php:437
 msgid "Invalid current password!"
 msgstr "Senha atual inválida!"
 
-#: include/class.staff.php:420
+#: include/class.staff.php:439
 msgid "New password MUST be different from the current password!"
 msgstr "Nova senha PRECISA ser diferente da senha atual!"
 
-#: include/class.staff.php:424
-#: include/class.staff.php:670
+#: include/class.staff.php:443
+#: include/class.staff.php:689
 msgid "Time zone required"
 msgstr "Fuso Horário Padrão requerido"
 
-#: include/class.staff.php:427
+#: include/class.staff.php:446
 msgid "You don't have a signature"
 msgstr "Você não tem assinatura"
 
-#: include/class.staff.php:558
+#: include/class.staff.php:577
 msgid "You've reached maximum failed login attempts allowed."
 msgstr "Você alcançou o número máximo permitido de tentativas de login."
 
-#: include/class.staff.php:596
+#: include/class.staff.php:615
 msgid "Forgot your login info? Contact Admin."
 msgstr "Esqueceu seu usuário ou senha? Por favor contacte o Admin"
 
-#: include/class.staff.php:598
+#: include/class.staff.php:617
 msgid "Excessive login attempts by a staff member?"
 msgstr "Tentativas excessivas de login por um membro da equipe?"
 
-#: include/class.staff.php:599
-#: include/class.staff.php:604
+#: include/class.staff.php:618
+#: include/class.staff.php:623
 msgid "Username"
 msgstr "Usuário"
 
-#: include/class.staff.php:599
-#: include/class.staff.php:604
+#: include/class.staff.php:618
+#: include/class.staff.php:623
 msgid "IP"
 msgstr "IP"
 
-#: include/class.staff.php:599
-#: include/class.staff.php:605
+#: include/class.staff.php:618
+#: include/class.staff.php:624
 msgid "TIME"
 msgstr "HORA"
 
-#: include/class.staff.php:600
-#: include/class.staff.php:605
+#: include/class.staff.php:619
+#: include/class.staff.php:624
 msgid "Attempts"
 msgstr "Tentativas"
 
-#: include/class.staff.php:600
+#: include/class.staff.php:619
 msgid "Timeout"
 msgstr "Tempo limite excedido"
 
-#: include/class.staff.php:601
+#: include/class.staff.php:620
 msgid "Excessive login attempts"
 msgstr "Número excessivo de tentativas de login"
 
-#: include/class.staff.php:606
+#: include/class.staff.php:625
 msgid "Failed staff login attempt"
 msgstr "Tentativa de login de membro da equipe falhou"
 
-#: include/class.staff.php:635
+#: include/class.staff.php:654
 msgid "Username required"
 msgstr "Nome de usuário requerido"
 
-#: include/class.staff.php:637
+#: include/class.staff.php:656
 msgid "Username already in-use"
 msgstr "Nome já está em uso"
 
-#: include/class.staff.php:642
+#: include/class.staff.php:661
 msgid "Already in-use system email"
 msgstr "E-mail já está configurado como e-mail de sistema"
 
-#: include/class.staff.php:654
+#: include/class.staff.php:673
 msgid "Temp. password required"
 msgstr "Senha temporária requerida"
 
-#: include/class.staff.php:664
+#: include/class.staff.php:683
 msgid "Department required"
 msgstr "Departamento requerido"
 
-#: include/class.staff.php:667
+#: include/class.staff.php:686
 msgid "Group required"
 msgstr "Nome do grupo requerido"
 
-#: include/class.staff.php:706
+#: include/class.staff.php:725
 msgid "Unable to update the user. Internal error occurred"
 msgstr "Não foi possível atualizar o usuário. Erro interno"
 
-#: include/class.staff.php:712
+#: include/class.staff.php:731
 msgid "Unable to create user. Internal error"
 msgstr "Não foi possível criar usuário. Erro interno"
 
@@ -6887,6 +6892,95 @@ msgstr "Nome da Base de Dados requerido"
 #: setup/inc/class.installer.php:60
 msgid "password required"
 msgstr "senha requerida"
+
+#: setup/inc/class.installer.php:64
+#, fuzzy
+msgid "Missing or invalid data - correct the errors and try again."
+msgstr "Dados inválidos ou faltando. Corrija os erros abaixo e tente novamente."
+
+#: setup/inc/class.installer.php:69
+#, fuzzy
+msgid "Conflicts with system email above"
+msgstr "Use E-mail Padrão do Sistema (acima)"
+
+#: setup/inc/class.installer.php:72
+#, fuzzy
+msgid "passwords to not match!"
+msgstr "Senha(s) não conferem"
+
+#: setup/inc/class.installer.php:75
+msgid "Bad prefix. Must have underscore (_) at the end. e.g 'ost_'"
+msgstr "Prefixo inválido. Deve possuir o caractere \"_\" ao final. Ex: 'ost_'"
+
+#: setup/inc/class.installer.php:79
+#, fuzzy
+msgid "Bad username"
+msgstr "usuário"
+
+#: setup/inc/class.installer.php:84
+msgid "Unable to connect to MySQL server. Possibly invalid login info."
+msgstr "Não foi possível conectar ao servidor MySQL. Informações de login possivelmente inválidas."
+
+#: setup/inc/class.installer.php:86
+#, php-format
+msgid "osTicket requires MySQL %s or better!"
+msgstr "O osTicket requer MySQL %s ou superior!"
+
+#: setup/inc/class.installer.php:88
+#, fuzzy
+msgid "Database doesn't exist"
+msgstr "Melhorias na Base de Dados"
+
+#: setup/inc/class.installer.php:89
+#, fuzzy
+msgid "Unable to create the database."
+msgstr "Não foi possível conectar à base de dados"
+
+#: setup/inc/class.installer.php:91
+#, fuzzy
+msgid "Unable to select the database"
+msgstr "Não foi possível conectar à base de dados"
+
+#: setup/inc/class.installer.php:107
+msgid "Internal Error - please make sure your download is the latest (#1)"
+msgstr "Erro interno - favor certificar-se que o arquivo baixado é o mais recente (#1)"
+
+#: setup/inc/class.installer.php:109
+#, fuzzy
+msgid "Unknown or invalid schema signature"
+msgstr "Modelo desconhecido ou inválido"
+
+#: setup/inc/class.installer.php:111
+msgid "Unable to read config file. Permission denied! (#2)"
+msgstr "Não foi possível ler o arquivo de configuração. Permissão negada! (#2)"
+
+#: setup/inc/class.installer.php:113
+msgid "Unable to open config file for writing. Permission denied! (#3)"
+msgstr "Não foi possível abrir o arquivo de configuração para escrita. Permissão negada! (#3)"
+
+#: setup/inc/class.installer.php:115
+#, fuzzy
+msgid "Error parsing SQL schema! Get help from developers (#4)"
+msgstr "Erro ao interpretar esquema SQL"
+
+#: setup/inc/class.installer.php:127
+#, fuzzy
+msgid "Unable to create admin user (#6)"
+msgstr "Não foi possível criar departamento. Erro interno"
+
+#: setup/inc/class.installer.php:157
+msgid "Unable to write to config file. Permission denied! (#5)"
+msgstr "Não foi possível escrever no arquivo de configuração. Permissão negada! (#5)"
+
+#: setup/inc/class.installer.php:194
+msgid ""
+"Congratulations osTicket basic installation completed!\n"
+"\n"
+"Thank you for choosing osTicket!"
+msgstr ""
+"Parabéns! Instalação básica do osTicket completada!\n"
+"\n"
+"Obrigado por escolher o osTicket!"
 
 msgid "Username: "
 msgstr "Usuário:"
