@@ -46,4 +46,14 @@ define('TABLE_PREFIX','%CONFIG-PREFIX');
 
 #Defines the language used for internationalization
 define('LANG','pt_BR');
+
+#Authentication Config
+define('LOGIN_TYPE','%CONFIG-LOGINTYPE');
+define('LDAP_DOMAIN_FQDN','%CONFIG-LDAPFQDN');
+define('LDAP_DOMAIN_NETBIOS','%CONFIG-LDAPNETBIOS');
+define('LDAP_USER','%CONFIG-LDAPUSER');
+define('LDAP_PASSWORD','%CONFIG-LDAPPW');
+define('LDAP_SEARCH_DN','%CONFIG-LDAPSEARCHDN');
+
+
 ?>
