@@ -271,7 +271,7 @@ class Upgrader extends SetupWizard {
             case 'c00511c7-7be60a84': //V1.6 ST- 1.7 * {{MD5('1.6 ST') -> c00511c7c1db65c0cfad04b4842afc57}}
                 $tasks[] = array('func' => 'migrateAttachments2DB'),
                                  'desc' => _('Migrating attachments to database, it might take a while depending on the number of files.'));
-                $tasks[] = array('func' => 'migrateSessionFile2DB'),
+                $tasks[] = array('func' => 'migrateSessionFile2DB',
                                  'desc' => _('Transitioning to db-backed sessions'));
                 break;
             case '98ae1ed2-e342f869': //v1.6 RC1-4 -> v1.6 RC5
@@ -281,6 +281,10 @@ class Upgrader extends SetupWizard {
             case '435c62c3-2e7531a2':
                 $tasks[] = array('func' => 'migrateGroupDeptAccess',
                                  'desc' => _('Migrating group\'s department access to a new table'));
+                break;
+            case '15b30765-dd0022fb':
+                $tasks[] = array('func' => 'migrateAttachments2DB',
+                                 'desc' => 'Migrating attachments to database, it might take a while depending on the number of files.');
                 break;
         }
 
