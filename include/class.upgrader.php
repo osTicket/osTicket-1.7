@@ -143,7 +143,7 @@ class Upgrader extends SetupWizard {
             if($task['status']) //Progress report... 
                 $action.=' ('.$task['status'].')';
         } elseif($this->isUpgradable() && ($nextversion = $this->getNextVersion())) {
-            $action = _("Upgrade to")." $nextversion");
+            $action = _("Upgrade to")." $nextversion";
         }
 
         return $action;
@@ -269,7 +269,7 @@ class Upgrader extends SetupWizard {
         $tasks=array();
         switch($phash) { //Add  patch specific scripted tasks.
             case 'c00511c7-7be60a84': //V1.6 ST- 1.7 * {{MD5('1.6 ST') -> c00511c7c1db65c0cfad04b4842afc57}}
-                $tasks[] = array('func' => 'migrateAttachments2DB'),
+                $tasks[] = array('func' => 'migrateAttachments2DB',
                                  'desc' => _('Migrating attachments to database, it might take a while depending on the number of files.'));
                 $tasks[] = array('func' => 'migrateSessionFile2DB',
                                  'desc' => _('Transitioning to db-backed sessions'));

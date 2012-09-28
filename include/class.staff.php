@@ -596,8 +596,8 @@ class Staff {
             $_SESSION['TZ_OFFSET']=$user->getTZoffset();
             $_SESSION['TZ_DST']=$user->observeDaylight();
 
-            $ost->logDebug('Staff login', 
-                    sprintf("%s logged in [%s]", $user->getUserName(), $_SERVER['REMOTE_ADDR'])); //Debug.
+            $ost->logDebug(_('Staff login'), 
+                    sprintf("%s "._("logged in")." [%s]", $user->getUserName(), $_SERVER['REMOTE_ADDR'])); //Debug.
             $sid=session_id(); //Current ID
             session_regenerate_id(TRUE);
             //Destroy old session ID - needed for PHP version < 5.1.0 TODO: remove when we move to php 5.3 as min. requirement.
