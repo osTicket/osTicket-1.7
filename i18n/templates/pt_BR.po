@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: osticket17\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-09-28 09:46-0300\n"
+"POT-Creation-Date: 2012-09-28 12:09-0300\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Fabio Rauber <fabior@interlegis.leg.br>\n"
 "Language-Team: Fabio Rauber <fabior@interlegis.leg.br>\n"
@@ -1353,6 +1353,10 @@ msgstr "sem patches pendentes de aplicação."
 #, php-format
 msgid "The upgrader does NOT support upgrading from the current patch [%s]!"
 msgstr "O atualizador NÃO suporta atualizar do patch atual [%s]!"
+
+#: scp/upgrade.php:81
+msgid "Upgrader"
+msgstr "Atualizador"
 
 #: scp/groups.php:19
 msgid "Unknown or invalid group ID."
@@ -2882,11 +2886,6 @@ msgstr "Atualizar osTicket para"
 #: include/class.upgrader.php:146
 msgid "Upgrade to"
 msgstr "Atualize para"
-
-#: include/class.upgrader.php:201
-#: include/class.upgrader.php:257
-msgid "Upgrader"
-msgstr "Atualizador"
 
 #: include/class.upgrader.php:201
 #, php-format
