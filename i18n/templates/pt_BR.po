@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: osticket17\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-09-28 09:01-0300\n"
+"POT-Creation-Date: 2012-09-28 09:46-0300\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Fabio Rauber <fabior@interlegis.leg.br>\n"
 "Language-Team: Fabio Rauber <fabior@interlegis.leg.br>\n"
@@ -146,19 +146,19 @@ msgstr "Por favor, para continuar, renomeie o arquivo de configurações include
 msgid "Error loading settings. Contact admin."
 msgstr "Erro carregando configurações: Contacte o administrador."
 
-#: main.inc.php:175
+#: main.inc.php:176
 msgid "Unable to connect to the database"
 msgstr "Não foi possível conectar à base de dados"
 
-#: main.inc.php:177
+#: main.inc.php:178
 msgid "Unable to load config info from DB. Get tech support."
 msgstr "Não foi possível carregar as informações de configuração do BD. Contacte o suporte."
 
-#: main.inc.php:183
+#: main.inc.php:184
 msgid "osTicket Fatal Error"
 msgstr "Erro Fatal do osTicket"
 
-#: main.inc.php:185
+#: main.inc.php:186
 msgid "<b>Fatal Error:</b> Contact system administrator."
 msgstr "<b>Erro Fatal:</b> Contacte o administrador do sistema."
 
@@ -2048,23 +2048,23 @@ msgstr "Prioridade Inválida"
 msgid "Valid phone # required"
 msgstr "No. de Telefone requerido"
 
-#: include/class.ticket.php:2075
+#: include/class.ticket.php:2079
 msgid "Summary of the issue required"
 msgstr "Resumo do problema requerido"
 
-#: include/class.ticket.php:2080
+#: include/class.ticket.php:2084
 msgid "Invalid source"
 msgstr "Origem inválida"
 
-#: include/class.ticket.php:2103
+#: include/class.ticket.php:2107
 msgid "New Ticket by Staff"
 msgstr "Novo Tíquete pela Equipe"
 
-#: include/class.ticket.php:2103
+#: include/class.ticket.php:2107
 msgid "Ticket created by staff"
 msgstr "Tíquete criado pela equipe"
 
-#: include/class.ticket.php:2160
+#: include/class.ticket.php:2164
 msgid "Ticket flagged as overdue by the system."
 msgstr "Tíquete marcado como atrasado pelo sistema."
 
@@ -2459,106 +2459,106 @@ msgstr "Não foi possível atualizar e-mail. Erro interno"
 msgid "Unable to add email. Internal error"
 msgstr "Não foi possível adicionar e-mail. Erro interno."
 
-#: include/class.config.php:573
+#: include/class.config.php:574
 msgid "Unknown setting option. Get technical support."
 msgstr "Opção de configuração desconhecida. Procure ajuda técnica."
 
-#: include/class.config.php:582
+#: include/class.config.php:583
 msgid "Helpdesk URl required"
 msgstr "URl do Helpdesk  requerida"
 
-#: include/class.config.php:583
+#: include/class.config.php:584
 msgid "Helpdesk title required"
 msgstr "Título do Helpdesk requerido"
 
-#: include/class.config.php:584
+#: include/class.config.php:585
 msgid "Default Dept. required"
 msgstr "Depto. Padrão requerido"
 
-#: include/class.config.php:585
+#: include/class.config.php:586
 msgid "You must select template."
 msgstr "Você deve selecionar um modelo."
 
-#: include/class.config.php:586
 #: include/class.config.php:587
+#: include/class.config.php:588
 msgid "Enter idle time in minutes"
 msgstr "Entre tempo de ociosidade em minutos"
 
-#: include/class.config.php:589
+#: include/class.config.php:590
 msgid "Time format required"
 msgstr "Formato de Data requerido"
 
-#: include/class.config.php:590
+#: include/class.config.php:591
 msgid "Date format required"
 msgstr "Formato de Data requerido"
 
-#: include/class.config.php:591
+#: include/class.config.php:592
 msgid "Datetime format required"
 msgstr "Formato de data e hora requerido"
 
-#: include/class.config.php:592
+#: include/class.config.php:593
 msgid "Day, Datetime format required"
 msgstr "Formato de Dia, Data e Hora requerido"
 
-#: include/class.config.php:593
+#: include/class.config.php:594
 msgid "Default Timezone required"
 msgstr "Fuso Horário Padrão requerido"
 
-#: include/class.config.php:631
 #: include/class.config.php:632
-#: include/class.config.php:706
+#: include/class.config.php:633
+#: include/class.config.php:707
 msgid "Selection required"
 msgstr "Seleção requerida"
 
-#: include/class.config.php:633
+#: include/class.config.php:634
 msgid "Enter valid numeric value"
 msgstr "Entre um número válido"
 
-#: include/class.config.php:634
+#: include/class.config.php:635
 msgid "Enter lock time in minutes"
 msgstr "Entre um tempo de bloqueio em mins."
 
-#: include/class.config.php:639
+#: include/class.config.php:640
 msgid "The GD extension required"
 msgstr "Extensão PHP-GD requerida"
 
-#: include/class.config.php:641
+#: include/class.config.php:642
 msgid "PNG support required for Image Captcha"
 msgstr "Suporte a PNG requerido para imagem Captcha"
 
-#: include/class.config.php:647
-#: include/class.config.php:741
+#: include/class.config.php:648
+#: include/class.config.php:742
 msgid "The 'file_uploads' directive is disabled in php.ini"
 msgstr "A diretiva 'file_uploads' está desabilitada no php.ini"
 
-#: include/class.config.php:650
-#: include/class.config.php:744
+#: include/class.config.php:651
+#: include/class.config.php:745
 msgid "Maximum file size required"
 msgstr "Tamanho máximo do arquivo requerido"
 
-#: include/class.config.php:653
-#: include/class.config.php:747
+#: include/class.config.php:654
+#: include/class.config.php:748
 msgid "Allowed file extentions required"
 msgstr "Extensões de arquivo permitidas requeridas"
 
-#: include/class.config.php:705
+#: include/class.config.php:706
 msgid "Default email required"
 msgstr "É requerido endereço de email válido"
 
-#: include/class.config.php:707
+#: include/class.config.php:708
 msgid "System admin email required"
 msgstr "E-mail do Administrador do Sistema requerido"
 
-#: include/class.config.php:710
+#: include/class.config.php:711
 msgid "Reply separator required to strip quoted reply."
 msgstr "Separador de resposta requerido para "
 
-#: include/class.config.php:713
+#: include/class.config.php:714
 msgid "Email already setup as system email"
 msgstr "E-mail já está configurado como e-mail de sistema"
 
-#: include/class.config.php:753
-#: include/class.config.php:756
+#: include/class.config.php:754
+#: include/class.config.php:757
 msgid "Invalid selection. Must be less than "
 msgstr "Seleção inválida. Deve ser menor que"
 
@@ -2918,11 +2918,11 @@ msgstr "Migrando chaves API para uma nova tabela"
 msgid "Migrating group's department access to a new table"
 msgstr "Migrando o acesso ao departamento do grupo para uma nova tabela"
 
-#: include/class.upgrader.php:291
+#: include/class.upgrader.php:295
 msgid "Post-upgrade cleanup!"
 msgstr "Limpeza pós-atualização!"
 
-#: include/class.upgrader.php:311
+#: include/class.upgrader.php:315
 #, php-format
 msgid "Unable to process cleanup file"
 msgstr "Não foi possível processar arquivo de limpeza"
@@ -3134,6 +3134,15 @@ msgstr "Você não tem assinatura"
 #: include/class.staff.php:577
 msgid "You've reached maximum failed login attempts allowed."
 msgstr "Você alcançou o número máximo permitido de tentativas de login."
+
+#: include/class.staff.php:599
+msgid "Staff login"
+msgstr "Login da Equipe"
+
+#: include/class.staff.php:600
+#, php-format
+msgid "logged in"
+msgstr "autenticado"
 
 #: include/class.staff.php:615
 msgid "Forgot your login info? Contact Admin."
@@ -6784,6 +6793,58 @@ msgstr " Cheque todos os tópicos de ajuda relacionados à este FAQ."
 msgid "Internal (private)"
 msgstr "Interno (privado)"
 
+#: include/upgrader/rename.inc.php:6
+msgid "Configuration file rename required!"
+msgstr "Renomeie o arquivo de configuração para continuar!"
+
+#: include/upgrader/rename.inc.php:9
+msgid "To avoid possible conflicts, please take a minute to rename configuration file as shown below."
+msgstr "Para evitar possíveis conflitos, por favor, renomeie os arquivos de configuração como mostrado abaixo."
+
+#: include/upgrader/rename.inc.php:11
+msgid "Solution"
+msgstr "Solução"
+
+#: include/upgrader/rename.inc.php:12
+msgid "Rename file"
+msgstr "Renomeie arquivo"
+
+#: include/upgrader/rename.inc.php:12
+msgid "and click continue below."
+msgstr "e clique em continuar abaixo."
+
+#: include/upgrader/rename.inc.php:18
+msgid "Please refer to the"
+msgstr "Por favor, refira-se ao"
+
+#: include/upgrader/rename.inc.php:18
+#: include/upgrader/prereq.inc.php:39
+#: include/upgrader/aborted.inc.php:25
+msgid "Upgrade Guide"
+msgstr "Guia de Atualização"
+
+#: include/upgrader/rename.inc.php:18
+msgid "for more information."
+msgstr "para mais informações."
+
+#: include/upgrader/rename.inc.php:23
+msgid "Continue"
+msgstr "Continue"
+
+#: include/upgrader/rename.inc.php:28
+#: include/upgrader/aborted.inc.php:27
+msgid "Need Help?"
+msgstr "Precisa de ajuda?"
+
+#: include/upgrader/rename.inc.php:30
+msgid "If you are looking for a greater level of support, we provide <u>professional upgrade</u> and commercial support with guaranteed response times, and access to the core development team. We can also help customize osTicket or even add new features to the system to meet your unique needs."
+msgstr "Se você está procurando um nível maior de suporte, nós provesmos <u> atualizações profissionais </u> e suporte comercial com tempos de resposta garantidos, e acesso ao time de desenvolvimento. Também podemos ajudar a customizar o osTicket ou ainda adicionar novos recursos para o sistema para atender suas necessidades específicas."
+
+#: include/upgrader/rename.inc.php:30
+#: include/upgrader/done.inc.php:26
+msgid "Learn More!"
+msgstr "Veja Mais!"
+
 #: include/upgrader/upgrade.inc.php:9
 msgid "Thank you for taking the time to upgrade your osTicket intallation!"
 msgstr "Obrigado por dedicar seu tempo à atualização da sua instalação do osTicket!"
@@ -6821,20 +6882,293 @@ msgid "3. We can help, feel free to"
 msgstr "3. Podemos ajudar, sinta-se à vontade para"
 
 #: include/upgrader/upgrade.inc.php:32
+#: include/upgrader/prereq.inc.php:41
 msgid "contact us"
 msgstr "contactar-nos"
 
 #: include/upgrader/upgrade.inc.php:32
+#: include/upgrader/prereq.inc.php:41
 msgid "for professional help."
 msgstr "ajuda profissional."
 
 #: include/upgrader/upgrade.inc.php:37
+#: include/upgrader/prereq.inc.php:50
 msgid "Please wait... while we upgrade your osTicket installation!"
 msgstr "Favor esperar... enquanto atualizamos sua instalação do osTicket!"
+
+#: include/upgrader/prereq.inc.php:4
+msgid "osTicket Upgrader"
+msgstr "Atualizador do osTicket"
+
+#: include/upgrader/prereq.inc.php:9
+msgid "Thank you for being a loyal osTicket user!"
+msgstr "Obrigado por ser um usuário fiel do osTicket!"
+
+#: include/upgrader/prereq.inc.php:10
+msgid "The upgrade wizard will guide you every step of the way in the upgrade process. While we try to ensure that the upgrade process is straightforward and painless, we can't guarantee it will be the case for every user."
+msgstr "O assistente de atualização o guiará em cada passo do processo de atualização. Apesar de tentarmos garantir que o processo de atualização seja tranqüilo, não podemos garantir que este será o caso para cada usuário."
+
+#: include/upgrader/prereq.inc.php:12
+msgid "Getting ready!"
+msgstr "Preparando-se!"
+
+#: include/upgrader/prereq.inc.php:13
+msgid "Before we begin, we'll check your server configuration to make sure you meet the minimum requirements to run the latest version of osTicket."
+msgstr "Antes de continuarmos, checaremos a configuração de seu servidor para termos certeza que ele atende aos requisitos mínimos para rodar a última versão do osTicket."
+
+#: include/upgrader/prereq.inc.php:14
+msgid "Prerequisites"
+msgstr "Pré-requisitos"
+
+#: include/upgrader/prereq.inc.php:15
+msgid "These items are necessary in order to run the latest version of osTicket."
+msgstr "Estes itens são necessários para rodar a última versão do osTicket."
+
+#: include/upgrader/prereq.inc.php:17
+#: include/upgrader/prereq.inc.php:19
+msgid "yes"
+msgstr "sim"
+
+#: include/upgrader/prereq.inc.php:17
+#: include/upgrader/prereq.inc.php:19
+msgid "no"
+msgstr "não"
+
+#: include/upgrader/prereq.inc.php:18
+msgid "PHP v4.3 or greater"
+msgstr "PHP versão 4.3 ou superior"
+
+#: include/upgrader/prereq.inc.php:20
+msgid "MySQL v4.4 or greater"
+msgstr "MySQL versão 4.4 ou superior"
+
+#: include/upgrader/prereq.inc.php:20
+msgid "module loaded"
+msgstr "módulo carregado"
+
+#: include/upgrader/prereq.inc.php:20
+msgid "missing!"
+msgstr "faltando!"
+
+#: include/upgrader/prereq.inc.php:22
+msgid "Higly Recommended"
+msgstr "Altamente Recomendado"
+
+#: include/upgrader/prereq.inc.php:23
+msgid "We hightly recommend that you follow the steps below."
+msgstr "Recomendamos fortemente que você siga os passos abaixo."
+
+#: include/upgrader/prereq.inc.php:25
+msgid "Backup the current database, if you haven't done so already."
+msgstr "Efetue backup de sua base de dados, se você ainda não o fez."
+
+#: include/upgrader/prereq.inc.php:26
+msgid "Be patient the upgrade process will take a couple of seconds."
+msgstr "Seja paciente, o processo de atualização irá demorar alguns segundos."
+
+#: include/upgrader/prereq.inc.php:32
+msgid "Start Upgrade Now"
+msgstr "Inicie a Atualização Agora"
+
+#: include/upgrader/prereq.inc.php:37
+msgid "Upgrade Tips"
+msgstr "Dicas de Atualização"
+
+#: include/upgrader/prereq.inc.php:38
+msgid "1. Remember to backup your osTicket database"
+msgstr "1. Lembre-se de fazer backup de sua base de dados do osTicket"
+
+#: include/upgrader/prereq.inc.php:39
+msgid "2. Refer to"
+msgstr "2. Refira-se ao"
+
+#: include/upgrader/prereq.inc.php:39
+msgid "for the latest tips"
+msgstr "para as últimas dicas"
+
+#: include/upgrader/prereq.inc.php:40
+msgid "3. If you experience any problems, you can always restore your files/database backup."
+msgstr "3. Se você tiver qualquer problema, pode sempre restaurar seus arquivos/base de dados do backup."
+
+#: include/upgrader/prereq.inc.php:41
+msgid "4. We can help, feel free to"
+msgstr "4. Podemos ajudar, sinta-se à vontade para"
+
+#: include/upgrader/prereq.inc.php:49
+msgid "Doing stuff!"
+msgstr "Trabalhando!"
+
+#: include/upgrader/done.inc.php:8
+msgid "Upgrade Completed!"
+msgstr "Atualização Completada!"
+
+#: include/upgrader/done.inc.php:10
+msgid "Congratulations osTicket upgrade has been completed successfully."
+msgstr "Parabéns! A atualização do osTicket foi completada com sucesso."
+
+#: include/upgrader/done.inc.php:11
+msgid "Please refer to"
+msgstr "Favor referir-se à(s)"
+
+#: include/upgrader/done.inc.php:11
+msgid "Release Notes"
+msgstr "Notas de Versão"
+
+#: include/upgrader/done.inc.php:11
+msgid "for more information about changes and/or new features."
+msgstr "para maiores informações sobre mudanças e/ou novos recursos."
+
+#: include/upgrader/done.inc.php:13
+msgid "Once again, thank you for choosing osTicket."
+msgstr "Novamente, obrigado por escolher o osTicket."
+
+#: include/upgrader/done.inc.php:14
+msgid "Please feel free to"
+msgstr "Sinta-se à vontade para"
+
+#: include/upgrader/done.inc.php:14
+msgid "let us know"
+msgstr "notifique-nos"
+
+#: include/upgrader/done.inc.php:14
+msgid "of any other improvements and features you would like to see in osTicket, so that we may add them in the future as we continue to develop better and better versions of osTicket."
+msgstr "de quaisquer outras melhorias e recursos que você gostaria de ver no osTicket, de forma que possamos adicioná-los no futuro para tornar o osTicket cada vez melhor."
+
+#: include/upgrader/done.inc.php:15
+msgid "We take user feedback seriously and we're dedicated to making changes based on your input."
+msgstr "Nós levamos suas sugestões a sério e estamos dedicados a fazer mudanças baseadas em seus comentários."
+
+#: include/upgrader/done.inc.php:16
+msgid "Good luck."
+msgstr "Boa sorte."
+
+#: include/upgrader/done.inc.php:17
+msgid "osTicket Team."
+msgstr "Time do osTicket."
+
+#: include/upgrader/done.inc.php:19
+msgid "PS"
+msgstr "PS"
+
+#: include/upgrader/done.inc.php:19
+msgid "Don't just make customers happy, make happy customers!"
+msgstr "Não deixe apenas os clientes felizes, faça clientes felizes!"
+
+#: include/upgrader/done.inc.php:22
+msgid "What's Next?"
+msgstr "O que vem por aí?"
+
+#: include/upgrader/done.inc.php:23
+msgid "Post-upgrade"
+msgstr "Pós-atualização"
+
+#: include/upgrader/done.inc.php:23
+msgid "You can now go to"
+msgstr "Você pode agora ir para"
+
+#: include/upgrader/done.inc.php:23
+msgid "to enable the system and explore the new features. For complete and upto date release notes see"
+msgstr "para habilitar o sistema e explorar os novos recursos. Para notas de versão completas e atualiadas, veja"
+
+#: include/upgrader/done.inc.php:23
+msgid "osTicket wiki"
+msgstr "wiki do osTicket"
+
+#: include/upgrader/done.inc.php:24
+msgid "Stay up to date"
+msgstr "Mantenha-se atualizado"
+
+#: include/upgrader/done.inc.php:24
+msgid "It's important to keep your osTicket installation up to date. Get announcements, security updates and alerts delivered directly to you!"
+msgstr "É importante manter sua instalação do osTicket atualizada. Tenha avisos, atualizações de seguranças e alertas enviados diretamente para você!"
+
+#: include/upgrader/done.inc.php:25
+msgid "Get in the loop"
+msgstr "Entre"
+
+#: include/upgrader/done.inc.php:25
+msgid "today and stay informed!"
+msgstr "hoje e mantenha-se informado!"
+
+#: include/upgrader/done.inc.php:26
+msgid "Commercial support available"
+msgstr "Suporte comercial disponível"
+
+#: include/upgrader/done.inc.php:26
+msgid "Get guidance and hands-on expertise to address unique challenges and make sure your osTicket runs smoothly, efficiently, and securely."
+msgstr "Obtenha orientação e experiência para enfrentar desafios únicos e certifique-se que seu osTicket funcione eficientemente e com segurança."
+
+#: include/upgrader/aborted.inc.php:6
+msgid "Upgrade Aborted!"
+msgstr "Atualização Abortada!"
+
+#: include/upgrader/aborted.inc.php:8
+msgid "Upgrade aborted due to errors. Any errors at this stage are fatal."
+msgstr "Atualização abortada em razão de erros. Quaisquer erros neste estágio são fatais. "
+
+#: include/upgrader/aborted.inc.php:9
+msgid "Please note the error(s), if any, when"
+msgstr "Por favor anote os erros, se existirem, quando"
+
+#: include/upgrader/aborted.inc.php:9
+msgid "seeking help"
+msgstr "procurando ajuda"
 
 #: include/upgrader/aborted.inc.php:20
 msgid "Internal error occurred - get technical help."
 msgstr "Erro interno. Contate o suporte técnico."
+
+#: include/upgrader/aborted.inc.php:23
+msgid "For detailed - please view"
+msgstr "Para detalhamento - favor ver"
+
+#: include/upgrader/aborted.inc.php:23
+msgid "system logs"
+msgstr "logs do sistema"
+
+#: include/upgrader/aborted.inc.php:23
+msgid "or check your email."
+msgstr "ou cheque seu e-mail."
+
+#: include/upgrader/aborted.inc.php:25
+msgid "Please, refer to the"
+msgstr "Por favor, refira-se ao"
+
+#: include/upgrader/aborted.inc.php:25
+msgid "on the wiki for more information."
+msgstr "na wiki para maiores informações."
+
+#: include/upgrader/aborted.inc.php:27
+msgid "We provide"
+msgstr "Nós provemos"
+
+#: include/upgrader/aborted.inc.php:27
+msgid "professional upgrade services"
+msgstr "serviços de atualização profissionais"
+
+#: include/upgrader/aborted.inc.php:27
+msgid "and commercial support."
+msgstr "e suporte comercial."
+
+#: include/upgrader/aborted.inc.php:27
+msgid "Contact us"
+msgstr "Contacte-nos"
+
+#: include/upgrader/aborted.inc.php:27
+msgid "today for <u>expedited</u> help."
+msgstr "hoje para ajuda <u>rápida</u>."
+
+#: include/upgrader/aborted.inc.php:30
+msgid "What to do?"
+msgstr "O que fazer?"
+
+#: include/upgrader/aborted.inc.php:31
+msgid "Restore your previous version from backup and try again or"
+msgstr "Restaura a versão anterior de seu backup e tente nocamente ou"
+
+#: include/upgrader/aborted.inc.php:31
+msgid "seek help"
+msgstr "procure ajuda"
 
 #: setup/install.php:30
 msgid "Installation Guide"
@@ -6894,28 +7228,24 @@ msgid "password required"
 msgstr "senha requerida"
 
 #: setup/inc/class.installer.php:64
-#, fuzzy
 msgid "Missing or invalid data - correct the errors and try again."
-msgstr "Dados inválidos ou faltando. Corrija os erros abaixo e tente novamente."
+msgstr "Dados inválidos ou faltando - corrija os erros e tente novamente."
 
 #: setup/inc/class.installer.php:69
-#, fuzzy
 msgid "Conflicts with system email above"
-msgstr "Use E-mail Padrão do Sistema (acima)"
+msgstr "Conflitos "
 
 #: setup/inc/class.installer.php:72
-#, fuzzy
 msgid "passwords to not match!"
-msgstr "Senha(s) não conferem"
+msgstr "senhas não conferem!"
 
 #: setup/inc/class.installer.php:75
 msgid "Bad prefix. Must have underscore (_) at the end. e.g 'ost_'"
 msgstr "Prefixo inválido. Deve possuir o caractere \"_\" ao final. Ex: 'ost_'"
 
 #: setup/inc/class.installer.php:79
-#, fuzzy
 msgid "Bad username"
-msgstr "usuário"
+msgstr "Usuário inválido"
 
 #: setup/inc/class.installer.php:84
 msgid "Unable to connect to MySQL server. Possibly invalid login info."
@@ -6927,28 +7257,24 @@ msgid "osTicket requires MySQL %s or better!"
 msgstr "O osTicket requer MySQL %s ou superior!"
 
 #: setup/inc/class.installer.php:88
-#, fuzzy
 msgid "Database doesn't exist"
-msgstr "Melhorias na Base de Dados"
+msgstr "Base de dados não existe"
 
 #: setup/inc/class.installer.php:89
-#, fuzzy
 msgid "Unable to create the database."
-msgstr "Não foi possível conectar à base de dados"
+msgstr "Não foi possível criar a base de dados"
 
 #: setup/inc/class.installer.php:91
-#, fuzzy
 msgid "Unable to select the database"
-msgstr "Não foi possível conectar à base de dados"
+msgstr "Não foi possível selecionar a base de dados"
 
 #: setup/inc/class.installer.php:107
 msgid "Internal Error - please make sure your download is the latest (#1)"
 msgstr "Erro interno - favor certificar-se que o arquivo baixado é o mais recente (#1)"
 
 #: setup/inc/class.installer.php:109
-#, fuzzy
 msgid "Unknown or invalid schema signature"
-msgstr "Modelo desconhecido ou inválido"
+msgstr "Assinatura do esquema desconhecida ou inválida"
 
 #: setup/inc/class.installer.php:111
 msgid "Unable to read config file. Permission denied! (#2)"
@@ -6959,14 +7285,12 @@ msgid "Unable to open config file for writing. Permission denied! (#3)"
 msgstr "Não foi possível abrir o arquivo de configuração para escrita. Permissão negada! (#3)"
 
 #: setup/inc/class.installer.php:115
-#, fuzzy
 msgid "Error parsing SQL schema! Get help from developers (#4)"
-msgstr "Erro ao interpretar esquema SQL"
+msgstr "Erro ao interpretar esquema SQL! Procure ajuda dos desenvolvedores (#4)"
 
 #: setup/inc/class.installer.php:127
-#, fuzzy
 msgid "Unable to create admin user (#6)"
-msgstr "Não foi possível criar departamento. Erro interno"
+msgstr "Não foi possível criar o usuário administrativo (#6)"
 
 #: setup/inc/class.installer.php:157
 msgid "Unable to write to config file. Permission denied! (#5)"
@@ -6985,39 +7309,6 @@ msgstr ""
 msgid "Username: "
 msgstr "Usuário:"
 
-msgid "Can "
-msgstr "Pode"
-
-#, fuzzy
-msgid "Ticket denied -"
-msgstr "Tíquete Reaberto"
-
-#, fuzzy
-msgid "%s: Unable to remove file from disk"
-msgstr "Não foi possível remover o e-mail da lista negra. Tente novamente."
-
-#, fuzzy
-msgid ""
-"\n"
-"User: "
-msgstr "Usuários"
-
-#, fuzzy
-msgid ""
-"\n"
-"Host: "
-msgstr "Host"
-
-#, fuzzy
-msgid ""
-"\n"
-"Error: "
-msgstr "Erro"
-
-#, fuzzy
-msgid "migrateAttachments2DB"
-msgstr "Anexos enviados por e-mail"
-
 msgid "Internal notes.&nbsp;"
 msgstr "Notas Internas.&nbsp;"
 
@@ -7032,9 +7323,6 @@ msgstr "Igual"
 
 msgid "Not Equal"
 msgstr "Diferente"
-
-msgid "Contains"
-msgstr "Contém"
 
 msgid "Does Not Contain"
 msgstr "Não Contém"
@@ -7062,41 +7350,6 @@ msgstr "Normal"
 
 msgid "Warning"
 msgstr "Aviso"
-
-#, fuzzy
-msgid " Select Priority"
-msgstr "Selecione Prioridade"
-
-#, fuzzy
-msgid " Select Department"
-msgstr "Selecione o Departamento"
-
-msgid " Unassigned"
-msgstr " Não Designado"
-
-#, fuzzy
-msgid " Create"
-msgstr "Criado"
-
-#, fuzzy
-msgid " Delete"
-msgstr "Apagar"
-
-#, fuzzy
-msgid " Select One"
-msgstr "Selecione Um"
-
-#, fuzzy
-msgid " Reject Ticket"
-msgstr "Reabrir Tíquete"
-
-#, fuzzy
-msgid " Default "
-msgstr "SLA Padrão"
-
-#, fuzzy
-msgid " Default"
-msgstr "(Padrão)"
 
 msgid "update"
 msgstr "atualiza"
