@@ -11,7 +11,7 @@ $conect_p = LDAP_PASSWORD;
 //Replace this with the DN of the base OU you want to search
 $search_user_dn = LDAP_SEARCH_DN;
 
-$inforequired = array("mail","sAMAccountName");
+$inforequired = array("mail","sAMAccountName","givenName","sn");
 
 
 if (!ldap_bind( $ds, $connect_u, $conect_p) ) {
@@ -48,10 +48,10 @@ else
                 {
 
                         if (!empty($_REQUEST['mail'])) {
-                                $arr[]= "{\"id\": \"".$i."\", \"value\": \"".$user_info[$i-1]['mail'][0]."\", \"info\": \"".$user_info[$i-1]['samaccountname'][0]."\"}";
+                                $arr[]= "{\"id\": \"".$i."\", \"value\": \"".$user_info[$i-1]['mail'][0]."\", \"info\": \"".$user_info[$i-1]['samaccountname'][0]." - ".$user_info[$i-1]['givenname'][0]."  ".$user_info[$i-1]['sn'][0]."\"}";
                         }
                         elseif (!empty($_REQUEST['username'])) {
-                                $arr[]= "{\"id\": \"".$i."\", \"value\": \"".$user_info[$i-1]['samaccountname'][0]."\", \"info\": \"".$user_info[$i-1]['mail'][0]."\"}";
+                                $arr[]= "{\"id\": \"".$i."\", \"value\": \"".$user_info[$i-1]['samaccountname'][0]."\", \"info\": \"".$user_info[$i-1]['mail'][0]." - ".$user_info[$i-1]['givenname'][0]."  ".$user_info[$i-1]['sn'][0]."\"}";
                         }
                 }
         echo implode (", ", $arr);

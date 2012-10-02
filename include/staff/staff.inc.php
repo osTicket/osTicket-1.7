@@ -75,7 +75,7 @@ if (LOGIN_TYPE == 'LDAP') {
                 <?= _('Last Name')?>:
             </td>
             <td>
-                <input type="text" size="30" name="lastname" value="<?php echo $info['lastname']; ?>">
+                <input type="text" size="30" id="surname" name="lastname" value="<?php echo $info['lastname']; ?>">
                 &nbsp;<span class="error">*&nbsp;<?php echo $errors['lastname']; ?></span>
             </td>
         </tr>
@@ -317,14 +317,14 @@ if (LOGIN_TYPE == 'LDAP') {
                 varname:"mail",
                 json:true,
                 cache:false,
-                callback:function (obj) {document.getElementById('username').value=obj.info; document.getElementById('givenname').value=obj.givenname;}
+                callback:function (obj) {document.getElementById('username').value=obj.info.split(" - ")[0]; document.getElementById('givenname').value=obj.info.split(" - ")[1].split("  ")[0]; document.getElementById('surname').value=obj.info.split(" - ")[1].split("  ")[1];}
         };
         var username_options = {
                 script: "/scp/usernamefind.php?maxEntries=10&",
                 varname:"username",
                 json:true,
                 cache:false,
-                callback:function (obj) {document.getElementById('email').value=obj.info;}
+                callback:function (obj) {document.getElementById('email').value=obj.info.split(" - ")[0]; document.getElementById('givenname').value=obj.info.split(" - ")[1].split("  ")[0]; document.getElementById('surname').value=obj.info.split(" - ")[1].split("  ")[1];}
         };
         
         var email_as=new bsn.AutoSuggest('email', email_options);
