@@ -33,7 +33,7 @@ header("Content-Type: text/html; charset=UTF-8\r\n");
                 <a href="<?php echo ROOT_PATH; ?>logout.php">Log Out</a>
              <?php
              }elseif($nav){ ?>
-                 Guest User - <a href="<?php echo ROOT_PATH; ?>login.php">Log In</a>
+                 Guest User - <a href="<?php echo ROOT_PATH; ?>login.php">Log In</a> Admin user - <a href="<?php echo ROOT_PATH;?>scp">Log In</a>
               <?php
              } ?>
             </p>
