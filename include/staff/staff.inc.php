@@ -26,6 +26,14 @@ if($staff && $_REQUEST['a']!='add'){
     $qstr.='&a=add';
 }
 $info=Format::htmlchars(($errors && $_POST)?$_POST:$info);
+
+#Changes password display style for LDAP Accounts
+if (LOGIN_TYPE == 'LDAP') {
+    $pw_display = 'none';
+} else {
+    $pw_display = 'table-row';
+}
+
 ?>
 <form action="staff.php?<?php echo $qstr; ?>" method="post" id="save" autocomplete="off">
  <?php csrf_token(); ?>
@@ -48,7 +56,7 @@ $info=Format::htmlchars(($errors && $_POST)?$_POST:$info);
                 <?= _('Username')?>:
             </td>
             <td>
-                <input type="text" size="30" name="username" value="<?php echo $info['username']; ?>">
+                <input type="text" size="30" name="username" id="username" value="<?php echo $info['username']; ?>">
                 &nbsp;<span class="error">*&nbsp;<?php echo $errors['username']; ?></span>
             </td>
         </tr>
@@ -58,7 +66,7 @@ $info=Format::htmlchars(($errors && $_POST)?$_POST:$info);
                 <?= _('First Name')?>:
             </td>
             <td>
-                <input type="text" size="30" name="firstname" value="<?php echo $info['firstname']; ?>">
+                <input type="text" size="30" id="givenname" name="firstname" value="<?php echo $info['firstname']; ?>">
                 &nbsp;<span class="error">*&nbsp;<?php echo $errors['firstname']; ?></span>
             </td>
         </tr>
@@ -76,7 +84,7 @@ $info=Format::htmlchars(($errors && $_POST)?$_POST:$info);
                 <?= _('Email Address')?>:
             </td>
             <td>
-                <input type="text" size="30" name="email" value="<?php echo $info['email']; ?>">
+                <input type="text" size="30" name="email" id="email" value="<?php echo $info['email']; ?>">
                 &nbsp;<span class="error">*&nbsp;<?php echo $errors['email']; ?></span>
             </td>
         </tr>
@@ -102,34 +110,34 @@ $info=Format::htmlchars(($errors && $_POST)?$_POST:$info);
         </tr>
         <tr>
             <th colspan="2">
-                <em><strong><?= _('Account Password')?></strong>: <?php echo $passwd_text; ?> &nbsp;<span class="error">&nbsp;<?php echo $errors['temppasswd']; ?></span></em>
+                <em><strong><?= _('Account Password')?></strong>: <?php if (LOGIN_TYPE == 'LDAP') { echo _("Account password is already set in the LDAP Directory"); } else { echo $passwd_text; } ?> &nbsp;<span class="error">&nbsp;<?php echo $errors['temppasswd']; ?></span></em>
             </th>
         </tr>
-        <tr>
+        <tr style="display:<?= $pw_display ?>">
             <td width="180">
                 <?= _('Password')?>:
             </td>
             <td>
-                <input type="password" size="18" name="passwd1" value="<?php echo $info['passwd1']; ?>">
+                <input type="password" size="18" name="passwd1" value="<?php if (LOGIN_TYPE == 'LDAP') { echo LDAP_PASSWORD; } else { echo $info['passwd1']; } ?>">
                 &nbsp;<span class="error">&nbsp;<?php echo $errors['passwd1']; ?></span>
             </td>
         </tr>
-        <tr>
+        <tr style="display:<?= $pw_display ?>">
             <td width="180">
                 <?= _('Confirm Password')?>:
             </td>
             <td>
-                <input type="password" size="18" name="passwd2" value="<?php echo $info['passwd2']; ?>">
+                <input type="password" size="18" name="passwd2" value="<?php if (LOGIN_TYPE == 'LDAP') { echo LDAP_PASSWORD; } else { echo $info['passwd2']; } ?>">
                 &nbsp;<span class="error">&nbsp;<?php echo $errors['passwd2']; ?></span>
             </td>
         </tr>
 
-        <tr>
+        <tr style="display:<?= $pw_display ?>">
             <td width="180">
                 <?= _('Forced Password Change')?>:
             </td>
             <td>
-                <input type="checkbox" name="change_passwd" value="0" <?php echo $info['change_passwd']?'checked="checked"':''; ?>>
+                <input type="checkbox" name="change_passwd" value="0" <?php echo $info['change_passwd'] && LOGIN_TYPE != 'LDAP'?'checked="checked"':''; ?>>
                 <strong><?= _('Force')?></strong> <?= _('password change on next login')?>.
             </td>
         </tr>
@@ -299,3 +307,28 @@ $info=Format::htmlchars(($errors && $_POST)?$_POST:$info);
     <input type="button" name="cancel" value="<?= _('Cancel')?>" onclick='window.location.href="staff.php"'>
 </p>
 </form>
+
+
+<!--    Change to AD lookup
+        J. Pastin 9-8-09-->
+<script type="text/javascript">
+        var email_options = {
+                script: "/scp/usernamefind.php?maxEntries=10&",
+                varname:"mail",
+                json:true,
+                cache:false,
+                callback:function (obj) {document.getElementById('username').value=obj.info; document.getElementById('givenname').value=obj.givenname;}
+        };
+        var username_options = {
+                script: "/scp/usernamefind.php?maxEntries=10&",
+                varname:"username",
+                json:true,
+                cache:false,
+                callback:function (obj) {document.getElementById('email').value=obj.info;}
+        };
+        
+        var email_as=new bsn.AutoSuggest('email', email_options);
+        var username_as=new bsn.AutoSuggest('username', username_options);
+</script>
+<!-- End Changes -->
+
