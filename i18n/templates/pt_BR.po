@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: osticket17\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-09-28 12:09-0300\n"
+"POT-Creation-Date: 2012-10-03 09:33-0300\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Fabio Rauber <fabior@interlegis.leg.br>\n"
 "Language-Team: Fabio Rauber <fabior@interlegis.leg.br>\n"
@@ -999,6 +999,14 @@ msgstr "departamentos selecionados apagados"
 msgid "Unable to delete selected departments."
 msgstr "Não foi possível apagar departamentos selecionados."
 
+#: scp/userfind.php:3
+msgid "Couldn't connect to LDAP!"
+msgstr "Não foi possível contactar ao LDAP!"
+
+#: scp/userfind.php:14
+msgid "Could not bind LDAP connection."
+msgstr "Não foi possível conectar ao LDAP."
+
 #: scp/file.php:27
 msgid "Unknown or invalid file. #"
 msgstr "Arquivo desconhecido ou inválido. #"
@@ -1440,7 +1448,6 @@ msgid "Valid email address required"
 msgstr "É requerido endereço de email válido"
 
 #: scp/banlist.php:44
-#: scp/emails.php:29
 msgid "Email updated successfully"
 msgstr "Email atualizado com sucesso"
 
@@ -1493,17 +1500,14 @@ msgid "Unable to disable selected emails"
 msgstr "Não foi possível desabilitar os e-mails selecionados"
 
 #: scp/banlist.php:103
-#: scp/emails.php:64
 msgid "Selected emails deleted successfully"
 msgstr "E-mails selecionados apagados com sucesso"
 
 #: scp/banlist.php:105
-#: scp/emails.php:66
 msgid "selected emails deleted"
 msgstr "emails selecionados foram deletados"
 
 #: scp/banlist.php:107
-#: scp/emails.php:68
 msgid "Unable to delete selected emails"
 msgstr "Não foi possível deletar os e-mails selecionados"
 
@@ -2189,7 +2193,6 @@ msgid "Name"
 msgstr "Nome"
 
 #: include/class.pdf.php:124
-#: include/class.export.php:42
 msgid "Priority"
 msgstr "Prioridade"
 
@@ -2198,9 +2201,6 @@ msgid "Email"
 msgstr "E-mail"
 
 #: include/class.pdf.php:132
-#: include/ajax.reports.php:31
-#: include/ajax.reports.php:51
-#: include/class.export.php:43
 msgid "Department"
 msgstr "Departamento"
 
@@ -2213,7 +2213,6 @@ msgid "Create Date"
 msgstr "Data Criação"
 
 #: include/class.pdf.php:144
-#: include/class.export.php:44
 msgid "Source"
 msgstr "Origem"
 
@@ -2230,7 +2229,6 @@ msgid "Last Response"
 msgstr "Última Resposta"
 
 #: include/class.pdf.php:174
-#: include/ajax.reports.php:58
 msgid "Help Topic"
 msgstr "Tópico de ajuda"
 
@@ -2324,6 +2322,81 @@ msgstr "Data"
 #: include/class.export.php:45
 msgid "Current Status"
 msgstr "Status Atual"
+
+#: include/ajax.tickets.php:171
+#, php-format
+msgid "Search criteria matched"
+msgstr "Critérios de pesquisa atendidos"
+
+#: include/ajax.tickets.php:171
+#, php-format
+msgid "view"
+msgstr "visualizar"
+
+#: include/ajax.tickets.php:172
+msgid "tickets"
+msgstr "tíquetes"
+
+#: include/ajax.tickets.php:172
+msgid "ticket"
+msgstr "tíquete"
+
+#: include/ajax.tickets.php:175
+msgid "No tickets found matching your search criteria."
+msgstr "Nenhum tíquete encontrado que corresponda aos critérios de pesquisa."
+
+#: include/ajax.tickets.php:197
+msgid "Unable to acquire lock."
+msgstr "Não foi possível bloquear."
+
+#: include/ajax.tickets.php:265
+msgid "Ticket is locked by"
+msgstr "Tíquete bloqueado por"
+
+#: include/ajax.tickets.php:267
+msgid "Marked overdue!"
+msgstr "Marcado como Atrasado!"
+
+#: include/ajax.tickets.php:293
+#, php-format
+msgid "Ticket State"
+msgstr "Estado do Tíquete"
+
+#: include/ajax.tickets.php:328
+msgid "Unassigned"
+msgstr "Não Designado"
+
+#: include/ajax.tickets.php:349
+msgid "Thread"
+msgstr "Histórico"
+
+#: include/ajax.tickets.php:351
+msgid "Notes"
+msgstr "Notas"
+
+#: include/ajax.tickets.php:354
+msgid "Reply"
+msgstr "Responder"
+
+#: include/ajax.tickets.php:357
+msgid "Reassign"
+msgstr "Redesignar"
+
+#: include/ajax.tickets.php:357
+msgid "Assign"
+msgstr "Designar"
+
+#: include/ajax.tickets.php:360
+msgid "Transfer"
+msgstr "Transferência"
+
+#: include/ajax.tickets.php:362
+msgid "Post Note"
+msgstr "Adicionar Nota"
+
+#: include/ajax.tickets.php:365
+msgid "Edit Ticket"
+msgstr "Editar Tíquete"
 
 #: include/class.validator.php:41
 msgid "Invalid input"
@@ -3015,10 +3088,6 @@ msgstr "416 Intervalo Solicitado Não Satisfatório"
 msgid "500 Internal Server Error"
 msgstr "500 Erro Interno do Servidor"
 
-#: include/ost-config.php:20
-msgid "Kwaheri rafiki!"
-msgstr "Kwaheri rafiki!"
-
 #: include/ost-config.php:25
 msgid "Error: Contact system admin."
 msgstr "Erro: Contacte o administrador."
@@ -3058,11 +3127,6 @@ msgstr " Erro no Departamento"
 #: include/class.dept.php:386
 msgid "Unable to create department. Internal error"
 msgstr "Não foi possível criar departamento. Erro interno"
-
-#: include/class.staff.php:105
-#: include/class.staff.php:117
-msgid "Couldn't connect to LDAP!"
-msgstr "Não foi possível contactar ao LDAP!"
 
 #: include/class.staff.php:404
 #: include/class.staff.php:646
@@ -3540,7 +3604,6 @@ msgstr "Atualizar Respostas Prontas"
 #: include/staff/settings-tickets.inc.php:245
 #: include/staff/settings-alerts.inc.php:175
 #: include/staff/team.inc.php:9
-#: include/staff/slaplan.inc.php:8
 msgid "Save Changes"
 msgstr "Salvar Mudanças"
 
@@ -3564,13 +3627,11 @@ msgstr "Configs. de respostas prontas"
 
 #: include/staff/cannedresponse.inc.php:41
 #: include/staff/team.inc.php:53
-#: include/staff/slaplan.inc.php:63
 msgid "Active"
 msgstr "Ativo"
 
 #: include/staff/cannedresponse.inc.php:42
 #: include/staff/team.inc.php:54
-#: include/staff/slaplan.inc.php:64
 msgid "Disabled"
 msgstr "Desabilitado"
 
@@ -3979,7 +4040,6 @@ msgstr "Alerta enviado quando novos tíquetes são criados"
 #: include/staff/settings-alerts.inc.php:137
 #: include/staff/teams.inc.php:116
 #: include/staff/team.inc.php:84
-#: include/staff/slaplan.inc.php:83
 msgid "Disable"
 msgstr "Desabilitar"
 
@@ -4257,7 +4317,6 @@ msgid "To add additional members go to target member's profile"
 msgstr "Para adicionar membros, vá ao perfil do membro correspondente."
 
 #: include/staff/team.inc.php:106
-#: include/staff/slaplan.inc.php:89
 msgid "Admin Notes"
 msgstr "Notas Administrativas"
 
@@ -4358,6 +4417,7 @@ msgid "Overwrite global setting"
 msgstr "Sobrescrever config. global"
 
 #: include/staff/slaplan.inc.php:89
+#: include/staff/filter.inc.php:322
 msgid "Internal notes"
 msgstr "Notas Internas"
 
@@ -4588,19 +4648,9 @@ msgstr "Fechar"
 msgid "Ability to close tickets. Staff can still post a response."
 msgstr "Permissão para fechar tíquetes. Membros da Equipe ainda podem postar respostas."
 
-#: include/staff/group.inc.php:87
-#: include/staff/ticket-view.inc.php:605
-msgid "Assign"
-msgstr "Designar"
-
 #: include/staff/group.inc.php:92
 msgid "Ability to assign tickets to staff members."
 msgstr "Permissão para designar tíquetes para membros da equipe."
-
-#: include/staff/group.inc.php:95
-#: include/staff/ticket-view.inc.php:531
-msgid "Transfer"
-msgstr "Transferência"
 
 #: include/staff/group.inc.php:100
 msgid "Ability to transfer tickets between departments."
@@ -4935,22 +4985,9 @@ msgstr "Este tíquete está bloqueado por"
 msgid "Email is in banlist! Must be removed before any reply/response"
 msgstr "E-mail está na lista negra! Deve ser removido antes de enviar respostas"
 
-#: include/staff/ticket-view.inc.php:36
-msgid "Marked overdue!"
-msgstr "Marcado como Atrasado!"
-
 #: include/staff/ticket-view.inc.php:46
 msgid "Print Ticket"
 msgstr "Imprimir Tíquete"
-
-#: include/staff/ticket-view.inc.php:49
-msgid "Edit Ticket"
-msgstr "Editar Tíquete"
-
-#: include/staff/ticket-view.inc.php:122
-#: include/staff/filter.inc.php:282
-msgid "Unassigned"
-msgstr "Não Designado"
 
 #: include/staff/ticket-view.inc.php:135
 msgid "Unknown"
@@ -5037,10 +5074,6 @@ msgstr "Marcar como não Respondido"
 msgid "Mark Answered"
 msgstr "Marcar como Respondido"
 
-#: include/staff/ticket-view.inc.php:484
-msgid "Post Note"
-msgstr "Adicionar Nota"
-
 #: include/staff/ticket-view.inc.php:505
 msgid "Select Target Department"
 msgstr "Selecione o Departamento de Destino"
@@ -5070,10 +5103,6 @@ msgstr "Selecione um Membro OU um Time "
 #: include/staff/ticket-view.inc.php:598
 msgid "Enter reasons for the assignment or instructions."
 msgstr "Digite as razões para a designação ou instruções."
-
-#: include/staff/ticket-view.inc.php:605
-msgid "Reassign"
-msgstr "Redesignar"
 
 #: include/staff/ticket-view.inc.php:613
 msgid "Ticket Print Options"
@@ -5541,23 +5570,23 @@ msgstr "A assinatura fica disponível como uma opção, na hora de responder o t
 msgid "Cancel Changes"
 msgstr "Cancelar Mudanças"
 
-#: include/staff/header.inc.php:32
+#: include/staff/header.inc.php:34
 msgid "osTicket - Customer Support System"
 msgstr "osTicket - Sistema de Suporte ao Cliente"
 
-#: include/staff/header.inc.php:33
+#: include/staff/header.inc.php:35
 msgid "Howdy,"
 msgstr "Olá, "
 
-#: include/staff/header.inc.php:36
+#: include/staff/header.inc.php:38
 msgid "Admin Panel"
 msgstr "Adm. do Sistema"
 
-#: include/staff/header.inc.php:38
+#: include/staff/header.inc.php:40
 msgid "Staff Panel"
 msgstr "Painel da Equipe"
 
-#: include/staff/header.inc.php:40
+#: include/staff/header.inc.php:42
 msgid "My Preferences"
 msgstr "Preferências"
 
@@ -5628,7 +5657,7 @@ msgid "Last Login"
 msgstr "Último Login"
 
 #: include/staff/staffmembers.inc.php:152
-#: include/staff/staff.inc.php:169
+#: include/staff/staff.inc.php:177
 msgid "Locked"
 msgstr "Bloqueado"
 
@@ -5877,7 +5906,6 @@ msgid "Overdue Tickets"
 msgstr "Tíquetes atrasados"
 
 #: include/staff/tickets.inc.php:171
-#: include/staff/syslogs.inc.php:36
 msgid "Entered date span is invalid. Selection ignored."
 msgstr "Intervalo de datas inválido. Seleção ignorada."
 
@@ -6013,117 +6041,121 @@ msgstr "Para mudar a senha digite a nova senha abaixo"
 msgid "Add Staff"
 msgstr "Adicionar Membro da Equipe"
 
-#: include/staff/staff.inc.php:35
+#: include/staff/staff.inc.php:43
 msgid "Staff Account"
 msgstr "Conta de Equipe"
 
-#: include/staff/staff.inc.php:41
+#: include/staff/staff.inc.php:49
 #: include/staff/ticket-open.inc.php:16
 #: include/staff/ticket-edit.inc.php:17
 msgid "User Information"
 msgstr "Informações do Usuário"
 
-#: include/staff/staff.inc.php:105
+#: include/staff/staff.inc.php:113
 msgid "Account Password"
 msgstr "Senha da Conta"
 
-#: include/staff/staff.inc.php:119
+#: include/staff/staff.inc.php:113
+msgid "Account password is already set in the LDAP Directory"
+msgstr "Senha da Conta de Usuário já configurada no diretório LDAP"
+
+#: include/staff/staff.inc.php:127
 msgid "Confirm Password"
 msgstr "Confirme a Senha"
 
-#: include/staff/staff.inc.php:129
+#: include/staff/staff.inc.php:137
 msgid "Forced Password Change"
 msgstr "Forçar Troca de Senha"
 
-#: include/staff/staff.inc.php:133
+#: include/staff/staff.inc.php:141
 msgid "Force"
 msgstr "Forçar"
 
-#: include/staff/staff.inc.php:133
+#: include/staff/staff.inc.php:141
 msgid "password change on next login"
 msgstr "mudança de senha no próximo login"
 
-#: include/staff/staff.inc.php:138
+#: include/staff/staff.inc.php:146
 msgid "Staff's Signature"
 msgstr "Assinatura da Equipe"
 
-#: include/staff/staff.inc.php:138
+#: include/staff/staff.inc.php:146
 msgid "Optional signature used on outgoing emails"
 msgstr "Assinatura opcional utilizada em e-mails enviados"
 
-#: include/staff/staff.inc.php:144
+#: include/staff/staff.inc.php:152
 msgid "Signature is made available as a choice, on ticket reply"
 msgstr "A assinatura fica disponível como uma opção, ao responder o tíquete"
 
-#: include/staff/staff.inc.php:149
+#: include/staff/staff.inc.php:157
 msgid "Account Status & Settings"
 msgstr "Estado de Conta e Configs."
 
-#: include/staff/staff.inc.php:149
+#: include/staff/staff.inc.php:157
 msgid "Dept. and assigned group controls access permissions."
 msgstr "O departamento e o grupo designado controlam as permissões de acesso."
 
-#: include/staff/staff.inc.php:154
+#: include/staff/staff.inc.php:162
 msgid "Account Type"
 msgstr "Tipo de Conta"
 
-#: include/staff/staff.inc.php:158
+#: include/staff/staff.inc.php:166
 msgid "Admin"
 msgstr "Administrador"
 
-#: include/staff/staff.inc.php:165
+#: include/staff/staff.inc.php:173
 msgid "Account Status"
 msgstr "Estado da Conta"
 
-#: include/staff/staff.inc.php:175
+#: include/staff/staff.inc.php:183
 msgid "Assigned Group"
 msgstr "Grupo Designado"
 
-#: include/staff/staff.inc.php:179
+#: include/staff/staff.inc.php:187
 msgid "Select Group"
 msgstr "Selecione Grupo"
 
-#: include/staff/staff.inc.php:195
+#: include/staff/staff.inc.php:203
 msgid "Primary Department"
 msgstr "Departamento Primário"
 
-#: include/staff/staff.inc.php:215
+#: include/staff/staff.inc.php:223
 msgid "Staff's Time Zone"
 msgstr "Fuso Horário da Equipe"
 
-#: include/staff/staff.inc.php:245
+#: include/staff/staff.inc.php:253
 msgid "Limited Access"
 msgstr "Acesso Limitado"
 
-#: include/staff/staff.inc.php:248
+#: include/staff/staff.inc.php:256
 msgid "Limit ticket access to ONLY assigned tickets"
 msgstr "Limitar acesso a tíquetes APENAS a tíquetes designados"
 
-#: include/staff/staff.inc.php:253
+#: include/staff/staff.inc.php:261
 msgid "Directory Listing"
 msgstr "Listagem do Diretório"
 
-#: include/staff/staff.inc.php:256
+#: include/staff/staff.inc.php:264
 msgid "Show the user on staff's directory"
 msgstr "Mostrar o usuário no diretório da equipe"
 
-#: include/staff/staff.inc.php:261
+#: include/staff/staff.inc.php:269
 msgid "Vacation Mode"
 msgstr "Modo Férias"
 
-#: include/staff/staff.inc.php:265
+#: include/staff/staff.inc.php:273
 msgid "Staff on vacation mode"
 msgstr "Membro da Equipe no modo férias"
 
-#: include/staff/staff.inc.php:265
+#: include/staff/staff.inc.php:273
 msgid "No ticket assignment or alerts"
 msgstr "Sem designação de tíquetes ou alertas"
 
-#: include/staff/staff.inc.php:274
+#: include/staff/staff.inc.php:282
 msgid "Assigned Teams"
 msgstr "Times Designados"
 
-#: include/staff/staff.inc.php:274
+#: include/staff/staff.inc.php:282
 msgid "Staff will have access to tickets assigned to a team they belong to regardless of the ticket's department"
 msgstr "Membros da equipe terão acesso a tíquetes designados a um time ao qual eles pertençam, independentemente do departamento do tíquete"
 
@@ -6818,7 +6850,6 @@ msgstr "Por favor, refira-se ao"
 
 #: include/upgrader/rename.inc.php:18
 #: include/upgrader/prereq.inc.php:39
-#: include/upgrader/aborted.inc.php:25
 msgid "Upgrade Guide"
 msgstr "Guia de Atualização"
 
@@ -6831,7 +6862,6 @@ msgid "Continue"
 msgstr "Continue"
 
 #: include/upgrader/rename.inc.php:28
-#: include/upgrader/aborted.inc.php:27
 msgid "Need Help?"
 msgstr "Precisa de ajuda?"
 
@@ -7304,6 +7334,9 @@ msgstr ""
 "Parabéns! Instalação básica do osTicket completada!\n"
 "\n"
 "Obrigado por escolher o osTicket!"
+
+msgid "Kwaheri rafiki!"
+msgstr "Kwaheri rafiki!"
 
 msgid "Username: "
 msgstr "Usuário:"
