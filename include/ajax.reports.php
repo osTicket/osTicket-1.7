@@ -35,6 +35,8 @@ class OverviewReportAjaxAPI extends AjaxController {
     }
 
     function getData() {
+        global $thisstaff;
+
         $start = $this->get('start', 'last month');
         $stop = $this->get('stop', 'now');
         if (substr($stop, 0, 1) == '+')
@@ -46,25 +48,33 @@ class OverviewReportAjaxAPI extends AjaxController {
             "dept" => array(
                 "table" => DEPT_TABLE,
                 "pk" => "dept_id",
-                "sort" => 'ORDER BY dept_name',
+                "sort" => '1',
                 "fields" => 'T1.dept_name',
-                "headers" => array('Department')
+                "headers" => array('Department'),
+                "filter" => "1"
             ),
             "topic" => array(
                 "table" => TOPIC_TABLE,
                 "pk" => "topic_id",
-                "sort" => 'ORDER BY topic',
-                "fields" => "T1.topic",
-                "headers" => array('Help Topic')
+                "sort" => '1',
+                "fields" => "CONCAT_WS(' / ',"
+                    ."(SELECT P.topic FROM ".TOPIC_TABLE." P WHERE P.topic_id = T1.topic_pid),"
+                    ."T1.topic)",
+                "headers" => array('Help Topic'),
+                "filter" => "1"
             ),
-            # XXX: This will be relative to permissions based on the
-            # logged-in-staff
             "staff" => array(
                 "table" => STAFF_TABLE,
                 "pk" => 'staff_id',
-                "sort" => 'ORDER BY T1.lastname, T1.firstname',
+                "sort" => 'T1.lastname, T1.firstname',
                 "fields" => "CONCAT_WS(' ', T1.firstname, T1.lastname)",
-                "headers" => array('Staff Member')
+                "headers" => array('Staff Member'),
+                "filter" =>
+                    ($thisstaff->isAdmin())
+                        ? "1"
+                        : (($thisstaff->isManager())
+                            ? "T1.dept_id=".db_input($thisstaff->getDeptId())
+                            : "T1.staff_id=".db_input($thisstaff->getId()))
             )
         );
         $group = $this->get('group', 'dept');
@@ -80,16 +90,16 @@ class OverviewReportAjaxAPI extends AjaxController {
                 COUNT(*)-COUNT(NULLIF(A1.state, "reopened")) AS Reopened
             FROM '.$info['table'].' T1 LEFT JOIN '.TICKET_TABLE.' T2 USING ('.$info['pk'].')
                 LEFT JOIN '.TICKET_EVENT_TABLE.' A1 USING (ticket_id)
-            WHERE A1.timestamp BETWEEN '.$start.' AND '.$stop.'
+            WHERE '.$info['filter'].' AND A1.timestamp BETWEEN '.$start.' AND '.$stop.'
             GROUP BY '.$info['fields'].'
-            ORDER BY '.$info['fields']),
+            ORDER BY '.$info['sort']),
 
             array(1, 'SELECT '.$info['fields'].',
                 FORMAT(AVG(DATEDIFF(T2.closed, T2.created)),1) AS ServiceTime
             FROM '.$info['table'].' T1 LEFT JOIN '.TICKET_TABLE.' T2 USING ('.$info['pk'].')
-            WHERE T2.closed BETWEEN '.$start.' AND '.$stop.'
+            WHERE '.$info['filter'].' AND T2.closed BETWEEN '.$start.' AND '.$stop.'
             GROUP BY '.$info['fields'].'
-            ORDER BY '.$info['fields']),
+            ORDER BY '.$info['sort']),
 
             array(1, 'SELECT '.$info['fields'].',
                 FORMAT(AVG(DATEDIFF(B2.created, B1.created)),1) AS ResponseTime
@@ -97,21 +107,32 @@ class OverviewReportAjaxAPI extends AjaxController {
                 LEFT JOIN '.TICKET_THREAD_TABLE.' B2 ON (B2.ticket_id = T2.ticket_id
                     AND B2.thread_type="R")
                 LEFT JOIN '.TICKET_THREAD_TABLE.' B1 ON (B2.pid = B1.id)
-            WHERE B1.created BETWEEN '.$start.' AND '.$stop.'
+            WHERE '.$info['filter'].' AND B1.created BETWEEN '.$start.' AND '.$stop.'
             GROUP BY '.$info['fields'].'
-            ORDER BY '.$info['fields'])
+            ORDER BY '.$info['sort'])
         );
         $rows = array();
+        $cols = 1;
         foreach ($queries as $q) {
             list($c, $sql) = $q;
             $res = db_query($sql);
-            $i = 0;
+            $cols += $c;
             while ($row = db_fetch_row($res)) {
-                if (count($rows) <= $i)
-                    $rows[] = array_slice($row, 0, count($row) - $c);
-                $rows[$i] = array_merge($rows[$i], array_slice($row, -$c));
-                $i++;
+                $found = false;
+                foreach ($rows as &$r) {
+                    if ($r[0] == $row[0]) {
+                        $r = array_merge($r, array_slice($row, -$c));
+                        $found = true;
+                        break;
+                    }
+                }
+                if (!$found)
+                    $rows[] = array_merge(array($row[0]), array_slice($row, -$c));
             }
+            # Make sure each row has the same number of items
+            foreach ($rows as &$r)
+                while (count($r) < $cols)
+                    $r[] = null;
         }
         return array("columns" => array_merge($info['headers'],
                         array('Open','Assigned','Overdue','Closed','Reopened',
