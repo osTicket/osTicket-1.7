@@ -316,7 +316,6 @@ a.Icon:hover {
 .Icon.newReply { background-image: url(../images/icons/new_reply.png); }
 
 .Icon.file { background-image: url(../images/icons/file.gif); }
-.Icon.refresh { background-image: url(../images/icons/refresh.gif); }
 .Icon.note {
     font-weight: bold;
     font-size: 1em;
@@ -334,7 +333,12 @@ a.Icon:hover {
 .Icon.alertLog { background:url(../images/icons/log_alert.gif) 0 2px no-repeat; }
 .Icon.errorLog { background:url(../images/icons/log_error.gif) 0 2px no-repeat; }
 
-
+h2 i.icon-refresh {
+    color:#71b052;
+    font-size:12px;
+    position:relative;
+    top:-2px;
+}
 
 #content {
     clear:both;
@@ -427,6 +431,10 @@ table.list tbody td.phoneticket, table.list tbody tr.row1 td.phoneticket {
 table.list tbody td.otherticket, table.list tbody tr.row1 td.otherticket {
     text-indent:20px;
     background:url(../images/icons/ticket_source_other.gif) 0 50% no-repeat;
+}
+
+table td.has-bottom-border {
+    border-bottom:1px solid #ddd;
 }
 
 a.refresh {

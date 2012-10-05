@@ -38,11 +38,10 @@ if($ticket->isOverdue())
 ?>
 <table width="940" cellpadding="2" cellspacing="0" border="0">
     <tr>
-        <td width="50%">
-            <h2><a href="tickets.php?id=<?php echo $ticket->getId(); ?>" title="Ticket #<?php echo $ticket->getExtId(); ?>">Ticket #<?php echo $ticket->getExtId(); ?></a>
-            <a href="tickets.php?id=<?php echo $ticket->getId(); ?>" title="Reload" class="reload">Reload</a></h2>
+        <td width="50%" class="has-bottom-border">
+            <h2><a href="tickets.php?id=<?php echo $ticket->getId(); ?>" title="Ticket #<?php echo $ticket->getExtId(); ?>"><i class="icon-refresh"></i> Ticket #<?php echo $ticket->getExtId(); ?></a></h2>
         </td>
-        <td width="50%" class="right_align">
+        <td width="50%" class="right_align" class="has-bottom-border">
             <?php
             /*
                 YOU WILL NEED TO EDIT SOME OF THESE VALUES!
@@ -56,23 +55,43 @@ if($ticket->isOverdue())
                 in case.
             */
             ?>
-            <a class="print-ticket-link" href="tickets.php?id=<?php echo $ticket->getId(); ?>">Print Ticket</a>
+            <a class="action-button" href="tickets.php?id=<?php echo $ticket->getId(); ?>"><i class="icon-print"></i> Print</a>
             <?php if($thisstaff->canEditTickets()): ?>
-                <a class="edit-ticket-link" href="tickets.php?id=<?php echo $ticket->getId(); ?>&a=edit">Edit Ticket</a>
+                <a class="action-button" href="tickets.php?id=<?php echo $ticket->getId(); ?>&a=edit"><i class="icon-pencil"></i> Edit</a>
             <?php endif; ?>
-            <i class="cog"></i>
-            <select name="ticket-quick-actions" id="ticket-quick-actions">
-                <option value="" selected="selected">&mdash; Select Action &mdash;</option>
-                <?php if($thisstaff->canCloseTickets()): ?>
-                    <option class="close" value="tickets.php?id=<?php echo $ticket->getId(); ?>&a=close" data-dialog="close-confirm">Close Ticket</option>
-                <?php endif; ?>
-                <?php if($thisstaff->canBanEmails()): ?>
-                    <option class="ban" value="tickets.php?id=<?php echo $ticket->getId(); ?>&a=ban" data-dialog="">Ban Email &amp; Close</option>
-                <?php endif; ?>
+
+            <?php if($thisstaff->canDeleteTickets()): ?>
+                <span class="action-button"><a href="tickets.php?id=<?php echo $ticket->getId(); ?>&a=delete"><i class="icon-trash"></i> Delete</a>
+                    <?php if($thisstaff->canBanEmails()): ?>
+                        <i data-dropdown="#action-dropdown-1" class="icon-caret-down"></i>
+                    <?php endif; ?>
+                </span>
+            <?php endif; ?>
+
+            <?php if($thisstaff->canCloseTickets() || $thisstaff->canBanEmails()): ?>
+                <span class="action-button"><i class="icon-cog"></i> More <i data-dropdown="#action-dropdown-2" class="icon-caret-down"></i></span>
+            <?php endif; ?>
+
+            <div id="action-dropdown-1" class="action-dropdown">
+              <ul>
                 <?php if($thisstaff->canDeleteTickets()): ?>
-                    <option class="delete" value="tickets.php?id=<?php echo $ticket->getId(); ?>&a=delete" data-dialog="delete-confirm">Delete Ticket</option>
-                <?php endif; ?>
-            </select>
+                    <li><a href="tickets.php?id=<?php echo $ticket->getId(); ?>&a=delete">Delete Ticket</a></li>
+                <?php endif ?>
+                <?php if($thisstaff->canBanEmails()): ?>
+                    <li><a href="tickets.php?id=<?php echo $ticket->getId(); ?>&a=ban">Delete as Spam</a></li>
+                <?php endif ?>
+              </ul>
+            </div>
+            <div id="action-dropdown-2" class="action-dropdown">
+              <ul>
+                <?php if($thisstaff->canCloseTickets()): ?>
+                    <li><a href="tickets.php?id=<?php echo $ticket->getId(); ?>&a=close">Close Ticket</a></li>
+                <?php endif ?>
+                <?php if($thisstaff->canBanEmails()): ?>
+                    <li><a href="tickets.php?id=<?php echo $ticket->getId(); ?>&a=ban">Close &amp; Ban</a></li>
+                <?php endif ?>
+              </ul>
+            </div>
         </td>
     </tr>
 </table>
