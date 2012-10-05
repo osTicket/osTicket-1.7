@@ -17,10 +17,8 @@
     <script type="text/javascript" src="./js/nicEdit.js"></script>
     <script type="text/javascript" src="./js/bootstrap-typeahead.js"></script>
     <script type="text/javascript" src="./js/scp.js"></script>
-    <script type="text/javascript" src="./js/bsn.AutoSuggest_2.1.3.js" charset="utf-8"></script>
     <link rel="stylesheet" href="./css/scp.css" media="screen">
     <link rel="stylesheet" href="./css/typeahead.css" media="screen">
-    <link rel="stylesheet" href="./css/autosuggest_inquisitor.css" type="text/css" media="screen" charset="utf-8" /> 
     <link type="text/css" href="../css/ui-lightness/jquery-ui-1.8.18.custom.css" rel="stylesheet" />   
     <?php
     if($ost && ($headers=$ost->getExtraHeaders())) {

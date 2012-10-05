@@ -187,10 +187,10 @@ $info['id']=$staff->getId();
         <?php } ?>
         <tr>
             <th colspan="2">
-                <em><strong><?= _('Password')?></strong>: <?= _('To reset your password, provide your current password and a new password below.')?>&nbsp;<span class="error">&nbsp;<?php echo $errors['passwd']; ?></span></em>
+                <em><strong><?= _('Password')?></strong>: <?php if (LOGIN_TYPE == 'LDAP' && !$staff->isAdmin()) echo _('Your password is configured at the LDAP directory.'); elseif (LOGIN_TYPE == 'LDAP' && $staff->isAdmin()) echo _('As an Admin, you can change the osTicket database password below, to login in case the LDAP directory is not available.'); else echo _('To reset your password, provide your current password and a new password below.');?>&nbsp;<span class="error">&nbsp;<?php echo $errors['passwd']; ?></span></em>
             </th>
         </tr>
-        <tr>
+        <tr<?php if (LOGIN_TYPE == 'LDAP' && !$staff->isAdmin()) { echo ' style="display:none"';}?>>
             <td width="180">
                 <?= _('Current Password')?>:
             </td>
@@ -199,7 +199,7 @@ $info['id']=$staff->getId();
                 &nbsp;<span class="error">&nbsp;<?php echo $errors['cpasswd']; ?></span>
             </td>
         </tr>
-        <tr>
+        <tr<?php if (LOGIN_TYPE == 'LDAP' && !$staff->isAdmin()) { echo ' style="display:none"';}?>>
             <td width="180">
                 <?= _('New Password')?>:
             </td>
@@ -208,7 +208,7 @@ $info['id']=$staff->getId();
                 &nbsp;<span class="error">&nbsp;<?php echo $errors['passwd1']; ?></span>
             </td>
         </tr>
-        <tr>
+        <tr<?php if (LOGIN_TYPE == 'LDAP' && !$staff->isAdmin()) { echo ' style="display:none"';}?>>
             <td width="180">
                 <?= _('Confirm New Password')?>:
             </td>

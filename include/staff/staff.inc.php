@@ -17,7 +17,7 @@ if($staff && $_REQUEST['a']!='add'){
     $title=_('Add New Staff');
     $action='create';
     $submit_text=_('Add Staff');
-    $passwd_text='Temp. password required &nbsp;<span class="error">&nbsp;*</span>';
+    $passwd_text=_('Temp. password required').' &nbsp;<span class="error">&nbsp;*</span>';
     //Some defaults for new staff.
     $info['change_passwd']=1;
     $info['isactive']=1;
@@ -28,7 +28,7 @@ if($staff && $_REQUEST['a']!='add'){
 $info=Format::htmlchars(($errors && $_POST)?$_POST:$info);
 
 #Changes password display style for LDAP Accounts
-if (LOGIN_TYPE == 'LDAP') {
+if (LOGIN_TYPE == 'LDAP' && !$staff->isAdmin()) {
     $pw_display = 'none';
 } else {
     $pw_display = 'table-row';
@@ -56,7 +56,7 @@ if (LOGIN_TYPE == 'LDAP') {
                 <?= _('Username')?>:
             </td>
             <td>
-                <input type="text" size="30" name="username" id="username" value="<?php echo $info['username']; ?>">
+                <input type="text" size="30" name="username" id="username" <?php if (LOGIN_TYPE == 'LDAP') { echo 'class="typeahead" ';}?>value="<?php echo $info['username']; ?>">
                 &nbsp;<span class="error">*&nbsp;<?php echo $errors['username']; ?></span>
             </td>
         </tr>
@@ -66,7 +66,7 @@ if (LOGIN_TYPE == 'LDAP') {
                 <?= _('First Name')?>:
             </td>
             <td>
-                <input type="text" size="30" id="givenname" name="firstname" value="<?php echo $info['firstname']; ?>">
+                <input type="text" size="30" id="firstname" name="firstname" value="<?php echo $info['firstname']; ?>">
                 &nbsp;<span class="error">*&nbsp;<?php echo $errors['firstname']; ?></span>
             </td>
         </tr>
@@ -75,7 +75,7 @@ if (LOGIN_TYPE == 'LDAP') {
                 <?= _('Last Name')?>:
             </td>
             <td>
-                <input type="text" size="30" id="surname" name="lastname" value="<?php echo $info['lastname']; ?>">
+                <input type="text" size="30" id="lastname" name="lastname" value="<?php echo $info['lastname']; ?>">
                 &nbsp;<span class="error">*&nbsp;<?php echo $errors['lastname']; ?></span>
             </td>
         </tr>
@@ -84,7 +84,7 @@ if (LOGIN_TYPE == 'LDAP') {
                 <?= _('Email Address')?>:
             </td>
             <td>
-                <input type="text" size="30" name="email" id="email" value="<?php echo $info['email']; ?>">
+                <input type="text" size="30" name="email" id="ldapemail" <?php if (LOGIN_TYPE == 'LDAP') { echo 'class="typeahead" ';}?>value="<?php echo $info['email']; ?>">
                 &nbsp;<span class="error">*&nbsp;<?php echo $errors['email']; ?></span>
             </td>
         </tr>
@@ -110,7 +110,7 @@ if (LOGIN_TYPE == 'LDAP') {
         </tr>
         <tr>
             <th colspan="2">
-                <em><strong><?= _('Account Password')?></strong>: <?php if (LOGIN_TYPE == 'LDAP') { echo _("Account password is already set in the LDAP Directory"); } else { echo $passwd_text; } ?> &nbsp;<span class="error">&nbsp;<?php echo $errors['temppasswd']; ?></span></em>
+                <em><strong><?= _('Account Password')?></strong>: <?php if (LOGIN_TYPE == 'LDAP' && !$staff->isAdmin()) { echo _("Account password is already set in the LDAP Directory"); } elseif (LOGIN_TYPE == 'LDAP' && $staff->isAdmin()) echo _('As an Admin, you can change the osTicket database password below, to login in case the LDAP directory is not available.'); else { echo $passwd_text; } ?> &nbsp;<span class="error">&nbsp;<?php echo $errors['temppasswd']; ?></span></em>
             </th>
         </tr>
         <tr style="display:<?= $pw_display ?>">
@@ -118,7 +118,7 @@ if (LOGIN_TYPE == 'LDAP') {
                 <?= _('Password')?>:
             </td>
             <td>
-                <input type="password" size="18" name="passwd1" value="<?php if (LOGIN_TYPE == 'LDAP') { echo LDAP_PASSWORD; } else { echo $info['passwd1']; } ?>">
+                <input type="password" size="18" name="passwd1" value="<?php if (LOGIN_TYPE == 'LDAP'  && !$staff->isAdmin()) { echo LDAP_PASSWORD; } else { echo $info['passwd1']; } ?>">
                 &nbsp;<span class="error">&nbsp;<?php echo $errors['passwd1']; ?></span>
             </td>
         </tr>
@@ -127,7 +127,7 @@ if (LOGIN_TYPE == 'LDAP') {
                 <?= _('Confirm Password')?>:
             </td>
             <td>
-                <input type="password" size="18" name="passwd2" value="<?php if (LOGIN_TYPE == 'LDAP') { echo LDAP_PASSWORD; } else { echo $info['passwd2']; } ?>">
+                <input type="password" size="18" name="passwd2" value="<?php if (LOGIN_TYPE == 'LDAP' && !$staff->isAdmin()) { echo LDAP_PASSWORD; } else { echo $info['passwd2']; } ?>">
                 &nbsp;<span class="error">&nbsp;<?php echo $errors['passwd2']; ?></span>
             </td>
         </tr>
@@ -307,28 +307,4 @@ if (LOGIN_TYPE == 'LDAP') {
     <input type="button" name="cancel" value="<?= _('Cancel')?>" onclick='window.location.href="staff.php"'>
 </p>
 </form>
-
-
-<!--    Change to AD lookup
-        J. Pastin 9-8-09-->
-<script type="text/javascript">
-        var email_options = {
-                script: "/scp/usernamefind.php?maxEntries=10&",
-                varname:"mail",
-                json:true,
-                cache:false,
-                callback:function (obj) {document.getElementById('username').value=obj.info.split(" - ")[0]; document.getElementById('givenname').value=obj.info.split(" - ")[1].split("  ")[0]; document.getElementById('surname').value=obj.info.split(" - ")[1].split("  ")[1];}
-        };
-        var username_options = {
-                script: "/scp/usernamefind.php?maxEntries=10&",
-                varname:"username",
-                json:true,
-                cache:false,
-                callback:function (obj) {document.getElementById('email').value=obj.info.split(" - ")[0]; document.getElementById('givenname').value=obj.info.split(" - ")[1].split("  ")[0]; document.getElementById('surname').value=obj.info.split(" - ")[1].split("  ")[1];}
-        };
-        
-        var email_as=new bsn.AutoSuggest('email', email_options);
-        var username_as=new bsn.AutoSuggest('username', username_options);
-</script>
-<!-- End Changes -->
 

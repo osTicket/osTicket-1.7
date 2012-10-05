@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: osticket17\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-10-03 09:33-0300\n"
+"POT-Creation-Date: 2012-10-05 11:28-0300\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Fabio Rauber <fabior@interlegis.leg.br>\n"
 "Language-Team: Fabio Rauber <fabior@interlegis.leg.br>\n"
@@ -999,14 +999,6 @@ msgstr "departamentos selecionados apagados"
 msgid "Unable to delete selected departments."
 msgstr "Não foi possível apagar departamentos selecionados."
 
-#: scp/userfind.php:3
-msgid "Couldn't connect to LDAP!"
-msgstr "Não foi possível contactar ao LDAP!"
-
-#: scp/userfind.php:14
-msgid "Could not bind LDAP connection."
-msgstr "Não foi possível conectar ao LDAP."
-
 #: scp/file.php:27
 msgid "Unknown or invalid file. #"
 msgstr "Arquivo desconhecido ou inválido. #"
@@ -1448,6 +1440,7 @@ msgid "Valid email address required"
 msgstr "É requerido endereço de email válido"
 
 #: scp/banlist.php:44
+#: scp/emails.php:29
 msgid "Email updated successfully"
 msgstr "Email atualizado com sucesso"
 
@@ -1500,14 +1493,17 @@ msgid "Unable to disable selected emails"
 msgstr "Não foi possível desabilitar os e-mails selecionados"
 
 #: scp/banlist.php:103
+#: scp/emails.php:64
 msgid "Selected emails deleted successfully"
 msgstr "E-mails selecionados apagados com sucesso"
 
 #: scp/banlist.php:105
+#: scp/emails.php:66
 msgid "selected emails deleted"
 msgstr "emails selecionados foram deletados"
 
 #: scp/banlist.php:107
+#: scp/emails.php:68
 msgid "Unable to delete selected emails"
 msgstr "Não foi possível deletar os e-mails selecionados"
 
@@ -2193,6 +2189,7 @@ msgid "Name"
 msgstr "Nome"
 
 #: include/class.pdf.php:124
+#: include/class.export.php:42
 msgid "Priority"
 msgstr "Prioridade"
 
@@ -2201,6 +2198,9 @@ msgid "Email"
 msgstr "E-mail"
 
 #: include/class.pdf.php:132
+#: include/ajax.reports.php:31
+#: include/ajax.reports.php:51
+#: include/class.export.php:43
 msgid "Department"
 msgstr "Departamento"
 
@@ -2213,6 +2213,7 @@ msgid "Create Date"
 msgstr "Data Criação"
 
 #: include/class.pdf.php:144
+#: include/class.export.php:44
 msgid "Source"
 msgstr "Origem"
 
@@ -2229,6 +2230,7 @@ msgid "Last Response"
 msgstr "Última Resposta"
 
 #: include/class.pdf.php:174
+#: include/ajax.reports.php:58
 msgid "Help Topic"
 msgstr "Tópico de ajuda"
 
@@ -2413,6 +2415,10 @@ msgstr "Erro ao acessar arquivo SQL"
 #: include/class.setup.php:56
 msgid "Error parsing SQL schema"
 msgstr "Erro ao interpretar esquema SQL"
+
+#: include/ajax.ldap.php:35
+msgid "Couldn't connect to LDAP!"
+msgstr "Não foi possível contactar ao LDAP!"
 
 #: include/class.osticket.php:106
 #, php-format
@@ -5543,6 +5549,14 @@ msgid "Password"
 msgstr "Senha"
 
 #: include/staff/profile.inc.php:190
+msgid "Your password is configured at the LDAP directory."
+msgstr "Sua senha está configurada no diretório LDAP."
+
+#: include/staff/profile.inc.php:190
+msgid "As an Admin, you can change the osTicket database password below, to login in case the LDAP directory is not available."
+msgstr "Como Administrador, você pode modificar sua senha armazenada na base de dados, para entrar caso o diretório LDAP não esteja disponível."
+
+#: include/staff/profile.inc.php:190
 msgid "To reset your password, provide your current password and a new password below."
 msgstr "Para trocar sua senha, digite a sua senha atual e a nova abaixo."
 
@@ -5570,23 +5584,23 @@ msgstr "A assinatura fica disponível como uma opção, na hora de responder o t
 msgid "Cancel Changes"
 msgstr "Cancelar Mudanças"
 
-#: include/staff/header.inc.php:34
+#: include/staff/header.inc.php:32
 msgid "osTicket - Customer Support System"
 msgstr "osTicket - Sistema de Suporte ao Cliente"
 
-#: include/staff/header.inc.php:35
+#: include/staff/header.inc.php:33
 msgid "Howdy,"
 msgstr "Olá, "
 
-#: include/staff/header.inc.php:38
+#: include/staff/header.inc.php:36
 msgid "Admin Panel"
 msgstr "Adm. do Sistema"
 
-#: include/staff/header.inc.php:40
+#: include/staff/header.inc.php:38
 msgid "Staff Panel"
 msgstr "Painel da Equipe"
 
-#: include/staff/header.inc.php:42
+#: include/staff/header.inc.php:40
 msgid "My Preferences"
 msgstr "Preferências"
 
@@ -5906,6 +5920,7 @@ msgid "Overdue Tickets"
 msgstr "Tíquetes atrasados"
 
 #: include/staff/tickets.inc.php:171
+#: include/staff/syslogs.inc.php:36
 msgid "Entered date span is invalid. Selection ignored."
 msgstr "Intervalo de datas inválido. Seleção ignorada."
 
@@ -6850,6 +6865,7 @@ msgstr "Por favor, refira-se ao"
 
 #: include/upgrader/rename.inc.php:18
 #: include/upgrader/prereq.inc.php:39
+#: include/upgrader/aborted.inc.php:25
 msgid "Upgrade Guide"
 msgstr "Guia de Atualização"
 
@@ -6862,6 +6878,7 @@ msgid "Continue"
 msgstr "Continue"
 
 #: include/upgrader/rename.inc.php:28
+#: include/upgrader/aborted.inc.php:27
 msgid "Need Help?"
 msgstr "Precisa de ajuda?"
 
@@ -7334,6 +7351,9 @@ msgstr ""
 "Parabéns! Instalação básica do osTicket completada!\n"
 "\n"
 "Obrigado por escolher o osTicket!"
+
+msgid "Could not bind LDAP connection."
+msgstr "Não foi possível conectar ao LDAP."
 
 msgid "Kwaheri rafiki!"
 msgstr "Kwaheri rafiki!"

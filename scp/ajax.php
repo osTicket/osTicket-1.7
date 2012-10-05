@@ -53,6 +53,7 @@ $dispatcher = patterns('',
         url_get('^table$', 'getTabularData')
     )),
     url_get('^/users$', array('ajax.users.php:UsersAjaxAPI', 'search')),
+    url_get('^/ldap$', array('ajax.ldap.php:UsersLDAPAjaxAPI', 'search')),
     url('^/tickets/', patterns('ajax.tickets.php:TicketsAjaxAPI',
         url_get('^(?P<tid>\d+)/preview', 'previewTicket'),
         url_post('^(?P<tid>\d+)/lock', 'acquireLock'),
