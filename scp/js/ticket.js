@@ -323,15 +323,6 @@ jQuery(function($) {
         left : ($(window).width() / 2 - 300)
     });
 
-    $('#ticket-quick-actions').change(function(e) {
-        if($(this).find(':selected').data('dialog')=="") {
-            window.location = $(this).val();
-        } else {
-            $('#overlay').show();
-            $('#' + $(this).find(':selected').data('dialog')).show();
-        }
-    });
-
     $('.print-ticket-link').click(function(e) {
         e.preventDefault();
         $('#overlay').show();
