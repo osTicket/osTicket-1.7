@@ -5763,7 +5763,7 @@ msgstr "osTicket fora do ar"
 
 #: include/staff/settings-system.inc.php:30
 msgid "Helpdesk URL"
-msgstr "URL do Centro de Suporte"
+msgstr "URL do Suporte"
 
 #: include/staff/settings-system.inc.php:36
 msgid "Helpdesk Name/Title"
@@ -7403,11 +7403,11 @@ msgstr "Por favor, preencha as informações abaixo para continuar com sua insta
 
 #: setup/inc/install.inc.php:12
 msgid "The URL of your helpdesk, its name, and the default system email address"
-msgstr "A URL do seu centro de suprote, seu nome, e o endereço de e-mail padrão do sistema"
+msgstr "A URL do seu centro de suporte, seu nome, e o endereço de e-mail padrão do sistema"
 
 #: setup/inc/install.inc.php:18
 msgid "Helpdesk Name"
-msgstr "Nome do Centro de Suporte"
+msgstr "Nome do Suporte"
 
 #: setup/inc/install.inc.php:24
 msgid "Default Email"
@@ -7670,7 +7670,7 @@ msgstr "Pré-requisitos."
 
 #: setup/inc/install-prereq.inc.php:13
 msgid "Before we begin, we'll check your server configuration to make sure you meet the minimum requirements to install and run osTicket."
-msgstr "Antes de começar, checaremos a configuração de seu servidor para termos certeza que ele atente aos requsitos mínimos para instalar e rodar o osTicket."
+msgstr "Antes de começar, checaremos a configuração de seu servidor para termos certeza que ele atende aos requsitos mínimos para instalar e rodar o osTicket."
 
 #: setup/inc/install-prereq.inc.php:15
 msgid "These items are necessary in order to install and use osTicket."
