@@ -442,7 +442,7 @@ class MailFetcher {
                     //This should be really a comment on message - NoT an internal note.
                     //TODO: support comments on Messages and Responses.
                     $error = sprintf(_('Attachment %s [%s] rejected because of file type'), $a['name'], $a['mime']);
-                    $ticket->postNote(_('Email Attachment Rejected'), $error, false);
+                    $ticket->postNote(_('Email Attachment Rejected'), $error, 'SYSTEM', false);
                     $ost->logDebug(_('Email Attachment Rejected (Ticket #').$ticket->getExtId().')', $error);
                 }
             }
