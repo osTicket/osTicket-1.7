@@ -13,6 +13,11 @@
 
     vim: expandtab sw=4 ts=4 sts=4:
 **********************************************************************/
+#Detect browser language for the installation proccess
+$langbase = substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2);
+$langext = strtoupper(substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 3, 2));
+define('LANG',$langbase."_".$langext);
+
 require('setup.inc.php');
 
 require_once INC_DIR.'class.installer.php';
