@@ -178,7 +178,7 @@ class Installer extends SetupWizard {
             .' ,subject="osTicket Installed!"';
         if(mysql_query($sql) && ($tid=mysql_insert_id())) {
             if(!($msg=file_get_contents(INC_DIR.'msg/installed.txt')))
-                $msg='Congratulations and Thank you for choosing osTicket!';
+                $msg=_('Congratulations and Thank you for choosing osTicket!');
                         
             $sql='INSERT INTO '.PREFIX.'ticket_thread SET created=NOW()'
                 .', source="Web" '

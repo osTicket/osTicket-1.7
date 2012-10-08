@@ -24,8 +24,8 @@ define('OSTICKET_CONFIGFILE','../include/ost-config.php'); //XXX: Make sure the 
 
 $installer = new Installer(OSTICKET_CONFIGFILE); //Installer instance.
 $wizard=array();
-$wizard['title']='osTicket Installer';
-$wizard['tagline']='Installing osTicket v'.$installer->getVersionVerbose();
+$wizard['title']=_('osTicket Installer');
+$wizard['tagline']=_('Installing osTicket v').$installer->getVersionVerbose();
 $wizard['logo']='logo.png';
 $wizard['menu']=array(_('Installation Guide')=>'http://osticket.com/wiki/Installation',
         _('Get Professional Help')=>'http://osticket.com/support');
