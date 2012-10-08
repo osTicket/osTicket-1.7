@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: osticket17\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-10-05 11:28-0300\n"
+"POT-Creation-Date: 2012-10-08 13:05-0300\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Fabio Rauber <fabior@interlegis.leg.br>\n"
 "Language-Team: Fabio Rauber <fabior@interlegis.leg.br>\n"
@@ -73,7 +73,6 @@ msgid "Unable to create a ticket. Please correct errors below and try again!"
 msgstr "Não foi possível criar o tíquete. Por favor corrija os erros abaixo e tente novamente!"
 
 #: tickets.php:18
-#: view.php:18
 msgid "Access denied"
 msgstr "Acesso negado"
 
@@ -146,19 +145,19 @@ msgstr "Por favor, para continuar, renomeie o arquivo de configurações include
 msgid "Error loading settings. Contact admin."
 msgstr "Erro carregando configurações: Contacte o administrador."
 
-#: main.inc.php:176
+#: main.inc.php:177
 msgid "Unable to connect to the database"
 msgstr "Não foi possível conectar à base de dados"
 
-#: main.inc.php:178
+#: main.inc.php:179
 msgid "Unable to load config info from DB. Get tech support."
 msgstr "Não foi possível carregar as informações de configuração do BD. Contacte o suporte."
 
-#: main.inc.php:184
+#: main.inc.php:185
 msgid "osTicket Fatal Error"
 msgstr "Erro Fatal do osTicket"
 
-#: main.inc.php:186
+#: main.inc.php:187
 msgid "<b>Fatal Error:</b> Contact system administrator."
 msgstr "<b>Erro Fatal:</b> Contacte o administrador do sistema."
 
@@ -220,7 +219,7 @@ msgid ""
 "member."
 msgstr "Estatísticas dos tíquetes, organizadas por departamento, tópico de ajuda e equipe"
 
-#: scp/autocron.php:38
+#: scp/autocron.php:42
 msgid "Mail fetcher cron call ["
 msgstr "Chamada do cron ao importador de E-mail ["
 
@@ -524,346 +523,342 @@ msgstr "Comentários de transferência/notas requeridas"
 msgid "Transfer comments too short!"
 msgstr "Comentários de transferência muito pequenos!"
 
-#: scp/tickets.php:86
+#: scp/tickets.php:85
 msgid "Ticket transferred successfully to "
 msgstr "Tíquete transferido com sucesso para "
 
-#: scp/tickets.php:88
-msgid "Dept. Transfer from "
-msgstr "Transferência do Depto"
-
-#: scp/tickets.php:96
+#: scp/tickets.php:91
 msgid "Unable to complete the transfer - try again"
 msgstr "Não foi possível completar a transferência - tente novamente"
 
-#: scp/tickets.php:97
-#: scp/tickets.php:141
+#: scp/tickets.php:92
+#: scp/tickets.php:136
 msgid "Missing or invalid data. Correct the error(s) below and try again!"
 msgstr "Dados inválidos ou faltando. Corrija os erros abaixo e tente novamente!"
 
-#: scp/tickets.php:100
+#: scp/tickets.php:95
 msgid "Action Denied. You are not allowed to transfer tickets."
 msgstr "Ação Negada. Você não tem permissão para transferir tíquetes."
 
-#: scp/tickets.php:107
+#: scp/tickets.php:102
 msgid "Select assignee"
 msgstr "Selecione "
 
-#: scp/tickets.php:109
+#: scp/tickets.php:104
 msgid "Invalid assignee ID - get technical support"
 msgstr "ID de designação inválido - procure suporte técnico"
 
-#: scp/tickets.php:113
+#: scp/tickets.php:108
 msgid "Ticket already assigned to the staff."
 msgstr "O tíquete já está deisgnado para a equipe."
 
-#: scp/tickets.php:115
+#: scp/tickets.php:110
 msgid "Ticket already assigned to the team."
 msgstr "O tíquete já está deisgnado para o time."
 
-#: scp/tickets.php:119
+#: scp/tickets.php:114
 msgid "Comments required"
 msgstr "Comentários requeridos"
 
-#: scp/tickets.php:121
+#: scp/tickets.php:116
 msgid "Comments too short"
 msgstr "Comentários muito pequenos"
 
-#: scp/tickets.php:124
+#: scp/tickets.php:119
 msgid "Ticket assigned successfully to "
 msgstr "O tíquete foi designado com sucesso para "
 
-#: scp/tickets.php:128
+#: scp/tickets.php:123
 msgid "Unable to assign the ticket. Correct the errors below and try again."
 msgstr "Não foi possível designar o tíquete. Corrija os erros abaixo e tente novamente!"
 
-#: scp/tickets.php:132
+#: scp/tickets.php:127
 msgid "Action Denied. You are not allowed to assign/reassign tickets."
 msgstr "Ação Negada. Você não tem permissão para designar tíquetes."
 
-#: scp/tickets.php:137
+#: scp/tickets.php:132
 msgid "Title required"
 msgstr "Título necessário"
 
-#: scp/tickets.php:138
+#: scp/tickets.php:133
 msgid "Note message required"
 msgstr "Nota requerida"
 
-#: scp/tickets.php:144
+#: scp/tickets.php:139
 msgid "Internal note posted successfully"
 msgstr "Nota interna postada com sucesso"
 
-#: scp/tickets.php:157
+#: scp/tickets.php:152
 msgid "Error(s) occurred. Unable to post the note."
 msgstr "Erros ocorreram. Não foi possível adicionar a nota."
 
-#: scp/tickets.php:163
+#: scp/tickets.php:158
 msgid "Perm. Denied. You are not allowed to edit tickets"
 msgstr "Perm. Negada. Você não pode editar tíquetes"
 
-#: scp/tickets.php:165
+#: scp/tickets.php:160
 msgid "Ticket updated successfully"
 msgstr "Tíquete atualizado com sucesso"
 
-#: scp/tickets.php:171
+#: scp/tickets.php:166
 msgid "Unable to update the ticket. Correct the errors below and try again!"
 msgstr "Não foi possível atualizar o tíquete.Corrija os erros abaixo e tente novamente!"
 
-#: scp/tickets.php:179
+#: scp/tickets.php:174
 msgid "Perm. Denied. You are not allowed to change ticket's priority"
 msgstr "Perm. Negada. Você não pode mudar a prioridade do tíquete"
 
-#: scp/tickets.php:181
+#: scp/tickets.php:176
 msgid "You must select priority"
 msgstr "Você deve selecionar prioridade"
 
-#: scp/tickets.php:185
+#: scp/tickets.php:180
 msgid "Priority Changed Successfully"
 msgstr "Prioridade alterada com sucesso"
 
-#: scp/tickets.php:187
+#: scp/tickets.php:182
 msgid "Ticket priority set to \""
 msgstr "Prioridade do tíquete é \""
 
-#: scp/tickets.php:188
+#: scp/tickets.php:183
 msgid "Priority Changed"
 msgstr "Prioridade Alterada"
 
-#: scp/tickets.php:190
+#: scp/tickets.php:185
 msgid "Problems changing priority. Try again"
 msgstr "Problemas ao mudar prioridade. Tente novamente"
 
-#: scp/tickets.php:196
+#: scp/tickets.php:191
 msgid "Perm. Denied. You are not allowed to close tickets."
 msgstr "Perm. Negada. Você não tem permissão para fechar tíquetes."
 
-#: scp/tickets.php:199
+#: scp/tickets.php:194
 msgid " status set to CLOSED"
 msgstr " mudou para FECHADO"
 
-#: scp/tickets.php:200
-#: scp/tickets.php:331
+#: scp/tickets.php:195
+#: scp/tickets.php:326
 msgid "Ticket closed without response by "
 msgstr "Tíquete fechado sem resposta por "
 
-#: scp/tickets.php:201
-#: scp/tickets.php:336
+#: scp/tickets.php:196
+#: scp/tickets.php:331
 msgid "Ticket Closed"
 msgstr "Tíquete Fechado"
 
-#: scp/tickets.php:204
+#: scp/tickets.php:199
 msgid "Problems closing the ticket. Try again"
 msgstr "Problemas ao fechar o tiquete. Tente novamente"
 
-#: scp/tickets.php:211
+#: scp/tickets.php:206
 msgid "Perm. Denied. You are not allowed to reopen tickets."
 msgstr "Perm. Negada. Você não tem permissão para reabrir tíquetes."
 
-#: scp/tickets.php:214
+#: scp/tickets.php:209
 msgid "Ticket status set to OPEN"
 msgstr "Estado do tíquete mudou para FECHADO"
 
-#: scp/tickets.php:215
+#: scp/tickets.php:210
 msgid "Ticket reopened (without comments)"
 msgstr "Tíquete reaberto (sem comentários)"
 
-#: scp/tickets.php:219
-#: scp/tickets.php:248
+#: scp/tickets.php:214
+#: scp/tickets.php:243
 msgid " and status set to "
 msgstr " e estado "
 
-#: scp/tickets.php:221
-#: scp/tickets.php:232
-#: scp/tickets.php:250
+#: scp/tickets.php:216
+#: scp/tickets.php:227
+#: scp/tickets.php:245
 msgid " by "
 msgstr " por "
 
-#: scp/tickets.php:224
+#: scp/tickets.php:219
 msgid "Problems reopening the ticket. Try again"
 msgstr "Problemas ao reabrir tíquete. Tente novamente"
 
-#: scp/tickets.php:230
+#: scp/tickets.php:225
 msgid "Ticket is not assigned!"
 msgstr "Tíquete não designado!"
 
-#: scp/tickets.php:232
+#: scp/tickets.php:227
 msgid "Ticket released (unassigned) from "
 msgstr "O tíquete  não está mais designado para "
 
-#: scp/tickets.php:235
+#: scp/tickets.php:230
 msgid "Problems releasing the ticket. Try again"
 msgstr "Problemas ao liberar o tíquete. Tente novamente"
 
-#: scp/tickets.php:240
+#: scp/tickets.php:235
 msgid "Perm. Denied. You are not allowed to flag tickets overdue"
 msgstr "Perm. Negada. Você não tem permissão para marcar tíquetes como atrasados"
 
-#: scp/tickets.php:243
+#: scp/tickets.php:238
 msgid "Ticket flagged as overdue"
 msgstr "Tíquete marcado como atrasado"
 
-#: scp/tickets.php:251
-#: scp/tickets.php:348
+#: scp/tickets.php:246
+#: scp/tickets.php:343
 msgid "Ticket Marked Overdue"
 msgstr "Tíquete Marcado como Atrasado"
 
-#: scp/tickets.php:253
+#: scp/tickets.php:248
 msgid "Problems marking the the ticket overdue. Try again"
 msgstr "Problemas ao marcar o tíquete como atrasado. Tente novamente"
 
-#: scp/tickets.php:259
+#: scp/tickets.php:254
 msgid "Perm. Denied. You are not allowed to ban emails"
 msgstr "Perm. Negada. Você não tem permissão para banir e-mails"
 
-#: scp/tickets.php:263
+#: scp/tickets.php:258
 msgid " & ticket status set to closed"
 msgstr " & o estado do tíquete é FECHADO"
 
-#: scp/tickets.php:268
+#: scp/tickets.php:263
 msgid "Unable to add the email to banlist"
 msgstr "Não foi possível adicionar o e-mail à lista negra"
 
-#: scp/tickets.php:273
+#: scp/tickets.php:268
 msgid "Perm. Denied. You are not allowed to remove emails from banlist."
 msgstr "Perm. Negada. Você não tem permissão para remover e-mails da lista negra."
 
-#: scp/tickets.php:275
+#: scp/tickets.php:270
 msgid "Email removed from banlist"
 msgstr "E-mail removido da lista negra"
 
-#: scp/tickets.php:277
+#: scp/tickets.php:272
 msgid "Unable to remove the email from banlist. Try again."
 msgstr "Não foi possível remover o e-mail da lista negra. Tente novamente."
 
-#: scp/tickets.php:282
+#: scp/tickets.php:277
 msgid "Perm. Denied. You are not allowed to DELETE tickets!!"
 msgstr "Perm. Negada. Você não tem permissão para APAGAR tíquetes!!"
 
-#: scp/tickets.php:286
+#: scp/tickets.php:281
 msgid "Ticket Deleted Forever"
 msgstr "Tíquete Apagado para Sempre"
 
-#: scp/tickets.php:289
+#: scp/tickets.php:284
 msgid "Problems deleting the ticket. Try again"
 msgstr "Problemas ao apagar tíquete. Tente novamente."
 
-#: scp/tickets.php:294
+#: scp/tickets.php:289
 msgid "You must select action to perform"
 msgstr "Você deve selecionar uma ação"
 
-#: scp/tickets.php:306
+#: scp/tickets.php:301
 msgid "You do not have permission to mass manage tickets. Contact admin for such access"
 msgstr "Você não tem permissão para gerenciar tíquetes em massa. Contacte o administrador."
 
-#: scp/tickets.php:308
+#: scp/tickets.php:303
 msgid "No tickets selected. You must select at least one ticket."
 msgstr "Nenhum tíquete selecionado. Você deve selecionar ao meno um tíquete."
 
-#: scp/tickets.php:310
+#: scp/tickets.php:305
 msgid "You do not have permission to close/reopen tickets"
 msgstr "Você não tem permissão para fechar/reabrir tíquetes"
 
-#: scp/tickets.php:312
+#: scp/tickets.php:307
 msgid "You do not have permission to delete tickets"
 msgstr "Você não tem permissão para apagar tíquetes"
 
-#: scp/tickets.php:314
+#: scp/tickets.php:309
 msgid "You must select at least one ticket"
 msgstr "Você deve selecionar ao menos um tíquete"
 
-#: scp/tickets.php:320
+#: scp/tickets.php:315
 msgid "Ticket reopened by "
 msgstr "Tíquete reaberto por"
 
-#: scp/tickets.php:325
+#: scp/tickets.php:320
 msgid "Ticket Reopened"
 msgstr "Tíquete Reaberto"
 
-#: scp/tickets.php:342
+#: scp/tickets.php:337
 msgid "Ticket flagged as overdue by "
 msgstr "Tíquete marcado como atrasado por"
 
-#: scp/tickets.php:365
+#: scp/tickets.php:360
 msgid "You do not have permission to create tickets. Contact admin for such access"
 msgstr "Você não tem permissão para criar tíquetes. Contacte o administrador"
 
-#: scp/tickets.php:367
+#: scp/tickets.php:362
 msgid "Ticket created successfully"
 msgstr "Tíquete criado com sucesso"
 
-#: scp/tickets.php:372
+#: scp/tickets.php:367
 msgid "Unable to create the ticket. Correct the error(s) and try again"
 msgstr "Não foi possível criar o tíquete. Corrija os erros abaixo e tente novamente!"
 
-#: scp/tickets.php:387
-#: scp/tickets.php:395
+#: scp/tickets.php:382
+#: scp/tickets.php:390
 msgid "Open"
 msgstr "Aberto"
 
-#: scp/tickets.php:388
-#: scp/tickets.php:396
+#: scp/tickets.php:383
+#: scp/tickets.php:391
 msgid "Open Tickets"
 msgstr "Tíquetes Abertos"
 
-#: scp/tickets.php:403
+#: scp/tickets.php:398
 msgid "Answered"
 msgstr "Respondidos"
 
-#: scp/tickets.php:404
+#: scp/tickets.php:399
 msgid "Answered Tickets"
 msgstr "Tíquetes Respondidos"
 
-#: scp/tickets.php:413
+#: scp/tickets.php:408
 msgid " assigned to you!"
 msgstr " designado para você!"
 
-#: scp/tickets.php:415
+#: scp/tickets.php:410
 msgid "My Tickets"
 msgstr "Meus tíquetes"
 
-#: scp/tickets.php:416
+#: scp/tickets.php:411
 msgid "Assigned Tickets"
 msgstr "Tíquetes Designados"
 
-#: scp/tickets.php:423
+#: scp/tickets.php:418
 msgid "Overdue"
 msgstr "Atrasado"
 
-#: scp/tickets.php:424
+#: scp/tickets.php:419
 msgid "Stale Tickets"
 msgstr "Tíquetes Atrasados"
 
-#: scp/tickets.php:430
+#: scp/tickets.php:425
 msgid " overdue tickets!"
 msgstr " tíquetes atrasados!"
 
-#: scp/tickets.php:434
-#: scp/tickets.php:435
+#: scp/tickets.php:429
+#: scp/tickets.php:430
 msgid "My Closed Tickets"
 msgstr "Meus Tíquetes Fechados"
 
-#: scp/tickets.php:441
-#: scp/tickets.php:442
+#: scp/tickets.php:436
+#: scp/tickets.php:437
 msgid "Closed Tickets"
 msgstr "Tíquetes Fechados"
 
-#: scp/tickets.php:449
+#: scp/tickets.php:444
 msgid "New Ticket"
 msgstr "Novo Tíquete"
 
-#: scp/tickets.php:463
+#: scp/tickets.php:458
 msgid "Internal error: Unable to export the ticket to PDF for print."
 msgstr "Erro interno: Não é possível exportar o tíquete para PDF."
 
-#: scp/tickets.php:472
+#: scp/tickets.php:467
 msgid "Query token required"
 msgstr "Token de pesquisa requerido"
 
-#: scp/tickets.php:474
+#: scp/tickets.php:469
 msgid "Query token not found"
 msgstr "Token de pesquisa não encontrado"
 
-#: scp/tickets.php:476
+#: scp/tickets.php:471
 msgid "Internal error: Unable to dump query results"
 msgstr "Erro interno: Não foi possível mostrar os resultados da pesquisa"
 
@@ -1293,7 +1288,7 @@ msgid "Fatal error... invalid setting."
 msgstr "Erro fatal... configuração inválida."
 
 #: scp/staff.inc.php:62
-#: scp/login.php:23
+#: scp/login.php:24
 msgid "Authentication Required"
 msgstr "Autenticação Requerida"
 
@@ -1354,6 +1349,7 @@ msgstr "sem patches pendentes de aplicação."
 msgid "The upgrader does NOT support upgrading from the current patch [%s]!"
 msgstr "O atualizador NÃO suporta atualizar do patch atual [%s]!"
 
+#: scp/upgrade.php:80
 #: scp/upgrade.php:81
 msgid "Upgrader"
 msgstr "Atualizador"
@@ -1575,14 +1571,6 @@ msgstr "Limpar"
 #: scp/emailtest.php:117
 msgid "Cancel"
 msgstr "Cancelar"
-
-#: scp/login.php:26
-msgid "Invalid login"
-msgstr "Login inválido"
-
-#: scp/login.php:34
-msgid "Login error - try again"
-msgstr "Erro de login - tente novamente"
 
 #: scp/canned.php:28
 msgid "Unknown or invalid canned response ID."
@@ -1892,183 +1880,187 @@ msgstr "na linha"
 msgid "Time"
 msgstr "Tempo"
 
-#: include/class.team.php:222
+#: include/class.team.php:226
 msgid "Missing or invalid team"
 msgstr "Time faltando ou inválido"
 
-#: include/class.team.php:225
+#: include/class.team.php:229
 msgid "Team name required"
 msgstr "Nome do Time requerido"
 
-#: include/class.team.php:227
+#: include/class.team.php:231
 msgid "Team name must be at least 3 chars."
 msgstr "Nome do time deve ter no mínimo 3 caracteres."
 
-#: include/class.team.php:229
+#: include/class.team.php:233
 msgid "Team name already exists"
 msgstr "Nome do Time já existe"
 
-#: include/class.team.php:244
+#: include/class.team.php:248
 msgid "Unable to update the team. Internal error"
 msgstr "Não foi possível atualizar o time. Erro interno"
 
-#: include/class.team.php:250
+#: include/class.team.php:254
 msgid "Unable to create the team. Internal error"
 msgstr "Não foi possível criar o time. Erro interno"
 
-#: include/class.ticket.php:991
+#: include/class.ticket.php:999
 msgid "Ticket assignment"
 msgstr "Designação de tíquete"
 
-#: include/class.ticket.php:992
+#: include/class.ticket.php:1000
+msgid "SYSTEM (Auto Assignment)"
+msgstr "SISTEMA (Auto Designação)"
+
+#: include/class.ticket.php:1003
 msgid "Ticket Assigned to"
 msgstr "Tíquete Designado para"
 
-#: include/class.ticket.php:1388
+#: include/class.ticket.php:1431
 msgid "Missing messageId - internal error"
 msgstr "Faltando ID da mensagem - Erro interno"
 
-#: include/class.ticket.php:1390
+#: include/class.ticket.php:1433
 msgid "Response message required"
 msgstr "Mensagem de resposta requerida"
 
-#: include/class.ticket.php:1593
+#: include/class.ticket.php:1640
 msgid "File Upload Error"
 msgstr "Erro em upload de arquivo"
 
-#: include/class.ticket.php:1595
+#: include/class.ticket.php:1642
 msgid "File Upload Error (Ticket #"
 msgstr "Erro no Upload de Arquivo (Tíquete #"
 
-#: include/class.ticket.php:1668
-#: include/class.ticket.php:1910
+#: include/class.ticket.php:1715
+#: include/class.ticket.php:1966
 msgid "Missing or invalid data - check the errors and try again"
 msgstr "Dados inválidos ou faltando. Corrija os erros abaixo e tente novamente."
 
-#: include/class.ticket.php:1672
+#: include/class.ticket.php:1719
 msgid "Duedate can NOT be set on a closed ticket"
 msgstr "Data limite NÃO pode ser configurada em tíquete fechado"
 
-#: include/class.ticket.php:1674
-#: include/class.ticket.php:1923
+#: include/class.ticket.php:1721
+#: include/class.ticket.php:1979
 msgid "Select time"
 msgstr "Selecione hora"
 
-#: include/class.ticket.php:1676
-#: include/class.ticket.php:1925
+#: include/class.ticket.php:1723
+#: include/class.ticket.php:1981
 msgid "Invalid duedate"
 msgstr "Data limite inválida"
 
-#: include/class.ticket.php:1678
-#: include/class.ticket.php:1927
+#: include/class.ticket.php:1725
+#: include/class.ticket.php:1983
 msgid "Due date must be in the future"
 msgstr "Data limite deve ser futura"
 
-#: include/class.ticket.php:1684
-#: include/class.ticket.php:1915
+#: include/class.ticket.php:1731
+#: include/class.ticket.php:1971
 msgid "Invalid phone ext."
 msgstr "Extensão de telefone inválida."
 
-#: include/class.ticket.php:1686
-#: include/class.ticket.php:1917
+#: include/class.ticket.php:1733
+#: include/class.ticket.php:1973
 msgid "Phone number required"
 msgstr "Número de telefone é requerido"
 
-#: include/class.ticket.php:1712
+#: include/class.ticket.php:1759
 #, php-format
 msgid "Ticket Updated by"
 msgstr "Tíquete atualizado por"
 
-#: include/class.ticket.php:1714
+#: include/class.ticket.php:1761
 msgid "Ticket Updated"
 msgstr "Tíquete Atualizado"
 
-#: include/class.ticket.php:1849
-#: include/class.ticket.php:1874
+#: include/class.ticket.php:1905
+#: include/class.ticket.php:1930
 msgid "Ticket denied. Error #403"
 msgstr "Tíquete negado. Erro #403"
 
-#: include/class.ticket.php:1850
-#: include/class.ticket.php:1861
-#: include/class.ticket.php:1875
+#: include/class.ticket.php:1906
+#: include/class.ticket.php:1917
+#: include/class.ticket.php:1931
 msgid "Ticket denied"
 msgstr "Tíquete negado"
 
-#: include/class.ticket.php:1850
+#: include/class.ticket.php:1906
 msgid "Banned email"
 msgstr "E-mail Banido"
 
-#: include/class.ticket.php:1860
+#: include/class.ticket.php:1916
 msgid "You've reached the maximum open tickets allowed."
 msgstr "Você alcançou o número máximo permitido de tíquetes abertos."
 
-#: include/class.ticket.php:1862
+#: include/class.ticket.php:1918
 #, php-format
 msgid "Max open tickets (%d) reached for %s "
 msgstr "Máximo de tíquetes abertos (%d) alcançado para %s"
 
-#: include/class.ticket.php:1876
+#: include/class.ticket.php:1932
 #, php-format
 msgid "Ticket rejected ( %s) by filter \"%s\""
 msgstr "Tíquete rejeitado ( %s) pelo filtro \"%s\""
 
-#: include/class.ticket.php:1885
+#: include/class.ticket.php:1941
 msgid "Valid email required"
 msgstr "É requerido endereço de email válido"
 
-#: include/class.ticket.php:1890
+#: include/class.ticket.php:1946
 msgid "Select help topic"
 msgstr "Selecione tópico de ajuda"
 
-#: include/class.ticket.php:1893
+#: include/class.ticket.php:1949
 msgid "Dept. required"
 msgstr "Depto. requerido"
 
-#: include/class.ticket.php:1894
+#: include/class.ticket.php:1950
 msgid "Topic required"
 msgstr "Tópico requerido"
 
-#: include/class.ticket.php:1895
+#: include/class.ticket.php:1951
 msgid "Invalid date - must be MM/DD/YY"
 msgstr "Data inválida - deve ser MM/DD/YY"
 
-#: include/class.ticket.php:1897
+#: include/class.ticket.php:1953
 msgid "Indicate source"
 msgstr "Indique a origem"
 
-#: include/class.ticket.php:1900
+#: include/class.ticket.php:1956
 msgid "Email unknown"
 msgstr "E-mail desconhecido"
 
-#: include/class.ticket.php:1904
+#: include/class.ticket.php:1960
 msgid "Invalid origin given"
 msgstr "Origem dada inválida"
 
-#: include/class.ticket.php:1906
+#: include/class.ticket.php:1962
 msgid "Invalid Priority"
 msgstr "Prioridade Inválida"
 
-#: include/class.ticket.php:1907
+#: include/class.ticket.php:1963
 msgid "Valid phone # required"
 msgstr "No. de Telefone requerido"
 
-#: include/class.ticket.php:2079
+#: include/class.ticket.php:2135
 msgid "Summary of the issue required"
 msgstr "Resumo do problema requerido"
 
-#: include/class.ticket.php:2084
+#: include/class.ticket.php:2140
 msgid "Invalid source"
 msgstr "Origem inválida"
 
-#: include/class.ticket.php:2107
+#: include/class.ticket.php:2163
 msgid "New Ticket by Staff"
 msgstr "Novo Tíquete pela Equipe"
 
-#: include/class.ticket.php:2107
+#: include/class.ticket.php:2163
 msgid "Ticket created by staff"
 msgstr "Tíquete criado pela equipe"
 
-#: include/class.ticket.php:2164
+#: include/class.ticket.php:2220
 msgid "Ticket flagged as overdue by the system."
 msgstr "Tíquete marcado como atrasado pelo sistema."
 
@@ -2100,31 +2092,31 @@ msgstr "Não foi possível atualizar grupo. Ocorreu um erro interno."
 msgid "Unable to create the group. Internal error"
 msgstr "Não foi possível criar o grupo. Erro interno"
 
-#: include/class.topic.php:184
+#: include/class.topic.php:188
 msgid "Help topic required"
 msgstr "Tópico de Ajuda requerido"
 
-#: include/class.topic.php:186
+#: include/class.topic.php:190
 msgid "Topic is too short. 5 chars minimum"
 msgstr "Nome do tópico muito curto. Mínimo de 5 caracteres"
 
-#: include/class.topic.php:188
+#: include/class.topic.php:192
 msgid "Topic already exists"
 msgstr "Tópico já existe"
 
-#: include/class.topic.php:191
+#: include/class.topic.php:195
 msgid "You must select a department"
 msgstr "Você deve selecionar um departamento"
 
-#: include/class.topic.php:194
+#: include/class.topic.php:198
 msgid "You must select a priority"
 msgstr "Você deve selecionar a prioridade"
 
-#: include/class.topic.php:222
+#: include/class.topic.php:226
 msgid "Unable to update topic. Internal error occurred"
 msgstr "Não foi possível atualizar tópico. Ocorreu um erro interno."
 
-#: include/class.topic.php:228
+#: include/class.topic.php:232
 msgid "Unable to create the topic. Internal error"
 msgstr "Não foi possível criar o tópico. Erro interno"
 
@@ -2447,7 +2439,7 @@ msgstr "Arquivo (%s) muito grande. Máximo de %s permitidos"
 msgid "Invalid or bad upload POST"
 msgstr "POST de upload inválido"
 
-#: include/class.osticket.php:227
+#: include/class.osticket.php:238
 #, php-format
 msgid "\"osTicket Alerts\""
 msgstr "\"Alertas do osTicket\""
@@ -2925,30 +2917,70 @@ msgstr "A extensão de criptografia mcrypt não está habilitada ou instalada. T
 msgid "mcrypt module missing"
 msgstr "módulo mcrypt faltando"
 
-#: include/class.client.php:151
+#: include/class.client.php:153
 msgid "Excessive failed login attempts"
 msgstr "Número excessivo de tentativas de login"
 
-#: include/class.client.php:152
-msgid "You've reached maximum failed login attempts allowed. Try again later or"
-msgstr "Você alcançou o número máximo permitido de tentativas de login. Tente novamente mais tarde, ou"
+#: include/class.client.php:154
+msgid "You've reached maximum failed login attempts allowed. Try again later or <a href=\"open.php\">open a new ticket</a>"
+msgstr "Você alcançou o número máximo permitido de tentativas de login. Tente novamente mais tarde, ou <a href=\"open.php\">abra um novo tíquete</a>"
 
-#: include/class.client.php:152
-#: include/class.client.php:191
-msgid "open a new ticket"
-msgstr "abra novo tíquete"
+#: include/class.client.php:164
+msgid "Invalid method"
+msgstr "Método inválido"
 
-#: include/class.client.php:191
+#: include/class.client.php:166
+msgid "Valid email and ticket number required"
+msgstr "É requerido endereço de email e número de tíquete válidos"
+
+#: include/class.client.php:207
+msgid "Invalid login"
+msgstr "Login inválido"
+
+#: include/class.client.php:211
 msgid "Forgot your login info? Please"
 msgstr "Esqueceu seu usuário ou senha? Por favor"
 
-#: include/class.client.php:193
-msgid "Excessive login attempts by a client?"
-msgstr "Tentativas excessivas de login por um cliente?"
+#: include/class.client.php:211
+msgid "open a new ticket"
+msgstr "abra novo tíquete"
 
-#: include/class.client.php:201
-msgid "Failed login attempt"
-msgstr "Tentativa de login falhou"
+#: include/class.client.php:213
+msgid "Excessive login attempts by a user."
+msgstr "Tentativas excessivas de login por um usuário."
+
+#: include/class.client.php:214
+msgid "Ticket#"
+msgstr "Tíquete #"
+
+#: include/class.client.php:215
+#: include/class.client.php:219
+msgid "IP"
+msgstr "IP"
+
+#: include/class.client.php:216
+msgid "Attempts"
+msgstr "Tentativas"
+
+#: include/class.client.php:217
+msgid "Excessive login attempts (user)"
+msgstr "Número excessivo de tentativas de login (usuário)"
+
+#: include/class.client.php:219
+msgid "Ticket #"
+msgstr "Tíquetes #"
+
+#: include/class.client.php:220
+msgid "TIME"
+msgstr "HORA"
+
+#: include/class.client.php:220
+msgid "Attempts #"
+msgstr "Tentativas #"
+
+#: include/class.client.php:221
+msgid "Failed login attempt (user)"
+msgstr "Tentativa de login falhou (usuário)"
 
 #: include/class.banlist.php:55
 msgid "Internal list for email banning. Do not remove"
@@ -3098,190 +3130,179 @@ msgstr "500 Erro Interno do Servidor"
 msgid "Error: Contact system admin."
 msgstr "Erro: Contacte o administrador."
 
-#: include/class.dept.php:337
+#: include/class.dept.php:341
 msgid "Missing or invalid Dept ID (internal error)."
 msgstr "ID de Depto. inválido ou faltando (erro interno)."
 
-#: include/class.dept.php:340
+#: include/class.dept.php:344
 msgid "Email selection required"
 msgstr "Seleção de E-mail requerida"
 
-#: include/class.dept.php:343
+#: include/class.dept.php:347
 msgid "Template selection required"
 msgstr "Seleçao de modelo requerida"
 
-#: include/class.dept.php:348
+#: include/class.dept.php:352
 msgid "Name is too short."
 msgstr "Nome muito pequeno."
 
-#: include/class.dept.php:350
+#: include/class.dept.php:354
 msgid "Department already exist"
 msgstr "Departamento já existe"
 
-#: include/class.dept.php:354
+#: include/class.dept.php:358
 msgid "System default department can not be private"
 msgstr "O Departamento padrão do sistema não pode ser privado"
 
-#: include/class.dept.php:378
+#: include/class.dept.php:382
 msgid "Unable to update "
 msgstr "Não foi possível atualizar"
 
-#: include/class.dept.php:378
+#: include/class.dept.php:382
 msgid " Dept. Error occurred"
 msgstr " Erro no Departamento"
 
-#: include/class.dept.php:386
+#: include/class.dept.php:390
 msgid "Unable to create department. Internal error"
 msgstr "Não foi possível criar departamento. Erro interno"
 
-#: include/class.staff.php:404
-#: include/class.staff.php:646
+#: include/class.staff.php:407
+#: include/class.staff.php:657
 msgid "Internal Error"
 msgstr "Erro Interno"
 
-#: include/class.staff.php:407
-#: include/class.staff.php:649
+#: include/class.staff.php:410
+#: include/class.staff.php:660
 msgid "First name required"
 msgstr "Primeiro nome requerido"
 
-#: include/class.staff.php:410
-#: include/class.staff.php:651
+#: include/class.staff.php:413
+#: include/class.staff.php:662
 msgid "Last name required"
 msgstr "Sobrenome requerido"
 
-#: include/class.staff.php:415
+#: include/class.staff.php:418
 msgid "Already in-use as system email"
 msgstr "E-mail já está em uso como email do sistema"
 
-#: include/class.staff.php:417
-#: include/class.staff.php:663
+#: include/class.staff.php:420
+#: include/class.staff.php:674
 msgid "Email already in-use by another staff member"
 msgstr "E-mail já em uso por outro membro da equipe"
 
-#: include/class.staff.php:420
 #: include/class.staff.php:423
-#: include/class.staff.php:666
-#: include/class.staff.php:669
+#: include/class.staff.php:426
+#: include/class.staff.php:677
+#: include/class.staff.php:680
 msgid "Valid number required"
 msgstr "Número válido requerido"
 
-#: include/class.staff.php:428
+#: include/class.staff.php:431
 msgid "New password required"
 msgstr "Nova senha requerida"
 
-#: include/class.staff.php:430
-#: include/class.staff.php:676
+#: include/class.staff.php:433
+#: include/class.staff.php:687
 msgid "Must be at least 6 characters"
 msgstr "Mínimo de 6 caracteres"
 
-#: include/class.staff.php:432
-#: include/class.staff.php:678
+#: include/class.staff.php:435
+#: include/class.staff.php:689
 msgid "Password(s) do not match"
 msgstr "Senha(s) não conferem"
 
-#: include/class.staff.php:435
+#: include/class.staff.php:438
 msgid "Current password required"
 msgstr "Senha atual requerida"
 
-#: include/class.staff.php:437
+#: include/class.staff.php:440
 msgid "Invalid current password!"
 msgstr "Senha atual inválida!"
 
-#: include/class.staff.php:439
+#: include/class.staff.php:442
 msgid "New password MUST be different from the current password!"
 msgstr "Nova senha PRECISA ser diferente da senha atual!"
 
-#: include/class.staff.php:443
-#: include/class.staff.php:689
+#: include/class.staff.php:446
+#: include/class.staff.php:700
 msgid "Time zone required"
 msgstr "Fuso Horário Padrão requerido"
 
-#: include/class.staff.php:446
+#: include/class.staff.php:449
 msgid "You don't have a signature"
 msgstr "Você não tem assinatura"
 
-#: include/class.staff.php:577
-msgid "You've reached maximum failed login attempts allowed."
-msgstr "Você alcançou o número máximo permitido de tentativas de login."
+#: include/class.staff.php:579
+msgid "Max. failed login attempts reached"
+msgstr "Número excessivo de tentativas de login alcançado"
 
-#: include/class.staff.php:599
+#: include/class.staff.php:589
+msgid "Username and password required"
+msgstr "Usuário e senha requeridos"
+
+#: include/class.staff.php:608
 msgid "Staff login"
 msgstr "Login da Equipe"
 
-#: include/class.staff.php:600
+#: include/class.staff.php:609
 #, php-format
 msgid "logged in"
 msgstr "autenticado"
 
-#: include/class.staff.php:615
+#: include/class.staff.php:626
 msgid "Forgot your login info? Contact Admin."
 msgstr "Esqueceu seu usuário ou senha? Por favor contacte o Admin"
 
-#: include/class.staff.php:617
+#: include/class.staff.php:628
 msgid "Excessive login attempts by a staff member?"
 msgstr "Tentativas excessivas de login por um membro da equipe?"
 
-#: include/class.staff.php:618
-#: include/class.staff.php:623
+#: include/class.staff.php:629
+#: include/class.staff.php:634
 msgid "Username"
 msgstr "Usuário"
 
-#: include/class.staff.php:618
-#: include/class.staff.php:623
-msgid "IP"
-msgstr "IP"
-
-#: include/class.staff.php:618
-#: include/class.staff.php:624
-msgid "TIME"
-msgstr "HORA"
-
-#: include/class.staff.php:619
-#: include/class.staff.php:624
-msgid "Attempts"
-msgstr "Tentativas"
-
-#: include/class.staff.php:619
+#: include/class.staff.php:630
 msgid "Timeout"
 msgstr "Tempo limite excedido"
 
-#: include/class.staff.php:620
+#: include/class.staff.php:631
 msgid "Excessive login attempts"
 msgstr "Número excessivo de tentativas de login"
 
-#: include/class.staff.php:625
+#: include/class.staff.php:636
 msgid "Failed staff login attempt"
 msgstr "Tentativa de login de membro da equipe falhou"
 
-#: include/class.staff.php:654
+#: include/class.staff.php:665
 msgid "Username required"
 msgstr "Nome de usuário requerido"
 
-#: include/class.staff.php:656
+#: include/class.staff.php:667
 msgid "Username already in-use"
 msgstr "Nome já está em uso"
 
-#: include/class.staff.php:661
+#: include/class.staff.php:672
 msgid "Already in-use system email"
 msgstr "E-mail já está configurado como e-mail de sistema"
 
-#: include/class.staff.php:673
+#: include/class.staff.php:684
 msgid "Temp. password required"
 msgstr "Senha temporária requerida"
 
-#: include/class.staff.php:683
+#: include/class.staff.php:694
 msgid "Department required"
 msgstr "Departamento requerido"
 
-#: include/class.staff.php:686
+#: include/class.staff.php:697
 msgid "Group required"
 msgstr "Nome do grupo requerido"
 
-#: include/class.staff.php:725
+#: include/class.staff.php:736
 msgid "Unable to update the user. Internal error occurred"
 msgstr "Não foi possível atualizar o usuário. Erro interno"
 
-#: include/class.staff.php:731
+#: include/class.staff.php:742
 msgid "Unable to create user. Internal error"
 msgstr "Não foi possível criar usuário. Erro interno"
 
@@ -3509,19 +3530,19 @@ msgstr "Todos os direitos reservados."
 msgid "To view the status of a ticket, provide us with the login details below."
 msgstr "Para ver o status de um tíquete, digite seu usuário e senha abaixo."
 
-#: include/client/login.inc.php:13
+#: include/client/login.inc.php:14
 msgid "E-Mail Address:"
 msgstr "Endereço de E-mail:"
 
-#: include/client/login.inc.php:17
+#: include/client/login.inc.php:18
 msgid "Ticket ID:"
 msgstr "ID do tíquete:"
 
-#: include/client/login.inc.php:21
+#: include/client/login.inc.php:22
 msgid "View Status"
 msgstr "Status do Tíquete"
 
-#: include/client/login.inc.php:26
+#: include/client/login.inc.php:27
 msgid "If this is your first time contacting us or you've lost the ticket ID, please"
 msgstr "Se for a primeira vez que acessa o sistema, ou se perdeu o ID do seu tíquete, por favor"
 
@@ -3719,7 +3740,6 @@ msgstr "SLA Padrão"
 #: include/staff/categories.inc.php:99
 #: include/staff/teams.inc.php:101
 #: include/staff/team.inc.php:64
-#: include/staff/emails.inc.php:108
 msgid "None"
 msgstr "Nenhum"
 
@@ -3975,21 +3995,18 @@ msgstr "Privado"
 #: include/staff/departments.inc.php:104
 #: include/staff/categories.inc.php:97
 #: include/staff/teams.inc.php:99
-#: include/staff/emails.inc.php:106
 msgid "Select"
 msgstr "Selecionar"
 
 #: include/staff/departments.inc.php:105
 #: include/staff/categories.inc.php:98
 #: include/staff/teams.inc.php:100
-#: include/staff/emails.inc.php:107
 msgid "All"
 msgstr "Todos"
 
 #: include/staff/departments.inc.php:107
 #: include/staff/categories.inc.php:100
 #: include/staff/teams.inc.php:102
-#: include/staff/emails.inc.php:109
 msgid "Toggle"
 msgstr "Alternar"
 
@@ -4178,7 +4195,6 @@ msgstr "Adicionar Nova Categoria"
 
 #: include/staff/categories.inc.php:60
 #: include/staff/teams.inc.php:60
-#: include/staff/emails.inc.php:63
 msgid "Last Updated"
 msgstr "Última Atualização"
 
@@ -4266,7 +4282,6 @@ msgid "Members"
 msgstr "Membros"
 
 #: include/staff/teams.inc.php:59
-#: include/staff/emails.inc.php:62
 msgid "Created"
 msgstr "Criado"
 
@@ -4347,6 +4362,7 @@ msgid "No emails found!"
 msgstr "Não foram encontrados e-mails!"
 
 #: include/staff/emails.inc.php:49
+#: include/staff/email.inc.php:22
 msgid "Add New Email"
 msgstr "Adicionar Novo E-mail"
 
@@ -4359,18 +4375,19 @@ msgid "Delete Email(s)"
 msgstr "Apagar E-mail(s)"
 
 #: include/staff/emails.inc.php:123
+#: include/staff/banlist.inc.php:138
 msgid "Are you sure you want to DELETE selected emails?"
 msgstr "Tem certeza que deseja APAGAR os e-mails selecionados?"
 
-#: include/staff/login.tpl.php:21
+#: include/staff/login.tpl.php:25
 msgid "osTicket Staff Control Panel"
 msgstr "Painel de Equipes do osTicket"
 
-#: include/staff/login.tpl.php:27
+#: include/staff/login.tpl.php:31
 msgid "username"
 msgstr "usuário"
 
-#: include/staff/login.tpl.php:28
+#: include/staff/login.tpl.php:32
 msgid "password"
 msgstr "senha"
 
@@ -4735,7 +4752,6 @@ msgid "Phone Ext"
 msgstr "Ramal"
 
 #: include/staff/directory.inc.php:103
-#: include/staff/profile.inc.php:70
 msgid "Mobile Number"
 msgstr "Celular"
 
@@ -5036,7 +5052,6 @@ msgid "Response"
 msgstr "Resposta"
 
 #: include/staff/ticket-view.inc.php:350
-#: include/staff/profile.inc.php:222
 msgid "Signature"
 msgstr "Assinatura"
 
@@ -5438,14 +5453,19 @@ msgid "Contact information."
 msgstr "Informações de contato."
 
 #: include/staff/profile.inc.php:32
+#: include/staff/staff.inc.php:66
 msgid "First Name"
 msgstr "Nome"
 
 #: include/staff/profile.inc.php:41
+#: include/staff/staff.inc.php:75
 msgid "Last Name"
 msgstr "Sobrenome"
 
 #: include/staff/profile.inc.php:64
+#: include/staff/staff.inc.php:98
+#: include/staff/ticket-open.inc.php:54
+#: include/staff/ticket-edit.inc.php:47
 msgid "Ext"
 msgstr "Ramal"
 
@@ -5462,18 +5482,23 @@ msgid "Time Zone"
 msgstr "Fuso Horário"
 
 #: include/staff/profile.inc.php:88
+#: include/staff/staff.inc.php:227
 msgid "Select Time Zone"
 msgstr "Selecione Fuso Horário"
 
 #: include/staff/profile.inc.php:104
+#: include/staff/settings-system.inc.php:232
+#: include/staff/staff.inc.php:243
 msgid "Daylight Saving"
 msgstr "Horário de Verão"
 
 #: include/staff/profile.inc.php:108
+#: include/staff/staff.inc.php:247
 msgid "Observe daylight saving"
 msgstr "Observar horário de verão"
 
 #: include/staff/profile.inc.php:109
+#: include/staff/staff.inc.php:248
 msgid "Current Time"
 msgstr "Horário Atual"
 
@@ -5508,6 +5533,7 @@ msgid "disable"
 msgstr "desabilitar"
 
 #: include/staff/profile.inc.php:135
+#: include/staff/settings-system.inc.php:122
 #, php-format
 msgid "Every"
 msgstr "Cada"
@@ -5525,6 +5551,7 @@ msgid "My Signature"
 msgstr "Minha Assinatura"
 
 #: include/staff/profile.inc.php:149
+#: include/staff/ticket-open.inc.php:301
 msgid "Dept. Signature (if set)"
 msgstr "Assinatura do Depto. (se existir)"
 
@@ -5545,6 +5572,7 @@ msgid "Show Assigned Tickets"
 msgstr "Mostrar Tíquetes Designados"
 
 #: include/staff/profile.inc.php:190
+#: include/staff/staff.inc.php:118
 msgid "Password"
 msgstr "Senha"
 
@@ -5553,6 +5581,7 @@ msgid "Your password is configured at the LDAP directory."
 msgstr "Sua senha está configurada no diretório LDAP."
 
 #: include/staff/profile.inc.php:190
+#: include/staff/staff.inc.php:113
 msgid "As an Admin, you can change the osTicket database password below, to login in case the LDAP directory is not available."
 msgstr "Como Administrador, você pode modificar sua senha armazenada na base de dados, para entrar caso o diretório LDAP não esteja disponível."
 
@@ -5581,6 +5610,7 @@ msgid "Signature is made available as a choice, on ticket reply."
 msgstr "A assinatura fica disponível como uma opção, na hora de responder o tíquete."
 
 #: include/staff/profile.inc.php:237
+#: include/staff/tpl.inc.php:62
 msgid "Cancel Changes"
 msgstr "Cancelar Mudanças"
 
@@ -5920,7 +5950,6 @@ msgid "Overdue Tickets"
 msgstr "Tíquetes atrasados"
 
 #: include/staff/tickets.inc.php:171
-#: include/staff/syslogs.inc.php:36
 msgid "Entered date span is invalid. Selection ignored."
 msgstr "Intervalo de datas inválido. Seleção ignorada."
 
@@ -6865,7 +6894,6 @@ msgstr "Por favor, refira-se ao"
 
 #: include/upgrader/rename.inc.php:18
 #: include/upgrader/prereq.inc.php:39
-#: include/upgrader/aborted.inc.php:25
 msgid "Upgrade Guide"
 msgstr "Guia de Atualização"
 
@@ -6878,7 +6906,6 @@ msgid "Continue"
 msgstr "Continue"
 
 #: include/upgrader/rename.inc.php:28
-#: include/upgrader/aborted.inc.php:27
 msgid "Need Help?"
 msgstr "Precisa de ajuda?"
 
@@ -6887,7 +6914,6 @@ msgid "If you are looking for a greater level of support, we provide <u>professi
 msgstr "Se você está procurando um nível maior de suporte, nós provesmos <u> atualizações profissionais </u> e suporte comercial com tempos de resposta garantidos, e acesso ao time de desenvolvimento. Também podemos ajudar a customizar o osTicket ou ainda adicionar novos recursos para o sistema para atender suas necessidades específicas."
 
 #: include/upgrader/rename.inc.php:30
-#: include/upgrader/done.inc.php:26
 msgid "Learn More!"
 msgstr "Veja Mais!"
 
@@ -7097,10 +7123,12 @@ msgid "PS"
 msgstr "PS"
 
 #: include/upgrader/done.inc.php:19
+#: setup/inc/install-done.inc.php:41
 msgid "Don't just make customers happy, make happy customers!"
 msgstr "Não deixe apenas os clientes felizes, faça clientes felizes!"
 
 #: include/upgrader/done.inc.php:22
+#: setup/inc/install-done.inc.php:44
 msgid "What's Next?"
 msgstr "O que vem por aí?"
 
@@ -7117,10 +7145,12 @@ msgid "to enable the system and explore the new features. For complete and upto 
 msgstr "para habilitar o sistema e explorar os novos recursos. Para notas de versão completas e atualiadas, veja"
 
 #: include/upgrader/done.inc.php:23
+#: setup/inc/install-done.inc.php:45
 msgid "osTicket wiki"
 msgstr "wiki do osTicket"
 
 #: include/upgrader/done.inc.php:24
+#: setup/inc/subscribe.inc.php:7
 msgid "Stay up to date"
 msgstr "Mantenha-se atualizado"
 
@@ -7181,6 +7211,7 @@ msgid "Please, refer to the"
 msgstr "Por favor, refira-se ao"
 
 #: include/upgrader/aborted.inc.php:25
+#: setup/inc/file-unclean.inc.php:10
 msgid "on the wiki for more information."
 msgstr "na wiki para maiores informações."
 
@@ -7216,7 +7247,17 @@ msgstr "Restaura a versão anterior de seu backup e tente nocamente ou"
 msgid "seek help"
 msgstr "procure ajuda"
 
+#: setup/install.php:27
+msgid "osTicket Installer"
+msgstr "Instalador do osTicket"
+
+#: setup/install.php:28
+msgid "Installing osTicket v"
+msgstr "Instalando osTicket v"
+
 #: setup/install.php:30
+#: setup/inc/file-unclean.inc.php:10
+#: setup/inc/file-missing.inc.php:17
 msgid "Installation Guide"
 msgstr "Guia de Instalação"
 
@@ -7242,6 +7283,7 @@ msgstr "Erro ao instalar o osTicket - corriga os erros abaixo e tente novamente.
 
 #: setup/install.php:64
 #: setup/install.php:67
+#: setup/inc/install-prereq.inc.php:14
 msgid "Required"
 msgstr "Requerido"
 
@@ -7252,6 +7294,176 @@ msgstr "Inválido"
 #: setup/install.php:72
 msgid "Check one or more"
 msgstr "Selecione um ou mais"
+
+#: setup/inc/install-done.inc.php:6
+msgid "Congratulations!"
+msgstr "Parabéns!"
+
+#: setup/inc/install-done.inc.php:8
+msgid "Your osTicket installation has been completed successfully. Your next step is to fully configure your new support ticket system for use, but before you get to it please take a minute to cleanup."
+msgstr "Sua instalação do osTicket foi completada com sucesso. Seu próximo passo é configurar completamente seu novo sistema de tíquetes de suporte, mas antes, por favor, reserve um minuto para limpeza."
+
+#: setup/inc/install-done.inc.php:10
+msgid "Config file permission"
+msgstr "Configure permissão de arquivo"
+
+#: setup/inc/install-done.inc.php:11
+msgid "Change permission of ost-config.php to remove write access as shown below."
+msgstr "Modifique a permissão do arquivo ost-config.php de modo a remover acesso de escrita, como mostrado abaixo."
+
+#: setup/inc/install-done.inc.php:14
+msgid "Using WS_FTP this would be right hand clicking on the file, selecting chmod, and then remove write access"
+msgstr "Utilizando WS_FTP seria: clique com botão direito no arquivo, selecione chmod, e então remova o acesso de escrita"
+
+#: setup/inc/install-done.inc.php:15
+msgid "Click on the file, select change permission, and then remove write access."
+msgstr "Clique no arquivo, selecione mudar permissão, e então remova o acesso de escrita."
+
+#: setup/inc/install-done.inc.php:18
+msgid "Below, you'll find some useful links regarding your installation."
+msgstr "Abaixo, você encontrará links úteis sobre sua instalação."
+
+#: setup/inc/install-done.inc.php:22
+msgid "Your osTicket URL:"
+msgstr "Sua URL do osTicket:"
+
+#: setup/inc/install-done.inc.php:26
+msgid "Your Staff Control Panel:"
+msgstr "Painel de Equipe do osTicket:"
+
+#: setup/inc/install-done.inc.php:32
+msgid "osTicket Forums:"
+msgstr "Fóruns do osTicket:"
+
+#: setup/inc/install-done.inc.php:36
+msgid "osTicket Community Wiki:"
+msgstr "Wiki Comunitário do osTicket:"
+
+#: setup/inc/install-done.inc.php:45
+msgid "Post-Install Setup"
+msgstr "Config. Pós-Instalação"
+
+#: setup/inc/install-done.inc.php:45
+msgid "You can now log in to"
+msgstr "Você pode agora entrar em"
+
+#: setup/inc/install-done.inc.php:45
+msgid "with the username and password you created during the install process. After a successful log in, you can proceed with post-install setup. For complete and upto date guide see"
+msgstr "com o usuário e senha criados durante o processo de instalação. Depois de entrar com sucesso, você pode proceder às configurações pós-instalação. Para um completo e atualizado guia, veja"
+
+#: setup/inc/install-done.inc.php:47
+msgid "Commercial Support Available"
+msgstr "Suporte Comercial Disponível"
+
+#: setup/inc/install-done.inc.php:47
+msgid "Don't let technical problems impact your osTicket implementation. Get guidance and hands-on expertise to address unique challenges and make sure your osTicket runs smoothly, efficiently, and securely."
+msgstr "Não deixe que problemas técnicos impactem sua implementação do osTicket. Obtenha ajuda para resolver desafios e certifique-se que seu osTicket está rodando suavemente, eficientemente e com segurança."
+
+#: setup/inc/file-perm.inc.php:5
+msgid "Configuration file is not writable"
+msgstr "Arquivo de configuração não é gravável"
+
+#: setup/inc/file-perm.inc.php:8
+msgid "osTicket installer requires ability to write to the configuration file"
+msgstr "O Instalador do osTicket requer permissão para escrever para o arquivo de configuração"
+
+#: setup/inc/file-perm.inc.php:12
+msgid "Please follow the instructions below to give read and write access to the web server."
+msgstr "Por favor, siga as instruções abaixo para dar permissão de escrita e leitura para o servidor web."
+
+#: setup/inc/file-perm.inc.php:15
+msgid "Using WS_FTP this would be right hand clicking on the fil, selecting chmod, and then giving all permissions to the file."
+msgstr "Usando o WS_FTP isto seria feito clicando com o botão direito no arquivo, selecionando chmod, e então dando todas permissões para o arquivo."
+
+#: setup/inc/file-perm.inc.php:16
+msgid "Click on the file, select change permission, and then giving all permissions to the file."
+msgstr "Clique no arquivo, selecione mudar permissão, e então dê todas as permissões para o arquivo."
+
+#: setup/inc/file-perm.inc.php:19
+msgid "Don't worry! We'll remind you to take away the write access post-install"
+msgstr "Não se preocupe! Lembraremos você para tirar o acesso de escrita depois da instalação"
+
+#: setup/inc/file-perm.inc.php:23
+msgid "Done? Continue"
+msgstr "Pronto? Continue"
+
+#: setup/inc/file-perm.inc.php:30
+#: setup/inc/file-missing.inc.php:28
+#: setup/inc/install-prereq.inc.php:39
+msgid "If you are looking for a greater level of support, we provide <u>professional installation services</u> and commercial support with guaranteed response times, and access to the core development team. We can also help customize osTicket or even add new features to the system to meet your unique needs."
+msgstr "Se você está procurando um nível maior de suporte, nós provemos <u> serviços de instalação profissionais </u> e suporte comercial com tempos de resposta garantidos, e acesso ao time de desenvolvimento. Também podemos ajudar a customizar o osTicket ou ainda adicionar novos recursos para o sistema para atender suas necessidades específicas."
+
+#: setup/inc/install.inc.php:6
+msgid "osTicket Basic Installation"
+msgstr "Instalação Básica do osTicket"
+
+#: setup/inc/install.inc.php:7
+msgid "Please fill out the information below to continue your osTicket installation. All fields are required."
+msgstr "Por favor, preencha as informações abaixo para continuar com sua instalação do osTicket. Todos os campos são requeridos."
+
+#: setup/inc/install.inc.php:12
+msgid "The URL of your helpdesk, its name, and the default system email address"
+msgstr "A URL do seu centro de suprote, seu nome, e o endereço de e-mail padrão do sistema"
+
+#: setup/inc/install.inc.php:18
+msgid "Helpdesk Name"
+msgstr "Nome do Centro de Suporte"
+
+#: setup/inc/install.inc.php:24
+msgid "Default Email"
+msgstr "E-mail Padrão"
+
+#: setup/inc/install.inc.php:30
+msgid "Admin User"
+msgstr "Usuário Admin"
+
+#: setup/inc/install.inc.php:31
+msgid "Your primary administrator account - you can add more users later."
+msgstr "Sua conta primária de administrador - você pode adicionar mais usuários depois."
+
+#: setup/inc/install.inc.php:63
+msgid "Retype Password"
+msgstr "Redigite a Senha"
+
+#: setup/inc/install.inc.php:69
+msgid "Database Settings"
+msgstr "Configs. de Base de Dados"
+
+#: setup/inc/install.inc.php:70
+msgid "Database connection information"
+msgstr "Informações de Conexão à Base de Dados"
+
+#: setup/inc/install.inc.php:72
+msgid "MySQL Table Prefix"
+msgstr "Prefixo das Tabelas MySQL"
+
+#: setup/inc/install.inc.php:78
+msgid "MySQL Hostname"
+msgstr "Servidor MySQL"
+
+#: setup/inc/install.inc.php:84
+msgid "MySQL Database"
+msgstr "Base de Dados MySQL"
+
+#: setup/inc/install.inc.php:90
+msgid "MySQL Username"
+msgstr "Usuário MySQL"
+
+#: setup/inc/install.inc.php:96
+msgid "MySQL Password"
+msgstr "Senha MySQL"
+
+#: setup/inc/install.inc.php:103
+msgid "Install Now"
+msgstr "Instalar Agora"
+
+#: setup/inc/install.inc.php:108
+msgid "We provide <u>professional installation services</u> and commercial support."
+msgstr "Provemos <u>serviços profissionais de instalação</u> e suporte comercial."
+
+#: setup/inc/install.inc.php:113
+msgid "Please wait... while we install your new support ticket system!"
+msgstr "Favor esperar... enquanto instalamos seu novo sistema de tíquetes!"
 
 #: setup/inc/class.installer.php:55
 msgid "Confirm password"
@@ -7342,6 +7554,10 @@ msgstr "Não foi possível criar o usuário administrativo (#6)"
 msgid "Unable to write to config file. Permission denied! (#5)"
 msgstr "Não foi possível escrever no arquivo de configuração. Permissão negada! (#5)"
 
+#: setup/inc/class.installer.php:181
+msgid "Congratulations and Thank you for choosing osTicket!"
+msgstr "Parabéns, e obrigado por escolher o osTicket!"
+
 #: setup/inc/class.installer.php:194
 msgid ""
 "Congratulations osTicket basic installation completed!\n"
@@ -7351,6 +7567,143 @@ msgstr ""
 "Parabéns! Instalação básica do osTicket completada!\n"
 "\n"
 "Obrigado por escolher o osTicket!"
+
+#: setup/inc/file-unclean.inc.php:5
+msgid "osTicket is already installed?"
+msgstr "osTicket já está instalado?"
+
+#: setup/inc/file-unclean.inc.php:7
+msgid "Configuration file already changed - which could mean osTicket is already installed or the config file is currupted. If you are trying to upgrade osTicket, then go to"
+msgstr "Arquivo de configuração modificado - o que pode significar que o osTicket já está instalado ou que o arquivo de configuração está corrompido. Se você está tentando atualizar o osTicket, vá para"
+
+#: setup/inc/file-unclean.inc.php:9
+msgid "If you believe this is in error, please try replacing the config file with a unchanged template copy and try again or get technical help."
+msgstr "Se você acredita que este é um erro, por favor, tente substituir o arquivo de configuração com um modelo não-modificado e tente novamente, ou procure ajuda técnica."
+
+#: setup/inc/file-unclean.inc.php:10
+msgid "Refer to the"
+msgstr "Refira-se ao"
+
+#: setup/inc/file-unclean.inc.php:16
+msgid "We provide <u>professional installation services</u> and commercial support with guaranteed response times, and access to the core development team."
+msgstr "Provemos <u>serviços profissionais de instalação</u> e suporte comercial com tempos de resposta garantidos, e acesso ao time de desenvolvimento."
+
+#: setup/inc/file-missing.inc.php:5
+msgid "Configuration file missing!"
+msgstr "Arquivo de configuração faltando!"
+
+#: setup/inc/file-missing.inc.php:7
+msgid "osTicket installer requires ability to write to the configuration file, <b>include/ost-config.php</b>. A template copy is located in the include directory (<b>include/ost-sampleconfig.php</b>)."
+msgstr "O instalador do osTicket requer a permissão para escrever no arquivo de configuração <b>include/ost-config.php</b>. Uma cópia-modelo está disponível no diretório <b>include/ost-sampleconfig.php</b>."
+
+#: setup/inc/file-missing.inc.php:11
+msgid "Rename the sample file <b>include/ost-sampleconfig.php</b> to <b>ost-config.php</b> and click continue below."
+msgstr "Renomeie o arquivo de exemplo <b> include/ost-sampleconfig.php</b> para <b>ost-config.php</b> e clique em continuar abaixo."
+
+#: setup/inc/file-missing.inc.php:17
+msgid "If sample config file is missing - please make sure you uploaded all files in 'upload' folder or refer to the"
+msgstr "Arquivo de exemplo de configuração faltando - favor certifique-se que você subiu todos os arquivos no diretório \"upload\" ou refira-se a"
+
+#: setup/inc/header.inc.php:23
+msgid "Contact Us"
+msgstr "Contacte-nos"
+
+#: setup/inc/subscribe.inc.php:5
+msgid "Basic Installation Completed"
+msgstr "Instalação Básica Completada"
+
+#: setup/inc/subscribe.inc.php:6
+msgid "osTicket installation has been completed successfully."
+msgstr "Parabéns! A instalação do osTicket foi completada com sucesso."
+
+#: setup/inc/subscribe.inc.php:8
+msgid "It's important to keep your installation up to date. Get announcements, security updates and alerts delivered directly to you!"
+msgstr "É importante manter sua instalação do osTicket atualizada. Tenha avisos, atualizações de segurança e alertas enviados diretamente para você!"
+
+#: setup/inc/subscribe.inc.php:24
+msgid "I'd like to receive the following notifications"
+msgstr "Eu gostaria de receber as notificações abaixo"
+
+#: setup/inc/subscribe.inc.php:28
+msgid "News &amp; Announcements"
+msgstr "Notícias e Anúncios"
+
+#: setup/inc/subscribe.inc.php:32
+msgid "Security Alerts"
+msgstr "Alertas de Segurança"
+
+#: setup/inc/subscribe.inc.php:35
+msgid "Keep me Updated"
+msgstr "Mantenha-me Informado"
+
+#: setup/inc/subscribe.inc.php:36
+msgid "No thanks."
+msgstr "Não obrigado."
+
+#: setup/inc/subscribe.inc.php:41
+msgid "Thank you!"
+msgstr "Obrigado!"
+
+#: setup/inc/subscribe.inc.php:43
+msgid "Once again, thank you for choosing osTicket as your new customer support platform!"
+msgstr "Novamente, obrigado por escolher o osTicket como sua plataforma de suporte a clientes!"
+
+#: setup/inc/subscribe.inc.php:46
+msgid "Launching a new customer support platform can be a daunting task. Let us get you started! We provide professional support services to help get osTicket up and running smoothly for your organization."
+msgstr "Instalar uma nova plataforma de suporte a clientes pode ser uma tarefa enorme. Deixe-nos ajudá-lo! Provemos serviços de suporte profissional para ajudá-lo a rodar o osTicket de forma suave para sua organização."
+
+#: setup/inc/install-prereq.inc.php:7
+msgid "Thank You for Choosing osTicket!"
+msgstr "Obrigado por escolher o osTicket!"
+
+#: setup/inc/install-prereq.inc.php:9
+msgid "We are delighted you have chosen osTicket for your customer support ticketing system!"
+msgstr "Estamos felizes que você escolheu o osTicket como seu sistema de tíquetes de suporte!"
+
+#: setup/inc/install-prereq.inc.php:10
+msgid "The installer will guide you every step of the way in the installation process. You're minutes away from your awesome customer support system!"
+msgstr "O instalador o guiará em todos os passos do processo de instalação. Você está a minutos de um excelente sistema de suporte para clientes!"
+
+#: setup/inc/install-prereq.inc.php:12
+msgid "Prerequisites."
+msgstr "Pré-requisitos."
+
+#: setup/inc/install-prereq.inc.php:13
+msgid "Before we begin, we'll check your server configuration to make sure you meet the minimum requirements to install and run osTicket."
+msgstr "Antes de começar, checaremos a configuração de seu servidor para termos certeza que ele atente aos requsitos mínimos para instalar e rodar o osTicket."
+
+#: setup/inc/install-prereq.inc.php:15
+msgid "These items are necessary in order to install and use osTicket."
+msgstr "Estes itens são necessários para instalar e usar o osTicket."
+
+#: setup/inc/install-prereq.inc.php:22
+msgid "Recommended"
+msgstr "Recomendado"
+
+#: setup/inc/install-prereq.inc.php:23
+msgid "You can use osTicket without these, but you may not be able to use all features."
+msgstr "Você pode usar o osTicket sem estes, mas não poderá usar alguns recursos."
+
+#: setup/inc/install-prereq.inc.php:25
+msgid "Mcrypt extension"
+msgstr "Extensão Mcrypt"
+
+#: setup/inc/install-prereq.inc.php:26
+msgid "Gdlib extension"
+msgstr "Extensão Gdlib"
+
+#: setup/inc/install-prereq.inc.php:27
+msgid "PHP IMAP extension"
+msgstr "Extensão PHP IMAP"
+
+msgid "Dept. Transfer from "
+msgstr "Transferência do Depto"
+
+msgid "Login error - try again"
+msgstr "Erro de login - tente novamente"
+
+msgid "You've reached maximum failed login attempts allowed."
+msgstr "Você alcançou o número máximo permitido de tentativas de login."
 
 msgid "Could not bind LDAP connection."
 msgstr "Não foi possível conectar ao LDAP."
