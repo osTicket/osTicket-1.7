@@ -66,6 +66,36 @@ $info=($_POST && $errors)?Format::htmlchars($_POST):array('prefix'=>'ost_','dbho
                     <font class="error"><?php echo $errors['passwd2']; ?></font>
                 </div>
 
+		 <h4 class="head admin"><?= _('Login Type')?></h4>
+                <span class="subhead"><input type="checkbox" name="logintype" value="LDAP"><?= _('Use LDAP database for user login (administradors can always login via osTicket database)')?></span>
+                <div class="row">
+                    <label><?= _('LDAP Domain FQDN')?>:</label>
+                    <input type="text" name="ldapfqdn" size="30" tabindex="3" value="<?php echo $info['ldapfqdn']; ?>">
+                    <font class="error"><?php echo $errors['ldapfqdn']; ?></font>
+                </div>
+	 	<div class="row">
+                    <label><?= _('LDAP NETBIOS Name')?>:</label>
+                    <input type="text" name="ldapnetbios" size="30" tabindex="3" value="<?php echo $info['ldapnetbios']; ?>">
+                    <font class="error"><?php echo $errors['ldapnetbios']; ?></font>
+                </div>
+		<div class="row">
+                    <label><?= _('Username')?>:</label>
+                    <input type="text" name="ldapuser" size="30" tabindex="3" value="<?php echo $info['ldapuser']; ?>">
+                    <font class="error"><?php echo $errors['ldapuser']; ?></font>
+                </div>
+		<div class="row">
+                    <label><?= _('Password')?>:</label>
+                    <input type="password" name="ldappw" size="30" tabindex="3" value="<?php echo $info['ldappw']; ?>">
+                    <font class="error"><?php echo $errors['ldappw']; ?></font>
+                </div>
+		<div class="row">
+                    <label><?= _('Search DN')?>:</label>
+                    <input type="text" name="ldapdn" size="30" tabindex="3" value="<?php echo $info['ldapdn']; ?>">
+                    <font class="error"><?php echo $errors['ldapdn']; ?></font>
+                </div>
+
+
+
                 <h4 class="head database"><?= _('Database Settings')?></h4>
                 <span class="subhead"><?= _('Database connection information')?> <font class="error"><?php echo $errors['db']; ?></font></span>
                 <div class="row">

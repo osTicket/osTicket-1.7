@@ -45,7 +45,7 @@ define('DBPASS','%CONFIG-DBPASS');
 define('TABLE_PREFIX','%CONFIG-PREFIX');
 
 #Defines the language used for internationalization
-define('LANG','pt_BR');
+define('LANG','%CONFIG-LANG');
 
 #Authentication Config
 define('LOGIN_TYPE','%CONFIG-LOGINTYPE');

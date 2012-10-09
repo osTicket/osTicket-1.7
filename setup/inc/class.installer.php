@@ -57,7 +57,12 @@ class Installer extends SetupWizard {
         $f['dbhost']        = array('type'=>'string',   'required'=>1, 'error'=>_('Hostname required'));
         $f['dbname']        = array('type'=>'string',   'required'=>1, 'error'=>_('Database name required'));
         $f['dbuser']        = array('type'=>'string',   'required'=>1, 'error'=>_('Username required'));
-        $f['dbpass']        = array('type'=>'string',   'required'=>1, 'error'=>_('password required'));
+        $f['dbpass']        = array('type'=>'string',   'required'=>1, 'error'=>_('Password required'));
+        $f['ldapfqdn']      = array('type'=>'string',   'required'=>1, 'error'=>_('LDAP FQDN required'));
+        $f['ldapnetbios']   = array('type'=>'string',   'required'=>1, 'error'=>_('NETBIOS name required'));
+        $f['ldapuser']      = array('type'=>'string',   'required'=>1, 'error'=>_('Username required'));
+        $f['ldappw']        = array('type'=>'string',   'required'=>1, 'error'=>_('Password required'));
+        $f['ldapdn']        = array('type'=>'string',   'required'=>1, 'error'=>_('LDAP Search DN required'));
         
 
         if(!Validator::process($f,$vars,$this->errors) && !$this->errors['err'])
@@ -153,6 +158,18 @@ class Installer extends SetupWizard {
         $configFile= str_replace('%CONFIG-DBPASS',$vars['dbpass'],$configFile);
         $configFile= str_replace('%CONFIG-PREFIX',$vars['prefix'],$configFile);
         $configFile= str_replace('%CONFIG-SIRI',Misc::randcode(32),$configFile);
+
+	//LDAP Configuration
+        $configFile= str_replace('%CONFIG-LOGINTYPE',$vars['logintype'],$configFile);
+        $configFile= str_replace('%CONFIG-LDAPFQDN',$vars['ldapfqdn'],$configFile);
+        $configFile= str_replace('%CONFIG-LDAPNETBIOS',$vars['ldapnetbios'],$configFile);
+        $configFile= str_replace('%CONFIG-LDAPUSER',$vars['ldapuser'],$configFile);
+        $configFile= str_replace('%CONFIG-LDAPPW',$vars['ldappw'],$configFile);
+        $configFile= str_replace('%CONFIG-LDAPSEARCHDN',$vars['ldapdn'],$configFile);
+
+	//Language Definition
+        $configFile= str_replace('%CONFIG-LANG',LANG,$configFile);
+
         if(!$fp || !ftruncate($fp,0) || !fwrite($fp,$configFile)) {
             $this->errors['err']=_('Unable to write to config file. Permission denied! (#5)');
             return false;
