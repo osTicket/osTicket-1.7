@@ -3,6 +3,11 @@ if(!defined('OSTADMININC') || !$thisstaff || !$thisstaff->isAdmin()) die(_('Acce
 
 $info=array();
 $qstr='';
+$isAdmin = false;
+if (LOGIN_TYPE == 'LDAP') {
+    $pw_display = 'none';
+}
+
 if($staff && $_REQUEST['a']!='add'){
     //Editing Department.
     $title=_('Update Staff');
@@ -13,6 +18,11 @@ if($staff && $_REQUEST['a']!='add'){
     $info['id']=$staff->getId();
     $info['teams'] = $staff->getTeams();
     $qstr.='&id='.$staff->getId();
+    #Changes password display style for LDAP Accounts
+    if (LOGIN_TYPE == 'LDAP' && $staff->isAdmin()) {
+        $pw_display = 'table-row';
+	$isAdmin = true;
+    }
 }else {
     $title=_('Add New Staff');
     $action='create';
@@ -26,13 +36,6 @@ if($staff && $_REQUEST['a']!='add'){
     $qstr.='&a=add';
 }
 $info=Format::htmlchars(($errors && $_POST)?$_POST:$info);
-
-#Changes password display style for LDAP Accounts
-if (LOGIN_TYPE == 'LDAP' && !$staff->isAdmin()) {
-    $pw_display = 'none';
-} else {
-    $pw_display = 'table-row';
-}
 
 ?>
 <form action="staff.php?<?php echo $qstr; ?>" method="post" id="save" autocomplete="off">
@@ -110,7 +113,7 @@ if (LOGIN_TYPE == 'LDAP' && !$staff->isAdmin()) {
         </tr>
         <tr>
             <th colspan="2">
-                <em><strong><?= _('Account Password')?></strong>: <?php if (LOGIN_TYPE == 'LDAP' && !$staff->isAdmin()) { echo _("Account password is already set in the LDAP Directory"); } elseif (LOGIN_TYPE == 'LDAP' && $staff->isAdmin()) echo _('As an Admin, you can change the osTicket database password below, to login in case the LDAP directory is not available.'); else { echo $passwd_text; } ?> &nbsp;<span class="error">&nbsp;<?php echo $errors['temppasswd']; ?></span></em>
+                <em><strong><?= _('Account Password')?></strong>: <?php if (LOGIN_TYPE == 'LDAP' && !$isAdmin) { echo _("Account password is already set in the LDAP Directory"); } elseif (LOGIN_TYPE == 'LDAP' && $isAdmin) echo _('As an Admin, you can change the osTicket database password below, to login in case the LDAP directory is not available.'); else { echo $passwd_text; } ?> &nbsp;<span class="error">&nbsp;<?php echo $errors['temppasswd']; ?></span></em>
             </th>
         </tr>
         <tr style="display:<?= $pw_display ?>">
@@ -118,7 +121,7 @@ if (LOGIN_TYPE == 'LDAP' && !$staff->isAdmin()) {
                 <?= _('Password')?>:
             </td>
             <td>
-                <input type="password" size="18" name="passwd1" value="<?php if (LOGIN_TYPE == 'LDAP'  && !$staff->isAdmin()) { echo LDAP_PASSWORD; } else { echo $info['passwd1']; } ?>">
+                <input type="password" size="18" name="passwd1" value="<?php if (LOGIN_TYPE == 'LDAP'  && !$isAdmin) { echo LDAP_PASSWORD; } else { echo $info['passwd1']; } ?>">
                 &nbsp;<span class="error">&nbsp;<?php echo $errors['passwd1']; ?></span>
             </td>
         </tr>
@@ -127,7 +130,7 @@ if (LOGIN_TYPE == 'LDAP' && !$staff->isAdmin()) {
                 <?= _('Confirm Password')?>:
             </td>
             <td>
-                <input type="password" size="18" name="passwd2" value="<?php if (LOGIN_TYPE == 'LDAP' && !$staff->isAdmin()) { echo LDAP_PASSWORD; } else { echo $info['passwd2']; } ?>">
+                <input type="password" size="18" name="passwd2" value="<?php if (LOGIN_TYPE == 'LDAP' && !$isAdmin) { echo LDAP_PASSWORD; } else { echo $info['passwd2']; } ?>">
                 &nbsp;<span class="error">&nbsp;<?php echo $errors['passwd2']; ?></span>
             </td>
         </tr>
