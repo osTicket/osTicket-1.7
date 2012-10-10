@@ -1,6 +1,9 @@
 <?php 
 if(!defined('SETUPINC')) die('Kwaheri!');
 $info=($_POST && $errors)?Format::htmlchars($_POST):array('prefix'=>'ost_','dbhost'=>'localhost');
+
+$ldaprowstatus = 'hidden';
+if ($info['logintype'] == 'LDAP') $ldaprowstatus = '';
 ?>
 <div id="main" class="step2">        
     <h1><?= _('osTicket Basic Installation')?></h1>
@@ -67,28 +70,29 @@ $info=($_POST && $errors)?Format::htmlchars($_POST):array('prefix'=>'ost_','dbho
                 </div>
 
 		 <h4 class="head admin"><?= _('Login Type')?></h4>
-                <span class="subhead"><input type="checkbox" name="logintype" value="LDAP"><?= _('Use LDAP database for user login (administradors can always login via osTicket database)')?></span>
-                <div class="row">
+                <span class="subhead">
+		    <input type="checkbox" name="logintype" value="<?php echo $info['logintype']; ?>" <?php if($info['logintype']=='LDAP') echo "checked";?> onclick="onLoginTypeClick(this)"><?= _('Use LDAP database for user login (administradors can always login via osTicket database)')?></span>
+                <div class="ldaprow <?=$ldaprowstatus?>">
                     <label><?= _('LDAP Domain FQDN')?>:</label>
                     <input type="text" name="ldapfqdn" size="30" tabindex="3" value="<?php echo $info['ldapfqdn']; ?>">
                     <font class="error"><?php echo $errors['ldapfqdn']; ?></font>
                 </div>
-	 	<div class="row">
+	 	<div class="ldaprow <?=$ldaprowstatus?>">
                     <label><?= _('LDAP NETBIOS Name')?>:</label>
                     <input type="text" name="ldapnetbios" size="30" tabindex="3" value="<?php echo $info['ldapnetbios']; ?>">
                     <font class="error"><?php echo $errors['ldapnetbios']; ?></font>
                 </div>
-		<div class="row">
+		<div class="ldaprow <?=$ldaprowstatus?>">
                     <label><?= _('Username')?>:</label>
                     <input type="text" name="ldapuser" size="30" tabindex="3" value="<?php echo $info['ldapuser']; ?>">
                     <font class="error"><?php echo $errors['ldapuser']; ?></font>
                 </div>
-		<div class="row">
+		<div class="ldaprow <?=$ldaprowstatus?>">
                     <label><?= _('Password')?>:</label>
                     <input type="password" name="ldappw" size="30" tabindex="3" value="<?php echo $info['ldappw']; ?>">
                     <font class="error"><?php echo $errors['ldappw']; ?></font>
                 </div>
-		<div class="row">
+		<div class="ldaprow <?=$ldaprowstatus?>">
                     <label><?= _('Search DN')?>:</label>
                     <input type="text" name="ldapdn" size="30" tabindex="3" value="<?php echo $info['ldapdn']; ?>">
                     <font class="error"><?php echo $errors['ldapdn']; ?></font>

@@ -19,3 +19,14 @@ jQuery(function($) {
         return true;
         });
 });
+
+function onLoginTypeClick(element){
+	if (!element.checked){
+		element.value = "BD";
+		$('div.ldaprow').addClass("hidden");	
+	}else{
+		element.value = "LDAP";
+		$('div.ldaprow').removeClass("hidden");
+
+	}
+}

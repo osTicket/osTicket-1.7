@@ -58,11 +58,15 @@ class Installer extends SetupWizard {
         $f['dbname']        = array('type'=>'string',   'required'=>1, 'error'=>_('Database name required'));
         $f['dbuser']        = array('type'=>'string',   'required'=>1, 'error'=>_('Username required'));
         $f['dbpass']        = array('type'=>'string',   'required'=>1, 'error'=>_('Password required'));
-        $f['ldapfqdn']      = array('type'=>'string',   'required'=>1, 'error'=>_('LDAP FQDN required'));
-        $f['ldapnetbios']   = array('type'=>'string',   'required'=>1, 'error'=>_('NETBIOS name required'));
-        $f['ldapuser']      = array('type'=>'string',   'required'=>1, 'error'=>_('Username required'));
-        $f['ldappw']        = array('type'=>'string',   'required'=>1, 'error'=>_('Password required'));
-        $f['ldapdn']        = array('type'=>'string',   'required'=>1, 'error'=>_('LDAP Search DN required'));
+
+	//LDAP Verification
+	$ldaprequired = 0;
+	if ($vars['logintype'] == "LDAP") $ldaprequired = 1;
+        $f['ldapfqdn']      = array('type'=>'string',   'required'=>$ldaprequired, 'error'=>_('LDAP FQDN required'));
+        $f['ldapnetbios']   = array('type'=>'string',   'required'=>$ldaprequired, 'error'=>_('NETBIOS name required'));
+        $f['ldapuser']      = array('type'=>'string',   'required'=>$ldaprequired, 'error'=>_('Username required'));
+        $f['ldappw']        = array('type'=>'string',   'required'=>$ldaprequired, 'error'=>_('Password required'));
+        $f['ldapdn']        = array('type'=>'string',   'required'=>$ldaprequired, 'error'=>_('LDAP Search DN required'));
         
 
         if(!Validator::process($f,$vars,$this->errors) && !$this->errors['err'])
