@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: osticket17\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-10-08 13:05-0300\n"
+"POT-Creation-Date: 2012-10-10 10:22-0300\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Fabio Rauber <fabior@interlegis.leg.br>\n"
 "Language-Team: Fabio Rauber <fabior@interlegis.leg.br>\n"
@@ -5453,17 +5453,17 @@ msgid "Contact information."
 msgstr "Informações de contato."
 
 #: include/staff/profile.inc.php:32
-#: include/staff/staff.inc.php:66
+#: include/staff/staff.inc.php:69
 msgid "First Name"
 msgstr "Nome"
 
 #: include/staff/profile.inc.php:41
-#: include/staff/staff.inc.php:75
+#: include/staff/staff.inc.php:78
 msgid "Last Name"
 msgstr "Sobrenome"
 
 #: include/staff/profile.inc.php:64
-#: include/staff/staff.inc.php:98
+#: include/staff/staff.inc.php:101
 #: include/staff/ticket-open.inc.php:54
 #: include/staff/ticket-edit.inc.php:47
 msgid "Ext"
@@ -5482,23 +5482,23 @@ msgid "Time Zone"
 msgstr "Fuso Horário"
 
 #: include/staff/profile.inc.php:88
-#: include/staff/staff.inc.php:227
+#: include/staff/staff.inc.php:230
 msgid "Select Time Zone"
 msgstr "Selecione Fuso Horário"
 
 #: include/staff/profile.inc.php:104
 #: include/staff/settings-system.inc.php:232
-#: include/staff/staff.inc.php:243
+#: include/staff/staff.inc.php:246
 msgid "Daylight Saving"
 msgstr "Horário de Verão"
 
 #: include/staff/profile.inc.php:108
-#: include/staff/staff.inc.php:247
+#: include/staff/staff.inc.php:250
 msgid "Observe daylight saving"
 msgstr "Observar horário de verão"
 
 #: include/staff/profile.inc.php:109
-#: include/staff/staff.inc.php:248
+#: include/staff/staff.inc.php:251
 msgid "Current Time"
 msgstr "Horário Atual"
 
@@ -5572,7 +5572,7 @@ msgid "Show Assigned Tickets"
 msgstr "Mostrar Tíquetes Designados"
 
 #: include/staff/profile.inc.php:190
-#: include/staff/staff.inc.php:118
+#: include/staff/staff.inc.php:121
 msgid "Password"
 msgstr "Senha"
 
@@ -5581,7 +5581,7 @@ msgid "Your password is configured at the LDAP directory."
 msgstr "Sua senha está configurada no diretório LDAP."
 
 #: include/staff/profile.inc.php:190
-#: include/staff/staff.inc.php:113
+#: include/staff/staff.inc.php:116
 msgid "As an Admin, you can change the osTicket database password below, to login in case the LDAP directory is not available."
 msgstr "Como Administrador, você pode modificar sua senha armazenada na base de dados, para entrar caso o diretório LDAP não esteja disponível."
 
@@ -5680,7 +5680,7 @@ msgid "Apply"
 msgstr "Aplicar"
 
 #: include/staff/staffmembers.inc.php:109
-#: include/staff/staff.inc.php:17
+#: include/staff/staff.inc.php:27
 msgid "Add New Staff"
 msgstr "Adicionar Novo Membro da Equipe"
 
@@ -5701,7 +5701,7 @@ msgid "Last Login"
 msgstr "Último Login"
 
 #: include/staff/staffmembers.inc.php:152
-#: include/staff/staff.inc.php:177
+#: include/staff/staff.inc.php:180
 msgid "Locked"
 msgstr "Bloqueado"
 
@@ -6073,133 +6073,133 @@ msgstr "Tem certeza que deseja DESABILITAR os planos selecionados?"
 msgid "Are you sure you want to DELETE selected plans?"
 msgstr "Tem certeza que deseja APAGAR os planos selecionados?"
 
-#: include/staff/staff.inc.php:8
+#: include/staff/staff.inc.php:13
 msgid "Update Staff"
 msgstr "Atualizar Membros da Equipe"
 
-#: include/staff/staff.inc.php:11
+#: include/staff/staff.inc.php:16
 msgid "To reset the password enter a new one below"
 msgstr "Para mudar a senha digite a nova senha abaixo"
 
-#: include/staff/staff.inc.php:19
+#: include/staff/staff.inc.php:29
 msgid "Add Staff"
 msgstr "Adicionar Membro da Equipe"
 
-#: include/staff/staff.inc.php:43
+#: include/staff/staff.inc.php:46
 msgid "Staff Account"
 msgstr "Conta de Equipe"
 
-#: include/staff/staff.inc.php:49
+#: include/staff/staff.inc.php:52
 #: include/staff/ticket-open.inc.php:16
 #: include/staff/ticket-edit.inc.php:17
 msgid "User Information"
 msgstr "Informações do Usuário"
 
-#: include/staff/staff.inc.php:113
+#: include/staff/staff.inc.php:116
 msgid "Account Password"
 msgstr "Senha da Conta"
 
-#: include/staff/staff.inc.php:113
+#: include/staff/staff.inc.php:116
 msgid "Account password is already set in the LDAP Directory"
 msgstr "Senha da Conta de Usuário já configurada no diretório LDAP"
 
-#: include/staff/staff.inc.php:127
+#: include/staff/staff.inc.php:130
 msgid "Confirm Password"
 msgstr "Confirme a Senha"
 
-#: include/staff/staff.inc.php:137
+#: include/staff/staff.inc.php:140
 msgid "Forced Password Change"
 msgstr "Forçar Troca de Senha"
 
-#: include/staff/staff.inc.php:141
+#: include/staff/staff.inc.php:144
 msgid "Force"
 msgstr "Forçar"
 
-#: include/staff/staff.inc.php:141
+#: include/staff/staff.inc.php:144
 msgid "password change on next login"
 msgstr "mudança de senha no próximo login"
 
-#: include/staff/staff.inc.php:146
+#: include/staff/staff.inc.php:149
 msgid "Staff's Signature"
 msgstr "Assinatura da Equipe"
 
-#: include/staff/staff.inc.php:146
+#: include/staff/staff.inc.php:149
 msgid "Optional signature used on outgoing emails"
 msgstr "Assinatura opcional utilizada em e-mails enviados"
 
-#: include/staff/staff.inc.php:152
+#: include/staff/staff.inc.php:155
 msgid "Signature is made available as a choice, on ticket reply"
 msgstr "A assinatura fica disponível como uma opção, ao responder o tíquete"
 
-#: include/staff/staff.inc.php:157
+#: include/staff/staff.inc.php:160
 msgid "Account Status & Settings"
 msgstr "Estado de Conta e Configs."
 
-#: include/staff/staff.inc.php:157
+#: include/staff/staff.inc.php:160
 msgid "Dept. and assigned group controls access permissions."
 msgstr "O departamento e o grupo designado controlam as permissões de acesso."
 
-#: include/staff/staff.inc.php:162
+#: include/staff/staff.inc.php:165
 msgid "Account Type"
 msgstr "Tipo de Conta"
 
-#: include/staff/staff.inc.php:166
+#: include/staff/staff.inc.php:169
 msgid "Admin"
 msgstr "Administrador"
 
-#: include/staff/staff.inc.php:173
+#: include/staff/staff.inc.php:176
 msgid "Account Status"
 msgstr "Estado da Conta"
 
-#: include/staff/staff.inc.php:183
+#: include/staff/staff.inc.php:186
 msgid "Assigned Group"
 msgstr "Grupo Designado"
 
-#: include/staff/staff.inc.php:187
+#: include/staff/staff.inc.php:190
 msgid "Select Group"
 msgstr "Selecione Grupo"
 
-#: include/staff/staff.inc.php:203
+#: include/staff/staff.inc.php:206
 msgid "Primary Department"
 msgstr "Departamento Primário"
 
-#: include/staff/staff.inc.php:223
+#: include/staff/staff.inc.php:226
 msgid "Staff's Time Zone"
 msgstr "Fuso Horário da Equipe"
 
-#: include/staff/staff.inc.php:253
+#: include/staff/staff.inc.php:256
 msgid "Limited Access"
 msgstr "Acesso Limitado"
 
-#: include/staff/staff.inc.php:256
+#: include/staff/staff.inc.php:259
 msgid "Limit ticket access to ONLY assigned tickets"
 msgstr "Limitar acesso a tíquetes APENAS a tíquetes designados"
 
-#: include/staff/staff.inc.php:261
+#: include/staff/staff.inc.php:264
 msgid "Directory Listing"
 msgstr "Listagem do Diretório"
 
-#: include/staff/staff.inc.php:264
+#: include/staff/staff.inc.php:267
 msgid "Show the user on staff's directory"
 msgstr "Mostrar o usuário no diretório da equipe"
 
-#: include/staff/staff.inc.php:269
+#: include/staff/staff.inc.php:272
 msgid "Vacation Mode"
 msgstr "Modo Férias"
 
-#: include/staff/staff.inc.php:273
+#: include/staff/staff.inc.php:276
 msgid "Staff on vacation mode"
 msgstr "Membro da Equipe no modo férias"
 
-#: include/staff/staff.inc.php:273
+#: include/staff/staff.inc.php:276
 msgid "No ticket assignment or alerts"
 msgstr "Sem designação de tíquetes ou alertas"
 
-#: include/staff/staff.inc.php:282
+#: include/staff/staff.inc.php:285
 msgid "Assigned Teams"
 msgstr "Times Designados"
 
-#: include/staff/staff.inc.php:282
+#: include/staff/staff.inc.php:285
 msgid "Staff will have access to tickets assigned to a team they belong to regardless of the ticket's department"
 msgstr "Membros da equipe terão acesso a tíquetes designados a um time ao qual eles pertençam, independentemente do departamento do tíquete"
 
@@ -7247,51 +7247,51 @@ msgstr "Restaura a versão anterior de seu backup e tente nocamente ou"
 msgid "seek help"
 msgstr "procure ajuda"
 
-#: setup/install.php:27
+#: setup/install.php:32
 msgid "osTicket Installer"
 msgstr "Instalador do osTicket"
 
-#: setup/install.php:28
+#: setup/install.php:33
 msgid "Installing osTicket v"
 msgstr "Instalando osTicket v"
 
-#: setup/install.php:30
+#: setup/install.php:35
 #: setup/inc/file-unclean.inc.php:10
 #: setup/inc/file-missing.inc.php:17
 msgid "Installation Guide"
 msgstr "Guia de Instalação"
 
-#: setup/install.php:31
+#: setup/install.php:36
 msgid "Get Professional Help"
 msgstr "Consiga ajuda profissional"
 
-#: setup/install.php:41
+#: setup/install.php:46
 msgid "Minimum requirements not met!"
 msgstr "Requisitos mínimos não satisfeitos!"
 
-#: setup/install.php:45
+#: setup/install.php:50
 msgid "Configuration file does NOT exist. Follow steps below to add one."
 msgstr "Arquivo de configuração NÃO exite. Siga os passos abaixo para adicionar um."
 
-#: setup/install.php:47
+#: setup/install.php:52
 msgid "Write access required to continue"
 msgstr "Necessário acesso de escrita para continuar"
 
-#: setup/install.php:59
+#: setup/install.php:64
 msgid "Error installing osTicket - correct the errors below and try again."
 msgstr "Erro ao instalar o osTicket - corriga os erros abaixo e tente novamente."
 
-#: setup/install.php:64
-#: setup/install.php:67
+#: setup/install.php:69
+#: setup/install.php:72
 #: setup/inc/install-prereq.inc.php:14
 msgid "Required"
 msgstr "Requerido"
 
-#: setup/install.php:69
+#: setup/install.php:74
 msgid "Invalid"
 msgstr "Inválido"
 
-#: setup/install.php:72
+#: setup/install.php:77
 msgid "Check one or more"
 msgstr "Selecione um ou mais"
 
@@ -7393,75 +7393,95 @@ msgstr "Pronto? Continue"
 msgid "If you are looking for a greater level of support, we provide <u>professional installation services</u> and commercial support with guaranteed response times, and access to the core development team. We can also help customize osTicket or even add new features to the system to meet your unique needs."
 msgstr "Se você está procurando um nível maior de suporte, nós provemos <u> serviços de instalação profissionais </u> e suporte comercial com tempos de resposta garantidos, e acesso ao time de desenvolvimento. Também podemos ajudar a customizar o osTicket ou ainda adicionar novos recursos para o sistema para atender suas necessidades específicas."
 
-#: setup/inc/install.inc.php:6
+#: setup/inc/install.inc.php:9
 msgid "osTicket Basic Installation"
 msgstr "Instalação Básica do osTicket"
 
-#: setup/inc/install.inc.php:7
+#: setup/inc/install.inc.php:10
 msgid "Please fill out the information below to continue your osTicket installation. All fields are required."
 msgstr "Por favor, preencha as informações abaixo para continuar com sua instalação do osTicket. Todos os campos são requeridos."
 
-#: setup/inc/install.inc.php:12
+#: setup/inc/install.inc.php:15
 msgid "The URL of your helpdesk, its name, and the default system email address"
 msgstr "A URL do seu centro de suporte, seu nome, e o endereço de e-mail padrão do sistema"
 
-#: setup/inc/install.inc.php:18
+#: setup/inc/install.inc.php:21
 msgid "Helpdesk Name"
 msgstr "Nome do Suporte"
 
-#: setup/inc/install.inc.php:24
+#: setup/inc/install.inc.php:27
 msgid "Default Email"
 msgstr "E-mail Padrão"
 
-#: setup/inc/install.inc.php:30
+#: setup/inc/install.inc.php:33
 msgid "Admin User"
 msgstr "Usuário Admin"
 
-#: setup/inc/install.inc.php:31
+#: setup/inc/install.inc.php:34
 msgid "Your primary administrator account - you can add more users later."
 msgstr "Sua conta primária de administrador - você pode adicionar mais usuários depois."
 
-#: setup/inc/install.inc.php:63
+#: setup/inc/install.inc.php:66
 msgid "Retype Password"
 msgstr "Redigite a Senha"
 
-#: setup/inc/install.inc.php:69
+#: setup/inc/install.inc.php:72
+msgid "Login Type"
+msgstr "Base de Login"
+
+#: setup/inc/install.inc.php:74
+msgid "Use LDAP database for user login (administradors can always login via osTicket database)"
+msgstr "Usar a base de dados LDAP para autenticar usuários (administradores sempre podem entrar via base do osTicket)"
+
+#: setup/inc/install.inc.php:76
+msgid "LDAP Domain FQDN"
+msgstr "FQDN do Domínio LDAP"
+
+#: setup/inc/install.inc.php:81
+msgid "LDAP NETBIOS Name"
+msgstr "Nome NETBIOS"
+
+#: setup/inc/install.inc.php:96
+msgid "Search DN"
+msgstr "DN de Pesquisa"
+
+#: setup/inc/install.inc.php:103
 msgid "Database Settings"
 msgstr "Configs. de Base de Dados"
 
-#: setup/inc/install.inc.php:70
+#: setup/inc/install.inc.php:104
 msgid "Database connection information"
 msgstr "Informações de Conexão à Base de Dados"
 
-#: setup/inc/install.inc.php:72
+#: setup/inc/install.inc.php:106
 msgid "MySQL Table Prefix"
 msgstr "Prefixo das Tabelas MySQL"
 
-#: setup/inc/install.inc.php:78
+#: setup/inc/install.inc.php:112
 msgid "MySQL Hostname"
 msgstr "Servidor MySQL"
 
-#: setup/inc/install.inc.php:84
+#: setup/inc/install.inc.php:118
 msgid "MySQL Database"
 msgstr "Base de Dados MySQL"
 
-#: setup/inc/install.inc.php:90
+#: setup/inc/install.inc.php:124
 msgid "MySQL Username"
 msgstr "Usuário MySQL"
 
-#: setup/inc/install.inc.php:96
+#: setup/inc/install.inc.php:130
 msgid "MySQL Password"
 msgstr "Senha MySQL"
 
-#: setup/inc/install.inc.php:103
+#: setup/inc/install.inc.php:137
 msgid "Install Now"
 msgstr "Instalar Agora"
 
-#: setup/inc/install.inc.php:108
+#: setup/inc/install.inc.php:142
 msgid "We provide <u>professional installation services</u> and commercial support."
 msgstr "Provemos <u>serviços profissionais de instalação</u> e suporte comercial."
 
-#: setup/inc/install.inc.php:113
+#: setup/inc/install.inc.php:147
 msgid "Please wait... while we install your new support ticket system!"
 msgstr "Favor esperar... enquanto instalamos seu novo sistema de tíquetes!"
 
@@ -7481,84 +7501,92 @@ msgstr "Nome do host requerido"
 msgid "Database name required"
 msgstr "Nome da Base de Dados requerido"
 
-#: setup/inc/class.installer.php:60
-msgid "password required"
-msgstr "senha requerida"
+#: setup/inc/class.installer.php:65
+msgid "LDAP FQDN required"
+msgstr "FQDN LDAP requerido"
 
-#: setup/inc/class.installer.php:64
+#: setup/inc/class.installer.php:66
+msgid "NETBIOS name required"
+msgstr "Nome NETBIOS requerido"
+
+#: setup/inc/class.installer.php:69
+msgid "LDAP Search DN required"
+msgstr "DN de Pesquisa LDAP requerido"
+
+#: setup/inc/class.installer.php:73
 msgid "Missing or invalid data - correct the errors and try again."
 msgstr "Dados inválidos ou faltando - corrija os erros e tente novamente."
 
-#: setup/inc/class.installer.php:69
+#: setup/inc/class.installer.php:78
 msgid "Conflicts with system email above"
 msgstr "Conflitos "
 
-#: setup/inc/class.installer.php:72
+#: setup/inc/class.installer.php:81
 msgid "passwords to not match!"
 msgstr "senhas não conferem!"
 
-#: setup/inc/class.installer.php:75
+#: setup/inc/class.installer.php:84
 msgid "Bad prefix. Must have underscore (_) at the end. e.g 'ost_'"
 msgstr "Prefixo inválido. Deve possuir o caractere \"_\" ao final. Ex: 'ost_'"
 
-#: setup/inc/class.installer.php:79
+#: setup/inc/class.installer.php:88
 msgid "Bad username"
 msgstr "Usuário inválido"
 
-#: setup/inc/class.installer.php:84
+#: setup/inc/class.installer.php:93
 msgid "Unable to connect to MySQL server. Possibly invalid login info."
 msgstr "Não foi possível conectar ao servidor MySQL. Informações de login possivelmente inválidas."
 
-#: setup/inc/class.installer.php:86
+#: setup/inc/class.installer.php:95
 #, php-format
 msgid "osTicket requires MySQL %s or better!"
 msgstr "O osTicket requer MySQL %s ou superior!"
 
-#: setup/inc/class.installer.php:88
+#: setup/inc/class.installer.php:97
 msgid "Database doesn't exist"
 msgstr "Base de dados não existe"
 
-#: setup/inc/class.installer.php:89
+#: setup/inc/class.installer.php:98
 msgid "Unable to create the database."
 msgstr "Não foi possível criar a base de dados"
 
-#: setup/inc/class.installer.php:91
+#: setup/inc/class.installer.php:100
 msgid "Unable to select the database"
 msgstr "Não foi possível selecionar a base de dados"
 
-#: setup/inc/class.installer.php:107
+#: setup/inc/class.installer.php:116
 msgid "Internal Error - please make sure your download is the latest (#1)"
 msgstr "Erro interno - favor certificar-se que o arquivo baixado é o mais recente (#1)"
 
-#: setup/inc/class.installer.php:109
+#: setup/inc/class.installer.php:118
 msgid "Unknown or invalid schema signature"
 msgstr "Assinatura do esquema desconhecida ou inválida"
 
-#: setup/inc/class.installer.php:111
+#: setup/inc/class.installer.php:120
 msgid "Unable to read config file. Permission denied! (#2)"
 msgstr "Não foi possível ler o arquivo de configuração. Permissão negada! (#2)"
 
-#: setup/inc/class.installer.php:113
+#: setup/inc/class.installer.php:122
 msgid "Unable to open config file for writing. Permission denied! (#3)"
 msgstr "Não foi possível abrir o arquivo de configuração para escrita. Permissão negada! (#3)"
 
-#: setup/inc/class.installer.php:115
+#: setup/inc/class.installer.php:124
 msgid "Error parsing SQL schema! Get help from developers (#4)"
 msgstr "Erro ao interpretar esquema SQL! Procure ajuda dos desenvolvedores (#4)"
 
-#: setup/inc/class.installer.php:127
+#: setup/inc/class.installer.php:136
 msgid "Unable to create admin user (#6)"
 msgstr "Não foi possível criar o usuário administrativo (#6)"
 
-#: setup/inc/class.installer.php:157
+#: setup/inc/class.installer.php:178
 msgid "Unable to write to config file. Permission denied! (#5)"
 msgstr "Não foi possível escrever no arquivo de configuração. Permissão negada! (#5)"
 
-#: setup/inc/class.installer.php:181
+#: setup/inc/class.installer.php:202
 msgid "Congratulations and Thank you for choosing osTicket!"
 msgstr "Parabéns, e obrigado por escolher o osTicket!"
 
-#: setup/inc/class.installer.php:194
+#: setup/inc/class.installer.php:215
 msgid ""
 "Congratulations osTicket basic installation completed!\n"
 "\n"
@@ -7695,6 +7723,9 @@ msgstr "Extensão Gdlib"
 #: setup/inc/install-prereq.inc.php:27
 msgid "PHP IMAP extension"
 msgstr "Extensão PHP IMAP"
+
+msgid "password required"
+msgstr "senha requerida"
 
 msgid "Dept. Transfer from "
 msgstr "Transferência do Depto"
