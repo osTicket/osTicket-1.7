@@ -2,7 +2,7 @@
 if(!defined('OSTSCPINC') || !$thisstaff || !$thisstaff->isAdmin()) die(_('Access Denied'));
 $action=$upgrader->getNextAction();
 ?>
-<h2>osTicket Upgrade</h2>
+<h2><?=_('osTicket Upgrade')?></h2>
 <div id="upgrader">
     <div id="main">
             <div id="intro">
@@ -21,12 +21,12 @@ $action=$upgrader->getNextAction();
                     <?php csrf_token(); ?>
                     <input type="hidden" name="s" value="upgrade">
                     <input type="hidden" name="sh" value="<?php echo $upgrader->getSchemaSignature(); ?>">
-                    <input class="btn"  type="submit" name="submit" value="Do It Now!">
+                    <input class="btn"  type="submit" name="submit" value="<?=_('Do It Now!')?>">
                 </form>
             </div>
     </div>
     <div id="sidebar">
-            <h3>Upgrade Tips</h3>
+            <h3><?=_('Upgrade Tips')?></h3>
             <p><?=_('1. Be patient the process will take a couple of minutes.')?></p>
             <p><?=_('2. If you experience any problems, you can always restore your files/database backup.')?></p>
             <p><?=_('3. We can help, feel free to')?> <a href="http://osticket.com/support/" target="_blank"><?=_('contact us')?></a> <?=_('for professional help.')?></p>

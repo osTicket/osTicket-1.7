@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: osticket17\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-10-10 10:22-0300\n"
+"POT-Creation-Date: 2012-10-10 12:14-0300\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Fabio Rauber <fabior@interlegis.leg.br>\n"
 "Language-Team: Fabio Rauber <fabior@interlegis.leg.br>\n"
@@ -6917,6 +6917,10 @@ msgstr "Se você está procurando um nível maior de suporte, nós provesmos <u>
 msgid "Learn More!"
 msgstr "Veja Mais!"
 
+#: include/upgrader/upgrade.inc.php:5
+msgid "osTicket Upgrade"
+msgstr "Atualização do osTicket"
+
 #: include/upgrader/upgrade.inc.php:9
 msgid "Thank you for taking the time to upgrade your osTicket intallation!"
 msgstr "Obrigado por dedicar seu tempo à atualização da sua instalação do osTicket!"
@@ -6940,6 +6944,10 @@ msgstr "Recursos novos e atualizados "
 #: include/upgrader/upgrade.inc.php:17
 msgid "Enhance settings and security"
 msgstr "Melhora segurança e configurações"
+
+#: include/upgrader/upgrade.inc.php:24
+msgid "Do It Now!"
+msgstr "Faça Agora!"
 
 #: include/upgrader/upgrade.inc.php:30
 msgid "1. Be patient the process will take a couple of minutes."
