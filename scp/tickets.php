@@ -143,7 +143,7 @@ if($_POST && !$errors):
                 //Set state: Error on state change not critical! 
                 if(isset($_POST['note_ticket_state']) && $_POST['note_ticket_state']) {
                     if($ticket->setState($_POST['note_ticket_state']) && $ticket->reload()) {
-                         $msg.=' and state changed to '.strtoupper($_POST['note_ticket_state']);
+                         $msg.=' '._('and state changed to').' '.strtoupper($_POST['note_ticket_state']);
                          if($ticket->isClosed())
                              $ticket=null; //Going back to main listing.
                     }
@@ -331,7 +331,7 @@ if($_POST && !$errors):
                                 $t->logActivity(_('Ticket Closed'),$note,false,'System');
                             }
                         }
-                        $msg="$i of $count selected tickets closed";
+                        $msg="$i "._("of")." $count "._("selected tickets closed");
                     }elseif(isset($_POST['overdue'])){
                         $i=0;
                         $note=_('Ticket flagged as overdue by ').$thisstaff->getName();
@@ -343,14 +343,14 @@ if($_POST && !$errors):
                                     $t->logActivity(_('Ticket Marked Overdue'),$note,false,'System');
                                 }
                         }
-                        $msg="$i of $count selected tickets marked overdue";
+                        $msg="$i "._("of")." $count "._("selected tickets marked overdue");
                     }elseif(isset($_POST['delete'])){
                         $i=0;
                         foreach($_POST['tids'] as $k=>$v) {
                             $t = new Ticket($v);
                             if($t && @$t->delete()) $i++;
                         }
-                        $msg="$i of $count selected tickets deleted";
+                        $msg="$i "._("of")." $count "._("selected tickets deleted");
                     }
                 }
                 break;
