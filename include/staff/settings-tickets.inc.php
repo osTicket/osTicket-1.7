@@ -53,7 +53,7 @@ if(!($maxfileuploads=ini_get('max_file_uploads')))
                     <?php
                     $priorities= db_query('SELECT priority_id,priority_desc FROM '.TICKET_PRIORITY_TABLE);
                     while (list($id,$tag) = db_fetch_row($priorities)){ ?>
-                        <option value="<?php echo $id; ?>"<?php echo ($config['default_priority_id']==$id)?'selected':''; ?>><?php echo $tag; ?></option>
+                        <option value="<?php echo $id; ?>"<?php echo ($config['default_priority_id']==$id)?'selected':''; ?>><?php echo _($tag); ?></option>
                     <?php
                     } ?>
                 </select>
