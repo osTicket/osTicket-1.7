@@ -99,7 +99,7 @@ $info=Format::htmlchars(($errors && $_POST)?$_POST:$ticket->getUpdateInfo());
                     if($priorities=Priority::getPriorities()) {
                         foreach($priorities as $id =>$name) {
                             echo sprintf('<option value="%d" %s>%s</option>',
-                                    $id, ($info['priorityId']==$id)?'selected="selected"':'',$name);
+                                    $id, ($info['priorityId']==$id)?'selected="selected"':'',_($name));
                         }
                     }
                     ?>
