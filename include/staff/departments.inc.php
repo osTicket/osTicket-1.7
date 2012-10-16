@@ -35,13 +35,13 @@ $qstr.='&order='.($order=='DESC'?'ASC':'DESC');
 $query="$sql GROUP BY dept.dept_id ORDER BY $order_by";
 $res=db_query($query);
 if($res && ($num=db_num_rows($res)))
-    $showing="Showing 1-$num of $num departments";
+    $showing=_("Showing")." 1-$num "._("of")." $num "._("departments");
 else
     $showing=_('No departments found!');
 
 ?>
 <div style="width:700;padding-top:5px; float:left;">
- <h2>Departments</h2>
+ <h2><?=_('Departments')?></h2>
  </div>
 <div style="float:right;text-align:right;padding-top:5px;padding-right:5px;">
     <b><a href="departments.php?a=add" class="Icon newDepartment"><?= _('Add New Department')?></a></b></div>
