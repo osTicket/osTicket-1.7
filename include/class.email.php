@@ -291,7 +291,7 @@ class Email {
                         'encryption' => $vars['mail_encryption'])
                     );
             if(!$fetcher->connect()) {
-                $errors['err']='Invalid login. Check '.Format::htmlchars($vars['mail_protocol']).' settings';
+                $errors['err']=_('Invalid login. Check '.Format::htmlchars($vars['mail_protocol']).' settings');
                 $errors['mail']='<br>'.$fetcher->getLastError();
             }elseif($vars['mail_archivefolder'] && !$fetcher->checkMailbox($vars['mail_archivefolder'],true)) {
                  $errors['postfetch']=_('Invalid or unknown mail folder! >> ').$fetcher->getLastError().'';

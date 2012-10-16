@@ -26,7 +26,7 @@ if($ticket->isAssigned() && (
         ))
     $warn.='&nbsp;&nbsp;<span class="Icon assignedTicket">'._('Ticket is assigned to ').implode('/', $ticket->getAssignees()).'</span>';
 if(!$errors['err'] && ($lock && $lock->getStaffId()!=$thisstaff->getId()))
-    $errors['err']=_('This ticket is currently locked by ').$lock->getStaffName();
+    $errors['err']=_('This ticket is currently locked by').' '.$lock->getStaffName();
 if(!$errors['err'] && ($emailBanned=TicketFilter::isBanned($ticket->getEmail())))
     $errors['err']=_('Email is in banlist! Must be removed before any reply/response');
 

@@ -5000,7 +5000,7 @@ msgid "Ticket is assigned to "
 msgstr "Tíquete designado para "
 
 #: include/staff/ticket-view.inc.php:29
-msgid "This ticket is currently locked by "
+msgid "This ticket is currently locked by"
 msgstr "Este tíquete está bloqueado por"
 
 #: include/staff/ticket-view.inc.php:31
@@ -7800,4 +7800,10 @@ msgstr "Aviso"
 
 msgid "update"
 msgstr "atualiza"
+
+msgid "Invalid login. Check POP settings"
+msgstr "Login inválido. Verifique as configurações POP"
+
+msgid "Invalid login. Check IMAP settings"
+msgstr "Login inválido. Verifique as configurações IMAP"
 
