@@ -27,7 +27,7 @@ $info=Format::htmlchars(($errors && $_POST)?$_POST:$info);
  <input type="hidden" name="do" value="<?php echo $action; ?>">
  <input type="hidden" name="a" value="<?php echo Format::htmlchars($_REQUEST['a']); ?>">
  <input type="hidden" name="id" value="<?php echo $info['id']; ?>">
- <h2>Incoming Email Filter</h2>
+ <h2><?=_("Incoming Email Filter")?></h2>
  <table class="form_table" width="940" border="0" cellspacing="0" cellpadding="2">
     <thead>
         <tr>
@@ -145,7 +145,7 @@ $info=Format::htmlchars(($errors && $_POST)?$_POST:$info);
                 </div>
                 <?php 
                 if($info["rule_w$i"] || $info["rule_h$i"] || $info["rule_v$i"]){ ?>
-                <div style="float:right;text-align:right;padding-right:20px;"><a href="#" class="clearrule">(clear)</a></div>
+                <div style="float:right;text-align:right;padding-right:20px;"><a href="#" class="clearrule"><?=_("(clear)")?></a></div>
                 <?php
                 } ?>
                 <div class="clear"></div>
