@@ -143,7 +143,7 @@ if($_POST && !$errors):
                 //Set state: Error on state change not critical! 
                 if(isset($_POST['note_ticket_state']) && $_POST['note_ticket_state']) {
                     if($ticket->setState($_POST['note_ticket_state']) && $ticket->reload()) {
-                         $msg.=' '._('and state changed to').' '.strtoupper($_POST['note_ticket_state']);
+                         $msg.=' '._('and state changed to').' '._(strtoupper($_POST['note_ticket_state']));
                          if($ticket->isClosed())
                              $ticket=null; //Going back to main listing.
                     }

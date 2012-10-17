@@ -7833,3 +7833,5 @@ msgstr "atualiza"
 msgid "Invalid login. Check IMAP settings"
 msgstr "Login inválido. Verifique as configurações IMAP"
 
+msgid "ANSWERED"
+msgstr "RESPONDIDO"
