@@ -77,7 +77,7 @@ if($ticket->isOverdue())
         <td width="50%">
             <table border="0" cellspacing="" cellpadding="4" width="100%">
                 <tr>
-                    <th width="100">Name:</th>
+                    <th width="100"><?=_("Name")?>:</th>
                     <td><?php echo Format::htmlchars($ticket->getName()); ?></td>
                 </tr>
                 <tr>
