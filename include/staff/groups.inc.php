@@ -34,7 +34,7 @@ $qstr.='&order='.($order=='DESC'?'ASC':'DESC');
 $query="$sql GROUP BY grp.group_id ORDER BY $order_by";
 $res=db_query($query);
 if($res && ($num=db_num_rows($res)))
-    $showing="Showing 1-$num of $num groups";
+    $showing=_("Showing")." 1-$num "._("of")." $num "._("groups");
 else
     $showing=_('No groups found!');
 
@@ -78,7 +78,7 @@ else
                   <input type="checkbox" name="ids[]" value="<?php echo $row['group_id']; ?>" 
                             <?php echo $sel?'checked="checked"':''; ?> onClick="highLight(this.value,this.checked);"> </td>
                 <td><a href="groups.php?id=<?php echo $row['group_id']; ?>"><?php echo $row['group_name']; ?></a> &nbsp;</td>
-                <td>&nbsp;<?php echo $row['group_enabled']?'Active':'<b>Disabled</b>'; ?></td>
+                <td>&nbsp;<?php echo $row['group_enabled']?_('Active'):'<b>'._('Disabled').'</b>'; ?></td>
                 <td style="text-align:right;padding-right:30px">&nbsp;&nbsp;
                     <?php if($row['users']>0) { ?>
                         <a href="staff.php?gid=<?php echo $row['group_id']; ?>"><?php echo $row['users']; ?></a>

@@ -77,7 +77,7 @@ else
                   <input type="checkbox" name="ids[]" value="<?php echo $row['team_id']; ?>" 
                             <?php echo $sel?'checked="checked"':''; ?> onClick="highLight(this.value,this.checked);"> </td>
                 <td><a href="teams.php?id=<?php echo $row['team_id']; ?>"><?php echo $row['name']; ?></a> &nbsp;</td>
-                <td>&nbsp;<?php echo $row['isenabled']?'Active':'<b>Disabled</b>'; ?></td>
+                <td>&nbsp;<?php echo $row['isenabled']?_('Active'):'<b>'._('Disabled').'</b>'; ?></td>
                 <td style="text-align:right;padding-right:25px">&nbsp;&nbsp;
                     <?php if($row['members']>0) { ?>
                         <a href="staff.php?tid=<?php echo $row['team_id']; ?>"><?php echo $row['members']; ?></a>
