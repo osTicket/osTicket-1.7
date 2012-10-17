@@ -196,7 +196,7 @@ class Client {
                 if(($session=$ost->getSession()) && is_object($session) && $sid)
                     $session->destroy($sid);
 
-                session_write_close();
+                #session_write_close();
 
                 return $user;
 
