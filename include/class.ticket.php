@@ -1700,16 +1700,16 @@ class Ticket {
             return false;
          
         $fields=array();
-        $fields['name']     = array('type'=>'string',   'required'=>1, 'error'=>'Name required');
-        $fields['email']    = array('type'=>'email',    'required'=>1, 'error'=>'Valid email required');
-        $fields['subject']  = array('type'=>'string',   'required'=>1, 'error'=>'Subject required');
-        $fields['topicId']  = array('type'=>'int',      'required'=>1, 'error'=>'Help topic required');
-        $fields['slaId']    = array('type'=>'int',      'required'=>1, 'error'=>'SLA required');
-        $fields['priorityId'] = array('type'=>'int',    'required'=>1, 'error'=>'Priority required');
-        $fields['phone']    = array('type'=>'phone',    'required'=>0, 'error'=>'Valid phone # required');
-        $fields['duedate']  = array('type'=>'date',     'required'=>0, 'error'=>'Invalid date - must be MM/DD/YY');
+        $fields['name']     = array('type'=>'string',   'required'=>1, 'error'=>_('Name required'));
+        $fields['email']    = array('type'=>'email',    'required'=>1, 'error'=>_('Valid email required'));
+        $fields['subject']  = array('type'=>'string',   'required'=>1, 'error'=>_('Subject required'));
+        $fields['topicId']  = array('type'=>'int',      'required'=>1, 'error'=>_('Help topic required'));
+        $fields['slaId']    = array('type'=>'int',      'required'=>1, 'error'=>_('SLA required'));
+        $fields['priorityId'] = array('type'=>'int',    'required'=>1, 'error'=>_('Priority required'));
+        $fields['phone']    = array('type'=>'phone',    'required'=>0, 'error'=>_('Valid phone # required'));
+        $fields['duedate']  = array('type'=>'date',     'required'=>0, 'error'=>_('Invalid date - must be MM/DD/YY'));
 
-        $fields['note']     = array('type'=>'text',     'required'=>1, 'error'=>'Reason for the update required');
+        $fields['note']     = array('type'=>'text',     'required'=>1, 'error'=>_('Reason for the update required'));
 
         if(!Validator::process($fields, $vars, $errors) && !$errors['err'])
             $errors['err'] =_('Missing or invalid data - check the errors and try again');

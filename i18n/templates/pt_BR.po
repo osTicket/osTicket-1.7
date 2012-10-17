@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: osticket17\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-10-17 08:37-0300\n"
+"POT-Creation-Date: 2012-10-17 11:01-0300\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Fabio Rauber <fabior@interlegis.leg.br>\n"
 "Language-Team: Fabio Rauber <fabior@interlegis.leg.br>\n"
@@ -164,6 +164,10 @@ msgstr "<b>Erro Fatal:</b> Contacte o administrador do sistema."
 #: osticket/login.php:17
 msgid "Fatal Error"
 msgstr "Erro Fatal"
+
+#: osticket/login.php:32
+msgid "Authentication error - try again!"
+msgstr "Erro de autenticação - tente novamente!"
 
 #: osticket/scp/dashboard.php:31
 msgid "Ticket Activity"
@@ -1951,6 +1955,38 @@ msgstr "Erro em upload de arquivo"
 msgid "File Upload Error (Ticket #"
 msgstr "Erro no Upload de Arquivo (Tíquete #"
 
+#: osticket/include/class.ticket.php:1704
+#: osticket/include/class.ticket.php:1941
+msgid "Valid email required"
+msgstr "É requerido endereço de email válido"
+
+#: osticket/include/class.ticket.php:1706
+#: osticket/include/class.topic.php:188
+msgid "Help topic required"
+msgstr "Tópico de Ajuda requerido"
+
+#: osticket/include/class.ticket.php:1707
+msgid "SLA required"
+msgstr "SLA requerido"
+
+#: osticket/include/class.ticket.php:1708
+msgid "Priority required"
+msgstr "Prioridade requerida"
+
+#: osticket/include/class.ticket.php:1709
+#: osticket/include/class.ticket.php:1963
+msgid "Valid phone # required"
+msgstr "No. de Telefone requerido"
+
+#: osticket/include/class.ticket.php:1710
+#: osticket/include/class.ticket.php:1951
+msgid "Invalid date - must be MM/DD/YY"
+msgstr "Data inválida - deve ser MM/DD/YY"
+
+#: osticket/include/class.ticket.php:1712
+msgid "Reason for the update required"
+msgstr "Razão para a edição requerida"
+
 #: osticket/include/class.ticket.php:1715
 #: osticket/include/class.ticket.php:1966
 msgid "Missing or invalid data - check the errors and try again"
@@ -2023,10 +2059,6 @@ msgstr "Máximo de tíquetes abertos (%d) alcançado para %s"
 msgid "Ticket rejected ( %s) by filter \"%s\""
 msgstr "Tíquete rejeitado ( %s) pelo filtro \"%s\""
 
-#: osticket/include/class.ticket.php:1941
-msgid "Valid email required"
-msgstr "É requerido endereço de email válido"
-
 #: osticket/include/class.ticket.php:1946
 msgid "Select help topic"
 msgstr "Selecione tópico de ajuda"
@@ -2038,10 +2070,6 @@ msgstr "Depto. requerido"
 #: osticket/include/class.ticket.php:1950
 msgid "Topic required"
 msgstr "Tópico requerido"
-
-#: osticket/include/class.ticket.php:1951
-msgid "Invalid date - must be MM/DD/YY"
-msgstr "Data inválida - deve ser MM/DD/YY"
 
 #: osticket/include/class.ticket.php:1953
 msgid "Indicate source"
@@ -2058,10 +2086,6 @@ msgstr "Origem dada inválida"
 #: osticket/include/class.ticket.php:1962
 msgid "Invalid Priority"
 msgstr "Prioridade Inválida"
-
-#: osticket/include/class.ticket.php:1963
-msgid "Valid phone # required"
-msgstr "No. de Telefone requerido"
 
 #: osticket/include/class.ticket.php:2135
 msgid "Summary of the issue required"
@@ -2110,10 +2134,6 @@ msgstr "Não foi possível atualizar grupo. Ocorreu um erro interno."
 #: osticket/include/class.group.php:227
 msgid "Unable to create the group. Internal error"
 msgstr "Não foi possível criar o grupo. Erro interno"
-
-#: osticket/include/class.topic.php:188
-msgid "Help topic required"
-msgstr "Tópico de Ajuda requerido"
 
 #: osticket/include/class.topic.php:190
 msgid "Topic is too short. 5 chars minimum"
@@ -5246,6 +5266,10 @@ msgstr "Adicionar Novo Filtro"
 msgid "Add Filter"
 msgstr "Adicionar Filtro"
 
+#: osticket/include/staff/filter.inc.php:30
+msgid "Incoming Email Filter"
+msgstr "Filtro de Entrada de E-mails"
+
 #: osticket/include/staff/filter.inc.php:36
 msgid "Filters are executed based on execution order. Filter can target specific ticket source."
 msgstr "Filtros são executados em ordem, e podem atingir origens de tíquete específicas."
@@ -5305,6 +5329,10 @@ msgstr "Corresponder Qualquer"
 #: osticket/include/staff/filter.inc.php:115
 msgid "(case-insensitive comparison)"
 msgstr "(comparação não distingue maiúsculas de minúsculas)"
+
+#: osticket/include/staff/filter.inc.php:148
+msgid "(clear)"
+msgstr "(limpar)"
 
 #: osticket/include/staff/filter.inc.php:160
 msgid "Filter Actions"
@@ -7767,9 +7795,6 @@ msgstr "senha requerida"
 msgid "Dept. Transfer from "
 msgstr "Transferência do Depto"
 
-msgid "Login error - try again"
-msgstr "Erro de login - tente novamente"
-
 msgid "You've reached maximum failed login attempts allowed."
 msgstr "Você alcançou o número máximo permitido de tentativas de login."
 
@@ -7835,3 +7860,4 @@ msgstr "Login inválido. Verifique as configurações IMAP"
 
 msgid "ANSWERED"
 msgstr "RESPONDIDO"
+
