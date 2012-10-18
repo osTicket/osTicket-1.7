@@ -144,7 +144,7 @@ $info=Format::htmlchars(($errors && $_POST)?$_POST:$info);
             if(($cannedResponses=Canned::getCannedResponses())) {
                 ?>
                 <div>
-                    Canned Response:&nbsp;
+                    <?=_("Canned Response")?>:&nbsp;
                     <select id="cannedResp" name="cannedResp">
                         <option value="0" selected="selected">&mdash; <?= _('Select a canned response') ?> &mdash;</option>
                         <?php
