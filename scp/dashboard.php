@@ -56,9 +56,8 @@ require(STAFFINC_DIR.'header.inc.php');
 </div>
 
 <hr/>
-<h2><?= _('Statistics')?></h2>
-<p><?= _('Statistics of tickets organized by department, help topic, and staff
-member.')?></p>
+<h2><?=_('Statistics')?></h2>
+<p><?=_('Statistics of tickets organized by department, help topic, and staff.')?></p>
 <ul class="nav nav-tabs" id="tabular-navigation"></ul>
 
 <div id="table-here"></div>

@@ -193,15 +193,27 @@ $orderWays=array('DESC'=>'DESC','ASC'=>'ASC');
 $order_by=$order=null;
 if($_REQUEST['sort'] && $sortOptions[$_REQUEST['sort']])
     $order_by =$sortOptions[$_REQUEST['sort']];
+elseif(!strcasecmp($status, 'open') && !$showanswered && $sortOptions[$_SESSION['tickets']['sort']]) {
+    $_REQUEST['sort'] = $_SESSION['tickets']['sort'];
+    $order_by = $sortOptions[$_SESSION['tickets']['sort']];
+    $order = $_SESSION['tickets']['order'];
+}
 
 if($_REQUEST['order'] && $orderWays[strtoupper($_REQUEST['order'])])
     $order=$orderWays[strtoupper($_REQUEST['order'])];
+
+//Save sort order for sticky sorting.
+if(!strcasecmp($status, 'open') && $_REQUEST['sort']) {
+    $_SESSION['tickets']['sort'] = $_REQUEST['sort'];
+    $_SESSION['tickets']['order'] = $_REQUEST['order'];
+}
 
 if(!$order_by && $showanswered) {
     $order_by='ticket.lastresponse, ticket.created'; //No priority sorting for answered tickets.
 }elseif(!$order_by && !strcasecmp($status,'closed')){
     $order_by='ticket.closed, ticket.created'; //No priority sorting for closed tickets.
 }
+
 $order_by =$order_by?$order_by:'priority_urgency, effective_date, ticket.created';
 $order=$order?$order:'ASC';
 
@@ -470,9 +482,9 @@ $negorder=$order=='DESC'?'ASC':'DESC'; //Negate the sorting..
     } ?>
     </form>
 </div>
-<div id="search_overlay"></div>
-<div style="display:none;" id="advanced-search">
-    <h3><?= _('Advanced Ticket Search')?></h3>
+
+<div class="dialog" style="display:none;" id="advanced-search">
+    <h3><?=_('Advanced Ticket Search')?></h3>
     <a class="close" href="">&times;</a>
     <form action="tickets.php" method="post" id="search" name="search">
         <input type="hidden" name="a" value="search">
