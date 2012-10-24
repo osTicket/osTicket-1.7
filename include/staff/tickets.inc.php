@@ -79,7 +79,7 @@ if($status){
 
 //Overloaded sub-statuses  - you've got to just have faith!
 if($staffId && ($staffId==$thisstaff->getId())) { //Staff's assigned tickets.
-    $results_type='Assigned Tickets';
+    $results_type=_('Assigned Tickets');
     $qwhere.=' AND ticket.staff_id='.db_input($staffId);
     $showassigned=false; //My tickets...already assigned to the staff.
 }elseif($showoverdue) { //overdue
