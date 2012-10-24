@@ -914,8 +914,8 @@ class Ticket {
         global $ost, $cfg;
 
         //Log the limit notice as a warning for admin.
-        $msg=sprintf('Max open tickets (%d) reached  for %s ', $cfg->getMaxOpenTickets(), $this->getEmail());
-        $ost->logWarning('Max. Open Tickets Limit ('.$this->getEmail().')', $msg);
+        $msg=sprintf(_('Max open tickets (%d) reached  for %s').' ', $cfg->getMaxOpenTickets(), $this->getEmail());
+        $ost->logWarning(_('Max. Open Tickets Limit').' ('.$this->getEmail().')', $msg);
 
         if(!$sendNotice || !$cfg->sendOverLimitNotice()) return true;
 
@@ -939,11 +939,11 @@ class Ticket {
         $client= $this->getClient();
         
         //Alert admin...this might be spammy (no option to disable)...but it is helpful..I think.
-        $alert='Max. open tickets reached for '.$this->getEmail()."\n"
-              .'Open ticket: '.$client->getNumOpenTickets()."\n"
-              .'Max Allowed: '.$cfg->getMaxOpenTickets()."\n\nNotice sent to the user.";
+        $alert=_('Max. open tickets reached for').' '.$this->getEmail()."\n"
+              ._('Open ticket:').' '.$client->getNumOpenTickets()."\n"
+              ._('Max Allowed:').' '.$cfg->getMaxOpenTickets()."\n\n"._("Notice sent to the user.");
             
-        $ost->alertAdmin('Overlimit Notice', $alert);
+        $ost->alertAdmin(_('Overlimit Notice'), $alert);
        
         return true;
     }
@@ -1249,7 +1249,7 @@ class Ticket {
         $this->selectSLAId();
                   
         /*** log the transfer comments as internal note - with alerts disabled - ***/
-        $title='Ticket transfered from '.$currentDept.' to '.$this->getDeptName();
+        $title=_('Ticket transfered from').' '.$currentDept.' '._('to').' '.$this->getDeptName();
         $comments=$comments?$comments:$title; 
         $this->logNote($title, $comments, $thisstaff, false);
 

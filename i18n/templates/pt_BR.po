@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: osticket17\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-10-23 13:06-0300\n"
+"POT-Creation-Date: 2012-10-24 09:20-0300\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Fabio Rauber <fabior@interlegis.leg.br>\n"
 "Language-Team: Fabio Rauber <fabior@interlegis.leg.br>\n"
@@ -1994,6 +1994,35 @@ msgstr "Não foi possível atualizar o time. Erro interno"
 msgid "Unable to create the team. Internal error"
 msgstr "Não foi possível criar o time. Erro interno"
 
+#: osticket/include/class.ticket.php:917
+#, php-format
+msgid "Max open tickets (%d) reached  for %s"
+msgstr "Máximo de tíquetes abertos (%d) alcançado para %s"
+
+#: osticket/include/class.ticket.php:918
+msgid "Max. Open Tickets Limit"
+msgstr "Limite máx. de Tíquetes Abertos"
+
+#: osticket/include/class.ticket.php:942
+msgid "Max. open tickets reached for"
+msgstr "Máximo de tíquetes abertos alcançado para"
+
+#: osticket/include/class.ticket.php:943
+msgid "Open ticket:"
+msgstr "Abrir tíquete:"
+
+#: osticket/include/class.ticket.php:944
+msgid "Max Allowed:"
+msgstr "Máx. Permitido:"
+
+#: osticket/include/class.ticket.php:944
+msgid "Notice sent to the user."
+msgstr "Aviso enviado ao usuário."
+
+#: osticket/include/class.ticket.php:946
+msgid "Overlimit Notice"
+msgstr "Aviso de limite ultrapassado"
+
 #: osticket/include/class.ticket.php:1013
 msgid "Ticket assignment"
 msgstr "Designação de tíquete"
@@ -2005,6 +2034,14 @@ msgstr "SISTEMA (Auto Designação)"
 #: osticket/include/class.ticket.php:1017
 msgid "Ticket Assigned to"
 msgstr "Tíquete Designado para"
+
+#: osticket/include/class.ticket.php:1252
+msgid "Ticket transfered from"
+msgstr "Tíquete transferido de"
+
+#: osticket/include/class.ticket.php:1252
+msgid "to"
+msgstr "até"
 
 #: osticket/include/class.ticket.php:1484
 msgid "Missing messageId - internal error"
@@ -6882,10 +6919,6 @@ msgstr "Logs do Sistema"
 #: osticket/include/staff/syslogs.inc.php:90
 msgid "Date Span"
 msgstr "Intervalo de Data"
-
-#: osticket/include/staff/syslogs.inc.php:92
-msgid "to"
-msgstr "até"
 
 #: osticket/include/staff/syslogs.inc.php:100
 msgid "Debug"
