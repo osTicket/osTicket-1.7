@@ -124,7 +124,7 @@ if($ticket->isOverdue())
             <table border="0" cellspacing="" cellpadding="4" width="100%">
                 <tr>
                     <th width="100"><?=_('Status')?>:</th>
-                    <td><?php echo ucfirst($ticket->getStatus()); ?></td>
+                    <td><?php echo _(ucfirst($ticket->getStatus())); ?></td>
                 </tr>
                 <tr>
                     <th><?=_('Priority')?>:</th>
@@ -166,7 +166,7 @@ if($ticket->isOverdue())
                 <tr>
                     <th><?=_('Source')?>:</th>
                     <td><?php 
-                        echo Format::htmlchars($ticket->getSource());
+                        echo Format::htmlchars(_($ticket->getSource()));
 
                         if($ticket->getIP())
                             echo '&nbsp;&nbsp; <span class="faded">('.$ticket->getIP().')</span>';
