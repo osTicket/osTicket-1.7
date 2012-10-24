@@ -481,8 +481,8 @@ if(!$cfg->showNotesInline()) { ?>
             </div>
         </table>
         <p  style="padding-left:165px;">
-            <input class="btn_sm" type="submit" value="Post Reply">
-            <input class="btn_sm" type="reset" value="Reset">
+            <input class="btn_sm" type="submit" value="<?=_('Post Reply')?>">
+            <input class="btn_sm" type="reset" value="<?=_('Reset')?>">
         </p>
     </form>
     <form id="note" action="tickets.php?id=<?php echo $ticket->getId(); ?>#note" name="note" method="post" enctype="multipart/form-data">
