@@ -128,7 +128,7 @@ if($ticket->isOverdue())
                 </tr>
                 <tr>
                     <th><?=_('Priority')?>:</th>
-                    <td><?php echo $ticket->getPriority(); ?></td>
+                    <td><?php echo _($ticket->getPriority()); ?></td>
                 </tr>
                 <tr>
                     <th><?=_('Department')?>:</th>
