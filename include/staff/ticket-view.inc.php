@@ -124,11 +124,11 @@ if($ticket->isOverdue())
             <table border="0" cellspacing="" cellpadding="4" width="100%">
                 <tr>
                     <th width="100"><?=_('Status')?>:</th>
-                    <td><?php echo ucfirst($ticket->getStatus()); ?></td>
+                    <td><?php echo _(ucfirst($ticket->getStatus())); ?></td>
                 </tr>
                 <tr>
                     <th><?=_('Priority')?>:</th>
-                    <td><?php echo $ticket->getPriority(); ?></td>
+                    <td><?php echo _($ticket->getPriority()); ?></td>
                 </tr>
                 <tr>
                     <th><?=_('Department')?>:</th>
@@ -166,7 +166,7 @@ if($ticket->isOverdue())
                 <tr>
                     <th><?=_('Source')?>:</th>
                     <td><?php 
-                        echo Format::htmlchars($ticket->getSource());
+                        echo Format::htmlchars(_($ticket->getSource()));
 
                         if($ticket->getIP())
                             echo '&nbsp;&nbsp; <span class="faded">('.$ticket->getIP().')</span>';
@@ -481,8 +481,8 @@ if(!$cfg->showNotesInline()) { ?>
             </div>
         </table>
         <p  style="padding-left:165px;">
-            <input class="btn_sm" type="submit" value="Post Reply">
-            <input class="btn_sm" type="reset" value="Reset">
+            <input class="btn_sm" type="submit" value="<?=_('Post Reply')?>">
+            <input class="btn_sm" type="reset" value="<?=_('Reset')?>">
         </p>
     </form>
     <form id="note" action="tickets.php?id=<?php echo $ticket->getId(); ?>#note" name="note" method="post" enctype="multipart/form-data">
