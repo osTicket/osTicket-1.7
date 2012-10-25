@@ -722,13 +722,14 @@ class Ticket {
         #     email filter? This method doesn't consider such a case
         if ($trump !== null) {
             $slaId = $trump;
-        } elseif ($this->getDept()->getSLAId()) {
+        } elseif ($this->getDept() && $this->getDept()->getSLAId()) {
             $slaId = $this->getDept()->getSLAId();
-        } elseif ($this->getTopicId() && $this->getTopic()) {
+        } elseif ($this->getTopic() && $this->getTopic()->getSLAId()) {
             $slaId = $this->getTopic()->getSLAId();
         } else {
             $slaId = $cfg->getDefaultSLAId();
         }
+
         return ($slaId && $this->setSLAId($slaId)) ? $slaId : false;
     }
 
@@ -1461,6 +1462,7 @@ class Ticket {
     }
 
     function postCannedReply($canned, $msgId, $alert=true) {
+        global $ost, $cfg;
 
         if((!is_object($canned) && !($canned=Canned::lookup($canned))) || !$canned->isEnabled())
             return false;
@@ -1473,7 +1475,38 @@ class Ticket {
                       'response' => $this->replaceVars($canned->getResponse()),
                       'cannedattachments' => $files);
 
-        return $this->postReply($info, $errors, $alert);
+        if(!($respId=$this->postReply($info, $errors, false)))
+            return false;
+
+        $this->markUnAnswered();
+
+        if(!$alert) return $respId;
+
+        $dept = $this->getDept();
+
+        if(!($tpl = $dept->getTemplate()))
+            $tpl= $cfg->getDefaultTemplate();
+
+        if(!$dept || !($email=$dept->getEmail()))
+            $email = $cfg->getDefaultEmail();
+
+        if($tpl && ($msg=$tpl->getAutoReplyMsgTemplate()) && $email) {
+
+            if($dept && $dept->isPublic())
+                $signature=$dept->getSignature();
+            else
+                $signature='';
+
+            $msg = $this->replaceVars($msg, array('response' => $info['response'], 'signature' => $signature));
+
+            if($cfg->stripQuotedReply() && ($tag=$cfg->getReplySeparator()))
+                $msg['body'] ="\n$tag\n\n".$msg['body'];
+
+            $attachments =($cfg->emailAttachments() && $files)?$this->getAttachments($respId, 'R'):array();
+            $email->send($this->getEmail(), $msg['subj'], $msg['body'], $attachments);
+        }
+
+        return $respId;
     }
 
     /* public */ 
@@ -1487,7 +1520,7 @@ class Ticket {
 
         if($errors) return 0;
 
-        $poster = $thisstaff?$thisstaff->getName():'SYSTEM (Canned Response)';
+        $poster = $thisstaff?$thisstaff->getName():'SYSTEM (Canned Reply)';
 
         $sql='INSERT INTO '.TICKET_THREAD_TABLE.' SET created=NOW() '
             .' ,thread_type="R"'
