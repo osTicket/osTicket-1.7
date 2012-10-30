@@ -1628,7 +1628,7 @@ class Ticket {
     }
 
     //Insert Internal Notes
-    function logNote($title, $note, $poster, $alert=true) {
+    function logNote($title, $note, $poster='SYSTEM', $alert=true) {
 
         return $this->postNote(
                 array('title' => $title, 'note' => $note),
@@ -2105,6 +2105,9 @@ class Ticket {
         # Perform ticket filter actions on the new ticket arguments
         if ($ticket_filter) $ticket_filter->apply($vars);
 
+        # we call event trigger for hook handling
+        EventListener::get()->apply(new Event(Event::PRE_CREATE_TICKET, NULL), $vars);
+
         # Some things will need to be unpacked back into the scope of this
         # function
         if (isset($vars['autorespond'])) $autorespond=$vars['autorespond'];
@@ -2180,6 +2183,9 @@ class Ticket {
         $dept = $ticket->getDept();
         //post the message.
         $msgid=$ticket->postMessage($vars['message'],$source,$vars['mid'],$vars['header'],true);
+
+        # we call event trigger for hook handling
+        EventListener::get()->apply(new Event(Event::POST_CREATE_TICKET, $ticket), $vars);
 
         // Configure service-level-agreement for this ticket
         $ticket->selectSLAId($vars['slaId']);
