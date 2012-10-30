@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: osticket17\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-10-30 12:13-0300\n"
+"POT-Creation-Date: 2012-10-30 12:54-0300\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Fabio Rauber <fabior@interlegis.leg.br>\n"
 "Language-Team: Fabio Rauber <fabior@interlegis.leg.br>\n"
@@ -816,6 +816,7 @@ msgid "Perm. Denied. You are not allowed to DELETE tickets!!"
 msgstr "Perm. Negada. Você não tem permissão para APAGAR tíquetes!!"
 
 #: osticket/scp/tickets.php:306
+#: osticket/scp/tickets.php:409
 msgid "deleted successfully"
 msgstr "apagado com sucesso"
 
@@ -848,6 +849,17 @@ msgstr "Nenhum tíquete selecionado. Você deve selecionar ao meno um tíquete."
 msgid "Ticket reopened by"
 msgstr "Tíquete reaberto por"
 
+#: osticket/scp/tickets.php:349
+#: osticket/scp/tickets.php:369
+#: osticket/scp/tickets.php:388
+#: osticket/scp/tickets.php:409
+msgid "Selected tickets"
+msgstr "Tíquetes selecionados"
+
+#: osticket/scp/tickets.php:349
+msgid "reopened successfully"
+msgstr "reabertos com sucesso"
+
 #: osticket/scp/tickets.php:351
 msgid "selected tickets reopened"
 msgstr "tíquetes selecionados reabertos"
@@ -864,6 +876,10 @@ msgstr "Você não tem permissão para reabrir tíquetes"
 msgid "Ticket closed without response by"
 msgstr "Tíquete fechado sem resposta por"
 
+#: osticket/scp/tickets.php:369
+msgid "closed succesfully"
+msgstr "fechados com sucesso"
+
 #: osticket/scp/tickets.php:371
 msgid "selected tickets closed"
 msgstr "tíquetes selecionados fechados"
@@ -879,6 +895,10 @@ msgstr "Você não tem permissão para fechar tíquetes"
 #: osticket/scp/tickets.php:379
 msgid "Ticket flagged as overdue by"
 msgstr "Tíquete marcado como atrasado por"
+
+#: osticket/scp/tickets.php:388
+msgid "marked overdue"
+msgstr "marcados como atrasados"
 
 #: osticket/scp/tickets.php:390
 msgid "selected tickets marked overdue"

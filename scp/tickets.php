@@ -346,7 +346,7 @@ if($_POST && !$errors):
                                 }
 
                                 if($i==$count)
-                                    $msg = _("Selected tickets ($i) reopened successfully");
+                                    $msg = _('Selected tickets')." ($i) "._('reopened successfully');
                                 elseif($i)
                                     $warn = "$i "._("of")." $count "._("selected tickets reopened");
                                 else
@@ -366,7 +366,7 @@ if($_POST && !$errors):
                                 }
 
                                 if($i==$count)
-                                    $msg =_("Selected tickets ($i) closed succesfully");
+                                    $msg =_('Selected tickets')." ($i) "._('closed succesfully');
                                 elseif($i)
                                     $warn = "$i "._("of")." $count "._("selected tickets closed");
                                 else
@@ -385,7 +385,7 @@ if($_POST && !$errors):
                             }
 
                             if($i==$count)
-                                $msg = _("Selected tickets ($i) marked overdue");
+                                $msg = _('Selected tickets')." ($i) "._('marked overdue');
                             elseif($i)
                                 $warn = "$i "._("of")." $count "._("selected tickets marked overdue");
                             else
@@ -406,7 +406,7 @@ if($_POST && !$errors):
                                 }
 
                                 if($i==$count)
-                                    $msg = _("Selected tickets ($i) deleted successfully");
+                                    $msg = _('Selected tickets')." ($i) "._('deleted successfully');
                                 elseif($i)
                                     $warn = "$i "._("of")." $count "._("selected tickets deleted");
                                 else
