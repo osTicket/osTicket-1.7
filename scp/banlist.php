@@ -18,13 +18,13 @@ include_once(INCLUDE_DIR.'class.banlist.php');
 
 /* Get the system ban list filter */
 if(!($filter=Banlist::getFilter())) 
-    $warn=_('System ban list is empty.');
+    $warn = _('System ban list is empty.');
 elseif(!$filter->isActive())
-    $warn=_('SYSTEM BAN LIST filter is <b>DISABLED</b> - <a href="filters.php">enable here</a>.'); 
+    $warn = _('SYSTEM BAN LIST filter is <b>DISABLED</b>').' - <a href="filters.php">'._('enable here').'</a>.'; 
  
 $rule=null; //ban rule obj.
 if($filter && $_REQUEST['id'] && !($rule=$filter->getRule($_REQUEST['id'])))
-    $errors['err']=_('Unknown or invalid ban list ID #');
+    $errors['err'] = _('Unknown or invalid ban list ID #');
 
 if($_POST && !$errors && $filter){
     switch(strtolower($_POST['do'])){
@@ -64,50 +64,52 @@ if($_POST && !$errors && $filter){
             break;
         case 'mass_process':
             if(!$_POST['ids'] || !is_array($_POST['ids']) || !count($_POST['ids'])) {
-                $errors['err']=_('You must select at least one email to process.');
-            }else{
+                $errors['err'] = _('You must select at least one email to process.');
+            } else {
                 $count=count($_POST['ids']);
-                if($_POST['enable']){
-                    $sql='UPDATE '.FILTER_RULE_TABLE.' SET isactive=1 WHERE filter_id='.
-                            db_input($filter->getId()).
-                         ' AND id IN ('.
-                            implode(',', db_input($_POST['ids'])).')';
-                    if(db_query($sql) && ($num=db_affected_rows())){
-                        if($num==$count)
-                            $msg=_('Selected emails ban status set to enabled');
-                        else
-                            $warn="$num "._("of")." $count "._("selected emails enabled");
-                    }else{
-                        $errors['err']=_('Unable to enable selected emails');
-                    }
-                }elseif($_POST['disable']){
-                    $sql='UPDATE '.FILTER_RULE_TABLE.' SET isactive=0 WHERE filter_id='.
-                            db_input($filter->getId()).
-                         ' AND id IN ('.
-                            implode(',', db_input($_POST['ids'])).')';
-                    if(db_query($sql) && ($num=db_affected_rows())) {
-                        if($num==$count)
-                            $msg=_('Selected emails ban status set to disabled');
-                        else
-                            $warn="$num "._("of")." $count "._("selected emails ban status set to disabled");
-                    }else{
-                        $errors['err']=_('Unable to disable selected emails');
-                    }
-                }elseif($_POST['delete']){
-                    $i=0;
-                    foreach($_POST['ids'] as $k=>$v) {
-                        if(($r=FilterRule::lookup($v)) && $r->delete())
-                            $i++;
-                    }
-                    if($i && $i==$count)
-                        $msg=_('Selected emails deleted successfully');
-                    elseif($i>0)
-                        $warn="$i "._("of")." $count "._("selected emails deleted");
-                    elseif(!$errors['err'])
-                        $errors['err']=_('Unable to delete selected emails');
+                switch(strtolower($_POST['a'])) {
+                    case 'enable':
+                        $sql='UPDATE '.FILTER_RULE_TABLE.' SET isactive=1 '
+                            .' WHERE filter_id='.db_input($filter->getId())
+                            .' AND id IN ('.implode(',', db_input($_POST['ids'])).')';
+                        if(db_query($sql) && ($num=db_affected_rows())){
+                            if($num==$count)
+                                $msg = _('Selected emails ban status set to enabled');
+                            else
+                                $warn = "$num "._("of")." $count "._("selected emails ban status enabled");
+                        } else  {
+                            $errors['err'] = _('Unable to enable selected emails');
+                        }
+                        break;
+                    case 'disable':
+                        $sql='UPDATE '.FILTER_RULE_TABLE.' SET isactive=0 '
+                            .' WHERE filter_id='.db_input($filter->getId())
+                            .' AND id IN ('.implode(',', db_input($_POST['ids'])).')';
+                        if(db_query($sql) && ($num=db_affected_rows())) {
+                            if($num==$count)
+                                $msg = _('Selected emails ban status set to disabled');
+                            else
+                                $warn = "$num "._("of")." $count "._("selected emails ban status set to disabled");
+                        } else {
+                            $errors['err'] = _('Unable to disable selected emails');
+                        }
+                        break;
+                    case 'delete':
+                        $i=0;
+                        foreach($_POST['ids'] as $k=>$v) {
+                            if(($r=FilterRule::lookup($v)) && $r->getFilterId()==$filter->getId() && $r->delete())
+                                $i++;
+                        }
+                        if($i && $i==$count)
+                            $msg = _('Selected emails deleted from banlist successfully');
+                        elseif($i>0)
+                            $warn = "$i "._("of")." $count "._("selected emails deleted from banlist");
+                        elseif(!$errors['err'])
+                            $errors['err'] = _('Unable to delete selected emails');
                     
-                }else{
-                    $errors['err']=_('Unknown action');
+                        break;
+                    default:
+                        $errors['err'] = _('Unknown action - get technical help');
                 }
             }
             break;

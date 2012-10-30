@@ -19,26 +19,27 @@ if($_POST){
     switch(strtolower($_POST['do'])){
         case 'mass_process':
             if(!$_POST['ids'] || !is_array($_POST['ids']) || !count($_POST['ids'])) {
-                $errors['err']=_('You must select at least one log to delete');
-            }else{
+                $errors['err'] = _('You must select at least one log to delete');
+            } else {
                 $count=count($_POST['ids']);
-                if($_POST['delete']){
-                    $sql='DELETE FROM '.SYSLOG_TABLE.' WHERE log_id IN ('
-                        .implode(',', db_input($_POST['ids'])).')';
+                if($_POST['a'] && !strcasecmp($_POST['a'], 'delete')) {
+
+                    $sql='DELETE FROM '.SYSLOG_TABLE
+                        .' WHERE log_id IN ('.implode(',', db_input($_POST['ids'])).')';
                     if(db_query($sql) && ($num=db_affected_rows())){
                         if($num==$count)
                             $msg=_('Selected logs deleted successfully');
                         else
                             $warn="$num "._("of")." $count "._("selected logs deleted");
-                    }elseif(!$errors['err'])
+                    } elseif(!$errors['err'])
                         $errors['err']=_('Unable to delete selected logs');
-                }else{
-                    $errors['err']=_('Unknown command');
+                } else {
+                    $errors['err']=_('Unknown action - get technical help');
                 }
             }
             break;
         default:
-            $errors['err']=_('Unknown option');
+            $errors['err']=_('Unknown command/action');
             break;
     }
 }

@@ -39,63 +39,65 @@ if($_POST){
             break;
         case 'mass_process':
             if(!$_POST['ids'] || !is_array($_POST['ids']) || !count($_POST['ids'])) {
-                $errors['err']=_('You must select at least one department');
-            }elseif(!$_POST['public'] && in_array($cfg->getDefaultDeptId(),$_POST['ids'])) {
-                $errors['err']=_('You can not disable/delete a default department. Remove default Dept. and try again.');
+                $errors['err'] = _('You must select at least one department');
+            }elseif(in_array($cfg->getDefaultDeptId(),$_POST['ids'])) {
+                $errors['err'] = _('You can not disable/delete a default department. Remove default Dept. and try again.');
             }else{
                 $count=count($_POST['ids']);
-                if($_POST['public']){
-                    $sql='UPDATE '.DEPT_TABLE.' SET ispublic=1 WHERE dept_id IN ('
-                        .implode(',', db_input($_POST['ids'])).')';
-                    if(db_query($sql) && ($num=db_affected_rows())){
-                        if($num==$count)
-                            $msg=_('Selected departments made public');
-                        else
-                            $warn="$num "._("of")." $count "._("selected departments made public");
-                    }else{
-                        $errors['err']=_('Unable to make selected department public.');
-                    }
-                }elseif($_POST['private']){
-                    $sql='UPDATE '.DEPT_TABLE.' SET ispublic=0  '.
-                         'WHERE dept_id IN ('
-                            .implode(',', db_input($_POST['ids']))
-                        .') AND dept_id!='.db_input($cfg->getDefaultDeptId());
-                    if(db_query($sql) && ($num=db_affected_rows())) {
-                        if($num==$count)
-                            $msg=_('Selected departments made private');
-                        else
-                            $warn="$num "._("of")." $count "._("selected departments made private");
-                    }else{
-                        $errors['err']=_('Unable to make selected department(s) private. Possibly already private!');
-                    }
-
-                }elseif($_POST['delete']){
-                    //Deny all deletes if one of the selections has members in it.
-                    $sql='SELECT count(staff_id) FROM '.STAFF_TABLE.' WHERE dept_id IN ('
-                        .implode(',', db_input($_POST['ids'])).')';
-                    list($members)=db_fetch_row(db_query($sql));
-                    if($members)
-                        $errors['err']=_('Dept. with users can not be deleted. Move staff first.');
-                    else{
-                        $i=0;
-                        foreach($_POST['ids'] as $k=>$v) {
-                            if($v!=$cfg->getDefaultDeptId() && ($d=Dept::lookup($v)) && $d->delete())
-                                $i++;
+                switch(strtolower($_POST['a'])) {
+                    case 'make_public':
+                        $sql='UPDATE '.DEPT_TABLE.' SET ispublic=1 '
+                            .' WHERE dept_id IN ('.implode(',', db_input($_POST['ids'])).')';
+                        if(db_query($sql) && ($num=db_affected_rows())){
+                            if($num==$count)
+                                $msg=_('Selected departments made public');
+                            else
+                                $warn="$num "._("of")." $count "._("selected departments made public");
+                        } else {
+                            $errors['err']=_('Unable to make selected department public.');
                         }
-                        if($i && $i==$count)
-                            $msg=_('Selected departments deleted successfully');
-                        elseif($i>0)
-                            $warn="$i "._("of")." $count "._("selected departments deleted");
-                        elseif(!$errors['err'])
-                            $errors['err']=_('Unable to delete selected departments.');
-                    }
-                }else {
-                    $errors['err']=_('Unknown action');
+                        break;
+                    case 'make_private':
+                        $sql='UPDATE '.DEPT_TABLE.' SET ispublic=0  '
+                            .' WHERE dept_id IN ('.implode(',', db_input($_POST['ids'])).') '
+                            .' AND dept_id!='.db_input($cfg->getDefaultDeptId());
+                        if(db_query($sql) && ($num=db_affected_rows())) {
+                            if($num==$count)
+                                $msg = _('Selected departments made private');
+                            else
+                                $warn = "$num "._("of")." $count "._("selected departments made private");
+                        } else {
+                            $errors['err'] = _('Unable to make selected department(s) private. Possibly already private!');
+                        }
+                        break;
+                    case 'delete':
+                        //Deny all deletes if one of the selections has members in it.
+                        $sql='SELECT count(staff_id) FROM '.STAFF_TABLE
+                            .' WHERE dept_id IN ('.implode(',', db_input($_POST['ids'])).')';
+                        list($members)=db_fetch_row(db_query($sql));
+                        if($members)
+                            $errors['err']=_('Departments with staff can not be deleted. Move staff first.');
+                        else {
+                            $i=0;
+                            foreach($_POST['ids'] as $k=>$v) {
+                                if($v!=$cfg->getDefaultDeptId() && ($d=Dept::lookup($v)) && $d->delete())
+                                    $i++;
+                            }
+                            if($i && $i==$count)
+                                $msg = _('Selected departments deleted successfully');
+                            elseif($i>0)
+                                $warn = "$i "._("of")." $count "._("selected departments deleted");
+                            elseif(!$errors['err'])
+                                $errors['err'] = _('Unable to delete selected departments.');
+                        }
+                        break;
+                    default:
+                        $errors['err']=_('Unknown action - get technical help');
                 }
             }
             break;
         default:
-            $errors['err']=_('Unknown action');
+            $errors['err']=_('Unknown action/command');
             break;
     }
 }

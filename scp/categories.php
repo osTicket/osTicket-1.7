@@ -51,44 +51,49 @@ if($_POST){
                 $errors['err']=_('You must select at least one category');
             } else {
                 $count=count($_POST['ids']);
-                if($_POST['public']) {
-                    $sql='UPDATE '.FAQ_CATEGORY_TABLE.' SET ispublic=1 WHERE category_id IN ('.
-                        implode(',', db_input($_POST['ids'])).')';
-                    if(db_query($sql) && ($num=db_affected_rows())) {
-                        if($num==$count)
-                            $msg=_('Selected categories made PUBLIC');
-                        else
-                            $warn="$num "._("of")." $count "._("selected categories made PUBLIC");
-                    } else {
-                        $errors['err']=_('Unable to enable selected categories public.');
-                    }
-                } elseif($_POST['private']) {
-                    $sql='UPDATE '.FAQ_CATEGORY_TABLE.' SET ispublic=0 WHERE category_id IN ('.
-                        implode(',', db_input($_POST['ids'])).')';
-                    if(db_query($sql) && ($num=db_affected_rows())) {
-                        if($num==$count)
-                            $msg=_('Selected categories made PRIVATE');
-                        else
-                            $warn="$num "._("of")." $count "._("selected categories made PRIVATE");
-                    } else {
-                        $errors['err']=_('Unable to disable selected categories PRIVATE');
-                    }
-                }elseif($_POST['delete']) {
-                    $i=0;
-                    foreach($_POST['ids'] as $k=>$v) {
-                        if(($c=Category::lookup($v)) && $c->delete())
-                            $i++;
-                    }
-
-                    if($i==$count)
-                        $msg=_('Selected categories deleted successfully');
-                    elseif($i>0)
-                        $warn="$i "._("of")." $count "._("selected categories deleted");
-                    elseif(!$errors['err'])
-                        $errors['err']=_('Unable to delete selected categories');
+                switch(strtolower($_POST['a'])) {
+                    case 'make_public':
+                        $sql='UPDATE '.FAQ_CATEGORY_TABLE.' SET ispublic=1 '
+                            .' WHERE category_id IN ('.implode(',', db_input($_POST['ids'])).')';
                     
-                } else {
-                    $errors['err']=_('Unknown command');
+                        if(db_query($sql) && ($num=db_affected_rows())) {
+                            if($num==$count)
+                                $msg = _('Selected categories made PUBLIC');
+                            else
+                                $warn = "$num "._("of")." $count "._("selected categories made PUBLIC");
+                        } else {
+                            $errors['err'] = _('Unable to enable selected categories public.');
+                        }
+                        break;
+                    case 'make_private':
+                        $sql='UPDATE '.FAQ_CATEGORY_TABLE.' SET ispublic=0 '
+                            .' WHERE category_id IN ('.implode(',', db_input($_POST['ids'])).')';
+
+                        if(db_query($sql) && ($num=db_affected_rows())) {
+                            if($num==$count)
+                                $msg = _('Selected categories made PRIVATE');
+                            else
+                                $warn = "$num "._("of")." $count "._("selected categories made PRIVATE");
+                        } else {
+                            $errors['err'] = _('Unable to disable selected categories PRIVATE');
+                        }
+                        break;
+                    case 'delete':
+                        $i=0;
+                        foreach($_POST['ids'] as $k=>$v) {
+                            if(($c=Category::lookup($v)) && $c->delete())
+                                $i++;
+                        }
+
+                        if($i==$count)
+                            $msg = _('Selected categories deleted successfully');
+                        elseif($i>0)
+                            $warn = "$i "._("of")." $count "._("selected categories deleted");
+                        elseif(!$errors['err'])
+                            $errors['err'] = _('Unable to delete selected categories');
+                        break;
+                    default:
+                        $errors['err']=_('Unknown action/command');
                 }
             }
             break;

@@ -39,52 +39,59 @@ if($_POST){
             break;
         case 'mass_process':
             if(!$_POST['ids'] || !is_array($_POST['ids']) || !count($_POST['ids'])) {
-                $errors['err']=_('You must select at least one staff member.');
-            }elseif(in_array($thisstaff->getId(),$_POST['ids'])) {
-                $errors['err']=_('You can not disable/delete yourself - you could be the only admin!');
-            }else{
+                $errors['err'] = _('You must select at least one staff member.');
+            } elseif(in_array($thisstaff->getId(),$_POST['ids'])) {
+                $errors['err'] = _('You can not disable/delete yourself - you could be the only admin!');
+            } else {
                 $count=count($_POST['ids']);
-                if($_POST['enable']){
-                    $sql='UPDATE '.STAFF_TABLE.' SET isactive=1 WHERE staff_id IN ('.
-                        implode(',', db_input($_POST['ids'])).')';
-                    if(db_query($sql) && ($num=db_affected_rows())){
-                        if($num==$count)
-                            $msg=_('Selected staff activated');
-                        else
-                            $warn="$num of $count selected staff activated";//?
-                    }else{
-                        $errors['err']=_('Unable to activate selected staff');
-                    }
-                }elseif($_POST['disable']){
-                    $sql='UPDATE '.STAFF_TABLE.' SET isactive=0  '.
-                         'WHERE staff_id IN ('.implode(',',$_POST['ids']).') AND staff_id!='.db_input($thisstaff->getId());
-                    if(db_query($sql) && ($num=db_affected_rows())) {
-                        if($num==$count)
-                            $msg=_('Selected staff disabled');
-                        else
-                            $warn="$num "._("of")." $count "._("selected staff disabled");
-                    }else{
-                        $errors['err']=_('Unable to disable selected staff');
-                    }
-                }elseif($_POST['delete']){
-                    foreach($_POST['ids'] as $k=>$v) {
-                        if($v!=$thisstaff->getId() && ($s=Staff::lookup($v)) && $s->delete())
-                            $i++;
-                    }
+                switch(strtolower($_POST['a'])) {
+                    case 'enable':
+                        $sql='UPDATE '.STAFF_TABLE.' SET isactive=1 '
+                            .' WHERE staff_id IN ('.implode(',', db_input($_POST['ids'])).')';
 
-                    if($i && $i==$count)
-                        $msg=_('Selected staff deleted successfully');
-                    elseif($i>0)
-                        $warn="$i "._("of")." $count "._("selected staff deleted");
-                    elseif(!$errors['err'])
-                        $errors['err']=_('Unable to delete selected staff.');
-                }else{
-                    $errors['err']=_('Unknown action. Get technical help!');
+                        if(db_query($sql) && ($num=db_affected_rows())) {
+                            if($num==$count)
+                                $msg = _('Selected staff activated');
+                            else
+                                $warn = "$num "._("of")." $count "._("selected staff activated");
+                        } else {
+                            $errors['err'] = _('Unable to activate selected staff');
+                        }
+                        break;
+                    case 'disable':
+                        $sql='UPDATE '.STAFF_TABLE.' SET isactive=0 '
+                            .' WHERE staff_id IN ('.implode(',',$_POST['ids']).') AND staff_id!='.db_input($thisstaff->getId());
+
+                        if(db_query($sql) && ($num=db_affected_rows())) {
+                            if($num==$count)
+                                $msg = _('Selected staff disabled');
+                            else
+                                $warn = "$num "._("of")." $count "._("selected staff disabled");
+                        } else {
+                            $errors['err'] = _('Unable to disable selected staff');
+                        }
+                        break;
+                    case 'delete':
+                        foreach($_POST['ids'] as $k=>$v) {
+                            if($v!=$thisstaff->getId() && ($s=Staff::lookup($v)) && $s->delete())
+                                $i++;
+                        }
+
+                        if($i && $i==$count)
+                            $msg = _('Selected staff deleted successfully');
+                        elseif($i>0)
+                            $warn = "$i "._("of")." $count "._("selected staff deleted");
+                        elseif(!$errors['err'])
+                            $errors['err'] = _('Unable to delete selected staff.');
+                        break;
+                    default:
+                        $errors['err'] = _('Unknown action. Get technical help!');
                 }
+                    
             }
             break;
         default:
-            $errors['err']=_('Unknown action');
+            $errors['err']=_('Unknown action/command');
             break;
     }
 }

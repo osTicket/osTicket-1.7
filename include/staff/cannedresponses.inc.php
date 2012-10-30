@@ -52,9 +52,10 @@ else
 <div style="float:right;text-align:right;padding-top:5px;padding-right:5px;">
     <b><a href="canned.php?a=add" class="Icon newReply"><?= _('Add New Response')?></a></b></div>
 <div class="clear"></div>
-<form action="canned.php" method="POST" name="canned" onSubmit="return checkbox_checker(this,1,0);">
+<form action="canned.php" method="POST" name="canned">
  <?php csrf_token(); ?>
  <input type="hidden" name="do" value="mass_process" >
+ <input type="hidden" id="action" name="a" value="" >
  <table class="list" border="0" cellspacing="1" cellpadding="0" width="940">
     <caption><?php echo $showing; ?></caption>
     <thead>
@@ -71,20 +72,16 @@ else
         $total=0;
         $ids=($errors && is_array($_POST['ids']))?$_POST['ids']:null;
         if($res && db_num_rows($res)):
-            $defaultId=$cfg->getDefaultDeptId();
             while ($row = db_fetch_array($res)) {
                 $sel=false;
-                if($ids && in_array($row['canned_id'],$ids)){
-                    $class="$class highlight";
+                if($ids && in_array($row['canned_id'],$ids))
                     $sel=true;
-                }
                 $files=$row['files']?'<span class="Icon file">&nbsp;</span>':'';
                 ?>
             <tr id="<?php echo $row['canned_id']; ?>">
                 <td width=7px>
-                  <input type="checkbox" name="ids[]" value="<?php echo $row['canned_id']; ?>"
-                            <?php echo $sel?'checked="checked"':''; ?>  <?php echo $default?'disabled="disabled"':''; ?>
-                                onClick="highLight(this.value,this.checked);"/>
+                  <input type="checkbox" name="ids[]" value="<?php echo $row['canned_id']; ?>" class="ckb"
+                            <?php echo $sel?'checked="checked"':''; ?> />
                 </td>
                 <td>
                     <a href="canned.php?id=<?php echo $row['canned_id']; ?>"><?php echo Format::truncate($row['title'],200); echo "&nbsp;$files"; ?></a>&nbsp;
@@ -100,10 +97,10 @@ else
      <tr>
         <td colspan="5">
             <?php if($res && $num){ ?>
-            <?= _('Select')?>:&nbsp;
-            <a href="#" onclick="return select_all(document.forms['canned'],true)"><?= _('All')?></a>&nbsp;&nbsp;
-            <a href="#" onclick="return reset_all(document.forms['canned'])"><?= _('None')?></a>&nbsp;&nbsp;
-            <a href="#" onclick="return toogle_all(document.forms['canned'],true)"><?= _('Toggle')?></a>&nbsp;&nbsp;
+            <?=_('Select')?>:&nbsp;
+            <a id="selectAll" href="#ckb"><?=_('All')?></a>&nbsp;&nbsp;
+            <a id="selectNone" href="#ckb"><?=_('None')?></a>&nbsp;&nbsp;
+            <a id="selectToggle" href="#ckb"><?=_('Toggle')?></a>&nbsp;&nbsp;
             <?php }else{
                 echo _('No canned responses');
             } ?>
@@ -115,15 +112,41 @@ else
 if($res && $num): //Show options..
     echo '<div>&nbsp;'._('Page').':'.$pageNav->getPageLinks().'&nbsp;</div>';
 ?>
-<p class="centered">
-    <input class="button" type="submit" name="enable" value="Enable"
-                onClick=' return confirm("<?= _('Are you sure you want to ENABLE selected responses?')?>");'>
-    <input class="button" type="submit" name="disable" value="Disable"
-                onClick=' return confirm("<?= _('Are you sure you want to DISABLE selected responses?')?>");'>
-    <input class="button" type="submit" name="delete" value="Delete"
-                onClick=' return confirm("<?= _('Are you sure you want to DELETE selected responses?')?>");'>
+<p class="centered" id="actions">
+    <input class="button" type="submit" name="enable" value="<?=_('Enable')?>" >
+    <input class="button" type="submit" name="disable" value="<?=_('Disable')?>" >
+    <input class="button" type="submit" name="delete" value="<?=_('Delete')?>" >
 </p>
 <?php
 endif;
 ?>
 </form>
+<div style="display:none;" class="dialog" id="confirm-action">
+    <h3><?=_('Please Confirm')?></h3>
+    <a class="close" href="">&times;</a>
+    <hr/>
+    <p class="confirm-action" style="display:none;" id="enable-confirm">
+        <?=_('Are you sure want to <b>enable</b> selected canned responses?')?>
+    </p>
+    <p class="confirm-action" style="display:none;" id="disable-confirm">
+        <?=_('Are you sure want to <b>disable</b> selected canned responses?')?>
+    </p>
+    <p class="confirm-action" style="display:none;" id="mark_overdue-confirm">
+        <?=_('Are you sure want to flag the selected tickets as <font color="red"><b>overdue</b>')?></font>?
+    </p>
+    <p class="confirm-action" style="display:none;" id="delete-confirm">
+        <font color="red"><strong><?=_('Are you sure you want to DELETE selected canned responses?')?></strong></font>
+        <br><br><?=_('Deleted items CANNOT be recovered, including any associated attachments.')?>
+    </p>
+    <div><?=_('Please confirm to continue.')?></div>
+    <hr style="margin-top:1em"/>
+    <p class="full-width">
+        <span class="buttons" style="float:left">
+            <input type="button" value="<?=_('No, Cancel')?>" class="close">
+        </span>
+        <span class="buttons" style="float:right">
+            <input type="button" value="<?=_('Yes, Do it!')?>" class="confirm">
+        </span>
+     </p>
+    <div class="clear"></div>
+</div>

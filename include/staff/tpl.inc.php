@@ -11,9 +11,9 @@ $info=array_merge($template->getMsgTemplate($info['tpl']),$info);
     <form method="get" action="templates.php">
     <input type="hidden" name="id" value="<?php echo $template->getId(); ?>">
     <input type="hidden" name="a" value="manage">
-    <?= _('Message Template') ?>:
-    <select name="tpl" style="width:300px;">
-        <option value="">&mdash; <?= _('Select Setting Group') ?> &mdash;</option>
+    <?= _('Message Template')?>:
+    <select id="tpl_options" name="tpl" style="width:300px;">
+        <option value="">&mdash; <?= _('Select Setting Group')?> &mdash;</option>
         <?php
         foreach($msgtemplates as $k=>$v) {
             $sel=($info['tpl']==$k)?'selected="selected"':'';

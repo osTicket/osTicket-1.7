@@ -51,49 +51,50 @@ if($_POST){
         case 'mass_process':
             if(!$_POST['ids'] || !is_array($_POST['ids']) || !count($_POST['ids'])) {
                 $errors['err']=_('You must select at least one template to process.');
-            }else{
+            } else {
                 $count=count($_POST['ids']);
-                if($_POST['enable']){
-                    $sql='UPDATE '.EMAIL_TEMPLATE_TABLE.' SET isactive=1 WHERE tpl_id IN ('.
-                        implode(',', db_input($_POST['ids'])).')';
-                    if(db_query($sql) && ($num=db_affected_rows())){
-                        if($num==$count)
-                            $msg=_('Selected templates enabled');
+                switch(strtolower($_POST['a'])) {
+                    case 'enable':
+                        $sql='UPDATE '.EMAIL_TEMPLATE_TABLE.' SET isactive=1 '
+                            .' WHERE tpl_id IN ('.implode(',', db_input($_POST['ids'])).')';
+                        if(db_query($sql) && ($num=db_affected_rows())){
+                            if($num==$count)
+                                $msg = _('Selected templates enabled');
+                            else
+                                $warn = "$num "._("of")." $count "._("selected templates enabled");
+                        } else {
+                            $errors['err'] = _('Unable to enable selected templates');
+                        }
+                        break;
+                    case 'disable':
+                        $i=0;
+                        foreach($_POST['ids'] as $k=>$v) {
+                            if(($t=Template::lookup($v)) && !$t->isInUse() && $t->disable())
+                                $i++;
+                        }
+                        if($i && $i==$count)
+                            $msg = _('Selected templates disabled');
+                        elseif($i)
+                            $warn = "$i "._("of")." $count "._("selected templates disabled (in-use templates can't be disabled)");
                         else
-                            $warn="$num "._("of")." $count "._("selected templates enabled");//Agora sim
-                    }else{
-                        $errors['err']=_('Unable to enable selected templates');
-                    }
-                }elseif($_POST['disable']){
+                            $errors['err'] = _("Unable to disable selected templates (in-use or default template can't be disabled)");
+                        break;
+                    case 'delete':
+                        $i=0;
+                        foreach($_POST['ids'] as $k=>$v) {
+                            if(($t=Template::lookup($v)) && !$t->isInUse() && $t->delete())
+                                $i++;
+                        }
 
-                    $i=0;
-                    foreach($_POST['ids'] as $k=>$v) {
-                        if(($t=Template::lookup($v)) && !$t->isInUse() && $t->disable())
-                            $i++;
-                    }
-
-                    if($i && $i==$count)
-                        $msg=_('Selected templates disabled');
-                    elseif($i)
-                        $warn="$i "._("of")." $count "._("selected templates disabled (in-use templates can't be disabled)");
-                    else
-                        $errors['err']=_("Unable to disable selected templates (in-use or default template can't be disabled)");
-                }elseif($_POST['delete']){
-                    $i=0;
-                    foreach($_POST['ids'] as $k=>$v) {
-                        if(($t=Template::lookup($v)) && $t->delete())
-                            $i++;
-                    }
-
-                    if($i && $i==$count)
-                        $msg=_('Selected templates deleted successfully');
-                    elseif($i>0)
-                        $warn="$i "._("of")." $count "._("selected templates deleted");
-                    elseif(!$errors['err'])
-                        $errors['err']=_('Unable to delete selected templates');
-                    
-                }else {
-                    $errors['err']=_('Unknown template action');
+                        if($i && $i==$count)
+                            $msg = _('Selected templates deleted successfully');
+                        elseif($i>0)
+                            $warn = "$i "._("of")." $count "._("selected templates deleted");
+                        elseif(!$errors['err'])
+                            $errors['err'] = _('Unable to delete selected templates');
+                        break;
+                    default:
+                        $errors['err']=_('Unknown template action');
                 }
             }
             break;

@@ -45,9 +45,10 @@ else
 <div style="float:right;text-align:right;padding-top:5px;padding-right:5px;">
  <b><a href="slas.php?a=add" class="Icon newsla"><?= _('Add New SLA Plan')?></a></b></div>
 <div class="clear"></div>
-<form action="slas.php" method="POST" name="slas" onSubmit="return checkbox_checker(this,1,0);">
+<form action="slas.php" method="POST" name="slas">
  <?php csrf_token(); ?>
  <input type="hidden" name="do" value="mass_process" >
+<input type="hidden" id="action" name="a" value="" >
  <table class="list" border="0" cellspacing="1" cellpadding="0" width="940">
     <caption><?php echo $showing; ?></caption>
     <thead>
@@ -67,15 +68,14 @@ else
         if($res && db_num_rows($res)):
             while ($row = db_fetch_array($res)) {
                 $sel=false;
-                if($ids && in_array($row['id'],$ids)){
-                    $class="$class highlight";
+                if($ids && in_array($row['id'],$ids))
                     $sel=true;
-                }
                 ?>
             <tr id="<?php echo $row['id']; ?>">
                 <td width=7px>
-                  <input type="checkbox" name="ids[]" value="<?php echo $row['id']; ?>" 
-                            <?php echo $sel?'checked="checked"':''; ?> onClick="highLight(this.value,this.checked);"> </td>
+                  <input type="checkbox" class="ckb" name="ids[]" value="<?php echo $row['id']; ?>" 
+                            <?php echo $sel?'checked="checked"':''; ?>>
+                </td>
                 <td>&nbsp;<a href="slas.php?id=<?php echo $row['id']; ?>"><?php echo Format::htmlchars($row['name']); ?></a></td>
                 <td><?php echo $row['isactive']?_('Active'):'<b>'._('Disabled').'</b>'; ?></td>
                 <td style="text-align:right;padding-right:35px;"><?php echo $row['grace_period']; ?>&nbsp;</td>
@@ -90,9 +90,9 @@ else
         <td colspan="6">
             <?php if($res && $num){ ?>
             <?= _('Select')?>:&nbsp;
-            <a href="#" onclick="return select_all(document.forms['slas'],true)"><?= _('All')?></a>&nbsp;&nbsp;
-            <a href="#" onclick="return reset_all(document.forms['slas'])"><?= _('None')?></a>&nbsp;&nbsp;
-            <a href="#" onclick="return toogle_all(document.forms['slas'],true)"><?= _('Toggle')?></a>&nbsp;&nbsp;
+            <a id="selectAll" href="#ckb"><?= _('All')?></a>&nbsp;&nbsp;
+            <a id="selectNone" href="#ckb"><?= _('None')?></a>&nbsp;&nbsp;
+            <a id="selectToggle" href="#ckb"><?= _('Toggle')?></a>&nbsp;&nbsp;
             <?php }else{
                 echo _('No SLA plans found');
             } ?>
@@ -104,16 +104,38 @@ else
 if($res && $num): //Show options..
     echo '<div>&nbsp;'._('Page').':'.$pageNav->getPageLinks().'&nbsp;</div>';
 ?>
-<p class="centered">
-    <input class="button" type="submit" name="enable" value="<?= _('Enable')?>"
-                onClick=' return confirm("<?= _('Are you sure you want to ENABLE selected plans?')?>");'>
-    <input class="button" type="submit" name="disable" value="<?= _('Disable')?>"
-                onClick=' return confirm("<?= _('Are you sure you want to DISABLE selected plans?')?>");'>
-    <input class="button" type="submit" name="delete" value="<?= _('Delete')?>"
-                onClick=' return confirm("<?= _('Are you sure you want to DELETE selected plans?')?>");'>
+<p class="centered" id="actions">
+    <input class="button" type="submit" name="enable" value="<?= _('Enable')?>" >
+    <input class="button" type="submit" name="disable" value="<?= _('Disable')?>" >
+    <input class="button" type="submit" name="delete" value="<?= _('Delete')?>" >
 </p>
 <?php
 endif;
 ?>
 </form>
 
+<div style="display:none;" class="dialog" id="confirm-action">
+    <h3><?= _('Please Confirm')?></h3>
+    <a class="close" href="">&times;</a>
+    <hr/>
+    <p class="confirm-action" style="display:none;" id="enable-confirm">
+        <?= _('Are you sure want to <b>enable</b> selected SLA plans?')?>
+    </p>
+    <p class="confirm-action" style="display:none;" id="disable-confirm">
+        <?= _('Are you sure want to <b>disable</b> selected SLA plans?')?>
+    </p>
+    <p class="confirm-action" style="display:none;" id="delete-confirm">
+        <font color="red"><strong><?= _('Are you sure you want to DELETE selected SLA plans?')?></strong></font>
+    </p>
+    <div><?= _('Please confirm to continue.')?></div>
+    <hr style="margin-top:1em"/>
+    <p class="full-width">
+        <span class="buttons" style="float:left">
+            <input type="button" value="<?= _('No, Cancel')?>" class="close">
+        </span>
+        <span class="buttons" style="float:right">
+            <input type="button" value="<?= _('Yes, Do it!')?>" class="confirm">
+        </span>
+     </p>
+    <div class="clear"></div>
+</div>

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: osticket17\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-10-24 09:20-0300\n"
+"POT-Creation-Date: 2012-10-30 12:13-0300\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Fabio Rauber <fabior@interlegis.leg.br>\n"
 "Language-Team: Fabio Rauber <fabior@interlegis.leg.br>\n"
@@ -255,72 +255,82 @@ msgstr "Não foi possível adicionar o time. Corrija os erros abaixo e tente nov
 msgid "You must select at least one team."
 msgstr "Você deve selecionar ao menos um time."
 
-#: osticket/scp/teams.php:50
+#: osticket/scp/teams.php:52
 msgid "Selected teams activated"
 msgstr "Ativados os times selecionados"
 
-#: osticket/scp/teams.php:52
-#: osticket/scp/teams.php:63
-#: osticket/scp/teams.php:76
-#: osticket/scp/categories.php:61
-#: osticket/scp/categories.php:72
-#: osticket/scp/categories.php:86
-#: osticket/scp/apikeys.php:54
-#: osticket/scp/apikeys.php:65
-#: osticket/scp/apikeys.php:80
-#: osticket/scp/tickets.php:363
-#: osticket/scp/tickets.php:375
-#: osticket/scp/tickets.php:382
-#: osticket/scp/helptopics.php:54
-#: osticket/scp/helptopics.php:65
-#: osticket/scp/helptopics.php:80
-#: osticket/scp/departments.php:54
-#: osticket/scp/departments.php:67
-#: osticket/scp/departments.php:88
-#: osticket/scp/filters.php:58
-#: osticket/scp/filters.php:69
-#: osticket/scp/filters.php:84
-#: osticket/scp/staff.php:65
-#: osticket/scp/staff.php:78
+#: osticket/scp/teams.php:54
+#: osticket/scp/teams.php:67
+#: osticket/scp/teams.php:80
+#: osticket/scp/categories.php:63
+#: osticket/scp/categories.php:76
+#: osticket/scp/categories.php:91
+#: osticket/scp/apikeys.php:55
+#: osticket/scp/apikeys.php:67
+#: osticket/scp/apikeys.php:81
+#: osticket/scp/tickets.php:351
+#: osticket/scp/tickets.php:371
+#: osticket/scp/tickets.php:390
+#: osticket/scp/tickets.php:411
+#: osticket/scp/helptopics.php:57
+#: osticket/scp/helptopics.php:69
+#: osticket/scp/helptopics.php:84
+#: osticket/scp/departments.php:55
+#: osticket/scp/departments.php:68
+#: osticket/scp/departments.php:89
+#: osticket/scp/filters.php:59
+#: osticket/scp/filters.php:71
+#: osticket/scp/filters.php:86
+#: osticket/scp/staff.php:56
+#: osticket/scp/staff.php:69
+#: osticket/scp/staff.php:83
 msgid "of"
 msgstr "de"
 
-#: osticket/scp/teams.php:52
+#: osticket/scp/teams.php:54
 msgid "selected teams activated"
 msgstr "times selecionados ativados"
 
-#: osticket/scp/teams.php:54
+#: osticket/scp/teams.php:56
 msgid "Unable to activate selected teams"
 msgstr "Não foi possível ativar os times selecionados"
 
-#: osticket/scp/teams.php:61
+#: osticket/scp/teams.php:65
 msgid "Selected teams disabled"
 msgstr "Desabilitados times selecionados"
 
-#: osticket/scp/teams.php:63
+#: osticket/scp/teams.php:67
 msgid "selected teams disabled"
 msgstr "times selecionados desabilitados"
 
-#: osticket/scp/teams.php:65
+#: osticket/scp/teams.php:69
 msgid "Unable to disable selected teams"
 msgstr "Não foi possível desabilitar os times selecionados"
 
-#: osticket/scp/teams.php:74
+#: osticket/scp/teams.php:78
 msgid "Selected teams deleted successfully"
 msgstr "Times selecionados apagados com sucesso"
 
-#: osticket/scp/teams.php:76
+#: osticket/scp/teams.php:80
 msgid "selected teams deleted"
 msgstr "times selecionados foram apagados"
 
-#: osticket/scp/teams.php:78
+#: osticket/scp/teams.php:82
 msgid "Unable to delete selected teams"
 msgstr "Não foi possível apagar os times selecionados"
 
-#: osticket/scp/teams.php:80
-#: osticket/scp/staff.php:82
+#: osticket/scp/teams.php:85
+#: osticket/scp/staff.php:88
 msgid "Unknown action. Get technical help!"
 msgstr "Ação desconhecida. Procure ajuda técnica!"
+
+#: osticket/scp/teams.php:90
+#: osticket/scp/categories.php:96
+#: osticket/scp/apikeys.php:91
+#: osticket/scp/departments.php:100
+#: osticket/scp/staff.php:94
+msgid "Unknown action/command"
+msgstr "Comando/ação desconhecido"
 
 #: osticket/scp/categories.php:28
 msgid "Unknown or invalid category ID."
@@ -350,45 +360,41 @@ msgstr "Não foi possível adicionar categoria. Corrija os erros abaixo e tente 
 msgid "You must select at least one category"
 msgstr "Você deve selecionar ao menos uma categoria"
 
-#: osticket/scp/categories.php:59
+#: osticket/scp/categories.php:61
 msgid "Selected categories made PUBLIC"
 msgstr "Categorias selecionadas configuradas como PÚBLICAS"
 
-#: osticket/scp/categories.php:61
+#: osticket/scp/categories.php:63
 msgid "selected categories made PUBLIC"
 msgstr "categorias selecionadas configuradas como PÚBLICAS"
 
-#: osticket/scp/categories.php:63
+#: osticket/scp/categories.php:65
 msgid "Unable to enable selected categories public."
 msgstr "Não foi possível tornar públicas as categorias selecionadas."
 
-#: osticket/scp/categories.php:70
+#: osticket/scp/categories.php:74
 msgid "Selected categories made PRIVATE"
 msgstr "Categorias selecionadas configuradas como PRIVADAS"
 
-#: osticket/scp/categories.php:72
+#: osticket/scp/categories.php:76
 msgid "selected categories made PRIVATE"
 msgstr "categorias selecionadas configuradas como PRIVADAS"
 
-#: osticket/scp/categories.php:74
+#: osticket/scp/categories.php:78
 msgid "Unable to disable selected categories PRIVATE"
 msgstr "Não foi possível desmarcar categorias selecionadas como PRIVADAS"
 
-#: osticket/scp/categories.php:84
+#: osticket/scp/categories.php:89
 msgid "Selected categories deleted successfully"
 msgstr "Categorias selecionadas apagadas com sucesso"
 
-#: osticket/scp/categories.php:86
+#: osticket/scp/categories.php:91
 msgid "selected categories deleted"
 msgstr "categorias selecionadas apagadas"
 
-#: osticket/scp/categories.php:88
+#: osticket/scp/categories.php:93
 msgid "Unable to delete selected categories"
 msgstr "Não foi possível apagar categorias selecionadas"
-
-#: osticket/scp/categories.php:91
-msgid "Unknown command"
-msgstr "Comando desconhecido"
 
 #: osticket/scp/admin.inc.php:29
 msgid "System upgrade is pending"
@@ -440,41 +446,47 @@ msgstr "Não foi possível adicionar uma chave API. Corrija os erros abaixo e te
 msgid "You must select at least one API key"
 msgstr "Você deve selecionar ao menos uma chave API"
 
-#: osticket/scp/apikeys.php:52
+#: osticket/scp/apikeys.php:53
 msgid "Selected API keys enabled"
 msgstr "Habilitadas Chaves de API selecionadas"
 
-#: osticket/scp/apikeys.php:54
+#: osticket/scp/apikeys.php:55
 msgid "selected API keys enabled"
 msgstr "chaves de API selecionadas habilitadas"
 
-#: osticket/scp/apikeys.php:56
+#: osticket/scp/apikeys.php:57
 msgid "Unable to enable selected API keys."
 msgstr "Não foi possível habilitar as chaves de API selecionadas."
 
-#: osticket/scp/apikeys.php:63
+#: osticket/scp/apikeys.php:65
 msgid "Selected API keys disabled"
 msgstr "Desabilitadas chaves API selecionadas"
 
-#: osticket/scp/apikeys.php:65
+#: osticket/scp/apikeys.php:67
 msgid "selected API keys disabled"
 msgstr "chaves API selecionadas desabilitadas"
 
-#: osticket/scp/apikeys.php:67
+#: osticket/scp/apikeys.php:69
 msgid "Unable to disable selected API keys"
 msgstr "Não foi possível desabilitar as chaves API selecionadas"
 
-#: osticket/scp/apikeys.php:78
+#: osticket/scp/apikeys.php:79
 msgid "Selected API keys deleted successfully"
 msgstr "APIs selecionadas apagadas com sucesso"
 
-#: osticket/scp/apikeys.php:80
+#: osticket/scp/apikeys.php:81
 msgid "selected API keys deleted"
 msgstr "chaves API selecionadas apagadas"
 
-#: osticket/scp/apikeys.php:82
+#: osticket/scp/apikeys.php:83
 msgid "Unable to delete selected API keys"
 msgstr "Não foi possível apagar as Chaves API selecionadas"
+
+#: osticket/scp/apikeys.php:86
+#: osticket/scp/departments.php:95
+#: osticket/scp/filters.php:91
+msgid "Unknown action - get technical help"
+msgstr "Ação desconhecida - procure ajuda técnica"
 
 #: osticket/scp/tickets.php:29
 msgid "Unknown or invalid ticket ID"
@@ -641,7 +653,7 @@ msgid "Ticket closed (without comments)"
 msgstr "Tíquete fechado (sem comentários)"
 
 #: osticket/scp/tickets.php:194
-#: osticket/scp/tickets.php:360
+#: osticket/scp/tickets.php:364
 msgid "Ticket Closed"
 msgstr "Tíquete Fechado"
 
@@ -666,7 +678,7 @@ msgid "Ticket reopened (without comments)"
 msgstr "Tíquete reaberto (sem comentários)"
 
 #: osticket/scp/tickets.php:218
-#: osticket/scp/tickets.php:349
+#: osticket/scp/tickets.php:344
 msgid "Ticket Reopened"
 msgstr "Tíquete Reaberto"
 
@@ -726,7 +738,7 @@ msgid "Ticket flagged as overdue"
 msgstr "Tíquete marcado como atrasado"
 
 #: osticket/scp/tickets.php:253
-#: osticket/scp/tickets.php:372
+#: osticket/scp/tickets.php:383
 msgid "Ticket Marked Overdue"
 msgstr "Tíquete Marcado como Atrasado"
 
@@ -824,131 +836,164 @@ msgstr "Problemas ao apagar tíquete. Tente novamente."
 msgid "You must select action to perform"
 msgstr "Você deve selecionar uma ação"
 
-#: osticket/scp/tickets.php:330
+#: osticket/scp/tickets.php:331
 msgid "You do not have permission to mass manage tickets. Contact admin for such access"
 msgstr "Você não tem permissão para gerenciar tíquetes em massa. Contacte o administrador."
 
-#: osticket/scp/tickets.php:332
+#: osticket/scp/tickets.php:333
 msgid "No tickets selected. You must select at least one ticket."
 msgstr "Nenhum tíquete selecionado. Você deve selecionar ao meno um tíquete."
 
-#: osticket/scp/tickets.php:334
-msgid "You do not have permission to close/reopen tickets"
-msgstr "Você não tem permissão para fechar/reabrir tíquetes"
-
-#: osticket/scp/tickets.php:336
-msgid "You do not have permission to delete tickets"
-msgstr "Você não tem permissão para apagar tíquetes"
-
-#: osticket/scp/tickets.php:338
-msgid "You must select at least one ticket"
-msgstr "Você deve selecionar ao menos um tíquete"
-
-#: osticket/scp/tickets.php:344
-msgid "Ticket reopened by "
+#: osticket/scp/tickets.php:340
+msgid "Ticket reopened by"
 msgstr "Tíquete reaberto por"
 
-#: osticket/scp/tickets.php:355
-msgid "Ticket closed without response by "
-msgstr "Tíquete fechado sem resposta por "
+#: osticket/scp/tickets.php:351
+msgid "selected tickets reopened"
+msgstr "tíquetes selecionados reabertos"
 
-#: osticket/scp/tickets.php:363
+#: osticket/scp/tickets.php:353
+msgid "Unable to reopen selected tickets"
+msgstr "Não foi possível reabrir os tíquetes selecionados"
+
+#: osticket/scp/tickets.php:355
+msgid "You do not have permission to reopen tickets"
+msgstr "Você não tem permissão para reabrir tíquetes"
+
+#: osticket/scp/tickets.php:360
+msgid "Ticket closed without response by"
+msgstr "Tíquete fechado sem resposta por"
+
+#: osticket/scp/tickets.php:371
 msgid "selected tickets closed"
 msgstr "tíquetes selecionados fechados"
 
-#: osticket/scp/tickets.php:366
-msgid "Ticket flagged as overdue by "
-msgstr "Tíquete marcado como atrasado por"
+#: osticket/scp/tickets.php:373
+msgid "Unable to close selected tickets"
+msgstr "Não foi possível fechar os tíquetes selecionados"
 
 #: osticket/scp/tickets.php:375
+msgid "You do not have permission to close tickets"
+msgstr "Você não tem permissão para fechar tíquetes"
+
+#: osticket/scp/tickets.php:379
+msgid "Ticket flagged as overdue by"
+msgstr "Tíquete marcado como atrasado por"
+
+#: osticket/scp/tickets.php:390
 msgid "selected tickets marked overdue"
 msgstr "tíquetes selecionados marcados como atrasados"
 
-#: osticket/scp/tickets.php:382
+#: osticket/scp/tickets.php:392
+msgid "Unable to flag selected tickets as overdue"
+msgstr "Não foi possível marcar os tíquetes selecionados como atrasados"
+
+#: osticket/scp/tickets.php:402
+#, php-format
+msgid "just deleted %d ticket(s)"
+msgstr "acabou de apagar %d tíquetes"
+
+#: osticket/scp/tickets.php:404
+msgid "Tickets deleted"
+msgstr "Tíquetes apagados"
+
+#: osticket/scp/tickets.php:411
 msgid "selected tickets deleted"
 msgstr "tíquetes selecionados apagados"
 
-#: osticket/scp/tickets.php:389
+#: osticket/scp/tickets.php:413
+msgid "Unable to delete selected tickets"
+msgstr "Não foi possível apagar os tíquetes selecionados"
+
+#: osticket/scp/tickets.php:415
+msgid "You do not have permission to delete tickets"
+msgstr "Você não tem permissão para apagar tíquetes"
+
+#: osticket/scp/tickets.php:419
+msgid "Unknown or unsupported action - get technical help"
+msgstr "Ação desconhecida ou não suportada -  procure ajuda técnica"
+
+#: osticket/scp/tickets.php:426
 msgid "You do not have permission to create tickets. Contact admin for such access"
 msgstr "Você não tem permissão para criar tíquetes. Contacte o administrador"
 
-#: osticket/scp/tickets.php:391
+#: osticket/scp/tickets.php:428
 msgid "Ticket created successfully"
 msgstr "Tíquete criado com sucesso"
 
-#: osticket/scp/tickets.php:396
+#: osticket/scp/tickets.php:433
 msgid "Unable to create the ticket. Correct the error(s) and try again"
 msgstr "Não foi possível criar o tíquete. Corrija os erros abaixo e tente novamente!"
 
-#: osticket/scp/tickets.php:411
-#: osticket/scp/tickets.php:419
+#: osticket/scp/tickets.php:448
+#: osticket/scp/tickets.php:456
 msgid "Open"
 msgstr "Aberto"
 
-#: osticket/scp/tickets.php:412
-#: osticket/scp/tickets.php:420
+#: osticket/scp/tickets.php:449
+#: osticket/scp/tickets.php:457
 msgid "Open Tickets"
 msgstr "Tíquetes Abertos"
 
-#: osticket/scp/tickets.php:427
+#: osticket/scp/tickets.php:464
 msgid "Answered"
 msgstr "Respondidos"
 
-#: osticket/scp/tickets.php:428
+#: osticket/scp/tickets.php:465
 msgid "Answered Tickets"
 msgstr "Tíquetes Respondidos"
 
-#: osticket/scp/tickets.php:437
+#: osticket/scp/tickets.php:474
 msgid " assigned to you!"
 msgstr " designado para você!"
 
-#: osticket/scp/tickets.php:439
+#: osticket/scp/tickets.php:476
 msgid "My Tickets"
 msgstr "Meus tíquetes"
 
-#: osticket/scp/tickets.php:440
+#: osticket/scp/tickets.php:477
 msgid "Assigned Tickets"
 msgstr "Tíquetes Designados"
 
-#: osticket/scp/tickets.php:447
+#: osticket/scp/tickets.php:484
 msgid "Overdue"
 msgstr "Atrasado"
 
-#: osticket/scp/tickets.php:448
+#: osticket/scp/tickets.php:485
 msgid "Stale Tickets"
 msgstr "Tíquetes Atrasados"
 
-#: osticket/scp/tickets.php:454
+#: osticket/scp/tickets.php:491
 msgid " overdue tickets!"
 msgstr " tíquetes atrasados!"
 
-#: osticket/scp/tickets.php:458
-#: osticket/scp/tickets.php:459
+#: osticket/scp/tickets.php:495
+#: osticket/scp/tickets.php:496
 msgid "My Closed Tickets"
 msgstr "Meus Tíquetes Fechados"
 
-#: osticket/scp/tickets.php:465
-#: osticket/scp/tickets.php:466
+#: osticket/scp/tickets.php:502
+#: osticket/scp/tickets.php:503
 msgid "Closed Tickets"
 msgstr "Tíquetes Fechados"
 
-#: osticket/scp/tickets.php:473
+#: osticket/scp/tickets.php:510
 msgid "New Ticket"
 msgstr "Novo Tíquete"
 
-#: osticket/scp/tickets.php:487
+#: osticket/scp/tickets.php:525
 msgid "Internal error: Unable to export the ticket to PDF for print."
 msgstr "Erro interno: Não é possível exportar o tíquete para PDF."
 
-#: osticket/scp/tickets.php:496
+#: osticket/scp/tickets.php:534
 msgid "Query token required"
 msgstr "Token de pesquisa requerido"
 
-#: osticket/scp/tickets.php:498
+#: osticket/scp/tickets.php:536
 msgid "Query token not found"
 msgstr "Token de pesquisa não encontrado"
 
-#: osticket/scp/tickets.php:500
+#: osticket/scp/tickets.php:538
 msgid "Internal error: Unable to dump query results"
 msgstr "Erro interno: Não foi possível mostrar os resultados da pesquisa"
 
@@ -980,41 +1025,49 @@ msgstr "Não foi possível adicionar o tópico de ajuda. Corrija os erros abaixo
 msgid "You must select at least one help topic"
 msgstr "Você deve selecionar ao menos um tópico de ajuda"
 
-#: osticket/scp/helptopics.php:52
+#: osticket/scp/helptopics.php:55
 msgid "Selected help topics enabled"
 msgstr "Tópicos de Ajuda selecionados habilitados"
 
-#: osticket/scp/helptopics.php:54
+#: osticket/scp/helptopics.php:57
 msgid "selected help topics enabled"
 msgstr "tópicos de ajuda selecionados habilitados"
 
-#: osticket/scp/helptopics.php:56
+#: osticket/scp/helptopics.php:59
 msgid "Unable to enable selected help topics."
 msgstr "Não foi possível habilitar os tópicos de ajuda selecionados."
 
-#: osticket/scp/helptopics.php:63
+#: osticket/scp/helptopics.php:67
 msgid "Selected help topics disabled"
 msgstr "Tópicos de ajuda selecionados desabilitados"
 
-#: osticket/scp/helptopics.php:65
+#: osticket/scp/helptopics.php:69
 msgid "selected help topics disabled"
 msgstr "tópicos de ajuda selecionados desabilitados"
 
-#: osticket/scp/helptopics.php:67
+#: osticket/scp/helptopics.php:71
 msgid "Unable to disable selected help topic(s)"
 msgstr "Não foi possível desabilitar os tópicos de ajuda selecionados"
 
-#: osticket/scp/helptopics.php:78
+#: osticket/scp/helptopics.php:82
 msgid "Selected help topics deleted successfully"
 msgstr "Tópicos de Ajuda selecionados apagados com sucesso"
 
-#: osticket/scp/helptopics.php:80
+#: osticket/scp/helptopics.php:84
 msgid "selected help topics deleted"
 msgstr "tópicos de ajuda selecionados apagados"
 
-#: osticket/scp/helptopics.php:82
+#: osticket/scp/helptopics.php:86
 msgid "Unable to delete selected help topics"
 msgstr "Não foi possível apagar os tópicos de ajuda selecionados"
+
+#: osticket/scp/helptopics.php:90
+msgid "Unknown action - get technical help."
+msgstr "Ação desconhecida - procure ajuda técnica."
+
+#: osticket/scp/helptopics.php:95
+msgid "Unknown command/action"
+msgstr "Comando/ação desconhecidos"
 
 #: osticket/scp/departments.php:19
 msgid "Unknown or invalid department ID."
@@ -1044,43 +1097,43 @@ msgstr "Você deve selecionar ao menos um departamento"
 msgid "You can not disable/delete a default department. Remove default Dept. and try again."
 msgstr "Você não pode desabilitar/apagar um departamento padrão. Desconfigure-o como padrão e tente novamente."
 
-#: osticket/scp/departments.php:52
+#: osticket/scp/departments.php:53
 msgid "Selected departments made public"
 msgstr "Departamentos selecionados publicados"
 
-#: osticket/scp/departments.php:54
+#: osticket/scp/departments.php:55
 msgid "selected departments made public"
 msgstr "departamentos selecionados publicados"
 
-#: osticket/scp/departments.php:56
+#: osticket/scp/departments.php:57
 msgid "Unable to make selected department public."
 msgstr "Não foi possível publicar os departamentos selecionados "
 
-#: osticket/scp/departments.php:65
+#: osticket/scp/departments.php:66
 msgid "Selected departments made private"
 msgstr "Departamentos selecionados marcados como privados"
 
-#: osticket/scp/departments.php:67
+#: osticket/scp/departments.php:68
 msgid "selected departments made private"
 msgstr "departamentos selecionados marcados como privado"
 
-#: osticket/scp/departments.php:69
+#: osticket/scp/departments.php:70
 msgid "Unable to make selected department(s) private. Possibly already private!"
 msgstr "Não foi possível marcar o(s) departamento(s) como privado(s). Possivelmente já "
 
-#: osticket/scp/departments.php:78
-msgid "Dept. with users can not be deleted. Move staff first."
-msgstr "Depto. com usuários não pode ser apagado. Mova os membros primeiro."
+#: osticket/scp/departments.php:79
+msgid "Departments with staff can not be deleted. Move staff first."
+msgstr "Departamentos com usuários não podem ser apagados. Mova os membros primeiro."
 
-#: osticket/scp/departments.php:86
+#: osticket/scp/departments.php:87
 msgid "Selected departments deleted successfully"
 msgstr "Departamentos selecionados apagados com sucesso"
 
-#: osticket/scp/departments.php:88
+#: osticket/scp/departments.php:89
 msgid "selected departments deleted"
 msgstr "departamentos selecionados apagados"
 
-#: osticket/scp/departments.php:90
+#: osticket/scp/departments.php:91
 msgid "Unable to delete selected departments."
 msgstr "Não foi possível apagar departamentos selecionados."
 
@@ -1113,41 +1166,45 @@ msgstr "Não foi possível adicionar filtro. Corrija os erros abaixo e tente nov
 msgid "You must select at least one filter to process."
 msgstr "Você deve selecionar ao menos um filtro para processar."
 
-#: osticket/scp/filters.php:56
+#: osticket/scp/filters.php:57
 msgid "Selected filters enabled"
 msgstr "Filtros selecionados habilitados"
 
-#: osticket/scp/filters.php:58
+#: osticket/scp/filters.php:59
 msgid "selected filters enabled"
 msgstr "filtros selecionados habilitados"
 
-#: osticket/scp/filters.php:60
+#: osticket/scp/filters.php:61
 msgid "Unable to enable selected filters"
 msgstr "Não foi possível habilitar os filtros selecionados"
 
-#: osticket/scp/filters.php:67
+#: osticket/scp/filters.php:69
 msgid "Selected filters disabled"
 msgstr "Filtros selecionados desabilitados"
 
-#: osticket/scp/filters.php:69
+#: osticket/scp/filters.php:71
 msgid "selected filters disabled"
 msgstr "filtros selecionados desabilitados"
 
-#: osticket/scp/filters.php:71
+#: osticket/scp/filters.php:73
 msgid "Unable to disable selected filters"
 msgstr "Não foi possível desabilitar filtros selecionados"
 
-#: osticket/scp/filters.php:82
+#: osticket/scp/filters.php:84
 msgid "Selected filters deleted successfully"
 msgstr "Filtros selecionados apagados com sucesso"
 
-#: osticket/scp/filters.php:84
+#: osticket/scp/filters.php:86
 msgid "selected filters deleted"
 msgstr "filtros selecionados apagados"
 
-#: osticket/scp/filters.php:86
+#: osticket/scp/filters.php:88
 msgid "Unable to delete selected filters"
 msgstr "Não foi possível apagar filtros selecionados"
+
+#: osticket/scp/filters.php:96
+msgid "Unknown commande/action"
+msgstr "Comando/ação desconhecidos"
 
 #: osticket/scp/staff.php:19
 msgid "Unknown or invalid staff ID."
@@ -1177,35 +1234,39 @@ msgstr "Você deve selecionar ao menos um membro da equipe."
 msgid "You can not disable/delete yourself - you could be the only admin!"
 msgstr "Você não pode desabilitar/deletar você mesmo - você pode ser o único admin!"
 
-#: osticket/scp/staff.php:52
+#: osticket/scp/staff.php:54
 msgid "Selected staff activated"
 msgstr "Equipe selecionada ativada"
 
 #: osticket/scp/staff.php:56
+msgid "selected staff activated"
+msgstr "membros selecionados ativados"
+
+#: osticket/scp/staff.php:58
 msgid "Unable to activate selected staff"
 msgstr "Não foi possível ativar os membros da equipe selecionados"
 
-#: osticket/scp/staff.php:63
+#: osticket/scp/staff.php:67
 msgid "Selected staff disabled"
 msgstr "Membro da Equipe selecionado desabilitado"
 
-#: osticket/scp/staff.php:65
+#: osticket/scp/staff.php:69
 msgid "selected staff disabled"
 msgstr "membros da equipe selecionados desabilitados"
 
-#: osticket/scp/staff.php:67
+#: osticket/scp/staff.php:71
 msgid "Unable to disable selected staff"
 msgstr "Não foi possível desabilitar o membro da equipe selecionado"
 
-#: osticket/scp/staff.php:76
+#: osticket/scp/staff.php:81
 msgid "Selected staff deleted successfully"
 msgstr "Membros da equipe selecionados apagados com sucesso"
 
-#: osticket/scp/staff.php:78
+#: osticket/scp/staff.php:83
 msgid "selected staff deleted"
 msgstr "membros da equipe selecionados habilitados"
 
-#: osticket/scp/staff.php:80
+#: osticket/scp/staff.php:85
 msgid "Unable to delete selected staff."
 msgstr "Não foi possível apagar membros da equipe selecionados."
 
@@ -1254,21 +1315,17 @@ msgstr "Não foi possível atualizar as configurações - corrija os erros abaix
 msgid "You must select at least one log to delete"
 msgstr "Você deve selecionar ao menos um log para apagar"
 
-#: osticket/scp/logs.php:30
+#: osticket/scp/logs.php:31
 msgid "Selected logs deleted successfully"
 msgstr "Logs selecionados apagados com sucesso"
 
-#: osticket/scp/logs.php:32
+#: osticket/scp/logs.php:33
 msgid "selected logs deleted"
 msgstr "logs selecionados apagados"
 
-#: osticket/scp/logs.php:34
+#: osticket/scp/logs.php:35
 msgid "Unable to delete selected logs"
 msgstr "Não foi possível apagar os logs selecionados"
-
-#: osticket/scp/logs.php:41
-msgid "Unknown option"
-msgstr "Oção desconhecida"
 
 #: osticket/scp/attachment.php:27
 msgid "Access Denied"
@@ -1328,39 +1385,39 @@ msgstr "Não foi possível adicionar plano SLA. Corrija os erros abaixo e tente 
 msgid "You must select at least one plan."
 msgstr "Você deve selecionar ao menos um plano."
 
-#: osticket/scp/slas.php:52
+#: osticket/scp/slas.php:54
 msgid "Selected SLA plans enabled"
 msgstr "Planos SLA selecionados habilitados"
 
-#: osticket/scp/slas.php:54
+#: osticket/scp/slas.php:56
 msgid "selected SLA plans enabled"
 msgstr "planos SLA selecionados habilitados"
 
-#: osticket/scp/slas.php:56
+#: osticket/scp/slas.php:58
 msgid "Unable to enable selected SLA plans."
 msgstr "Não foi possível habilitar os planos SLA selecionados"
 
-#: osticket/scp/slas.php:63
+#: osticket/scp/slas.php:66
 msgid "Selected SLA plans disabled"
 msgstr "Desabilitados planos SLA selecionados"
 
-#: osticket/scp/slas.php:65
+#: osticket/scp/slas.php:68
 msgid "selected SLA plans disabled"
 msgstr "planos SLA selecionados desabilitados"
 
-#: osticket/scp/slas.php:67
+#: osticket/scp/slas.php:70
 msgid "Unable to disable selected SLA plans"
 msgstr "Não foi possível desabilitar os planos SLA selecionados"
 
-#: osticket/scp/slas.php:78
+#: osticket/scp/slas.php:81
 msgid "Selected SLA plans deleted successfully"
 msgstr "Planos SLA selecionados apagados com sucesso"
 
-#: osticket/scp/slas.php:80
+#: osticket/scp/slas.php:83
 msgid "selected SLA plans deleted"
 msgstr "planos SLA selecionados apagados"
 
-#: osticket/scp/slas.php:82
+#: osticket/scp/slas.php:85
 msgid "Unable to delete selected SLA plans"
 msgstr "Não foi possível apagar os planos de SLA selecionados"
 
@@ -1468,39 +1525,43 @@ msgstr "Não foi possível adicionar grupo. Corrija os erros abaixo e tente nova
 msgid "You must select at least one group."
 msgstr "Você deve selecionar ao menos um grupo."
 
-#: osticket/scp/groups.php:50
+#: osticket/scp/groups.php:44
+msgid "As an admin, you can't disable/delete a group you belong to - you might lockout all admins!"
+msgstr "Como administrador, você não pode desabilitar/apagar um grupo ao qual pertence - você pode bloquear todos os administradores!"
+
+#: osticket/scp/groups.php:54
 msgid "Selected groups activated"
 msgstr "Ativados grupos selecionados"
 
-#: osticket/scp/groups.php:52
+#: osticket/scp/groups.php:56
 msgid "selected groups activated"
 msgstr "grupos selecionados ativados"
 
-#: osticket/scp/groups.php:54
+#: osticket/scp/groups.php:58
 msgid "Unable to activate selected groups"
 msgstr "Não foi possível ativar os grupos selecionados"
 
-#: osticket/scp/groups.php:61
+#: osticket/scp/groups.php:66
 msgid "Selected groups disabled"
 msgstr "Grupos selecionados desabilitados"
 
-#: osticket/scp/groups.php:63
+#: osticket/scp/groups.php:68
 msgid "selected groups disabled"
 msgstr "grupos selecionados desabilitados"
 
-#: osticket/scp/groups.php:65
+#: osticket/scp/groups.php:70
 msgid "Unable to disable selected groups"
 msgstr "Não foi possível desabilitar os grupos selecionados"
 
-#: osticket/scp/groups.php:74
+#: osticket/scp/groups.php:80
 msgid "Selected groups deleted successfully"
 msgstr "Grupos selecionados deletados com sucesso"
 
-#: osticket/scp/groups.php:76
+#: osticket/scp/groups.php:82
 msgid "selected groups deleted"
 msgstr "grupos selecionados deletados"
 
-#: osticket/scp/groups.php:78
+#: osticket/scp/groups.php:84
 msgid "Unable to delete selected groups"
 msgstr "Não foi posível deletar os grupos selecionados"
 
@@ -1509,8 +1570,12 @@ msgid "System ban list is empty."
 msgstr "A lista negra do sistema está vazia."
 
 #: osticket/scp/banlist.php:23
-msgid "SYSTEM BAN LIST filter is <b>DISABLED</b> - <a href=\"filters.php\">enable here</a>."
-msgstr "Filtro da LISTA DE BANIMENTO DO SISTEMA está <b>DESABILITADO </b> - <a href=\"filters.php\">habilite aqui</a>."
+msgid "SYSTEM BAN LIST filter is <b>DISABLED</b>"
+msgstr "Filtro da LISTA DE BANIMENTO DO SISTEMA está <b>DESABILITADO</b>"
+
+#: osticket/scp/banlist.php:23
+msgid "enable here"
+msgstr "habilite aqui"
 
 #: osticket/scp/banlist.php:27
 msgid "Unknown or invalid ban list ID #"
@@ -1559,8 +1624,8 @@ msgid "Selected emails ban status set to enabled"
 msgstr "E-mails selecionados adicionados à lista negra"
 
 #: osticket/scp/banlist.php:79
-msgid "selected emails enabled"
-msgstr "e-mails selecionados habilitados"
+msgid "selected emails ban status enabled"
+msgstr "e-mails selecionados adicionados à lista negra"
 
 #: osticket/scp/banlist.php:81
 msgid "Unable to enable selected emails"
@@ -1578,18 +1643,16 @@ msgstr "e-mails selecionados adicionados à lista negra"
 msgid "Unable to disable selected emails"
 msgstr "Não foi possível desabilitar os e-mails selecionados"
 
-#: osticket/scp/banlist.php:103
-#: osticket/scp/emails.php:64
-msgid "Selected emails deleted successfully"
-msgstr "E-mails selecionados apagados com sucesso"
+#: osticket/scp/banlist.php:104
+msgid "Selected emails deleted from banlist successfully"
+msgstr "e-mails selecionados removidos da lista negra com sucesso"
 
-#: osticket/scp/banlist.php:105
-#: osticket/scp/emails.php:66
-msgid "selected emails deleted"
-msgstr "emails selecionados foram deletados"
+#: osticket/scp/banlist.php:106
+msgid "selected emails deleted from banlist"
+msgstr "e-mails selecionados removidos da lista negra"
 
-#: osticket/scp/banlist.php:107
-#: osticket/scp/emails.php:68
+#: osticket/scp/banlist.php:108
+#: osticket/scp/emails.php:67
 msgid "Unable to delete selected emails"
 msgstr "Não foi possível deletar os e-mails selecionados"
 
@@ -1690,41 +1753,45 @@ msgstr "Não foi possível adicionar a resposta pronta. Corrija os erros abaixo 
 msgid "You must select at least one canned response"
 msgstr "Você deve selecionar ao menos uma resposta pronta"
 
-#: osticket/scp/canned.php:78
+#: osticket/scp/canned.php:79
 msgid "Selected canned responses enabled"
 msgstr "Habilitadas respostas prontas selecionadas."
 
-#: osticket/scp/canned.php:80
+#: osticket/scp/canned.php:81
 msgid "selected canned responses enabled"
 msgstr "respostas prontas selecionadas habilitadas"
 
-#: osticket/scp/canned.php:82
+#: osticket/scp/canned.php:83
 msgid "Unable to enable selected canned responses."
 msgstr "Não foi possível habilitar as respostas prontas selecionadas."
 
-#: osticket/scp/canned.php:89
+#: osticket/scp/canned.php:91
 msgid "Selected canned responses disabled"
 msgstr "Desabilitadas respostas prontas selecionadas"
 
-#: osticket/scp/canned.php:91
+#: osticket/scp/canned.php:93
 msgid "selected canned responses disabled"
 msgstr "respostas prontas selecionadas desabilitadas"
 
-#: osticket/scp/canned.php:93
+#: osticket/scp/canned.php:95
 msgid "Unable to disable selected canned responses"
 msgstr "Não foi possível desabilitar as repostas prontas selecionadas"
 
-#: osticket/scp/canned.php:103
+#: osticket/scp/canned.php:107
 msgid "Selected canned responses deleted successfully"
 msgstr "Respostas prontas selecionadas apagadas com sucesso."
 
-#: osticket/scp/canned.php:105
+#: osticket/scp/canned.php:109
 msgid "selected canned responses deleted"
 msgstr "respostas prontas selecionadas apagadas"
 
-#: osticket/scp/canned.php:107
+#: osticket/scp/canned.php:111
 msgid "Unable to delete selected canned responses"
 msgstr "Não foi possível apagar as respostas prontas selecionadas"
+
+#: osticket/scp/canned.php:114
+msgid "Unknown command"
+msgstr "Comando desconhecido"
 
 #: osticket/scp/faq.php:21
 #: osticket/scp/faq.php:49
@@ -1816,15 +1883,15 @@ msgstr "Não foi possível adicionar o modelo. Corrija os erros abaixo e tente n
 msgid "You must select at least one template to process."
 msgstr "Você deve selecionar ao menos um modelo para processar."
 
-#: osticket/scp/templates.php:61
+#: osticket/scp/templates.php:62
 msgid "Selected templates enabled"
 msgstr "Habilitados modelos selecionados"
 
-#: osticket/scp/templates.php:63
+#: osticket/scp/templates.php:64
 msgid "selected templates enabled"
 msgstr "habilitados modelos selecionados"
 
-#: osticket/scp/templates.php:65
+#: osticket/scp/templates.php:66
 msgid "Unable to enable selected templates"
 msgstr "Não foi possível habilitar os modelos selecionados"
 
@@ -1840,19 +1907,19 @@ msgstr "modelos selecionados desabilitados (modelos em uso não podem ser desabi
 msgid "Unable to disable selected templates (in-use or default template can't be disabled)"
 msgstr "Não foi possível desabilitar modelos selecionados (o modelo padrão e os em uso não podem ser desabilitados)"
 
-#: osticket/scp/templates.php:89
+#: osticket/scp/templates.php:90
 msgid "Selected templates deleted successfully"
 msgstr "Modelos selecionados apagados com sucesso"
 
-#: osticket/scp/templates.php:91
+#: osticket/scp/templates.php:92
 msgid "selected templates deleted"
 msgstr "modelos selecionados apagados"
 
-#: osticket/scp/templates.php:93
+#: osticket/scp/templates.php:94
 msgid "Unable to delete selected templates"
 msgstr "Não foi possível apagar os modelos selecionados"
 
-#: osticket/scp/templates.php:96
+#: osticket/scp/templates.php:97
 msgid "Unknown template action"
 msgstr "Ação desconhecida para o modelo"
 
@@ -1880,9 +1947,17 @@ msgstr "Não foi possível adicionar o e-mail. Corrija os erros abaixo e tente n
 msgid "You must select at least one email address"
 msgstr "Você deve selecionar ao menos um endereço de e-mail"
 
-#: osticket/scp/emails.php:55
+#: osticket/scp/emails.php:54
 msgid "One or more of the selected emails is being used by a department. Remove association first!"
 msgstr "Um ou mais dos emails selecionados estão em uso por outro departamento. Remova a associação antes!"
+
+#: osticket/scp/emails.php:63
+msgid "Selected emails deleted successfully"
+msgstr "E-mails selecionados apagados com sucesso"
+
+#: osticket/scp/emails.php:65
+msgid "selected emails deleted"
+msgstr "emails selecionados foram deletados"
 
 #: osticket/api/pipe.php:25
 msgid "Email piping not enabled - check MTA settings."
@@ -1994,220 +2069,220 @@ msgstr "Não foi possível atualizar o time. Erro interno"
 msgid "Unable to create the team. Internal error"
 msgstr "Não foi possível criar o time. Erro interno"
 
-#: osticket/include/class.ticket.php:917
+#: osticket/include/class.ticket.php:918
 #, php-format
 msgid "Max open tickets (%d) reached  for %s"
 msgstr "Máximo de tíquetes abertos (%d) alcançado para %s"
 
-#: osticket/include/class.ticket.php:918
+#: osticket/include/class.ticket.php:919
 msgid "Max. Open Tickets Limit"
 msgstr "Limite máx. de Tíquetes Abertos"
 
-#: osticket/include/class.ticket.php:942
+#: osticket/include/class.ticket.php:943
 msgid "Max. open tickets reached for"
 msgstr "Máximo de tíquetes abertos alcançado para"
 
-#: osticket/include/class.ticket.php:943
+#: osticket/include/class.ticket.php:944
 msgid "Open ticket:"
 msgstr "Abrir tíquete:"
 
-#: osticket/include/class.ticket.php:944
+#: osticket/include/class.ticket.php:945
 msgid "Max Allowed:"
 msgstr "Máx. Permitido:"
 
-#: osticket/include/class.ticket.php:944
+#: osticket/include/class.ticket.php:945
 msgid "Notice sent to the user."
 msgstr "Aviso enviado ao usuário."
 
-#: osticket/include/class.ticket.php:946
+#: osticket/include/class.ticket.php:947
 msgid "Overlimit Notice"
 msgstr "Aviso de limite ultrapassado"
 
-#: osticket/include/class.ticket.php:1013
+#: osticket/include/class.ticket.php:1014
 msgid "Ticket assignment"
 msgstr "Designação de tíquete"
 
-#: osticket/include/class.ticket.php:1014
+#: osticket/include/class.ticket.php:1015
 msgid "SYSTEM (Auto Assignment)"
 msgstr "SISTEMA (Auto Designação)"
 
-#: osticket/include/class.ticket.php:1017
+#: osticket/include/class.ticket.php:1018
 msgid "Ticket Assigned to"
 msgstr "Tíquete Designado para"
 
-#: osticket/include/class.ticket.php:1252
+#: osticket/include/class.ticket.php:1253
 msgid "Ticket transfered from"
 msgstr "Tíquete transferido de"
 
-#: osticket/include/class.ticket.php:1252
+#: osticket/include/class.ticket.php:1253
 msgid "to"
 msgstr "até"
 
-#: osticket/include/class.ticket.php:1484
+#: osticket/include/class.ticket.php:1517
 msgid "Missing messageId - internal error"
 msgstr "Faltando ID da mensagem - Erro interno"
 
-#: osticket/include/class.ticket.php:1486
+#: osticket/include/class.ticket.php:1519
 msgid "Response message required"
 msgstr "Mensagem de resposta requerida"
 
-#: osticket/include/class.ticket.php:1723
+#: osticket/include/class.ticket.php:1756
 msgid "File Upload Error"
 msgstr "Erro em upload de arquivo"
 
-#: osticket/include/class.ticket.php:1725
+#: osticket/include/class.ticket.php:1758
 msgid "File Upload Error (Ticket #"
 msgstr "Erro no Upload de Arquivo (Tíquete #"
 
-#: osticket/include/class.ticket.php:1787
-#: osticket/include/class.ticket.php:2023
+#: osticket/include/class.ticket.php:1820
+#: osticket/include/class.ticket.php:2056
 msgid "Valid email required"
 msgstr "É requerido endereço de email válido"
 
-#: osticket/include/class.ticket.php:1789
+#: osticket/include/class.ticket.php:1822
 #: osticket/include/class.topic.php:188
 msgid "Help topic required"
 msgstr "Tópico de Ajuda requerido"
 
-#: osticket/include/class.ticket.php:1790
+#: osticket/include/class.ticket.php:1823
 msgid "Priority required"
 msgstr "Prioridade requerida"
 
-#: osticket/include/class.ticket.php:1791
+#: osticket/include/class.ticket.php:1824
 msgid "Select SLA"
 msgstr "Selecione SLA"
 
-#: osticket/include/class.ticket.php:1792
-#: osticket/include/class.ticket.php:2045
+#: osticket/include/class.ticket.php:1825
+#: osticket/include/class.ticket.php:2078
 msgid "Valid phone # required"
 msgstr "No. de Telefone requerido"
 
-#: osticket/include/class.ticket.php:1793
-#: osticket/include/class.ticket.php:2033
+#: osticket/include/class.ticket.php:1826
+#: osticket/include/class.ticket.php:2066
 msgid "Invalid date - must be MM/DD/YY"
 msgstr "Data inválida - deve ser MM/DD/YY"
 
-#: osticket/include/class.ticket.php:1794
+#: osticket/include/class.ticket.php:1827
 msgid "Reason for the update required"
 msgstr "Razão para a edição requerida"
 
-#: osticket/include/class.ticket.php:1797
-#: osticket/include/class.ticket.php:2048
+#: osticket/include/class.ticket.php:1830
+#: osticket/include/class.ticket.php:2081
 msgid "Missing or invalid data - check the errors and try again"
 msgstr "Dados inválidos ou faltando. Corrija os erros abaixo e tente novamente."
 
-#: osticket/include/class.ticket.php:1801
+#: osticket/include/class.ticket.php:1834
 msgid "Duedate can NOT be set on a closed ticket"
 msgstr "Data limite NÃO pode ser configurada em tíquete fechado"
 
-#: osticket/include/class.ticket.php:1803
-#: osticket/include/class.ticket.php:2061
+#: osticket/include/class.ticket.php:1836
+#: osticket/include/class.ticket.php:2094
 msgid "Select time"
 msgstr "Selecione hora"
 
-#: osticket/include/class.ticket.php:1805
-#: osticket/include/class.ticket.php:2063
+#: osticket/include/class.ticket.php:1838
+#: osticket/include/class.ticket.php:2096
 msgid "Invalid duedate"
 msgstr "Data limite inválida"
 
-#: osticket/include/class.ticket.php:1807
-#: osticket/include/class.ticket.php:2065
+#: osticket/include/class.ticket.php:1840
+#: osticket/include/class.ticket.php:2098
 msgid "Due date must be in the future"
 msgstr "Data limite deve ser futura"
 
-#: osticket/include/class.ticket.php:1813
-#: osticket/include/class.ticket.php:2053
+#: osticket/include/class.ticket.php:1846
+#: osticket/include/class.ticket.php:2086
 msgid "Invalid phone ext."
 msgstr "Extensão de telefone inválida."
 
-#: osticket/include/class.ticket.php:1815
-#: osticket/include/class.ticket.php:2055
+#: osticket/include/class.ticket.php:1848
+#: osticket/include/class.ticket.php:2088
 msgid "Phone number required"
 msgstr "Número de telefone é requerido"
 
-#: osticket/include/class.ticket.php:1841
+#: osticket/include/class.ticket.php:1874
 #, php-format
 msgid "Ticket Updated by"
 msgstr "Tíquete atualizado por"
 
-#: osticket/include/class.ticket.php:1843
+#: osticket/include/class.ticket.php:1876
 msgid "Ticket Updated"
 msgstr "Tíquete Atualizado"
 
-#: osticket/include/class.ticket.php:1987
-#: osticket/include/class.ticket.php:2012
+#: osticket/include/class.ticket.php:2020
+#: osticket/include/class.ticket.php:2045
 msgid "Ticket denied. Error #403"
 msgstr "Tíquete negado. Erro #403"
 
-#: osticket/include/class.ticket.php:1988
-#: osticket/include/class.ticket.php:1999
-#: osticket/include/class.ticket.php:2013
+#: osticket/include/class.ticket.php:2021
+#: osticket/include/class.ticket.php:2032
+#: osticket/include/class.ticket.php:2046
 msgid "Ticket denied"
 msgstr "Tíquete negado"
 
-#: osticket/include/class.ticket.php:1988
+#: osticket/include/class.ticket.php:2021
 msgid "Banned email"
 msgstr "E-mail Banido"
 
-#: osticket/include/class.ticket.php:1998
+#: osticket/include/class.ticket.php:2031
 msgid "You've reached the maximum open tickets allowed."
 msgstr "Você alcançou o número máximo permitido de tíquetes abertos."
 
-#: osticket/include/class.ticket.php:2000
+#: osticket/include/class.ticket.php:2033
 #, php-format
 msgid "Max open tickets (%d) reached for %s "
 msgstr "Máximo de tíquetes abertos (%d) alcançado para %s"
 
-#: osticket/include/class.ticket.php:2014
+#: osticket/include/class.ticket.php:2047
 #, php-format
 msgid "Ticket rejected ( %s) by filter \"%s\""
 msgstr "Tíquete rejeitado ( %s) pelo filtro \"%s\""
 
-#: osticket/include/class.ticket.php:2028
+#: osticket/include/class.ticket.php:2061
 msgid "Select help topic"
 msgstr "Selecione tópico de ajuda"
 
-#: osticket/include/class.ticket.php:2031
+#: osticket/include/class.ticket.php:2064
 msgid "Dept. required"
 msgstr "Depto. requerido"
 
-#: osticket/include/class.ticket.php:2032
+#: osticket/include/class.ticket.php:2065
 msgid "Topic required"
 msgstr "Tópico requerido"
 
-#: osticket/include/class.ticket.php:2035
+#: osticket/include/class.ticket.php:2068
 msgid "Indicate source"
 msgstr "Indique a origem"
 
-#: osticket/include/class.ticket.php:2038
+#: osticket/include/class.ticket.php:2071
 msgid "Email unknown"
 msgstr "E-mail desconhecido"
 
-#: osticket/include/class.ticket.php:2042
+#: osticket/include/class.ticket.php:2075
 msgid "Invalid origin given"
 msgstr "Origem dada inválida"
 
-#: osticket/include/class.ticket.php:2044
+#: osticket/include/class.ticket.php:2077
 msgid "Invalid Priority"
 msgstr "Prioridade Inválida"
 
-#: osticket/include/class.ticket.php:2214
+#: osticket/include/class.ticket.php:2247
 msgid "Summary of the issue required"
 msgstr "Resumo do problema requerido"
 
-#: osticket/include/class.ticket.php:2219
+#: osticket/include/class.ticket.php:2252
 msgid "Invalid source"
 msgstr "Origem inválida"
 
-#: osticket/include/class.ticket.php:2242
+#: osticket/include/class.ticket.php:2275
 msgid "New Ticket by Staff"
 msgstr "Novo Tíquete pela Equipe"
 
-#: osticket/include/class.ticket.php:2242
+#: osticket/include/class.ticket.php:2275
 msgid "Ticket created by staff"
 msgstr "Tíquete criado pela equipe"
 
-#: osticket/include/class.ticket.php:2299
+#: osticket/include/class.ticket.php:2332
 msgid "Ticket flagged as overdue by the system."
 msgstr "Tíquete marcado como atrasado pelo sistema."
 
@@ -2551,29 +2626,29 @@ msgstr "Erro ao interpretar esquema SQL"
 msgid "Couldn't connect to LDAP!"
 msgstr "Não foi possível contactar ao LDAP!"
 
-#: osticket/include/class.osticket.php:106
+#: osticket/include/class.osticket.php:107
 #, php-format
 msgid "Invalid CSRF token"
 msgstr "Token CSRF inválido"
 
-#: osticket/include/class.osticket.php:108
+#: osticket/include/class.osticket.php:109
 msgid "Invalid CSRF Token "
 msgstr "Token CSRF inválido"
 
-#: osticket/include/class.osticket.php:139
+#: osticket/include/class.osticket.php:140
 msgid "Invalid file type for"
 msgstr "Tipo de arquivo inválido para"
 
-#: osticket/include/class.osticket.php:141
+#: osticket/include/class.osticket.php:142
 #, php-format
 msgid "File (%s) is too big. Maximum of %s allowed"
 msgstr "Arquivo (%s) muito grande. Máximo de %s permitidos"
 
-#: osticket/include/class.osticket.php:144
+#: osticket/include/class.osticket.php:145
 msgid "Invalid or bad upload POST"
 msgstr "POST de upload inválido"
 
-#: osticket/include/class.osticket.php:238
+#: osticket/include/class.osticket.php:247
 #, php-format
 msgid "\"osTicket Alerts\""
 msgstr "\"Alertas do osTicket\""
@@ -3171,16 +3246,16 @@ msgstr "Limpeza pós-atualização!"
 msgid "Unable to process cleanup file"
 msgstr "Não foi possível processar arquivo de limpeza"
 
-#: osticket/include/class.mailer.php:153
+#: osticket/include/class.mailer.php:152
 #, php-format
 msgid "Unable to email via SMTP"
 msgstr "Não foi possível enviar e-mail via SMTP"
 
-#: osticket/include/class.mailer.php:167
+#: osticket/include/class.mailer.php:166
 msgid "Mailer Error"
 msgstr "Erro no envio de E-mail"
 
-#: osticket/include/class.template.php:342
+#: osticket/include/class.template.php:354
 msgid "Template name already exists"
 msgstr "Nome do Modelo já existe"
 
@@ -3795,13 +3870,13 @@ msgid "Canned response settings"
 msgstr "Configs. de respostas prontas"
 
 #: osticket/include/staff/cannedresponse.inc.php:41
-#: osticket/include/staff/teams.inc.php:80
+#: osticket/include/staff/teams.inc.php:79
 #: osticket/include/staff/team.inc.php:53
 msgid "Active"
 msgstr "Ativo"
 
 #: osticket/include/staff/cannedresponse.inc.php:42
-#: osticket/include/staff/teams.inc.php:80
+#: osticket/include/staff/teams.inc.php:79
 #: osticket/include/staff/team.inc.php:54
 msgid "Disabled"
 msgstr "Desabilitado"
@@ -3881,8 +3956,8 @@ msgstr "SLA Padrão"
 
 #: osticket/include/staff/settings-tickets.inc.php:35
 #: osticket/include/staff/departments.inc.php:106
-#: osticket/include/staff/categories.inc.php:99
-#: osticket/include/staff/teams.inc.php:101
+#: osticket/include/staff/categories.inc.php:97
+#: osticket/include/staff/teams.inc.php:100
 #: osticket/include/staff/team.inc.php:64
 msgid "None"
 msgstr "Nenhum"
@@ -4111,19 +4186,19 @@ msgstr "Nenhum departamento encontrado!"
 msgid "Add New Department"
 msgstr "Adicionar Novo Departamento"
 
-#: osticket/include/staff/departments.inc.php:58
+#: osticket/include/staff/departments.inc.php:59
 msgid "Type"
 msgstr "Tipo"
 
-#: osticket/include/staff/departments.inc.php:59
+#: osticket/include/staff/departments.inc.php:60
 msgid "Users"
 msgstr "Usuários"
 
-#: osticket/include/staff/departments.inc.php:60
+#: osticket/include/staff/departments.inc.php:61
 msgid "Email Address"
 msgstr "Endereço de E-mail"
 
-#: osticket/include/staff/departments.inc.php:61
+#: osticket/include/staff/departments.inc.php:62
 msgid "Dept. Manager"
 msgstr "Gerente do Depto."
 
@@ -4141,20 +4216,20 @@ msgid "Private"
 msgstr "Privado"
 
 #: osticket/include/staff/departments.inc.php:104
-#: osticket/include/staff/categories.inc.php:97
-#: osticket/include/staff/teams.inc.php:99
+#: osticket/include/staff/categories.inc.php:95
+#: osticket/include/staff/teams.inc.php:98
 msgid "Select"
 msgstr "Selecionar"
 
 #: osticket/include/staff/departments.inc.php:105
-#: osticket/include/staff/categories.inc.php:98
-#: osticket/include/staff/teams.inc.php:100
+#: osticket/include/staff/categories.inc.php:96
+#: osticket/include/staff/teams.inc.php:99
 msgid "All"
 msgstr "Todos"
 
 #: osticket/include/staff/departments.inc.php:107
-#: osticket/include/staff/categories.inc.php:100
-#: osticket/include/staff/teams.inc.php:102
+#: osticket/include/staff/categories.inc.php:98
+#: osticket/include/staff/teams.inc.php:101
 msgid "Toggle"
 msgstr "Alternar"
 
@@ -4163,29 +4238,57 @@ msgid "No department found"
 msgstr "Nenhum departamento encontrado"
 
 #: osticket/include/staff/departments.inc.php:119
-#: osticket/include/staff/categories.inc.php:113
+#: osticket/include/staff/categories.inc.php:111
 msgid "Make Public"
 msgstr "Publicar"
 
 #: osticket/include/staff/departments.inc.php:120
-msgid "Are you sure you want to make selected departments public?"
-msgstr "Tem certeza que deseja tornar os departamentos selecionados públicos?"
-
-#: osticket/include/staff/departments.inc.php:121
 msgid "Make Private"
 msgstr "Tornar Privado"
 
-#: osticket/include/staff/departments.inc.php:122
-msgid "Are you sure you want to make selected departments private?"
-msgstr "Tem certeza que deseja tornar os departamentos selecionados privados?"
-
-#: osticket/include/staff/departments.inc.php:123
+#: osticket/include/staff/departments.inc.php:121
 msgid "Delete Dept(s)"
 msgstr "Apagar Depto(s)"
 
-#: osticket/include/staff/departments.inc.php:124
+#: osticket/include/staff/departments.inc.php:129
+#: osticket/include/staff/categories.inc.php:120
+#: osticket/include/staff/teams.inc.php:122
+msgid "Please Confirm"
+msgstr "Favor Confirmar"
+
+#: osticket/include/staff/departments.inc.php:133
+msgid "Are you sure want to make selected departments <b>public</b>?"
+msgstr "Tem certeza que deseja tornar os departamentos selecionados <b>públicos</b>?"
+
+#: osticket/include/staff/departments.inc.php:136
+msgid "Are you sure want to make selected departments <b>private</b>?"
+msgstr "Tem certeza que deseja tornar os departamentos selecionados <b>privados</b>?"
+
+#: osticket/include/staff/departments.inc.php:139
 msgid "Are you sure you want to DELETE selected departments?"
 msgstr "Tem certeza que deseja APAGAR os departamentos selecionados?"
+
+#: osticket/include/staff/departments.inc.php:140
+msgid "Deleted departments CANNOT be recovered."
+msgstr "Departamentos apagados NÃO PODEM ser recuperados."
+
+#: osticket/include/staff/departments.inc.php:142
+#: osticket/include/staff/categories.inc.php:133
+#: osticket/include/staff/teams.inc.php:135
+msgid "Please confirm to continue."
+msgstr "Confirme para continuar."
+
+#: osticket/include/staff/departments.inc.php:146
+#: osticket/include/staff/categories.inc.php:137
+#: osticket/include/staff/teams.inc.php:139
+msgid "No, Cancel"
+msgstr "Não, Cancele"
+
+#: osticket/include/staff/departments.inc.php:149
+#: osticket/include/staff/categories.inc.php:140
+#: osticket/include/staff/teams.inc.php:142
+msgid "Yes, Do it!"
+msgstr "Sim, Faça!"
 
 #: osticket/include/staff/settings-alerts.inc.php:1
 msgid "Alerts and Notices"
@@ -4209,7 +4312,7 @@ msgstr "Alerta enviado quando novos tíquetes são criados"
 #: osticket/include/staff/settings-alerts.inc.php:89
 #: osticket/include/staff/settings-alerts.inc.php:113
 #: osticket/include/staff/settings-alerts.inc.php:137
-#: osticket/include/staff/teams.inc.php:116
+#: osticket/include/staff/teams.inc.php:114
 #: osticket/include/staff/team.inc.php:84
 msgid "Disable"
 msgstr "Desabilitar"
@@ -4277,7 +4380,7 @@ msgid "Alert sent out to staff on ticket assignment."
 msgstr "Alerta enviado ao membro da equipe ao ser designado um tíquete."
 
 #: osticket/include/staff/settings-alerts.inc.php:100
-#: osticket/include/staff/teams.inc.php:58
+#: osticket/include/staff/teams.inc.php:59
 #: osticket/include/staff/team.inc.php:60
 msgid "Team Lead"
 msgstr "Líder do Time"
@@ -4341,35 +4444,39 @@ msgstr "Nenhuma categoria FAQ encontrada!"
 msgid "Add New Category"
 msgstr "Adicionar Nova Categoria"
 
-#: osticket/include/staff/categories.inc.php:60
-#: osticket/include/staff/teams.inc.php:60
+#: osticket/include/staff/categories.inc.php:61
+#: osticket/include/staff/teams.inc.php:61
 msgid "Last Updated"
 msgstr "Última Atualização"
 
-#: osticket/include/staff/categories.inc.php:102
+#: osticket/include/staff/categories.inc.php:100
 msgid "No FAQ categories found."
 msgstr "Não foram encontradas categorias de FAQs."
 
-#: osticket/include/staff/categories.inc.php:114
-msgid "Are you sure you want to make selected categories PUBLIC?"
-msgstr "Tem certeza que deseja tornar as categorias selecionadas PÚBLICAS?"
-
-#: osticket/include/staff/categories.inc.php:115
+#: osticket/include/staff/categories.inc.php:112
 msgid "Make Internal"
 msgstr "Internalizar"
 
-#: osticket/include/staff/categories.inc.php:116
-msgid "Are you sure you want to make selected categories INTERNAL?"
-msgstr "Tem certeza que deseja tornar as categorias selecionadas INTERNAS?"
-
-#: osticket/include/staff/categories.inc.php:117
-#: osticket/include/staff/teams.inc.php:118
+#: osticket/include/staff/categories.inc.php:113
+#: osticket/include/staff/teams.inc.php:115
 msgid "Delete"
 msgstr "Apagar"
 
-#: osticket/include/staff/categories.inc.php:118
-msgid "Are you sure you want to DELETE selected categories - including associated FAQs?"
-msgstr "Tem certeza que deseja APAGAR as categorias selecionadas, incluindo as FAQs associadas?"
+#: osticket/include/staff/categories.inc.php:124
+msgid "Are you sure want to make selected categories <b>public</b>?"
+msgstr "Tem certeza que deseja tornar as categorias selecionadas <b>públicas</b>?"
+
+#: osticket/include/staff/categories.inc.php:127
+msgid "Are you sure want to make selected categories <b>private</b> (internal)?"
+msgstr "Tem certeza que deseja tornar as categorias selecionadas <b>privadas</b> (internas)?"
+
+#: osticket/include/staff/categories.inc.php:130
+msgid "Are you sure you want to DELETE selected categories?"
+msgstr "Tem certeza que deseja APAGAR as categorias selecionadas?"
+
+#: osticket/include/staff/categories.inc.php:131
+msgid "Deleted entries CANNOT be recovered, including any associated FAQs."
+msgstr "Entradas apagadas NÃO PODEM ser recuperadas, incluindo quaisquer FAQs associadas."
 
 #: osticket/include/staff/category.inc.php:6
 msgid "Update Category :"
@@ -4416,7 +4523,7 @@ msgid "teams"
 msgstr "times"
 
 #: osticket/include/staff/teams.inc.php:38
-#: osticket/include/staff/teams.inc.php:104
+#: osticket/include/staff/teams.inc.php:103
 msgid "No teams found!"
 msgstr "Não foram encontrados times!"
 
@@ -4425,29 +4532,33 @@ msgstr "Não foram encontrados times!"
 msgid "Add New Team"
 msgstr "Adicionar Novo Time"
 
-#: osticket/include/staff/teams.inc.php:55
+#: osticket/include/staff/teams.inc.php:56
 msgid "Team Name"
 msgstr "Nome do Time"
 
-#: osticket/include/staff/teams.inc.php:57
+#: osticket/include/staff/teams.inc.php:58
 msgid "Members"
 msgstr "Membros"
 
-#: osticket/include/staff/teams.inc.php:59
+#: osticket/include/staff/teams.inc.php:60
 msgid "Created"
 msgstr "Criado"
 
-#: osticket/include/staff/teams.inc.php:115
-msgid "Are you sure you want to ENABLE selected teams?"
-msgstr "Tem certeza que deseja HABILITAR os times selecionados?"
+#: osticket/include/staff/teams.inc.php:126
+msgid "Are you sure want to <b>enable</b> selected teams?"
+msgstr "Tem certeza que deseja <b>habilitar</b> os times selecionados?"
 
-#: osticket/include/staff/teams.inc.php:117
-msgid "Are you sure you want to DISABLE selected teams?"
-msgstr "Tem certeza que deseja DESABILITAR os times selecionados?"
+#: osticket/include/staff/teams.inc.php:129
+msgid "Are you sure want to <b>disable</b> selected teams?"
+msgstr "Tem certeza que deseja <b>desabilitar</b> os times selecionados?"
 
-#: osticket/include/staff/teams.inc.php:119
+#: osticket/include/staff/teams.inc.php:132
 msgid "Are you sure you want to DELETE selected teams?"
 msgstr "Tem certeza que deseja APAGAR os times selecionados?"
+
+#: osticket/include/staff/teams.inc.php:133
+msgid "Deleted team CANNOT be recovered."
+msgstr "Times apagados NÃO PODEM ser recuperados."
 
 #: osticket/include/staff/team.inc.php:7
 msgid "Update Team"
@@ -4518,18 +4629,21 @@ msgstr "Não foram encontrados e-mails!"
 msgid "Add New Email"
 msgstr "Adicionar Novo E-mail"
 
-#: osticket/include/staff/emails.inc.php:111
+#: osticket/include/staff/emails.inc.php:105
 msgid "No help emails found"
 msgstr "Não foram encontrados e-mails de ajuda"
 
-#: osticket/include/staff/emails.inc.php:122
+#: osticket/include/staff/emails.inc.php:116
 msgid "Delete Email(s)"
 msgstr "Apagar E-mail(s)"
 
-#: osticket/include/staff/emails.inc.php:123
-#: osticket/include/staff/banlist.inc.php:138
+#: osticket/include/staff/emails.inc.php:128
 msgid "Are you sure you want to DELETE selected emails?"
 msgstr "Tem certeza que deseja APAGAR os e-mails selecionados?"
+
+#: osticket/include/staff/emails.inc.php:129
+msgid "Deleted emails CANNOT be recovered."
+msgstr "E-mails apagados NÃO PODEM ser recuperados."
 
 #: osticket/include/staff/login.tpl.php:25
 msgid "osTicket Staff Control Panel"
@@ -4701,37 +4815,45 @@ msgstr "Notas Internas."
 msgid "Term too short!"
 msgstr "Termo muito curto!"
 
-#: osticket/include/staff/banlist.inc.php:51
+#: osticket/include/staff/banlist.inc.php:49
 msgid "Banned Email Addresses"
 msgstr "Endereços de E-mail Banidos (Lista Negra)"
 
-#: osticket/include/staff/banlist.inc.php:56
+#: osticket/include/staff/banlist.inc.php:54
 msgid " Query"
 msgstr " Pesquisa"
 
-#: osticket/include/staff/banlist.inc.php:62
+#: osticket/include/staff/banlist.inc.php:60
 msgid "Ban New Email"
 msgstr "Banir Novo E-mail"
 
-#: osticket/include/staff/banlist.inc.php:68
+#: osticket/include/staff/banlist.inc.php:66
 msgid "No banned emails matching the query found!"
 msgstr "Nenhum e-mail banido correponde à pesquisa!"
 
-#: osticket/include/staff/banlist.inc.php:83
+#: osticket/include/staff/banlist.inc.php:82
 msgid "Ban Status"
 msgstr "Estado de Banimento"
 
-#: osticket/include/staff/banlist.inc.php:84
+#: osticket/include/staff/banlist.inc.php:83
 msgid "Date Added"
 msgstr "Data de Adição"
 
-#: osticket/include/staff/banlist.inc.php:120
+#: osticket/include/staff/banlist.inc.php:117
 msgid "No banned emails found!"
 msgstr "Não foram encontrados e-mails na lista negra!"
 
-#: osticket/include/staff/banlist.inc.php:135
-msgid "Are you sure you want to DISABLE selected emails ban?"
-msgstr "Tem certeza que deseja DESATIVAR o banimento dos e-mail selecionados?"
+#: osticket/include/staff/banlist.inc.php:144
+msgid "Are you sure want to <b>enable</b> selected ban rules?"
+msgstr "Tem certeza que deseja <b>habilitar</b> as regras de banimento selecionadas?"
+
+#: osticket/include/staff/banlist.inc.php:147
+msgid "Are you sure want to <b>disable</b>  selected ban rules?"
+msgstr "Tem certeza que deseja <b>desabilitar</b> as regras de banimento selecionadas?"
+
+#: osticket/include/staff/banlist.inc.php:150
+msgid "Are you sure you want to DELETE selected ban rules?"
+msgstr "Tem certeza que deseja APAGAR as regras de banimento selecionadas?"
 
 #: osticket/include/staff/group.inc.php:6
 msgid "Update Group"
@@ -4927,21 +5049,29 @@ msgstr "Respostas Prontas"
 msgid "Add New Response"
 msgstr "Adicionar Nova Resposta"
 
-#: osticket/include/staff/cannedresponses.inc.php:108
+#: osticket/include/staff/cannedresponses.inc.php:105
 msgid "No canned responses"
 msgstr "Nenhuma resposta pronta"
 
-#: osticket/include/staff/cannedresponses.inc.php:120
-msgid "Are you sure you want to ENABLE selected responses?"
-msgstr "Tem certeza que deseja HABILITAR as respostas selecionadas?"
+#: osticket/include/staff/cannedresponses.inc.php:129
+msgid "Are you sure want to <b>enable</b> selected canned responses?"
+msgstr "Tem certeza que deseja <b>habilitar</b> as respostas prontas selecionadas?"
 
-#: osticket/include/staff/cannedresponses.inc.php:122
-msgid "Are you sure you want to DISABLE selected responses?"
-msgstr "Tem certeza que deseja DESABILITAR as respostas selecionadas?"
+#: osticket/include/staff/cannedresponses.inc.php:132
+msgid "Are you sure want to <b>disable</b> selected canned responses?"
+msgstr "Tem certeza que deseja <b>desabilitar</b> as respostas prontas selecionadas?"
 
-#: osticket/include/staff/cannedresponses.inc.php:124
-msgid "Are you sure you want to DELETE selected responses?"
-msgstr "Tem certeza que deseja APAGAR as respostas selecionadas?"
+#: osticket/include/staff/cannedresponses.inc.php:135
+msgid "Are you sure want to flag the selected tickets as <font color=\"red\"><b>overdue</b>"
+msgstr "Tem certeza que quer marcar os tíquetes selecionados como <font color=\"red\"><b>atrasados</b>"
+
+#: osticket/include/staff/cannedresponses.inc.php:138
+msgid "Are you sure you want to DELETE selected canned responses?"
+msgstr "Tem certeza que deseja APAGAR as respostas prontas selecionadas?"
+
+#: osticket/include/staff/cannedresponses.inc.php:139
+msgid "Deleted items CANNOT be recovered, including any associated attachments."
+msgstr "Itens apagados NÃO PODEM ser recuperados, incluindo quaisquer anexos."
 
 #: osticket/include/staff/helptopics.inc.php:45
 msgid "help topics"
@@ -4959,21 +5089,25 @@ msgstr "Tópico de Ajuda"
 msgid "Add New Help Topic"
 msgstr "Adicionar Tópico de Ajuda"
 
-#: osticket/include/staff/helptopics.inc.php:109
+#: osticket/include/staff/helptopics.inc.php:107
 msgid "No help topics found"
 msgstr "Não foram encontrados tópicos de ajuda"
 
-#: osticket/include/staff/helptopics.inc.php:121
-msgid "Are you sure you want to ENABLE selected help topics?"
-msgstr "Tem certeza que deseja HABILITAR os tópicos de ajuda selecionados?"
+#: osticket/include/staff/helptopics.inc.php:132
+msgid "Are you sure want to <b>enable</b> selected help topics?"
+msgstr "Tem certeza que deseja <b>habilitar</b> os tópicos de ajuda selecionados?"
 
-#: osticket/include/staff/helptopics.inc.php:123
-msgid "Are you sure you want to DISABLE selected help topics?"
-msgstr "Tem certeza que deseja DESABILITAR os tópicos de ajuda selecionados?"
+#: osticket/include/staff/helptopics.inc.php:135
+msgid "Are you sure want to <b>disable</b>  selected help topics?"
+msgstr "Tem certeza que deseja <b>desabilitar</b> os tópicos de ajuda selecionados?"
 
-#: osticket/include/staff/helptopics.inc.php:125
+#: osticket/include/staff/helptopics.inc.php:138
 msgid "Are you sure you want to DELETE selected help topics?"
 msgstr "Tem certeza que deseja APAGAR os tópicos de ajuda selecionados?"
+
+#: osticket/include/staff/helptopics.inc.php:139
+msgid "Deleted topics CANNOT be recovered."
+msgstr "Tópicos de ajuda apagados NÃO PODEM ser recuperados."
 
 #: osticket/include/staff/email.inc.php:6
 msgid "Update Email"
@@ -5419,10 +5553,6 @@ msgstr "FECHAR"
 msgid "Reasons for status change (internal note). Optional but highly recommended."
 msgstr "Razões para a mudança de estado (nota interna). Opcional, mas recomendado."
 
-#: osticket/include/staff/ticket-view.inc.php:804
-msgid "Please Confirm"
-msgstr "Favor Confirmar"
-
 #: osticket/include/staff/ticket-view.inc.php:808
 msgid "Are you sure want to <b>claim</b> (self assign) this ticket?"
 msgstr "Tem certeza que deseja <b>designar</b> este tíquete para si?"
@@ -5466,10 +5596,6 @@ msgstr "Tem certeza que deseja APAGAR este tíquete?"
 #: osticket/include/staff/ticket-view.inc.php:831
 msgid "Deleted tickets CANNOT be recovered, including any associated attachments."
 msgstr "Tíquetes apagados NÃO PODEM ser recuperados, incluindo quaisquer anexos."
-
-#: osticket/include/staff/ticket-view.inc.php:833
-msgid "Please confirm to continue."
-msgstr "Confirme para continuar."
 
 #: osticket/include/staff/ticket-view.inc.php:845
 msgid "OK"
@@ -5977,25 +6103,29 @@ msgstr "Chaves API"
 msgid "No API keys found!"
 msgstr "Nenhuma Chave API encontrada!"
 
-#: osticket/include/staff/apikeys.inc.php:59
+#: osticket/include/staff/apikeys.inc.php:60
 msgid "IP Addr"
 msgstr "End. IP"
 
-#: osticket/include/staff/apikeys.inc.php:97
+#: osticket/include/staff/apikeys.inc.php:96
 msgid "No API keys found"
 msgstr "Não foram encontradas Chaves API"
 
-#: osticket/include/staff/apikeys.inc.php:109
-msgid "Are you sure you want to ENABLE selected API keys?"
-msgstr "Tem certeza que deseja HABILITAR as chaves API selecionadas?"
+#: osticket/include/staff/apikeys.inc.php:120
+msgid "Are you sure want to <b>enable</b> selected API keys?"
+msgstr "Tem certeza que deseja <b>habilitar</b> as chaves API selecionadas?"
 
-#: osticket/include/staff/apikeys.inc.php:111
-msgid "Are you sure you want to DISABLE selected API keys?"
-msgstr "Tem certeza que deseja DESABILITAR as chaves API selecionadas?"
+#: osticket/include/staff/apikeys.inc.php:123
+msgid "Are you sure want to <b>disable</b>  selected API keys?"
+msgstr "Tem certeza que deseja <b>desabilitar</b> as chaves API selecionadas?"
 
-#: osticket/include/staff/apikeys.inc.php:113
+#: osticket/include/staff/apikeys.inc.php:126
 msgid "Are you sure you want to DELETE selected API keys?"
 msgstr "Tem certeza que deseja APAGAR as chaves API selecionadas?"
+
+#: osticket/include/staff/apikeys.inc.php:127
+msgid "Deleted keys CANNOT be recovered."
+msgstr "Chaves apagadas NÃO PODEM ser recuperadas."
 
 #: osticket/include/staff/staffmembers.inc.php:77
 msgid "All Groups"
@@ -6018,38 +6148,46 @@ msgstr "Adicionar Novo Membro da Equipe"
 msgid "No staff found!"
 msgstr "Não foram encontrados membros da equipe!"
 
-#: osticket/include/staff/staffmembers.inc.php:127
+#: osticket/include/staff/staffmembers.inc.php:128
 msgid "UserName"
 msgstr "Nome de Usuário"
 
-#: osticket/include/staff/staffmembers.inc.php:129
+#: osticket/include/staff/staffmembers.inc.php:130
 msgid "Group"
 msgstr "Grupo"
 
-#: osticket/include/staff/staffmembers.inc.php:132
+#: osticket/include/staff/staffmembers.inc.php:133
 msgid "Last Login"
 msgstr "Último Login"
 
-#: osticket/include/staff/staffmembers.inc.php:152
+#: osticket/include/staff/staffmembers.inc.php:150
 #: osticket/include/staff/staff.inc.php:180
 msgid "Locked"
 msgstr "Bloqueado"
 
-#: osticket/include/staff/staffmembers.inc.php:182
-msgid "Are you sure you want to ENABLE selected users?"
-msgstr "Tem certeza que deseja HABILITAR os usuários selecionados?"
-
-#: osticket/include/staff/staffmembers.inc.php:184
+#: osticket/include/staff/staffmembers.inc.php:181
 msgid "Lock"
 msgstr "Bloquear"
 
-#: osticket/include/staff/staffmembers.inc.php:185
-msgid "Are you sure you want to LOCK selected users?"
-msgstr "Tem certeza que deseja BLOQUAR os usuários selecionados?"
+#: osticket/include/staff/staffmembers.inc.php:195
+msgid "Are you sure want to <b>enable</b> (unlock) selected staff?"
+msgstr "Tem certeza que deseja <b>habilitar</b> (desbloquear) os membros selecionados?"
 
-#: osticket/include/staff/staffmembers.inc.php:188
-msgid "Are you sure you want to DELETE selected users?"
-msgstr "Tem certeza que deseja APAGAR os usuários selecionados?"
+#: osticket/include/staff/staffmembers.inc.php:198
+msgid "Are you sure want to <b>disable</b> (lock) selected staff?"
+msgstr "Tem certeza que deseja <b>desabilitar</b> (bloquear) os membros selecionados?"
+
+#: osticket/include/staff/staffmembers.inc.php:199
+msgid "Locked staff won't be able to login to Staff Control Panel."
+msgstr "Membros da equipe bloqueados não poderão entar no Painel de Controle da Equipe."
+
+#: osticket/include/staff/staffmembers.inc.php:202
+msgid "Are you sure you want to DELETE selected staff?"
+msgstr "Tem certeza que deseja APAGAR os membros da equipe selecionados?"
+
+#: osticket/include/staff/staffmembers.inc.php:203
+msgid "Deleted staff CANNOT be recovered."
+msgstr "Membros apagados NÃO PODEM ser recuperados."
 
 #: osticket/include/staff/settings-system.inc.php:6
 msgid "System Settings and Preferences"
@@ -6108,7 +6246,7 @@ msgid "Select Default Department"
 msgstr "Selecione o Departamento Padrão"
 
 #: osticket/include/staff/settings-system.inc.php:50
-#: osticket/include/staff/tickets.inc.php:503
+#: osticket/include/staff/tickets.inc.php:534
 msgid "Dept"
 msgstr "Depto"
 
@@ -6291,74 +6429,68 @@ msgstr "(Resultados da Pesquisa)"
 msgid "advanced"
 msgstr "avançado"
 
-#: osticket/include/staff/tickets.inc.php:323
+#: osticket/include/staff/tickets.inc.php:324
 msgid "Sort By Name"
 msgstr "Ordenar por Nome"
 
-#: osticket/include/staff/tickets.inc.php:333
+#: osticket/include/staff/tickets.inc.php:334
 msgid "Sort By Priority"
 msgstr "Ordenar por Prioridade"
 
-#: osticket/include/staff/tickets.inc.php:340
+#: osticket/include/staff/tickets.inc.php:341
 msgid "Sort By Assignee"
 msgstr "Ordenar por Designação"
 
-#: osticket/include/staff/tickets.inc.php:345
+#: osticket/include/staff/tickets.inc.php:346
 msgid "Sort By Closing Staff Name"
 msgstr "Ordenar pela Pessoa que Fechou"
 
-#: osticket/include/staff/tickets.inc.php:393
+#: osticket/include/staff/tickets.inc.php:400
 msgid "Preview Ticket"
 msgstr "Visualizar Tíquete"
 
-#: osticket/include/staff/tickets.inc.php:420
+#: osticket/include/staff/tickets.inc.php:427
 msgid "There are no tickets here. (Leave a little early today)."
 msgstr "Não existem tíquetes aqui. (Saia mais cedo hoje)."
 
-#: osticket/include/staff/tickets.inc.php:433
+#: osticket/include/staff/tickets.inc.php:440
 msgid "Query returned 0 results."
 msgstr "Sua pesquisa não retornou resultados."
 
-#: osticket/include/staff/tickets.inc.php:444
+#: osticket/include/staff/tickets.inc.php:451
 msgid "Export"
 msgstr "Exportar"
 
-#: osticket/include/staff/tickets.inc.php:454
-#: osticket/include/staff/tickets.inc.php:472
-msgid "Are you sure you want to reopen selected tickets?"
-msgstr "Tem certeza que deseja reabrir os tíquetes selecionados?"
+#: osticket/include/staff/tickets.inc.php:492
+msgid "Are you sure want to <b>close</b> selected open tickets?"
+msgstr "Tem certeza que deseja <b>fechar</b> os tíquetes selecionados?"
 
-#: osticket/include/staff/tickets.inc.php:462
-msgid "Are you sure you want to mark selected tickets overdue/stale?"
-msgstr "Tem certeza que quer marcar os tíquetes selecionados como atrasados?"
+#: osticket/include/staff/tickets.inc.php:495
+msgid "Are you sure want to <b>reopen</b> selected closed tickets?"
+msgstr "Tem certeza que deseja <b>reabrir</b> os tíquetes selecionados?"
 
-#: osticket/include/staff/tickets.inc.php:464
-#: osticket/include/staff/tickets.inc.php:470
-msgid "Are you sure you want to close selected tickets?"
-msgstr "Tem certeza que deseja fechar os tíquetes selecionados?"
-
-#: osticket/include/staff/tickets.inc.php:477
+#: osticket/include/staff/tickets.inc.php:501
 msgid "Are you sure you want to DELETE selected tickets?"
 msgstr "Tem certeza que deseja APAGAR os tíquetes selecionados?"
 
-#: osticket/include/staff/tickets.inc.php:487
+#: osticket/include/staff/tickets.inc.php:518
 msgid "Advanced Ticket Search"
 msgstr "Pesquisa Avançada de Tíquetes"
 
-#: osticket/include/staff/tickets.inc.php:492
+#: osticket/include/staff/tickets.inc.php:523
 msgid "Keyword"
 msgstr "Palavra-chave"
 
-#: osticket/include/staff/tickets.inc.php:493
+#: osticket/include/staff/tickets.inc.php:524
 msgid "Optional"
 msgstr "Opcional"
 
-#: osticket/include/staff/tickets.inc.php:519
-#: osticket/include/staff/tickets.inc.php:542
+#: osticket/include/staff/tickets.inc.php:550
+#: osticket/include/staff/tickets.inc.php:573
 msgid "Anyone"
 msgstr "Qualquer um"
 
-#: osticket/include/staff/tickets.inc.php:552
+#: osticket/include/staff/tickets.inc.php:583
 msgid "Date Range"
 msgstr "Intervalo de Data"
 
@@ -6374,7 +6506,7 @@ msgstr "Nenhum plano SLA encontrado!"
 msgid "Service Level Agreements"
 msgstr "Acordos de Nível de Serviço (SLAs)"
 
-#: osticket/include/staff/slaplans.inc.php:58
+#: osticket/include/staff/slaplans.inc.php:59
 msgid "Grace Period (hrs)"
 msgstr "Período de Tolerância (hrs)"
 
@@ -6382,17 +6514,17 @@ msgstr "Período de Tolerância (hrs)"
 msgid "No SLA plans found"
 msgstr "Nenhum plano SLA encontrado"
 
-#: osticket/include/staff/slaplans.inc.php:109
-msgid "Are you sure you want to ENABLE selected plans?"
-msgstr "Tem certeza que deseja HABILITAR os planos selecionados?"
+#: osticket/include/staff/slaplans.inc.php:122
+msgid "Are you sure want to <b>enable</b> selected SLA plans?"
+msgstr "Tem certeza que deseja <b>habilitar</b> os planos SLA selecionados?"
 
-#: osticket/include/staff/slaplans.inc.php:111
-msgid "Are you sure you want to DISABLE selected plans?"
-msgstr "Tem certeza que deseja DESABILITAR os planos selecionados?"
+#: osticket/include/staff/slaplans.inc.php:125
+msgid "Are you sure want to <b>disable</b> selected SLA plans?"
+msgstr "Tem certeza que deseja <b>desabilitar</b> os planos SLA selecionados?"
 
-#: osticket/include/staff/slaplans.inc.php:113
-msgid "Are you sure you want to DELETE selected plans?"
-msgstr "Tem certeza que deseja APAGAR os planos selecionados?"
+#: osticket/include/staff/slaplans.inc.php:128
+msgid "Are you sure you want to DELETE selected SLA plans?"
+msgstr "Tem certeza que deseja APAGAR os planos SLA selecionados?"
 
 #: osticket/include/staff/staff.inc.php:13
 msgid "Update Staff"
@@ -6529,7 +6661,7 @@ msgid "groups"
 msgstr "grupos"
 
 #: osticket/include/staff/groups.inc.php:39
-#: osticket/include/staff/groups.inc.php:107
+#: osticket/include/staff/groups.inc.php:106
 msgid "No groups found!"
 msgstr "Nenhum grupo encontrado!"
 
@@ -6537,25 +6669,29 @@ msgstr "Nenhum grupo encontrado!"
 msgid "User Groups"
 msgstr "Grupos de Usuário"
 
-#: osticket/include/staff/groups.inc.php:56
+#: osticket/include/staff/groups.inc.php:57
 msgid "Group Name"
 msgstr "Nome do Grupo"
 
-#: osticket/include/staff/groups.inc.php:60
+#: osticket/include/staff/groups.inc.php:61
 msgid "Created On"
 msgstr "Criado Em"
 
-#: osticket/include/staff/groups.inc.php:118
-msgid "Are you sure you want to ENABLE selected groups?"
-msgstr "Tem certeza que deseja HABILITAR os grupos selecionadas?"
+#: osticket/include/staff/groups.inc.php:130
+msgid "Are you sure want to <b>enable</b> selected groups?"
+msgstr "Tem certeza que deseja <b>habilitar</b> os grupos selecionados?"
 
-#: osticket/include/staff/groups.inc.php:120
-msgid "Are you sure you want to DISABLE selected groups?"
-msgstr "Tem certeza que deseja DESABILITAR os grupos selecionados?"
+#: osticket/include/staff/groups.inc.php:133
+msgid "Are you sure want to <b>disable</b> selected groups?"
+msgstr "Tem certeza que deseja <b>desabilitar</b> os grupos selecionados?"
 
-#: osticket/include/staff/groups.inc.php:122
+#: osticket/include/staff/groups.inc.php:136
 msgid "Are you sure you want to DELETE selected groups?"
 msgstr "Tem certeza que deseja APAGAR os grupos selecionados?"
+
+#: osticket/include/staff/groups.inc.php:137
+msgid "Deleted groups CANNOT be recovered and might affect staff's access."
+msgstr "Grupos apagados NÃO PODEM ser recuperados e podem afetar o acesso de membros da equipe."
 
 #: osticket/include/staff/tpl.inc.php:9
 msgid "Email Template Message"
@@ -6866,11 +7002,11 @@ msgstr "Não foram encontrados filtros!"
 msgid "Ticket Filters"
 msgstr "Filtros de Tíquete"
 
-#: osticket/include/staff/filters.inc.php:62
+#: osticket/include/staff/filters.inc.php:63
 msgid "Order"
 msgstr "Ordem"
 
-#: osticket/include/staff/filters.inc.php:63
+#: osticket/include/staff/filters.inc.php:64
 msgid "Rules"
 msgstr "Regras"
 
@@ -6878,17 +7014,21 @@ msgstr "Regras"
 msgid "No filters found"
 msgstr "Não foram encontrados filtros"
 
-#: osticket/include/staff/filters.inc.php:117
-msgid "Are you sure you want to ENABLE selected filters?"
-msgstr "Tem certeza que deseja HABILITAR os filtros selecionados?"
+#: osticket/include/staff/filters.inc.php:130
+msgid "Are you sure want to <b>enable</b> selected filters?"
+msgstr "Tem certeza que deseja <b>habilitar</b> os filtros selecionados?"
 
-#: osticket/include/staff/filters.inc.php:119
-msgid "Are you sure you want to DISABLE selected filters?"
-msgstr "Tem certeza que deseja DESABILITAR os filtros selecionados?"
+#: osticket/include/staff/filters.inc.php:133
+msgid "Are you sure want to <b>disable</b>  selected filters?"
+msgstr "Tem certeza que deseja <b>desabilitar</b> os filtros selecionados?"
 
-#: osticket/include/staff/filters.inc.php:121
+#: osticket/include/staff/filters.inc.php:136
 msgid "Are you sure you want to DELETE selected filters?"
 msgstr "Tem certeza que deseja APAGAR os filtros selecionados?"
+
+#: osticket/include/staff/filters.inc.php:137
+msgid "Deleted filters CANNOT be recovered, including any associated rules."
+msgstr "Filtros apagados NÃO PODEM ser recuperados, incluindo quaisquer regras associadas."
 
 #: osticket/include/staff/syslogs.inc.php:11
 #: osticket/include/staff/syslogs.inc.php:98
@@ -6928,33 +7068,37 @@ msgstr "Debug"
 msgid "Go!"
 msgstr "Ir!"
 
-#: osticket/include/staff/syslogs.inc.php:115
+#: osticket/include/staff/syslogs.inc.php:116
 msgid "Log Title"
 msgstr "Título do Log"
 
-#: osticket/include/staff/syslogs.inc.php:116
+#: osticket/include/staff/syslogs.inc.php:117
 msgid "Log Type"
 msgstr "Tipo de Log"
 
-#: osticket/include/staff/syslogs.inc.php:117
+#: osticket/include/staff/syslogs.inc.php:118
 msgid "Log Date"
 msgstr "Data do Log"
 
-#: osticket/include/staff/syslogs.inc.php:118
+#: osticket/include/staff/syslogs.inc.php:119
 msgid "IP Address"
 msgstr "Endereço IP"
 
-#: osticket/include/staff/syslogs.inc.php:155
+#: osticket/include/staff/syslogs.inc.php:154
 msgid "No logs found"
 msgstr "Não foram encontradas logs"
 
-#: osticket/include/staff/syslogs.inc.php:166
+#: osticket/include/staff/syslogs.inc.php:165
 msgid "Delete Selected Entries"
 msgstr "Deletar Entradas Selecionadas"
 
-#: osticket/include/staff/syslogs.inc.php:167
-msgid "Are you sure you want to DELETE selected log entries?"
+#: osticket/include/staff/syslogs.inc.php:177
+msgid "Are you sure you want to DELETE selected logs?"
 msgstr "Tem certeza que deseja APAGAR os logs selecionados?"
+
+#: osticket/include/staff/syslogs.inc.php:178
+msgid "Deleted logs CANNOT be recovered."
+msgstr "Logs apagados NÃO PODEM ser recuperados."
 
 #: osticket/include/staff/faq-view.inc.php:14
 msgid "(Published)"
@@ -7044,7 +7188,7 @@ msgstr " Modelos"
 msgid "No templates found!"
 msgstr "Nenhum modelo encontrado!"
 
-#: osticket/include/staff/templates.inc.php:61
+#: osticket/include/staff/templates.inc.php:62
 msgid "In-Use"
 msgstr "Em Uso"
 
@@ -7052,21 +7196,25 @@ msgstr "Em Uso"
 msgid "(System Default)"
 msgstr "(Padrão do Sistema)"
 
-#: osticket/include/staff/templates.inc.php:104
+#: osticket/include/staff/templates.inc.php:105
 msgid "No templates found"
 msgstr "Nenhuma modelo encontrado"
 
-#: osticket/include/staff/templates.inc.php:116
-msgid "Are you sure you want to ENABLE selected templates?"
-msgstr "Tem certeza que deseja HABILITAR aos modelos selecionados?"
+#: osticket/include/staff/templates.inc.php:130
+msgid "Are you sure want to <b>enable</b> selected templates?"
+msgstr "Tem certeza que deseja <b>habilitar</b> os modelos selecionados?"
 
-#: osticket/include/staff/templates.inc.php:118
-msgid "Are you sure you want to DISABLE selected templates?"
-msgstr "Tem certeza que deseja DESABILITAR aos modelos selecionados?"
+#: osticket/include/staff/templates.inc.php:133
+msgid "Are you sure want to <b>disable</b>  selected templates?"
+msgstr "Tem certeza que deseja <b>desabilitar</b> os modelos selecionados?"
 
-#: osticket/include/staff/templates.inc.php:120
+#: osticket/include/staff/templates.inc.php:136
 msgid "Are you sure you want to DELETE selected templates?"
 msgstr "Tem certeza que deseja APAGAR os modelos selecionados?"
+
+#: osticket/include/staff/templates.inc.php:137
+msgid "Deleted templates CANNOT be recovered."
+msgstr "Modelos apagados NÃO PODEM ser recuperados."
 
 #: osticket/include/staff/settings-autoresp.inc.php:9
 msgid "Autoresponder Setting"
@@ -7173,6 +7321,8 @@ msgid "To avoid possible conflicts, please take a minute to rename configuration
 msgstr "Para evitar possíveis conflitos, por favor, renomeie os arquivos de configuração como mostrado abaixo."
 
 #: osticket/include/upgrader/rename.inc.php:11
+#: osticket/setup/inc/file-perm.inc.php:11
+#: osticket/setup/inc/file-missing.inc.php:10
 msgid "Solution"
 msgstr "Solução"
 
@@ -7190,6 +7340,7 @@ msgstr "Por favor, refira-se ao"
 
 #: osticket/include/upgrader/rename.inc.php:18
 #: osticket/include/upgrader/prereq.inc.php:39
+#: osticket/include/upgrader/aborted.inc.php:25
 msgid "Upgrade Guide"
 msgstr "Guia de Atualização"
 
@@ -7198,10 +7349,16 @@ msgid "for more information."
 msgstr "para mais informações."
 
 #: osticket/include/upgrader/rename.inc.php:23
+#: osticket/setup/inc/file-missing.inc.php:21
 msgid "Continue"
 msgstr "Continue"
 
 #: osticket/include/upgrader/rename.inc.php:28
+#: osticket/include/upgrader/aborted.inc.php:27
+#: osticket/setup/inc/file-perm.inc.php:28
+#: osticket/setup/inc/install.inc.php:142
+#: osticket/setup/inc/file-unclean.inc.php:14
+#: osticket/setup/inc/file-missing.inc.php:26
 msgid "Need Help?"
 msgstr "Precisa de ajuda?"
 
@@ -7210,6 +7367,12 @@ msgid "If you are looking for a greater level of support, we provide <u>professi
 msgstr "Se você está procurando um nível maior de suporte, nós provesmos <u> atualizações profissionais </u> e suporte comercial com tempos de resposta garantidos, e acesso ao time de desenvolvimento. Também podemos ajudar a customizar o osTicket ou ainda adicionar novos recursos para o sistema para atender suas necessidades específicas."
 
 #: osticket/include/upgrader/rename.inc.php:30
+#: osticket/include/upgrader/done.inc.php:26
+#: osticket/setup/inc/install-done.inc.php:47
+#: osticket/setup/inc/file-perm.inc.php:30
+#: osticket/setup/inc/install.inc.php:142
+#: osticket/setup/inc/file-unclean.inc.php:16
+#: osticket/setup/inc/file-missing.inc.php:28
 msgid "Learn More!"
 msgstr "Veja Mais!"
 
@@ -7372,6 +7535,7 @@ msgid "4. We can help, feel free to"
 msgstr "4. Podemos ajudar, sinta-se à vontade para"
 
 #: osticket/include/upgrader/prereq.inc.php:49
+#: osticket/setup/inc/install.inc.php:146
 msgid "Doing stuff!"
 msgstr "Trabalhando!"
 
@@ -7455,7 +7619,6 @@ msgid "osTicket wiki"
 msgstr "wiki do osTicket"
 
 #: osticket/include/upgrader/done.inc.php:24
-#: osticket/setup/inc/subscribe.inc.php:7
 msgid "Stay up to date"
 msgstr "Mantenha-se atualizado"
 
@@ -7588,7 +7751,6 @@ msgstr "Erro ao instalar o osTicket - corriga os erros abaixo e tente novamente.
 
 #: osticket/setup/install.php:69
 #: osticket/setup/install.php:72
-#: osticket/setup/inc/install-prereq.inc.php:14
 msgid "Required"
 msgstr "Requerido"
 
@@ -7694,7 +7856,6 @@ msgstr "Pronto? Continue"
 
 #: osticket/setup/inc/file-perm.inc.php:30
 #: osticket/setup/inc/file-missing.inc.php:28
-#: osticket/setup/inc/install-prereq.inc.php:39
 msgid "If you are looking for a greater level of support, we provide <u>professional installation services</u> and commercial support with guaranteed response times, and access to the core development team. We can also help customize osTicket or even add new features to the system to meet your unique needs."
 msgstr "Se você está procurando um nível maior de suporte, nós provemos <u> serviços de instalação profissionais </u> e suporte comercial com tempos de resposta garantidos, e acesso ao time de desenvolvimento. Também podemos ajudar a customizar o osTicket ou ainda adicionar novos recursos para o sistema para atender suas necessidades específicas."
 
@@ -8028,6 +8189,57 @@ msgstr "Extensão Gdlib"
 #: osticket/setup/inc/install-prereq.inc.php:27
 msgid "PHP IMAP extension"
 msgstr "Extensão PHP IMAP"
+
+msgid "You must select at least one ticket"
+msgstr "Você deve selecionar ao menos um tíquete"
+
+msgid "Unknown option"
+msgstr "Oção desconhecida"
+
+msgid "selected emails enabled"
+msgstr "e-mails selecionados habilitados"
+
+msgid "Are you sure you want to make selected categories INTERNAL?"
+msgstr "Tem certeza que deseja tornar as categorias selecionadas INTERNAS?"
+
+msgid "Are you sure you want to DELETE selected categories - including associated FAQs?"
+msgstr "Tem certeza que deseja APAGAR as categorias selecionadas, incluindo as FAQs associadas?"
+
+msgid "Are you sure you want to DISABLE selected teams?"
+msgstr "Tem certeza que deseja DESABILITAR os times selecionados?"
+
+msgid "Are you sure you want to DISABLE selected emails ban?"
+msgstr "Tem certeza que deseja DESATIVAR o banimento dos e-mail selecionados?"
+
+msgid "Are you sure you want to DISABLE selected responses?"
+msgstr "Tem certeza que deseja DESABILITAR as respostas selecionadas?"
+
+msgid "Are you sure you want to DISABLE selected help topics?"
+msgstr "Tem certeza que deseja DESABILITAR os tópicos de ajuda selecionados?"
+
+msgid "Are you sure you want to DISABLE selected API keys?"
+msgstr "Tem certeza que deseja DESABILITAR as chaves API selecionadas?"
+
+msgid "Are you sure you want to ENABLE selected users?"
+msgstr "Tem certeza que deseja HABILITAR os usuários selecionados?"
+
+msgid "Are you sure you want to mark selected tickets overdue/stale?"
+msgstr "Tem certeza que quer marcar os tíquetes selecionados como atrasados?"
+
+msgid "Are you sure you want to DISABLE selected plans?"
+msgstr "Tem certeza que deseja DESABILITAR os planos selecionados?"
+
+msgid "Are you sure you want to DISABLE selected groups?"
+msgstr "Tem certeza que deseja DESABILITAR os grupos selecionados?"
+
+msgid "Are you sure you want to DISABLE selected filters?"
+msgstr "Tem certeza que deseja DESABILITAR os filtros selecionados?"
+
+msgid "Are you sure you want to DELETE selected log entries?"
+msgstr "Tem certeza que deseja APAGAR os logs selecionados?"
+
+msgid "Are you sure you want to DISABLE selected templates?"
+msgstr "Tem certeza que deseja DESABILITAR aos modelos selecionados?"
 
 msgid "Action Denied. You are not allowed to transfer tickets."
 msgstr "Ação Negada. Você não tem permissão para transferir tíquetes."

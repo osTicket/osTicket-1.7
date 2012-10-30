@@ -324,62 +324,99 @@ if($_POST && !$errors):
         if($ticket && is_object($ticket))
             $ticket->reload();//Reload ticket info following post processing
     }elseif($_POST['a']) {
+
         switch($_POST['a']) {
             case 'mass_process':
                 if(!$thisstaff->canManageTickets())
                     $errors['err']=_('You do not have permission to mass manage tickets. Contact admin for such access');    
                 elseif(!$_POST['tids'] || !is_array($_POST['tids']))
                     $errors['err']=_('No tickets selected. You must select at least one ticket.');
-                elseif(($_POST['reopen'] || $_POST['close']) && !$thisstaff->canCloseTickets())
-                    $errors['err']=_('You do not have permission to close/reopen tickets');
-                elseif($_POST['delete'] && !$thisstaff->canDeleteTickets())
-                    $errors['err']=_('You do not have permission to delete tickets');
-                elseif(!$_POST['tids'] || !is_array($_POST['tids']))
-                    $errors['err']=_('You must select at least one ticket');
-        
-                if(!$errors) {
+                else {
                     $count=count($_POST['tids']);
-                    if(isset($_POST['reopen'])){
-                        $i=0;
-                        $note=_('Ticket reopened by ').$thisstaff->getName();
-                        foreach($_POST['tids'] as $k=>$v) {
-                            $t = new Ticket($v);
-                            if($t && @$t->reopen()) {
-                                $i++;
-                                $t->logActivity(_('Ticket Reopened'),$note,false,'System');
-                            }
-                        }
-                        $msg="$i of $count selected tickets reopened";
-                    }elseif(isset($_POST['close'])){
-                        $i=0;
-                        $note=_('Ticket closed without response by ').$thisstaff->getName();
-                        foreach($_POST['tids'] as $k=>$v) {
-                            $t = new Ticket($v);
-                            if($t && @$t->close()){ 
-                                $i++;
-                                $t->logActivity(_('Ticket Closed'),$note,false,'System');
-                            }
-                        }
-                        $msg="$i "._("of")." $count "._("selected tickets closed");
-                    }elseif(isset($_POST['overdue'])){
-                        $i=0;
-                        $note=_('Ticket flagged as overdue by ').$thisstaff->getName();
-                        foreach($_POST['tids'] as $k=>$v) {
-                            $t = new Ticket($v);
-                            if($t && !$t->isOverdue())
-                                if($t->markOverdue()) { 
-                                    $i++;
-                                    $t->logActivity(_('Ticket Marked Overdue'),$note,false,'System');
+                    $i = 0;
+                    switch(strtolower($_POST['do'])) {
+                        case 'reopen':
+                            if($thisstaff->canCloseTickets() || $thisstaff->canCreateTickets()) {
+                                $note=_('Ticket reopened by').' '.$thisstaff->getName();
+                                foreach($_POST['tids'] as $k=>$v) {
+                                    if(($t=Ticket::lookup($v)) && $t->isClosed() && @$t->reopen()) {
+                                        $i++;
+                                        $t->logNote(_('Ticket Reopened'), $note);
+                                    }
                                 }
-                        }
-                        $msg="$i "._("of")." $count "._("selected tickets marked overdue");
-                    }elseif(isset($_POST['delete'])){
-                        $i=0;
-                        foreach($_POST['tids'] as $k=>$v) {
-                            $t = new Ticket($v);
-                            if($t && @$t->delete()) $i++;
-                        }
-                        $msg="$i "._("of")." $count "._("selected tickets deleted");
+
+                                if($i==$count)
+                                    $msg = _("Selected tickets ($i) reopened successfully");
+                                elseif($i)
+                                    $warn = "$i "._("of")." $count "._("selected tickets reopened");
+                                else
+                                    $errors['err'] = _('Unable to reopen selected tickets');
+                            } else {
+                                $errors['err'] = _('You do not have permission to reopen tickets');
+                            }
+                            break;
+                        case 'close':
+                            if($thisstaff->canCloseTickets()) {
+                                $note=_('Ticket closed without response by').' '.$thisstaff->getName();
+                                foreach($_POST['tids'] as $k=>$v) {
+                                    if(($t=Ticket::lookup($v)) && $t->isOpen() && @$t->close()) { 
+                                        $i++;
+                                        $t->logNote(_('Ticket Closed'), $note);
+                                    }
+                                }
+
+                                if($i==$count)
+                                    $msg =_("Selected tickets ($i) closed succesfully");
+                                elseif($i)
+                                    $warn = "$i "._("of")." $count "._("selected tickets closed");
+                                else
+                                    $errors['err'] = _('Unable to close selected tickets');
+                            } else {
+                                $errors['err'] = _('You do not have permission to close tickets');
+                            }
+                            break;
+                        case 'mark_overdue':
+                            $note=_('Ticket flagged as overdue by').' '.$thisstaff->getName();
+                            foreach($_POST['tids'] as $k=>$v) {
+                                if(($t=Ticket::lookup($v)) && !$t->isOverdue() && $t->markOverdue()) {
+                                    $i++;
+                                    $t->logNote(_('Ticket Marked Overdue'), $note);
+                                }
+                            }
+
+                            if($i==$count)
+                                $msg = _("Selected tickets ($i) marked overdue");
+                            elseif($i)
+                                $warn = "$i "._("of")." $count "._("selected tickets marked overdue");
+                            else
+                                $errors['err'] = _('Unable to flag selected tickets as overdue');
+                            break;
+                        case 'delete':
+                            if($thisstaff->canDeleteTickets()) {
+                                foreach($_POST['tids'] as $k=>$v) {
+                                    if(($t=Ticket::lookup($v)) && @$t->delete()) $i++;
+                                }
+                        
+                                //Log a warning
+                                if($i) {
+                                    $log = sprintf('%s (%s) '._('just deleted %d ticket(s)'),
+                                            $thisstaff->getName(), $thisstaff->getUserName(), $i);
+                                    $ost->logWarning(_('Tickets deleted'), $log, false);
+
+                                }
+
+                                if($i==$count)
+                                    $msg = _("Selected tickets ($i) deleted successfully");
+                                elseif($i)
+                                    $warn = "$i "._("of")." $count "._("selected tickets deleted");
+                                else
+                                    $errors['err'] = _('Unable to delete selected tickets');
+                            } else {
+                                $errors['err'] = _('You do not have permission to delete tickets');
+                            }
+                            break;
+                        default:
+                            $errors['err']=_('Unknown or unsupported action - get technical help');
                     }
                 }
                 break;
