@@ -114,13 +114,13 @@ $negorder=$order=='DESC'?'ASC':'DESC'; //Negate the sorting
             <th width="80">
                 <a href="tickets.php?sort=status&order=<?php echo $negorder; ?><?php echo $qstr; ?>" title="<?= _('Sort By Status')?>"><?= _('Status')?></a>
             </th>
-            <th width="240">
+            <th width="300">
                 <a href="tickets.php?sort=subj&order=<?php echo $negorder; ?><?php echo $qstr; ?>" title="<?= _('Sort By Subject')?>"><?= _('Subject')?></a>
             </th>
             <th width="150">
                 <a href="tickets.php?sort=dept&order=<?php echo $negorder; ?><?php echo $qstr; ?>" title="<?= _('Sort By Department')?>"><?= _('Department')?></a>
             </th>
-            <th width="150"><?= _('Phone Number')?></th>
+            <th width="100"><?= _('Phone Number')?></th>
         </tr>
     </thead>
     <tbody>
