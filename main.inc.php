@@ -109,7 +109,7 @@
     require(INCLUDE_DIR.'class.format.php'); //format helpers
     require(INCLUDE_DIR.'class.validator.php'); //Class to help with basic form input validation...please help improve it.
     require(INCLUDE_DIR.'class.mailer.php');
-    require(INCLUDE_DIR.'class.event.php');
+    require(INCLUDE_DIR.'class.plugin.php');
     require(INCLUDE_DIR.'mysql.php');
 
     #CURRENT EXECUTING SCRIPT.
@@ -189,7 +189,7 @@
         exit;
     }
 
-    EventListener::loadHooks(); 
+    Plugin::loadPlugins(); 
     
     //Init
     $session = $ost->getSession();

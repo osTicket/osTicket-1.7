@@ -9,3 +9,5 @@ Vagrantfile
 include/hooks/*
 !include/hooks/hook.logdata.php
 !include/hooks/hook.mailsend.php
+include/plugins/*
+!include/plugins/plugin.highpriority.php

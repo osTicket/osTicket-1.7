@@ -17,6 +17,9 @@ class TicketController extends ApiController {
             ), 
             "message", "ip"
         );
+
+        EventListener::get()->apply(new Event(Event::API_REQUEST_ALLOW, $this), $supported);
+
         if ($format == "xml") return array("ticket" => $supported);
         else return $supported;
     }

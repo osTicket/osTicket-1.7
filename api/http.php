@@ -22,6 +22,6 @@ require_once INCLUDE_DIR."class.dispatcher.php";
 $dispatcher = Dispatcher::include_urls("urls.conf.php");
 
 # Call the respective function
-$dispatcher->resolve($_SERVER['PATH_INFO']);
+$dispatcher->resolve($_SERVER['PATH_INFO'] ?: $_SERVER['ORIG_PATH_INFO']);
 
 ?>

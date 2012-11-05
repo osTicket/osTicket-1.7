@@ -1,6 +1,6 @@
 <?php 
 /*********************************************************************
-    class.email.php
+    class.event.php
 
     Alban Seurat <alkpone@alkpone.com>
     http://www.albanseurat.com/
@@ -16,6 +16,8 @@ class Event
 	const PRE_CREATE_TICKET = 1;
 	const POST_CREATE_TICKET = 2;
 	const PRE_MAIL_SEND = 3;
+
+	const API_REQUEST_ALLOW = 101;
 
 	private $source;
 	private $eventHandler;
@@ -56,7 +58,7 @@ class EventHandler {
 	{
 		$this->priority = $priority;
 		$this->stopPropagation = false;
-		if($function instanceof Closure || function_exists($function)) {
+		if($function instanceof Closure || is_callable($function)) {
 			$this->function = $function;
 		}
 	}
@@ -65,7 +67,7 @@ class EventHandler {
 	{
 		if($event && $this->function) {
 			$event->setEventHandler($this);
-			call_user_func($this->function, $event, $vars);
+			call_user_func($this->function, $event, &$vars);
 		}
 	}
 
@@ -115,17 +117,4 @@ class EventListener
 		return self::$eventListener;
 	}
 
-	/* static */ public function loadHooks()
-	{
-		$hookDir = INCLUDE_DIR.self::HOOK_DIR;
-		if(file_exists($hookDir) && is_dir($hookDir)) 
-		{
-			foreach(new DirectoryIterator($hookDir) as $file) {
-				if(preg_match("/^hook\.[^.]*\.php$/i", $file->getFileName())) {
-					include_once($file->getRealPath());
-				}
-			}
-		}
-
-	}
 }
