@@ -8,7 +8,6 @@ class HighPriorityPlugin extends Plugin
 		global $cfg, $ost;
 
 		$regex = "/".$this->getParameter("regex")."/i";
-
 		if(preg_match($regex, $vars["message"]) || preg_match($regex, $vars["subject"]))
 		{
 			$ticket = $event->getSource();

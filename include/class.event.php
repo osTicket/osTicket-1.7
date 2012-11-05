@@ -18,6 +18,7 @@ class Event
 	const PRE_MAIL_SEND = 3;
 
 	const API_REQUEST_ALLOW = 101;
+	const MAIL_PIPE = 201;
 
 	private $source;
 	private $eventHandler;
