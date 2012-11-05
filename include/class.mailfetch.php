@@ -401,6 +401,22 @@ class MailFetcher {
        
         $ticket=null;
         $newticket=true;
+
+        //Init ticket filters...
+        $ticket_filter = new TicketFilter('Email', $var);
+        // Make sure email contents should not be rejected
+        if($ticket_filter 
+                && ($filter=$ticket_filter->shouldReject())) {
+            $errors['err']='Ticket denied. Error #403';
+            $ost->logWarning('Ticket denied', 
+                    sprintf('Ticket rejected ( %s) by filter "%s"', 
+                        $var['email'], $filter->getName()));
+
+            return true;
+        }
+
+        EventListener::get()->apply(new Event(Event::MAIL_PIPE, $this), $var);
+
         //Check the subject line for possible ID.
         if($var['subject'] && preg_match ("[[#][0-9]{1,10}]", $var['subject'], $regs)) {
             $tid=trim(preg_replace("/[^0-9]/", "", $regs[0]));

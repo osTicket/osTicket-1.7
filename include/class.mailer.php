@@ -120,7 +120,8 @@ class Mailer {
                     $mime->addAttachment($attachment['file'],$attachment['type'],$attachment['name']);
             }
         }
-        
+        EventListener::get()->apply(new Event(Event::PRE_MAIL_SEND, $this), $mime);
+
         //Desired encodings...
         $encodings=array(
                 'head_encoding' => 'quoted-printable',

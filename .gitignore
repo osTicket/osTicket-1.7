@@ -3,5 +3,11 @@ php53.cgi
 include/ost-config.php
 *.sw[a-z]
 .DS_Store
+.AppleDouble
 .vagrant
 Vagrantfile
+include/hooks/*
+!include/hooks/hook.logdata.php
+!include/hooks/hook.mailsend.php
+include/plugins/*
+!include/plugins/plugin.highpriority.php
