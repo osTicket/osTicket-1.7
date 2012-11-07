@@ -166,7 +166,7 @@ if($ticket->isOverdue())
                 <tr>
                     <th><?=_('Source')?>:</th>
                     <td><?php 
-                        echo Format::htmlchars(_($ticket->getSource()));
+                        echo Format::htmlchars($ticket->getSource()!=""?_($ticket->getSource()):"");
 
                         if($ticket->getIP())
                             echo '&nbsp;&nbsp; <span class="faded">('.$ticket->getIP().')</span>';
