@@ -234,7 +234,7 @@ class UserNav {
     var $navs=array();
     var $activenav;
 
-    var $user;
+    var $user;	
 
     function UserNav($user=null, $active=''){
 
@@ -261,29 +261,34 @@ class UserNav {
 
     function getNavLinks(){
         global $cfg;
-
+		
+		// Fanha
+		global $ost;
+		$ost->language->load('class.nav');
+		//~ Fanha
+		
         //Paths are based on the root dir.
         if(!$this->navs){
 
             $navs = array();
             $user = $this->user;
-            $navs['home']=array('desc'=>'Support&nbsp;Center&nbsp;Home','href'=>'index.php','title'=>'');
+            $navs['home']=array('desc'=>$ost->language->get('support_home'),'href'=>'index.php','title'=>'');
             if($cfg && $cfg->isKnowledgebaseEnabled())
-                $navs['kb']=array('desc'=>'Knowledgebase','href'=>'kb/index.php','title'=>'');
+                $navs['kb']=array('desc'=>$ost->language->get('knowledgebase'),'href'=>'kb/index.php','title'=>'');
 
-            $navs['new']=array('desc'=>'Open&nbsp;New&nbsp;Ticket','href'=>'open.php','title'=>'');
+            $navs['new']=array('desc'=>$ost->language->get('open_new_ticket'),'href'=>'open.php','title'=>'');
             if($user && $user->isValid()) {
                 if($cfg && $cfg->showRelatedTickets()) {
-                    $navs['tickets']=array('desc'=>sprintf('My&nbsp;Tickets&nbsp;(%d)',$user->getNumTickets()),
+                    $navs['tickets']=array('desc'=>sprintf($ost->language->get('my_ticket'),$user->getNumTickets()),
                                            'href'=>'tickets.php',
-                                            'title'=>'Show all tickets');
+                                            'title'=>$ost->language->get('show_all_ticket'));
                 } else {
-                    $navs['tickets']=array('desc'=>'View&nbsp;Ticket&nbsp;Thread',
+                    $navs['tickets']=array('desc'=>$ost->language->get('view_ticket_thread'),
                                            'href'=>sprintf('tickets.php?id=%d',$user->getTicketID()),
-                                           'title'=>'View ticket status');
+                                           'title'=>$ost->language->get('view_ticket_status'));
                 }
             } else {
-                $navs['status']=array('desc'=>'Check Ticket Status','href'=>'view.php','title'=>'');
+                $navs['status']=array('desc'=>$ost->language->get('view_ticket_status'),'href'=>'view.php','title'=>'');
             }
             $this->navs=$navs;
         }

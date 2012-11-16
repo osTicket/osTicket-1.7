@@ -1,5 +1,6 @@
 <?php
-$title=($cfg && is_object($cfg) && $cfg->getTitle())?$cfg->getTitle():'osTicket :: Support Ticket System';
+$ost->language->load('client/header');
+$title=($cfg && is_object($cfg) && $cfg->getTitle())?$cfg->getTitle():$ost->language->get('default_title');
 header("Content-Type: text/html; charset=UTF-8\r\n");
 ?>
 <!DOCTYPE html>
@@ -19,7 +20,7 @@ header("Content-Type: text/html; charset=UTF-8\r\n");
 <body>
     <div id="container">
         <div id="header">
-            <a id="logo" href="<?php echo ROOT_PATH; ?>index.php" title="Support Center"><img src="<?php echo ASSETS_PATH; ?>images/logo.png" border=0 alt="Support Center"></a>
+            <a id="logo" href="<?php echo ROOT_PATH; ?>index.php" title="<?php echo $ost->language->get('support_center');?>"><img src="<?php echo ASSETS_PATH; ?>images/logo.png" border=0 alt="<?php echo $ost->language->get('support_center');?>"></a>
             <p>
              <?php
              if($thisclient && is_object($thisclient) && $thisclient->isValid()) {
@@ -27,13 +28,13 @@ header("Content-Type: text/html; charset=UTF-8\r\n");
                  ?>
                 <?php
                 if($cfg->showRelatedTickets()) {?>
-                <a href="<?php echo ROOT_PATH; ?>tickets.php">My Tickets <b>(<?php echo $thisclient->getNumTickets(); ?>)</b></a> -
+                <a href="<?php echo ROOT_PATH; ?>tickets.php"><?php echo $ost->language->get('my_ticket');?> <b>(<?php echo $thisclient->getNumTickets(); ?>)</b></a> -
                 <?php
                 } ?>
-                <a href="<?php echo ROOT_PATH; ?>logout.php">Log Out</a>
+                <a href="<?php echo ROOT_PATH; ?>logout.php"><?php echo $ost->language->get('logout');?></a>
              <?php
              }elseif($nav){ ?>
-                 Guest User - <a href="<?php echo ROOT_PATH; ?>login.php">Log In</a>
+                <?php echo $ost->language->get('guest');?> - <a href="<?php echo ROOT_PATH; ?>login.php"><?php echo $ost->language->get('login');?></a>
               <?php
              } ?>
             </p>

@@ -110,7 +110,7 @@
     require(INCLUDE_DIR.'class.validator.php'); //Class to help with basic form input validation...please help improve it.
     require(INCLUDE_DIR.'class.mailer.php');
     require(INCLUDE_DIR.'mysql.php');
-
+	
     #CURRENT EXECUTING SCRIPT.
     define('THISPAGE', Misc::currentURL());
     define('THISURI', $_SERVER['REQUEST_URI']);
@@ -190,6 +190,13 @@
     
     //Init
     $session = $ost->getSession();
+	
+	// Fanha: define language dir
+	define('LANGUAGE', 'EN');
+    define('LANGUAGE_DIR',ROOT_DIR.'languages/'); //Change this if include is moved outside the web path.
+    require(INCLUDE_DIR.'class.language.php');	
+	$ost->language = new Language();
+	//~ Fanha
 
     //System defaults we might want to make global//
     #pagenation default - user can overwrite it!
