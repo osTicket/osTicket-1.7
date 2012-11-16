@@ -164,6 +164,85 @@ CREATE TABLE `%TABLE_PREFIX%config` (
   KEY `isoffline` (`isonline`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
 
+DROP TABLE IF EXISTS `%TABLE_PREFIX%dynamic_form_group`;
+CREATE TABLE `%TABLE_PREFIX%dynamic_form` (
+    `id` int(11) unsigned auto_increment,
+    `form_id` int(11) NOT NULL,
+    -- Allow more than one form, sorted in this order
+    `sort` int(11) NOT NULL DEFAULT 1,
+    PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `%TABLE_PREFIX%dynamic_form`;
+CREATE TABLE `%TABLE_PREFIX%dynamic_form` (
+    `id` int(11) unsigned NOT NULL auto_increment,
+    `title` varchar(255) NOT NULL,
+    `notes` text,
+    `created` datetime NOT NULL,
+    `updated` datetime NOT NULL,
+    PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `%TABLE_PREFIX%dynamic_form_field`;
+CREATE TABLE `%TABLE_PREFIX%dynamic_form_field` (
+    `id` int(11) unsigned NOT NULL auto_increment,
+    `form_id` int(11) unsigned NOT NULL,
+    `type` varchar(255) NOT NULL DEFAULT 'text',
+    `label` varchar(255) NOT NULL,
+    `required` tinyint(1) NOT NULL DEFAULT 0,
+    `name` varchar(64) NOT NULL,
+    `editable` tinyint(1) NOT NULL DEFAULT 1,
+    `configurable` tinyint(1) NOT NULL DEFAULT 0,
+    `configuration` text,
+    `sort` int(11) unsigned NOT NULL,
+    `created` datetime NOT NULL,
+    `updated` datetime NOT NULL,
+    PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `%TABLE_PREFIX%dynamic_form_entry`;
+CREATE TABLE `%TABLE_PREFIX%dynamic_form_entry` (
+    `id` int(11) unsigned NOT NULL auto_increment,
+    `form_id` int(11) unsigned NOT NULL,
+    `ticket_id` int(11) unsigned,
+    `sort` int(11) unsigned NOT NULL DEFAULT 1,
+    `created` datetime NOT NULL,
+    `updated` datetime NOT NULL,
+    PRIMARY KEY (`id`),
+    KEY `ticket_dyn_form_lookup` (`ticket_id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `%TABLE_PREFIX%dynamic_form_entry_values`;
+CREATE TABLE `%TABLE_PREFIX%dynamic_form_entry_values` (
+    -- references dynamic_form_entry.id
+    `entry_id` int(11) unsigned NOT NULL,
+    `field_id` int(11) unsigned NOT NULL,
+    `value` text,
+    PRIMARY KEY (`entry_id`, `field_id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `%TABLE_PREFIX%dynamic_list`;
+CREATE TABLE `%TABLE_PREFIX%dynamic_list` (
+    `id` int(11) unsigned NOT NULL auto_increment,
+    `name` varchar(255) NOT NULL,
+    `name_plural` varchar(255),
+    `sort_mode` enum('Alpha', '-Alpha', 'SortCol') NOT NULL DEFAULT 'Alpha',
+    `notes` text,
+    `created` datetime NOT NULL,
+    `updated` datetime NOT NULL,
+    PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `%TABLE_PREFIX%dynamic_list_items`;
+CREATE TABLE `%TABLE_PREFIX%dynamic_list_items` (
+    `list_id` int(11) NOT NULL,
+    `value` varchar(255) NOT NULL,
+    -- extra value such as abbreviation
+    `extra` varchar(255),
+    `sort` int(11) NOT NULL DEFAULT 1,
+    KEY `dynamic_list_item_lookup` (`list_id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
+
 DROP TABLE IF EXISTS `%TABLE_PREFIX%department`;
 CREATE TABLE `%TABLE_PREFIX%department` (
   `dept_id` int(11) unsigned NOT NULL auto_increment,
