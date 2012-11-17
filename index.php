@@ -20,26 +20,26 @@ $ost->language->load('home');
 ?>
 
 <div id="landing_page">
-    <h1><?php echo $ost->language->get('welcome_title');?></h1>
+    <h1><?php echo $ost->language->get('TEXT_WELCOME_TITLE');?></h1>
     <p>
-        <?php echo $ost->language->get('welcome_text');?>
+        <?php echo $ost->language->get('TEXT_WELCOME_MSG');?>
     </p>
 
     <div id="new_ticket">
-        <h3><?php echo $ost->language->get('new_ticket');?></h3>
+        <h3><?php echo $ost->language->get('TEXT_OPEN_NEW_TICKET_TITLE');?></h3>
         <br>
-        <div><?php echo $ost->language->get('new_ticket_desc');?></div>
+        <div><?php echo $ost->language->get('TEXT_OPEN_NEW_TICKET_MSG');?></div>
         <p>
-            <a href="open.php" class="green button"><?php echo $ost->language->get('new_ticket_butt');?></a>
+            <a href="open.php" class="green button"><?php echo $ost->language->get('LABEL_OPEN_NEW_TICKET');?></a>
         </p>
     </div>
 
     <div id="check_status">
-        <h3><?php echo $ost->language->get('check_status');?></h3>
+        <h3><?php echo $ost->language->get('TEXT_CHECK_STATUS_TITLE');?></h3>
         <br>
-        <div><?php echo $ost->language->get('check_status_desc');?></div>
+        <div><?php echo $ost->language->get('TEXT_CHECK_STATUS_MSG');?></div>
         <p>
-            <a href="view.php" class="blue button"><?php echo $ost->language->get('check_status_butt');?></a>
+            <a href="view.php" class="blue button"><?php echo $ost->language->get('LABEL_CHECK_STATUS');?></a>
         </p>
     </div>
 </div>
@@ -48,7 +48,7 @@ $ost->language->load('home');
 if($cfg && $cfg->isKnowledgebaseEnabled()){
     //FIXME: provide ability to feature or select random FAQs ??
 ?>
-<p><?php printf($ost->language->get('browse_faq'), '<a href="kb/index.php">', '</a>'); ?></p>
+<p><?php printf($ost->language->get('TEXT_BROWSE_FAQ'), '<a href="kb/index.php">', '</a>'); ?></p>
 </div>
 <?php
 } ?>

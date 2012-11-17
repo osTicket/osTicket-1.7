@@ -14,10 +14,10 @@
     vim: expandtab sw=4 ts=4 sts=4:
 **********************************************************************/
 
-	$lang['default_title'] = 'osTicket :: Support Ticket System';
-	$lang['support_center'] = 'Support Center';
-	$lang['my_ticket'] = 'My Tickets';
-	$lang['logout'] = 'Log Out';
-	$lang['guest'] = 'Guest User';
-	$lang['login'] = 'Log In';
+	$lang['TEXT_DEFAULT_TITLE'] = 'osTicket :: Support Ticket System';
+	$lang['TEXT_SUPPORT_CENTER'] = 'Support Center';
+	$lang['TEXT_MY_TICKET'] = 'My Tickets';
+	$lang['TEXT_LOG_OUT'] = 'Log Out';
+	$lang['TEXT_GUEST'] = 'Guest User';
+	$lang['TEXT_LOG_IN'] = 'Log In';
 	

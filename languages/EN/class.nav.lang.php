@@ -14,10 +14,10 @@
     vim: expandtab sw=4 ts=4 sts=4:
 **********************************************************************/
 
-	$lang['support_home'] = 'Support&nbsp;Center&nbsp;Home';
-	$lang['knowledgebase'] = 'Knowledgebase';
-	$lang['open_new_ticket'] = 'Open&nbsp;New&nbsp;Ticket';
-	$lang['my_ticket'] = 'My&nbsp;Tickets&nbsp;(%d)';
-	$lang['show_all_ticket'] = 'Show all tickets';
-	$lang['view_ticket_thread'] = 'View&nbsp;Ticket&nbsp;Thread';
-	$lang['view_ticket_status'] = 'View ticket status';
+	$lang['TEXT_SUPPORT_HOME'] = 'Support&nbsp;Center&nbsp;Home';
+	$lang['TEXT_KNOWLEDGEBASE'] = 'Knowledgebase';
+	$lang['TEXT_OPEN_NEW_TICKET'] = 'Open&nbsp;New&nbsp;Ticket';
+	$lang['TEXT_MY_TICKET'] = 'My&nbsp;Tickets&nbsp;(%d)';
+	$lang['TEXT_SHOW_ALL_TICKET'] = 'Show all tickets';
+	$lang['TEXT_VIEW_TICKET_THREAD'] = 'View&nbsp;Ticket&nbsp;Thread';
+	$lang['TEXT_VIEW_TICKET_STATUS'] = 'View ticket status';

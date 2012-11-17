@@ -14,5 +14,5 @@
     vim: expandtab sw=4 ts=4 sts=4:
 **********************************************************************/
 
-$lang['copyright'] = 'Copyright &copy; %s <a href="http://osticket.com" target="_blank" title="osTicket">osTicket.com</a> - All rights reserved.';
-$lang['poweredby'] = 'Powered by osTicket';
+$lang['TEXT_COPYRIGHT'] = 'Copyright &copy; %s <a href="http://osticket.com" target="_blank" title="osTicket">osTicket.com</a> - All rights reserved.';
+$lang['TEXT_POWERED'] = 'Powered by osTicket';
