@@ -57,7 +57,7 @@ $info=($_POST && $errors)?Format::htmlchars($_POST):$info;
         <td class="required"><?= _('Help Topic:') ?></td>
         <td>
             <select id="topicId" name="topicId">
-                <option value="" selected="selected">&mdash; <?= _('Select a Help Topics') ?> &mdash;</option>
+                <option value="" selected="selected">&mdash; <?=_('Select a Help Topic')?> &mdash;</option>
                 <?php
                 if($topics=Topic::getPublicHelpTopics()) {
                     foreach($topics as $id =>$name) {
@@ -82,7 +82,7 @@ $info=($_POST && $errors)?Format::htmlchars($_POST):$info;
     <tr>
         <td class="required"><?= _('Message:') ?></td>
         <td>
-            <div><em><?= _('Please provide as much details as possible so we can best assist you.') ?></em> <font class="error">*&nbsp;<?php echo $errors['message']; ?></font></div>
+            <div><em><?=_('Please provide as much detail as possible so we can best assist you.')?></em> <font class="error">*&nbsp;<?php echo $errors['message']; ?></font></div>
             <textarea id="message" cols="60" rows="8" name="message"><?php echo $info['message']; ?></textarea>
         </td>
     </tr>
