@@ -206,15 +206,9 @@ class MailFetcher {
         return utf8_encode($text);
     }
     
-    //Generic decoder - mirrors imap_utf8
+    //Decode using iconv_mime_decode - handles accented characters better
     function mime_decode($text) {
-        
-        $str = '';
-        $parts = imap_mime_header_decode($text);
-        foreach ($parts as $part)
-            $str.= $part->text;
-        
-        return $str?$str:imap_utf8($text);
+        return iconv_mime_decode($text, 0, "UTF-8");
     }
 
     function getLastError() {
