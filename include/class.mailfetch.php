@@ -300,15 +300,21 @@ class MailFetcher {
 
      */
     function getAttachments($part, $index=0) {
-
         if($part && !$part->parts) {
             //Check if the part is an attachment.
             $filename = '';
-            if($part->ifdisposition && in_array(strtolower($part->disposition), array('attachment', 'inline')))
-                $filename = $part->dparameters[0]->value;
-            elseif($part->ifparameters && $part->type == 5) //inline image without disposition.
-                $filename = $part->parameters[0]->value;
-
+            if($part->ifdisposition && in_array(strtolower($part->disposition), array('attachment', 'inline'))) {
+                foreach ($part->dparameters as $dparameter) {
+		   if (strncmp(strtolower($dparameter->attribute),'filename',strlen('filename')) == 0)
+			$filename.=$this->mime_encode($this->mime_decode(urldecode($dparameter->value)));
+		}
+	    }elseif($part->ifparameters && $part->type == 5) { //inline image without disposition.
+		foreach ($part->parameters as $parameter) {
+                   if (strncmp(strtolower($parameter->attribute),'filename',strlen('filename')) == 0)
+                        $filename.=$this->mime_encode($this->mime_decode(urldecode($parameter->value)));
+                }
+	    }
+	   
             if($filename) {
                 return array(
                         array(
