@@ -19,6 +19,8 @@ require_once(INCLUDE_DIR.'class.ticket.php');
 require_once(INCLUDE_DIR.'class.dept.php');
 require_once(INCLUDE_DIR.'class.email.php');
 require_once(INCLUDE_DIR.'class.filter.php');
+require_once(INCLUDE_DIR.'tnef_decoder.php');
+
 
 class MailFetcher {
 
@@ -28,7 +30,7 @@ class MailFetcher {
     var $srvstr;
 
     var $charset = 'UTF-8';
-    var $encodings =array('UTF-8','WINDOWS-1251', 'ISO-8859-5', 'ISO-8859-1','KOI8-R');
+    var $encodings = array('UTF-8', 'ISO-8859-1', 'WINDOWS-1251', 'ISO-8859-5', 'KOI8-R');
     
     function MailFetcher($email, $charset='UTF-8') {
 
@@ -200,7 +202,7 @@ class MailFetcher {
             if($charset)
                 return iconv($charset, $enc.'//IGNORE', $text);
             elseif(function_exists('mb_detect_encoding'))
-                return iconv(mb_detect_encoding($text, $this->encodings), $enc, $text);
+                return iconv(mb_detect_encoding($text, $this->encodings, true), $enc, $text);
         }
 
         return utf8_encode($text);
@@ -313,7 +315,8 @@ class MailFetcher {
                    if (strncmp(strtolower($parameter->attribute),'filename',strlen('filename')) == 0)
                         $filename.=$this->mime_encode($this->mime_decode(urldecode($parameter->value)));
                 }
-	    }
+	    }elseif(strtolower($this->getMimeType($part)) == "application/ms-tnef")
+		$filename = "winmail.dat"; 
 	   
             if($filename) {
                 return array(
@@ -435,7 +438,25 @@ class MailFetcher {
             //We're just checking the type of file - not size or number of attachments...
             // Restrictions are mainly due to PHP file uploads limitations
             foreach($attachments as $a ) {
-                if($ost->isFileTypeAllowed($a['name'], $a['mime'])) {
+		if(strtolower($a['mime']) == "application/ms-tnef"){ //unpack winmail.dat attachments
+		    $tnef = new tnef_decoder;
+		    $tnef_arr = $tnef->decompress($this->decode($a['encoding'], imap_fetchbody($this->mbox, $mid, $a['index'])));
+                    foreach ($tnef_arr as $tnef_file) {
+			$file = array(
+                            'name'  => $this->mime_encode($tnef_file['name']),
+                            'type'  => trim(strtolower($tnef_file['type']))."/".trim(strtolower($tnef_file['subtype'])),
+                            'data'  => $tnef_file['stream']
+                            );
+			if($ost->isFileTypeAllowed($file['name'], $file['type'])) {
+		    		$ost->logDebug($file['name'],$file['type']);
+				$ticket->saveAttachment($file, $msgid, 'M');
+			}else{
+				$error = sprintf(_('Attachment %s [%s] rejected because of file type'), $file['name'], $file['type']);
+                    		$ticket->postNote(_('Email Attachment Rejected'), $error, 'SYSTEM', false);
+                    		$ost->logDebug(_('Email Attachment Rejected (Ticket #').$ticket->getExtId().')', $error);
+			}
+		    } 	
+		} elseif($ost->isFileTypeAllowed($a['name'], $a['mime'])) {
                     $file = array(
                             'name'  => $a['name'],
                             'type'  => $a['mime'],
