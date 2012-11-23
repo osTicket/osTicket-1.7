@@ -137,6 +137,8 @@ class VerySimpleModel {
         else
             $sql = 'UPDATE '.$table;
         $filter = $fields = array();
+        if (count($this->dirty) === 0)
+            return;
         foreach ($this->dirty as $field=>$old)
             if ($this->__new__ or !in_array($field, $pk))
                 if (@get_class($this->ht[$field]) == 'SqlFunction')
@@ -283,7 +285,8 @@ class DynamicForm extends VerySimpleModel {
     }
 
     function save() {
-        $this->set('updated', new SqlFunction('NOW'));
+        if (count($this->dirty))
+            $this->set('updated', new SqlFunction('NOW'));
         return parent::save(DYNAMIC_FORM_TABLE, 'id', true);
     }
 
@@ -387,7 +390,8 @@ class DynamicFormField extends VerySimpleModel {
     }
 
     function save() {
-        $this->set('updated', new SqlFunction('NOW'));
+        if (count($this->dirty))
+            $this->set('updated', new SqlFunction('NOW'));
         return parent::save(DYNAMIC_FORM_FIELD_TABLE, 'id');
     }
 
