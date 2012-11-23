@@ -422,11 +422,24 @@ if($_POST && !$errors):
                 break;
             case 'open':
                 $ticket=null;
+                $forms=HelpTopicDynamicForm::forTopic($_POST['topicId']);
+                foreach ($forms as $idx=>$f) {
+                    $form=$f->getForm()->instanciate();
+                    $form->set('sort', $f->get('sort'));
+                    $forms[$idx] = $form;
+                    if (!$form->isValid())
+                        $errors = array_merge($errors, $form->errors());
+                }
                 if(!$thisstaff || !$thisstaff->canCreateTickets()) {
                      $errors['err']='You do not have permission to create tickets. Contact admin for such access';
                 }elseif(($ticket=Ticket::open($_POST, $errors))) {
                     $msg='Ticket created successfully';
                     $_REQUEST['a']=null;
+                    # TODO: Save dynamic form(s)
+                    foreach ($forms as $f) {
+                        $f->set('ticket_id', $ticket->getId());
+                        $f->save();
+                    }
                     if(!$ticket->checkStaffAccess($thisstaff) || $ticket->isClosed())
                         $ticket=null;
                 }elseif(!$errors['err']) {

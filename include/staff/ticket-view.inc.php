@@ -251,6 +251,48 @@ if($ticket->isOverdue())
         </td>
     </tr>
 </table>
+<?php foreach (DynamicFormEntry::forTicket($ticket->getId()) as $form) { 
+    $answers = $form->getAnswers(); ?>
+<br />
+<table class="ticket_info" cellspacing="0" cellpadding="0" width="940" border="0">
+<tbody>
+    <tr>
+        <td width="50%">
+            <table cellspacing="0" cellpadding="4" width="100%" border="0">
+            <?php while ($a = current($answers)) {
+                next($answers); next($answers); ?>
+                <tr>
+                    <th width="100"><?php
+    echo $a->getField()->get('label');
+                    ?>:</th>
+                    <td><?php
+    echo $a->get('value');
+                    ?></td>
+                </tr>
+                <?php } ?>
+            </table>
+        </td>
+        <td width="50%">
+            <table cellspacing="0" cellpadding="4" width="100%" border="0">
+            <?php 
+            reset($answers); next($answers);
+            while ($a = current($answers)) {
+                next($answers); next($answers); ?>
+                <tr>
+                    <th width="100"><?php
+    echo $a->getField()->get('label');
+                    ?>:</th>
+                    <td><?php
+    echo $a->get('value');
+                    ?></td>
+                </tr>
+                <?php } ?>
+            </table>
+        </td>
+    </tr>
+</tbody>
+</table>
+    <?php } ?>
 <div class="clear"></div>
 <h2 style="padding:10px 0 5px 0; font-size:11pt;"><?php echo Format::htmlchars($ticket->getSubject()); ?></h2>
 <?php

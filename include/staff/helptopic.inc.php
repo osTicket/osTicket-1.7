@@ -203,7 +203,35 @@ $info=Format::htmlchars(($errors && $_POST)?$_POST:$info);
                     <strong>Disable</strong> new ticket auto-response for this topic (Overwrites Dept. settings).
             </td>
         </tr>
-
+       <tr>
+           <th colspan="2">
+               <em>Dynamic information for tickets associated with this
+               help topic</em>
+           </th>
+       </tr>
+       <tr><th>Delete | Sort</th><th>Form name</th></tr>
+       <?php foreach (HelpTopicDynamicForm::forTopic($topic->getId()) as $formatt) { 
+           $form = $formatt->getForm(); ?>
+           <tr>
+               <td><input type="checkbox" name="form-delete-<?php echo $formatt->get('id'); ?>"/> <em>|</em>
+                   <input type="text" size="4" name="form-sort-<?php echo $formatt->get('id'); ?>"
+                       value="<?php echo $formatt->get('sort'); ?>"/>
+               </td>
+               <td>
+                   <?php echo $form->get('title'); ?></td>
+           </tr>
+       <?php } ?>
+       <tr>
+           <td><em>add</em>
+               <input type="text" name="form-sort-new" size="4"/>
+           </td><td>
+               <select name="form-id-new">
+               <?php foreach (DynamicForm::all() as $form) { ?>
+                   <option value="<?php echo $form->get('id'); ?>">
+                       <?php echo $form->get('title'); ?>
+                   </option>
+               <?php } ?>
+               </select>
         <tr>
             <th colspan="2">
                 <em><strong>Admin Notes</strong>: Internal notes about the help topic.&nbsp;</em>

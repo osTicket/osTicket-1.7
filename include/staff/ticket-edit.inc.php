@@ -153,6 +153,14 @@ $info=Format::htmlchars(($errors && $_POST)?$_POST:$ticket->getUpdateInfo());
                 <em>Time is based on your time zone (GMT <?php echo $thisstaff->getTZoffset(); ?>)</em>
             </td>
         </tr>
+        </tbody>
+        <tbody id="dynamic-form">
+        <?php if ($forms) 
+            foreach ($forms as $form) {
+                include(STAFFINC_DIR . 'templates/dynamic-form.tmpl.php');
+        } ?>
+        </tbody>
+        <tbody>
         <tr>
             <th colspan="2">
                 <em><strong>Internal Note</strong>: Reason for editing the ticket (required) <font class="error">&nbsp;<?php echo $errors['note'];?></font></em>

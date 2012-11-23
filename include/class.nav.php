@@ -202,6 +202,7 @@ class AdminNav extends StaffNav{
                     break;
                 case 'manage':
                     $subnav[]=array('desc'=>'Help&nbsp;Topics','href'=>'helptopics.php','iconclass'=>'helpTopics');
+                    $subnav[]=array('desc'=>'Dynamic&nbsp;Forms','href'=>'dynamic-forms.php','iconclass'=>'');
                     $subnav[]=array('desc'=>'Ticket&nbsp;Filters','href'=>'filters.php',
                                         'title'=>'Ticket&nbsp;Filters','iconclass'=>'ticketFilters');
                     $subnav[]=array('desc'=>'SLA&nbsp;Plans','href'=>'slas.php','iconclass'=>'sla');
