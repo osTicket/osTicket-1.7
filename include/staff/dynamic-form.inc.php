@@ -77,7 +77,18 @@ $info=Format::htmlchars(($errors && $_POST)?$_POST:$info);
                     if ($f->get('type') == $type) echo 'selected="selected"'; ?>>
                     <?php echo $nfo[0]; ?></option>
                 <?php } ?>
-            </select></td>
+            </select>
+            <?php if ($f->isConfigurable()) { ?>
+                <a class="action-button" style="float:none"
+                    href="ajax.php/form/field-config/<?php
+                        echo $f->get('id'); ?>"
+                    onclick="javascript:
+                        $('#overlay').show();
+                        $('#field-config .body').load(this.href);
+                        $('#field-config').show();
+                        return false;
+                    "><i class="icon-edit"></i> Config</a>
+            <?php } ?></td>
             <td><?php if ($f->get('editable')) { ?>
                 <input type="text" size="24" name="_name-<?php echo $id; ?>"
                     value="<?php echo $f->get('name'); ?>"/>
@@ -110,3 +121,7 @@ $info=Format::htmlchars(($errors && $_POST)?$_POST:$info);
     <input type="button" name="cancel" value="Cancel" onclick='window.location.href="?"'>
 </p>
 </form>
+
+<div style="display:none;" class="dialog" id="field-config">
+    <div class="body"></div>
+</div>

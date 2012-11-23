@@ -21,6 +21,19 @@ class DynamicFormsAjaxAPI extends AjaxController {
             include(STAFFINC_DIR . 'templates/dynamic-form.tmpl.php');
         }
     }
+
+    function getFieldConfiguration($field_id) {
+        $field = DynamicFormField::lookup($field_id);
+        include(STAFFINC_DIR . 'templates/dynamic-field-config.tmpl.php');
+    }
+
+    function saveFieldConfiguration($field_id) {
+        $field = DynamicFormField::lookup($field_id);
+        if (!$field->setConfiguration())
+            include(STAFFINC_DIR . 'templates/dynamic-field-config.tmpl.php');
+        else
+            $field->save();
+    }
 }
 
 ?>

@@ -297,6 +297,8 @@ class DynamicForm extends VerySimpleModel {
     }
 }
 
+require_once(INCLUDE_DIR . "class.json.php");
+
 class DynamicFormField extends VerySimpleModel {
 
     /**
@@ -369,6 +371,46 @@ class DynamicFormField extends VerySimpleModel {
 
     function render() {
         $this->getWidget()->render();
+    }
+
+    function getConfigurationOptions() {
+        return array();
+    }
+
+    function getConfigurationForm() {
+        $types = get_dynamic_field_types();
+        $clazz = $types[$this->get('type')][1];
+        $T = new $clazz();
+        return $T->getConfigurationOptions();
+    }
+
+    function setConfiguration($errors) {
+        $config = array();
+        foreach ($this->getConfigurationForm() as $name=>$field) {
+            $config[$name] = $field->getClean();
+            $errors = array_merge($errors, $field->errors());
+        }
+        if (count($errors) === 0)
+            $this->set('configuration', JsonDataEncoder::encode($config));
+        return count($errors) === 0;
+    }
+    
+    /**
+     * getConfiguration
+     *
+     * Loads configuration information from database into hashtable format
+     */
+    function getConfiguration() {
+        if (!$this->_config) {
+            if (!$this->get('configuration'))
+                return array();
+            $this->_config = JsonDataParser::parse($this->get('configuration'));
+        }
+        return $this->_config;
+    }
+
+    function isConfigurable() {
+        return true;
     }
 
     function all($sort='sort') {
@@ -692,6 +734,14 @@ class TextboxField extends DynamicFormField {
     function getWidget() {
         return new TextboxWidget($this);
     }
+    function getConfigurationOptions() {
+        return array(
+            'size'  =>  new TextboxField(array(
+                'id'=>1, 'label'=>'Size', 'required'=>false, 'default'=>16)),
+            'length' => new TextboxField(array(
+                'id'=>2, 'label'=>'Max Length', 'required'=>false, 'default'=>30))
+        );
+    }
 }
 
 class TextareaField extends DynamicFormField {
@@ -773,6 +823,8 @@ class Widget {
             $this->value = $_POST[$this->name];
         elseif ($a = $field->getAnswer())
             $this->value = $a->get('value');
+        elseif ($field->value)
+            $this->value = $field->value;
     }
     function getValue() {
         return $this->value;
@@ -781,9 +833,16 @@ class Widget {
 
 class TextboxWidget extends Widget {
     function render() {
+        $config = $this->field->getConfiguration();
+        if (isset($config['size']))
+            $size = "size=\"{$config['size']}\"";
+        if (isset($config['length']))
+            $maxlength = "maxlength=\"{$config['length']}\"";
         ?>
         <input type="text" id="<?php echo $this->name; ?>"
-            name="<?php echo $this->name; ?>" value="<?php echo $this->value; ?>"/>
+            <?php echo $size . " " . $maxlength; ?>
+            name="<?php echo $this->name; ?>"
+            value="<?php echo $this->value; ?>"/>
         <?php
     }
 }

@@ -22,9 +22,12 @@ include_once "JSON.php";
 
 class JsonDataParser {
     function parse($stream) {
-        $contents = '';
-        while (!feof($stream)) {
-            $contents .= fread($stream, 8192);
+        if (strlen($stream))
+            $contents = $stream;
+        else {
+            $contents = '';
+            while (!feof($stream))
+                $contents .= fread($stream, 8192);
         }
         if (function_exists("json_decode")) {
             return json_decode($contents, true);
@@ -56,7 +59,11 @@ class JsonDataParser {
 
 class JsonDataEncoder {
     function encode($var) {
-        $decoder = new Services_JSON();
-        return $decoder->encode($var);
+        if (function_exists('json_encode'))
+            return json_encode($var);
+        else {
+            $decoder = new Services_JSON();
+            return $decoder->encode($var);
+        }
     }
 }
