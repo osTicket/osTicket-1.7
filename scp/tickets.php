@@ -165,12 +165,17 @@ if($_POST && !$errors):
             break;
         case 'edit':
         case 'update':
+            $forms=DynamicFormEntry::forTicket($ticket->getId());
+            foreach ($forms as $form)
+                if (!$form->isValid())
+                    $errors = array_merge($errors, $form->errors());
             if(!$ticket || !$thisstaff->canEditTickets())
                 $errors['err']='Perm. Denied. You are not allowed to edit tickets';
             elseif($ticket->update($_POST,$errors)) {
                 $msg='Ticket updated successfully';
                 $_REQUEST['a'] = null; //Clear edit action - going back to view.
                 //Check to make sure the staff STILL has access post-update (e.g dept change).
+                foreach ($forms as $f) $f->save();
                 if(!$ticket->checkStaffAccess($thisstaff))
                     $ticket=null;
             } elseif(!$errors['err']) {
@@ -423,7 +428,8 @@ if($_POST && !$errors):
                 break;
             case 'open':
                 $ticket=null;
-                $forms=HelpTopicDynamicForm::forTopic($_POST['topicId']);
+                $topic=Topic::lookup($_POST['topicId']);
+                $forms=DynamicFormGroup::lookup($topic->ht['form_group_id'])->getForms();
                 foreach ($forms as $idx=>$f) {
                     $form=$f->getForm()->instanciate();
                     $form->set('sort', $f->get('sort'));
@@ -533,9 +539,10 @@ if($ticket) {
     $ost->setPageTitle('Ticket #'.$ticket->getNumber());
     $nav->setActiveSubMenu(-1);
     $inc = 'ticket-view.inc.php';
-    if($_REQUEST['a']=='edit' && $thisstaff->canEditTickets()) 
+    if($_REQUEST['a']=='edit' && $thisstaff->canEditTickets()) {
         $inc = 'ticket-edit.inc.php';
-    elseif($_REQUEST['a'] == 'print' && !$ticket->pdfExport($_REQUEST['psize'], $_REQUEST['notes']))
+        if (!$forms) $forms=DynamicFormEntry::forTicket($ticket->getId());
+    } elseif($_REQUEST['a'] == 'print' && !$ticket->pdfExport($_REQUEST['psize'], $_REQUEST['notes']))
         $errors['err'] = 'Internal error: Unable to export the ticket to PDF for print.';
 } else {
     $inc = 'tickets.inc.php';

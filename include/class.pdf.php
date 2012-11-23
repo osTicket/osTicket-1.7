@@ -202,6 +202,17 @@ class Ticket2PDF extends FPDF
         $this->Cell($c, 7, Format::db_datetime($ticket->getLastMsgDate()), 1, 1, 'L', true);
         $this->Ln(5);
 
+        foreach (DynamicFormEntry::forTicket($ticket->getId()) as $form) {
+            $this->Ln(5);
+            foreach ($form->getAnswers() as $a) {
+                $this->SetFont('Arial', 'B', 11);
+                $this->Cell($l, 7, $a->getField()->get('label'), 1, 0, 'L', true);
+                $this->SetFont('');
+                $this->Cell($c, 7, $a->get('value'), 1, 1, 'L', true);
+            }
+        }
+        $this->Ln(10);
+
         $this->SetFont('Arial', 'B', 11);
         $this->cMargin = 0;
         $this->SetTextColor(10, 86, 142);

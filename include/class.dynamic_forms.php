@@ -303,7 +303,7 @@ class DynamicFormField extends VerySimpleModel {
      * Validates and cleans inputs from POST request
      */
     function getClean() {
-        $value = $this->getWidget()->value;
+        $value = $this->getWidget()->getValue();
         $value = $this->parse($value);
         $this->validateEntry($value);
         return $value;
@@ -539,31 +539,89 @@ class DynamicFormEntryAnswer extends VerySimpleModel {
     }
 }
 
-class HelpTopicDynamicForm extends VerySimpleModel {
+class DynamicFormGroup extends VerySimpleModel {
 
-    function forTopic($id) {
-        return self::find(array('topic_id'=>$id));
+    function getForms() {
+        if (!$this->_forms)
+            $this->_forms = DynamicFormGroupForms::find(
+                    array('group_id'=>$this->get('id')));
+        return $this->_forms;
     }
 
-    function getForm() { return DynamicForm::lookup($this->get('form_id')); }
+    function hasField($name) {
+        foreach ($this->getForms() as $form) 
+            foreach ($form->getForm()->getFields() as $f)
+                if ($f->get('name') == $name)
+                    return true;
+    }
+
+    function all($sort='title') {
+        return parent::all(get_class(), DYNAMIC_FORM_GROUP_TABLE, $sort);
+    }
 
     function find($where, $sort='sort') {
-        return parent::find(get_class(), TOPIC_DYNAMIC_FORM_TABLE, $where,
+        return parent::find(get_class(), DYNAMIC_FORM_GROUP_TABLE, $where,
             $sort);
     }
 
+    function lookup($id) {
+        return parent::lookup(get_class(), DYNAMIC_FORM_GROUP_TABLE,
+            array('id'=>$id));
+    }
+
+    function count($where=false) {
+        return parent::count(get_class(), DYNAMIC_FORM_GROUP_TABLE, $where);
+    }
+
     function save() {
-        return parent::save(TOPIC_DYNAMIC_FORM_TABLE, array('topic_id',
-            'form_id'));
+        if (count($this->dirty))
+            $this->set('updated', new SqlFunction('NOW'));
+        return parent::save(DYNAMIC_FORM_GROUP_TABLE, array('id'));
+    }
+
+    function create($ht=false) {
+        $inst = parent::create(get_class(), $ht);
+        $inst->set('created', new SqlFunction('NOW'));
+        return $inst;
+    }
+
+    function delete() {
+        return parent::delete(DYNAMIC_FORM_GROUP_TABLE,
+                array('id'));
+    }
+}
+
+class DynamicFormGroupForms extends VerySimpleModel {
+    function find($where, $sort='sort') {
+        return parent::find(get_class(), DYNAMIC_FORM_GROUP_FORM_TABLE, $where,
+            $sort);
+    }
+
+    function getForm() {
+        if (!$this->_form)
+            $this->_form = DynamicForm::lookup($this->get('form_id'));
+        return $this->_form;
+    }
+
+    function getTitle() {
+        $title = $this->get('title');
+        if ($title)
+            return $title;
+        else
+            return $this->getForm()->get('title');
+    }
+
+    function delete() {
+        return parent::delete(DYNAMIC_FORM_GROUP_FORM_TABLE,
+                array('id'));
     }
 
     function create($ht=false) {
         return parent::create(get_class(), $ht);
     }
 
-    function delete() {
-        return parent::delete(TOPIC_DYNAMIC_FORM_TABLE,
-                array('topic_id', 'form_id'));
+    function save() {
+        return parent::save(DYNAMIC_FORM_GROUP_FORM_TABLE, array('id'));
     }
 }
 
@@ -651,12 +709,15 @@ class EmailField extends TextboxField {
     }
 }
 
-class PhoneField extends TextboxField {
+class PhoneField extends DynamicFormField {
     function validateEntry($value) {
         parent::validateEntry($value);
         # Run validator against $this->value for email type
-        if (!Validator::is_phone($value))
+        if ($value && !Validator::is_phone($value))
             $this->_errors[] = "Enter a valid phone number";
+    }
+    function getWidget() {
+        return new PhoneNumberWidget($this);
     }
 }
 
@@ -713,7 +774,10 @@ class Widget {
         elseif ($a = $field->getAnswer())
             $this->value = $a->get('value');
     }
-}
+    function getValue() {
+        return $this->value;
+    }
+}   
 
 class TextboxWidget extends Widget {
     function render() {
@@ -730,6 +794,23 @@ class TextareaWidget extends Widget {
         <textarea rows="4" cols="40" name="<?php echo $this->name; ?>"><?php
             echo $this->value; ?></textarea>
         <?php
+    }
+}
+
+class PhoneNumberWidget extends Widget {
+    function render() {
+        list($phone, $ext) = explode("X", $this->value);
+        ?>
+        <input type="test" name="<?php echo $this->name; ?>" value="<?php
+            echo $phone; ?>"/> Ext: <input type="text" name="<?php
+            echo $this->name; ?>-ext" value="<?php echo $ext; ?>" size="5"/>
+        <?php
+    }
+
+    function getValue() {
+        $ext = $_POST["{$this->name}-ext"];
+        if ($ext) $ext = 'X'.$ext;
+        return $this->value . $ext;
     }
 }
 

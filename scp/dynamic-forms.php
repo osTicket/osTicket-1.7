@@ -63,7 +63,7 @@ $page='dynamic-forms.inc.php';
 if($form || ($_REQUEST['a'] && !strcasecmp($_REQUEST['a'],'add')))
     $page='dynamic-form.inc.php';
 
-$nav->setTabActive('manage');
+$nav->setTabActive('forms');
 require(STAFFINC_DIR.'header.inc.php');
 require(STAFFINC_DIR.$page);
 include(STAFFINC_DIR.'footer.inc.php');

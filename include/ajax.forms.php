@@ -1,6 +1,7 @@
 <?php
 
-require_once("class.dynamic_forms.php");
+require_once(INCLUDE_DIR . 'class.topic.php');
+require_once(INCLUDE_DIR . 'class.dynamic_forms.php');
 
 class DynamicFormsAjaxAPI extends AjaxController {
     function getForm($form_id) {
@@ -13,7 +14,9 @@ class DynamicFormsAjaxAPI extends AjaxController {
     }
 
     function getFormsForHelpTopic($topic_id) {
-        foreach (HelpTopicDynamicForm::forTopic($topic_id) as $form) {
+        $topic = Topic::lookup($topic_id);
+        foreach (DynamicFormGroup::lookup($topic->ht['form_group_id'])->getForms() as $form) {
+            $set=$form;
             $form=$form->getForm();
             include(STAFFINC_DIR . 'templates/dynamic-form.tmpl.php');
         }
