@@ -175,6 +175,7 @@ class AdminNav extends StaffNav{
             $tabs['dashboard']=array('desc'=>'Dashboard','href'=>'logs.php','title'=>'Admin Dashboard');
             $tabs['settings']=array('desc'=>'Settings','href'=>'settings.php','title'=>'System Settings');
             $tabs['manage']=array('desc'=>'Manage','href'=>'helptopics.php','title'=>'Manage Options');
+            $tabs['forms']=array('desc'=>'Forms','href'=>'dynamic-forms.php','title'=>'Manage Forms');
             $tabs['emails']=array('desc'=>'Emails','href'=>'emails.php','title'=>'Email Settings');
             $tabs['staff']=array('desc'=>'Staff','href'=>'staff.php','title'=>'Manage Staff');
             $this->tabs=$tabs;
@@ -202,11 +203,15 @@ class AdminNav extends StaffNav{
                     break;
                 case 'manage':
                     $subnav[]=array('desc'=>'Help&nbsp;Topics','href'=>'helptopics.php','iconclass'=>'helpTopics');
-                    $subnav[]=array('desc'=>'Dynamic&nbsp;Forms','href'=>'dynamic-forms.php','iconclass'=>'');
                     $subnav[]=array('desc'=>'Ticket&nbsp;Filters','href'=>'filters.php',
                                         'title'=>'Ticket&nbsp;Filters','iconclass'=>'ticketFilters');
                     $subnav[]=array('desc'=>'SLA&nbsp;Plans','href'=>'slas.php','iconclass'=>'sla');
                     $subnav[]=array('desc'=>'API&nbsp;Keys','href'=>'apikeys.php','iconclass'=>'api');
+                    break;
+                case 'forms':
+                    $subnav[]=array('desc'=>'Forms&nbsp;Groups','href'=>'dynamic-form-groups.php','iconclass'=>'');
+                    $subnav[]=array('desc'=>'Dynamic&nbsp;Forms','href'=>'dynamic-forms.php','iconclass'=>'');
+                    $subnav[]=array('desc'=>'Dynamic&nbsp;Lists','href'=>'dynamic-lists.php','iconclass'=>'');
                     break;
                 case 'emails':
                     $subnav[]=array('desc'=>'Emails','href'=>'emails.php', 'title'=>'Email Addresses', 'iconclass'=>'emailSettings');

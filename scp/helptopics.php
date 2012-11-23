@@ -96,27 +96,9 @@ if($_POST){
             $errors['err']='Unknown command/action';
             break;
     }
-   if ($id or $topic) {
-       if (!$id) $id=$topic->getId();
-       // Update associated dynamic forms
-       foreach (HelpTopicDynamicForm::forTopic($id) as $formatt) {
-           if ($_POST['form-delete-'.$formatt->get('id')] == 'on')
-               $formatt->delete();
-           elseif ($sort = $_POST['form-sort-'.$formatt->get('id')]) {
-               $formatt->set('sort', $sort);
-               if ($formatt->isValid())
-                   $formatt->save();
-           }
-       }
-       if ($_POST['form-sort-new']) {
-           $formatt = HelpTopicDynamicForm::create(array(
-                   'form_id'=>$_POST['form-id-new'],
-                   'sort'=>$_POST['form-sort-new'],
-                   'topic_id'=>$id));
-           if ($formatt->isValid())
-               $formatt->save();
-       }
-   }
+    if ($id or $topic) {
+        if (!$id) $id=$topic->getId();
+    }
 }
 
 $page='helptopics.inc.php';

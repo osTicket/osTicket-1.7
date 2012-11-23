@@ -204,34 +204,21 @@ $info=Format::htmlchars(($errors && $_POST)?$_POST:$info);
             </td>
         </tr>
        <tr>
-           <th colspan="2">
-               <em>Dynamic information for tickets associated with this
-               help topic</em>
-           </th>
-       </tr>
-       <tr><th>Delete | Sort</th><th>Form name</th></tr>
-       <?php foreach (HelpTopicDynamicForm::forTopic($topic->getId()) as $formatt) { 
-           $form = $formatt->getForm(); ?>
-           <tr>
-               <td><input type="checkbox" name="form-delete-<?php echo $formatt->get('id'); ?>"/> <em>|</em>
-                   <input type="text" size="4" name="form-sort-<?php echo $formatt->get('id'); ?>"
-                       value="<?php echo $formatt->get('sort'); ?>"/>
-               </td>
-               <td>
-                   <?php echo $form->get('title'); ?></td>
-           </tr>
-       <?php } ?>
-       <tr>
-           <td><em>add</em>
-               <input type="text" name="form-sort-new" size="4"/>
-           </td><td>
-               <select name="form-id-new">
-               <?php foreach (DynamicForm::all() as $form) { ?>
-                   <option value="<?php echo $form->get('id'); ?>">
-                       <?php echo $form->get('title'); ?>
+           <td><strong>Formset</strong>:</td>
+           <td><select name="form-group-id">
+               <option value="0">&mdash; Select a Formset &mdash;</option>
+               <?php foreach (DynamicFormGroup::all() as $group) { ?>
+                   <option value="<?php echo $group->get('id'); ?>"
+                       <?php if ($group->get('id') == $info['form_group_id'])
+                            echo 'selected="selected"'; ?>>
+                       <?php echo $group->get('title'); ?>
                    </option>
                <?php } ?>
                </select>
+               <em>Information for tickets associated with this help topic</em>
+               &nbsp;<span class="error">&nbsp;<?php echo $errors['form-group-id']; ?></span>
+           </td>
+       </tr>
         <tr>
             <th colspan="2">
                 <em><strong>Admin Notes</strong>: Internal notes about the help topic.&nbsp;</em>

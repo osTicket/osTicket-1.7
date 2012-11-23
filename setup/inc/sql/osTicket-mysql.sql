@@ -165,14 +165,27 @@ CREATE TABLE `%TABLE_PREFIX%config` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS `%TABLE_PREFIX%dynamic_form_group`;
-CREATE TABLE `%TABLE_PREFIX%dynamic_form` (
+CREATE TABLE `%TABLE_PREFIX%dynamic_form_group` (
     `id` int(11) unsigned auto_increment,
+    `title` varchar(255) NOT NULL,
+    `notes` text,
+    `created` datetime NOT NULL,
+    `updated` datetime NOT NULL,
+    PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `%TABLE_PREFIX%dynamic_form_group_forms`;
+CREATE TABLE `%TABLE_PREFIX%dynamic_form_group_forms` (
+    `id` int(11) unsigned NOT NULL auto_increment,
+    `group_id` int(11) NOT NULL,
     `form_id` int(11) NOT NULL,
+    `title` varchar(255),
+    `instructions` text,
     -- Allow more than one form, sorted in this order
     `sort` int(11) NOT NULL DEFAULT 1,
     PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
-
+ 
 DROP TABLE IF EXISTS `%TABLE_PREFIX%dynamic_form`;
 CREATE TABLE `%TABLE_PREFIX%dynamic_form` (
     `id` int(11) unsigned NOT NULL auto_increment,
@@ -476,6 +489,7 @@ CREATE TABLE `%TABLE_PREFIX%help_topic` (
   `staff_id` int(10) unsigned NOT NULL default '0',
   `team_id` int(10) unsigned NOT NULL default '0',
   `sla_id` int(10) unsigned NOT NULL default '0',
+  `form_group_id` int(11) unsigned NOT NULL default '0',
   `topic` varchar(32) NOT NULL default '',
   `notes` text,
   `created` datetime NOT NULL,
