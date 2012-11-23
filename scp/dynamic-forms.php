@@ -22,8 +22,8 @@ if($_POST) {
                     continue;
                 }
                 foreach (array('sort','label','type','name') as $f)
-                    if (isset($_POST["$f-$id"]))
-                        $field->set($f, $_POST["$f-$id"]);
+                    if (isset($_POST["_$f-$id"]))
+                        $field->set($f, $_POST["_$f-$id"]);
                 if ($field->get('editable'))
                     $field->set('required', $_POST["required-$id"] == 'on' ?  1 : 0);
                 if ($field->isValid())

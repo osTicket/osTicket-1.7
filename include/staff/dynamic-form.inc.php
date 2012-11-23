@@ -67,11 +67,11 @@ $info=Format::htmlchars(($errors && $_POST)?$_POST:$info);
             <td><?php if ($f->get('editable')) { ?>
                 <input type="checkbox" name="delete-<?php echo $id; ?>"/>
             <?php } ?></td>
-            <td><input type="text" size="4" name="sort-<?php echo $id; ?>"
+            <td><input type="text" size="4" name="_sort-<?php echo $id; ?>"
                 value="<?php echo $f->get('sort'); ?>"/></td>
-            <td><input type="text" size="48" name="label-<?php echo $id; ?>"
+            <td><input type="text" size="48" name="_label-<?php echo $id; ?>"
                 value="<?php echo $f->get('label'); ?>"/></td>
-            <td><select name="type-<?php echo $id; ?>">
+            <td><select name="_type-<?php echo $id; ?>">
                 <?php foreach (get_dynamic_field_types() as $type=>$nfo) { ?>
                 <option value="<?php echo $type; ?>" <?php
                     if ($f->get('type') == $type) echo 'selected="selected"'; ?>>
@@ -79,7 +79,7 @@ $info=Format::htmlchars(($errors && $_POST)?$_POST:$info);
                 <?php } ?>
             </select></td>
             <td><?php if ($f->get('editable')) { ?>
-                <input type="text" size="24" name="name-<?php echo $id; ?>"
+                <input type="text" size="24" name="_name-<?php echo $id; ?>"
                     value="<?php echo $f->get('name'); ?>"/>
                 <?php } else echo $f->get('name'); ?></td>
             <td><input type="checkbox" name="required-<?php echo $id; ?>"
