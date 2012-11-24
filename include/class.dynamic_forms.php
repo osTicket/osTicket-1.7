@@ -398,13 +398,21 @@ class DynamicFormField extends VerySimpleModel {
     /**
      * getConfiguration
      *
-     * Loads configuration information from database into hashtable format
+     * Loads configuration information from database into hashtable format.
+     * Also, the defaults from ::getConfigurationOptions() are integrated
+     * into the database-backed options, so that if options have not yet
+     * been set or a new option has been added and not saved for this field,
+     * the default value will be reflected in the returned configuration.
      */
     function getConfiguration() {
         if (!$this->_config) {
-            if (!$this->get('configuration'))
-                return array();
-            $this->_config = JsonDataParser::parse($this->get('configuration'));
+            if ($this->get('configuration'))
+                $this->_config = JsonDataParser::parse($this->get('configuration'));
+            else
+                $this->_config = array();
+            foreach ($this->getConfigurationOptions() as $name=>$field)
+                if (!isset($this->_config[$name]))
+                    $this->_config[$name] = $field->get('default');
         }
         return $this->_config;
     }
@@ -748,6 +756,16 @@ class TextareaField extends DynamicFormField {
     function getWidget() {
         return new TextareaWidget($this);
     }
+    function getConfigurationOptions() {
+        return array(
+            'rows'  =>  new TextboxField(array(
+                'id'=>1, 'label'=>'Width (chars)', 'required'=>true, 'default'=>4)),
+            'cols'  =>  new TextboxField(array(
+                'id'=>1, 'label'=>'Height (rows)', 'required'=>false, 'default'=>40)),
+            'length' => new TextboxField(array(
+                'id'=>2, 'label'=>'Max Length', 'required'=>false, 'default'=>30))
+        );
+    }
 }
 
 class EmailField extends TextboxField {
@@ -849,9 +867,17 @@ class TextboxWidget extends Widget {
 
 class TextareaWidget extends Widget {
     function render() {
+        $config = $this->field->getConfiguration();
+        if (isset($config['rows']))
+            $rows = "rows=\"{$config['rows']}\"";
+        if (isset($config['cols']))
+            $cols = "cols=\"{$config['cols']}\"";
+        if (isset($config['length']))
+            $maxlength = "maxlength=\"{$config['length']}\"";
         ?>
-        <textarea rows="4" cols="40" name="<?php echo $this->name; ?>"><?php
-            echo $this->value; ?></textarea>
+        <textarea <?php echo $rows." ".$cols." ".$length; ?>
+            name="<?php echo $this->name; ?>"><?php echo $this->value;
+            ?></textarea>
         <?php
     }
 }
