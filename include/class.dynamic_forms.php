@@ -775,6 +775,7 @@ class EmailField extends TextboxField {
         if (!Validator::is_email($value))
             $this->_errors[] = "Enter a valid email address";
     }
+    # TODO: Use widget with autocomplete and such turned off
 }
 
 class PhoneField extends DynamicFormField {
@@ -789,6 +790,12 @@ class PhoneField extends DynamicFormField {
     }
 }
 
+class BooleanField extends DynamicFormField {
+    function getWidget() {
+        return new CheckboxWidget($this);
+    }
+}
+
 function get_dynamic_field_types() {
     static $types = false;
     if (!$types) {
@@ -796,7 +803,8 @@ function get_dynamic_field_types() {
             'text'  => array('Short Answer', TextboxField),
             'memo' => array('Long Answer', TextareaField),
             'email' => array('Email Address', EmailField),
-            'phone' => array('Phone Number', PhoneField)
+            'phone' => array('Phone Number', PhoneField),
+            'bool' => array('Checkbox', BooleanField),
         );
         foreach (DynamicList::all() as $list) {
             $types['list-'+$list->get('id')] = array('Selection: ' . $list->getPluralName(),
@@ -913,6 +921,19 @@ class SelectionWidget extends Widget {
             <?php } ?>
         </select>
         <?php
+    }
+}
+
+class CheckboxWidget extends Widget {
+    function render() {
+        ?>
+        <input type="checkbox" name="<?php echo $this->name; ?>" <?php
+            if ($this->value) echo 'checked="checked"'; ?>/>
+        <?php
+    }
+
+    function getValue() {
+        return ($this->value == 'on' or $this->value) ? true : false;
     }
 }
 
