@@ -30,6 +30,7 @@ include_once(INCLUDE_DIR.'class.variable.php');
 include_once(INCLUDE_DIR.'class.priority.php');
 include_once(INCLUDE_DIR.'class.sla.php');
 include_once(INCLUDE_DIR.'class.canned.php');
+require_once(INCLUDE_DIR.'class.dynamic_forms.php');
 
 class Ticket {
 
@@ -129,8 +130,12 @@ class Ticket {
         $this->dept_name = $this->ht['dept_name'];
         $this->sla_id = $this->ht['sla_id'];
         $this->topic_id = $this->ht['topic_id'];
-        $this->subject = $this->ht['subject'];
         $this->overdue = $this->ht['isoverdue'];
+
+        $this->_answers = array();
+        foreach (DynamicFormEntry::forTicket($this->getId()) as $form)
+            foreach ($form->getAnswers() as $answer)
+                $this->_answers[$answer->getField()->get('name')] = $answer->get('value');
         
         //Reset the sub classes (initiated ondemand)...good for reloads.
         $this->staff = null;
@@ -214,7 +219,7 @@ class Ticket {
     }
    
     function getEmail(){
-        return $this->email;
+        return $this->_answers['email'];
     }
 
     function getAuthToken() {
@@ -223,11 +228,11 @@ class Ticket {
     }
 
     function getName(){
-        return $this->fullname;
+        return $this->_answers['name'];
     }
 
     function getSubject() {
-        return $this->subject;
+        return $this->_answers['subject'];
     }
 
     /* Help topic title  - NOT object -> $topic */
@@ -313,11 +318,8 @@ class Ticket {
 
     function getUpdateInfo() {
 
-        $info=array('name'  =>  $this->getName(),
-                    'email' =>  $this->getEmail(),
-                    'phone' =>  $this->getPhone(),
+        $info=array('phone' =>  $this->getPhone(),
                     'phone_ext' =>  $this->getPhoneExt(),
-                    'subject'   =>  $this->getSubject(),
                     'source'    =>  $this->getSource(),
                     'topicId'   =>  $this->getTopicId(),
                     'priorityId'    =>  $this->getPriorityId(),
@@ -1173,6 +1175,10 @@ class Ticket {
 
                 return $closedate;
                 break;
+            default:
+                if (isset($this->_answers[$tag]))
+                    # TODO: Use DynamicField to format the value
+                    return $this->_answers[$tag];
         }
 
         return false;
@@ -1816,9 +1822,6 @@ class Ticket {
             return false;
          
         $fields=array();
-        $fields['name']     = array('type'=>'string',   'required'=>1, 'error'=>'Name required');
-        $fields['email']    = array('type'=>'email',    'required'=>1, 'error'=>'Valid email required');
-        $fields['subject']  = array('type'=>'string',   'required'=>1, 'error'=>'Subject required');
         $fields['topicId']  = array('type'=>'int',      'required'=>1, 'error'=>'Help topic required');
         $fields['priorityId'] = array('type'=>'int',    'required'=>1, 'error'=>'Priority required');
         $fields['slaId']    = array('type'=>'int',      'required'=>0, 'error'=>'Select SLA');
@@ -1852,9 +1855,6 @@ class Ticket {
         if($errors) return false;
 
         $sql='UPDATE '.TICKET_TABLE.' SET updated=NOW() '
-            .' ,email='.db_input($vars['email'])
-            .' ,name='.db_input(Format::striptags($vars['name']))
-            .' ,subject='.db_input(Format::striptags($vars['subject']))
             .' ,phone="'.db_input($vars['phone'],false).'"'
             .' ,phone_ext='.db_input($vars['phone_ext']?$vars['phone_ext']:NULL)
             .' ,priority_id='.db_input($vars['priorityId'])
@@ -2055,9 +2055,6 @@ class Ticket {
 
         $id=0;
         $fields=array();
-        $fields['name']     = array('type'=>'string',   'required'=>1, 'error'=>'Name required');
-        $fields['email']    = array('type'=>'email',    'required'=>1, 'error'=>'Valid email required');
-        $fields['subject']  = array('type'=>'string',   'required'=>1, 'error'=>'Subject required');
         $fields['message']  = array('type'=>'text',     'required'=>1, 'error'=>'Message required');
         switch (strtolower($origin)) {
             case 'web':
@@ -2154,9 +2151,6 @@ class Ticket {
             .' ,dept_id='.db_input($deptId)
             .' ,topic_id='.db_input($topicId)
             .' ,priority_id='.db_input($priorityId)
-            .' ,email='.db_input($vars['email'])
-            .' ,name='.db_input(Format::striptags($vars['name']))
-            .' ,subject='.db_input(Format::striptags($vars['subject']))
             .' ,phone="'.db_input($vars['phone'],false).'"'
             .' ,phone_ext='.db_input($vars['phone_ext']?$vars['phone_ext']:'')
             .' ,ip_address='.db_input($ipaddress) 

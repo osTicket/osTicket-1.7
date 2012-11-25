@@ -19,32 +19,6 @@ $info=Format::htmlchars(($errors && $_POST)?$_POST:$info);
     </thead>
     <tbody>
         <tr>
-            <td width="160" class="required">
-                Email Address:
-            </td>
-            <td>
-
-                <input type="text" size="50" name="email" id="email" class="typeahead" value="<?php echo $info['email']; ?>"
-                    autocomplete="off" autocorrect="off" autocapitalize="off">
-                &nbsp;<span class="error">*&nbsp;<?php echo $errors['email']; ?></span>
-            <?php 
-            if($cfg->notifyONNewStaffTicket()) { ?>
-               &nbsp;&nbsp;&nbsp;
-               <input type="checkbox" name="alertuser" <?php echo (!$errors || $info['alertuser'])? 'checked="checked"': ''; ?>>Send alert to user.
-            <?php 
-             } ?>
-            </td>
-        </tr>
-        <tr>
-            <td width="160" class="required">
-                Full Name:
-            </td>
-            <td>
-                <input type="text" size="50" name="name" id="name" value="<?php echo $info['name']; ?>">
-                &nbsp;<span class="error">*&nbsp;<?php echo $errors['name']; ?></span>
-            </td>
-        </tr>
-        <tr>
             <td width="160">
                 Phone Number:
             </td>
@@ -55,6 +29,17 @@ $info=Format::htmlchars(($errors && $_POST)?$_POST:$info);
                 &nbsp;<span class="error">&nbsp;<?php echo $errors['phone_ext']; ?></span>
             </td>
         </tr>
+        <?php 
+        if($cfg->notifyONNewStaffTicket()) { ?>
+        <tr>
+            <td width="160">Alert:</td>
+            <td>
+            &nbsp;&nbsp;&nbsp;
+            <input type="checkbox" name="alertuser" <?php echo (!$errors || $info['alertuser'])? 'checked="checked"': ''; ?>>Send alert to user.
+            </td>
+        </tr>
+            <?php 
+             } ?>
         <tr>
             <th colspan="2">
                 <em><strong>Ticket Information &amp; Options</strong>:</em>
@@ -223,10 +208,6 @@ $info=Format::htmlchars(($errors && $_POST)?$_POST:$info);
     </tr>
     <tr>
         <td colspan=2>
-            <div>
-                <em><strong>Subject</strong>: Issue summary </em> &nbsp;<font class="error">*&nbsp;<?php echo $errors['subject']; ?></font><br>
-                <input type="text" name="subject" size="60" value="<?php echo $info['subject']; ?>">
-            </div>
             <div><em><strong>Issue</strong>: Details on the reason(s) for opening the ticket.</em> <font class="error">*&nbsp;<?php echo $errors['issue']; ?></font></div>
             <textarea name="issue" cols="21" rows="8" style="width:80%;"><?php echo $info['issue']; ?></textarea>
         </td>

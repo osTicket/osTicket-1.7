@@ -428,11 +428,20 @@ if($_POST && !$errors):
                 break;
             case 'open':
                 $ticket=null;
+                $interest=array('name','email','subject');
                 $topic=Topic::lookup($_POST['topicId']);
                 $forms=DynamicFormGroup::lookup($topic->ht['form_group_id'])->getForms();
                 foreach ($forms as $idx=>$f) {
                     $form=$f->getForm()->instanciate();
                     $form->set('sort', $f->get('sort'));
+                    # Collect name, email, and subject address for banning and such
+                    foreach ($form->getAnswers() as $answer) {
+                        $fname = $answer->getField()->get('name');
+                        if (in_array($fname, $interest))
+                            # XXX: Assigning to _POST not considered great PHP
+                            #      coding style
+                            $_POST[$fname] = $answer->getField()->getClean();
+                    }
                     $forms[$idx] = $form;
                     if (!$form->isValid())
                         $errors = array_merge($errors, $form->errors());

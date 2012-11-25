@@ -8,6 +8,7 @@ if($_REQUEST['id'] && !($form=DynamicForm::lookup($_REQUEST['id'])))
 
 if($_POST) {
     $fields = array('title', 'notes');
+    $required = array('name','email','subject');
     switch(strtolower($_POST['do'])) {
         case 'update':
             foreach ($fields as $f)
@@ -24,8 +25,12 @@ if($_POST) {
                 foreach (array('sort','label','type','name') as $f)
                     if (isset($_POST["_$f-$id"]))
                         $field->set($f, $_POST["_$f-$id"]);
+                # TODO: make sure all help topics still have all required fields
                 if ($field->get('editable'))
                     $field->set('required', $_POST["required-$id"] == 'on' ?  1 : 0);
+                # Core fields are forced required
+                if (in_array($field->get('name'), $required))
+                    $field->set('required', 1);
                 if ($field->isValid())
                     $field->save();
             }
