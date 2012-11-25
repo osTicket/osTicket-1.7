@@ -195,7 +195,7 @@ class Topic {
             $errors['form-group-id'] = 'You must select a form';
         else {
             $group=DynamicFormGroup::lookup($vars['form-group-id']);
-            foreach (array('name', 'email', 'subject', 'message') as $f)
+            foreach (array('name', 'email', 'subject') as $f)
                     if (!$group->hasField($f))
                         $errors['form-group-id']="Form set must define the '$f' field";
         }
