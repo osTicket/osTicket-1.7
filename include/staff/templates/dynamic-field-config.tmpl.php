@@ -6,11 +6,11 @@
             var form = $(this);
             $.post(this.action, form.serialize(), function(data, status, xhr) {
                     console.log(data, status, xhr);
-                    if (data.length) {
+                    if (!data.length) {
                         form.closest('.dialog').hide();
                         $('#overlay').hide();
                     } else {
-                        form.closest('.dialog').clear().append(data);
+                        form.closest('.dialog').empty().append(data);
                     }
             });
             return false;
