@@ -64,10 +64,12 @@ class Ticket {
     var $team;  //Team obj
     var $topic; //Topic obj
     var $tlock; //TicketLock obj
+    var $justClosed; //If the Ticket in closing
     
     function Ticket($id){
         $this->id = 0;
         $this->load($id);
+        $this->justClosed=false;
     }
     
     function load($id=0) {
@@ -804,6 +806,7 @@ class Ticket {
     //Close the ticket
     function close(){
         global $thisstaff;
+        $this->justClosed=true; 
         
         $sql='UPDATE '.TICKET_TABLE.' SET closed=NOW(),isoverdue=0, duedate=NULL, updated=NOW(), status='.db_input('closed');
         if($thisstaff) //Give the closing  staff credit. 
@@ -1565,7 +1568,7 @@ class Ticket {
         if(!$dept || !($email=$dept->getEmail()))
             $email = $cfg->getDefaultEmail();
 
-        if($tpl && ($msg=$tpl->getReplyMsgTemplate()) && $email) {
+        if($tpl && ($msg=$tpl->getReplyMsgTemplate($justClosed)) && $email) {
 
             if($thisstaff && $vars['signature']=='mine')
                 $signature=$thisstaff->getSignature();

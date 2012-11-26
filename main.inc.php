@@ -63,7 +63,7 @@
 
     #Current version && schema signature (Changes from version to version)
     define('THIS_VERSION','1.7-RC3+'); //Shown on admin panel
-    define('SCHEMA_SIGNATURE','00ff231f2ade8797a0e7f2a7fccd52f4'); //MD5 signature of the db schema. (used to trigger upgrades)
+    define('SCHEMA_SIGNATURE','4b36dab4267833899313bb719f74b3e8 '); //MD5 signature of the db schema. (used to trigger upgrades)
     #load config info
     $configfile='';
     if(file_exists(ROOT_DIR.'ostconfig.php')) //Old installs prior to v 1.6 RC5

@@ -106,6 +106,9 @@ class Template {
             case 'msg_autoresp':
                  $tpl=array('subj'=>$this->ht['message_autoresp_subj'],'body'=>$this->ht['message_autoresp_body']);
                  break;
+            case 'msg_closing':
+                 $tpl=array('subj'=>$this->ht['message_close_subj'],'body'=>$this->ht['message_close_body']);
+                 break;
             case 'ticket_notice':
                  $tpl=array('subj'=>$this->ht['ticket_notice_subj'],'body'=>$this->ht['ticket_notice_body']);
                  break;
@@ -158,7 +161,7 @@ class Template {
         return $this->getMsgTemplate('msg_autoresp');
     }
 
-    function getAutoRespMsgTemplate() {
+	function getAutoRespMsgTemplate() {
         return $this->getMsgTemplate('ticket_autoresp');
     }
 
@@ -166,8 +169,13 @@ class Template {
         return $this->getMsgTemplate('ticket_autoreply');
     }
 
-    function getReplyMsgTemplate() {
-        return $this->getMsgTemplate('ticket_reply');
+    function getReplyMsgTemplate($closing=false) {
+		if($closing==true) {
+			return $this->getMsgTemplate('ticket_reply');
+		}
+		else {
+			return $this->getMsgTemplate('msg_closing');
+		}
     }
 
     function getOverlimitMsgTemplate() {
@@ -214,6 +222,9 @@ class Template {
                 break;
             case 'msg_autoresp':
                 $sql.=',message_autoresp_subj='.db_input($vars['subj']).',message_autoresp_body='.db_input($vars['body']);
+                break;
+            case 'msg_closing':
+                $sql.=',message_close_subj='.db_input($vars['subj']).',message_close_body='.db_input($vars['body']);
                 break;
             case 'ticket_notice':
                 $sql.=',ticket_notice_subj='.db_input($vars['subj']).',ticket_notice_body='.db_input($vars['body']);
@@ -299,6 +310,8 @@ class Template {
                                                  'desc'=>'Canned Auto-reply sent to user on new ticket, based on filter matches. Overwrites "normal" auto-response.'),
                         'msg_autoresp'=>array('name'=>'New Message Auto-response',
                                               'desc'=>'Confirmation sent to user when a new message is appended to an existing ticket.'),
+                        'msg_closing'=>array('name'=>'Ticket closing reply',
+                                              'desc'=>'Message template used when responding to a ticket that ticket is closing.'),
                         'ticket_notice'=>array('name'=>'New Ticket Notice',
                                                'desc'=>'Notice sent to user, if enabled, on new ticket created by staff on their behalf (e.g phone calls).'),
                         'overlimit_notice'=>array('name'=>'Over Limit Notice',
@@ -379,6 +392,8 @@ class Template {
                 .' ,ticket_autoresp_body='.db_input($info['ticket_autoresp_body'])
                 .' ,ticket_autoreply_subj='.db_input($info['ticket_autoreply_subj'])
                 .' ,ticket_autoreply_body='.db_input($info['ticket_autoreply_body'])
+				.' ,ticket_close_subj='.db_input($info['ticket_close_subj'])
+                .' ,ticket_close_body='.db_input($info['ticket_close_body'])                
                 .' ,ticket_notice_subj='.db_input($info['ticket_notice_subj'])
                 .' ,ticket_notice_body='.db_input($info['ticket_notice_body'])
                 .' ,ticket_alert_subj='.db_input($info['ticket_alert_subj'])
