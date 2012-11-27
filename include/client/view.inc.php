@@ -112,6 +112,28 @@ if($ticket->getThreadCount() && ($thread=$ticket->getClientThread())) {
                 <textarea name="message" id="message" cols="50" rows="9" wrap="soft"><?php echo $info['message']; ?></textarea>
             </td>
         </tr>
+         <?php
+    if($cfg->allowPriorityChange() && ($priorities=Priority::getPriorities())) { ?>
+    <tr>
+        <td>Ticket Priority:</td>
+        <td>
+            <select id="priority" name="priorityId">
+                <?php
+                    if(!$info['priorityId'])
+                        $info['priorityId'] = $ticket->getPriorityId();
+                    foreach($priorities as $id =>$name) {
+                        echo sprintf('<option value="%d" %s>%s</option>',
+                                        $id, ($info['priorityId']==$id)?'selected="selected"':'', $name);
+                        
+                    }
+                ?>
+            </select>
+            <font class="error">&nbsp;<?php echo $errors['priorityId']; ?></font>
+        </td>
+    </tr>
+    <?php
+    }
+    ?>
         <?php
         if($cfg->allowOnlineAttachments()) { ?>
         <tr>

@@ -47,6 +47,9 @@ if($_POST && is_object($ticket) && $ticket->getId()):
                     $ost->validateFileUploads($files); //Validator sets errors - if any.
                     $ticket->uploadAttachments($files, $msgid, 'M');
                 }
+                if($cfg->allowPriorityChange()) {
+                $ticket->setPriority($_POST['priorityId']);
+				}
                 $msg='Message Posted Successfully';
             } else {
                 $errors['err']='Unable to post the message. Try again';
