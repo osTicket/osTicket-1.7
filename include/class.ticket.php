@@ -1387,6 +1387,11 @@ class Ticket {
         global $cfg;
        
         if(!$this->getId()) return 0;
+		
+		if ($this->getStatus() === 'closed')
+        {
+                $this->reopen();
+		}
 
         //Strip quoted reply...on emailed replies
         if(!strcasecmp($source, 'Email') 
