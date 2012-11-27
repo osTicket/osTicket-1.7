@@ -208,7 +208,7 @@ class Ticket2PDF extends FPDF
                 $this->SetFont('Arial', 'B', 11);
                 $this->Cell($l, 7, $a->getField()->get('label'), 1, 0, 'L', true);
                 $this->SetFont('');
-                $this->Cell($c, 7, $a->get('value'), 1, 1, 'L', true);
+                $this->Cell($c, 7, $a->getValue(), 1, 1, 'L', true);
             }
         }
         $this->Ln(10);

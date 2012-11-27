@@ -266,7 +266,7 @@ if($ticket->isOverdue())
     echo $a->getField()->get('label');
                     ?>:</th>
                     <td><?php
-    echo $a->get('value');
+    echo $a->getValue();
                     ?></td>
                 </tr>
                 <?php } ?>
@@ -283,7 +283,7 @@ if($ticket->isOverdue())
     echo $a->getField()->get('label');
                     ?>:</th>
                     <td><?php
-    echo $a->get('value');
+    echo $a->getValue();
                     ?></td>
                 </tr>
                 <?php } ?>

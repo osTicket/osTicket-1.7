@@ -109,7 +109,7 @@ $info=Format::htmlchars(($errors && $_POST)?$_POST:$info);
                     <?php echo $nfo[0]; ?></option>
                 <?php } ?>
             </select></td>
-            <td><input type="text" size="24" name="name-<?php echo $id; ?>"/></td>
+            <td><input type="text" size="24" name="name-new-<?php echo $i; ?>"/></td>
             <td><input type="checkbox" name="required-new-<?php echo $i; ?>"/></td>
         </tr>
     <?php } ?>

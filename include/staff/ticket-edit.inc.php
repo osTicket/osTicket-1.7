@@ -20,24 +20,6 @@ $info=Format::htmlchars(($errors && $_POST)?$_POST:$ticket->getUpdateInfo());
     </thead>
     <tbody>
         <tr>
-            <td width="160" class="required">
-                Full Name:
-            </td>
-            <td>
-                <input type="text" size="50" name="name" value="<?php echo $info['name']; ?>">
-                &nbsp;<span class="error">*&nbsp;<?php echo $errors['name']; ?></span>
-            </td>
-        </tr>
-        <tr>
-            <td width="160" class="required">
-                Email Address:
-            </td>
-            <td>
-                <input type="text" size="50" name="email" value="<?php echo $info['email']; ?>">
-                &nbsp;<span class="error">*&nbsp;<?php echo $errors['email']; ?></span>
-            </td>
-        </tr>
-        <tr>
             <td width="160">
                 Phone Number:
             </td>
@@ -105,15 +87,6 @@ $info=Format::htmlchars(($errors && $_POST)?$_POST:$ticket->getUpdateInfo());
                     ?>
                 </select>
                 &nbsp;<font class="error">*&nbsp;<?php echo $errors['priorityId']; ?></font>
-            </td>
-        </tr>
-        <tr>
-            <td width="160" class="required">
-                Subject:
-            </td>
-            <td>
-                 <input type="text" name="subject" size="60" value="<?php echo $info['subject']; ?>">
-                 &nbsp;<font class="error">*&nbsp;<?php $errors['subject']; ?></font>
             </td>
         </tr>
         <tr>

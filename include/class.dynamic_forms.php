@@ -333,7 +333,6 @@ class DynamicFormField extends VerySimpleModel {
         # Validates a user-input into an instance of this field on a dynamic
         # form
         if (!is_array($this->_errors)) $this->_errors = array();
-        $value = $this->to_php($value);
         # Returns array of errors
         if ($this->get('required'))
             if (!$value)
@@ -358,8 +357,9 @@ class DynamicFormField extends VerySimpleModel {
     function getLabel() { return $this->get('label'); }
 
     function getImpl() {
-        $types = get_dynamic_field_types();
-        $clazz = $types[$this->get('type')][1];
+        $type = get_dynamic_field_types();
+        $type = $type[$this->get('type')];
+        $clazz = $type[1];
         return new $clazz($this->ht);
     }
 
@@ -524,11 +524,12 @@ class DynamicFormEntry extends VerySimpleModel {
     }
 
     function save() {
-        $this->set('updated', new SqlFunction('NOW'));
+        if (count($this->dirty))
+            $this->set('updated', new SqlFunction('NOW'));
         parent::save(DYNAMIC_FORM_ENTRY_TABLE, 'id');
         # XXX: Handle field additions to form (?)
         foreach ($this->getAnswers() as $a) {
-            $a->set('value', $a->getField()->getClean());
+            $a->set('value', $a->getField()->to_database($a->getField()->getClean()));
             $a->set('entry_id', $this->get('id'));
             $a->save();
         }
@@ -572,6 +573,15 @@ class DynamicFormEntryAnswer extends VerySimpleModel {
         return array(
             'field' => array('field_id', DynamicFormField, DYNAMIC_FORM_FIELD_TABLE, 'id')
         );
+    }
+
+    function getValue() {
+        if (!$this->_value) {
+            $this->_value = $this->getField()->to_php($this->get('value'));
+            if (is_object($this->_value))
+                $this->_value = $this->_value->toString();
+        }
+        return $this->_value;
     }
 
     function find($where, $sort='field__sort') {
@@ -677,6 +687,14 @@ class DynamicFormGroupForms extends VerySimpleModel {
 
 class DynamicList extends VerySimpleModel {
 
+    function getSortModes() {
+        return array(
+            'Alpha'     => 'Alphabetical',
+            '-Alpha'    => 'Alphabetical (Reversed)',
+            'SortCol'   => 'By Sort column'
+        );
+    }
+
     function getListOrderBy() {
         switch ($this->ht['sort_mode']) {
             case 'Alpha':   return 'value';
@@ -693,15 +711,19 @@ class DynamicList extends VerySimpleModel {
     }
 
     function getItems() {
-        if (!$this->items) {
-            $this->items = DynamicListItem::find(array('list_id'=>$this->id),
+        if (!$this->_items) {
+            $this->_items = DynamicListItem::find(array('list_id'=>$this->get('id')),
                 $this->getListOrderBy());
         }
-        return $this->items;
+        return $this->_items;
     }
 
     function all($sort='name') {
         return parent::all(get_class(), DYNAMIC_LIST_TABLE, $sort);
+    }
+
+    function count($where=false) {
+        return parent::count(get_class(), DYNAMIC_LIST_TABLE, $where);
     }
 
     function find($where, $sort='name') {
@@ -715,15 +737,28 @@ class DynamicList extends VerySimpleModel {
     }
 
     function save() {
+        if (count($this->dirty))
+            $this->set('updated', new SqlFunction('NOW'));
         return parent::save(DYNAMIC_LIST_TABLE, 'id');
     }
 
     function create($ht=false) {
-        return parent::create(get_class(), $ht);
+        $inst = parent::create(get_class(), $ht);
+        $inst->set('created', new SqlFunction('NOW'));
+        return $inst;
     }
 }
 
 class DynamicListItem extends VerySimpleModel {
+    function toString() {
+        return $this->get('value');
+    }
+    
+    function lookup($id) {
+        return parent::lookup(get_class(), DYNAMIC_LIST_ITEM_TABLE,
+            array('id'=>$id));
+    }
+
     function find($where, $sort=false) {
         return parent::find(get_class(), DYNAMIC_LIST_ITEM_TABLE, $where,
             $sort);
@@ -735,6 +770,13 @@ class DynamicListItem extends VerySimpleModel {
 
     function create($ht=false) {
         return parent::create(get_class(), $ht);
+    }
+
+    function delete() {
+        # Don't really delete, just unset the list_id to un-associate it with
+        # the list
+        $this->set('list_id', null);
+        return $this->save();
     }
 }
 
@@ -807,7 +849,7 @@ function get_dynamic_field_types() {
             'bool' => array('Checkbox', BooleanField),
         );
         foreach (DynamicList::all() as $list) {
-            $types['list-'+$list->get('id')] = array('Selection: ' . $list->getPluralName(),
+            $types['list-'.$list->get('id')] = array('Selection: ' . $list->getPluralName(),
                 SelectionField, $list->get('id'));
         }
     }
@@ -815,12 +857,18 @@ function get_dynamic_field_types() {
 }
 
 class SelectionField extends DynamicFormField {
-    function SelectionField($list_id) {
-        $this->list = DynamicList::lookup($list_id);
+    function getList() {
+        if (!$this->_list) {
+            $type = get_dynamic_field_types();
+            $type = $type[$this->get('type')];
+            $list_id = $type[2];
+            $this->_list = DynamicList::lookup($list_id);
+        }
+        return $this->_list;
     }
 
     function getWidget() {
-        return new SelectionWidget($this->list->getItems());
+        return new SelectionWidget($this);
     }
 
     function parse($id) {
@@ -828,15 +876,12 @@ class SelectionField extends DynamicFormField {
     }
 
     function to_php($id) {
-        foreach ($this->list->getItems() as $i)
-            if ($i->id == $id)
-                return $i;
-        return null;
+        return DynamicListItem::lookup($id);
     }
 
     function to_database($item) {
-        if ($item && $item->id)
-            return $item->id;
+        if ($item && $item->get('id'))
+            return $item->get('id');
         return null;
     }
 }
@@ -908,16 +953,17 @@ class PhoneNumberWidget extends Widget {
 }
 
 class SelectionWidget extends Widget {
-    function SelectionWidget($field, $items) {
-        $this->items = $items;
-    }
-
     function render() {
         ?>
-        <select name="field-id-<?php echo $this->field->get('id'); ?>">
-            <?php foreach ($this->items as $i) { ?>
-            <option value="<?php echo $i->get('id'); ?>"><?php  
-                echo $i->get('value') ?></option>
+        <select name="<?php echo $this->name; ?>">
+            <?php
+                $name = $this->field->get('label'); ?>
+                <option value="">&mdash; Select <?php echo $name; ?> &mdash;</option>
+            <?php 
+            foreach ($this->field->getList()->getItems() as $i) { ?>
+            <option value="<?php echo $i->get('id'); ?>"
+                <?php if ($this->value == $i->get('id')) echo 'selected="selected"';
+                ?>><?php  echo $i->get('value') ?></option>
             <?php } ?>
         </select>
         <?php

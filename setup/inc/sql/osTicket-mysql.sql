@@ -248,11 +248,13 @@ CREATE TABLE `%TABLE_PREFIX%dynamic_list` (
 
 DROP TABLE IF EXISTS `%TABLE_PREFIX%dynamic_list_items`;
 CREATE TABLE `%TABLE_PREFIX%dynamic_list_items` (
-    `list_id` int(11) NOT NULL,
+    `id` int(11) unsigned NOT NULL auto_increment,
+    `list_id` int(11),
     `value` varchar(255) NOT NULL,
     -- extra value such as abbreviation
     `extra` varchar(255),
     `sort` int(11) NOT NULL DEFAULT 1,
+    PRIMARY KEY (`id`),
     KEY `dynamic_list_item_lookup` (`list_id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
 

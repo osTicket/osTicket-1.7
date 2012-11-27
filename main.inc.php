@@ -170,6 +170,7 @@
     define('DYNAMIC_FORM_GROUP_FORM_TABLE',TABLE_PREFIX.'dynamic_form_group_forms');
 
     define('DYNAMIC_LIST_TABLE',TABLE_PREFIX.'dynamic_list');
+    define('DYNAMIC_LIST_ITEM_TABLE',TABLE_PREFIX.'dynamic_list_items');
 
     define('DYNAMIC_FORM_ENTRY_TABLE',TABLE_PREFIX.'dynamic_form_entry');
     define('DYNAMIC_FORM_ANSWER_TABLE',TABLE_PREFIX.'dynamic_form_entry_values');
