@@ -522,8 +522,11 @@ class Ticket {
 
     function getRelatedTicketsCount(){
 
-        $sql='SELECT count(*)  FROM '.TICKET_TABLE
-            .' WHERE email='.db_input($this->getEmail());
+        $sql='SELECT count(*)  FROM '.TICKET_TABLE.' ticket '
+            .' LEFT JOIN '.DYNAMIC_FORM_ENTRY_TABLE.' entry ON entry.ticket_id = ticket.ticket_id '
+            .' LEFT JOIN '.DYNAMIC_FORM_ANSWER_TABLE.' answer ON answer.entry_id = entry.id '
+            .' LEFT JOIN '.DYNAMIC_FORM_FIELD_TABLE.' field ON answer.field_id = field.id '
+            .' WHERE field.name = "email" AND answer.value = '.db_input($this->getEmail());
 
         return db_result(db_query($sql));
     }
