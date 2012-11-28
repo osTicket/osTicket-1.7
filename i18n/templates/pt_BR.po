@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: osticket17\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-10-30 12:54-0300\n"
+"POT-Creation-Date: 2012-11-28 08:49-0300\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Fabio Rauber <fabior@interlegis.leg.br>\n"
 "Language-Team: Fabio Rauber <fabior@interlegis.leg.br>\n"
@@ -1991,13 +1991,17 @@ msgstr "Processamento de E-mail falhou ["
 msgid "Invalid FROM address ["
 msgstr "Endereço de ORIGEM inválido ["
 
-#: osticket/api/pipe.php:105
-msgid "Ticket create Failed "
-msgstr "Criação de tíquete falhou"
-
-#: osticket/api/pipe.php:113
+#: osticket/api/pipe.php:104
 msgid "Unable to post message"
 msgstr "Não foi possível postar a mensagem"
+
+#: osticket/api/pipe.php:116
+msgid "Bounced email"
+msgstr "E-mail voltou"
+
+#: osticket/api/pipe.php:120
+msgid "Ticket create Failed"
+msgstr "Criação de tíquete falhou"
 
 #: osticket/include/class.category.php:125
 msgid "Internal error. Try again"
@@ -2155,7 +2159,7 @@ msgid "File Upload Error (Ticket #"
 msgstr "Erro no Upload de Arquivo (Tíquete #"
 
 #: osticket/include/class.ticket.php:1820
-#: osticket/include/class.ticket.php:2056
+#: osticket/include/class.ticket.php:2058
 msgid "Valid email required"
 msgstr "É requerido endereço de email válido"
 
@@ -2173,12 +2177,12 @@ msgid "Select SLA"
 msgstr "Selecione SLA"
 
 #: osticket/include/class.ticket.php:1825
-#: osticket/include/class.ticket.php:2078
+#: osticket/include/class.ticket.php:2080
 msgid "Valid phone # required"
 msgstr "No. de Telefone requerido"
 
 #: osticket/include/class.ticket.php:1826
-#: osticket/include/class.ticket.php:2066
+#: osticket/include/class.ticket.php:2068
 msgid "Invalid date - must be MM/DD/YY"
 msgstr "Data inválida - deve ser MM/DD/YY"
 
@@ -2187,7 +2191,7 @@ msgid "Reason for the update required"
 msgstr "Razão para a edição requerida"
 
 #: osticket/include/class.ticket.php:1830
-#: osticket/include/class.ticket.php:2081
+#: osticket/include/class.ticket.php:2083
 msgid "Missing or invalid data - check the errors and try again"
 msgstr "Dados inválidos ou faltando. Corrija os erros abaixo e tente novamente."
 
@@ -2196,27 +2200,27 @@ msgid "Duedate can NOT be set on a closed ticket"
 msgstr "Data limite NÃO pode ser configurada em tíquete fechado"
 
 #: osticket/include/class.ticket.php:1836
-#: osticket/include/class.ticket.php:2094
+#: osticket/include/class.ticket.php:2096
 msgid "Select time"
 msgstr "Selecione hora"
 
 #: osticket/include/class.ticket.php:1838
-#: osticket/include/class.ticket.php:2096
+#: osticket/include/class.ticket.php:2098
 msgid "Invalid duedate"
 msgstr "Data limite inválida"
 
 #: osticket/include/class.ticket.php:1840
-#: osticket/include/class.ticket.php:2098
+#: osticket/include/class.ticket.php:2100
 msgid "Due date must be in the future"
 msgstr "Data limite deve ser futura"
 
 #: osticket/include/class.ticket.php:1846
-#: osticket/include/class.ticket.php:2086
+#: osticket/include/class.ticket.php:2088
 msgid "Invalid phone ext."
 msgstr "Extensão de telefone inválida."
 
 #: osticket/include/class.ticket.php:1848
-#: osticket/include/class.ticket.php:2088
+#: osticket/include/class.ticket.php:2090
 msgid "Phone number required"
 msgstr "Número de telefone é requerido"
 
@@ -2230,79 +2234,79 @@ msgid "Ticket Updated"
 msgstr "Tíquete Atualizado"
 
 #: osticket/include/class.ticket.php:2020
-#: osticket/include/class.ticket.php:2045
+#: osticket/include/class.ticket.php:2046
 msgid "Ticket denied. Error #403"
 msgstr "Tíquete negado. Erro #403"
 
-#: osticket/include/class.ticket.php:2021
-#: osticket/include/class.ticket.php:2032
-#: osticket/include/class.ticket.php:2046
+#: osticket/include/class.ticket.php:2022
+#: osticket/include/class.ticket.php:2033
+#: osticket/include/class.ticket.php:2048
 msgid "Ticket denied"
 msgstr "Tíquete negado"
 
-#: osticket/include/class.ticket.php:2021
+#: osticket/include/class.ticket.php:2022
 msgid "Banned email"
 msgstr "E-mail Banido"
 
-#: osticket/include/class.ticket.php:2031
+#: osticket/include/class.ticket.php:2032
 msgid "You've reached the maximum open tickets allowed."
 msgstr "Você alcançou o número máximo permitido de tíquetes abertos."
 
-#: osticket/include/class.ticket.php:2033
+#: osticket/include/class.ticket.php:2034
 #, php-format
 msgid "Max open tickets (%d) reached for %s "
 msgstr "Máximo de tíquetes abertos (%d) alcançado para %s"
 
-#: osticket/include/class.ticket.php:2047
+#: osticket/include/class.ticket.php:2049
 #, php-format
 msgid "Ticket rejected ( %s) by filter \"%s\""
 msgstr "Tíquete rejeitado ( %s) pelo filtro \"%s\""
 
-#: osticket/include/class.ticket.php:2061
+#: osticket/include/class.ticket.php:2063
 msgid "Select help topic"
 msgstr "Selecione tópico de ajuda"
 
-#: osticket/include/class.ticket.php:2064
+#: osticket/include/class.ticket.php:2066
 msgid "Dept. required"
 msgstr "Depto. requerido"
 
-#: osticket/include/class.ticket.php:2065
+#: osticket/include/class.ticket.php:2067
 msgid "Topic required"
 msgstr "Tópico requerido"
 
-#: osticket/include/class.ticket.php:2068
+#: osticket/include/class.ticket.php:2070
 msgid "Indicate source"
 msgstr "Indique a origem"
 
-#: osticket/include/class.ticket.php:2071
+#: osticket/include/class.ticket.php:2073
 msgid "Email unknown"
 msgstr "E-mail desconhecido"
 
-#: osticket/include/class.ticket.php:2075
+#: osticket/include/class.ticket.php:2077
 msgid "Invalid origin given"
 msgstr "Origem dada inválida"
 
-#: osticket/include/class.ticket.php:2077
+#: osticket/include/class.ticket.php:2079
 msgid "Invalid Priority"
 msgstr "Prioridade Inválida"
 
-#: osticket/include/class.ticket.php:2247
+#: osticket/include/class.ticket.php:2249
 msgid "Summary of the issue required"
 msgstr "Resumo do problema requerido"
 
-#: osticket/include/class.ticket.php:2252
+#: osticket/include/class.ticket.php:2254
 msgid "Invalid source"
 msgstr "Origem inválida"
 
-#: osticket/include/class.ticket.php:2275
+#: osticket/include/class.ticket.php:2277
 msgid "New Ticket by Staff"
 msgstr "Novo Tíquete pela Equipe"
 
-#: osticket/include/class.ticket.php:2275
+#: osticket/include/class.ticket.php:2277
 msgid "Ticket created by staff"
 msgstr "Tíquete criado pela equipe"
 
-#: osticket/include/class.ticket.php:2332
+#: osticket/include/class.ticket.php:2334
 msgid "Ticket flagged as overdue by the system."
 msgstr "Tíquete marcado como atrasado pelo sistema."
 
@@ -2421,7 +2425,7 @@ msgstr "Prioridade"
 
 #: osticket/include/class.pdf.php:139
 #: osticket/include/ajax.reports.php:31
-#: osticket/include/ajax.reports.php:53
+#: osticket/include/ajax.reports.php:58
 #: osticket/include/class.export.php:43
 msgid "Department"
 msgstr "Departamento"
@@ -2448,7 +2452,7 @@ msgid "Closed By"
 msgstr "Fechado Por"
 
 #: osticket/include/class.pdf.php:176
-#: osticket/include/ajax.reports.php:63
+#: osticket/include/ajax.reports.php:68
 msgid "Help Topic"
 msgstr "Tópico de ajuda"
 
@@ -2515,27 +2519,27 @@ msgstr "Tópicos"
 msgid "Staff"
 msgstr "Equipe"
 
-#: osticket/include/ajax.reports.php:149
+#: osticket/include/ajax.reports.php:154
 msgid "Opened"
 msgstr "Aberto"
 
-#: osticket/include/ajax.reports.php:149
+#: osticket/include/ajax.reports.php:154
 msgid "Assigned"
 msgstr "Designado"
 
-#: osticket/include/ajax.reports.php:149
+#: osticket/include/ajax.reports.php:154
 msgid "Closed"
 msgstr "Fechado"
 
-#: osticket/include/ajax.reports.php:149
+#: osticket/include/ajax.reports.php:154
 msgid "Reopened"
 msgstr "Reaberto"
 
-#: osticket/include/ajax.reports.php:150
+#: osticket/include/ajax.reports.php:155
 msgid "Service Time"
 msgstr "Tempo de Serviço"
 
-#: osticket/include/ajax.reports.php:150
+#: osticket/include/ajax.reports.php:155
 msgid "Response Time"
 msgstr "Tempo de Resposta"
 
@@ -2870,69 +2874,72 @@ msgstr "E-mail já está configurado como e-mail de sistema"
 msgid "Invalid selection. Must be less than "
 msgstr "Seleção inválida. Deve ser menor que"
 
-#: osticket/include/class.mailfetch.php:444
+#: osticket/include/class.mailfetch.php:460
+#: osticket/include/class.mailfetch.php:475
 #, php-format
 msgid "Attachment %s [%s] rejected because of file type"
 msgstr "Anexos %s [%s] rejeitados por causa do tipo de arquivo"
 
-#: osticket/include/class.mailfetch.php:445
+#: osticket/include/class.mailfetch.php:461
+#: osticket/include/class.mailfetch.php:476
 msgid "Email Attachment Rejected"
 msgstr "Anexo de E-mail Rejeitado"
 
-#: osticket/include/class.mailfetch.php:446
+#: osticket/include/class.mailfetch.php:462
+#: osticket/include/class.mailfetch.php:477
 msgid "Email Attachment Rejected (Ticket #"
 msgstr "Anexo de E-mail Rejeitado (Tíquete #"
 
-#: osticket/include/class.mailfetch.php:487
+#: osticket/include/class.mailfetch.php:518
 #, php-format
 msgid "Excessive errors processing emails for %s/%s. Please manually check the inbox."
 msgstr "Erros excessivos ao processar e-mails para %s/%s. Favor checar manualmente a caixa de entrada."
 
-#: osticket/include/class.mailfetch.php:499
+#: osticket/include/class.mailfetch.php:530
 msgid "Mail Fetcher"
 msgstr "Importador de E-mail"
 
-#: osticket/include/class.mailfetch.php:516
+#: osticket/include/class.mailfetch.php:547
 msgid "osTicket requires PHP IMAP extension enabled for IMAP/POP3 email fetch to work!"
 msgstr "O osTicket requer que a extensão PHP IMAP esteja habilitada para que o importador de e-mails IMAP/POP3 funcione!"
 
-#: osticket/include/class.mailfetch.php:517
+#: osticket/include/class.mailfetch.php:548
 msgid "Mail Fetch Error"
 msgstr "Erro ao Importar E-mail"
 
-#: osticket/include/class.mailfetch.php:548
+#: osticket/include/class.mailfetch.php:579
 msgid "osTicket is having trouble fetching emails from the following mail account"
 msgstr "O osTicket está tendo problemas ao importar e-mails da seguinte conta de e-mail"
 
-#: osticket/include/class.mailfetch.php:549
+#: osticket/include/class.mailfetch.php:580
 msgid "User"
 msgstr "Usuário"
 
-#: osticket/include/class.mailfetch.php:550
+#: osticket/include/class.mailfetch.php:581
 msgid "Host"
 msgstr "Host"
 
-#: osticket/include/class.mailfetch.php:551
+#: osticket/include/class.mailfetch.php:582
 msgid "Error"
 msgstr "Erro"
 
-#: osticket/include/class.mailfetch.php:552
+#: osticket/include/class.mailfetch.php:583
 msgid " consecutive errors. Maximum of"
 msgstr " erros consecutivos. Máximo de"
 
-#: osticket/include/class.mailfetch.php:552
+#: osticket/include/class.mailfetch.php:583
 msgid "allowed"
 msgstr "permitido"
 
-#: osticket/include/class.mailfetch.php:553
+#: osticket/include/class.mailfetch.php:584
 msgid "This could be connection issues related to the mail server. Next delayed login attempt in aprox."
 msgstr "Podem haver problemas de conexão relacionados ao servidor de e-mail. Próxima tentativa em aprox."
 
-#: osticket/include/class.mailfetch.php:553
+#: osticket/include/class.mailfetch.php:584
 msgid "minutes"
 msgstr "minutos"
 
-#: osticket/include/class.mailfetch.php:554
+#: osticket/include/class.mailfetch.php:585
 msgid "Mail Fetch Failure Alert"
 msgstr "Alerta de Falha ao Importar E-mails"
 
@@ -3624,8 +3631,8 @@ msgid "Help Topic:"
 msgstr "Tópico de ajuda:"
 
 #: osticket/include/client/open.inc.php:60
-msgid "Select a Help Topics"
-msgstr "Selecione um tópico de ajuda:"
+msgid "Select a Help Topic"
+msgstr "Selecione um Tópico de Ajuda"
 
 #: osticket/include/client/open.inc.php:68
 msgid "General Inquiry"
@@ -3640,7 +3647,7 @@ msgid "Message:"
 msgstr "Mensagem:"
 
 #: osticket/include/client/open.inc.php:85
-msgid "Please provide as much details as possible so we can best assist you."
+msgid "Please provide as much detail as possible so we can best assist you."
 msgstr "Favor informar o máximo de detalhes possível para que possamos melhor atendê-lo."
 
 #: osticket/include/client/open.inc.php:93
@@ -5006,7 +5013,6 @@ msgid "Ability to add/update/disable/delete knowledgebase categories and FAQs."
 msgstr "Permissão para adicionar/atualizar/desabilitar/apagar categorias da Base de Conhecimento e FAQs."
 
 #: osticket/include/staff/group.inc.php:137
-#: osticket/include/staff/department.inc.php:209
 msgid "Department Access"
 msgstr "Acesso ao Departamento"
 
@@ -6266,7 +6272,7 @@ msgid "Select Default Department"
 msgstr "Selecione o Departamento Padrão"
 
 #: osticket/include/staff/settings-system.inc.php:50
-#: osticket/include/staff/tickets.inc.php:534
+#: osticket/include/staff/tickets.inc.php:536
 msgid "Dept"
 msgstr "Depto"
 
@@ -6441,76 +6447,76 @@ msgstr "Tíquetes atrasados"
 msgid "Entered date span is invalid. Selection ignored."
 msgstr "Intervalo de datas inválido. Seleção ignorada."
 
-#: osticket/include/staff/tickets.inc.php:276
+#: osticket/include/staff/tickets.inc.php:278
 msgid "(Search Results)"
 msgstr "(Resultados da Pesquisa)"
 
-#: osticket/include/staff/tickets.inc.php:292
+#: osticket/include/staff/tickets.inc.php:294
 msgid "advanced"
 msgstr "avançado"
 
-#: osticket/include/staff/tickets.inc.php:324
+#: osticket/include/staff/tickets.inc.php:326
 msgid "Sort By Name"
 msgstr "Ordenar por Nome"
 
-#: osticket/include/staff/tickets.inc.php:334
+#: osticket/include/staff/tickets.inc.php:336
 msgid "Sort By Priority"
 msgstr "Ordenar por Prioridade"
 
-#: osticket/include/staff/tickets.inc.php:341
+#: osticket/include/staff/tickets.inc.php:343
 msgid "Sort By Assignee"
 msgstr "Ordenar por Designação"
 
-#: osticket/include/staff/tickets.inc.php:346
+#: osticket/include/staff/tickets.inc.php:348
 msgid "Sort By Closing Staff Name"
 msgstr "Ordenar pela Pessoa que Fechou"
 
-#: osticket/include/staff/tickets.inc.php:400
+#: osticket/include/staff/tickets.inc.php:402
 msgid "Preview Ticket"
 msgstr "Visualizar Tíquete"
 
-#: osticket/include/staff/tickets.inc.php:427
+#: osticket/include/staff/tickets.inc.php:429
 msgid "There are no tickets here. (Leave a little early today)."
 msgstr "Não existem tíquetes aqui. (Saia mais cedo hoje)."
 
-#: osticket/include/staff/tickets.inc.php:440
+#: osticket/include/staff/tickets.inc.php:442
 msgid "Query returned 0 results."
 msgstr "Sua pesquisa não retornou resultados."
 
-#: osticket/include/staff/tickets.inc.php:451
+#: osticket/include/staff/tickets.inc.php:453
 msgid "Export"
 msgstr "Exportar"
 
-#: osticket/include/staff/tickets.inc.php:492
+#: osticket/include/staff/tickets.inc.php:494
 msgid "Are you sure want to <b>close</b> selected open tickets?"
 msgstr "Tem certeza que deseja <b>fechar</b> os tíquetes selecionados?"
 
-#: osticket/include/staff/tickets.inc.php:495
+#: osticket/include/staff/tickets.inc.php:497
 msgid "Are you sure want to <b>reopen</b> selected closed tickets?"
 msgstr "Tem certeza que deseja <b>reabrir</b> os tíquetes selecionados?"
 
-#: osticket/include/staff/tickets.inc.php:501
+#: osticket/include/staff/tickets.inc.php:503
 msgid "Are you sure you want to DELETE selected tickets?"
 msgstr "Tem certeza que deseja APAGAR os tíquetes selecionados?"
 
-#: osticket/include/staff/tickets.inc.php:518
+#: osticket/include/staff/tickets.inc.php:520
 msgid "Advanced Ticket Search"
 msgstr "Pesquisa Avançada de Tíquetes"
 
-#: osticket/include/staff/tickets.inc.php:523
+#: osticket/include/staff/tickets.inc.php:525
 msgid "Keyword"
 msgstr "Palavra-chave"
 
-#: osticket/include/staff/tickets.inc.php:524
+#: osticket/include/staff/tickets.inc.php:526
 msgid "Optional"
 msgstr "Opcional"
 
-#: osticket/include/staff/tickets.inc.php:550
-#: osticket/include/staff/tickets.inc.php:573
+#: osticket/include/staff/tickets.inc.php:552
+#: osticket/include/staff/tickets.inc.php:575
 msgid "Anyone"
 msgstr "Qualquer um"
 
-#: osticket/include/staff/tickets.inc.php:583
+#: osticket/include/staff/tickets.inc.php:585
 msgid "Date Range"
 msgstr "Intervalo de Data"
 
