@@ -333,7 +333,12 @@ class DynamicFormField extends VerySimpleModel {
         # Validates a user-input into an instance of this field on a dynamic
         # form
         if (!is_array($this->_errors)) $this->_errors = array();
-        # Returns array of errors
+
+        if ($this->_validated)
+            return;
+        else
+            $this->_validated = true;
+
         if ($this->get('required'))
             if (!$value)
                 $this->_errors[] = $this->getLabel() . ' is a required field';
@@ -466,6 +471,13 @@ class DynamicFormEntry extends VerySimpleModel {
                 $v->entry = $this;
         }
         return $this->_values;
+    }
+
+    function getAnswer($name) {
+        foreach ($this->getAnswers() as $ans)
+            if ($ans->getField()->get('name') == $name)
+                return $ans->getValue();
+        return null;
     }
 
     function errors() {
