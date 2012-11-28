@@ -28,6 +28,9 @@ require_once INCLUDE_DIR.'/class.ajax.php';
 $dispatcher = patterns('',
     url('^/config/', patterns('ajax.config.php:ConfigAjaxAPI',
         url_get('^client', 'client')
+    )),
+    url('^/form/', patterns('ajax.forms.php:DynamicFormsAjaxAPI',
+        url_get('^help-topic/(?P<id>\d+)$', 'getClientFormsForHelpTopic')
     ))
 );
 print $dispatcher->resolve($_SERVER['PATH_INFO']);

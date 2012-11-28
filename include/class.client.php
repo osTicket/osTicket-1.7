@@ -40,11 +40,15 @@ class Client {
         if(!$id && !($id=$this->getId()))
             return false;
 
-        $sql='SELECT ticket_id, ticketID, name, email, phone, phone_ext '
-            .' FROM '.TICKET_TABLE
-            .' WHERE ticketID='.db_input($id);
+        $sql='SELECT ticket.ticket_id, ticketID, email.value as email, phone, phone_ext '
+            .' FROM '.TICKET_TABLE.' ticket '
+            .' LEFT JOIN '.DYNAMIC_FORM_ENTRY_TABLE.' entry ON entry.ticket_id = ticket.ticket_id '
+            .' LEFT JOIN '.DYNAMIC_FORM_ANSWER_TABLE.' email ON email.entry_id = entry.id '
+            .' LEFT JOIN '.DYNAMIC_FORM_FIELD_TABLE.' field ON email.field_id = field.id '
+            .' WHERE field.name = "email" AND ticketID='.db_input($id);
+
         if($email)
-            $sql.=' AND email='.db_input($email);
+            $sql.=' AND email.value = '.db_input($email);
 
         if(!($res=db_query($sql)) || !db_num_rows($res))
             return NULL;
@@ -53,12 +57,17 @@ class Client {
         $this->id         = $this->ht['ticketID']; //placeholder
         $this->ticket_id  = $this->ht['ticket_id'];
         $this->ticketID   = $this->ht['ticketID'];
-        $this->fullname   = ucfirst($this->ht['name']);
+
+        $entry = DynamicFormEntry::forTicket($this->ticket_id);
+        foreach ($entry as $form)
+            if ($form->getAnswer('name'))
+                $this->fullname = $form->getAnswer('name');
+
         $this->username   = $this->ht['email'];
         $this->email      = $this->ht['email'];
 
         $this->stats = array();
-      
+
         return($this->id);
     }
 
@@ -116,9 +125,12 @@ class Client {
 
     /* ------------- Static ---------------*/
     function getLastTicketIdByEmail($email) {
-        $sql='SELECT ticketID FROM '.TICKET_TABLE
-            .' WHERE email='.db_input($email)
-            .' ORDER BY created '
+        $sql='SELECT ticket.ticketID '.TICKET_TABLE.' ticket '
+            .' LEFT JOIN '.DYNAMIC_FORM_ENTRY_TABLE.' entry ON entry.ticket_id = ticket.ticket_id '
+            .' LEFT JOIN '.DYNAMIC_FORM_ANSWER_TABLE.' email ON email.entry_id = entry.id '
+            .' LEFT JOIN '.DYNAMIC_FORM_FIELD_TABLE.' field ON email.field_id = field.id '
+            .' WHERE field.name = "email" AND email.value = '.db_input($email)
+            .' ORDER BY ticket.created '
             .' LIMIT 1';
         if(($res=db_query($sql)) && db_num_rows($res))
             list($tid) = db_fetch_row($res);

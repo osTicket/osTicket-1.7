@@ -524,9 +524,9 @@ class Ticket {
 
         $sql='SELECT count(*)  FROM '.TICKET_TABLE.' ticket '
             .' LEFT JOIN '.DYNAMIC_FORM_ENTRY_TABLE.' entry ON entry.ticket_id = ticket.ticket_id '
-            .' LEFT JOIN '.DYNAMIC_FORM_ANSWER_TABLE.' answer ON answer.entry_id = entry.id '
-            .' LEFT JOIN '.DYNAMIC_FORM_FIELD_TABLE.' field ON answer.field_id = field.id '
-            .' WHERE field.name = "email" AND answer.value = '.db_input($this->getEmail());
+            .' LEFT JOIN '.DYNAMIC_FORM_ANSWER_TABLE.' email ON email.entry_id = entry.id '
+            .' LEFT JOIN '.DYNAMIC_FORM_FIELD_TABLE.' field ON email.field_id = field.id '
+            .' WHERE field.name = "email" AND email.value = '.db_input($this->getEmail());
 
         return db_result(db_query($sql));
     }
@@ -1890,11 +1890,14 @@ class Ticket {
         if(!$extId || !is_numeric($extId)) 
             return 0;
 
-        $sql ='SELECT  ticket_id FROM '.TICKET_TABLE.' ticket '
-             .' WHERE ticketID='.db_input($extId);
+        $sql ='SELECT ticket.ticket_id FROM '.TICKET_TABLE.' ticket '
+             .' LEFT JOIN '.DYNAMIC_FORM_ENTRY_TABLE.' entry ON entry.ticket_id = ticket.ticket_id '
+             .' LEFT JOIN '.DYNAMIC_FORM_ANSWER_TABLE.' email ON email.entry_id = entry.id '
+             .' LEFT JOIN '.DYNAMIC_FORM_FIELD_TABLE.' field ON email.field_id = field.id '
+             .' WHERE field.name = "email" AND ticketID='.db_input($extId);
         
         if($email)
-            $sql.=' AND email='.db_input($email);
+            $sql .= ' AND email.value = '.db_input($email);
 
         if(($res=db_query($sql)) && db_num_rows($res))
             list($id)=db_fetch_row($res);
@@ -2003,7 +2006,10 @@ class Ticket {
                 ON (open.ticket_id=ticket.ticket_id AND open.status=\'open\') '
             .' LEFT JOIN '.TICKET_TABLE.' closed
                 ON (closed.ticket_id=ticket.ticket_id AND closed.status=\'closed\')'
-            .' WHERE ticket.email='.db_input($email);
+            .' LEFT JOIN '.DYNAMIC_FORM_ENTRY_TABLE.' entry ON entry.ticket_id = ticket.ticket_id '
+            .' LEFT JOIN '.DYNAMIC_FORM_ANSWER_TABLE.' email ON email.entry_id = entry.id '
+            .' LEFT JOIN '.DYNAMIC_FORM_FIELD_TABLE.' field ON email.field_id = field.id '
+            .' WHERE field.name = "email" AND email.value = '.db_input($email);
 
         return db_fetch_array(db_query($sql));
     }

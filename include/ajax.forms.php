@@ -13,13 +13,20 @@ class DynamicFormsAjaxAPI extends AjaxController {
         }
     }
 
-    function getFormsForHelpTopic($topic_id) {
+    function getFormsForHelpTopic($topic_id, $client=false) {
         $topic = Topic::lookup($topic_id);
         foreach (DynamicFormGroup::lookup($topic->ht['form_group_id'])->getForms() as $form) {
             $set=$form;
             $form=$form->getForm();
-            include(STAFFINC_DIR . 'templates/dynamic-form.tmpl.php');
+            if ($client)
+                include(CLIENTINC_DIR . 'templates/dynamic-form.tmpl.php');
+            else
+                include(STAFFINC_DIR . 'templates/dynamic-form.tmpl.php');
         }
+    }
+
+    function getClientFormsForHelpTopic($topic_id) {
+        return $this->getFormsForHelpTopic($topic_id, true);
     }
 
     function getFieldConfiguration($field_id) {

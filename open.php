@@ -14,6 +14,8 @@
     vim: expandtab sw=4 ts=4 sts=4:
 **********************************************************************/
 require('client.inc.php');
+require_once(INCLUDE_DIR.'class.dynamic_forms.php');
+
 define('SOURCE','Web'); //Ticket source.
 $inc='open.inc.php';    //default include.
 $errors=array();
@@ -28,6 +30,24 @@ if($_POST):
         elseif(strcmp($_SESSION['captcha'],md5($_POST['captcha'])))
             $errors['captcha']='Invalid - try again!';
     }
+    $interest=array('name','email','subject');
+    $topic=Topic::lookup($_POST['topicId']);
+    $forms=DynamicFormGroup::lookup($topic->ht['form_group_id'])->getForms();
+    foreach ($forms as $idx=>$f) {
+        $form=$f->getForm()->instanciate();
+        $form->set('sort', $f->get('sort'));
+        # Collect name, email, and subject address for banning and such
+        foreach ($form->getAnswers() as $answer) {
+            $fname = $answer->getField()->get('name');
+            if (in_array($fname, $interest) and !isset($_POST[$fname]))
+                # XXX: Assigning to _POST not considered great PHP
+                #      coding style
+                $_POST[$fname] = $answer->getField()->getClean();
+        }
+        $forms[$idx] = $form;
+        if (!$form->isValid())
+            $errors = array_merge($errors, $form->errors());
+    }
 
     //Ticket::create...checks for errors..
     if(($ticket=Ticket::create($_POST,$errors,SOURCE))){
@@ -38,6 +58,10 @@ if($_POST):
                 && ($files=Format::files($_FILES['attachments']))) {
             $ost->validateFileUploads($files); //Validator sets errors - if any.
             $ticket->uploadAttachments($files, $ticket->getLastMsgId(), 'M');
+        }
+        foreach ($forms as $f) {
+            $f->set('ticket_id', $ticket->getId());
+            $f->save();
         }
 
         //Logged in...simply view the newly created ticket.
