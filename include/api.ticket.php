@@ -8,15 +8,25 @@ class TicketController extends ApiController {
     # Supported arguments -- anything else is an error. These items will be
     # inspected _after_ the fixup() method of the ApiXxxDataParser classes
     # so that all supported input formats should be supported
-    function getRequestStructure($format) {
+    function getRequestStructure($format, $data=null) {
         $supported = array(
             "alert", "autorespond", "source", "topicId",
-            "name", "email", "subject", "phone", "phone_ext",
+            "phone", "phone_ext",
             "attachments" => array("*" => 
                 array("name", "type", "data", "encoding")
             ), 
             "message", "ip", "priorityId"
         );
+        # Fetch dynamic form field names for the given help topic and add
+        # the names to the supported request structure
+        if (isset($data['topicId'])) {
+            $topic=Topic::lookup($data['topicId']);
+            $formset=DynamicFormGroup::lookup($topic->ht['form_group_id']);
+            foreach ($formset->getForms() as $form)
+                foreach ($form->getForm()->getFields() as $field)
+                    $supported[] = $field->get('name');
+        }
+
         if ($format == "xml") return array("ticket" => $supported);
         else return $supported;
     }
@@ -50,6 +60,22 @@ class TicketController extends ApiController {
 
         # Create the ticket with the data (attempt to anyway)
         $errors = array();
+
+        $topic=Topic::lookup($data['topicId']);
+        $forms=DynamicFormGroup::lookup($topic->ht['form_group_id'])->getForms();
+        foreach ($forms as $idx=>$f) {
+            $forms[$idx] = $form = $f->getForm()->instanciate();
+            $form->set('sort', $f->get('sort'));
+            # Collect name, email, and subject address for banning and such
+            foreach ($form->getFields() as $field) {
+                $fname = $field->get('name');
+                if (isset($data[$fname]))
+                    $field->value = $data[$fname];
+            }
+            if (!$form->isValid())
+                $errors = array_merge($errors, $form->errors());
+        }
+
         $ticket = Ticket::create($data, $errors, $source, $autorespond, 
             $alert);
 
@@ -59,6 +85,12 @@ class TicketController extends ApiController {
                 . Format::array_implode(": ", "\n", $errors));
         } elseif (!$ticket) {
             Http::response(500, "Unable to create new ticket: unknown error");
+        }
+
+        # Save dynamic forms
+        foreach ($forms as $f) {
+            $f->set('ticket_id', $ticket->getId());
+            $f->save();
         }
 
         # Save attachment(s)
