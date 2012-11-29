@@ -871,9 +871,8 @@ function get_dynamic_field_types() {
 class SelectionField extends DynamicFormField {
     function getList() {
         if (!$this->_list) {
-            $type = get_dynamic_field_types();
-            $type = $type[$this->get('type')];
-            $list_id = $type[2];
+            $list_id = explode('-', $this->get('type'));
+            $list_id = $list_id[1];
             $this->_list = DynamicList::lookup($list_id);
         }
         return $this->_list;
@@ -888,7 +887,14 @@ class SelectionField extends DynamicFormField {
     }
 
     function to_php($id) {
-        return DynamicListItem::lookup($id);
+        $item = DynamicListItem::lookup($id);
+        # Attempt item lookup by name too
+        if (!$item) {
+            $item = DynamicListItem::find(array('value'=>$id,
+                        'list_id'=>$this->getList()->get('id')));
+            $item = (count($item) ? $item[0] : null;
+        }
+        return $item;
     }
 
     function to_database($item) {
