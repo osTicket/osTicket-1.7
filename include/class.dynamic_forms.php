@@ -892,7 +892,7 @@ class SelectionField extends DynamicFormField {
         if (!$item) {
             $item = DynamicListItem::find(array('value'=>$id,
                         'list_id'=>$this->getList()->get('id')));
-            $item = (count($item) ? $item[0] : null;
+            $item = (count($item)) ? $item[0] : null;
         }
         return $item;
     }
