@@ -1,11 +1,11 @@
 <?php
 
 $info=array();
-if($form && $_REQUEST['a']!='add') {
+if($group && $_REQUEST['a']!='add') {
     $title = 'Update dynamic form';
     $action = 'update';
     $submit_text='Save Changes';
-    $info = $form->ht;
+    $info = $group->ht;
     $newcount=2;
 } else {
     $title = 'Add new dynamic form';
@@ -24,104 +24,81 @@ $info=Format::htmlchars(($errors && $_POST)?$_POST:$info);
     <table class="form_table" width="940" border="0" cellspacing="0" cellpadding="2">
     <thead>
         <tr>
-            <th colspan="2">
+            <th colspan="4">
                 <h4><?php echo $title; ?></h4>
-                <em>Dynamic forms are used to allow custom data to be
-                associated with tickets</em>
+                <em>Dynamic forms are used to combine several form sections
+                into a larger form for use in the ticketing system. This
+                allows for common sections to be reused among various forms
+                </em>
             </th>
         </tr>
     </thead>
     <tbody>
         <tr>
             <td width="180" class="required">Title:</td>
-            <td><input type="text" name="title" value="<?php echo $info['title']; ?>"/></td>
+            <td colspan="3"><input size="40" type="text" name="title"
+                value="<?php echo $info['title']; ?>"/></td>
         </tr>
         <tr>
             <td width="180">Description:</td>
-            <td><textarea name="notes" rows="3" cols="40"><?php
+            <td colspan="3"><textarea name="notes" rows="3" cols="40"><?php
                 echo $info['notes']; ?></textarea>
             </td>
         </tr>
     </tbody>
-    </table>
-    <table class="form_table" width="940" border="0" cellspacing="0" cellpadding="2">
-    <thead>
-        <tr>
-            <th colspan="6">
-                <em>Form Fields</em>
-            </th>
-        </tr>
-        <tr>
-            <th>Delete</th>
-            <th>Order</th>
-            <th>Label</th>
-            <th>Type</th>
-            <th>Name</th>
-            <th>Required</th>
-        </tr>
-    </thead>
     <tbody>
-    <?php if ($form) foreach ($form->getFields() as $f) { 
-        $id = $f->get('id'); ?>
-        <tr>
-            <td><?php if ($f->get('editable')) { ?>
-                <input type="checkbox" name="delete-<?php echo $id; ?>"/>
-            <?php } ?></td>
-            <td><input type="text" size="4" name="_sort-<?php echo $id; ?>"
-                value="<?php echo $f->get('sort'); ?>"/></td>
-            <td><input type="text" size="48" name="_label-<?php echo $id; ?>"
-                value="<?php echo $f->get('label'); ?>"/></td>
-            <td><select name="_type-<?php echo $id; ?>">
-                <?php foreach (get_dynamic_field_types() as $type=>$nfo) { ?>
-                <option value="<?php echo $type; ?>" <?php
-                    if ($f->get('type') == $type) echo 'selected="selected"'; ?>>
-                    <?php echo $nfo[0]; ?></option>
-                <?php } ?>
-            </select>
-            <?php if ($f->isConfigurable()) { ?>
-                <a class="action-button" style="float:none"
-                    href="ajax.php/form/field-config/<?php
-                        echo $f->get('id'); ?>"
-                    onclick="javascript:
-                        $('#overlay').show();
-                        $('#field-config .body').load(this.href);
-                        $('#field-config').show();
-                        return false;
-                    "><i class="icon-edit"></i> Config</a>
-            <?php } ?></td>
-            <td><?php if ($f->get('editable')) { ?>
-                <input type="text" size="24" name="_name-<?php echo $id; ?>"
-                    value="<?php echo $f->get('name'); ?>"/>
-                <?php } else echo $f->get('name'); ?></td>
-            <td><input type="checkbox" name="required-<?php echo $id; ?>"
-                <?php if (!$f->get('editable')) { ?>disabled="disabled" <?php }
-                      if ($f->get('required')) echo 'checked="checked"'; ?>/></td>
+       <tr><th>Delete | Sort</th><th>Title</th><th>Form
+       name</th><th>Instructions</th></tr>
+       <?php if ($group) foreach ($group->getForms() as $formatt) { 
+           $form = $formatt->getForm(); ?>
+           <tr>
+               <td><input type="checkbox" name="delete-<?php echo $formatt->get('id'); ?>"/> <em>|</em>
+                   <input type="text" size="4" name="sort-<?php echo $formatt->get('id'); ?>"
+                       value="<?php echo $formatt->get('sort'); ?>"/>
+               </td><td>
+                   <input type="text" name="title-<?php echo $formatt->get('id'); ?>" size="16"
+                       value="<?php echo $formatt->get('title'); ?>"/>
+               </td><td>
+                   <select name="section_id-<?php echo $formatt->get('id'); ?>">
+                   <?php foreach (DynamicFormSection::all() as $form) { ?>
+                       <option value="<?php echo $form->get('id'); ?>" <?php
+                            if ($formatt->get('section_id') == $form->get('id'))
+                                echo 'selected="selected"'; ?>>
+                           <?php echo $form->get('title'); ?>
+                       </option>
+                   <?php } ?>
+                   </select>
+               </td><td>
+                   <textarea rows="2" cols="40" name="instructions-<?php echo $formatt->get('id'); ?>"
+                        ><?php echo $formatt->get('instructions') ?></textarea>
+               </td>
+           </tr>
+       <?php } 
+       for ($i=0; $i<$newcount; $i++) { ?>
+       <tr>
+           <td><em>add</em>
+               <input type="text" name="sort-new-<?php echo $i; ?>" size="4"/>
+           </td><td>
+               <input type="text" name="title-new-<?php echo $i; ?>" size="16"/>
+           </td><td>
+               <select name="section_id-new-<?php echo $i; ?>">
+                   <option value="0">&mdash; Select Form &mdash;</option>
+               <?php foreach (DynamicFormSection::all() as $form) { ?>
+                   <option value="<?php echo $form->get('id'); ?>">
+                       <?php echo $form->get('title'); ?>
+                   </option>
+               <?php } ?>
+               </select>
+            </td><td><textarea rows="2" cols="40"
+                name="instructions-new-<?php echo $i; ?>"></textarea>
+            </td>
         </tr>
-    <?php
-    } 
-    for ($i=0; $i<$newcount; $i++) { ?>
-            <td><em>add</em></td>
-            <td><input type="text" size="4" name="sort-new-<?php echo $i; ?>"/></td>
-            <td><input type="text" size="48" name="label-new-<?php echo $i; ?>"/></td>
-            <td><select name="type-new-<?php echo $i; ?>">
-                <?php foreach (get_dynamic_field_types() as $type=>$nfo) { ?>
-                <option value="<?php echo $type; ?>"> 
-                    <?php echo $nfo[0]; ?></option>
-                <?php } ?>
-            </select></td>
-            <td><input type="text" size="24" name="name-new-<?php echo $i; ?>"/></td>
-            <td><input type="checkbox" name="required-new-<?php echo $i; ?>"/></td>
-        </tr>
-    <?php } ?>
+        <?php } ?>
     </tbody>
-    </table>
+</table>
 <p style="padding-left:225px;">
     <input type="submit" name="submit" value="<?php echo $submit_text; ?>">
     <input type="reset"  name="reset"  value="Reset">
     <input type="button" name="cancel" value="Cancel" onclick='window.location.href="?"'>
 </p>
 </form>
-
-<div style="display:none;" class="dialog" id="field-config">
-    <div class="body"></div>
-</div>

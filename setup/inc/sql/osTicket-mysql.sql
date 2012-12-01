@@ -164,8 +164,8 @@ CREATE TABLE `%TABLE_PREFIX%config` (
   KEY `isoffline` (`isonline`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
 
-DROP TABLE IF EXISTS `%TABLE_PREFIX%dynamic_form_group`;
-CREATE TABLE `%TABLE_PREFIX%dynamic_form_group` (
+DROP TABLE IF EXISTS `%TABLE_PREFIX%dynamic_formset`;
+CREATE TABLE `%TABLE_PREFIX%dynamic_formset` (
     `id` int(11) unsigned auto_increment,
     `title` varchar(255) NOT NULL,
     `notes` text,
@@ -174,11 +174,11 @@ CREATE TABLE `%TABLE_PREFIX%dynamic_form_group` (
     PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
 
-DROP TABLE IF EXISTS `%TABLE_PREFIX%dynamic_form_group_forms`;
-CREATE TABLE `%TABLE_PREFIX%dynamic_form_group_forms` (
+DROP TABLE IF EXISTS `%TABLE_PREFIX%dynamic_formset_sections`;
+CREATE TABLE `%TABLE_PREFIX%dynamic_formset_sections` (
     `id` int(11) unsigned NOT NULL auto_increment,
-    `group_id` int(11) NOT NULL,
-    `form_id` int(11) NOT NULL,
+    `formset_id` int(11) NOT NULL,
+    `section_id` int(11) NOT NULL,
     `title` varchar(255),
     `instructions` text,
     -- Allow more than one form, sorted in this order
@@ -186,7 +186,7 @@ CREATE TABLE `%TABLE_PREFIX%dynamic_form_group_forms` (
     PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
  
-DROP TABLE IF EXISTS `%TABLE_PREFIX%dynamic_form`;
+DROP TABLE IF EXISTS `%TABLE_PREFIX%dynamic_form_section`;
 CREATE TABLE `%TABLE_PREFIX%dynamic_form` (
     `id` int(11) unsigned NOT NULL auto_increment,
     `title` varchar(255) NOT NULL,
@@ -199,7 +199,7 @@ CREATE TABLE `%TABLE_PREFIX%dynamic_form` (
 DROP TABLE IF EXISTS `%TABLE_PREFIX%dynamic_form_field`;
 CREATE TABLE `%TABLE_PREFIX%dynamic_form_field` (
     `id` int(11) unsigned NOT NULL auto_increment,
-    `form_id` int(11) unsigned NOT NULL,
+    `section_id` int(11) unsigned NOT NULL,
     `type` varchar(255) NOT NULL DEFAULT 'text',
     `label` varchar(255) NOT NULL,
     `required` tinyint(1) NOT NULL DEFAULT 0,
@@ -216,7 +216,7 @@ CREATE TABLE `%TABLE_PREFIX%dynamic_form_field` (
 DROP TABLE IF EXISTS `%TABLE_PREFIX%dynamic_form_entry`;
 CREATE TABLE `%TABLE_PREFIX%dynamic_form_entry` (
     `id` int(11) unsigned NOT NULL auto_increment,
-    `form_id` int(11) unsigned NOT NULL,
+    `section_id` int(11) unsigned NOT NULL,
     `ticket_id` int(11) unsigned,
     `sort` int(11) unsigned NOT NULL DEFAULT 1,
     `created` datetime NOT NULL,
@@ -491,7 +491,7 @@ CREATE TABLE `%TABLE_PREFIX%help_topic` (
   `staff_id` int(10) unsigned NOT NULL default '0',
   `team_id` int(10) unsigned NOT NULL default '0',
   `sla_id` int(10) unsigned NOT NULL default '0',
-  `form_group_id` int(11) unsigned NOT NULL default '0',
+  `formset_id` int(11) unsigned NOT NULL default '0',
   `topic` varchar(32) NOT NULL default '',
   `notes` text,
   `created` datetime NOT NULL,

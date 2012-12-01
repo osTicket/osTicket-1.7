@@ -209,8 +209,8 @@ class AdminNav extends StaffNav{
                     $subnav[]=array('desc'=>'API&nbsp;Keys','href'=>'apikeys.php','iconclass'=>'api');
                     break;
                 case 'forms':
-                    $subnav[]=array('desc'=>'Forms&nbsp;Groups','href'=>'dynamic-form-groups.php','iconclass'=>'');
                     $subnav[]=array('desc'=>'Dynamic&nbsp;Forms','href'=>'dynamic-forms.php','iconclass'=>'');
+                    $subnav[]=array('desc'=>'Form&nbsp;Sections','href'=>'dynamic-form-sections.php','iconclass'=>'');
                     $subnav[]=array('desc'=>'Dynamic&nbsp;Lists','href'=>'dynamic-lists.php','iconclass'=>'');
                     break;
                 case 'emails':

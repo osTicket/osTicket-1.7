@@ -203,7 +203,7 @@ class SqlFunction {
  * Form template, used for designing the custom form and for entering custom
  * data for a ticket
  */
-class DynamicForm extends VerySimpleModel {
+class DynamicFormSection extends VerySimpleModel {
 
     function __construct($row) {
         parent::__construct($row);
@@ -214,7 +214,7 @@ class DynamicForm extends VerySimpleModel {
     function getFields() {
         if (!$this->_fields) {
             $this->_fields = array();
-            foreach (DynamicFormField::find(array('form_id'=>$this->id)) as $f)
+            foreach (DynamicFormField::find(array('section_id'=>$this->id)) as $f)
                 $this->_fields[] = $f->getImpl();
         }
         return $this->_fields;
@@ -262,32 +262,32 @@ class DynamicForm extends VerySimpleModel {
     }
 
     function instanciate() {
-        return DynamicFormEntry::create(array('form_id'=>$this->get('id')));
+        return DynamicFormEntry::create(array('section_id'=>$this->get('id')));
     }
 
     function all($sort='title') {
-        return parent::all(get_class(), DYNAMIC_FORM_TABLE, $sort);
+        return parent::all(get_class(), DYNAMIC_FORM_SEC_TABLE, $sort);
     }
 
     function count($where=false) {
-        return parent::count(get_class(), DYNAMIC_FORM_TABLE, $where);
+        return parent::count(get_class(), DYNAMIC_FORM_SEC_TABLE, $where);
     }
 
     function find($where, $sort='title') {
-        return parent::find(get_class(), DYNAMIC_FORM_TABLE, $where,
+        return parent::find(get_class(), DYNAMIC_FORM_SEC_TABLE, $where,
             $sort);
     }
 
     function lookup($id) {
         return ($id && is_numeric($id)
-            && ($r=parent::lookup(get_class(), DYNAMIC_FORM_TABLE, array('id'=>$id)))
+            && ($r=parent::lookup(get_class(), DYNAMIC_FORM_SEC_TABLE, array('id'=>$id)))
             && $r->get('id')==$id)?$r:null;
     }
 
     function save() {
         if (count($this->dirty))
             $this->set('updated', new SqlFunction('NOW'));
-        return parent::save(DYNAMIC_FORM_TABLE, 'id', true);
+        return parent::save(DYNAMIC_FORM_SEC_TABLE, 'id', true);
     }
 
     function create($ht=false) {
@@ -488,7 +488,7 @@ class DynamicFormEntry extends VerySimpleModel {
 
     function getForm() {
         if (!$this->_form)
-            $this->_form = DynamicForm::lookup($this->get('form_id'));
+            $this->_form = DynamicFormSection::lookup($this->get('section_id'));
         return $this->_form;
     }
 
@@ -611,12 +611,12 @@ class DynamicFormEntryAnswer extends VerySimpleModel {
     }
 }
 
-class DynamicFormGroup extends VerySimpleModel {
+class DynamicFormset extends VerySimpleModel {
 
     function getForms() {
         if (!$this->_forms)
-            $this->_forms = DynamicFormGroupForms::find(
-                    array('group_id'=>$this->get('id')));
+            $this->_forms = DynamicFormsetSections::find(
+                    array('formset_id'=>$this->get('id')));
         return $this->_forms;
     }
 
@@ -628,27 +628,27 @@ class DynamicFormGroup extends VerySimpleModel {
     }
 
     function all($sort='title') {
-        return parent::all(get_class(), DYNAMIC_FORM_GROUP_TABLE, $sort);
+        return parent::all(get_class(), DYNAMIC_FORMSET_TABLE, $sort);
     }
 
     function find($where, $sort='sort') {
-        return parent::find(get_class(), DYNAMIC_FORM_GROUP_TABLE, $where,
+        return parent::find(get_class(), DYNAMIC_FORMSET_TABLE, $where,
             $sort);
     }
 
     function lookup($id) {
-        return parent::lookup(get_class(), DYNAMIC_FORM_GROUP_TABLE,
+        return parent::lookup(get_class(), DYNAMIC_FORMSET_TABLE,
             array('id'=>$id));
     }
 
     function count($where=false) {
-        return parent::count(get_class(), DYNAMIC_FORM_GROUP_TABLE, $where);
+        return parent::count(get_class(), DYNAMIC_FORMSET_TABLE, $where);
     }
 
     function save() {
         if (count($this->dirty))
             $this->set('updated', new SqlFunction('NOW'));
-        return parent::save(DYNAMIC_FORM_GROUP_TABLE, array('id'));
+        return parent::save(DYNAMIC_FORMSET_TABLE, array('id'));
     }
 
     function create($ht=false) {
@@ -658,21 +658,21 @@ class DynamicFormGroup extends VerySimpleModel {
     }
 
     function delete() {
-        return parent::delete(DYNAMIC_FORM_GROUP_TABLE,
+        return parent::delete(DYNAMIC_FORMSET_TABLE,
                 array('id'));
     }
 }
 
-class DynamicFormGroupForms extends VerySimpleModel {
+class DynamicFormsetSections extends VerySimpleModel {
     function find($where, $sort='sort') {
-        return parent::find(get_class(), DYNAMIC_FORM_GROUP_FORM_TABLE, $where,
+        return parent::find(get_class(), DYNAMIC_FORMSET_SEC_TABLE, $where,
             $sort);
     }
 
     function getForm() {
-        if (!$this->_form)
-            $this->_form = DynamicForm::lookup($this->get('form_id'));
-        return $this->_form;
+        if (!$this->_section)
+            $this->_section = DynamicFormSection::lookup($this->get('section_id'));
+        return $this->_section;
     }
 
     function getTitle() {
@@ -684,7 +684,7 @@ class DynamicFormGroupForms extends VerySimpleModel {
     }
 
     function delete() {
-        return parent::delete(DYNAMIC_FORM_GROUP_FORM_TABLE,
+        return parent::delete(DYNAMIC_FORMSET_SEC_TABLE,
                 array('id'));
     }
 
@@ -693,7 +693,7 @@ class DynamicFormGroupForms extends VerySimpleModel {
     }
 
     function save() {
-        return parent::save(DYNAMIC_FORM_GROUP_FORM_TABLE, array('id'));
+        return parent::save(DYNAMIC_FORMSET_SEC_TABLE, array('id'));
     }
 }
 

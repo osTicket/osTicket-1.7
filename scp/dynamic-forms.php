@@ -2,70 +2,62 @@
 require('admin.inc.php');
 require_once(INCLUDE_DIR."/class.dynamic_forms.php");
 
-$form=null;
-if($_REQUEST['id'] && !($form=DynamicForm::lookup($_REQUEST['id'])))
+$group=null;
+if($_REQUEST['id'] && !($group=DynamicFormset::lookup($_REQUEST['id'])))
     $errors['err']='Unknown or invalid dynamic form ID.';
 
 if($_POST) {
     $fields = array('title', 'notes');
-    $required = array('name','email','subject');
     switch(strtolower($_POST['do'])) {
         case 'update':
             foreach ($fields as $f)
                 if (isset($_POST[$f]))
-                    $form->set($f, $_POST[$f]);
-            if ($form->isValid())
-                $form->save();
-            foreach ($form->getFields() as $field) {
-                $id = $field->get('id');
-                if ($field->get('editable') && $_POST["delete-$id"] == 'on') {
-                    $field->delete();
+                    $group->set($f, $_POST[$f]);
+            if ($group->isValid())
+                $group->save();
+            foreach ($group->getForms() as $form) {
+                $id = $form->get('id');
+                if ($_POST["delete-$id"] == 'on') {
+                    $form->delete();
                     continue;
                 }
-                foreach (array('sort','label','type','name') as $f)
-                    if (isset($_POST["_$f-$id"]))
-                        $field->set($f, $_POST["_$f-$id"]);
-                # TODO: make sure all help topics still have all required fields
-                if ($field->get('editable'))
-                    $field->set('required', $_POST["required-$id"] == 'on' ?  1 : 0);
-                # Core fields are forced required
-                if (in_array($field->get('name'), $required))
-                    $field->set('required', 1);
-                if ($field->isValid())
-                    $field->save();
+                foreach (array('sort','section_id','title','instructions') as $f)
+                    if (isset($_POST["$f-$id"]))
+                        $form->set($f, $_POST["$f-$id"]);
+                if ($form->isValid())
+                    $form->save();
             }
             break;
         case 'add':
-            $form = DynamicForm::create(array(
+            $group = DynamicFormset::create(array(
                 'title'=>$_POST['title'],
                 'notes'=>$_POST['notes']));
-            if ($form->isValid())
-                $form->save();
+            if ($group->isValid())
+                $group->save();
             break;
     }
 
-    if ($form) {
+    if ($group) {
         for ($i=0; isset($_POST["sort-new-$i"]); $i++) {
-            if (!$_POST["label-new-$i"])
+            if (!$_POST["section_id-new-$i"])
                 continue;
-            $field = DynamicFormField::create(array(
-                'form_id'=>$form->get('id'),
+            $field = DynamicFormsetSections::create(array(
+                'formset_id'=>$group->get('id'),
                 'sort'=>$_POST["sort-new-$i"],
-                'label'=>$_POST["label-new-$i"],
-                'type'=>$_POST["type-new-$i"],
-                'name'=>$_POST["name-new-$i"],
-                'required'=>$_POST["required-new-$i"] == 'on' ? 1 : 0
+                'title'=>$_POST["title-new-$i"],
+                'section_id'=>$_POST["section_id-new-$i"],
+                'instructions'=>$_POST["instructions-new-$i"]
             ));
             if ($field->isValid())
                 $field->save();
         }
         # Invalidate field cache
-        $form->_fields = false;
+        $group->_forms = false;
     }
 }
 
 $page='dynamic-forms.inc.php';
-if($form || ($_REQUEST['a'] && !strcasecmp($_REQUEST['a'],'add')))
+if($group || ($_REQUEST['a'] && !strcasecmp($_REQUEST['a'],'add')))
     $page='dynamic-form.inc.php';
 
 $nav->setTabActive('forms');

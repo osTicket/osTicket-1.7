@@ -164,10 +164,10 @@
     define('FILTER_TABLE',TABLE_PREFIX.'filter');
     define('FILTER_RULE_TABLE',TABLE_PREFIX.'filter_rule');
     
-    define('DYNAMIC_FORM_TABLE',TABLE_PREFIX.'dynamic_form');
+    define('DYNAMIC_FORM_SEC_TABLE',TABLE_PREFIX.'dynamic_form_section');
     define('DYNAMIC_FORM_FIELD_TABLE',TABLE_PREFIX.'dynamic_form_field');
-    define('DYNAMIC_FORM_GROUP_TABLE',TABLE_PREFIX.'dynamic_form_group');
-    define('DYNAMIC_FORM_GROUP_FORM_TABLE',TABLE_PREFIX.'dynamic_form_group_forms');
+    define('DYNAMIC_FORMSET_TABLE',TABLE_PREFIX.'dynamic_formset');
+    define('DYNAMIC_FORMSET_SEC_TABLE',TABLE_PREFIX.'dynamic_formset_sections');
 
     define('DYNAMIC_LIST_TABLE',TABLE_PREFIX.'dynamic_list');
     define('DYNAMIC_LIST_ITEM_TABLE',TABLE_PREFIX.'dynamic_list_items');

@@ -21,7 +21,7 @@ class TicketController extends ApiController {
         # the names to the supported request structure
         if (isset($data['topicId'])) {
             $topic=Topic::lookup($data['topicId']);
-            $formset=DynamicFormGroup::lookup($topic->ht['form_group_id']);
+            $formset=DynamicFormset::lookup($topic->ht['formset_id']);
             foreach ($formset->getForms() as $form)
                 foreach ($form->getForm()->getFields() as $field)
                     $supported[] = $field->get('name');
@@ -62,7 +62,7 @@ class TicketController extends ApiController {
         $errors = array();
 
         $topic=Topic::lookup($data['topicId']);
-        $forms=DynamicFormGroup::lookup($topic->ht['form_group_id'])->getForms();
+        $forms=DynamicFormset::lookup($topic->ht['formset_id'])->getForms();
         foreach ($forms as $idx=>$f) {
             $forms[$idx] = $form = $f->getForm()->instanciate();
             $form->set('sort', $f->get('sort'));

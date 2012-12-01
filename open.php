@@ -32,7 +32,7 @@ if($_POST):
     }
     $interest=array('name','email','subject');
     $topic=Topic::lookup($_POST['topicId']);
-    $forms=DynamicFormGroup::lookup($topic->ht['form_group_id'])->getForms();
+    $forms=DynamicFormset::lookup($topic->ht['formset_id'])->getForms();
     foreach ($forms as $idx=>$f) {
         $form=$f->getForm()->instanciate();
         $form->set('sort', $f->get('sort'));

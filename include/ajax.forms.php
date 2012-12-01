@@ -5,7 +5,7 @@ require_once(INCLUDE_DIR . 'class.dynamic_forms.php');
 
 class DynamicFormsAjaxAPI extends AjaxController {
     function getForm($form_id) {
-        $form = DynamicForm::lookup($form_id);
+        $form = DynamicFormSection::lookup($form_id);
         if (!$form) return;
 
         foreach ($form->getFields() as $field) {
@@ -15,7 +15,7 @@ class DynamicFormsAjaxAPI extends AjaxController {
 
     function getFormsForHelpTopic($topic_id, $client=false) {
         $topic = Topic::lookup($topic_id);
-        foreach (DynamicFormGroup::lookup($topic->ht['form_group_id'])->getForms() as $form) {
+        foreach (DynamicFormset::lookup($topic->ht['formset_id'])->getForms() as $form) {
             $set=$form;
             $form=$form->getForm();
             if ($client)
