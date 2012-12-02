@@ -203,8 +203,12 @@ class Ticket2PDF extends FPDF
         $this->Ln(5);
 
         foreach (DynamicFormEntry::forTicket($ticket->getId()) as $form) {
-            $this->Ln(5);
+            $idx = 0;
             foreach ($form->getAnswers() as $a) {
+                if (in_array($a->getField()->get('name'),
+                            array('email','name','subject','phone')))
+                    continue;
+                if ($idx++ === 0) $this->Ln(5);
                 $this->SetFont('Arial', 'B', 11);
                 $this->Cell($l, 7, $a->getField()->get('label'), 1, 0, 'L', true);
                 $this->SetFont('');
