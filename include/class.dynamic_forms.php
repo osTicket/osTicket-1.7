@@ -855,6 +855,18 @@ class BooleanField extends DynamicFormField {
     function getWidget() {
         return new CheckboxWidget($this);
     }
+
+    function to_database($value) {
+        return ($value) ? '1' : '0';
+    }
+
+    function to_php($value) {
+        return ((int)$value) ? true : false;
+    }
+
+    function toString($value) {
+        return ($value) ? 'Yes' : 'No';
+    }
 }
 
 function get_dynamic_field_types() {
@@ -909,10 +921,19 @@ class SelectionField extends DynamicFormField {
             return $item->get('id');
         return null;
     }
+
+    function toString($item) {
+        return ($item) ? $item->toString() : '';
+    }
 }
 
 class Widget {
-    function Widget($field) {
+    function Widget() {
+        # Not called in PHP5
+        call_user_func_array(array(&$this, '__construct'), func_get_args());
+    }
+
+    function __construct($field) {
         $this->field = $field;
         $this->name = '_form-field-id-'.$field->get('id');
         if (isset($_POST[$this->name]))
@@ -996,15 +1017,23 @@ class SelectionWidget extends Widget {
 }
 
 class CheckboxWidget extends Widget {
+    function __construct($field) {
+        parent::__construct($field);
+        $this->name = '_field-checkboxes';
+    }
+
     function render() {
         ?>
-        <input type="checkbox" name="<?php echo $this->name; ?>" <?php
-            if ($this->value) echo 'checked="checked"'; ?>/>
+        <input type="checkbox" name="<?php echo $this->name; ?>[]" <?php
+            if ($this->value) echo 'checked="checked"'; ?> value="<?php
+            echo $this->field->get('id'); ?>"/>
         <?php
     }
 
     function getValue() {
-        return ($this->value == 'on' or $this->value) ? true : false;
+        if (count($_POST))
+            return @in_array($this->field->get('id'), $_POST[$this->name]);
+        return parent::getValue();
     }
 }
 
