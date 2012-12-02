@@ -875,6 +875,19 @@ class BooleanField extends DynamicFormField {
     }
 }
 
+class ChoiceField extends DynamicFormField {
+    function getWidget() {
+        return new ChoicesWidget($this);
+    }
+
+    function getConfigurationOptions() {
+        return array(
+            'choices'  =>  new TextareaField(array(
+                'id'=>1, 'label'=>'Choices', 'required'=>false, 'default'=>''))
+        );
+    }
+}
+
 function get_dynamic_field_types() {
     static $types = false;
     if (!$types) {
@@ -884,6 +897,7 @@ function get_dynamic_field_types() {
             'email' => array('Email Address', EmailField),
             'phone' => array('Phone Number', PhoneField),
             'bool' => array('Checkbox', BooleanField),
+            'choices' => array('Choices', ChoiceField),
         );
         foreach (DynamicList::all() as $list) {
             $types['list-'.$list->get('id')] = array('Selection: ' . $list->getPluralName(),
@@ -1004,21 +1018,60 @@ class PhoneNumberWidget extends Widget {
     }
 }
 
-class SelectionWidget extends Widget {
+class ChoicesWidget extends Widget {
     function render() {
-        ?>
-        <select name="<?php echo $this->name; ?>">
-            <?php
-                $name = $this->field->get('label'); ?>
-                <option value="">&mdash; Select <?php echo $name; ?> &mdash;</option>
+        $config = $this->field->getConfiguration();
+        // Determine the value for the default (the one listed if nothing is
+        // selected)
+        $def_key = $config['default'];
+        $choices = $this->getChoices();
+        $def_val = $choices[$def_key];
+        if (!$def_val)
+            $def_val = 'Select '.$this->field->get('label');
+        ?> <select name="<?php echo $this->name; ?>">
+            <option value="<?php echo $def_key; ?>">&mdash; <?php
+                echo $def_val; ?> &mdash;</option>
             <?php 
-            foreach ($this->field->getList()->getItems() as $i) { ?>
-            <option value="<?php echo $i->get('id'); ?>"
-                <?php if ($this->value == $i->get('id')) echo 'selected="selected"';
-                ?>><?php  echo $i->get('value') ?></option>
+            foreach ($choices as $key=>$name) {
+                if ($key == $def_key)
+                    continue; ?>
+                <option value="<?php echo $key; ?>"
+                <?php if ($this->value == $key) echo 'selected="selected"';
+                ?>><?php echo $name; ?></option>
             <?php } ?>
-        </select>
-        <?php
+        </select> <?php
+    }
+
+    function getChoices() {
+        while ($this->_choices === null) {
+            // Allow choices to be set in this->ht (for configurationOptions)
+            $this->_choices = $this->field->get('choices');
+            if ($this->_choices)
+                break;
+            else
+                $this->_choices = array();
+            $config = $this->field->getConfiguration();
+            $choices = explode("\n", $config['choices']);
+            foreach ($choices as $choice) { 
+                // Allow choices to be key: value
+                list($key, $val) = explode(':', $choice);
+                if ($val == null)
+                    $val = $key;
+                $this->_choices[trim($key)] = trim($val);
+            }
+        }
+        return $this->_choices;
+     }
+}
+
+class SelectionWidget extends ChoicesWidget {
+    function getChoices() {
+        if (!$this->_choices) {
+            $this->_choices = array();
+            foreach ($this->field->getList()->getItems() as $i)
+                $this->_choices[$i->get('id')] = $i->get('value');
+        }
+        return $this->_choices;
     }
 }
 
