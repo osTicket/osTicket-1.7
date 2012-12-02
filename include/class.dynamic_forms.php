@@ -359,6 +359,11 @@ class DynamicFormField extends VerySimpleModel {
         return $value;
     }
 
+    function toString($value) {
+        # Converts the PHP value to a display value
+        return $value;
+    }
+
     function getLabel() { return $this->get('label'); }
 
     function getImpl() {
@@ -595,12 +600,13 @@ class DynamicFormEntryAnswer extends VerySimpleModel {
     }
 
     function getValue() {
-        if (!$this->_value) {
+        if (!$this->_value)
             $this->_value = $this->getField()->to_php($this->get('value'));
-            if (is_object($this->_value))
-                $this->_value = $this->_value->toString();
-        }
         return $this->_value;
+    }
+
+    function toString() {
+        return $this->getField()->toString($this->getValue());
     }
 
     function find($where, $sort='field__sort') {

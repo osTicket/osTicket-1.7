@@ -71,7 +71,7 @@ $info=Format::htmlchars(($errors && $_POST)?$_POST:$info);
             <?php } ?></td>
             <td><input type="text" size="4" name="sort-<?php echo $id; ?>"
                 value="<?php echo $f->get('sort'); ?>"/></td>
-            <td><input type="text" size="48" name="label-<?php echo $id; ?>"
+            <td><input type="text" size="32" name="label-<?php echo $id; ?>"
                 value="<?php echo $f->get('label'); ?>"/></td>
             <td><select name="type-<?php echo $id; ?>">
                 <?php foreach (get_dynamic_field_types() as $type=>$nfo) { ?>
@@ -107,7 +107,7 @@ $info=Format::htmlchars(($errors && $_POST)?$_POST:$info);
     for ($i=0; $i<$newcount; $i++) { ?>
             <td><em>add</em></td>
             <td><input type="text" size="4" name="sort-new-<?php echo $i; ?>"/></td>
-            <td><input type="text" size="48" name="label-new-<?php echo $i; ?>"/></td>
+            <td><input type="text" size="32" name="label-new-<?php echo $i; ?>"/></td>
             <td><select name="type-new-<?php echo $i; ?>">
                 <?php foreach (get_dynamic_field_types() as $type=>$nfo) { ?>
                 <option value="<?php echo $type; ?>"> 

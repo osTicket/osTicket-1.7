@@ -273,7 +273,7 @@ foreach (DynamicFormEntry::forTicket($ticket->getId()) as $form) {
     echo $a->getField()->get('label');
                     ?>:</th>
                     <td><?php
-    echo $a->getValue();
+    echo $a->toString();
                     ?></td>
                 </tr>
                 <?php } ?>

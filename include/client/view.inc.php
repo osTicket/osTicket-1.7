@@ -70,7 +70,7 @@ foreach (DynamicFormEntry::forTicket($ticket->getId()) as $idx=>$form) {
         <tr>
         <th width="100"><?php echo $answer->getField()->get('label'); 
             ?>:</th>
-        <td><?php echo $answer->getValue(); ?></td>
+        <td><?php echo $answer->toString(); ?></td>
         </tr>
     <?php } ?>
     </table></td>
