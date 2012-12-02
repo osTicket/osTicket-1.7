@@ -26,11 +26,15 @@ if($_POST) {
                     if (isset($_POST["$f-$id"]))
                         $field->set($f, $_POST["$f-$id"]);
                 # TODO: make sure all help topics still have all required fields
-                if ($field->get('editable'))
+                if ($field->get('editable')) {
                     $field->set('required', $_POST["required-$id"] == 'on' ?  1 : 0);
-                # Core fields are forced required
-                if (in_array($field->get('name'), $required))
+                    $field->set('private', $_POST["private-$id"] == 'on' ?  1 : 0);
+                }
+                # Core fields are forced required and public
+                if (in_array($field->get('name'), $required)) {
                     $field->set('required', 1);
+                    $field->set('private', 0);
+                }
                 if ($field->isValid())
                     $field->save();
             }

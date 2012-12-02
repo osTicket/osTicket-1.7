@@ -48,7 +48,7 @@ $info=Format::htmlchars(($errors && $_POST)?$_POST:$info);
     <table class="form_table" width="940" border="0" cellspacing="0" cellpadding="2">
     <thead>
         <tr>
-            <th colspan="6">
+            <th colspan="7">
                 <em>Form Fields</em>
             </th>
         </tr>
@@ -58,6 +58,7 @@ $info=Format::htmlchars(($errors && $_POST)?$_POST:$info);
             <th>Label</th>
             <th>Type</th>
             <th>Name</th>
+            <th>Private</th>
             <th>Required</th>
         </tr>
     </thead>
@@ -91,9 +92,12 @@ $info=Format::htmlchars(($errors && $_POST)?$_POST:$info);
                     "><i class="icon-edit"></i> Config</a>
             <?php } ?></td>
             <td><?php if ($f->get('editable')) { ?>
-                <input type="text" size="24" name="name-<?php echo $id; ?>"
+                <input type="text" size="20" name="name-<?php echo $id; ?>"
                     value="<?php echo $f->get('name'); ?>"/>
                 <?php } else echo $f->get('name'); ?></td>
+            <td><input type="checkbox" name="private-<?php echo $id; ?>"
+                <?php if (!$f->get('editable')) { ?>disabled="disabled" <?php }
+                      if ($f->get('private')) echo 'checked="checked"'; ?>/></td>
             <td><input type="checkbox" name="required-<?php echo $id; ?>"
                 <?php if (!$f->get('editable')) { ?>disabled="disabled" <?php }
                       if ($f->get('required')) echo 'checked="checked"'; ?>/></td>
@@ -110,7 +114,8 @@ $info=Format::htmlchars(($errors && $_POST)?$_POST:$info);
                     <?php echo $nfo[0]; ?></option>
                 <?php } ?>
             </select></td>
-            <td><input type="text" size="24" name="name-new-<?php echo $i; ?>"/></td>
+            <td><input type="text" size="20" name="name-new-<?php echo $i; ?>"/></td>
+            <td><input type="checkbox" name="private-new-<?php echo $i; ?>"/></td>
             <td><input type="checkbox" name="required-new-<?php echo $i; ?>"/></td>
         </tr>
     <?php } ?>

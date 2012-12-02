@@ -15,6 +15,8 @@
                     break;
             }
         }
+        if ($field->get('private'))
+            continue;
         ?>
         <tr><td class="<?php if ($field->get('required')) echo 'required'; ?>">
             <?php echo $field->get('label'); ?>:</td>

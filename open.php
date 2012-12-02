@@ -38,6 +38,8 @@ if($_POST):
         $form->set('sort', $f->get('sort'));
         # Collect name, email, and subject address for banning and such
         foreach ($form->getAnswers() as $answer) {
+            if ($answer->getField()->get('private'))
+                continue;
             $fname = $answer->getField()->get('name');
             if (in_array($fname, $interest) and !isset($_POST[$fname]))
                 # XXX: Assigning to _POST not considered great PHP

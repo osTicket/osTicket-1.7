@@ -64,6 +64,8 @@ foreach (DynamicFormEntry::forTicket($ticket->getId()) as $idx=>$form) {
     <?php foreach ($answers as $answer) {
         if (in_array($answer->getField()->get('name'), array('name', 'email', 'subject')))
             continue;
+        elseif ($answer->getField()->get('private'))
+            continue;
         ?>
         <tr>
         <th width="100"><?php echo $answer->getField()->get('label'); 

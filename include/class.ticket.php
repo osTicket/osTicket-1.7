@@ -1180,7 +1180,9 @@ class Ticket {
                 break;
             default:
                 if (isset($this->_answers[$tag]))
-                    # TODO: Use DynamicField to format the value
+                    # TODO: Use DynamicField to format the value, also,
+                    # private field data should never go external, via
+                    # email, for instance
                     return $this->_answers[$tag];
         }
 

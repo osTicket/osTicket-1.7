@@ -203,6 +203,7 @@ CREATE TABLE `%TABLE_PREFIX%dynamic_form_field` (
     `type` varchar(255) NOT NULL DEFAULT 'text',
     `label` varchar(255) NOT NULL,
     `required` tinyint(1) NOT NULL DEFAULT 0,
+    `private` tinyint(1) NOT NULL DEFAULT 0,
     `name` varchar(64) NOT NULL,
     `editable` tinyint(1) NOT NULL DEFAULT 1,
     `configurable` tinyint(1) NOT NULL DEFAULT 0,

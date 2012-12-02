@@ -812,12 +812,12 @@ class TextareaField extends DynamicFormField {
     }
     function getConfigurationOptions() {
         return array(
-            'rows'  =>  new TextboxField(array(
-                'id'=>1, 'label'=>'Width (chars)', 'required'=>true, 'default'=>4)),
             'cols'  =>  new TextboxField(array(
-                'id'=>1, 'label'=>'Height (rows)', 'required'=>false, 'default'=>40)),
+                'id'=>1, 'label'=>'Width (chars)', 'required'=>true, 'default'=>40)),
+            'rows'  =>  new TextboxField(array(
+                'id'=>2, 'label'=>'Height (rows)', 'required'=>false, 'default'=>4)),
             'length' => new TextboxField(array(
-                'id'=>2, 'label'=>'Max Length', 'required'=>false, 'default'=>30))
+                'id'=>3, 'label'=>'Max Length', 'required'=>false, 'default'=>30))
         );
     }
 }
