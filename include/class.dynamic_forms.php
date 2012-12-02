@@ -441,7 +441,14 @@ class DynamicFormField extends VerySimpleModel {
     }
 
     function delete() {
-        return parent::delete(DYNAMIC_FORM_FIELD_TABLE, 'id');
+        // Don't really delete form fields as that will screw up the data
+        // model. Instead, just drop the association with the form section
+        // which will give the appearance of deletion. Not deleting means
+        // that the field will continue to exist of form entries it may
+        // already have answers on, but since it isn't associated with the
+        // form section, it won't be available for new form submittals.
+        $this->set('section_id', 0);
+        $this->save();
     }
 
     function save() {
