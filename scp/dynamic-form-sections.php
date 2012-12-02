@@ -58,6 +58,7 @@ if($_POST) {
                 'label'=>$_POST["label-new-$i"],
                 'type'=>$_POST["type-new-$i"],
                 'name'=>$_POST["name-new-$i"],
+                'private'=>$_POST["private-new-$i"] == 'on' ? 1 : 0,
                 'required'=>$_POST["required-new-$i"] == 'on' ? 1 : 0
             ));
             if ($field->isValid())
