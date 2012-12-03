@@ -28,7 +28,13 @@
                 <?php echo $f->get('label'); ?>:</label>
             <?php
             $f->render();
-            ?>
+            if ($f->get('required')) { ?>
+                <font class="error">*</font>
+            <?php 
+            }
+            foreach ($f->errors() as $e) { ?>
+                <font class="error"><?php echo $e; ?></font>
+            <?php } ?>
             <br/>
             <?php
         }

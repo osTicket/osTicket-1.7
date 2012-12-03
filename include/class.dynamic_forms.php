@@ -307,7 +307,8 @@ class DynamicFormField extends VerySimpleModel {
     function getClean() {
         $value = $this->getWidget()->getValue();
         $value = $this->parse($value);
-        $this->validateEntry($value);
+        if (!$this->_validated)
+            $this->validateEntry($value);
         return $value;
     }
 
@@ -325,19 +326,15 @@ class DynamicFormField extends VerySimpleModel {
     }
 
     function isValidEntry() {
-        $this->validateEntry();
         return count($this->_errors) == 0;
     }
 
     function validateEntry($value) {
         # Validates a user-input into an instance of this field on a dynamic
         # form
-        if (!is_array($this->_errors)) $this->_errors = array();
+        $this->_validated = true;
 
-        if ($this->_validated)
-            return;
-        else
-            $this->_validated = true;
+        if (!is_array($this->_errors)) $this->_errors = array();
 
         if ($this->get('required'))
             if (!$value)
@@ -388,14 +385,17 @@ class DynamicFormField extends VerySimpleModel {
     }
 
     function getConfigurationForm() {
-        $types = get_dynamic_field_types();
-        $clazz = $types[$this->get('type')][1];
-        $T = new $clazz();
-        return $T->getConfigurationOptions();
+        if (!$this->_cform) {
+            $types = get_dynamic_field_types();
+            $clazz = $types[$this->get('type')][1];
+            $T = new $clazz();
+            $this->_cform = $T->getConfigurationOptions();
+        }
+        return $this->_cform;
     }
 
     function setConfiguration($errors) {
-        $config = array();
+        $errors = $config = array();
         foreach ($this->getConfigurationForm() as $name=>$field) {
             $config[$name] = $field->getClean();
             $errors = array_merge($errors, $field->errors());
@@ -809,13 +809,44 @@ class TextboxField extends DynamicFormField {
     function getWidget() {
         return new TextboxWidget($this);
     }
+
     function getConfigurationOptions() {
         return array(
             'size'  =>  new TextboxField(array(
-                'id'=>1, 'label'=>'Size', 'required'=>false, 'default'=>16)),
+                'id'=>1, 'label'=>'Size', 'required'=>false, 'default'=>16, 
+                    'validator' => 'number')),
             'length' => new TextboxField(array(
-                'id'=>2, 'label'=>'Max Length', 'required'=>false, 'default'=>30))
+                'id'=>2, 'label'=>'Max Length', 'required'=>false, 'default'=>30,
+                    'validator' => 'number')),
+            'validator' => new ChoiceField(array(
+                'id'=>3, 'label'=>'Validator', 'required'=>false, 'default'=>'',
+                'choices' => array('phone'=>'Phone Number','email'=>'Email Address',
+                    'ip'=>'IP Address', 'number'=>'Number', ''=>'None')))
         );
+    }
+
+    function validateEntry($value) {
+        parent::validateEntry($value);
+        $validators = array(
+            '' =>       null,
+            'email' =>  array(array('Validator', 'is_email'),
+                'Enter a valid email address'),
+            'phone' =>  array(array('Validator', 'is_phone'),
+                'Enter a valid phone number'),
+            'ip' =>     array(array('Validator', 'is_ip'),
+                'Enter a valid IP address'),
+            'number' => array('is_numeric', 'Enter a number')
+        );
+        // Support configuration forms, as well as GUI-based form fields
+        $valid = $this->get('validator');
+        if (!$valid) {
+            $config = $this->getConfiguration();
+            $valid = $config['validator'];
+        }
+        $func = $validators[$valid];
+        if (is_array($func) && is_callable($func[0]))
+            if (!call_user_func($func[0], $value))
+                $this->_errors[] = $func[1];
     }
 }
 
@@ -833,16 +864,6 @@ class TextareaField extends DynamicFormField {
                 'id'=>3, 'label'=>'Max Length', 'required'=>false, 'default'=>30))
         );
     }
-}
-
-class EmailField extends TextboxField {
-    function validateEntry($value) {
-        parent::validateEntry($value);
-        # Run validator against $this->value for email type
-        if (!Validator::is_email($value))
-            $this->_errors[] = "Enter a valid email address";
-    }
-    # TODO: Use widget with autocomplete and such turned off
 }
 
 class PhoneField extends DynamicFormField {
@@ -894,7 +915,6 @@ function get_dynamic_field_types() {
         $types = array(
             'text'  => array('Short Answer', TextboxField),
             'memo' => array('Long Answer', TextareaField),
-            'email' => array('Email Address', EmailField),
             'phone' => array('Phone Number', PhoneField),
             'bool' => array('Checkbox', BooleanField),
             'choices' => array('Choices', ChoiceField),
