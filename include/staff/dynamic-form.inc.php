@@ -68,6 +68,10 @@ $info=Format::htmlchars(($errors && $_POST)?$_POST:$info);
                        </option>
                    <?php } ?>
                    </select>
+                    <a class="action-button" style="float:none"
+                        href="dynamic-form-sections.php?id=<?php
+                            echo $formatt->get('section_id'); ?>"><i class="icon-edit"></i
+                            > Edit</a>
                </td><td>
                    <textarea rows="2" cols="40" name="instructions-<?php echo $formatt->get('id'); ?>"
                         ><?php echo $formatt->get('instructions') ?></textarea>
