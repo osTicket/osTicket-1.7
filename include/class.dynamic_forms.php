@@ -222,33 +222,14 @@ class DynamicFormSection extends VerySimpleModel {
     function getTitle() { return $this->get('title'); }
 
     function isValid() {
-        if ($this->_errors === null)
-            $this->validate();
         return !$this->_errors;
-    }
-
-    function validate() {
-        # Validates a field added to a dynamic form
-        return true;
-    }
-
-    function validateEntry() {
-        # Validates a user-input into an instance of this field on a dynamic
-        # form
-        if (!is_array($this->_errors)) {
-            $this->_errors = array();
-            foreach ($this->getFields() as $field)
-                if (!$field->isValid())
-                    $this->_errors =
-                        array_merge($this->_errors, $field->errors());
-        }
-        return $this->_errors;
     }
 
     function errors() {
         return $this->_errors;
     }
 
+    // XXX: This doesn't appear to be used
     function getClean() {
         if (!$this->_clean) {
             $this->_clean = array();
@@ -317,18 +298,35 @@ class DynamicFormField extends VerySimpleModel {
         else return $this->_errors;
     }
 
+    /**
+     * validate
+     *
+     * Validates the contents of $this->ht before the model should be
+     * committed to the database. This is the validation for the field
+     * template -- edited in the admin panel for a form section.
+     */
     function isValid() {
-        return true;
-    }
-
-    function validate() {
-        return true;
+        if (!is_numeric($this->get('sort')))
+            $this->_errors['sort'] = 'Enter a number';
+        if (strpos($this->get('name'), ' ') !== false)
+            $this->_errors['name'] = 'Name cannot contain spaces';
+        return count($this->errors()) === 0;
     }
 
     function isValidEntry() {
         return count($this->_errors) == 0;
     }
 
+    /**
+     * validateEntry
+     *
+     * Validates user entry on an instance of the field on a dynamic form.
+     * This is called when an instance of this field (like a TextboxField)
+     * receives data from the user and that value should be validated.
+     *
+     * Parameters:
+     * $value - (string) input from the user
+     */
     function validateEntry($value) {
         # Validates a user-input into an instance of this field on a dynamic
         # form

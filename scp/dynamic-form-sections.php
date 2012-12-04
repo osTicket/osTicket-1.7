@@ -61,11 +61,11 @@ if($_POST) {
                 'private'=>$_POST["private-new-$i"] == 'on' ? 1 : 0,
                 'required'=>$_POST["required-new-$i"] == 'on' ? 1 : 0
             ));
+            // XXX: Move to an instrumented list that can handle this better
+            $form->_fields[] = $field;
             if ($field->isValid())
                 $field->save();
         }
-        # Invalidate field cache
-        $form->_fields = false;
     }
 }
 

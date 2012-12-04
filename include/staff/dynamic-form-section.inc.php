@@ -64,13 +64,18 @@ $info=Format::htmlchars(($errors && $_POST)?$_POST:$info);
     </thead>
     <tbody>
     <?php if ($form) foreach ($form->getFields() as $f) { 
-        $id = $f->get('id'); ?>
+        $id = $f->get('id');
+        $errors = $f->errors(); ?>
         <tr>
             <td><?php if ($f->get('editable')) { ?>
                 <input type="checkbox" name="delete-<?php echo $id; ?>"/>
             <?php } ?></td>
             <td><input type="text" size="4" name="sort-<?php echo $id; ?>"
-                value="<?php echo $f->get('sort'); ?>"/></td>
+                value="<?php echo $f->get('sort'); ?>"/>
+                <font class="error"><?php
+                    if ($errors['sort']) echo '<br/>'; echo $errors['sort'];
+                ?></font>
+                </td>
             <td><input type="text" size="32" name="label-<?php echo $id; ?>"
                 value="<?php echo $f->get('label'); ?>"/></td>
             <td><select name="type-<?php echo $id; ?>">
@@ -94,7 +99,11 @@ $info=Format::htmlchars(($errors && $_POST)?$_POST:$info);
             <td><?php if ($f->get('editable')) { ?>
                 <input type="text" size="20" name="name-<?php echo $id; ?>"
                     value="<?php echo $f->get('name'); ?>"/>
-                <?php } else echo $f->get('name'); ?></td>
+                <?php } else echo $f->get('name'); ?>
+                <font class="error"><?php
+                    if ($errors['name']) echo '<br/>'; echo $errors['name'];
+                ?></font>
+                </td>
             <td><input type="checkbox" name="private-<?php echo $id; ?>"
                 <?php if (!$f->get('editable')) { ?>disabled="disabled" <?php }
                       if ($f->get('private')) echo 'checked="checked"'; ?>/></td>
