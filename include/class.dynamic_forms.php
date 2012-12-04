@@ -638,6 +638,18 @@ class DynamicFormset extends VerySimpleModel {
                     return true;
     }
 
+    function errors() {
+        return $this->_errors;
+    }
+
+    function isValid() {
+        if (!$this->_errors) $this->_errors = array();
+        foreach (array('name', 'email', 'subject') as $f)
+            if (!$this->hasField($f))
+                $this->_errors["err"] = "Form set must define the '$f' field";
+        return count($this->_errors) === 0;
+    }
+
     function all($sort='title') {
         return parent::all(get_class(), DYNAMIC_FORMSET_TABLE, $sort);
     }
@@ -692,6 +704,17 @@ class DynamicFormsetSections extends VerySimpleModel {
             return $title;
         else
             return $this->getForm()->get('title');
+    }
+
+    function errors() {
+        return $this->_errors;
+    }
+
+    function isValid() {
+        if (!$this->_errors) $this->_errors = array();
+        if (!is_numeric($this->get('sort')))
+            $this->_errors['sort'] = 'Enter a number';
+        return count($this->errors()) === 0;
     }
 
     function delete() {

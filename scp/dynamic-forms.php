@@ -8,17 +8,20 @@ if($_REQUEST['id'] && !($group=DynamicFormset::lookup($_REQUEST['id'])))
 
 if($_POST) {
     $fields = array('title', 'notes');
+    $deleted = array();
     switch(strtolower($_POST['do'])) {
         case 'update':
             foreach ($fields as $f)
                 if (isset($_POST[$f]))
                     $group->set($f, $_POST[$f]);
-            if ($group->isValid())
-                $group->save();
-            foreach ($group->getForms() as $form) {
+            foreach ($group->getForms() as $idx=>$form) {
                 $id = $form->get('id');
                 if ($_POST["delete-$id"] == 'on') {
-                    $form->delete();
+                    // Don't delete yet, in case this makes the formset
+                    // invalid. XXX: When is osTicket going to adopt database
+                    // transactions?
+                    unset($group->_forms[$idx]);
+                    $deleted[] = $form;
                     continue;
                 }
                 foreach (array('sort','section_id','title','instructions') as $f)
@@ -32,8 +35,6 @@ if($_POST) {
             $group = DynamicFormset::create(array(
                 'title'=>$_POST['title'],
                 'notes'=>$_POST['notes']));
-            if ($group->isValid())
-                $group->save();
             break;
     }
 
@@ -41,18 +42,27 @@ if($_POST) {
         for ($i=0; isset($_POST["sort-new-$i"]); $i++) {
             if (!$_POST["section_id-new-$i"])
                 continue;
-            $field = DynamicFormsetSections::create(array(
+            $form = DynamicFormsetSections::create(array(
                 'formset_id'=>$group->get('id'),
                 'sort'=>$_POST["sort-new-$i"],
                 'title'=>$_POST["title-new-$i"],
                 'section_id'=>$_POST["section_id-new-$i"],
                 'instructions'=>$_POST["instructions-new-$i"]
             ));
-            if ($field->isValid())
-                $field->save();
+            // XXX: Use an instrumented list to make this better
+            $group->_forms[] = $form;
+            if ($form->isValid())
+                $form->save();
         }
-        # Invalidate field cache
-        $group->_forms = false;
+
+        if ($group->isValid()) {
+            $group->save();
+            // Now delete requested items
+            foreach ($deleted as $form)
+                $form->delete();
+        }
+        else
+            $errors = array_merge($errors, $group->errors());
     }
 }
 

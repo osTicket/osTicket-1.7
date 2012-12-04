@@ -50,11 +50,15 @@ $info=Format::htmlchars(($errors && $_POST)?$_POST:$info);
        <tr><th>Delete | Sort</th><th>Title</th><th>Form
        name</th><th>Instructions</th></tr>
        <?php if ($group) foreach ($group->getForms() as $formatt) { 
-           $form = $formatt->getForm(); ?>
+           $form = $formatt->getForm();
+           $errors = $formatt->errors(); ?>
            <tr>
                <td><input type="checkbox" name="delete-<?php echo $formatt->get('id'); ?>"/> <em>|</em>
                    <input type="text" size="4" name="sort-<?php echo $formatt->get('id'); ?>"
                        value="<?php echo $formatt->get('sort'); ?>"/>
+                    <font class="error"><?php
+                        if ($errors['sort']) echo '<br/>'; echo $errors['sort'];
+                    ?></font>
                </td><td>
                    <input type="text" name="title-<?php echo $formatt->get('id'); ?>" size="16"
                        value="<?php echo $formatt->get('title'); ?>"/>
