@@ -1000,7 +1000,7 @@ class Widget {
         if (isset($_POST[$this->name]))
             $this->value = $_POST[$this->name];
         elseif ($a = $field->getAnswer())
-            $this->value = $a->get('value');
+            $this->value = $a->getValue();
         elseif ($field->value)
             $this->value = $field->value;
     }
