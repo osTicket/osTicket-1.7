@@ -930,12 +930,69 @@ class ChoiceField extends DynamicFormField {
     }
 }
 
+class DatetimeField extends DynamicFormField {
+    function getWidget() {
+        return new DatetimePickerWidget($this);
+    }
+
+    function to_database($value) {
+        // Store time in gmt time, unix epoch format
+        return (string) $value;
+    }
+
+    function to_php($value) {
+        return (int) $value;
+    }
+
+    function parse($value) {
+        $config = $this->getConfiguration();
+        return ($config['gmt']) ? Misc::db2gmtime($value) : strtotime($value);
+    }
+
+    function toString($value) {
+        global $cfg;
+        $config = $this->getConfiguration();
+        $format = ($config['time'])
+            ? $cfg->getDateTimeFormat() : $cfg->getDateFormat();
+        if ($config['gmt'])
+            // Return time local to user's timezone
+            return Format::userdate($format, $value);
+        else
+            return Format::date($format, $value);
+    }
+
+    function getConfigurationOptions() {
+        return array(
+            'time' => new BooleanField(array(
+                'id'=>1, 'label'=>'Time', 'required'=>false, 'default'=>false)),
+            'gmt' => new BooleanField(array(
+                'id'=>2, 'label'=>'Timezone Aware', 'required'=>false, 'default'=>true)),
+            'min' => new DatetimeField(array(
+                'id'=>3, 'label'=>'Earliest', 'required'=>false, 'default'=>null)),
+            'max' => new DatetimeField(array(
+                'id'=>4, 'label'=>'Latest', 'required'=>false, 'default'=>null))
+        );
+    }
+
+    function validateEntry($value) {
+        $config = $this->getConfiguration();
+        if ($config['min'] and $value < $config['min'])
+            $this->_errors[] = 'Selected date is earlier than permitted';
+        elseif ($config['max'] and $value > $config['max'])
+            $this->_errors[] = 'Selected date is later than permitted';
+        // strtotime returns -1 on error for PHP < 5.1.0 and false thereafter
+        elseif ($value === -1 or $value === false)
+            $this->_errors[] = 'Enter a valid date';
+    }
+}
+
 function get_dynamic_field_types() {
     static $types = false;
     if (!$types) {
         $types = array(
             'text'  => array('Short Answer', TextboxField),
             'memo' => array('Long Answer', TextareaField),
+            'datetime' => array('Date and Time', DatetimeField),
             'phone' => array('Phone Number', PhoneField),
             'bool' => array('Checkbox', BooleanField),
             'choices' => array('Choices', ChoiceField),
@@ -1134,6 +1191,38 @@ class CheckboxWidget extends Widget {
         if (count($_POST))
             return @in_array($this->field->get('id'), $_POST[$this->name]);
         return parent::getValue();
+    }
+}
+
+class DatetimePickerWidget extends Widget {
+    function render() {
+        $config = $this->field->getConfiguration();
+        if (is_int($this->value))
+            $this->value = $this->field->toString($this->value);
+        ?>
+        <input type="text" class="dp" name="<?php echo $this->name; ?>"
+            value="<?php echo Format::htmlchars($this->value); ?>" size="12"
+            autocomplete="off" />
+        <script type="text/javascript">
+            $(function() {
+                $('input[name="<?php echo $this->name; ?>"]').datepicker({
+                    <?php
+                    if ($config['min'])
+                        echo "minDate: new Date({$config['min']}*1000),";
+                    if ($config['max'])
+                        echo "maxDate: new Date({$config['max']}*1000),";
+                    ?>
+                    numberOfMonths: 2,
+                    showButtonPanel: true,
+                    buttonImage: './images/cal.png',
+                    showOn:'both'
+                });
+            });
+        </script>
+        <?php
+        if ($config['time']);
+        // TODO: Add time picker -- requires time picker or selection with
+        //       Misc::timeDropdown
     }
 }
 
