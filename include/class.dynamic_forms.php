@@ -414,9 +414,10 @@ class DynamicFormField extends VerySimpleModel {
      */
     function getConfiguration() {
         if (!$this->_config) {
-            if ($this->get('configuration'))
-                $this->_config = JsonDataParser::parse($this->get('configuration'));
-            else
+            $this->_config = $this->get('configuration');
+            if (is_string($this->_config))
+                $this->_config = JsonDataParser::parse($this->_config);
+            elseif (!$this->_config)
                 $this->_config = array();
             foreach ($this->getConfigurationOptions() as $name=>$field)
                 if (!isset($this->_config[$name]))
