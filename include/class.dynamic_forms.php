@@ -843,7 +843,11 @@ class TextboxField extends DynamicFormField {
             'validator' => new ChoiceField(array(
                 'id'=>3, 'label'=>'Validator', 'required'=>false, 'default'=>'',
                 'choices' => array('phone'=>'Phone Number','email'=>'Email Address',
-                    'ip'=>'IP Address', 'number'=>'Number', ''=>'None')))
+                    'ip'=>'IP Address', 'number'=>'Number', ''=>'None'))),
+            'hint' => new TextareaField(array(
+                'id'=>4, 'label'=>'Help Text', 'required'=>false, 'default'=>'',
+                'configuration'=>
+                    array('rows'=>2, 'hint'=>'Help text shown with the field')))
         );
     }
 
@@ -903,6 +907,15 @@ class PhoneField extends DynamicFormField {
 class BooleanField extends DynamicFormField {
     function getWidget() {
         return new CheckboxWidget($this);
+    }
+
+    function getConfigurationOptions() {
+        return array(
+            'hint' => new TextareaField(array(
+                'id'=>1, 'label'=>'Help Text', 'required'=>false, 'default'=>'',
+                'configuration'=>
+                    array('rows'=>2, 'hint'=>'Help text shown with the field')))
+        );
     }
 
     function to_database($value) {
@@ -1076,10 +1089,17 @@ class TextboxWidget extends Widget {
         if (isset($config['length']))
             $maxlength = "maxlength=\"{$config['length']}\"";
         ?>
+        <span style="display:inline-block">
         <input type="text" id="<?php echo $this->name; ?>"
             <?php echo $size . " " . $maxlength; ?>
             name="<?php echo $this->name; ?>"
-            value="<?php echo $this->value; ?>"/>
+            value="<?php echo Format::htmlchars($this->value); ?>"/>
+        <?php
+        if ($config['hint']) { ?>
+            <br /><em style="color:gray;display:inline-block"><?php
+                echo Format::htmlchars($config['hint']); ?></em>
+        <?php } ?>
+        </span>
         <?php
     }
 }
@@ -1094,9 +1114,17 @@ class TextareaWidget extends Widget {
         if (isset($config['length']))
             $maxlength = "maxlength=\"{$config['length']}\"";
         ?>
+        <span style="display:inline-block">
         <textarea <?php echo $rows." ".$cols." ".$length; ?>
-            name="<?php echo $this->name; ?>"><?php echo $this->value;
+            name="<?php echo $this->name; ?>"><?php
+                echo Format::htmlchars($this->value);
             ?></textarea>
+        <?php
+        if ($config['hint']) { ?>
+            <br /><em style="color:gray;display:inline-block"><?php
+                echo Format::htmlchars($config['hint']); ?></em>
+        <?php } ?>
+        </span>
         <?php
     }
 }
@@ -1182,11 +1210,16 @@ class CheckboxWidget extends Widget {
     }
 
     function render() {
+        $config = $this->field->getConfiguration();
         ?>
         <input type="checkbox" name="<?php echo $this->name; ?>[]" <?php
             if ($this->value) echo 'checked="checked"'; ?> value="<?php
             echo $this->field->get('id'); ?>"/>
         <?php
+        if ($config['hint']) { ?>
+            <em style="display:inline-block"><?php
+                echo Format::htmlchars($config['hint']); ?></em>
+        <?php }
     }
 
     function getValue() {
