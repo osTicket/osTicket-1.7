@@ -946,6 +946,7 @@ class DatetimeField extends DynamicFormField {
 
     function parse($value) {
         $config = $this->getConfiguration();
+        if (!$value) return null;
         return ($config['gmt']) ? Misc::db2gmtime($value) : strtotime($value);
     }
 
@@ -1197,8 +1198,16 @@ class CheckboxWidget extends Widget {
 class DatetimePickerWidget extends Widget {
     function render() {
         $config = $this->field->getConfiguration();
-        if (is_int($this->value))
-            $this->value = $this->field->toString($this->value);
+        if ($this->value)
+            $this->value = (is_int($this->value) ? $this->value :
+                    strtotime($this->value)); 
+        if ($config['gmt'])
+            $this->value += 3600 *
+                $_SESSION['TZ_OFFSET']+($_SESSION['TZ_DST']?date('I',$time):0);
+        if ($this->value) {
+            list($hr, $min) = explode(':', date('H:i', $this->value));
+            $this->value = date('m/d/Y', $this->value);
+        }
         ?>
         <input type="text" class="dp" name="<?php echo $this->name; ?>"
             value="<?php echo Format::htmlchars($this->value); ?>" size="12"
@@ -1208,9 +1217,9 @@ class DatetimePickerWidget extends Widget {
                 $('input[name="<?php echo $this->name; ?>"]').datepicker({
                     <?php
                     if ($config['min'])
-                        echo "minDate: new Date({$config['min']}*1000),";
+                        echo "minDate: new Date({$config['min']}000),";
                     if ($config['max'])
-                        echo "maxDate: new Date({$config['max']}*1000),";
+                        echo "maxDate: new Date({$config['max']}000),";
                     ?>
                     numberOfMonths: 2,
                     showButtonPanel: true,
@@ -1220,9 +1229,23 @@ class DatetimePickerWidget extends Widget {
             });
         </script>
         <?php
-        if ($config['time']);
-        // TODO: Add time picker -- requires time picker or selection with
-        //       Misc::timeDropdown
+        if ($config['time'])
+            // TODO: Add time picker -- requires time picker or selection with
+            //       Misc::timeDropdown
+            echo '&nbsp;' . Misc::timeDropdown($hr, $min, $this->name . ':time');
+    }
+
+    /**
+     * Function: getValue
+     * Combines the datepicker date value and the time dropdown selected
+     * time value into a single date and time string value.
+     */
+    function getValue() {
+
+        $datetime = $this->value;
+        if (isset($_POST[$this->name . ':time']))
+            $datetime .= ' ' . $_POST[$this->name . ':time'];
+        return $datetime;
     }
 }
 
