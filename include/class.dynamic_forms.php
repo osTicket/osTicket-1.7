@@ -1171,21 +1171,20 @@ class ChoicesWidget extends Widget {
     }
 
     function getChoices() {
-        while ($this->_choices === null) {
+        if ($this->_choices === null) {
             // Allow choices to be set in this->ht (for configurationOptions)
             $this->_choices = $this->field->get('choices');
-            if ($this->_choices)
-                break;
-            else
+            if (!$this->_choices) {
                 $this->_choices = array();
-            $config = $this->field->getConfiguration();
-            $choices = explode("\n", $config['choices']);
-            foreach ($choices as $choice) { 
-                // Allow choices to be key: value
-                list($key, $val) = explode(':', $choice);
-                if ($val == null)
-                    $val = $key;
-                $this->_choices[trim($key)] = trim($val);
+                $config = $this->field->getConfiguration();
+                $choices = explode("\n", $config['choices']);
+                foreach ($choices as $choice) { 
+                    // Allow choices to be key: value
+                    list($key, $val) = explode(':', $choice);
+                    if ($val == null)
+                        $val = $key;
+                    $this->_choices[trim($key)] = trim($val);
+                }
             }
         }
         return $this->_choices;
