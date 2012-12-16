@@ -25,7 +25,7 @@
                 $f->value = $f->get('default');
             ?>
             <label for="<?php echo $f->getWidget()->name; ?>">
-                <?php echo $f->get('label'); ?>:</label>
+                <?php echo Format::htmlchars($f->get('label')); ?>:</label>
             <?php
             $f->render();
             if ($f->get('required')) { ?>

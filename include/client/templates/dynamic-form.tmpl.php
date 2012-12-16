@@ -19,7 +19,7 @@
             continue;
         ?>
         <tr><td class="<?php if ($field->get('required')) echo 'required'; ?>">
-            <?php echo $field->get('label'); ?>:</td>
+            <?php echo Format::htmlchars($field->get('label')); ?>:</td>
             <td><?php $field->render(); ?>
             <?php if ($field->get('required')) { ?>
                 <font class="error">*</font>
