@@ -551,6 +551,8 @@ if($ticket) {
     if($_REQUEST['a']=='edit' && $thisstaff->canEditTickets()) {
         $inc = 'ticket-edit.inc.php';
         if (!$forms) $forms=DynamicFormEntry::forTicket($ticket->getId());
+        // Auto add new fields to the entries
+        foreach ($forms as $f) $f->addMissingFields();
     } elseif($_REQUEST['a'] == 'print' && !$ticket->pdfExport($_REQUEST['psize'], $_REQUEST['notes']))
         $errors['err'] = 'Internal error: Unable to export the ticket to PDF for print.';
 } else {

@@ -541,6 +541,33 @@ class DynamicFormEntry extends VerySimpleModel {
         return self::find(array('ticket_id'=>$ticket_id));
     }
 
+    /**
+     * addMissingFields
+     *
+     * Adds fields that have been added to the linked form section (field
+     * set) since this entry was originally created. If fields are added to
+     * the form section, the method will automatically add the fields and
+     * the fields and null answers to the entry.
+     */
+    function addMissingFields() {
+        foreach ($this->getForm()->getFields() as $field) {
+            $found = false;
+            foreach ($this->getAnswers() as $answer) {
+                if ($answer->get('field_id') == $field->get('id')) {
+                    $found = true; break;
+                }
+            }
+            if (!$found) {
+                # Section ID is auto set in the ::save method
+                $a = DynamicFormEntryAnswer::create(
+                    array('field_id'=>$field->get('id')));
+                $a->field = $field;
+                // Add to list of answers
+                $this->_values[] = $a;
+            }
+        }
+    }
+
     function find($where, $sort='sort') {
         return parent::find(get_class(), DYNAMIC_FORM_ENTRY_TABLE, $where,
             $sort);
@@ -550,7 +577,6 @@ class DynamicFormEntry extends VerySimpleModel {
         if (count($this->dirty))
             $this->set('updated', new SqlFunction('NOW'));
         parent::save(DYNAMIC_FORM_ENTRY_TABLE, 'id');
-        # XXX: Handle field additions to form (?)
         foreach ($this->getAnswers() as $a) {
             $a->set('value', $a->getField()->to_database($a->getField()->getClean()));
             $a->set('entry_id', $this->get('id'));
