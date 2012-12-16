@@ -1242,7 +1242,7 @@ class DatetimePickerWidget extends Widget {
             $this->value = date('m/d/Y', $this->value);
         }
         ?>
-        <input type="text" class="dp" name="<?php echo $this->name; ?>"
+        <input type="text" name="<?php echo $this->name; ?>"
             value="<?php echo Format::htmlchars($this->value); ?>" size="12"
             autocomplete="off" />
         <script type="text/javascript">
