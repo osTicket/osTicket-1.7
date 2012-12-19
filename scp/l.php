@@ -14,7 +14,9 @@
     vim: expandtab sw=4 ts=4 sts=4:
 **********************************************************************/
 require_once 'staff.inc.php';
-$url = trim($_GET['url']);
+$url = http_build_query($_GET);
+$url = urldecode(trim($url));
+$url = substr($url, strlen('url='));
 if (!$url || !Validator::is_url($url)) exit('Invalid url');
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
