@@ -965,7 +965,11 @@ class ChoiceField extends DynamicFormField {
     function getConfigurationOptions() {
         return array(
             'choices'  =>  new TextareaField(array(
-                'id'=>1, 'label'=>'Choices', 'required'=>false, 'default'=>''))
+                'id'=>1, 'label'=>'Choices', 'required'=>false, 'default'=>'')),
+            'hint' => new TextareaField(array(
+                'id'=>2, 'label'=>'Help Text', 'required'=>false, 'default'=>'',
+                'configuration'=>
+                    array('rows'=>2, 'hint'=>'Help text shown with the field')))
         );
     }
 }
@@ -1090,8 +1094,13 @@ class SelectionField extends DynamicFormField {
             'typeahead' => new ChoiceField(array(
                 'id'=>1, 'label'=>'Widget', 'required'=>false,
                 'default'=>false,
-                    'choices'=>array(false=>'Drop Down', true=>'Typeahead')))
-        );
+                'choices'=>array(false=>'Drop Down', true=>'Typeahead'),
+                'configuration'=>array('hint'=>'Typeahead will work better for large lists'))),
+            'hint' => new TextareaField(array(
+                'id'=>2, 'label'=>'Help Text', 'required'=>false, 'default'=>'',
+                'configuration'=>
+                    array('rows'=>2, 'hint'=>'Help text shown with the field')))
+            );
     }
 }
 
@@ -1193,7 +1202,8 @@ class ChoicesWidget extends Widget {
             $def_val = 'Select '.$this->field->get('label');
         else
             $def_val = $choices[$def_key];
-        ?> <select name="<?php echo $this->name; ?>">
+        ?> <span style="display:inline-block">
+        <select name="<?php echo $this->name; ?>">
             <?php if (!$have_def) { ?>
             <option value="<?php echo $def_key; ?>">&mdash; <?php
                 echo $def_val; ?> &mdash;</option>
@@ -1206,6 +1216,12 @@ class ChoicesWidget extends Widget {
                 ?>><?php echo $name; ?></option>
             <?php } ?>
         </select> <?php
+        if ($config['hint']) { ?>
+            <br /><em style="color:gray;display:inline-block"><?php
+                echo Format::htmlchars($config['hint']); ?></em>
+        <?php } ?>
+        </span>
+        <?php
     }
 
     function getChoices() {
@@ -1238,9 +1254,9 @@ class SelectionWidget extends ChoicesWidget {
         $source = array(); $value = false;
         foreach ($this->field->getList()->getItems() as $i)
             $source[] = array(
-                    'info' => $i->get('value'),
-                    'value' => strtolower($i->get('value').' '.$i->get('extra')),
-                    'id' => $i->get('id'));
+                'info' => $i->get('value'),
+                'value' => strtolower($i->get('value').' '.$i->get('extra')),
+                'id' => $i->get('id'));
         if ($this->value && get_class($this->value) == 'DynamicListItem') {
             // Loaded from database
             $value = $this->value->get('id');
@@ -1252,6 +1268,7 @@ class SelectionWidget extends ChoicesWidget {
             $name = ($name) ? $name->get('value') : null;
         }
         ?>
+        <span style="display:inline-block">
         <input type="hidden" name="<?php echo $this->name; ?>"
             value="<?php echo $value; ?>" />
         <input type="text" size="30" id="<?php echo $this->name; ?>"
@@ -1268,7 +1285,13 @@ class SelectionWidget extends ChoicesWidget {
             });
         });
         </script>
-    <?php
+        <?php
+        if ($config['hint']) { ?>
+            <br /><em style="color:gray;display:inline-block"><?php
+                echo Format::htmlchars($config['hint']); ?></em>
+        <?php } ?>
+        </span>
+        <?php
     }
 
     function getChoices() {
