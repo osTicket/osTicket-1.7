@@ -11,7 +11,6 @@ class TicketController extends ApiController {
     function getRequestStructure($format, $data=null) {
         $supported = array(
             "alert", "autorespond", "source", "topicId",
-            "phone", "phone_ext",
             "attachments" => array("*" => 
                 array("name", "type", "data", "encoding")
             ), 
@@ -66,10 +65,10 @@ class TicketController extends ApiController {
         foreach ($forms as $idx=>$f) {
             $forms[$idx] = $form = $f->getForm()->instanciate();
             $form->set('sort', $f->get('sort'));
-            # Collect name, email, and subject address for banning and such
+            # Collect name, email address, and subject for banning and such
             foreach ($form->getFields() as $field) {
                 $fname = $field->get('name');
-                if (isset($data[$fname]))
+                if ($fname && isset($data[$fname]))
                     $field->value = $data[$fname];
             }
             if (!$form->isValid())

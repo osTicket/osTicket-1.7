@@ -18,17 +18,6 @@ $info=Format::htmlchars(($errors && $_POST)?$_POST:$info);
         </tr>
     </thead>
     <tbody>
-        <tr>
-            <td width="160">
-                Phone Number:
-            </td>
-            <td>
-                <input type="text" size="20" name="phone" id="phone" value="<?php echo $info['phone']; ?>">
-                &nbsp;<span class="error">&nbsp;<?php echo $errors['phone']; ?></span>
-                Ext <input type="text" size="6" name="phone_ext" id="phone_ext" value="<?php echo $info['phone_ext']; ?>">
-                &nbsp;<span class="error">&nbsp;<?php echo $errors['phone_ext']; ?></span>
-            </td>
-        </tr>
         <?php 
         if($cfg->notifyONNewStaffTicket()) { ?>
         <tr>

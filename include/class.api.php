@@ -212,8 +212,7 @@ class ApiXmlDataParser extends XmlDataParser {
             return $current;
         foreach ($current as $key=>&$value) {
             if ($key == "phone") {
-                $current["phone_ext"] = $value["ext"];  # PHP [like] point
-                $value = $value[":text"];
+                $value = $value[":text"].'X'.$value["ext"];
             } else if ($key == "alert") {
                 $value = (bool)$value;
             } else if ($key == "autorespond") {
@@ -247,10 +246,7 @@ class ApiJsonDataParser extends JsonDataParser {
         if (!is_array($current))
             return $current;
         foreach ($current as $key=>&$value) {
-            if ($key == "phone") {
-                list($value,$current["phone_ext"])
-                    = explode("X", strtoupper($value), 2); 
-            } else if ($key == "alert") {
+            if ($key == "alert") {
                 $value = (bool)$value;
             } else if ($key == "autorespond") {
                 $value = (bool)$value;

@@ -289,11 +289,13 @@ class Ticket {
     }
      
     function getPhone() {
-        return $this->ht['phone'];
+        list($phone, $ext) = explode("X", $this->_answers['phone'], 2);
+        return $phone;
     }
 
     function getPhoneExt() {
-        return $this->ht['phone_ext'];
+        list($phone, $ext) = explode("X", $this->_answers['phone'], 2);
+        return $ext;
     }
 
     function getPhoneNumber() {
@@ -1830,7 +1832,6 @@ class Ticket {
         $fields['topicId']  = array('type'=>'int',      'required'=>1, 'error'=>'Help topic required');
         $fields['priorityId'] = array('type'=>'int',    'required'=>1, 'error'=>'Priority required');
         $fields['slaId']    = array('type'=>'int',      'required'=>0, 'error'=>'Select SLA');
-        $fields['phone']    = array('type'=>'phone',    'required'=>0, 'error'=>'Valid phone # required');
         $fields['duedate']  = array('type'=>'date',     'required'=>0, 'error'=>'Invalid date - must be MM/DD/YY');
 
         $fields['note']     = array('type'=>'text',     'required'=>1, 'error'=>'Reason for the update required');
@@ -1849,19 +1850,9 @@ class Ticket {
                 $errors['duedate']='Due date must be in the future';
         }
         
-        //Make sure phone extension is valid
-        if($vars['phone_ext'] ) {
-            if(!is_numeric($vars['phone_ext']) && !$errors['phone'])
-                $errors['phone']='Invalid phone ext.';
-            elseif(!$vars['phone']) //make sure they just didn't enter ext without phone #
-                $errors['phone']='Phone number required';
-        }
-
         if($errors) return false;
 
         $sql='UPDATE '.TICKET_TABLE.' SET updated=NOW() '
-            .' ,phone="'.db_input($vars['phone'],false).'"'
-            .' ,phone_ext='.db_input($vars['phone_ext']?$vars['phone_ext']:NULL)
             .' ,priority_id='.db_input($vars['priorityId'])
             .' ,topic_id='.db_input($vars['topicId'])
             .' ,sla_id='.db_input($vars['slaId'])
@@ -2086,18 +2077,9 @@ class Ticket {
                 $errors['err']=$errors['origin'] = 'Invalid origin given';
         }
         $fields['priorityId']   = array('type'=>'int',      'required'=>0, 'error'=>'Invalid Priority');
-        $fields['phone']        = array('type'=>'phone',    'required'=>0, 'error'=>'Valid phone # required');
         
         if(!Validator::process($fields, $vars, $errors) && !$errors['err'])
             $errors['err'] ='Missing or invalid data - check the errors and try again';
-
-        //Make sure phone extension is valid
-        if($vars['phone_ext'] ) {
-            if(!is_numeric($vars['phone_ext']) && !$errors['phone'])
-                $errors['phone']='Invalid phone ext.';
-            elseif(!$vars['phone']) //make sure they just didn't enter ext without phone # XXX: reconsider allowing!
-                $errors['phone']='Phone number required';
-        }
 
         //Make sure the due date is valid
         if($vars['duedate']) {
@@ -2162,8 +2144,6 @@ class Ticket {
             .' ,dept_id='.db_input($deptId)
             .' ,topic_id='.db_input($topicId)
             .' ,priority_id='.db_input($priorityId)
-            .' ,phone="'.db_input($vars['phone'],false).'"'
-            .' ,phone_ext='.db_input($vars['phone_ext']?$vars['phone_ext']:'')
             .' ,ip_address='.db_input($ipaddress) 
             .' ,source='.db_input($source);
 

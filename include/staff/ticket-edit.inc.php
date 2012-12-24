@@ -20,17 +20,6 @@ $info=Format::htmlchars(($errors && $_POST)?$_POST:$ticket->getUpdateInfo());
     </thead>
     <tbody>
         <tr>
-            <td width="160">
-                Phone Number:
-            </td>
-            <td>
-                <input type="text" size="20" name="phone" value="<?php echo $info['phone']; ?>">
-                &nbsp;<span class="error">&nbsp;<?php echo $errors['phone']; ?></span>
-                Ext <input type="text" size="6" name="phone_ext" value="<?php echo $info['phone_ext']; ?>">
-                &nbsp;<span class="error">&nbsp;<?php echo $errors['phone_ext']; ?></span>
-            </td>
-        </tr>
-        <tr>
             <th colspan="2">
                 <em><strong>Ticket Information</strong>: Due date overwrites SLA's grace period.</em>
             </th>
