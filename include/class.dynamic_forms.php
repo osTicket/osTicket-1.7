@@ -1084,6 +1084,15 @@ class SelectionField extends DynamicFormField {
     function toString($item) {
         return ($item) ? $item->toString() : '';
     }
+
+    function getConfigurationOptions() {
+        return array(
+            'typeahead' => new ChoiceField(array(
+                'id'=>1, 'label'=>'Widget', 'required'=>false,
+                'default'=>false,
+                    'choices'=>array(false=>'Drop Down', true=>'Typeahead')))
+        );
+    }
 }
 
 class Widget {
@@ -1218,6 +1227,47 @@ class ChoicesWidget extends Widget {
 }
 
 class SelectionWidget extends ChoicesWidget {
+    function render() {
+        $config = $this->field->getConfiguration();
+        if (!$config['typeahead'])
+            return parent::render();
+
+        $source = array(); $value = false;
+        foreach ($this->field->getList()->getItems() as $i)
+            $source[] = array(
+                    'info' => $i->get('value'),
+                    'value' => strtolower($i->get('value').' '.$i->get('extra')),
+                    'id' => $i->get('id'));
+        if ($this->value && get_class($this->value) == 'DynamicListItem') {
+            // Loaded from database
+            $value = $this->value->get('id');
+            $name = $this->value->get('value');
+        } else {
+            // Loaded from POST
+            $value = $this->value;
+            $name = DynamicListItem::lookup($this->value);
+            $name = ($name) ? $name->get('value') : null;
+        }
+        ?>
+        <input type="hidden" name="<?php echo $this->name; ?>"
+            value="<?php echo $value; ?>" />
+        <input type="text" size="30" id="<?php echo $this->name; ?>"
+            value="<?php echo $name; ?>" />
+        <script type="text/javascript">
+        $(function() {
+            var items = <?php echo JsonDataEncoder::encode($source); ?>;
+            $('#<?php echo $this->name; ?>').typeahead({
+                source: items,
+                onselect: function(item) {
+                    $('#<?php echo $this->name; ?>').val(item['info'])
+                    $('input[name="<?php echo $this->name; ?>"]').val(item['id'])
+                }
+            });
+        });
+        </script>
+    <?php
+    }
+
     function getChoices() {
         if (!$this->_choices) {
             $this->_choices = array();

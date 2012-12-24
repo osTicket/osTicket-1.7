@@ -5,7 +5,6 @@
             echo $field->get('id'); ?>" onsubmit="javascript:
             var form = $(this);
             $.post(this.action, form.serialize(), function(data, status, xhr) {
-                    console.log(data, status, xhr);
                     if (!data.length) {
                         form.closest('.dialog').hide();
                         $('#overlay').hide();
