@@ -922,11 +922,25 @@ class PhoneField extends DynamicFormField {
     function validateEntry($value) {
         parent::validateEntry($value);
         # Run validator against $this->value for email type
-        if ($value && !Validator::is_phone($value))
+        list($phone, $ext) = explode("X", $value, 2);
+        if ($phone && !Validator::is_phone($phone))
             $this->_errors[] = "Enter a valid phone number";
+        if ($ext) {
+            if (!is_numeric($ext))
+                $this->_errors[] = "Enter a valide phone extension";
+            elseif (!$phone)
+                $this->_errors[] = "Enter a phone number for the extension";
+        }
     }
     function getWidget() {
         return new PhoneNumberWidget($this);
+    }
+
+    function toString($value) {
+        list($phone, $ext) = explode("X", $value, 2);
+        $phone=Format::phone($phone);
+        if($ext)
+            $phone.=" $ext";
     }
 }
 
@@ -1114,14 +1128,14 @@ class Widget {
         $this->field = $field;
         $this->name = '_form-field-id-'.$field->get('id');
         if (isset($_POST[$this->name]))
-            $this->value = $_POST[$this->name];
+            $this->value = $this->getValue();
         elseif ($a = $field->getAnswer())
             $this->value = $a->getValue();
         elseif ($field->value)
             $this->value = $field->value;
     }
     function getValue() {
-        return $this->value;
+        return $_POST[$this->name];
     }
 }   
 
@@ -1186,7 +1200,7 @@ class PhoneNumberWidget extends Widget {
     function getValue() {
         $ext = $_POST["{$this->name}-ext"];
         if ($ext) $ext = 'X'.$ext;
-        return $this->value . $ext;
+        return parent::getValue() . $ext;
     }
 }
 
@@ -1376,7 +1390,6 @@ class DatetimePickerWidget extends Widget {
      * time value into a single date and time string value.
      */
     function getValue() {
-
         $datetime = $this->value;
         if (isset($_POST[$this->name . ':time']))
             $datetime .= ' ' . $_POST[$this->name . ':time'];
