@@ -1186,17 +1186,20 @@ class ChoicesWidget extends Widget {
         $config = $this->field->getConfiguration();
         // Determine the value for the default (the one listed if nothing is
         // selected)
-        $def_key = $config['default'];
+        $def_key = $this->field->get('default');
         $choices = $this->getChoices();
-        $def_val = $choices[$def_key];
-        if (!$def_val)
+        $have_def = isset($choices[$def_key]);
+        if (!$have_def)
             $def_val = 'Select '.$this->field->get('label');
+        else
+            $def_val = $choices[$def_key];
         ?> <select name="<?php echo $this->name; ?>">
+            <?php if (!$have_def) { ?>
             <option value="<?php echo $def_key; ?>">&mdash; <?php
                 echo $def_val; ?> &mdash;</option>
-            <?php 
+            <?php }
             foreach ($choices as $key=>$name) {
-                if ($key == $def_key)
+                if (!$have_def && $key == $def_key)
                     continue; ?>
                 <option value="<?php echo $key; ?>"
                 <?php if ($this->value == $key) echo 'selected="selected"';
