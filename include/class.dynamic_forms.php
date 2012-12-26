@@ -286,7 +286,7 @@ class DynamicFormField extends VerySimpleModel {
      * Validates and cleans inputs from POST request
      */
     function getClean() {
-        $value = $this->getWidget()->getValue();
+        $value = $this->getWidget()->value;
         $value = $this->parse($value);
         if (!$this->_validated)
             $this->validateEntry($value);
@@ -1027,14 +1027,18 @@ class DatetimeField extends DynamicFormField {
             'gmt' => new BooleanField(array(
                 'id'=>2, 'label'=>'Timezone Aware', 'required'=>false, 'default'=>true)),
             'min' => new DatetimeField(array(
-                'id'=>3, 'label'=>'Earliest', 'required'=>false, 'default'=>null)),
+                'id'=>3, 'label'=>'Earliest', 'required'=>false,
+                'default'=>null)),
             'max' => new DatetimeField(array(
-                'id'=>4, 'label'=>'Latest', 'required'=>false, 'default'=>null))
+                'id'=>4, 'label'=>'Latest', 'required'=>false,
+                'default'=>null))
         );
     }
 
     function validateEntry($value) {
         $config = $this->getConfiguration();
+        parent::validateEntry($value);
+        if (!$value) return;
         if ($config['min'] and $value < $config['min'])
             $this->_errors[] = 'Selected date is earlier than permitted';
         elseif ($config['max'] and $value > $config['max'])
@@ -1127,12 +1131,12 @@ class Widget {
     function __construct($field) {
         $this->field = $field;
         $this->name = '_form-field-id-'.$field->get('id');
-        if (isset($_POST[$this->name]))
-            $this->value = $this->getValue();
-        elseif ($a = $field->getAnswer())
+        if ($a = $field->getAnswer())
             $this->value = $a->getValue();
         elseif ($field->value)
             $this->value = $field->value;
+        else
+            $this->value = $this->getValue();
     }
     function getValue() {
         return $_POST[$this->name];
@@ -1390,7 +1394,7 @@ class DatetimePickerWidget extends Widget {
      * time value into a single date and time string value.
      */
     function getValue() {
-        $datetime = $this->value;
+        $datetime = parent::getValue();
         if (isset($_POST[$this->name . ':time']))
             $datetime .= ' ' . $_POST[$this->name . ':time'];
         return $datetime;
