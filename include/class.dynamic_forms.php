@@ -229,19 +229,6 @@ class DynamicFormSection extends VerySimpleModel {
         return $this->_errors;
     }
 
-    // XXX: This doesn't appear to be used
-    function getClean() {
-        if (!$this->_clean) {
-            $this->_clean = array();
-            foreach ($this->getFields() as $field)
-                # Need to hash be able to get field in order to ask the
-                # field to convert the value to the database format when
-                # saving to database
-                $this->_clean[$field] = $field->getClean();
-        }
-        return $this->_clean;
-    }
-
     function instanciate() {
         return DynamicFormEntry::create(array('section_id'=>$this->get('id')));
     }
@@ -283,7 +270,12 @@ require_once(INCLUDE_DIR . "class.json.php");
 class DynamicFormField extends VerySimpleModel {
 
     /**
-     * Validates and cleans inputs from POST request
+     * getClean
+     *
+     * Validates and cleans inputs from POST request. This is performed on a
+     * field instance, after a DynamicFormSet / DynamicFormSection is
+     * submitted via POST, in order to kick off parsing and validation of
+     * user-entered data.
      */
     function getClean() {
         $value = $this->getWidget()->value;
@@ -314,6 +306,7 @@ class DynamicFormField extends VerySimpleModel {
     }
 
     function isValidEntry() {
+        $this->validateEntry();
         return count($this->_errors) == 0;
     }
 
@@ -339,23 +332,64 @@ class DynamicFormField extends VerySimpleModel {
                 $this->_errors[] = $this->getLabel() . ' is a required field';
     }
 
+    /**
+     * parse
+     *
+     * Used to transform user-submitted data to a PHP value. This value is
+     * not yet considered valid. The ::validateEntry() method will be called
+     * on the value to determine if the entry is valid. Therefore, if the
+     * data is clearly invalid, return something like NULL that can easily
+     * be deemed invalid in ::validateEntry(), however, can still produce a
+     * useful error message indicating what is wrong with the input.
+     */
     function parse($value) {
-        # From (validated) user input to PHP
         return $value;
     }
 
+    /**
+     * to_php
+     *
+     * Transforms the data from the value stored in the database to a PHP
+     * value. The ::to_database() method is used to produce the database
+     * valse, so this method is the compliment to ::to_database().
+     *
+     * Parameters:
+     * $value - (string or null) database representation of the field's
+     *      content
+     */
     function to_php($value) {
-        # From database value to PHP
         return $value;
     }
     
+    /**
+     * to_database
+     *
+     * Determines the value to be stored in the database. The database
+     * backend for all fields is a text field, so this method should return
+     * a text value or NULL to represent the value of the field. The
+     * ::to_php() method will convert this value back to PHP.
+     *
+     * Paremeters:
+     * $value - PHP value of the field's content
+     */
     function to_database($value) {
-        # From PHP to database value
         return $value;
     }
 
+    /**
+     * toString
+     *
+     * Converts the PHP value created in ::parse() or ::to_php() to a
+     * pretty-printed value to show to the user. This is especially useful
+     * for something like dates which are stored considerably different in
+     * the database from their respective human-friendly versions.
+     * Furthermore, this method allows for internationalization and
+     * localization.
+     *
+     * Parametes:
+     * $value - PHP value of the field's content
+     */
     function toString($value) {
-        # Converts the PHP value to a display value
         return $value;
     }
 
@@ -547,7 +581,7 @@ class DynamicFormEntry extends VerySimpleModel {
      * Adds fields that have been added to the linked form section (field
      * set) since this entry was originally created. If fields are added to
      * the form section, the method will automatically add the fields and
-     * the fields and null answers to the entry.
+     * null answers to the entry.
      */
     function addMissingFields() {
         foreach ($this->getForm()->getFields() as $field) {
@@ -1003,8 +1037,8 @@ class DatetimeField extends DynamicFormField {
     }
 
     function parse($value) {
-        $config = $this->getConfiguration();
         if (!$value) return null;
+        $config = $this->getConfiguration();
         return ($config['gmt']) ? Misc::db2gmtime($value) : strtotime($value);
     }
 
