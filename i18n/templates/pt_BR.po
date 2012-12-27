@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: osticket17\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-11-28 08:49-0300\n"
+"POT-Creation-Date: 2012-12-27 13:22-0300\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Fabio Rauber <fabior@interlegis.leg.br>\n"
 "Language-Team: Fabio Rauber <fabior@interlegis.leg.br>\n"
@@ -268,10 +268,10 @@ msgstr "Ativados os times selecionados"
 #: osticket/scp/apikeys.php:55
 #: osticket/scp/apikeys.php:67
 #: osticket/scp/apikeys.php:81
-#: osticket/scp/tickets.php:351
-#: osticket/scp/tickets.php:371
-#: osticket/scp/tickets.php:390
-#: osticket/scp/tickets.php:411
+#: osticket/scp/tickets.php:356
+#: osticket/scp/tickets.php:376
+#: osticket/scp/tickets.php:395
+#: osticket/scp/tickets.php:416
 #: osticket/scp/helptopics.php:57
 #: osticket/scp/helptopics.php:69
 #: osticket/scp/helptopics.php:84
@@ -396,29 +396,29 @@ msgstr "categorias selecionadas apagadas"
 msgid "Unable to delete selected categories"
 msgstr "Não foi possível apagar categorias selecionadas"
 
-#: osticket/scp/admin.inc.php:29
+#: osticket/scp/admin.inc.php:30
 msgid "System upgrade is pending"
 msgstr "Atualização do Sistema pendente"
 
-#: osticket/scp/admin.inc.php:29
+#: osticket/scp/admin.inc.php:30
 msgid "Upgrade Now"
 msgstr "Atualize Agora"
 
-#: osticket/scp/admin.inc.php:38
+#: osticket/scp/admin.inc.php:39
 #, php-format
 msgid "Please rename config file include/%s to include/ost-config.php to avoid possible conflicts"
 msgstr "Por favor, renomeie o arquivo de configurações include/%s para incluir include/ost-config.php para evitar possíveis conflitos"
 
-#: osticket/scp/admin.inc.php:45
+#: osticket/scp/admin.inc.php:46
 msgid "Please take a minute to delete <strong>setup/install</strong> directory (../setup/) for security reasons."
 msgstr "Dedique um pouco de seu tempo para apagar o diretório <strong>setup/install</strong> (../setup/) por razões de segurança."
 
-#: osticket/scp/admin.inc.php:51
+#: osticket/scp/admin.inc.php:52
 #, php-format
 msgid "Please change permission of config file (%s) to remove write access. e.g <i>chmod 644 %s</i>"
 msgstr "Por favor, modifique as permissões do arquivo de configuração (%s) para remover acesso de escrita, ou seja, <i>chmod 644 %s</i>"
 
-#: osticket/scp/admin.inc.php:57
+#: osticket/scp/admin.inc.php:58
 msgid "Please consider turning off register globals if possible"
 msgstr "Considere desabilitar registros globais, se possível"
 
@@ -496,524 +496,528 @@ msgstr "ID do Tíquete desconhecido ou inválido"
 msgid "Access denied. Contact admin if you believe this is in error"
 msgstr "Acesso negado. Contacte o administrador se você acha que isto é um erro"
 
-#: osticket/scp/tickets.php:47
+#: osticket/scp/tickets.php:46
+msgid "Action denied. Contact admin for access"
+msgstr "Ação Negada. Contate o Administrador para acesso"
+
+#: osticket/scp/tickets.php:50
 msgid "Missing message ID - Internal error"
 msgstr "Faltando ID da mensagem - Erro interno"
 
-#: osticket/scp/tickets.php:49
+#: osticket/scp/tickets.php:52
 msgid "Response required"
 msgstr "Resposta requerida"
 
-#: osticket/scp/tickets.php:52
+#: osticket/scp/tickets.php:56
 msgid "Action Denied. Ticket is locked by someone else!"
 msgstr "Ação Negada. O Tíquete está bloqueado por outra pessoa!"
 
-#: osticket/scp/tickets.php:56
+#: osticket/scp/tickets.php:60
 msgid "Email is in banlist. Must be removed to reply."
 msgstr "O E-mail está na lista negra. Deve ser removido para responder."
 
-#: osticket/scp/tickets.php:61
+#: osticket/scp/tickets.php:66
 msgid "Reply posted successfully"
 msgstr "Resposta postada com sucesso"
 
-#: osticket/scp/tickets.php:67
+#: osticket/scp/tickets.php:72
 msgid "Unable to post the reply. Correct the errors below and try again!"
 msgstr "Não foi possível adicionar a resposta. Corrija os erros abaixo e tente novamente!"
 
-#: osticket/scp/tickets.php:78
+#: osticket/scp/tickets.php:83
 msgid "Select department"
 msgstr "Selecione o departamento"
 
-#: osticket/scp/tickets.php:80
+#: osticket/scp/tickets.php:85
 msgid "Ticket already in the department"
 msgstr "Tíquete já está no departamento"
 
-#: osticket/scp/tickets.php:82
+#: osticket/scp/tickets.php:87
 msgid "Unknown or invalid department"
 msgstr "Departamento desconhecido ou inválido"
 
-#: osticket/scp/tickets.php:86
+#: osticket/scp/tickets.php:91
 msgid "Transfer comments required"
 msgstr "Comentários de transferência requeridos"
 
-#: osticket/scp/tickets.php:88
+#: osticket/scp/tickets.php:93
 msgid "Transfer comments too short!"
 msgstr "Comentários de transferência muito pequenos!"
 
-#: osticket/scp/tickets.php:92
+#: osticket/scp/tickets.php:97
 msgid "Ticket transferred successfully to"
 msgstr "Tíquete transferido com sucesso para"
 
-#: osticket/scp/tickets.php:98
+#: osticket/scp/tickets.php:103
 msgid "Unable to complete the ticket transfer"
 msgstr "Não foi possível completar a transferência do tíquete"
 
-#: osticket/scp/tickets.php:99
-#: osticket/scp/tickets.php:141
+#: osticket/scp/tickets.php:104
+#: osticket/scp/tickets.php:146
 msgid "Correct the error(s) below and try again!"
 msgstr "Corrija os erros abaixo e tente novamente!"
 
-#: osticket/scp/tickets.php:106
+#: osticket/scp/tickets.php:111
 msgid "Action Denied. You are not allowed to assign/reassign tickets."
 msgstr "Ação Negada. Você não tem permissão para designar tíquetes."
 
-#: osticket/scp/tickets.php:113
+#: osticket/scp/tickets.php:118
 msgid "Select assignee"
 msgstr "Selecione "
 
-#: osticket/scp/tickets.php:115
+#: osticket/scp/tickets.php:120
 msgid "Invalid assignee ID - get technical support"
 msgstr "ID de designação inválido - procure suporte técnico"
 
-#: osticket/scp/tickets.php:118
+#: osticket/scp/tickets.php:123
 msgid "Ticket already assigned to the staff."
 msgstr "O tíquete já está deisgnado para a equipe."
 
-#: osticket/scp/tickets.php:120
+#: osticket/scp/tickets.php:125
 msgid "Ticket already assigned to the team."
 msgstr "O tíquete já está deisgnado para o time."
 
-#: osticket/scp/tickets.php:125
-#: osticket/scp/tickets.php:241
+#: osticket/scp/tickets.php:130
+#: osticket/scp/tickets.php:246
 msgid "Ticket claimed by"
 msgstr "Tíquete designado para si por"
 
-#: osticket/scp/tickets.php:127
+#: osticket/scp/tickets.php:132
 msgid "Assignment comments required"
 msgstr "Comentários de Designação requeridos"
 
-#: osticket/scp/tickets.php:129
+#: osticket/scp/tickets.php:134
 msgid "Comment too short"
 msgstr "Comentários muito curtos"
 
-#: osticket/scp/tickets.php:133
+#: osticket/scp/tickets.php:138
 msgid "Ticket is NOW assigned to you!"
 msgstr "AGORA, o tíquete está designado para você! "
 
-#: osticket/scp/tickets.php:135
+#: osticket/scp/tickets.php:140
 msgid "Ticket assigned successfully to"
 msgstr "Tíquete designado com sucesso para "
 
-#: osticket/scp/tickets.php:140
+#: osticket/scp/tickets.php:145
 msgid "Unable to complete the ticket assignment"
 msgstr "Não foi possível completar a designação do tíquete"
 
-#: osticket/scp/tickets.php:149
+#: osticket/scp/tickets.php:154
 msgid "You don't have permission to close tickets"
 msgstr "Você não tem permissão para fechar tíquetes"
 
-#: osticket/scp/tickets.php:152
+#: osticket/scp/tickets.php:157
 msgid "You don't have permission to set the state"
 msgstr "Você não tem permissão para mudar o estado"
 
-#: osticket/scp/tickets.php:157
+#: osticket/scp/tickets.php:162
 msgid "Internal note posted successfully"
 msgstr "Nota interna postada com sucesso"
 
-#: osticket/scp/tickets.php:161
+#: osticket/scp/tickets.php:166
 msgid "Unable to post internal note - missing or invalid data."
 msgstr "Não foi possível postar nota interna - dados inválidos ou faltando."
 
-#: osticket/scp/tickets.php:162
+#: osticket/scp/tickets.php:167
 msgid "Unable to post the note. Correct the error(s) below and try again!"
 msgstr "Não foi possível adicionar a resposta. Corrija os erros abaixo e tente novamente!"
 
-#: osticket/scp/tickets.php:168
+#: osticket/scp/tickets.php:173
 msgid "Perm. Denied. You are not allowed to edit tickets"
 msgstr "Perm. Negada. Você não pode editar tíquetes"
 
-#: osticket/scp/tickets.php:170
+#: osticket/scp/tickets.php:175
 msgid "Ticket updated successfully"
 msgstr "Tíquete atualizado com sucesso"
 
-#: osticket/scp/tickets.php:176
+#: osticket/scp/tickets.php:181
 msgid "Unable to update the ticket. Correct the errors below and try again!"
 msgstr "Não foi possível atualizar o tíquete.Corrija os erros abaixo e tente novamente!"
 
-#: osticket/scp/tickets.php:183
+#: osticket/scp/tickets.php:188
 msgid "Perm. Denied. You are not allowed to close tickets."
 msgstr "Perm. Negada. Você não tem permissão para fechar tíquetes."
 
-#: osticket/scp/tickets.php:185
+#: osticket/scp/tickets.php:190
 msgid "Ticket is already closed!"
 msgstr "Tíquete já está fechado!"
 
-#: osticket/scp/tickets.php:187
-#: osticket/scp/tickets.php:306
-#: osticket/scp/tickets.php:308
+#: osticket/scp/tickets.php:192
+#: osticket/scp/tickets.php:311
+#: osticket/scp/tickets.php:313
 msgid "Ticket #"
 msgstr "Tíquetes #"
 
-#: osticket/scp/tickets.php:187
+#: osticket/scp/tickets.php:192
 msgid "status set to CLOSED"
 msgstr "estado mudou para FECHADO"
 
-#: osticket/scp/tickets.php:192
+#: osticket/scp/tickets.php:197
 msgid "Ticket closed (without comments)"
 msgstr "Tíquete fechado (sem comentários)"
 
-#: osticket/scp/tickets.php:194
-#: osticket/scp/tickets.php:364
+#: osticket/scp/tickets.php:199
+#: osticket/scp/tickets.php:369
 msgid "Ticket Closed"
 msgstr "Tíquete Fechado"
 
-#: osticket/scp/tickets.php:201
+#: osticket/scp/tickets.php:206
 msgid "Problems closing the ticket. Try again"
 msgstr "Problemas ao fechar o tiquete. Tente novamente"
 
-#: osticket/scp/tickets.php:207
+#: osticket/scp/tickets.php:212
 msgid "Perm. Denied. You are not allowed to reopen tickets."
 msgstr "Perm. Negada. Você não tem permissão para reabrir tíquetes."
 
-#: osticket/scp/tickets.php:209
+#: osticket/scp/tickets.php:214
 msgid "Ticket is already open!"
 msgstr "Tíquete já está aberto!"
 
-#: osticket/scp/tickets.php:211
+#: osticket/scp/tickets.php:216
 msgid "Ticket REOPENED"
 msgstr "Tíquete REABERTO"
 
-#: osticket/scp/tickets.php:216
+#: osticket/scp/tickets.php:221
 msgid "Ticket reopened (without comments)"
 msgstr "Tíquete reaberto (sem comentários)"
 
-#: osticket/scp/tickets.php:218
-#: osticket/scp/tickets.php:344
+#: osticket/scp/tickets.php:223
+#: osticket/scp/tickets.php:349
 msgid "Ticket Reopened"
 msgstr "Tíquete Reaberto"
 
-#: osticket/scp/tickets.php:221
+#: osticket/scp/tickets.php:226
 msgid "Problems reopening the ticket. Try again"
 msgstr "Problemas ao reabrir tíquete. Tente novamente"
 
-#: osticket/scp/tickets.php:226
+#: osticket/scp/tickets.php:231
 msgid "Ticket is not assigned!"
 msgstr "Tíquete não designado!"
 
-#: osticket/scp/tickets.php:228
+#: osticket/scp/tickets.php:233
 msgid "Ticket released (unassigned) from"
 msgstr "O tíquete não está mais designado para"
 
-#: osticket/scp/tickets.php:229
+#: osticket/scp/tickets.php:234
 msgid "Ticket unassigned"
 msgstr "Tíquete não designado"
 
-#: osticket/scp/tickets.php:229
-#: osticket/scp/tickets.php:253
-#: osticket/scp/tickets.php:264
-#: osticket/scp/tickets.php:275
+#: osticket/scp/tickets.php:234
+#: osticket/scp/tickets.php:258
+#: osticket/scp/tickets.php:269
+#: osticket/scp/tickets.php:280
 msgid "by"
 msgstr "por"
 
-#: osticket/scp/tickets.php:231
+#: osticket/scp/tickets.php:236
 msgid "Problems releasing the ticket. Try again"
 msgstr "Problemas ao liberar o tíquete. Tente novamente"
 
-#: osticket/scp/tickets.php:236
+#: osticket/scp/tickets.php:241
 msgid "Perm. Denied. You are not allowed to assign/claim tickets."
 msgstr "Perm. Negada. Você não tem permissão para designar tíquetes."
 
-#: osticket/scp/tickets.php:238
+#: osticket/scp/tickets.php:243
 msgid "Only open tickets can be assigned"
 msgstr "Somente tíquetes abertos podem ser designados"
 
-#: osticket/scp/tickets.php:240
+#: osticket/scp/tickets.php:245
 msgid "Ticket is already assigned to"
 msgstr "Tíquete já está designado para"
 
-#: osticket/scp/tickets.php:242
+#: osticket/scp/tickets.php:247
 msgid "Ticket is now assigned to you!"
 msgstr "Tíquete designado para você!"
 
-#: osticket/scp/tickets.php:244
+#: osticket/scp/tickets.php:249
 msgid "Problems assigning the ticket. Try again"
 msgstr "Problemas ao designar tíquete. Tente novamente"
 
-#: osticket/scp/tickets.php:250
+#: osticket/scp/tickets.php:255
 msgid "Perm. Denied. You are not allowed to flag tickets overdue"
 msgstr "Perm. Negada. Você não tem permissão para marcar tíquetes como atrasados"
 
-#: osticket/scp/tickets.php:252
+#: osticket/scp/tickets.php:257
 msgid "Ticket flagged as overdue"
 msgstr "Tíquete marcado como atrasado"
 
-#: osticket/scp/tickets.php:253
-#: osticket/scp/tickets.php:383
+#: osticket/scp/tickets.php:258
+#: osticket/scp/tickets.php:388
 msgid "Ticket Marked Overdue"
 msgstr "Tíquete Marcado como Atrasado"
 
-#: osticket/scp/tickets.php:255
+#: osticket/scp/tickets.php:260
 msgid "Problems marking the the ticket overdue. Try again"
 msgstr "Problemas ao marcar o tíquete como atrasado. Tente novamente"
 
-#: osticket/scp/tickets.php:261
-#: osticket/scp/tickets.php:272
+#: osticket/scp/tickets.php:266
+#: osticket/scp/tickets.php:277
 msgid "Perm. Denied. You are not allowed to flag tickets"
 msgstr "Perm. Negada. Você não tem permissão para marcar tíquetes"
 
-#: osticket/scp/tickets.php:263
+#: osticket/scp/tickets.php:268
 msgid "Ticket flagged as answered"
 msgstr "Tíquete marcado como respondido"
 
-#: osticket/scp/tickets.php:264
+#: osticket/scp/tickets.php:269
 msgid "Ticket Marked Answered"
 msgstr "Tíquete Marcado como Respondido"
 
-#: osticket/scp/tickets.php:266
+#: osticket/scp/tickets.php:271
 msgid "Problems marking the the ticket answered. Try again"
 msgstr "Problemas ao marcar o tíquete como respondido. Tente novamente"
 
-#: osticket/scp/tickets.php:274
+#: osticket/scp/tickets.php:279
 msgid "Ticket flagged as unanswered"
 msgstr "Tíquete marcado como não respondido"
 
-#: osticket/scp/tickets.php:275
+#: osticket/scp/tickets.php:280
 msgid "Ticket Marked Unanswered"
 msgstr "Tíquete Marcado como Não Respondido"
 
-#: osticket/scp/tickets.php:277
+#: osticket/scp/tickets.php:282
 msgid "Problems marking the the ticket unanswered. Try again"
 msgstr "Problemas ao marcar o tíquete como não respondido. Tente novamente"
 
-#: osticket/scp/tickets.php:282
+#: osticket/scp/tickets.php:287
 msgid "Perm. Denied. You are not allowed to ban emails"
 msgstr "Perm. Negada. Você não tem permissão para banir e-mails"
 
-#: osticket/scp/tickets.php:284
+#: osticket/scp/tickets.php:289
 msgid "Email already in banlist"
 msgstr "E-mail já está na lista negra"
 
-#: osticket/scp/tickets.php:286
+#: osticket/scp/tickets.php:291
 msgid "Email"
 msgstr "E-mail"
 
-#: osticket/scp/tickets.php:286
+#: osticket/scp/tickets.php:291
 msgid "added to banlist"
 msgstr "adicionado à lista negra"
 
-#: osticket/scp/tickets.php:288
+#: osticket/scp/tickets.php:293
 msgid "Unable to add the email to banlist"
 msgstr "Não foi possível adicionar o e-mail à lista negra"
 
-#: osticket/scp/tickets.php:293
+#: osticket/scp/tickets.php:298
 msgid "Perm. Denied. You are not allowed to remove emails from banlist."
 msgstr "Perm. Negada. Você não tem permissão para remover e-mails da lista negra."
 
-#: osticket/scp/tickets.php:295
+#: osticket/scp/tickets.php:300
 msgid "Email removed from banlist"
 msgstr "E-mail removido da lista negra"
 
-#: osticket/scp/tickets.php:297
+#: osticket/scp/tickets.php:302
 msgid "Email is not in the banlist"
 msgstr "E-mail não está na lista negra"
 
-#: osticket/scp/tickets.php:299
+#: osticket/scp/tickets.php:304
 msgid "Unable to remove the email from banlist. Try again."
 msgstr "Não foi possível remover o e-mail da lista negra. Tente novamente."
 
-#: osticket/scp/tickets.php:304
+#: osticket/scp/tickets.php:309
 msgid "Perm. Denied. You are not allowed to DELETE tickets!!"
 msgstr "Perm. Negada. Você não tem permissão para APAGAR tíquetes!!"
 
-#: osticket/scp/tickets.php:306
-#: osticket/scp/tickets.php:409
+#: osticket/scp/tickets.php:311
+#: osticket/scp/tickets.php:414
 msgid "deleted successfully"
 msgstr "apagado com sucesso"
 
-#: osticket/scp/tickets.php:308
+#: osticket/scp/tickets.php:313
 msgid "deleted"
 msgstr "apagado"
 
-#: osticket/scp/tickets.php:309
+#: osticket/scp/tickets.php:314
 #, php-format
 msgid "Ticket #%s deleted by %s"
 msgstr "Tíquete no. %s apagado por %s"
 
-#: osticket/scp/tickets.php:314
+#: osticket/scp/tickets.php:319
 msgid "Problems deleting the ticket. Try again"
 msgstr "Problemas ao apagar tíquete. Tente novamente."
 
-#: osticket/scp/tickets.php:318
+#: osticket/scp/tickets.php:323
 msgid "You must select action to perform"
 msgstr "Você deve selecionar uma ação"
 
-#: osticket/scp/tickets.php:331
+#: osticket/scp/tickets.php:336
 msgid "You do not have permission to mass manage tickets. Contact admin for such access"
 msgstr "Você não tem permissão para gerenciar tíquetes em massa. Contacte o administrador."
 
-#: osticket/scp/tickets.php:333
+#: osticket/scp/tickets.php:338
 msgid "No tickets selected. You must select at least one ticket."
 msgstr "Nenhum tíquete selecionado. Você deve selecionar ao meno um tíquete."
 
-#: osticket/scp/tickets.php:340
+#: osticket/scp/tickets.php:345
 msgid "Ticket reopened by"
 msgstr "Tíquete reaberto por"
 
-#: osticket/scp/tickets.php:349
-#: osticket/scp/tickets.php:369
-#: osticket/scp/tickets.php:388
-#: osticket/scp/tickets.php:409
+#: osticket/scp/tickets.php:354
+#: osticket/scp/tickets.php:374
+#: osticket/scp/tickets.php:393
+#: osticket/scp/tickets.php:414
 msgid "Selected tickets"
 msgstr "Tíquetes selecionados"
 
-#: osticket/scp/tickets.php:349
+#: osticket/scp/tickets.php:354
 msgid "reopened successfully"
 msgstr "reabertos com sucesso"
 
-#: osticket/scp/tickets.php:351
+#: osticket/scp/tickets.php:356
 msgid "selected tickets reopened"
 msgstr "tíquetes selecionados reabertos"
 
-#: osticket/scp/tickets.php:353
+#: osticket/scp/tickets.php:358
 msgid "Unable to reopen selected tickets"
 msgstr "Não foi possível reabrir os tíquetes selecionados"
 
-#: osticket/scp/tickets.php:355
+#: osticket/scp/tickets.php:360
 msgid "You do not have permission to reopen tickets"
 msgstr "Você não tem permissão para reabrir tíquetes"
 
-#: osticket/scp/tickets.php:360
+#: osticket/scp/tickets.php:365
 msgid "Ticket closed without response by"
 msgstr "Tíquete fechado sem resposta por"
 
-#: osticket/scp/tickets.php:369
+#: osticket/scp/tickets.php:374
 msgid "closed succesfully"
 msgstr "fechados com sucesso"
 
-#: osticket/scp/tickets.php:371
+#: osticket/scp/tickets.php:376
 msgid "selected tickets closed"
 msgstr "tíquetes selecionados fechados"
 
-#: osticket/scp/tickets.php:373
+#: osticket/scp/tickets.php:378
 msgid "Unable to close selected tickets"
 msgstr "Não foi possível fechar os tíquetes selecionados"
 
-#: osticket/scp/tickets.php:375
+#: osticket/scp/tickets.php:380
 msgid "You do not have permission to close tickets"
 msgstr "Você não tem permissão para fechar tíquetes"
 
-#: osticket/scp/tickets.php:379
+#: osticket/scp/tickets.php:384
 msgid "Ticket flagged as overdue by"
 msgstr "Tíquete marcado como atrasado por"
 
-#: osticket/scp/tickets.php:388
+#: osticket/scp/tickets.php:393
 msgid "marked overdue"
 msgstr "marcados como atrasados"
 
-#: osticket/scp/tickets.php:390
+#: osticket/scp/tickets.php:395
 msgid "selected tickets marked overdue"
 msgstr "tíquetes selecionados marcados como atrasados"
 
-#: osticket/scp/tickets.php:392
+#: osticket/scp/tickets.php:397
 msgid "Unable to flag selected tickets as overdue"
 msgstr "Não foi possível marcar os tíquetes selecionados como atrasados"
 
-#: osticket/scp/tickets.php:402
+#: osticket/scp/tickets.php:407
 #, php-format
 msgid "just deleted %d ticket(s)"
 msgstr "acabou de apagar %d tíquetes"
 
-#: osticket/scp/tickets.php:404
+#: osticket/scp/tickets.php:409
 msgid "Tickets deleted"
 msgstr "Tíquetes apagados"
 
-#: osticket/scp/tickets.php:411
+#: osticket/scp/tickets.php:416
 msgid "selected tickets deleted"
 msgstr "tíquetes selecionados apagados"
 
-#: osticket/scp/tickets.php:413
+#: osticket/scp/tickets.php:418
 msgid "Unable to delete selected tickets"
 msgstr "Não foi possível apagar os tíquetes selecionados"
 
-#: osticket/scp/tickets.php:415
+#: osticket/scp/tickets.php:420
 msgid "You do not have permission to delete tickets"
 msgstr "Você não tem permissão para apagar tíquetes"
 
-#: osticket/scp/tickets.php:419
+#: osticket/scp/tickets.php:424
 msgid "Unknown or unsupported action - get technical help"
 msgstr "Ação desconhecida ou não suportada -  procure ajuda técnica"
 
-#: osticket/scp/tickets.php:426
+#: osticket/scp/tickets.php:431
 msgid "You do not have permission to create tickets. Contact admin for such access"
 msgstr "Você não tem permissão para criar tíquetes. Contacte o administrador"
 
-#: osticket/scp/tickets.php:428
+#: osticket/scp/tickets.php:433
 msgid "Ticket created successfully"
 msgstr "Tíquete criado com sucesso"
 
-#: osticket/scp/tickets.php:433
+#: osticket/scp/tickets.php:438
 msgid "Unable to create the ticket. Correct the error(s) and try again"
 msgstr "Não foi possível criar o tíquete. Corrija os erros abaixo e tente novamente!"
 
-#: osticket/scp/tickets.php:448
-#: osticket/scp/tickets.php:456
+#: osticket/scp/tickets.php:453
+#: osticket/scp/tickets.php:461
 msgid "Open"
 msgstr "Aberto"
 
-#: osticket/scp/tickets.php:449
-#: osticket/scp/tickets.php:457
+#: osticket/scp/tickets.php:454
+#: osticket/scp/tickets.php:462
 msgid "Open Tickets"
 msgstr "Tíquetes Abertos"
 
-#: osticket/scp/tickets.php:464
+#: osticket/scp/tickets.php:469
 msgid "Answered"
 msgstr "Respondidos"
 
-#: osticket/scp/tickets.php:465
+#: osticket/scp/tickets.php:470
 msgid "Answered Tickets"
 msgstr "Tíquetes Respondidos"
 
-#: osticket/scp/tickets.php:474
-msgid " assigned to you!"
-msgstr " designado para você!"
+#: osticket/scp/tickets.php:479
+msgid "tickets assigned to you! Do something about it!"
+msgstr "tíquetes designados para você! Faça alguma coisa!"
 
-#: osticket/scp/tickets.php:476
+#: osticket/scp/tickets.php:481
 msgid "My Tickets"
 msgstr "Meus tíquetes"
 
-#: osticket/scp/tickets.php:477
+#: osticket/scp/tickets.php:482
 msgid "Assigned Tickets"
 msgstr "Tíquetes Designados"
 
-#: osticket/scp/tickets.php:484
+#: osticket/scp/tickets.php:489
 msgid "Overdue"
 msgstr "Atrasado"
 
-#: osticket/scp/tickets.php:485
+#: osticket/scp/tickets.php:490
 msgid "Stale Tickets"
 msgstr "Tíquetes Atrasados"
 
-#: osticket/scp/tickets.php:491
+#: osticket/scp/tickets.php:496
 msgid " overdue tickets!"
 msgstr " tíquetes atrasados!"
 
-#: osticket/scp/tickets.php:495
-#: osticket/scp/tickets.php:496
+#: osticket/scp/tickets.php:500
+#: osticket/scp/tickets.php:501
 msgid "My Closed Tickets"
 msgstr "Meus Tíquetes Fechados"
 
-#: osticket/scp/tickets.php:502
-#: osticket/scp/tickets.php:503
+#: osticket/scp/tickets.php:507
+#: osticket/scp/tickets.php:508
 msgid "Closed Tickets"
 msgstr "Tíquetes Fechados"
 
-#: osticket/scp/tickets.php:510
+#: osticket/scp/tickets.php:515
 msgid "New Ticket"
 msgstr "Novo Tíquete"
 
-#: osticket/scp/tickets.php:525
+#: osticket/scp/tickets.php:530
 msgid "Internal error: Unable to export the ticket to PDF for print."
 msgstr "Erro interno: Não é possível exportar o tíquete para PDF."
 
-#: osticket/scp/tickets.php:534
+#: osticket/scp/tickets.php:539
 msgid "Query token required"
 msgstr "Token de pesquisa requerido"
 
-#: osticket/scp/tickets.php:536
+#: osticket/scp/tickets.php:541
 msgid "Query token not found"
 msgstr "Token de pesquisa não encontrado"
 
-#: osticket/scp/tickets.php:538
+#: osticket/scp/tickets.php:543
 msgid "Internal error: Unable to dump query results"
 msgstr "Erro interno: Não foi possível mostrar os resultados da pesquisa"
 
@@ -1979,27 +1983,31 @@ msgstr "E-mails selecionados apagados com sucesso"
 msgid "selected emails deleted"
 msgstr "emails selecionados foram deletados"
 
-#: osticket/api/pipe.php:25
+#: osticket/api/pipe.php:26
 msgid "Email piping not enabled - check MTA settings."
 msgstr "Direcionamento de E-mail para programas não habilitado - cheque as configurações MTA."
 
-#: osticket/api/pipe.php:35
+#: osticket/api/pipe.php:28
+msgid "API key not authorized"
+msgstr "Chave API não autorizada"
+
+#: osticket/api/pipe.php:39
 msgid "Email parse failed ["
 msgstr "Processamento de E-mail falhou ["
 
-#: osticket/api/pipe.php:44
+#: osticket/api/pipe.php:48
 msgid "Invalid FROM address ["
 msgstr "Endereço de ORIGEM inválido ["
 
-#: osticket/api/pipe.php:104
+#: osticket/api/pipe.php:108
 msgid "Unable to post message"
 msgstr "Não foi possível postar a mensagem"
 
-#: osticket/api/pipe.php:116
+#: osticket/api/pipe.php:120
 msgid "Bounced email"
 msgstr "E-mail voltou"
 
-#: osticket/api/pipe.php:120
+#: osticket/api/pipe.php:124
 msgid "Ticket create Failed"
 msgstr "Criação de tíquete falhou"
 
@@ -2093,220 +2101,220 @@ msgstr "Não foi possível atualizar o time. Erro interno"
 msgid "Unable to create the team. Internal error"
 msgstr "Não foi possível criar o time. Erro interno"
 
-#: osticket/include/class.ticket.php:918
+#: osticket/include/class.ticket.php:917
 #, php-format
 msgid "Max open tickets (%d) reached  for %s"
 msgstr "Máximo de tíquetes abertos (%d) alcançado para %s"
 
-#: osticket/include/class.ticket.php:919
+#: osticket/include/class.ticket.php:918
 msgid "Max. Open Tickets Limit"
 msgstr "Limite máx. de Tíquetes Abertos"
 
-#: osticket/include/class.ticket.php:943
+#: osticket/include/class.ticket.php:942
 msgid "Max. open tickets reached for"
 msgstr "Máximo de tíquetes abertos alcançado para"
 
-#: osticket/include/class.ticket.php:944
+#: osticket/include/class.ticket.php:943
 msgid "Open ticket:"
 msgstr "Abrir tíquete:"
 
-#: osticket/include/class.ticket.php:945
+#: osticket/include/class.ticket.php:944
 msgid "Max Allowed:"
 msgstr "Máx. Permitido:"
 
-#: osticket/include/class.ticket.php:945
+#: osticket/include/class.ticket.php:944
 msgid "Notice sent to the user."
 msgstr "Aviso enviado ao usuário."
 
-#: osticket/include/class.ticket.php:947
+#: osticket/include/class.ticket.php:946
 msgid "Overlimit Notice"
 msgstr "Aviso de limite ultrapassado"
 
-#: osticket/include/class.ticket.php:1014
+#: osticket/include/class.ticket.php:1013
 msgid "Ticket assignment"
 msgstr "Designação de tíquete"
 
-#: osticket/include/class.ticket.php:1015
+#: osticket/include/class.ticket.php:1014
 msgid "SYSTEM (Auto Assignment)"
 msgstr "SISTEMA (Auto Designação)"
 
-#: osticket/include/class.ticket.php:1018
+#: osticket/include/class.ticket.php:1017
 msgid "Ticket Assigned to"
 msgstr "Tíquete Designado para"
 
-#: osticket/include/class.ticket.php:1253
+#: osticket/include/class.ticket.php:1252
 msgid "Ticket transfered from"
 msgstr "Tíquete transferido de"
 
-#: osticket/include/class.ticket.php:1253
+#: osticket/include/class.ticket.php:1252
 msgid "to"
 msgstr "até"
 
-#: osticket/include/class.ticket.php:1517
+#: osticket/include/class.ticket.php:1516
 msgid "Missing messageId - internal error"
 msgstr "Faltando ID da mensagem - Erro interno"
 
-#: osticket/include/class.ticket.php:1519
+#: osticket/include/class.ticket.php:1518
 msgid "Response message required"
 msgstr "Mensagem de resposta requerida"
 
-#: osticket/include/class.ticket.php:1756
+#: osticket/include/class.ticket.php:1755
 msgid "File Upload Error"
 msgstr "Erro em upload de arquivo"
 
-#: osticket/include/class.ticket.php:1758
+#: osticket/include/class.ticket.php:1757
 msgid "File Upload Error (Ticket #"
 msgstr "Erro no Upload de Arquivo (Tíquete #"
 
-#: osticket/include/class.ticket.php:1820
-#: osticket/include/class.ticket.php:2058
+#: osticket/include/class.ticket.php:1819
+#: osticket/include/class.ticket.php:2057
 msgid "Valid email required"
 msgstr "É requerido endereço de email válido"
 
-#: osticket/include/class.ticket.php:1822
-#: osticket/include/class.topic.php:188
+#: osticket/include/class.ticket.php:1821
+#: osticket/include/class.topic.php:191
 msgid "Help topic required"
 msgstr "Tópico de Ajuda requerido"
 
-#: osticket/include/class.ticket.php:1823
+#: osticket/include/class.ticket.php:1822
 msgid "Priority required"
 msgstr "Prioridade requerida"
 
-#: osticket/include/class.ticket.php:1824
+#: osticket/include/class.ticket.php:1823
 msgid "Select SLA"
 msgstr "Selecione SLA"
 
-#: osticket/include/class.ticket.php:1825
-#: osticket/include/class.ticket.php:2080
+#: osticket/include/class.ticket.php:1824
+#: osticket/include/class.ticket.php:2079
 msgid "Valid phone # required"
 msgstr "No. de Telefone requerido"
 
-#: osticket/include/class.ticket.php:1826
-#: osticket/include/class.ticket.php:2068
+#: osticket/include/class.ticket.php:1825
+#: osticket/include/class.ticket.php:2067
 msgid "Invalid date - must be MM/DD/YY"
 msgstr "Data inválida - deve ser MM/DD/YY"
 
-#: osticket/include/class.ticket.php:1827
+#: osticket/include/class.ticket.php:1826
 msgid "Reason for the update required"
 msgstr "Razão para a edição requerida"
 
-#: osticket/include/class.ticket.php:1830
-#: osticket/include/class.ticket.php:2083
+#: osticket/include/class.ticket.php:1829
+#: osticket/include/class.ticket.php:2082
 msgid "Missing or invalid data - check the errors and try again"
 msgstr "Dados inválidos ou faltando. Corrija os erros abaixo e tente novamente."
 
-#: osticket/include/class.ticket.php:1834
+#: osticket/include/class.ticket.php:1833
 msgid "Duedate can NOT be set on a closed ticket"
 msgstr "Data limite NÃO pode ser configurada em tíquete fechado"
 
-#: osticket/include/class.ticket.php:1836
-#: osticket/include/class.ticket.php:2096
+#: osticket/include/class.ticket.php:1835
+#: osticket/include/class.ticket.php:2095
 msgid "Select time"
 msgstr "Selecione hora"
 
-#: osticket/include/class.ticket.php:1838
-#: osticket/include/class.ticket.php:2098
+#: osticket/include/class.ticket.php:1837
+#: osticket/include/class.ticket.php:2097
 msgid "Invalid duedate"
 msgstr "Data limite inválida"
 
-#: osticket/include/class.ticket.php:1840
-#: osticket/include/class.ticket.php:2100
+#: osticket/include/class.ticket.php:1839
+#: osticket/include/class.ticket.php:2099
 msgid "Due date must be in the future"
 msgstr "Data limite deve ser futura"
 
-#: osticket/include/class.ticket.php:1846
-#: osticket/include/class.ticket.php:2088
+#: osticket/include/class.ticket.php:1845
+#: osticket/include/class.ticket.php:2087
 msgid "Invalid phone ext."
 msgstr "Extensão de telefone inválida."
 
-#: osticket/include/class.ticket.php:1848
-#: osticket/include/class.ticket.php:2090
+#: osticket/include/class.ticket.php:1847
+#: osticket/include/class.ticket.php:2089
 msgid "Phone number required"
 msgstr "Número de telefone é requerido"
 
-#: osticket/include/class.ticket.php:1874
+#: osticket/include/class.ticket.php:1873
 #, php-format
 msgid "Ticket Updated by"
 msgstr "Tíquete atualizado por"
 
-#: osticket/include/class.ticket.php:1876
+#: osticket/include/class.ticket.php:1875
 msgid "Ticket Updated"
 msgstr "Tíquete Atualizado"
 
-#: osticket/include/class.ticket.php:2020
-#: osticket/include/class.ticket.php:2046
+#: osticket/include/class.ticket.php:2019
+#: osticket/include/class.ticket.php:2045
 msgid "Ticket denied. Error #403"
 msgstr "Tíquete negado. Erro #403"
 
-#: osticket/include/class.ticket.php:2022
-#: osticket/include/class.ticket.php:2033
-#: osticket/include/class.ticket.php:2048
+#: osticket/include/class.ticket.php:2021
+#: osticket/include/class.ticket.php:2032
+#: osticket/include/class.ticket.php:2047
 msgid "Ticket denied"
 msgstr "Tíquete negado"
 
-#: osticket/include/class.ticket.php:2022
+#: osticket/include/class.ticket.php:2021
 msgid "Banned email"
 msgstr "E-mail Banido"
 
-#: osticket/include/class.ticket.php:2032
+#: osticket/include/class.ticket.php:2031
 msgid "You've reached the maximum open tickets allowed."
 msgstr "Você alcançou o número máximo permitido de tíquetes abertos."
 
-#: osticket/include/class.ticket.php:2034
+#: osticket/include/class.ticket.php:2033
 #, php-format
 msgid "Max open tickets (%d) reached for %s "
 msgstr "Máximo de tíquetes abertos (%d) alcançado para %s"
 
-#: osticket/include/class.ticket.php:2049
+#: osticket/include/class.ticket.php:2048
 #, php-format
 msgid "Ticket rejected ( %s) by filter \"%s\""
 msgstr "Tíquete rejeitado ( %s) pelo filtro \"%s\""
 
-#: osticket/include/class.ticket.php:2063
+#: osticket/include/class.ticket.php:2062
 msgid "Select help topic"
 msgstr "Selecione tópico de ajuda"
 
-#: osticket/include/class.ticket.php:2066
+#: osticket/include/class.ticket.php:2065
 msgid "Dept. required"
 msgstr "Depto. requerido"
 
-#: osticket/include/class.ticket.php:2067
+#: osticket/include/class.ticket.php:2066
 msgid "Topic required"
 msgstr "Tópico requerido"
 
-#: osticket/include/class.ticket.php:2070
+#: osticket/include/class.ticket.php:2069
 msgid "Indicate source"
 msgstr "Indique a origem"
 
-#: osticket/include/class.ticket.php:2073
+#: osticket/include/class.ticket.php:2072
 msgid "Email unknown"
 msgstr "E-mail desconhecido"
 
-#: osticket/include/class.ticket.php:2077
+#: osticket/include/class.ticket.php:2076
 msgid "Invalid origin given"
 msgstr "Origem dada inválida"
 
-#: osticket/include/class.ticket.php:2079
+#: osticket/include/class.ticket.php:2078
 msgid "Invalid Priority"
 msgstr "Prioridade Inválida"
 
-#: osticket/include/class.ticket.php:2249
+#: osticket/include/class.ticket.php:2248
 msgid "Summary of the issue required"
 msgstr "Resumo do problema requerido"
 
-#: osticket/include/class.ticket.php:2254
+#: osticket/include/class.ticket.php:2253
 msgid "Invalid source"
 msgstr "Origem inválida"
 
-#: osticket/include/class.ticket.php:2277
+#: osticket/include/class.ticket.php:2276
 msgid "New Ticket by Staff"
 msgstr "Novo Tíquete pela Equipe"
 
-#: osticket/include/class.ticket.php:2277
+#: osticket/include/class.ticket.php:2276
 msgid "Ticket created by staff"
 msgstr "Tíquete criado pela equipe"
 
-#: osticket/include/class.ticket.php:2334
+#: osticket/include/class.ticket.php:2333
 msgid "Ticket flagged as overdue by the system."
 msgstr "Tíquete marcado como atrasado pelo sistema."
 
@@ -2330,35 +2338,35 @@ msgstr "Nome do Grupo deve ter no mínimo 3 caracteres."
 msgid "Group name already exists"
 msgstr "Nome do Grupo já existe"
 
-#: osticket/include/class.group.php:220
+#: osticket/include/class.group.php:222
 msgid "Unable to update group. Internal error occurred."
 msgstr "Não foi possível atualizar grupo. Ocorreu um erro interno."
 
-#: osticket/include/class.group.php:227
+#: osticket/include/class.group.php:229
 msgid "Unable to create the group. Internal error"
 msgstr "Não foi possível criar o grupo. Erro interno"
 
-#: osticket/include/class.topic.php:190
+#: osticket/include/class.topic.php:193
 msgid "Topic is too short. 5 chars minimum"
 msgstr "Nome do tópico muito curto. Mínimo de 5 caracteres"
 
-#: osticket/include/class.topic.php:192
+#: osticket/include/class.topic.php:195
 msgid "Topic already exists"
 msgstr "Tópico já existe"
 
-#: osticket/include/class.topic.php:195
+#: osticket/include/class.topic.php:198
 msgid "You must select a department"
 msgstr "Você deve selecionar um departamento"
 
-#: osticket/include/class.topic.php:198
+#: osticket/include/class.topic.php:201
 msgid "You must select a priority"
 msgstr "Você deve selecionar a prioridade"
 
-#: osticket/include/class.topic.php:226
+#: osticket/include/class.topic.php:229
 msgid "Unable to update topic. Internal error occurred"
 msgstr "Não foi possível atualizar tópico. Ocorreu um erro interno."
 
-#: osticket/include/class.topic.php:232
+#: osticket/include/class.topic.php:235
 msgid "Unable to create the topic. Internal error"
 msgstr "Não foi possível criar o tópico. Erro interno"
 
@@ -2519,27 +2527,27 @@ msgstr "Tópicos"
 msgid "Staff"
 msgstr "Equipe"
 
-#: osticket/include/ajax.reports.php:154
+#: osticket/include/ajax.reports.php:156
 msgid "Opened"
 msgstr "Aberto"
 
-#: osticket/include/ajax.reports.php:154
+#: osticket/include/ajax.reports.php:156
 msgid "Assigned"
 msgstr "Designado"
 
-#: osticket/include/ajax.reports.php:154
+#: osticket/include/ajax.reports.php:156
 msgid "Closed"
 msgstr "Fechado"
 
-#: osticket/include/ajax.reports.php:154
+#: osticket/include/ajax.reports.php:156
 msgid "Reopened"
 msgstr "Reaberto"
 
-#: osticket/include/ajax.reports.php:155
+#: osticket/include/ajax.reports.php:157
 msgid "Service Time"
 msgstr "Tempo de Serviço"
 
-#: osticket/include/ajax.reports.php:155
+#: osticket/include/ajax.reports.php:157
 msgid "Response Time"
 msgstr "Tempo de Resposta"
 
@@ -2650,124 +2658,128 @@ msgstr "Erro ao interpretar esquema SQL"
 msgid "Couldn't connect to LDAP!"
 msgstr "Não foi possível contactar ao LDAP!"
 
-#: osticket/include/class.osticket.php:107
+#: osticket/include/class.osticket.php:116
 #, php-format
 msgid "Invalid CSRF token"
 msgstr "Token CSRF inválido"
 
-#: osticket/include/class.osticket.php:109
+#: osticket/include/class.osticket.php:118
 msgid "Invalid CSRF Token "
 msgstr "Token CSRF inválido"
 
-#: osticket/include/class.osticket.php:140
+#: osticket/include/class.osticket.php:152
+msgid "File upload error #"
+msgstr "Erro em upload de arquivo #"
+
+#: osticket/include/class.osticket.php:154
+msgid "Invalid or bad upload POST"
+msgstr "POST de upload inválido"
+
+#: osticket/include/class.osticket.php:156
 msgid "Invalid file type for"
 msgstr "Tipo de arquivo inválido para"
 
-#: osticket/include/class.osticket.php:142
+#: osticket/include/class.osticket.php:158
 #, php-format
 msgid "File (%s) is too big. Maximum of %s allowed"
 msgstr "Arquivo (%s) muito grande. Máximo de %s permitidos"
 
-#: osticket/include/class.osticket.php:145
-msgid "Invalid or bad upload POST"
-msgstr "POST de upload inválido"
-
-#: osticket/include/class.osticket.php:247
+#: osticket/include/class.osticket.php:258
 #, php-format
 msgid "\"osTicket Alerts\""
 msgstr "\"Alertas do osTicket\""
 
-#: osticket/include/class.email.php:213
+#: osticket/include/class.email.php:222
 msgid "Internal error. Get technical help."
 msgstr "Erro interno. Contate o suporte técnico."
 
-#: osticket/include/class.email.php:218
+#: osticket/include/class.email.php:227
 msgid "Email already exits"
 msgstr "E-mail já existe"
 
-#: osticket/include/class.email.php:220
+#: osticket/include/class.email.php:229
 msgid "Email already used as admin email!"
 msgstr "E-mail já é utilizado com e-mail de administrador!"
 
-#: osticket/include/class.email.php:222
+#: osticket/include/class.email.php:231
 msgid "Email in-use by a staff member"
 msgstr "E-mail em uso por membro da equipe"
 
-#: osticket/include/class.email.php:226
+#: osticket/include/class.email.php:235
 msgid "Email name required"
 msgstr "Nome do E-mail requerido"
 
-#: osticket/include/class.email.php:230
+#: osticket/include/class.email.php:239
 msgid "Username missing"
 msgstr "Nome de usuário faltando"
 
-#: osticket/include/class.email.php:233
+#: osticket/include/class.email.php:242
 msgid "Password required"
 msgstr "Senha requerida"
 
-#: osticket/include/class.email.php:239
+#: osticket/include/class.email.php:248
 msgid "IMAP doesn't exist. PHP must be compiled with IMAP enabled."
 msgstr "IMAP não detectado. PHP precisa ser compilado com IMAP habilitado."
 
-#: osticket/include/class.email.php:241
-#: osticket/include/class.email.php:263
+#: osticket/include/class.email.php:250
+#: osticket/include/class.email.php:272
 msgid "Host name required"
 msgstr "Nome do host requerido"
 
-#: osticket/include/class.email.php:243
-#: osticket/include/class.email.php:265
+#: osticket/include/class.email.php:252
+#: osticket/include/class.email.php:274
 msgid "Port required"
 msgstr "Porta requerida"
 
-#: osticket/include/class.email.php:245
+#: osticket/include/class.email.php:254
 msgid "Select protocol"
 msgstr "Selecione protocolo"
 
-#: osticket/include/class.email.php:247
+#: osticket/include/class.email.php:256
 msgid "Fetch interval required"
 msgstr "É requerido endereço de email válido"
 
-#: osticket/include/class.email.php:249
+#: osticket/include/class.email.php:258
 msgid "Maximum emails required"
 msgstr "Máximo de e-mails requerido"
 
-#: osticket/include/class.email.php:251
+#: osticket/include/class.email.php:260
 msgid "You must select a Dept."
 msgstr "Você deve selecionar um Depto."
 
-#: osticket/include/class.email.php:256
+#: osticket/include/class.email.php:265
 msgid "Indicate what to do with fetched emails"
 msgstr "Idique o que fazer com e-mails adquiridos"
 
-#: osticket/include/class.email.php:258
+#: osticket/include/class.email.php:267
 msgid "Valid folder required"
 msgstr "Necessária uma pasta válida"
 
-#: osticket/include/class.email.php:278
+#: osticket/include/class.email.php:287
 msgid "Host/userid combination already in-use."
 msgstr "ID de usuário já está em uso."
 
-#: osticket/include/class.email.php:294
+#: osticket/include/class.email.php:303
 msgid "Invalid login. Check "
 msgstr "Login inválido. Verifique"
 
-#: osticket/include/class.email.php:297
+#: osticket/include/class.email.php:306
 msgid "Invalid or unknown mail folder! >> "
 msgstr "Pasta de e-mail inválida ou desconhecida! >> "
 
-#: osticket/include/class.email.php:299
+#: osticket/include/class.email.php:308
 msgid "Invalid or unknown archive folder!"
 msgstr "Diretório para Arquivo inválido ou desconhecido!"
 
-#: osticket/include/class.email.php:316
+#: osticket/include/class.email.php:325
 msgid "Unable to login. Check SMTP settings."
 msgstr "Não foi possível autenticar. Cheque as configs. SMTP."
 
-#: osticket/include/class.email.php:368
+#: osticket/include/class.email.php:377
 msgid "Unable to update email. Internal error occurred"
 msgstr "Não foi possível atualizar e-mail. Erro interno"
 
-#: osticket/include/class.email.php:374
+#: osticket/include/class.email.php:383
 msgid "Unable to add email. Internal error"
 msgstr "Não foi possível adicionar e-mail. Erro interno."
 
@@ -2874,72 +2886,72 @@ msgstr "E-mail já está configurado como e-mail de sistema"
 msgid "Invalid selection. Must be less than "
 msgstr "Seleção inválida. Deve ser menor que"
 
-#: osticket/include/class.mailfetch.php:460
-#: osticket/include/class.mailfetch.php:475
+#: osticket/include/class.mailfetch.php:477
+#: osticket/include/class.mailfetch.php:492
 #, php-format
 msgid "Attachment %s [%s] rejected because of file type"
 msgstr "Anexos %s [%s] rejeitados por causa do tipo de arquivo"
 
-#: osticket/include/class.mailfetch.php:461
-#: osticket/include/class.mailfetch.php:476
+#: osticket/include/class.mailfetch.php:478
+#: osticket/include/class.mailfetch.php:493
 msgid "Email Attachment Rejected"
 msgstr "Anexo de E-mail Rejeitado"
 
-#: osticket/include/class.mailfetch.php:462
-#: osticket/include/class.mailfetch.php:477
+#: osticket/include/class.mailfetch.php:479
+#: osticket/include/class.mailfetch.php:494
 msgid "Email Attachment Rejected (Ticket #"
 msgstr "Anexo de E-mail Rejeitado (Tíquete #"
 
-#: osticket/include/class.mailfetch.php:518
+#: osticket/include/class.mailfetch.php:535
 #, php-format
 msgid "Excessive errors processing emails for %s/%s. Please manually check the inbox."
 msgstr "Erros excessivos ao processar e-mails para %s/%s. Favor checar manualmente a caixa de entrada."
 
-#: osticket/include/class.mailfetch.php:530
+#: osticket/include/class.mailfetch.php:547
 msgid "Mail Fetcher"
 msgstr "Importador de E-mail"
 
-#: osticket/include/class.mailfetch.php:547
+#: osticket/include/class.mailfetch.php:564
 msgid "osTicket requires PHP IMAP extension enabled for IMAP/POP3 email fetch to work!"
 msgstr "O osTicket requer que a extensão PHP IMAP esteja habilitada para que o importador de e-mails IMAP/POP3 funcione!"
 
-#: osticket/include/class.mailfetch.php:548
+#: osticket/include/class.mailfetch.php:565
 msgid "Mail Fetch Error"
 msgstr "Erro ao Importar E-mail"
 
-#: osticket/include/class.mailfetch.php:579
+#: osticket/include/class.mailfetch.php:596
 msgid "osTicket is having trouble fetching emails from the following mail account"
 msgstr "O osTicket está tendo problemas ao importar e-mails da seguinte conta de e-mail"
 
-#: osticket/include/class.mailfetch.php:580
+#: osticket/include/class.mailfetch.php:597
 msgid "User"
 msgstr "Usuário"
 
-#: osticket/include/class.mailfetch.php:581
+#: osticket/include/class.mailfetch.php:598
 msgid "Host"
 msgstr "Host"
 
-#: osticket/include/class.mailfetch.php:582
+#: osticket/include/class.mailfetch.php:599
 msgid "Error"
 msgstr "Erro"
 
-#: osticket/include/class.mailfetch.php:583
+#: osticket/include/class.mailfetch.php:600
 msgid " consecutive errors. Maximum of"
 msgstr " erros consecutivos. Máximo de"
 
-#: osticket/include/class.mailfetch.php:583
+#: osticket/include/class.mailfetch.php:600
 msgid "allowed"
 msgstr "permitido"
 
-#: osticket/include/class.mailfetch.php:584
+#: osticket/include/class.mailfetch.php:601
 msgid "This could be connection issues related to the mail server. Next delayed login attempt in aprox."
 msgstr "Podem haver problemas de conexão relacionados ao servidor de e-mail. Próxima tentativa em aprox."
 
-#: osticket/include/class.mailfetch.php:584
+#: osticket/include/class.mailfetch.php:601
 msgid "minutes"
 msgstr "minutos"
 
-#: osticket/include/class.mailfetch.php:585
+#: osticket/include/class.mailfetch.php:602
 msgid "Mail Fetch Failure Alert"
 msgstr "Alerta de Falha ao Importar E-mails"
 
@@ -3273,12 +3285,12 @@ msgstr "Limpeza pós-atualização!"
 msgid "Unable to process cleanup file"
 msgstr "Não foi possível processar arquivo de limpeza"
 
-#: osticket/include/class.mailer.php:152
+#: osticket/include/class.mailer.php:165
 #, php-format
 msgid "Unable to email via SMTP"
 msgstr "Não foi possível enviar e-mail via SMTP"
 
-#: osticket/include/class.mailer.php:166
+#: osticket/include/class.mailer.php:179
 msgid "Mailer Error"
 msgstr "Erro no envio de E-mail"
 
@@ -3310,21 +3322,17 @@ msgstr "Não foi possível atualizar resposta pronta."
 msgid "Unable to create the canned response. Internal error"
 msgstr "Não foi possível criar a resposta pronta. Erro interno"
 
-#: osticket/include/class.api.php:105
+#: osticket/include/class.api.php:121
 msgid "Valid IP required"
 msgstr "IP Válido requerido"
 
-#: osticket/include/class.api.php:107
-msgid "API key for the IP already exists"
-msgstr "Chave de API para o IP já existe"
-
-#: osticket/include/class.api.php:122
+#: osticket/include/class.api.php:135
 msgid "Unable to update API key. Internal error occurred"
 msgstr "Não foi possível atualizar a chave de API. Erro interno"
 
-#: osticket/include/class.api.php:130
-msgid "Unable to add API key. Internal error"
-msgstr "Não foi possível adicionar chave API. Erro interno"
+#: osticket/include/class.api.php:146
+msgid "Unable to add API key. Try again!"
+msgstr "Não foi possível adicionar a chave API. Tente novamente!"
 
 #: osticket/include/class.http.php:20
 msgid "200 OK"
@@ -3406,203 +3414,203 @@ msgstr " Erro no Departamento"
 msgid "Unable to create department. Internal error"
 msgstr "Não foi possível criar departamento. Erro interno"
 
-#: osticket/include/class.staff.php:414
-#: osticket/include/class.staff.php:662
+#: osticket/include/class.staff.php:422
+#: osticket/include/class.staff.php:670
 msgid "Internal Error"
 msgstr "Erro Interno"
 
-#: osticket/include/class.staff.php:417
-#: osticket/include/class.staff.php:665
+#: osticket/include/class.staff.php:425
+#: osticket/include/class.staff.php:673
 msgid "First name required"
 msgstr "Primeiro nome requerido"
 
-#: osticket/include/class.staff.php:420
-#: osticket/include/class.staff.php:667
+#: osticket/include/class.staff.php:428
+#: osticket/include/class.staff.php:675
 msgid "Last name required"
 msgstr "Sobrenome requerido"
 
-#: osticket/include/class.staff.php:425
+#: osticket/include/class.staff.php:433
 msgid "Already in-use as system email"
 msgstr "E-mail já está em uso como email do sistema"
 
-#: osticket/include/class.staff.php:427
-#: osticket/include/class.staff.php:679
+#: osticket/include/class.staff.php:435
+#: osticket/include/class.staff.php:687
 msgid "Email already in-use by another staff member"
 msgstr "E-mail já em uso por outro membro da equipe"
 
-#: osticket/include/class.staff.php:430
-#: osticket/include/class.staff.php:433
-#: osticket/include/class.staff.php:682
-#: osticket/include/class.staff.php:685
+#: osticket/include/class.staff.php:438
+#: osticket/include/class.staff.php:441
+#: osticket/include/class.staff.php:690
+#: osticket/include/class.staff.php:693
 msgid "Valid number required"
 msgstr "Número válido requerido"
 
-#: osticket/include/class.staff.php:438
+#: osticket/include/class.staff.php:446
 msgid "New password required"
 msgstr "Nova senha requerida"
 
-#: osticket/include/class.staff.php:440
-#: osticket/include/class.staff.php:692
+#: osticket/include/class.staff.php:448
+#: osticket/include/class.staff.php:700
 msgid "Must be at least 6 characters"
 msgstr "Mínimo de 6 caracteres"
 
-#: osticket/include/class.staff.php:442
-#: osticket/include/class.staff.php:694
+#: osticket/include/class.staff.php:450
+#: osticket/include/class.staff.php:702
 msgid "Password(s) do not match"
 msgstr "Senha(s) não conferem"
 
-#: osticket/include/class.staff.php:445
+#: osticket/include/class.staff.php:453
 msgid "Current password required"
 msgstr "Senha atual requerida"
 
-#: osticket/include/class.staff.php:447
+#: osticket/include/class.staff.php:455
 msgid "Invalid current password!"
 msgstr "Senha atual inválida!"
 
-#: osticket/include/class.staff.php:449
+#: osticket/include/class.staff.php:457
 msgid "New password MUST be different from the current password!"
 msgstr "Nova senha PRECISA ser diferente da senha atual!"
 
-#: osticket/include/class.staff.php:453
-#: osticket/include/class.staff.php:705
+#: osticket/include/class.staff.php:461
+#: osticket/include/class.staff.php:713
 msgid "Time zone required"
 msgstr "Fuso Horário Padrão requerido"
 
-#: osticket/include/class.staff.php:456
+#: osticket/include/class.staff.php:464
 msgid "You don't have a signature"
 msgstr "Você não tem assinatura"
 
-#: osticket/include/class.staff.php:586
+#: osticket/include/class.staff.php:594
 msgid "Max. failed login attempts reached"
 msgstr "Número excessivo de tentativas de login alcançado"
 
-#: osticket/include/class.staff.php:596
+#: osticket/include/class.staff.php:604
 msgid "Username and password required"
 msgstr "Usuário e senha requeridos"
 
-#: osticket/include/class.staff.php:615
+#: osticket/include/class.staff.php:623
 msgid "Staff login"
 msgstr "Login da Equipe"
 
-#: osticket/include/class.staff.php:616
+#: osticket/include/class.staff.php:624
 #, php-format
 msgid "logged in"
 msgstr "autenticado"
 
-#: osticket/include/class.staff.php:631
+#: osticket/include/class.staff.php:639
 msgid "Forgot your login info? Contact Admin."
 msgstr "Esqueceu seu usuário ou senha? Por favor contacte o Admin"
 
-#: osticket/include/class.staff.php:633
+#: osticket/include/class.staff.php:641
 msgid "Excessive login attempts by a staff member?"
 msgstr "Tentativas excessivas de login por um membro da equipe?"
 
-#: osticket/include/class.staff.php:634
-#: osticket/include/class.staff.php:639
+#: osticket/include/class.staff.php:642
+#: osticket/include/class.staff.php:647
 msgid "Username"
 msgstr "Usuário"
 
-#: osticket/include/class.staff.php:635
+#: osticket/include/class.staff.php:643
 msgid "Timeout"
 msgstr "Tempo limite excedido"
 
-#: osticket/include/class.staff.php:636
+#: osticket/include/class.staff.php:644
 msgid "Excessive login attempts"
 msgstr "Número excessivo de tentativas de login"
 
-#: osticket/include/class.staff.php:641
+#: osticket/include/class.staff.php:649
 msgid "Failed staff login attempt"
 msgstr "Tentativa de login de membro da equipe falhou"
 
-#: osticket/include/class.staff.php:670
+#: osticket/include/class.staff.php:678
 msgid "Username required"
 msgstr "Nome de usuário requerido"
 
-#: osticket/include/class.staff.php:672
+#: osticket/include/class.staff.php:680
 msgid "Username already in-use"
 msgstr "Nome já está em uso"
 
-#: osticket/include/class.staff.php:677
+#: osticket/include/class.staff.php:685
 msgid "Already in-use system email"
 msgstr "E-mail já está configurado como e-mail de sistema"
 
-#: osticket/include/class.staff.php:689
+#: osticket/include/class.staff.php:697
 msgid "Temp. password required"
 msgstr "Senha temporária requerida"
 
-#: osticket/include/class.staff.php:699
+#: osticket/include/class.staff.php:707
 msgid "Department required"
 msgstr "Departamento requerido"
 
-#: osticket/include/class.staff.php:702
+#: osticket/include/class.staff.php:710
 msgid "Group required"
 msgstr "Nome do grupo requerido"
 
-#: osticket/include/class.staff.php:741
+#: osticket/include/class.staff.php:749
 msgid "Unable to update the user. Internal error occurred"
 msgstr "Não foi possível atualizar o usuário. Erro interno"
 
-#: osticket/include/class.staff.php:747
+#: osticket/include/class.staff.php:755
 msgid "Unable to create user. Internal error"
 msgstr "Não foi possível criar usuário. Erro interno"
 
-#: osticket/include/class.filter.php:376
+#: osticket/include/class.filter.php:380
 msgid "Invalid match selection"
 msgstr "Seleção de correspondência inválida"
 
-#: osticket/include/class.filter.php:378
+#: osticket/include/class.filter.php:382
 msgid "Invalid match type selection"
 msgstr "Seleção de tipo de correspondência inválida"
 
-#: osticket/include/class.filter.php:380
+#: osticket/include/class.filter.php:384
 msgid "Value required"
 msgstr "Valor requerido"
 
-#: osticket/include/class.filter.php:382
+#: osticket/include/class.filter.php:386
 msgid "Valid email required for the match type"
 msgstr "Endereço de email válido requerido para o tipo de correspondência"
 
-#: osticket/include/class.filter.php:386
+#: osticket/include/class.filter.php:390
 msgid "Incomplete selection"
 msgstr "Seleção incompleta"
 
-#: osticket/include/class.filter.php:394
+#: osticket/include/class.filter.php:398
 msgid "You must set at least one rule."
 msgstr "Você deve configurar ao menos uma regra."
 
-#: osticket/include/class.filter.php:416
+#: osticket/include/class.filter.php:420
 msgid "Order required"
 msgstr "Ordem requerida"
 
-#: osticket/include/class.filter.php:418
+#: osticket/include/class.filter.php:422
 msgid "Must be numeric value"
 msgstr "Deve ser valor numérico"
 
-#: osticket/include/class.filter.php:423
+#: osticket/include/class.filter.php:427
 msgid "Name already in-use"
 msgstr "Nome já está em uso"
 
-#: osticket/include/class.filter.php:426
+#: osticket/include/class.filter.php:430
 msgid "Unable to validate rules as entered"
 msgstr "Não foi possível validar as regras tais quais foram entradas"
 
-#: osticket/include/class.filter.php:430
+#: osticket/include/class.filter.php:434
 msgid "Target required"
 msgstr "Destino requerido"
 
-#: osticket/include/class.filter.php:432
+#: osticket/include/class.filter.php:436
 msgid "Unknown or invalid target"
 msgstr "Destino desconhecido ou inválido."
 
-#: osticket/include/class.filter.php:471
+#: osticket/include/class.filter.php:475
 msgid "Unable to update the filter. Internal error occurred"
 msgstr "Não foi possível atualizar o tíquete. Corrija os erros abaixo e tente novamente!"
 
-#: osticket/include/class.filter.php:475
+#: osticket/include/class.filter.php:479
 msgid "Unable to add filter. Internal error"
 msgstr "Não foi possível adicionar filtro. Erro interno"
 
-#: osticket/include/class.filter.php:574
+#: osticket/include/class.filter.php:578
 msgid "Parent filter ID required"
 msgstr "ID de Filtro pai requerido"
 
@@ -4785,55 +4793,45 @@ msgstr ", isto é, ponto asterisco (NÃO recomendado)."
 msgid "Update API Key"
 msgstr "Atualizar Chave de API"
 
-#: osticket/include/staff/apikey.inc.php:14
+#: osticket/include/staff/apikey.inc.php:12
 msgid "Add New API Key"
 msgstr "Adicionar Chave de API"
 
-#: osticket/include/staff/apikey.inc.php:16
+#: osticket/include/staff/apikey.inc.php:14
 msgid "Add Key"
 msgstr "Adicionar Chave"
 
-#: osticket/include/staff/apikey.inc.php:27
+#: osticket/include/staff/apikey.inc.php:25
+#: osticket/include/staff/apikey.inc.php:58
 msgid "API Key"
 msgstr "Chave API"
 
-#: osticket/include/staff/apikey.inc.php:33
+#: osticket/include/staff/apikey.inc.php:31
 msgid "API Key is autogenerated and unique per IP address."
 msgstr "Chave API é gerada automaticamente e é única por endereço IP."
 
-#: osticket/include/staff/apikey.inc.php:51
-msgid "IP Address:"
-msgstr "Endereçoo IP:"
+#: osticket/include/staff/apikey.inc.php:32
+msgid "API Key is auto-generated. Delete and re-add to change the key."
+msgstr "A Chave API é auto-gerada. Apague e readicione para mudar a chave."
 
-#: osticket/include/staff/apikey.inc.php:59
-msgid "API Key:"
-msgstr "Chave API:"
+#: osticket/include/staff/apikey.inc.php:50
+#: osticket/include/staff/apikey.inc.php:65
+msgid "IP Address"
+msgstr "Endereço IP"
 
-#: osticket/include/staff/apikey.inc.php:61
-msgid "Delete and re-add to change the key"
-msgstr "Apague e adicione novamente para mudar a chave"
-
-#: osticket/include/staff/apikey.inc.php:66
-msgid " IP Address:"
-msgstr " Endereço IP:"
-
-#: osticket/include/staff/apikey.inc.php:76
+#: osticket/include/staff/apikey.inc.php:75
 msgid "Enabled Services"
 msgstr "Serviços Habilitados"
 
-#: osticket/include/staff/apikey.inc.php:76
-msgid "Check applicable API services."
-msgstr "Cheque os serviços API aplicáveis."
+#: osticket/include/staff/apikey.inc.php:75
+msgid "Check applicable API services. All active keys can make cron call."
+msgstr "Cheque os serviços API aplicáveis. Todas as chaves ativas podem fazer chamadas ao cron."
 
 #: osticket/include/staff/apikey.inc.php:81
-msgid "Email piping:"
-msgstr "Direcionamento de E-mail:"
+msgid "Can Create Tickets."
+msgstr "Pode Criar Tíquetes."
 
-#: osticket/include/staff/apikey.inc.php:85
-msgid "remote email piping."
-msgstr "direcionamento de e-mail remoto."
-
-#: osticket/include/staff/apikey.inc.php:90
+#: osticket/include/staff/apikey.inc.php:86
 #: osticket/include/staff/template.inc.php:107
 msgid "Internal notes."
 msgstr "Notas Internas."
@@ -4920,6 +4918,7 @@ msgstr "Aplica-se a todos os membros do grupo"
 #: osticket/include/staff/group.inc.php:87
 #: osticket/include/staff/group.inc.php:95
 #: osticket/include/staff/group.inc.php:103
+#: osticket/include/staff/group.inc.php:111
 msgid "Can"
 msgstr "Pode"
 
@@ -4936,6 +4935,8 @@ msgstr "Criar"
 #: osticket/include/staff/group.inc.php:113
 #: osticket/include/staff/group.inc.php:121
 #: osticket/include/staff/group.inc.php:129
+#: osticket/include/staff/group.inc.php:137
+#: osticket/include/staff/group.inc.php:145
 #: osticket/include/staff/email.inc.php:228
 msgid "Yes"
 msgstr "Sim"
@@ -4949,6 +4950,8 @@ msgstr "Sim"
 #: osticket/include/staff/group.inc.php:115
 #: osticket/include/staff/group.inc.php:123
 #: osticket/include/staff/group.inc.php:131
+#: osticket/include/staff/group.inc.php:139
+#: osticket/include/staff/group.inc.php:147
 msgid "No"
 msgstr "Não"
 
@@ -4965,75 +4968,87 @@ msgstr "Editar"
 msgid "Ability to edit tickets."
 msgstr "Permissão para abrir tíquetes."
 
-#: osticket/include/staff/group.inc.php:79
+#: osticket/include/staff/group.inc.php:84
+msgid "Ability to post a ticket reply."
+msgstr "Permissão para adicionar uma resposta a um tíquete."
+
+#: osticket/include/staff/group.inc.php:87
 #: osticket/include/staff/ticket-view.inc.php:60
-#: osticket/include/staff/ticket-view.inc.php:777
-#: osticket/include/staff/ticket-view.inc.php:797
+#: osticket/include/staff/ticket-view.inc.php:784
+#: osticket/include/staff/ticket-view.inc.php:804
 msgid "Close"
 msgstr "Fechar"
 
-#: osticket/include/staff/group.inc.php:84
+#: osticket/include/staff/group.inc.php:92
 msgid "Ability to close tickets. Staff can still post a response."
 msgstr "Permissão para fechar tíquetes. Membros da Equipe ainda podem postar respostas."
 
-#: osticket/include/staff/group.inc.php:92
+#: osticket/include/staff/group.inc.php:100
 msgid "Ability to assign tickets to staff members."
 msgstr "Permissão para designar tíquetes para membros da equipe."
 
-#: osticket/include/staff/group.inc.php:100
+#: osticket/include/staff/group.inc.php:108
 msgid "Ability to transfer tickets between departments."
 msgstr "Permissão para transferir tíquetes entre departamentos."
 
-#: osticket/include/staff/group.inc.php:108
-msgid "Deleted tickets can't be recovered!"
-msgstr "Tíquetes apagados não podem ser recuperados!"
+#: osticket/include/staff/group.inc.php:116
+msgid "Ability to delete tickets (Deleted tickets can't be recovered!)"
+msgstr "Permissão para apagar tíquetes (Tíquetes apagados não podem ser recuperados!)"
 
-#: osticket/include/staff/group.inc.php:111
+#: osticket/include/staff/group.inc.php:119
 msgid "Can Ban Emails"
 msgstr "Pode Banir E-mails"
 
-#: osticket/include/staff/group.inc.php:116
+#: osticket/include/staff/group.inc.php:124
 msgid "Ability to add/remove emails from banlist via ticket interface."
 msgstr "Permissão para adicionar/remover e-mails da lista negra via interface de tíquete."
 
-#: osticket/include/staff/group.inc.php:119
+#: osticket/include/staff/group.inc.php:127
 msgid "Can Manage Premade"
 msgstr "Pode Gerenciar Pré-pronto"
 
-#: osticket/include/staff/group.inc.php:124
+#: osticket/include/staff/group.inc.php:132
 msgid "Ability to add/update/disable/delete canned responses and attachments."
 msgstr "Permissão para adicionar/atualizar/desabilitar/apagar respostas prontas e anexos."
 
-#: osticket/include/staff/group.inc.php:127
+#: osticket/include/staff/group.inc.php:135
 msgid "Can Manage FAQ"
 msgstr "Pode Gerenciar FAQ"
 
-#: osticket/include/staff/group.inc.php:132
+#: osticket/include/staff/group.inc.php:140
 msgid "Ability to add/update/disable/delete knowledgebase categories and FAQs."
 msgstr "Permissão para adicionar/atualizar/desabilitar/apagar categorias da Base de Conhecimento e FAQs."
 
-#: osticket/include/staff/group.inc.php:137
+#: osticket/include/staff/group.inc.php:143
+msgid "Can View Staff Stats."
+msgstr "Pode Ver Estatísticas da Equipe"
+
+#: osticket/include/staff/group.inc.php:148
+msgid "Ability to view stats of other staff members in allowed departments."
+msgstr "Permissão para ver estatísticas de outros membros da equipe em departamentos permitidos."
+
+#: osticket/include/staff/group.inc.php:153
 msgid "Department Access"
 msgstr "Acesso ao Departamento"
 
-#: osticket/include/staff/group.inc.php:137
+#: osticket/include/staff/group.inc.php:153
 msgid "Check all departments the group members are allowed to access."
 msgstr "Selecione todos os membros do grupo que podem acessar."
 
-#: osticket/include/staff/group.inc.php:137
+#: osticket/include/staff/group.inc.php:153
 msgid "Select All"
 msgstr "Selecione Todos"
 
-#: osticket/include/staff/group.inc.php:137
+#: osticket/include/staff/group.inc.php:153
 msgid "Select None"
 msgstr "Selecione Nenhum"
 
-#: osticket/include/staff/group.inc.php:151
+#: osticket/include/staff/group.inc.php:167
 msgid "Internal notes viewable by all admins."
 msgstr "Notas Internas visíveis por todos os administradores."
 
 #: osticket/include/staff/directory.inc.php:63
-#: osticket/include/staff/ticket-view.inc.php:688
+#: osticket/include/staff/ticket-view.inc.php:695
 #: osticket/include/staff/filter.inc.php:292
 msgid "Staff Members"
 msgstr "Membros da Equipe"
@@ -5328,8 +5343,8 @@ msgid "More"
 msgstr "Mais"
 
 #: osticket/include/staff/ticket-view.inc.php:63
-#: osticket/include/staff/ticket-view.inc.php:777
-#: osticket/include/staff/ticket-view.inc.php:797
+#: osticket/include/staff/ticket-view.inc.php:784
+#: osticket/include/staff/ticket-view.inc.php:804
 msgid "Reopen"
 msgstr "Reabrir"
 
@@ -5338,7 +5353,7 @@ msgid "Claim"
 msgstr "Designar para si"
 
 #: osticket/include/staff/ticket-view.inc.php:81
-#: osticket/include/staff/ticket-view.inc.php:770
+#: osticket/include/staff/ticket-view.inc.php:777
 msgid "Print"
 msgstr "Imprimir"
 
@@ -5392,238 +5407,238 @@ msgstr "Nenhuma nota interna encontrada."
 msgid "Error fetching ticket thread - get technical help."
 msgstr "Erro ao abrir o tíquete - procure suporte técnico."
 
-#: osticket/include/staff/ticket-view.inc.php:352
+#: osticket/include/staff/ticket-view.inc.php:356
 msgid "Post Internal Note"
 msgstr "Adic. Nota Interna"
 
-#: osticket/include/staff/ticket-view.inc.php:355
+#: osticket/include/staff/ticket-view.inc.php:359
 msgid "Dept. Transfer"
 msgstr "Transf. de Depto."
 
-#: osticket/include/staff/ticket-view.inc.php:360
+#: osticket/include/staff/ticket-view.inc.php:364
 msgid "Reassign Ticket"
 msgstr "Designar Tíquete"
 
-#: osticket/include/staff/ticket-view.inc.php:360
+#: osticket/include/staff/ticket-view.inc.php:364
 msgid "Assign Ticket"
 msgstr "Designar Tíquete"
 
-#: osticket/include/staff/ticket-view.inc.php:375
+#: osticket/include/staff/ticket-view.inc.php:379
 msgid "TO"
 msgstr "PARA"
 
-#: osticket/include/staff/ticket-view.inc.php:386
+#: osticket/include/staff/ticket-view.inc.php:390
 msgid "Email Reply"
 msgstr "Resposta por E-mail"
 
-#: osticket/include/staff/ticket-view.inc.php:396
+#: osticket/include/staff/ticket-view.inc.php:400
 msgid "Response"
 msgstr "Resposta"
 
-#: osticket/include/staff/ticket-view.inc.php:402
+#: osticket/include/staff/ticket-view.inc.php:406
 msgid "Select a canned response"
 msgstr "Selecione uma resposta pronta"
 
-#: osticket/include/staff/ticket-view.inc.php:410
+#: osticket/include/staff/ticket-view.inc.php:414
 msgid "Append"
 msgstr "Acrescentar"
 
-#: osticket/include/staff/ticket-view.inc.php:437
+#: osticket/include/staff/ticket-view.inc.php:441
 msgid "Signature"
 msgstr "Assinatura"
 
-#: osticket/include/staff/ticket-view.inc.php:447
+#: osticket/include/staff/ticket-view.inc.php:451
 msgid "My signature"
 msgstr "Minha assinatura"
 
-#: osticket/include/staff/ticket-view.inc.php:454
+#: osticket/include/staff/ticket-view.inc.php:458
 msgid "Dept. Signature"
 msgstr "Assinatura do Depto."
 
-#: osticket/include/staff/ticket-view.inc.php:470
+#: osticket/include/staff/ticket-view.inc.php:474
 msgid "Reopen on Reply"
 msgstr "Reabrir ao Responder"
 
-#: osticket/include/staff/ticket-view.inc.php:474
+#: osticket/include/staff/ticket-view.inc.php:478
 msgid "Close on Reply"
 msgstr "Fechar ao Responder"
 
-#: osticket/include/staff/ticket-view.inc.php:503
+#: osticket/include/staff/ticket-view.inc.php:510
 msgid "Internal Note"
 msgstr "Nota Interna"
 
-#: osticket/include/staff/ticket-view.inc.php:506
+#: osticket/include/staff/ticket-view.inc.php:513
 msgid "Note details"
 msgstr "Detalhes da nota interna"
 
-#: osticket/include/staff/ticket-view.inc.php:510
-msgid "Note title - sumarry of the note (optional)"
+#: osticket/include/staff/ticket-view.inc.php:517
+msgid "Note title - summarry of the note (optional)"
 msgstr "Título da nota - sumário da nota (opcional)"
 
-#: osticket/include/staff/ticket-view.inc.php:541
+#: osticket/include/staff/ticket-view.inc.php:548
 msgid "unchanged"
 msgstr "não modificado"
 
-#: osticket/include/staff/ticket-view.inc.php:549
+#: osticket/include/staff/ticket-view.inc.php:556
 #, php-format
 msgid "Close Ticket"
 msgstr "Fechar Tíquete"
 
-#: osticket/include/staff/ticket-view.inc.php:553
+#: osticket/include/staff/ticket-view.inc.php:560
 msgid "Ticket States"
 msgstr "Estados do Tíquete"
 
-#: osticket/include/staff/ticket-view.inc.php:557
+#: osticket/include/staff/ticket-view.inc.php:564
 #, php-format
 msgid "Mark As Unanswered"
 msgstr "Marcar como não Respondido"
 
-#: osticket/include/staff/ticket-view.inc.php:560
+#: osticket/include/staff/ticket-view.inc.php:567
 #, php-format
 msgid "Mark As Answered"
 msgstr "Marcar como Respondido"
 
-#: osticket/include/staff/ticket-view.inc.php:568
+#: osticket/include/staff/ticket-view.inc.php:575
 #, php-format
 msgid "Flag As Overdue"
 msgstr "Marcar como Atrasado"
 
-#: osticket/include/staff/ticket-view.inc.php:571
+#: osticket/include/staff/ticket-view.inc.php:578
 #, php-format
 msgid "Clear Overdue Flag"
 msgstr "Desmarcar Atrasado"
 
-#: osticket/include/staff/ticket-view.inc.php:575
+#: osticket/include/staff/ticket-view.inc.php:582
 #, php-format
 msgid "Release (Unassign) Ticket"
 msgstr "Remover designação do Tíquete"
 
-#: osticket/include/staff/ticket-view.inc.php:613
+#: osticket/include/staff/ticket-view.inc.php:620
 #, php-format
 msgid "Ticket is currently in <b>%s</b> department."
 msgstr "Tíquete está atualmente no departamento <b>%s</b>."
 
-#: osticket/include/staff/ticket-view.inc.php:617
+#: osticket/include/staff/ticket-view.inc.php:624
 msgid "Select Target Department"
 msgstr "Selecione o Departamento de Destino"
 
-#: osticket/include/staff/ticket-view.inc.php:632
-#: osticket/include/staff/ticket-view.inc.php:720
+#: osticket/include/staff/ticket-view.inc.php:639
+#: osticket/include/staff/ticket-view.inc.php:727
 msgid "Comments"
 msgstr "Comentários"
 
-#: osticket/include/staff/ticket-view.inc.php:635
+#: osticket/include/staff/ticket-view.inc.php:642
 msgid "Enter reasons for the transfer."
 msgstr "Digite as razões para a transferência."
 
-#: osticket/include/staff/ticket-view.inc.php:668
+#: osticket/include/staff/ticket-view.inc.php:675
 msgid "Assignee"
 msgstr "Designado Para"
 
-#: osticket/include/staff/ticket-view.inc.php:673
+#: osticket/include/staff/ticket-view.inc.php:680
 #, php-format
 msgid "Ticket is currently assigned to"
 msgstr "Tíquete está designado para"
 
-#: osticket/include/staff/ticket-view.inc.php:676
+#: osticket/include/staff/ticket-view.inc.php:683
 msgid "Assigning a closed ticket will <b>reopen</b> it!"
 msgstr "Designar um tíquete fechado irá <b>reabrí-lo</b>!"
 
-#: osticket/include/staff/ticket-view.inc.php:681
+#: osticket/include/staff/ticket-view.inc.php:688
 msgid "Select Staff Member OR a Team"
 msgstr "Selecione um Membro OU um Time "
 
-#: osticket/include/staff/ticket-view.inc.php:684
+#: osticket/include/staff/ticket-view.inc.php:691
 #, php-format
 msgid "Claim Ticket (comments optional)"
 msgstr "Deisgnar Tíquete para si (comentários opcionais)"
 
-#: osticket/include/staff/ticket-view.inc.php:723
+#: osticket/include/staff/ticket-view.inc.php:730
 msgid "Enter reasons for the assignment or instructions for assignee."
 msgstr "Digite as razões para a designação ou instruções para a pessoa designada."
 
-#: osticket/include/staff/ticket-view.inc.php:738
+#: osticket/include/staff/ticket-view.inc.php:745
 msgid "Ticket Print Options"
 msgstr "Opções de Impressão de Tíquete"
 
-#: osticket/include/staff/ticket-view.inc.php:746
+#: osticket/include/staff/ticket-view.inc.php:753
 msgid "Print Notes"
 msgstr "Impr. Notas"
 
-#: osticket/include/staff/ticket-view.inc.php:747
+#: osticket/include/staff/ticket-view.inc.php:754
 msgid "Print <b>Internal</b> Notes/Comments"
 msgstr "Imprimir Notas/Comentários <b>Internos</b>"
 
-#: osticket/include/staff/ticket-view.inc.php:750
+#: osticket/include/staff/ticket-view.inc.php:757
 msgid "Paper Size"
 msgstr "Papel"
 
-#: osticket/include/staff/ticket-view.inc.php:752
+#: osticket/include/staff/ticket-view.inc.php:759
 msgid "Select Print Paper Size"
 msgstr "Tamanho do Papel"
 
-#: osticket/include/staff/ticket-view.inc.php:780
+#: osticket/include/staff/ticket-view.inc.php:787
 #, php-format
 msgid "Are you sure you want to <b>%s</b> this ticket?"
 msgstr "Tem certeza que deseja <b>%s</b> este tíquete?"
 
-#: osticket/include/staff/ticket-view.inc.php:780
+#: osticket/include/staff/ticket-view.inc.php:787
 msgid "REOPEN"
 msgstr "REABRIR"
 
-#: osticket/include/staff/ticket-view.inc.php:780
+#: osticket/include/staff/ticket-view.inc.php:787
 msgid "CLOSE"
 msgstr "FECHAR"
 
-#: osticket/include/staff/ticket-view.inc.php:787
+#: osticket/include/staff/ticket-view.inc.php:794
 msgid "Reasons for status change (internal note). Optional but highly recommended."
 msgstr "Razões para a mudança de estado (nota interna). Opcional, mas recomendado."
 
-#: osticket/include/staff/ticket-view.inc.php:808
+#: osticket/include/staff/ticket-view.inc.php:815
 msgid "Are you sure want to <b>claim</b> (self assign) this ticket?"
 msgstr "Tem certeza que deseja <b>designar</b> este tíquete para si?"
 
-#: osticket/include/staff/ticket-view.inc.php:811
+#: osticket/include/staff/ticket-view.inc.php:818
 msgid "Are you sure want to flag the ticket as <b>answered</b>?"
 msgstr "Tem certeza que quer marcar o tíquete como <b>respondido</b>?"
 
-#: osticket/include/staff/ticket-view.inc.php:814
+#: osticket/include/staff/ticket-view.inc.php:821
 msgid "Are you sure want to flag the ticket as <b>unanswered</b>?"
 msgstr "Tem certeza que quer marcar o tíquete como <b>não respondido</b>?"
 
-#: osticket/include/staff/ticket-view.inc.php:817
+#: osticket/include/staff/ticket-view.inc.php:824
 msgid "Are you sure want to flag the ticket as <font color=\"red\"><b>overdue</b></font>?"
 msgstr "Tem certeza que quer marcar o tíquete como <font color=\"red\"><b>atrasado</b></font>?"
 
-#: osticket/include/staff/ticket-view.inc.php:820
+#: osticket/include/staff/ticket-view.inc.php:827
 msgid "Are you sure want to <b>ban</b>"
 msgstr "Tem certeza que deseja <b>banir</b>"
 
-#: osticket/include/staff/ticket-view.inc.php:821
+#: osticket/include/staff/ticket-view.inc.php:828
 msgid "New tickets from the email address will be auto-rejected."
 msgstr "Novos tíquetes do e-mail serão rejeitados automaticamente."
 
-#: osticket/include/staff/ticket-view.inc.php:824
+#: osticket/include/staff/ticket-view.inc.php:831
 msgid "Are you sure want to <b>remove</b>"
 msgstr "Tem certeza que deseja <b>remover</b>"
 
-#: osticket/include/staff/ticket-view.inc.php:824
+#: osticket/include/staff/ticket-view.inc.php:831
 msgid "from ban list?"
 msgstr "da lista negra?"
 
-#: osticket/include/staff/ticket-view.inc.php:827
+#: osticket/include/staff/ticket-view.inc.php:834
 msgid "Are you sure want to <b>unassign</b> ticket from"
 msgstr "Tem certeza que deseja <b>remover a designação</b> do tíquete de"
 
-#: osticket/include/staff/ticket-view.inc.php:830
+#: osticket/include/staff/ticket-view.inc.php:837
 msgid "Are you sure you want to DELETE this ticket?"
 msgstr "Tem certeza que deseja APAGAR este tíquete?"
 
-#: osticket/include/staff/ticket-view.inc.php:831
+#: osticket/include/staff/ticket-view.inc.php:838
 msgid "Deleted tickets CANNOT be recovered, including any associated attachments."
 msgstr "Tíquetes apagados NÃO PODEM ser recuperados, incluindo quaisquer anexos."
 
-#: osticket/include/staff/ticket-view.inc.php:845
+#: osticket/include/staff/ticket-view.inc.php:852
 msgid "OK"
 msgstr "OK"
 
@@ -6096,23 +6111,23 @@ msgstr "A assinatura fica disponível como uma opção, na hora de responder o t
 msgid "Cancel Changes"
 msgstr "Cancelar Mudanças"
 
-#: osticket/include/staff/header.inc.php:35
+#: osticket/include/staff/header.inc.php:43
 msgid "osTicket - Customer Support System"
 msgstr "osTicket - Sistema de Suporte ao Cliente"
 
-#: osticket/include/staff/header.inc.php:36
+#: osticket/include/staff/header.inc.php:44
 msgid "Howdy,"
 msgstr "Olá, "
 
-#: osticket/include/staff/header.inc.php:39
+#: osticket/include/staff/header.inc.php:47
 msgid "Admin Panel"
 msgstr "Adm. do Sistema"
 
-#: osticket/include/staff/header.inc.php:41
+#: osticket/include/staff/header.inc.php:49
 msgid "Staff Panel"
 msgstr "Painel da Equipe"
 
-#: osticket/include/staff/header.inc.php:43
+#: osticket/include/staff/header.inc.php:51
 msgid "My Preferences"
 msgstr "Preferências"
 
@@ -6129,8 +6144,8 @@ msgstr "Chaves API"
 msgid "No API keys found!"
 msgstr "Nenhuma Chave API encontrada!"
 
-#: osticket/include/staff/apikeys.inc.php:60
-msgid "IP Addr"
+#: osticket/include/staff/apikeys.inc.php:58
+msgid "IP Addr."
 msgstr "End. IP"
 
 #: osticket/include/staff/apikeys.inc.php:96
@@ -6272,7 +6287,7 @@ msgid "Select Default Department"
 msgstr "Selecione o Departamento Padrão"
 
 #: osticket/include/staff/settings-system.inc.php:50
-#: osticket/include/staff/tickets.inc.php:536
+#: osticket/include/staff/tickets.inc.php:544
 msgid "Dept"
 msgstr "Depto"
 
@@ -6447,76 +6462,76 @@ msgstr "Tíquetes atrasados"
 msgid "Entered date span is invalid. Selection ignored."
 msgstr "Intervalo de datas inválido. Seleção ignorada."
 
-#: osticket/include/staff/tickets.inc.php:278
+#: osticket/include/staff/tickets.inc.php:281
 msgid "(Search Results)"
 msgstr "(Resultados da Pesquisa)"
 
-#: osticket/include/staff/tickets.inc.php:294
+#: osticket/include/staff/tickets.inc.php:297
 msgid "advanced"
 msgstr "avançado"
 
-#: osticket/include/staff/tickets.inc.php:326
+#: osticket/include/staff/tickets.inc.php:329
 msgid "Sort By Name"
 msgstr "Ordenar por Nome"
 
-#: osticket/include/staff/tickets.inc.php:336
+#: osticket/include/staff/tickets.inc.php:339
 msgid "Sort By Priority"
 msgstr "Ordenar por Prioridade"
 
-#: osticket/include/staff/tickets.inc.php:343
+#: osticket/include/staff/tickets.inc.php:346
 msgid "Sort By Assignee"
 msgstr "Ordenar por Designação"
 
-#: osticket/include/staff/tickets.inc.php:348
+#: osticket/include/staff/tickets.inc.php:351
 msgid "Sort By Closing Staff Name"
 msgstr "Ordenar pela Pessoa que Fechou"
 
-#: osticket/include/staff/tickets.inc.php:402
+#: osticket/include/staff/tickets.inc.php:405
 msgid "Preview Ticket"
 msgstr "Visualizar Tíquete"
 
-#: osticket/include/staff/tickets.inc.php:429
+#: osticket/include/staff/tickets.inc.php:432
 msgid "There are no tickets here. (Leave a little early today)."
 msgstr "Não existem tíquetes aqui. (Saia mais cedo hoje)."
 
-#: osticket/include/staff/tickets.inc.php:442
+#: osticket/include/staff/tickets.inc.php:445
 msgid "Query returned 0 results."
 msgstr "Sua pesquisa não retornou resultados."
 
-#: osticket/include/staff/tickets.inc.php:453
+#: osticket/include/staff/tickets.inc.php:456
 msgid "Export"
 msgstr "Exportar"
 
-#: osticket/include/staff/tickets.inc.php:494
+#: osticket/include/staff/tickets.inc.php:502
 msgid "Are you sure want to <b>close</b> selected open tickets?"
 msgstr "Tem certeza que deseja <b>fechar</b> os tíquetes selecionados?"
 
-#: osticket/include/staff/tickets.inc.php:497
+#: osticket/include/staff/tickets.inc.php:505
 msgid "Are you sure want to <b>reopen</b> selected closed tickets?"
 msgstr "Tem certeza que deseja <b>reabrir</b> os tíquetes selecionados?"
 
-#: osticket/include/staff/tickets.inc.php:503
+#: osticket/include/staff/tickets.inc.php:511
 msgid "Are you sure you want to DELETE selected tickets?"
 msgstr "Tem certeza que deseja APAGAR os tíquetes selecionados?"
 
-#: osticket/include/staff/tickets.inc.php:520
+#: osticket/include/staff/tickets.inc.php:528
 msgid "Advanced Ticket Search"
 msgstr "Pesquisa Avançada de Tíquetes"
 
-#: osticket/include/staff/tickets.inc.php:525
+#: osticket/include/staff/tickets.inc.php:533
 msgid "Keyword"
 msgstr "Palavra-chave"
 
-#: osticket/include/staff/tickets.inc.php:526
+#: osticket/include/staff/tickets.inc.php:534
 msgid "Optional"
 msgstr "Opcional"
 
-#: osticket/include/staff/tickets.inc.php:552
-#: osticket/include/staff/tickets.inc.php:575
+#: osticket/include/staff/tickets.inc.php:560
+#: osticket/include/staff/tickets.inc.php:583
 msgid "Anyone"
 msgstr "Qualquer um"
 
-#: osticket/include/staff/tickets.inc.php:585
+#: osticket/include/staff/tickets.inc.php:593
 msgid "Date Range"
 msgstr "Intervalo de Data"
 
@@ -7106,10 +7121,6 @@ msgstr "Tipo de Log"
 msgid "Log Date"
 msgstr "Data do Log"
 
-#: osticket/include/staff/syslogs.inc.php:119
-msgid "IP Address"
-msgstr "Endereço IP"
-
 #: osticket/include/staff/syslogs.inc.php:154
 msgid "No logs found"
 msgstr "Não foram encontradas logs"
@@ -7347,7 +7358,6 @@ msgid "To avoid possible conflicts, please take a minute to rename configuration
 msgstr "Para evitar possíveis conflitos, por favor, renomeie os arquivos de configuração como mostrado abaixo."
 
 #: osticket/include/upgrader/rename.inc.php:11
-#: osticket/setup/inc/file-perm.inc.php:11
 #: osticket/setup/inc/file-missing.inc.php:10
 msgid "Solution"
 msgstr "Solução"
@@ -7861,8 +7871,8 @@ msgid "osTicket installer requires ability to write to the configuration file"
 msgstr "O Instalador do osTicket requer permissão para escrever para o arquivo de configuração"
 
 #: osticket/setup/inc/file-perm.inc.php:12
-msgid "Please follow the instructions below to give read and write access to the web server."
-msgstr "Por favor, siga as instruções abaixo para dar permissão de escrita e leitura para o servidor web."
+msgid "Please follow the instructions below to give read and write access to the web server user."
+msgstr "Por favor, siga as instruções abaixo para dar permissão de escrita e leitura para o usuário do servidor web."
 
 #: osticket/setup/inc/file-perm.inc.php:15
 msgid "Using WS_FTP this would be right hand clicking on the fil, selecting chmod, and then giving all permissions to the file."
@@ -8046,39 +8056,47 @@ msgstr "Não foi possível criar a base de dados"
 msgid "Unable to select the database"
 msgstr "Não foi possível selecionar a base de dados"
 
-#: osticket/setup/inc/class.installer.php:116
+#: osticket/setup/inc/class.installer.php:105
+msgid "We have a problem - another installation with same table prefix exists!"
+msgstr "Temos um problema - existe outra instalação com o mesmo prefixo de tabelas!"
+
+#: osticket/setup/inc/class.installer.php:106
+msgid "Prefix already in-use"
+msgstr "Prefixo já está em uso"
+
+#: osticket/setup/inc/class.installer.php:123
 msgid "Internal Error - please make sure your download is the latest (#1)"
 msgstr "Erro interno - favor certificar-se que o arquivo baixado é o mais recente (#1)"
 
-#: osticket/setup/inc/class.installer.php:118
+#: osticket/setup/inc/class.installer.php:125
 msgid "Unknown or invalid schema signature"
 msgstr "Assinatura do esquema desconhecida ou inválida"
 
-#: osticket/setup/inc/class.installer.php:120
+#: osticket/setup/inc/class.installer.php:127
 msgid "Unable to read config file. Permission denied! (#2)"
 msgstr "Não foi possível ler o arquivo de configuração. Permissão negada! (#2)"
 
-#: osticket/setup/inc/class.installer.php:122
+#: osticket/setup/inc/class.installer.php:129
 msgid "Unable to open config file for writing. Permission denied! (#3)"
 msgstr "Não foi possível abrir o arquivo de configuração para escrita. Permissão negada! (#3)"
 
-#: osticket/setup/inc/class.installer.php:124
+#: osticket/setup/inc/class.installer.php:131
 msgid "Error parsing SQL schema! Get help from developers (#4)"
 msgstr "Erro ao interpretar esquema SQL! Procure ajuda dos desenvolvedores (#4)"
 
-#: osticket/setup/inc/class.installer.php:136
+#: osticket/setup/inc/class.installer.php:143
 msgid "Unable to create admin user (#6)"
 msgstr "Não foi possível criar o usuário administrativo (#6)"
 
-#: osticket/setup/inc/class.installer.php:178
+#: osticket/setup/inc/class.installer.php:185
 msgid "Unable to write to config file. Permission denied! (#5)"
 msgstr "Não foi possível escrever no arquivo de configuração. Permissão negada! (#5)"
 
-#: osticket/setup/inc/class.installer.php:202
+#: osticket/setup/inc/class.installer.php:209
 msgid "Congratulations and Thank you for choosing osTicket!"
 msgstr "Parabéns, e obrigado por escolher o osTicket!"
 
-#: osticket/setup/inc/class.installer.php:215
+#: osticket/setup/inc/class.installer.php:222
 msgid ""
 "Congratulations osTicket basic installation completed!\n"
 "\n"
@@ -8215,6 +8233,30 @@ msgstr "Extensão Gdlib"
 #: osticket/setup/inc/install-prereq.inc.php:27
 msgid "PHP IMAP extension"
 msgstr "Extensão PHP IMAP"
+
+msgid " assigned to you!"
+msgstr " designado para você!"
+
+msgid "API key for the IP already exists"
+msgstr "Chave de API para o IP já existe"
+
+msgid "Unable to add API key. Internal error"
+msgstr "Não foi possível adicionar chave API. Erro interno"
+
+msgid "IP Address:"
+msgstr "Endereçoo IP:"
+
+msgid "API Key:"
+msgstr "Chave API:"
+
+msgid " IP Address:"
+msgstr " Endereço IP:"
+
+msgid "Email piping:"
+msgstr "Direcionamento de E-mail:"
+
+msgid "remote email piping."
+msgstr "direcionamento de e-mail remoto."
 
 msgid "You must select at least one ticket"
 msgstr "Você deve selecionar ao menos um tíquete"

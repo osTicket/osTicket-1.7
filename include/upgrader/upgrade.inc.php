@@ -32,7 +32,7 @@ $action=$upgrader->getNextAction();
             <p><?=_('3. We can help, feel free to')?> <a href="http://osticket.com/support/" target="_blank"><?=_('contact us')?></a> <?=_('for professional help.')?></p>
     </div>
     <div class="clear"></div>
-    <div id="loading">
+    <div id="upgrading">
         <h4><?php echo $action; ?></h4>
         <?=_('Please wait... while we upgrade your osTicket installation!')?>
         <div id="msg" style="font-weight: bold;padding-top:10px;">Smile!</div>

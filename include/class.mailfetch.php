@@ -198,19 +198,27 @@ class MailFetcher {
     //Convert text to desired encoding..defaults to utf8
     function mime_encode($text, $charset=null, $enc='utf-8') { //Thank in part to afterburner  
         
-        if(function_exists('iconv') and $text) {
+        if(function_exists('iconv') and ($charset or function_exists('mb_detect_encoding'))) {
             if($charset)
                 return iconv($charset, $enc.'//IGNORE', $text);
             elseif(function_exists('mb_detect_encoding'))
-                return iconv(mb_detect_encoding($text, $this->encodings, true), $enc, $text);
+                return iconv(mb_detect_encoding($text, $this->encodings), $enc, $text);
+        } elseif(function_exists('iconv_mime_decode')) {
+            return iconv_mime_decode($text, 0, $enc);
         }
 
         return utf8_encode($text);
     }
     
-    //Decode using iconv_mime_decode - handles accented characters better
+    //Generic decoder - resuting text is utf8 encoded -> mirrors imap_utf8
     function mime_decode($text) {
-        return iconv_mime_decode($text, 0, "UTF-8");
+        
+        $str = '';
+        $parts = imap_mime_header_decode($text);
+        foreach ($parts as $part)
+            $str.= $this->mime_encode($part->text, ($part->charset=='default'?'ASCII':$part->charset), 'utf-8');
+        
+        return $str?$str:imap_utf8($text);
     }
 
     function getLastError() {
@@ -306,22 +314,31 @@ class MailFetcher {
             //Check if the part is an attachment.
             $filename = '';
             if($part->ifdisposition && in_array(strtolower($part->disposition), array('attachment', 'inline'))) {
-                foreach ($part->dparameters as $dparameter) {
-		   if (strncmp(strtolower($dparameter->attribute),'filename',strlen('filename')) == 0)
-			$filename.=$this->mime_encode($this->mime_decode(urldecode($dparameter->value)));
-		}
-	    }elseif($part->ifparameters && $part->type == 5) { //inline image without disposition.
-		foreach ($part->parameters as $parameter) {
-                   if (strncmp(strtolower($parameter->attribute),'filename',strlen('filename')) == 0)
-                        $filename.=$this->mime_encode($this->mime_decode(urldecode($parameter->value)));
+                $filename = $part->dparameters[0]->value;
+                //Some inline attachments have multiple parameters.
+                if(count($part->dparameters)>1) {
+                    foreach($part->dparameters as $dparameter) {
+                        if(strcasecmp($dparameter->attribute, 'FILENAME')) continue;
+                        $filename = $dparameter->value;
+                        break;
+                    }
                 }
-	    }elseif(strtolower($this->getMimeType($part)) == "application/ms-tnef")
-		$filename = "winmail.dat"; 
-	   
-            if($filename) {
+            } elseif($part->ifparameters && $part->type == 5) { //inline image without disposition.
+                $filename = $part->parameters[0]->value;
+                if(count($part->parameters)>1) {
+                    foreach($part->parameters as $parameter) {
+                        if(strcasecmp($parameter->attribute, 'FILENAME')) continue;
+                        $filename = $parameter->value;
+                        break;
+                    }
+                }
+           } elseif(strtolower($this->getMimeType($part)) == "application/ms-tnef")
+                $filename = "winmail.dat";
+
+           if($filename) {
                 return array(
                         array(
-                            'name'  => $filename,
+                            'name'  => $this->mime_decode($filename),
                             'mime'  => $this->getMimeType($part),
                             'encoding' => $part->encoding,
                             'index' => ($index?$index:1)

@@ -348,8 +348,12 @@ if(!$cfg->showNotesInline()) { ?>
 
 <div id="response_options">
     <ul>
-        <li><a id="reply_tab" href="#reply"><?=_('Post Reply')?></a></li>
-        <li><a id="note_tab" href="#note"><?=_('Post Internal Note')?></a></li>
+        <?php
+        if($thisstaff->canPostReply()) { ?>
+        <li><a id="reply_tab" href="#reply"><?=_("Post Reply")?></a></li>
+        <?php
+        } ?>
+        <li><a id="note_tab" href="#note"><?=_("Post Internal Note")?></a></li>
         <?php
         if($thisstaff->canTransferTickets()) { ?>
         <li><a id="transfer_tab" href="#transfer"><?=_('Dept. Transfer')?></a></li>
@@ -361,12 +365,12 @@ if(!$cfg->showNotesInline()) { ?>
         <?php
         } ?>
     </ul>
-
+    <?php
+    if($thisstaff->canPostReply()) { ?>
     <form id="reply" action="tickets.php?id=<?php echo $ticket->getId(); ?>#reply" name="reply" method="post" enctype="multipart/form-data">
         <?php csrf_token(); ?>
         <input type="hidden" name="id" value="<?php echo $ticket->getId(); ?>">
         <input type="hidden" name="msgId" value="<?php echo $msgId; ?>">
-        <input type="hidden" name="locktime" value="<?php echo $cfg->getLockTime(); ?>">
         <input type="hidden" name="a" value="reply">
         <span class="error"></span>
         <table border="0" cellspacing="0" cellpadding="3">
@@ -485,9 +489,12 @@ if(!$cfg->showNotesInline()) { ?>
             <input class="btn_sm" type="reset" value="<?=_('Reset')?>">
         </p>
     </form>
+    <?php
+    } ?>
     <form id="note" action="tickets.php?id=<?php echo $ticket->getId(); ?>#note" name="note" method="post" enctype="multipart/form-data">
         <?php csrf_token(); ?>
         <input type="hidden" name="id" value="<?php echo $ticket->getId(); ?>">
+        <input type="hidden" name="locktime" value="<?php echo $cfg->getLockTime(); ?>">
         <input type="hidden" name="a" value="postnote">
         <table border="0" cellspacing="0" cellpadding="3">
             <?php 
@@ -507,7 +514,7 @@ if(!$cfg->showNotesInline()) { ?>
                         <span class="error">*&nbsp;<?php echo $errors['note']; ?></span></div>
                     <textarea name="note" id="internal_note" cols="80" rows="9" wrap="soft"><?php echo $info['note']; ?></textarea><br>
                     <div>
-                        <span class="faded"><?=_('Note title - sumarry of the note (optional)')?></span>&nbsp;
+                        <span class="faded"><?=_("Note title - summarry of the note (optional)")?></span>&nbsp;
                         <span class="error"&nbsp;<?php echo $errors['title']; ?></span>
                     </div>
                     <input type="text" name="title" id="title" size="60" value="<?php echo $info['title']; ?>" >
