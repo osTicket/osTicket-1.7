@@ -43,18 +43,23 @@ if($_POST && !$errors):
         $statusKeys=array('open'=>'Open','Reopen'=>'Open','Close'=>'Closed');
         switch(strtolower($_POST['a'])):
         case 'reply':
+            if(!$thisstaff->canPostReply())
+                $errors['err'] = 'Action denied. Contact admin for access';
+            else {
 
-            if(!$_POST['msgId'])
-                $errors['err']='Missing message ID - Internal error';
-            if(!$_POST['response'])
-                $errors['response']='Response required';
-            //Use locks to avoid double replies
-            if($lock && $lock->getStaffId()!=$thisstaff->getId())
-                $errors['err']='Action Denied. Ticket is locked by someone else!';
+                if(!$_POST['msgId'])
+                    $errors['err']='Missing message ID - Internal error';
+                if(!$_POST['response'])
+                    $errors['response']='Response required';
             
-            //Make sure the email is not banned
-            if(!$errors['err'] && TicketFilter::isBanned($ticket->getEmail()))
-                $errors['err']='Email is in banlist. Must be removed to reply.';
+                //Use locks to avoid double replies
+                if($lock && $lock->getStaffId()!=$thisstaff->getId())
+                    $errors['err']='Action Denied. Ticket is locked by someone else!';
+            
+                //Make sure the email is not banned
+                if(!$errors['err'] && TicketFilter::isBanned($ticket->getEmail()))
+                    $errors['err']='Email is in banlist. Must be removed to reply.';
+            }
 
             $wasOpen =($ticket->isOpen());
             //If no error...do the do.
@@ -347,7 +352,7 @@ if($_POST && !$errors):
                                 foreach($_POST['tids'] as $k=>$v) {
                                     if(($t=Ticket::lookup($v)) && $t->isClosed() && @$t->reopen()) {
                                         $i++;
-                                        $t->logNote('Ticket Reopened', $note);
+                                        $t->logNote('Ticket Reopened', $note, $thisstaff);
                                     }
                                 }
 
@@ -367,7 +372,7 @@ if($_POST && !$errors):
                                 foreach($_POST['tids'] as $k=>$v) {
                                     if(($t=Ticket::lookup($v)) && $t->isOpen() && @$t->close()) { 
                                         $i++;
-                                        $t->logNote('Ticket Closed', $note);
+                                        $t->logNote('Ticket Closed', $note, $thisstaff);
                                     }
                                 }
 
@@ -386,7 +391,7 @@ if($_POST && !$errors):
                             foreach($_POST['tids'] as $k=>$v) {
                                 if(($t=Ticket::lookup($v)) && !$t->isOverdue() && $t->markOverdue()) {
                                     $i++;
-                                    $t->logNote('Ticket Marked Overdue', $note);
+                                    $t->logNote('Ticket Marked Overdue', $note, $thisstaff);
                                 }
                             }
 
@@ -499,8 +504,8 @@ if($cfg->showAnsweredTickets()) {
 }
 
 if($stats['assigned']) {
-    if(!$sysnotice && $stats['assigned']>10)
-        $sysnotice=$stats['assigned'].' assigned to you!';
+    if(!$ost->getWarning() && $stats['assigned']>10)
+        $ost->setWarning($stats['assigned'].' tickets assigned to you! Do something about it!');
 
     $nav->addSubMenu(array('desc'=>'My Tickets ('.$stats['assigned'].')',
                            'title'=>'Assigned Tickets',
