@@ -1331,9 +1331,8 @@ class SelectionWidget extends ChoicesWidget {
             value="<?php echo $name; ?>" />
         <script type="text/javascript">
         $(function() {
-            var items = <?php echo JsonDataEncoder::encode($source); ?>;
             $('#<?php echo $this->name; ?>').typeahead({
-                source: items,
+                source: <?php echo JsonDataEncoder::encode($source); ?>,
                 onselect: function(item) {
                     $('#<?php echo $this->name; ?>').val(item['info'])
                     $('input[name="<?php echo $this->name; ?>"]').val(item['id'])

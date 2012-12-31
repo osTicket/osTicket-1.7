@@ -12,9 +12,14 @@ header("Content-Type: text/html; charset=UTF-8\r\n");
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <link rel="stylesheet" href="<?php echo ASSETS_PATH; ?>css/theme.css" media="screen">
     <link rel="stylesheet" href="<?php echo ASSETS_PATH; ?>css/print.css" media="print">
+    <link rel="stylesheet" href="scp/css/typeahead.css" media="screen" />
+    <link rel="stylesheet" href="css/ui-lightness/jquery-ui-1.8.18.custom.css"
+        media="screen" />
     <script src="<?php echo ROOT_PATH; ?>js/jquery-1.7.2.min.js"></script>
     <script src="<?php echo ROOT_PATH; ?>js/jquery.multifile.js"></script>
     <script src="<?php echo ROOT_PATH; ?>js/osticket.js"></script>
+    <script src="<?php echo ROOT_PATH; ?>scp/js/bootstrap-typeahead.js"></script>
+    <script src="<?php echo ROOT_PATH; ?>js/jquery-ui-1.8.18.custom.min.js"></script>
 </head>
 <body>
     <div id="container">
