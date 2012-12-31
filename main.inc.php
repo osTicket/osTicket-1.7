@@ -59,6 +59,13 @@
     define('UPGRADE_DIR', INCLUDE_DIR.'upgrader/');
     define('SQL_DIR', UPGRADE_DIR.'sql/');
 
+	// Fanha: define language dir
+	define('LANGUAGE', 'VN');
+    define('LANGUAGE_DIR',ROOT_DIR.'languages/'); //Change this if include is moved outside the web path.
+    require(INCLUDE_DIR.'class.language.php');	
+	$language = new Language();
+	//~ Fanha
+
     /*############## Do NOT monkey with anything else beyond this point UNLESS you really know what you are doing ##############*/
 
     #Current version && schema signature (Changes from version to version)
@@ -72,13 +79,13 @@
         $configfile=INCLUDE_DIR.'settings.php';
         //Die gracefully on upgraded v1.6 RC5 installation - otherwise script dies with confusing message. 
         if(!strcasecmp(basename($_SERVER['SCRIPT_NAME']), 'settings.php'))
-            die('Please rename config file include/settings.php to include/ost-config.php to continue!');
+            die($language->get('rename_config'));
     } elseif(file_exists(INCLUDE_DIR.'ost-config.php')) //NEW config file v 1.6 stable ++
         $configfile=INCLUDE_DIR.'ost-config.php';
     elseif(file_exists(ROOT_DIR.'setup/'))
         header('Location: '.ROOT_PATH.'setup/');
 
-    if(!$configfile || !file_exists($configfile)) die('<b>Error loading settings. Contact admin.</b>');
+    if(!$configfile || !file_exists($configfile)) die($language->get('error_setting'));
 
     require($configfile);
     define('CONFIG_FILE',$configfile); //used in admin.php to check perm.
@@ -110,7 +117,7 @@
     require(INCLUDE_DIR.'class.validator.php'); //Class to help with basic form input validation...please help improve it.
     require(INCLUDE_DIR.'class.mailer.php');
     require(INCLUDE_DIR.'mysql.php');
-
+	
     #CURRENT EXECUTING SCRIPT.
     define('THISPAGE', Misc::currentURL());
     define('THISURI', $_SERVER['REQUEST_URI']);
@@ -174,23 +181,25 @@
     #Connect to the DB && get configuration from database
     $ferror=null;
     if (!db_connect(DBHOST,DBUSER,DBPASS) || !db_select_database(DBNAME)) {
-        $ferror='Unable to connect to the database';
+        $ferror=$language->get('error_database');
     } elseif(!($ost=osTicket::start(1)) || !($cfg = $ost->getConfig())) {
-        $ferror='Unable to load config info from DB. Get tech support.';
+        $ferror=$language->get('error_config');
     }
 
     if($ferror) { //Fatal error
         //try alerting admin using email in config file
         $msg=$ferror."\n\n".THISPAGE;
-        Mailer::sendmail(ADMIN_EMAIL, 'osTicket Fatal Error', $msg, sprintf('"osTicket Alerts"<%s>', ADMIN_EMAIL));
+        Mailer::sendmail(ADMIN_EMAIL, $language->get('email_title'), $msg, sprintf($language->get('email_account'), ADMIN_EMAIL));
         //Display generic error to the user
-        die("<b>Fatal Error:</b> Contact system administrator.");
+        die($language->get('contact_admin'));
         exit;
     }
     
     //Init
     $session = $ost->getSession();
-
+	
+	$ost->language = &$language;
+	
     //System defaults we might want to make global//
     #pagenation default - user can overwrite it!
     define('DEFAULT_PAGE_LIMIT', $cfg->getPageSize()?$cfg->getPageSize():25);

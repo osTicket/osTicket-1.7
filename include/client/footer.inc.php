@@ -1,8 +1,9 @@
         </div>
     </div>
     <div id="footer">
-        <p>Copyright &copy; <?php echo date('Y'); ?> <a href="http://osticket.com" target="_blank" title="osTicket">osTicket.com</a> - All rights reserved.</p>
-        <a id="poweredBy" href="http://osticket.com" target="_blank">Powered by osTicket</a>
+		<?php $ost->language->load('client/footer'); ?>
+		<p><?php printf($ost->language->get('TEXT_COPYRIGHT'), date('Y'));?></p>
+        <a id="poweredBy" href="http://osticket.com" target="_blank"><?php echo $ost->language->get('TEXT_POWERED');?></a>
     </div>
 </body>
 </html>  
