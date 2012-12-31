@@ -1033,7 +1033,10 @@ class DatetimeField extends DynamicFormField {
     }
 
     function to_php($value) {
-        return (int) $value;
+        if (!$value)
+            return $value;
+        else
+            return (int) $value;
     }
 
     function parse($value) {
@@ -1164,14 +1167,15 @@ class Widget {
 
     function __construct($field) {
         $this->field = $field;
-        $this->name = '_form-field-id-'.$field->get('id');
-        if ($a = $field->getAnswer())
-            $this->value = $a->getValue();
+        $this->name = $field->getFormName();
+        if ($_SERVER['REQUEST_METHOD'] == 'POST')
+            $this->value = $this->getValue();
+        elseif (is_object($field->getAnswer()))
+            $this->value = $field->getAnswer()->getValue();
         elseif ($field->value)
             $this->value = $field->value;
-        else
-            $this->value = $this->getValue();
     }
+
     function getValue() {
         return $_POST[$this->name];
     }
@@ -1429,7 +1433,7 @@ class DatetimePickerWidget extends Widget {
      */
     function getValue() {
         $datetime = parent::getValue();
-        if (isset($_POST[$this->name . ':time']))
+        if ($datetime && isset($_POST[$this->name . ':time']))
             $datetime .= ' ' . $_POST[$this->name . ':time'];
         return $datetime;
     }
