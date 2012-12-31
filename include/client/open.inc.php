@@ -48,6 +48,7 @@ $info=($_POST && $errors)?Format::htmlchars($_POST):$info;
         } ?>
     </tbody>
     <tbody>
+    <tr><td colspan="2"><hr /></td></tr>
     <tr>
         <td class="required">Message:</td>
         <td>
