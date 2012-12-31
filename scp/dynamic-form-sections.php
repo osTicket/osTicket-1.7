@@ -7,7 +7,7 @@ if($_REQUEST['id'] && !($form=DynamicFormSection::lookup($_REQUEST['id'])))
     $errors['err']='Unknown or invalid dynamic form ID.';
 
 if($_POST) {
-    $fields = array('title', 'notes');
+    $fields = array('title', 'notes', 'instructions');
     $required = array('name','email','subject');
     switch(strtolower($_POST['do'])) {
         case 'update':
@@ -42,6 +42,7 @@ if($_POST) {
         case 'add':
             $form = DynamicFormSection::create(array(
                 'title'=>$_POST['title'],
+                'instructions'=>$_POST['instructions'],
                 'notes'=>$_POST['notes']));
             if ($form->isValid())
                 $form->save();

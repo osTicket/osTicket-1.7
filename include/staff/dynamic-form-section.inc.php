@@ -38,8 +38,14 @@ $info=Format::htmlchars(($errors && $_POST)?$_POST:$info);
                 echo $info['title']; ?>"/></td>
         </tr>
         <tr>
-            <td width="180">Description:</td>
-            <td><textarea name="notes" rows="3" cols="40"><?php
+            <td width="180">Instructions:</td>
+            <td><textarea name="instructions" rows="3" cols="40"><?php
+                echo $info['instructions']; ?></textarea>
+            </td>
+        </tr>
+        <tr>
+            <td width="180">Internal Notes:</td>
+            <td><textarea name="notes" rows="4" cols="80"><?php
                 echo $info['notes']; ?></textarea>
             </td>
         </tr>

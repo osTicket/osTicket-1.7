@@ -169,6 +169,7 @@ DROP TABLE IF EXISTS `%TABLE_PREFIX%dynamic_formset`;
 CREATE TABLE `%TABLE_PREFIX%dynamic_formset` (
     `id` int(11) unsigned auto_increment,
     `title` varchar(255) NOT NULL,
+    `instructions` varchar(512),
     `notes` text,
     `created` datetime NOT NULL,
     `updated` datetime NOT NULL,

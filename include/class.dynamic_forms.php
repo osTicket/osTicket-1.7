@@ -220,6 +220,7 @@ class DynamicFormSection extends VerySimpleModel {
         return $this->_fields;
     }
     function getTitle() { return $this->get('title'); }
+    function getInstructions() { return $this->get('instructions'); }
 
     function isValid() {
         return !$this->_errors;
@@ -530,6 +531,7 @@ class DynamicFormEntry extends VerySimpleModel {
     }
 
     function getTitle() { return $this->getForm()->getTitle(); }
+    function getInstructions() { return $this->getForm()->getInstructions(); }
 
     function getForm() {
         if (!$this->_form)
