@@ -1582,7 +1582,13 @@ class Ticket {
             //Set attachments if emailing.
             $attachments =($cfg->emailAttachments() && $attachments)?$this->getAttachments($respId,'R'):array();
             //TODO: setup  5 param (options... e.g mid trackable on replies)
-            $email->send($this->getEmail(), $msg['subj'], $msg['body'], $attachments);
+            
+            $options = array(
+                        'msgid' => $respId,
+                        'ticket_id' => $this->getId()
+                        );
+            
+            $email->send($this->getEmail(), $msg['subj'], $msg['body'], $attachments, $options);
         }
 
         return $respId;
@@ -1934,6 +1940,25 @@ class Ticket {
             list($id)=db_fetch_row($res);
 
         return $id;
+    }
+    
+    function getLastEmailMessageId($tid) {
+        if(!$tid)
+            return 0;
+
+        $sql='SELECT email_mid '
+             .' FROM '.TICKET_THREAD_TABLE.' msg '
+             .' INNER JOIN '.TICKET_EMAIL_INFO_TABLE.' emsg ON (msg.id = emsg.message_id) '
+             .' WHERE msg.ticket_id='.db_input($tid)
+             ."   AND msg.thread_type = 'M'"
+             .' ORDER BY msg.created DESC LIMIT 1';
+             
+        $mid=0;
+        
+        if(($res=db_query($sql)) && db_num_rows($res))
+            list($mid)=db_fetch_row($res);
+
+        return $mid;
     }
 
     function getOpenTicketsByEmail($email){
