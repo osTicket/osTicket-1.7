@@ -495,25 +495,27 @@ class Staff {
 
     function updateTeams($teams) {
 
-	if($teams) {
-	    foreach($teams as $k=>$id) {
-		$sql='INSERT IGNORE INTO '.TEAM_MEMBER_TABLE.' SET updated=NOW() '
-		    .' ,staff_id='.db_input($this->getId()).', team_id='.db_input($id);
-		db_query($sql);
-	    }
-	}
-	$sql='DELETE FROM '.TEAM_MEMBER_TABLE.' WHERE staff_id='.db_input($this->getId());
-	if($teams)
-	    $sql.=' AND team_id NOT IN('.implode(',', $teams).')';
-	
-	db_query($sql);
+        if($teams) {
+            foreach($teams as $k=>$id) {
+                $sql='INSERT IGNORE INTO '.TEAM_MEMBER_TABLE.' SET updated=NOW() '
+                    .' ,staff_id='.db_input($this->getId()).', team_id='.db_input($id);
+                db_query($sql);
+            }
+        }
+
+        $sql='DELETE FROM '.TEAM_MEMBER_TABLE.' WHERE staff_id='.db_input($this->getId());
+        if($teams)
+            $sql.=' AND team_id NOT IN('.implode(',', db_input($teams)).')';
+        
+        db_query($sql);
 
 	return true;
     }
 
     function update($vars, &$errors) {
-	if(!$this->save($this->getId(), $vars, $errors))
-	    return false;
+
+        if(!$this->save($this->getId(), $vars, $errors))
+            return false;
 
 	$this->updateTeams($vars['teams']);
 	$this->reload();
