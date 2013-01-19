@@ -192,6 +192,7 @@ DROP TABLE IF EXISTS `%TABLE_PREFIX%dynamic_form_section`;
 CREATE TABLE `%TABLE_PREFIX%dynamic_form` (
     `id` int(11) unsigned NOT NULL auto_increment,
     `title` varchar(255) NOT NULL,
+    `instructions` varchar(512),
     `notes` text,
     `created` datetime NOT NULL,
     `updated` datetime NOT NULL,
@@ -215,6 +216,39 @@ CREATE TABLE `%TABLE_PREFIX%dynamic_form_field` (
     `updated` datetime NOT NULL,
     PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
+
+-- Create a default form to mimic the previous default form of osTicket < 1.7.1
+INSERT INTO `%TABLE_PREFIX%dynamic_form_section` SET
+    `id` = 1, `title` = 'User Information', `created` = NOW(),
+    `updated` = NOW();
+INSERT INTO `%TABLE_PREFIX%dynamic_form_section` SET
+    `id` = 2, `title` = 'Ticket Details', `created` = NOW(),
+    `updated` = NOW();
+
+INSERT INTO `%TABLE_PREFIX%dynamic_formset` SET
+    `id` = 1, `title` = 'Default', `created` = NOW(), `updated` = NOW();
+
+INSERT INTO `%TABLE_PREFIX%dynamic_formset_sections` SET
+    `formset_id` = 1, `section_id` = 1, `sort` = 10;
+INSERT INTO `%TABLE_PREFIX%dynamic_formset_sections` SET
+    `formset_id` = 1, `section_id` = 2, `sort` = 20;
+
+INSERT INTO `%TABLE_PREFIX%dynamic_form_field` SET
+    `section_id` = 1, `type` = 'text', `label` = 'Email Address',
+    `required` = 1, `configuration` = '{"size":40,"validator":"email"}',
+    `name` = 'email', `sort` = 10, `created` = NOW(), `updated` = NOW();
+INSERT INTO `%TABLE_PREFIX%dynamic_form_field` SET
+    `section_id` = 1, `type` = 'text', `label` = 'Full Name',
+    `required` = 1, `configuration` = '{"size":40}',
+    `name` = 'name', `sort` = 20, `created` = NOW(), `updated` = NOW();
+INSERT INTO `%TABLE_PREFIX%dynamic_form_field` SET
+    `section_id` = 1, `type` = 'phone', `label` = 'Phone Number',
+    `name` = 'phone', `sort` = 30, `created` = NOW(), `updated` = NOW();
+
+INSERT INTO `%TABLE_PREFIX%dynamic_form_field` SET
+    `section_id` = 2, `type` = 'text', `label` = 'Subject',
+    `required` = 1, `configuration` = '{"hint":"Issue Summary"}',
+    `name` = 'subject', `sort` = 10, `created` = NOW(), `updated` = NOW();
 
 DROP TABLE IF EXISTS `%TABLE_PREFIX%dynamic_form_entry`;
 CREATE TABLE `%TABLE_PREFIX%dynamic_form_entry` (
@@ -667,11 +701,6 @@ CREATE TABLE `%TABLE_PREFIX%ticket` (
   `topic_id` int(10) unsigned NOT NULL default '0',
   `staff_id` int(10) unsigned NOT NULL default '0',
   `team_id` int(10) unsigned NOT NULL default '0',
-  `email` varchar(120) NOT NULL default '',
-  `name` varchar(32) NOT NULL default '',
-  `subject` varchar(64) NOT NULL default '[no subject]',
-  `phone` varchar(16) default NULL,
-  `phone_ext` varchar(8) default NULL,
   `ip_address` varchar(64) NOT NULL default '',
   `status` enum('open','closed') NOT NULL default 'open',
   `source` enum('Web','Email','Phone','API','Other') NOT NULL default
@@ -686,7 +715,6 @@ CREATE TABLE `%TABLE_PREFIX%ticket` (
   `created` datetime NOT NULL,
   `updated` datetime NOT NULL,
   PRIMARY KEY  (`ticket_id`),
-  UNIQUE KEY `email_extid` (`ticketID`,`email`),
   KEY `dept_id` (`dept_id`),
   KEY `staff_id` (`staff_id`),
   KEY `team_id` (`staff_id`),
