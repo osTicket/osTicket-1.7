@@ -1062,15 +1062,28 @@ class DatetimeField extends DynamicFormField {
     function getConfigurationOptions() {
         return array(
             'time' => new BooleanField(array(
-                'id'=>1, 'label'=>'Time', 'required'=>false, 'default'=>false)),
+                'id'=>1, 'label'=>'Time', 'required'=>false, 'default'=>false,
+                'configuration'=>array(
+                    'hint'=>'Show time selection with date picker'))),
             'gmt' => new BooleanField(array(
-                'id'=>2, 'label'=>'Timezone Aware', 'required'=>false, 'default'=>true)),
+                'id'=>2, 'label'=>'Timezone Aware', 'required'=>false,
+                'default'=>true, 'configuration'=>array(
+                    'hint'=>"Show date/time relative to user's timezone"))),
             'min' => new DatetimeField(array(
                 'id'=>3, 'label'=>'Earliest', 'required'=>false,
-                'default'=>null)),
+                'default'=>null, 'configuration'=>array(
+                    'hint'=>'Earliest date selectable'))),
             'max' => new DatetimeField(array(
                 'id'=>4, 'label'=>'Latest', 'required'=>false,
-                'default'=>null))
+                'default'=>null)),
+            'future' => new BooleanField(array(
+                'id'=>5, 'label'=>'Allow Future Dates', 'required'=>false,
+                'default'=>true, 'configuration'=>array(
+                    'hint'=>'Allow entries into the future'))),
+            'hint' => new TextareaField(array(
+                'id'=>6, 'label'=>'Help Text', 'required'=>false, 'default'=>'',
+                'configuration'=>
+                    array('rows'=>2, 'hint'=>'Help text shown with the field')))
         );
     }
 
@@ -1412,6 +1425,8 @@ class DatetimePickerWidget extends Widget {
                         echo "minDate: new Date({$config['min']}000),";
                     if ($config['max'])
                         echo "maxDate: new Date({$config['max']}000),";
+                    elseif (!$config['future'])
+                        echo "maxDate: new Date().getTime(),";
                     ?>
                     numberOfMonths: 2,
                     showButtonPanel: true,
@@ -1425,6 +1440,10 @@ class DatetimePickerWidget extends Widget {
             // TODO: Add time picker -- requires time picker or selection with
             //       Misc::timeDropdown
             echo '&nbsp;' . Misc::timeDropdown($hr, $min, $this->name . ':time');
+        if ($config['hint']) { ?>
+            <em style="color:gray;display:inline-block"><?php
+                echo Format::htmlchars($config['hint']); ?></em>
+        <?php }
     }
 
     /**
