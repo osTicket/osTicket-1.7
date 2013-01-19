@@ -435,6 +435,7 @@ class DynamicFormField extends VerySimpleModel {
         }
         if (count($errors) === 0)
             $this->set('configuration', JsonDataEncoder::encode($config));
+        $this->set('hint', $_POST['hint']);
         return count($errors) === 0;
     }
     
@@ -483,7 +484,7 @@ class DynamicFormField extends VerySimpleModel {
         // Don't really delete form fields as that will screw up the data
         // model. Instead, just drop the association with the form section
         // which will give the appearance of deletion. Not deleting means
-        // that the field will continue to exist of form entries it may
+        // that the field will continue to exist on form entries it may
         // already have answers on, but since it isn't associated with the
         // form section, it won't be available for new form submittals.
         $this->set('section_id', 0);
@@ -906,10 +907,6 @@ class TextboxField extends DynamicFormField {
                 'id'=>3, 'label'=>'Validator', 'required'=>false, 'default'=>'',
                 'choices' => array('phone'=>'Phone Number','email'=>'Email Address',
                     'ip'=>'IP Address', 'number'=>'Number', ''=>'None'))),
-            'hint' => new TextareaField(array(
-                'id'=>4, 'label'=>'Help Text', 'required'=>false, 'default'=>'',
-                'configuration'=>
-                    array('rows'=>2, 'hint'=>'Help text shown with the field')))
         );
     }
 
@@ -987,10 +984,10 @@ class BooleanField extends DynamicFormField {
 
     function getConfigurationOptions() {
         return array(
-            'hint' => new TextareaField(array(
-                'id'=>1, 'label'=>'Help Text', 'required'=>false, 'default'=>'',
-                'configuration'=>
-                    array('rows'=>2, 'hint'=>'Help text shown with the field')))
+            'desc' => new TextareaField(array(
+                'id'=>1, 'label'=>'Description', 'required'=>false, 'default'=>'',
+                'hint'=>'Text shown inline with the widget',
+                'configuration'=>array('rows'=>2)))
         );
     }
 
@@ -1016,10 +1013,6 @@ class ChoiceField extends DynamicFormField {
         return array(
             'choices'  =>  new TextareaField(array(
                 'id'=>1, 'label'=>'Choices', 'required'=>false, 'default'=>'')),
-            'hint' => new TextareaField(array(
-                'id'=>2, 'label'=>'Help Text', 'required'=>false, 'default'=>'',
-                'configuration'=>
-                    array('rows'=>2, 'hint'=>'Help text shown with the field')))
         );
     }
 }
@@ -1064,26 +1057,21 @@ class DatetimeField extends DynamicFormField {
             'time' => new BooleanField(array(
                 'id'=>1, 'label'=>'Time', 'required'=>false, 'default'=>false,
                 'configuration'=>array(
-                    'hint'=>'Show time selection with date picker'))),
+                    'desc'=>'Show time selection with date picker'))),
             'gmt' => new BooleanField(array(
                 'id'=>2, 'label'=>'Timezone Aware', 'required'=>false,
-                'default'=>true, 'configuration'=>array(
-                    'hint'=>"Show date/time relative to user's timezone"))),
+                'configuration'=>array(
+                    'desc'=>"Show date/time relative to user's timezone"))),
             'min' => new DatetimeField(array(
                 'id'=>3, 'label'=>'Earliest', 'required'=>false,
-                'default'=>null, 'configuration'=>array(
-                    'hint'=>'Earliest date selectable'))),
+                'hint'=>'Earliest date selectable')),
             'max' => new DatetimeField(array(
                 'id'=>4, 'label'=>'Latest', 'required'=>false,
                 'default'=>null)),
             'future' => new BooleanField(array(
                 'id'=>5, 'label'=>'Allow Future Dates', 'required'=>false,
                 'default'=>true, 'configuration'=>array(
-                    'hint'=>'Allow entries into the future'))),
-            'hint' => new TextareaField(array(
-                'id'=>6, 'label'=>'Help Text', 'required'=>false, 'default'=>'',
-                'configuration'=>
-                    array('rows'=>2, 'hint'=>'Help text shown with the field')))
+                    'desc'=>'Allow entries into the future'))),
         );
     }
 
@@ -1165,12 +1153,8 @@ class SelectionField extends DynamicFormField {
                 'id'=>1, 'label'=>'Widget', 'required'=>false,
                 'default'=>false,
                 'choices'=>array(false=>'Drop Down', true=>'Typeahead'),
-                'configuration'=>array('hint'=>'Typeahead will work better for large lists'))),
-            'hint' => new TextareaField(array(
-                'id'=>2, 'label'=>'Help Text', 'required'=>false, 'default'=>'',
-                'configuration'=>
-                    array('rows'=>2, 'hint'=>'Help text shown with the field')))
-            );
+                'hint'=>'Typeahead will work better for large lists')),
+        );
     }
 }
 
@@ -1209,11 +1193,6 @@ class TextboxWidget extends Widget {
             <?php echo $size . " " . $maxlength; ?>
             name="<?php echo $this->name; ?>"
             value="<?php echo Format::htmlchars($this->value); ?>"/>
-        <?php
-        if ($config['hint']) { ?>
-            <br /><em style="color:gray;display:inline-block"><?php
-                echo Format::htmlchars($config['hint']); ?></em>
-        <?php } ?>
         </span>
         <?php
     }
@@ -1234,11 +1213,6 @@ class TextareaWidget extends Widget {
             name="<?php echo $this->name; ?>"><?php
                 echo Format::htmlchars($this->value);
             ?></textarea>
-        <?php
-        if ($config['hint']) { ?>
-            <br /><em style="color:gray;display:inline-block"><?php
-                echo Format::htmlchars($config['hint']); ?></em>
-        <?php } ?>
         </span>
         <?php
     }
@@ -1286,11 +1260,7 @@ class ChoicesWidget extends Widget {
                 <?php if ($this->value == $key) echo 'selected="selected"';
                 ?>><?php echo $name; ?></option>
             <?php } ?>
-        </select> <?php
-        if ($config['hint']) { ?>
-            <br /><em style="color:gray;display:inline-block"><?php
-                echo Format::htmlchars($config['hint']); ?></em>
-        <?php } ?>
+        </select>
         </span>
         <?php
     }
@@ -1355,11 +1325,6 @@ class SelectionWidget extends ChoicesWidget {
             });
         });
         </script>
-        <?php
-        if ($config['hint']) { ?>
-            <br /><em style="color:gray;display:inline-block"><?php
-                echo Format::htmlchars($config['hint']); ?></em>
-        <?php } ?>
         </span>
         <?php
     }
@@ -1387,9 +1352,9 @@ class CheckboxWidget extends Widget {
             if ($this->value) echo 'checked="checked"'; ?> value="<?php
             echo $this->field->get('id'); ?>"/>
         <?php
-        if ($config['hint']) { ?>
+        if ($config['desc']) { ?>
             <em style="display:inline-block"><?php
-                echo Format::htmlchars($config['hint']); ?></em>
+                echo Format::htmlchars($config['desc']); ?></em>
         <?php }
     }
 
@@ -1440,10 +1405,6 @@ class DatetimePickerWidget extends Widget {
             // TODO: Add time picker -- requires time picker or selection with
             //       Misc::timeDropdown
             echo '&nbsp;' . Misc::timeDropdown($hr, $min, $this->name . ':time');
-        if ($config['hint']) { ?>
-            <em style="color:gray;display:inline-block"><?php
-                echo Format::htmlchars($config['hint']); ?></em>
-        <?php }
     }
 
     /**

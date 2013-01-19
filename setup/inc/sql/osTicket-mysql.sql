@@ -212,6 +212,7 @@ CREATE TABLE `%TABLE_PREFIX%dynamic_form_field` (
     `configurable` tinyint(1) NOT NULL DEFAULT 0,
     `configuration` text,
     `sort` int(11) unsigned NOT NULL,
+    `hint` varchar(512),
     `created` datetime NOT NULL,
     `updated` datetime NOT NULL,
     PRIMARY KEY (`id`)
@@ -235,11 +236,11 @@ INSERT INTO `%TABLE_PREFIX%dynamic_formset_sections` SET
 
 INSERT INTO `%TABLE_PREFIX%dynamic_form_field` SET
     `section_id` = 1, `type` = 'text', `label` = 'Email Address',
-    `required` = 1, `configuration` = '{"size":40,"validator":"email"}',
+    `required` = 1, `configuration` = '{"size":40,"length":40,"validator":"email"}',
     `name` = 'email', `sort` = 10, `created` = NOW(), `updated` = NOW();
 INSERT INTO `%TABLE_PREFIX%dynamic_form_field` SET
     `section_id` = 1, `type` = 'text', `label` = 'Full Name',
-    `required` = 1, `configuration` = '{"size":40}',
+    `required` = 1, `configuration` = '{"size":40,"length":40}',
     `name` = 'name', `sort` = 20, `created` = NOW(), `updated` = NOW();
 INSERT INTO `%TABLE_PREFIX%dynamic_form_field` SET
     `section_id` = 1, `type` = 'phone', `label` = 'Phone Number',
@@ -247,7 +248,8 @@ INSERT INTO `%TABLE_PREFIX%dynamic_form_field` SET
 
 INSERT INTO `%TABLE_PREFIX%dynamic_form_field` SET
     `section_id` = 2, `type` = 'text', `label` = 'Subject',
-    `required` = 1, `configuration` = '{"hint":"Issue Summary"}',
+    `hint` = 'Issue summary', `required` = 1,
+    `configuration` = '{"size":40,"length":50}',
     `name` = 'subject', `sort` = 10, `created` = NOW(), `updated` = NOW();
 
 DROP TABLE IF EXISTS `%TABLE_PREFIX%dynamic_form_entry`;
