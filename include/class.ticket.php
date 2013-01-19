@@ -727,7 +727,7 @@ class Ticket {
         global $cfg;
         # XXX Should the SLA be overwritten if it was originally set via an
         #     email filter? This method doesn't consider such a case
-        if ($trump !== null) {
+        if ($trump && is_numeric($trump)) {
             $slaId = $trump;
         } elseif ($this->getDept() && $this->getDept()->getSLAId()) {
             $slaId = $this->getDept()->getSLAId();
@@ -1969,10 +1969,10 @@ class Ticket {
             .' WHERE (ticket.staff_id='.db_input($staff->getId());
 
         if(($teams=$staff->getTeams()))
-            $sql.=' OR ticket.team_id IN('.implode(',', array_filter($teams)).')';
+            $sql.=' OR ticket.team_id IN('.implode(',', db_input(array_filter($teams))).')';
 
         if(!$staff->showAssignedOnly() && ($depts=$staff->getDepts())) //Staff with limited access just see Assigned tickets.
-            $sql.=' OR ticket.dept_id IN('.implode(',', $depts).') ';
+            $sql.=' OR ticket.dept_id IN('.implode(',', db_input($depts)).') ';
 
         $sql.=')';
 
@@ -2119,7 +2119,9 @@ class Ticket {
                 $vars['teamId'] = $topic->getTeamId();
 
             //set default sla.
-            if(!isset($vars['slaId']) && $topic->getSLAId())
+            if(isset($vars['slaId']))
+                $vars['slaId'] = $vars['slaId']?$vars['slaId']:$cfg->getDefaultSLAId();
+            elseif($topic && $topic->getSLAId())
                 $vars['slaId'] = $topic->getSLAId();
 
         }elseif($vars['emailId'] && !$vars['deptId'] && ($email=Email::lookup($vars['emailId']))) { //Emailed Tickets
