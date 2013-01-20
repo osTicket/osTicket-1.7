@@ -18,7 +18,7 @@ if($_POST) {
                 $form->save();
             foreach ($form->getFields() as $field) {
                 $id = $field->get('id');
-                if ($field->get('editable') && $_POST["delete-$id"] == 'on') {
+                if ($_POST["delete-$id"] == 'on') {
                     $field->delete();
                     continue;
                 }
@@ -26,10 +26,8 @@ if($_POST) {
                     if (isset($_POST["$f-$id"]))
                         $field->set($f, $_POST["$f-$id"]);
                 # TODO: make sure all help topics still have all required fields
-                if ($field->get('editable')) {
-                    $field->set('required', $_POST["required-$id"] == 'on' ?  1 : 0);
-                    $field->set('private', $_POST["private-$id"] == 'on' ?  1 : 0);
-                }
+                $field->set('required', $_POST["required-$id"] == 'on' ?  1 : 0);
+                $field->set('private', $_POST["private-$id"] == 'on' ?  1 : 0);
                 # Core fields are forced required and public
                 if (in_array($field->get('name'), $required)) {
                     $field->set('required', 1);

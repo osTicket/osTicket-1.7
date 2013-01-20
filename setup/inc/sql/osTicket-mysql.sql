@@ -208,8 +208,6 @@ CREATE TABLE `%TABLE_PREFIX%dynamic_form_field` (
     `required` tinyint(1) NOT NULL DEFAULT 0,
     `private` tinyint(1) NOT NULL DEFAULT 0,
     `name` varchar(64) NOT NULL,
-    `editable` tinyint(1) NOT NULL DEFAULT 1,
-    `configurable` tinyint(1) NOT NULL DEFAULT 0,
     `configuration` text,
     `sort` int(11) unsigned NOT NULL,
     `hint` varchar(512),
