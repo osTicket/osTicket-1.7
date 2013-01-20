@@ -59,9 +59,18 @@ $info=Format::htmlchars(($errors && $_POST)?$_POST:$info);
     </table>
     <table class="form_table" width="940" border="0" cellspacing="0" cellpadding="2">
     <thead>
+    <?php if ($list) {
+        $page = ($_GET['p'] && is_numeric($_GET['p'])) ? $_GET['p'] : 1;
+        $count = $list->getItemCount();
+        $pageNav = new Pagenate($count, $page, PAGE_LIMIT);
+        $pageNav->setURL('dynamic-list.php', 'id='.urlencode($_REQUEST['id']));
+        $showing=$pageNav->showing().' list items';
+        ?>
+    <?php }
+    ?>
         <tr>
             <th colspan="4">
-                <em>List items</em>
+                <em><?php echo $showing; ?></em>
             </th>
         </tr>
         <tr>
@@ -72,8 +81,9 @@ $info=Format::htmlchars(($errors && $_POST)?$_POST:$info);
         </tr>
     </thead>
     <tbody>
-    <?php if ($list) foreach ($list->getItems() as $i) { 
-        $id = $i->get('id'); ?>
+        <?php if ($list)
+        foreach ($list->getItems($pageNav->getLimit(), $pageNav->getStart()) as $i) { 
+            $id = $i->get('id'); ?>
         <tr>
             <td>
                 <input type="checkbox" name="delete-<?php echo $id; ?>"/>
@@ -96,6 +106,10 @@ $info=Format::htmlchars(($errors && $_POST)?$_POST:$info);
     <?php } ?>
     </tbody>
     </table>
+<?php
+if ($count) //Show options..
+    echo '<div>&nbsp;Page:'.$pageNav->getPageLinks().'&nbsp;</div>';
+?>
 <p style="padding-left:225px;">
     <input type="submit" name="submit" value="<?php echo $submit_text; ?>">
     <input type="reset"  name="reset"  value="Reset">

@@ -6,12 +6,11 @@
 <div class="clear"></div>
 
 <?php
-$page = 1;
-$pagesize = 25;
-$start = ($page-1)*$pagesize;
+$page = ($_GET['p'] && is_numeric($_GET['p'])) ? $_GET['p'] : 1;
 $count = DynamicFormSection::count();
-$end = min($start+$pagesize, $count);
-$showing = sprintf("Showing %s - %s of %s", $start+1, $end, $count);
+$pageNav = new Pagenate($count, $page, PAGE_LIMIT);
+$pageNav->setURL('dynamic-form-sections.php');
+$showing=$pageNav->showing().' form sections';
 ?>
 
 <table class="list" border="0" cellspacing="1" cellpadding="0" width="940">
@@ -24,7 +23,8 @@ $showing = sprintf("Showing %s - %s of %s", $start+1, $end, $count);
         </tr>
     </thead>
     <tbody>
-    <?php foreach (DynamicFormSection::all() as $form) { ?>
+    <?php foreach (DynamicFormSection::all('title',
+                $pageNav->getLimit(), $pageNav->getStart()) as $form) { ?>
         <tr>
             <td/>
             <td><a href="?id=<?php echo $form->get('id'); ?>"><?php echo $form->get('title'); ?></a></td>
@@ -34,3 +34,7 @@ $showing = sprintf("Showing %s - %s of %s", $start+1, $end, $count);
     ?>
     </tbody>
 </table>
+<?php
+if ($count) //Show options..
+    echo '<div>&nbsp;Page:'.$pageNav->getPageLinks().'&nbsp;</div>';
+?>

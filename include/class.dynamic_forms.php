@@ -42,8 +42,8 @@ class VerySimpleModel {
             $this->set($field, $value);
     }
 
-    function all($class, $table, $sort=false) {
-        return self::find($class, $table, false, $sort);
+    function all($class, $table, $sort=false, $limit=false, $offset=false) {
+        return self::find($class, $table, false, $sort, $limit, $offset);
     }
 
     function _get_joins_and_field($class, $field) {
@@ -234,7 +234,7 @@ class DynamicFormSection extends VerySimpleModel {
         return DynamicFormEntry::create(array('section_id'=>$this->get('id')));
     }
 
-    function all($sort='title') {
+    function all($sort='title', $limit=false, $offset=false) {
         return parent::all(get_class(), DYNAMIC_FORM_SEC_TABLE, $sort);
     }
 
@@ -242,9 +242,9 @@ class DynamicFormSection extends VerySimpleModel {
         return parent::count(get_class(), DYNAMIC_FORM_SEC_TABLE, $where);
     }
 
-    function find($where, $sort='title') {
+    function find($where, $sort='title', $limit=false, $offset=false) {
         return parent::find(get_class(), DYNAMIC_FORM_SEC_TABLE, $where,
-            $sort);
+            $sort, $limit, $offset);
     }
 
     function lookup($id) {
@@ -714,8 +714,9 @@ class DynamicFormset extends VerySimpleModel {
         return count($this->_errors) === 0;
     }
 
-    function all($sort='title') {
-        return parent::all(get_class(), DYNAMIC_FORMSET_TABLE, $sort);
+    function all($sort='title', $limit=false, $offset=false) {
+        return parent::all(get_class(), DYNAMIC_FORMSET_TABLE, $sort,
+                $limit, $offset);
     }
 
     function find($where, $sort='sort') {
@@ -820,16 +821,21 @@ class DynamicList extends VerySimpleModel {
             return $this->get('name') . 's';
     }
 
-    function getItems() {
+    function getItems($limit=false, $offset=false) {
         if (!$this->_items) {
             $this->_items = DynamicListItem::find(array('list_id'=>$this->get('id')),
-                $this->getListOrderBy());
+                $this->getListOrderBy(), $limit, $false);
         }
         return $this->_items;
     }
 
-    function all($sort='name') {
-        return parent::all(get_class(), DYNAMIC_LIST_TABLE, $sort);
+    function getItemCount() {
+        return DynamicListItem::count(array('list_id'=>$this->get('id')));
+    }
+
+    function all($sort='name', $limit=false, $offset=false) {
+        return parent::all(get_class(), DYNAMIC_LIST_TABLE, $sort, $limit,
+                $offset);
     }
 
     function count($where=false) {
@@ -869,9 +875,13 @@ class DynamicListItem extends VerySimpleModel {
             array('id'=>$id));
     }
 
-    function find($where, $sort=false) {
+    function find($where, $sort=false, $limit=false, $offset=false) {
         return parent::find(get_class(), DYNAMIC_LIST_ITEM_TABLE, $where,
-            $sort);
+            $sort, $limit, $offset);
+    }
+
+    function count($where=false) {
+        return parent::count(get_class(), DYNAMIC_LIST_ITEM_TABLE, $where);
     }
 
     function save() {
