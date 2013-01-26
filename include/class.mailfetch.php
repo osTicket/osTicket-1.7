@@ -244,9 +244,17 @@ class MailFetcher {
         $header=array('name'  =>@$sender->personal,
                       'email' =>(strtolower($sender->mailbox).'@'.$sender->host),
                       'subject'=>@$headerinfo->subject,
-                      'mid'    =>$headerinfo->message_id
+                      'mid'    =>$headerinfo->message_id,
+                      'inReplyTo'    =>$headerinfo->in_reply_to,
+                      'references'    =>$headerinfo->references
                       );
-
+							 
+        // TODO: Handle Microsoft specific Thread-Topic and Thread-Index headers.
+        //if(!($rawheaderinfo=imap_fetchheader($this->mbox, $mid))) {
+        //  ... do something ...
+        //  return $header;
+		//}
+        
         return $header;
     }
 
@@ -413,6 +421,8 @@ class MailFetcher {
         $var['emailId']=$emailId?$emailId:$ost->getConfig()->getDefaultEmailId(); //ok to default?
         $var['name']=$var['name']?$var['name']:$var['email']; //No name? use email
         $var['mid']=$mailinfo['mid'];
+        $var['inReplyTo']=$mailinfo['inReplyTo'];
+        $var['references']=$mailinfo['references'];
 
         if(!$var['message']) //An email with just attachments can have empty body.
             $var['message'] = '(EMPTY)';
@@ -422,8 +432,17 @@ class MailFetcher {
        
         $ticket=null;
         $newticket=true;
-        //Check the subject line for possible ID.
-        if($var['subject'] && preg_match ("[[#][0-9]{1,10}]", $var['subject'], $regs)) {
+        
+        //Check the "In-Reply-To" mail header to retrieve the original message
+        if ($var['inReplyTo'] && ($tid = Ticket::getIdByMessageId($var['inReplyTo'], $var['email']))) {
+            $ticket=new Ticket($tid);
+        
+        // If none found, check the "references" header
+        } elseif ($var['references'] && ($tid = Ticket::getIdByMessageId($var['references'], $var['email']))) {
+            $ticket=new Ticket($tid);
+        
+        // As last resort, check the subject line for possible ID.
+        } elseif (!$ticket && $var['subject'] && preg_match ("[[#][0-9]{1,10}]", $var['subject'], $regs)) {
             $tid=trim(preg_replace("/[^0-9]/", "", $regs[0]));
             //Allow mismatched emails?? For now NO.
             if(!($ticket=Ticket::lookupByExtId($tid)) || strcasecmp($ticket->getEmail(), $var['email']))

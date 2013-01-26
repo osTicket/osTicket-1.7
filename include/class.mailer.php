@@ -108,7 +108,14 @@ class Mailer {
                 'Message-ID' => $messageId,
                 'X-Mailer' =>'osTicket Mailer'
                );
-
+               
+        // Set In-Reply-To and References email headers to the latest email message when receiving the ticket_id.
+        if ($options && $options['ticket_id'] && ($ticket_mid = Ticket::getLastEmailMessageId($options['ticket_id']))) {
+            $headers+= array(
+                    'In-Reply-To' => $ticket_mid,
+                    'References' => $ticket_mid);
+        }
+        
         //Set bulk/auto-response headers.
         if($options && ($options['autoreply'] or $options['bulk'])) {
             $headers+= array(
@@ -122,6 +129,15 @@ class Mailer {
                 $headers+= array('Precedence' => 'auto_reply');
         }
 
+        // Save outgoing mail information when receiving the message id (usually used to keep track of replies when fetching emails)
+        if ($options && $options['msgid']) {
+            $sql='INSERT INTO '.TICKET_EMAIL_INFO_TABLE
+                .' SET message_id='.db_input($options['msgid'])
+                .', email_mid='.db_input($messageId)
+                .', headers='.db_input(print_r($headers, true));
+            db_query($sql);
+        }
+        
         $mime = new Mail_mime();
         $mime->setTXTBody($body);
         //XXX: Attachments
