@@ -48,8 +48,8 @@
             <?php }else{ ?>
             | <a href="index.php"><?= _('Staff Panel') ?></a>
             <?php } ?>
-            | <a href="profile.php"><?=_('My Preferences')?></a>
-            | <a href="logout.php?auth=<?php echo md5($ost->getCSRFToken().SECRET_SALT.session_id()); ?>"><?=_('Log Out')?></a>
+            | <a href="profile.php"><?= _('My Preferences')?></a>
+            | <a href="logout.php?auth=<?php echo $ost->getLinkToken(); ?>"><?= _('Log Out') ?></a>
         </p>
     </div>
     <ul id="nav">
