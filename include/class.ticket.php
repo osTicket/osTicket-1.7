@@ -135,7 +135,8 @@ class Ticket {
         $this->_answers = array();
         foreach (DynamicFormEntry::forTicket($this->getId()) as $form)
             foreach ($form->getAnswers() as $answer)
-                $this->_answers[$answer->getField()->get('name')] = $answer->getValue();
+                $this->_answers[$answer->getField()->get('name')] =
+                    $answer->toString();
         
         //Reset the sub classes (initiated ondemand)...good for reloads.
         $this->staff = null;
