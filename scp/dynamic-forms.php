@@ -24,7 +24,7 @@ if($_POST) {
                     $deleted[] = $form;
                     continue;
                 }
-                foreach (array('sort','section_id','title','instructions') as $f)
+                foreach (array('sort','section_id') as $f)
                     if (isset($_POST["$f-$id"]))
                         $form->set($f, $_POST["$f-$id"]);
                 if ($form->isValid())
@@ -45,9 +45,7 @@ if($_POST) {
             $form = DynamicFormsetSections::create(array(
                 'formset_id'=>$group->get('id'),
                 'sort'=>$_POST["sort-new-$i"],
-                'title'=>$_POST["title-new-$i"],
                 'section_id'=>$_POST["section_id-new-$i"],
-                'instructions'=>$_POST["instructions-new-$i"]
             ));
             // XXX: Use an instrumented list to make this better
             $group->_forms[] = $form;

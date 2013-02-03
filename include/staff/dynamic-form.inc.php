@@ -47,8 +47,7 @@ $info=Format::htmlchars(($errors && $_POST)?$_POST:$info);
         </tr>
     </tbody>
     <tbody>
-       <tr><th>Delete | Sort</th><th>Title</th><th>Form
-       name</th><th>Instructions</th></tr>
+       <tr><th>Delete | Sort</th><th>Form name</th></tr>
        <?php if ($group) foreach ($group->getForms() as $formatt) { 
            $form = $formatt->getForm();
            $errors = $formatt->errors(); ?>
@@ -59,9 +58,6 @@ $info=Format::htmlchars(($errors && $_POST)?$_POST:$info);
                     <font class="error"><?php
                         if ($errors['sort']) echo '<br/>'; echo $errors['sort'];
                     ?></font>
-               </td><td>
-                   <input type="text" name="title-<?php echo $formatt->get('id'); ?>" size="16"
-                       value="<?php echo $formatt->get('title'); ?>"/>
                </td><td>
                    <select name="section_id-<?php echo $formatt->get('id'); ?>">
                    <?php foreach (DynamicFormSection::all() as $form) { ?>
@@ -76,9 +72,6 @@ $info=Format::htmlchars(($errors && $_POST)?$_POST:$info);
                         href="dynamic-form-sections.php?id=<?php
                             echo $formatt->get('section_id'); ?>"><i class="icon-edit"></i
                             > Edit</a>
-               </td><td>
-                   <textarea rows="2" cols="40" name="instructions-<?php echo $formatt->get('id'); ?>"
-                        ><?php echo $formatt->get('instructions') ?></textarea>
                </td>
            </tr>
        <?php } 
@@ -86,8 +79,6 @@ $info=Format::htmlchars(($errors && $_POST)?$_POST:$info);
        <tr>
            <td><em>add</em>
                <input type="text" name="sort-new-<?php echo $i; ?>" size="4"/>
-           </td><td>
-               <input type="text" name="title-new-<?php echo $i; ?>" size="16"/>
            </td><td>
                <select name="section_id-new-<?php echo $i; ?>">
                    <option value="0">&mdash; Select Form &mdash;</option>
@@ -97,8 +88,6 @@ $info=Format::htmlchars(($errors && $_POST)?$_POST:$info);
                    </option>
                <?php } ?>
                </select>
-            </td><td><textarea rows="2" cols="40"
-                name="instructions-new-<?php echo $i; ?>"></textarea>
             </td>
         </tr>
         <?php } ?>
