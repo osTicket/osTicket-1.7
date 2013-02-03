@@ -708,9 +708,6 @@ class DynamicFormset extends VerySimpleModel {
 
     function isValid() {
         if (!$this->_errors) $this->_errors = array();
-        foreach (array('name', 'email', 'subject') as $f)
-            if (!$this->hasField($f))
-                $this->_errors["err"] = "Form set must define the '$f' field";
         return count($this->_errors) === 0;
     }
 

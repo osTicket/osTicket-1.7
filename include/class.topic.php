@@ -196,6 +196,12 @@ class Topic {
 
         if (!$vars['formset-id'])
             $errors['formset-id'] = 'You must select a form';
+        else {
+            $group=DynamicFormset::lookup($vars['formset-id']);
+            foreach (array('name', 'email', 'subject') as $f)
+                    if (!$group->hasField($f))
+                        $errors['formset-id']="Form set must define the '$f' field";
+        }
 
         if(!$vars['dept_id'])
             $errors['dept_id']='You must select a department';
