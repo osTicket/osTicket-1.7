@@ -54,7 +54,15 @@ if($_POST) {
         }
 
         if ($group->isValid()) {
+            $new = $group->__new__;
             $group->save();
+            // Add the correct 'id' value to the attached form sections
+            if ($new) {
+                foreach ($group->getForms() as $form) {
+                    $form->set('formset_id', $group->get('id'));
+                    $form->save();
+                }
+            }
             // Now delete requested items
             foreach ($deleted as $form)
                 $form->delete();
