@@ -154,8 +154,10 @@ class VerySimpleModel {
         }
         if (db_affected_rows(db_query($sql)) != 1)
             return false;
-        if ($this->__new__ && count($pk) == 1)
+        if ($this->__new__ && count($pk) == 1) {
             $this->ht[$pk[0]] = db_insert_id();
+            $this->__new__ = false;
+        }
         # Refetch row from database
         # XXX: Too much voodoo
         if ($refetch)
