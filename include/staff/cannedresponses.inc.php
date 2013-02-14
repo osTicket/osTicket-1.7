@@ -86,8 +86,8 @@ else
                 <td>
                     <a href="canned.php?id=<?php echo $row['canned_id']; ?>"><?php echo Format::truncate($row['title'],200); echo "&nbsp;$files"; ?></a>&nbsp;
                 </td>
-                <td><?php echo $row['isenabled']?'Active':'<b>'._('Disabled').'</b>'; ?></td>
-                <td><?php echo $row['department']?$row['department']:'-- '._('All Departments').' --'; ?></td>
+                <td><?php echo $row['isenabled']?_('Active'):'<b>'._('Disabled').'</b>'; ?></td>
+                <td><?php echo $row['department']?$row['department']:'&mdash; '._('All Departments').' &mdash;'; ?></td>
                 <td>&nbsp;<?php echo Format::db_datetime($row['updated']); ?></td>
             </tr>
             <?php
