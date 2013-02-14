@@ -15,14 +15,14 @@
     vim: expandtab sw=4 ts=4 sts=4:
 **********************************************************************/
 require('secure.inc.php');
-if(!is_object($thisclient) || !$thisclient->isValid()) die('Access denied'); //Double check again.
+if(!is_object($thisclient) || !$thisclient->isValid()) die(_('Access denied')); //Double check again.
 require_once(INCLUDE_DIR.'class.ticket.php');
 $ticket=null;
 if($_REQUEST['id']) {
     if(!($ticket=Ticket::lookupByExtId($_REQUEST['id']))) {
-        $errors['err']='Unknown or invalid ticket ID.';
+        $errors['err']=_('Unknown or invalid ticket ID.');
     }elseif(!$ticket->checkClientAccess($thisclient)) {
-        $errors['err']='Unknown or invalid ticket ID.'; //Using generic message on purpose!
+        $errors['err']=_('Unknown or invalid ticket ID.'); //Using generic message on purpose!
         $ticket=null;
     }
 }
@@ -33,10 +33,10 @@ if($_POST && is_object($ticket) && $ticket->getId()):
     switch(strtolower($_POST['a'])){
     case 'reply':
         if(!$ticket->checkClientAccess($thisclient)) //double check perm again!
-            $errors['err']='Access Denied. Possibly invalid ticket ID';
+            $errors['err']=_('Access Denied. Possibly invalid ticket ID');
 
         if(!$_POST['message'])
-            $errors['message']='Message required';
+            $errors['message']=_('Message required');
 
         if(!$errors) {
             //Everything checked out...do the magic.
@@ -47,17 +47,17 @@ if($_POST && is_object($ticket) && $ticket->getId()):
                     $ost->validateFileUploads($files); //Validator sets errors - if any.
                     $ticket->uploadAttachments($files, $msgid, 'M');
                 }
-                $msg='Message Posted Successfully';
+                $msg=_('Message Posted Successfully');
             } else {
-                $errors['err']='Unable to post the message. Try again';
+                $errors['err']=_('Unable to post the message. Try again');
             }
 
         } elseif(!$errors['err']) {
-            $errors['err']='Error(s) occurred. Please try again';
+            $errors['err']=_('Error(s) occurred. Please try again');
         }
         break;
     default:
-        $errors['err']='Unknown action';
+        $errors['err']=_('Unknown action');
     }
     $ticket->reload();
 endif;

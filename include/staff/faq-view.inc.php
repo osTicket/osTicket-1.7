@@ -1,17 +1,17 @@
 <?php
-if(!defined('OSTSTAFFINC') || !$faq || !$thisstaff) die('Access Denied');
+if(!defined('OSTSTAFFINC') || !$faq || !$thisstaff) die(_('Access Denied'));
 
 $category=$faq->getCategory();
 
 ?>
-<h2>Frequently Asked Questions</h2>
+<h2><?= _('Frequently Asked Questions')?></h2>
 <div id="breadcrumbs">
-    <a href="kb.php">All Categories</a> 
+    <a href="kb.php"><?= _('All Categories')?></a> 
     &raquo; <a href="kb.php?cid=<?php echo $category->getId(); ?>"><?php echo $category->getName(); ?></a>
-    <span class="faded">(<?php echo $category->isPublic()?'Public':'Internal'; ?>)</span>
+    <span class="faded">(<?php echo $category->isPublic()?_('Public'):_('Internal'); ?>)</span>
 </div>
 <div style="width:700;padding-top:2px; float:left;">
-<strong style="font-size:16px;"><?php echo $faq->getQuestion() ?></strong>&nbsp;&nbsp;<span class="faded"><?php echo $faq->isPublished()?'(Published)':''; ?></span>
+<strong style="font-size:16px;"><?php echo $faq->getQuestion() ?></strong>&nbsp;&nbsp;<span class="faded"><?php echo $faq->isPublished()?_('(Published)'):''; ?></span>
 </div>
 <div style="float:right;text-align:right;padding-top:5px;padding-right:5px;">
 <?php
@@ -27,12 +27,12 @@ if($thisstaff->canManageFAQ()) {
 <?php echo Format::safe_html($faq->getAnswer()); ?>
 </p>
 <p>
- <div><span class="faded"><b>Attachments:</b></span> <?php echo $faq->getAttachmentsLinks(); ?></div>
- <div><span class="faded"><b>Help Topics:</b></span> 
+ <div><span class="faded"><b><?= _('Attachments')?>:</b></span> <?php echo $faq->getAttachmentsLinks(); ?></div>
+ <div><span class="faded"><b><?= _('Help Topics')?>:</b></span> 
     <?php echo ($topics=$faq->getHelpTopics())?implode(', ',$topics):' '; ?>
     </div>
 </p>
-<div class="faded">&nbsp;Last updated <?php echo Format::db_daydatetime($category->getUpdateDate()); ?></div>
+<div class="faded">&nbsp;<?= _('Last updated')?> <?php echo Format::db_daydatetime($category->getUpdateDate()); ?></div>
 <hr>
 <?php
 if($thisstaff->canManageFAQ()) {
@@ -44,19 +44,19 @@ if($thisstaff->canManageFAQ()) {
         <input type="hidden" name="id" value="<?php echo  $faq->getId(); ?>">
         <input type="hidden" name="do" value="manage-faq">
         <div>
-            <strong>Options: </strong>
+            <strong><?= _('Options')?>: </strong>
             <select name="a" style="width:200px;">
-                <option value="">Select Action</option>
+                <option value=""><?= _('Select Action')?></option>
                 <?php
                 if($faq->isPublished()) { ?>
-                <option value="unpublish">Unpublish FAQ</option>
+                <option value="unpublish"><?= _('Unpublish FAQ')?></option>
                 <?php
                 }else{ ?>
-                <option value="publish">Publish FAQ</option>
+                <option value="publish"><?= _('Publish FAQ')?></option>
                 <?php
                 } ?>
-                <option value="edit">Edit FAQ</option>
-                <option value="delete">Delete FAQ</option>
+                <option value="edit"><?= _('Edit FAQ')?></option>
+                <option value="delete"><?= _('Delete FAQ')?></option>
             </select>
             &nbsp;&nbsp;<input type="submit" name="submit" value="Go">
         </div>

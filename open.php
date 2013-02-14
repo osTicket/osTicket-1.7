@@ -24,14 +24,14 @@ if($_POST):
         $_POST['email']=$thisclient->getEmail();
     } elseif($cfg->isCaptchaEnabled()) {
         if(!$_POST['captcha'])
-            $errors['captcha']='Enter text shown on the image';
+            $errors['captcha']=_('Enter text shown on the image');
         elseif(strcmp($_SESSION['captcha'],md5($_POST['captcha'])))
-            $errors['captcha']='Invalid - try again!';
+            $errors['captcha']=_('Invalid - try again!');
     }
 
     //Ticket::create...checks for errors..
     if(($ticket=Ticket::create($_POST,$errors,SOURCE))){
-        $msg='Support ticket request created';
+        $msg=_('Support ticket request created');
         //Upload attachments...         
         if($cfg->allowOnlineAttachments()
                 && $_FILES['attachments']
@@ -51,7 +51,7 @@ if($_POST):
         //Thank the user and promise speedy resolution!
         $inc='thankyou.inc.php';
     }else{
-        $errors['err']=$errors['err']?$errors['err']:'Unable to create a ticket. Please correct errors below and try again!';
+        $errors['err']=$errors['err']?$errors['err']:_('Unable to create a ticket. Please correct errors below and try again!');
     }
 endif;
 

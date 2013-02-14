@@ -1,5 +1,5 @@
 <?php
-if(!defined('OSTADMININC') || !$thisstaff->isAdmin()) die('Access Denied');
+if(!defined('OSTADMININC') || !$thisstaff->isAdmin()) die(_('Access Denied'));
 
 $qstr='';
 $sql='SELECT topic.* '
@@ -42,16 +42,16 @@ $qstr.='&order='.($order=='DESC'?'ASC':'DESC');
 $query="$sql GROUP BY topic.topic_id ORDER BY $order_by LIMIT ".$pageNav->getStart().",".$pageNav->getLimit();
 $res=db_query($query);
 if($res && ($num=db_num_rows($res)))
-    $showing=$pageNav->showing().' help topics';
+    $showing=$pageNav->showing().' '._('help topics');
 else
-    $showing='No help topic found!';
+    $showing=_('No help topic found!');
 
 ?>
 <div style="width:700;padding-top:5px; float:left;">
- <h2>Help Topics</h2>
+ <h2><?= _('Help Topics')?></h2>
  </div>
 <div style="float:right;text-align:right;padding-top:5px;padding-right:5px;">
-    <b><a href="helptopics.php?a=add" class="Icon newHelpTopic">Add New Help Topic</a></b></div>
+    <b><a href="helptopics.php?a=add" class="Icon newHelpTopic"><?= _('Add New Help Topic')?></a></b></div>
 <div class="clear"></div>
 <form action="helptopics.php" method="POST" name="topics">
  <?php csrf_token(); ?>
@@ -62,12 +62,12 @@ else
     <thead>
         <tr>
             <th width="7">&nbsp;</th>        
-            <th width="320"><a <?php echo $name_sort; ?> href="helptopics.php?<?php echo $qstr; ?>&sort=name">Help Topic</a></th>
-            <th width="80"><a  <?php echo $status_sort; ?> href="helptopics.php?<?php echo $qstr; ?>&sort=status">Status</a></th>
-            <th width="100"><a  <?php echo $type_sort; ?> href="helptopics.php?<?php echo $qstr; ?>&sort=type">Type</a></th>
-            <th width="100"><a  <?php echo $priority_sort; ?> href="helptopics.php?<?php echo $qstr; ?>&sort=priority">Priority</a></th>
-            <th width="200"><a  <?php echo $dept_sort; ?> href="helptopics.php?<?php echo $qstr; ?>&sort=dept">Department</a></th>
-            <th width="150" nowrap><a  <?php echo $updated_sort; ?>href="helptopics.php?<?php echo $qstr; ?>&sort=updated">Last Updated</a></th>
+            <th width="320"><a <?php echo $name_sort; ?> href="helptopics.php?<?php echo $qstr; ?>&sort=name"><?= _('Help Topic')?></a></th>
+            <th width="80"><a  <?php echo $status_sort; ?> href="helptopics.php?<?php echo $qstr; ?>&sort=status"><?= _('Status')?></a></th>
+            <th width="100"><a  <?php echo $type_sort; ?> href="helptopics.php?<?php echo $qstr; ?>&sort=type"><?= _('Type')?></a></th>
+            <th width="100"><a  <?php echo $priority_sort; ?> href="helptopics.php?<?php echo $qstr; ?>&sort=priority"><?= _('Priority')?></a></th>
+            <th width="200"><a  <?php echo $dept_sort; ?> href="helptopics.php?<?php echo $qstr; ?>&sort=dept"><?= _('Department')?></a></th>
+            <th width="150" nowrap><a  <?php echo $updated_sort; ?>href="helptopics.php?<?php echo $qstr; ?>&sort=updated"><?= _('Last Updated')?></a></th>
         </tr>
     </thead>
     <tbody>
@@ -86,9 +86,9 @@ else
                             <?php echo $sel?'checked="checked"':''; ?>>
                 </td>
                 <td><a href="helptopics.php?id=<?php echo $row['topic_id']; ?>"><?php echo $row['name']; ?></a>&nbsp;</td>
-                <td><?php echo $row['isactive']?'Active':'<b>Disabled</b>'; ?></td>
-                <td><?php echo $row['ispublic']?'Public':'<b>Private</b>'; ?></td>
-                <td><?php echo $row['priority']; ?></td>
+                <td><?php echo $row['isactive']?_('Active'):'<b>'._('Disabled').'</b>'; ?></td>
+                <td><?php echo $row['ispublic']?_('Public'):'<b>'._('Private').'</b>'; ?></td>
+                <td><?php echo _($row['priority']); ?></td>
                 <td><a href="departments.php?id=<?php echo $row['dept_id']; ?>"><?php echo $row['department']; ?></a></td>
                 <td>&nbsp;<?php echo Format::db_datetime($row['updated']); ?></td>
             </tr>
@@ -99,12 +99,12 @@ else
      <tr>
         <td colspan="7">
             <?php if($res && $num){ ?>
-            Select:&nbsp;
-            <a id="selectAll" href="#ckb">All</a>&nbsp;&nbsp;
-            <a id="selectNone" href="#ckb">None</a>&nbsp;&nbsp;
-            <a id="selectToggle" href="#ckb">Toggle</a>&nbsp;&nbsp;
+            <?= _('Select')?>:&nbsp;
+            <a id="selectAll" href="#ckb"><?= _('All')?></a>&nbsp;&nbsp;
+            <a id="selectNone" href="#ckb"><?= _('None')?></a>&nbsp;&nbsp;
+            <a id="selectToggle" href="#ckb"><?= _('Toggle')?></a>&nbsp;&nbsp;
             <?php }else{
-                echo 'No help topics found';
+                echo _('No help topics found');
             } ?>
         </td>
      </tr>
@@ -112,12 +112,12 @@ else
 </table>
 <?php
 if($res && $num): //Show options..
-    echo '<div>&nbsp;Page:'.$pageNav->getPageLinks().'&nbsp;</div>';
+    echo '<div>&nbsp;'._('Page').':'.$pageNav->getPageLinks().'&nbsp;</div>';
 ?>
 <p class="centered" id="actions">
-    <input class="button" type="submit" name="enable" value="Enable" >
-    <input class="button" type="submit" name="disable" value="Disable">
-    <input class="button" type="submit" name="delete" value="Delete">
+    <input class="button" type="submit" name="enable" value="<?= _('Enable')?>" >
+    <input class="button" type="submit" name="disable" value="<?= _('Disable')?>">
+    <input class="button" type="submit" name="delete" value="<?= _('Delete')?>">
 </p>
 <?php
 endif;
@@ -125,27 +125,27 @@ endif;
 </form>
 
 <div style="display:none;" class="dialog" id="confirm-action">
-    <h3>Please Confirm</h3>
+    <h3><?= _('Please Confirm')?></h3>
     <a class="close" href="">&times;</a>
     <hr/>
     <p class="confirm-action" style="display:none;" id="enable-confirm">
-        Are you sure want to <b>enable</b> selected help topics?
+        <?= _('Are you sure want to <b>enable</b> selected help topics?')?>
     </p>
     <p class="confirm-action" style="display:none;" id="disable-confirm">
-        Are you sure want to <b>disable</b>  selected help topics?
+        <?= _('Are you sure want to <b>disable</b>  selected help topics?')?>
     </p>
     <p class="confirm-action" style="display:none;" id="delete-confirm">
-        <font color="red"><strong>Are you sure you want to DELETE selected help topics?</strong></font>
-        <br><br>Deleted topics CANNOT be recovered.
+        <font color="red"><strong><?= _('Are you sure you want to DELETE selected help topics?')?></strong></font>
+        <br><br><?= _('Deleted topics CANNOT be recovered.')?>
     </p>
-    <div>Please confirm to continue.</div>
+    <div><?= _('Please confirm to continue.')?></div>
     <hr style="margin-top:1em"/>
     <p class="full-width">
         <span class="buttons" style="float:left">
-            <input type="button" value="No, Cancel" class="close">
+            <input type="button" value="<?= _('No, Cancel')?>" class="close">
         </span>
         <span class="buttons" style="float:right">
-            <input type="button" value="Yes, Do it!" class="confirm">
+            <input type="button" value="<?= _('Yes, Do it!')?>" class="confirm">
         </span>
      </p>
     <div class="clear"></div>

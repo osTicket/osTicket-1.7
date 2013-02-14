@@ -60,6 +60,17 @@ define('PEAR_DIR',INCLUDE_DIR.'pear/');
 ini_set('include_path', './'.PATH_SEPARATOR.INC_DIR.PATH_SEPARATOR.INCLUDE_DIR.PATH_SEPARATOR.PEAR_DIR);
 endif;
 
+#Internationalization variables
+putenv('LC_ALL=' . LANG);
+setlocale(LC_ALL, LANG . '.UTF-8');
+bindtextdomain('i18n', 'i18n');
+bindtextdomain('i18n', '../i18n');
+
+// Choose domain
+textdomain("i18n");
+
+
+
 #required files
 require_once(INCLUDE_DIR.'class.setup.php');
 require_once(INCLUDE_DIR.'class.validator.php');

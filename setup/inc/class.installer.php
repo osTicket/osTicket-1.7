@@ -45,56 +45,65 @@ class Installer extends SetupWizard {
 
         $this->errors=$f=array();
         
-        $f['name']          = array('type'=>'string',   'required'=>1, 'error'=>'Name required');
-        $f['email']         = array('type'=>'email',    'required'=>1, 'error'=>'Valid email required');
-        $f['fname']         = array('type'=>'string',   'required'=>1, 'error'=>'First name required');
-        $f['lname']         = array('type'=>'string',   'required'=>1, 'error'=>'Last name required');
-        $f['admin_email']   = array('type'=>'email',    'required'=>1, 'error'=>'Valid email required');
-        $f['username']      = array('type'=>'username', 'required'=>1, 'error'=>'Username required');
-        $f['passwd']        = array('type'=>'password', 'required'=>1, 'error'=>'Password required');
-        $f['passwd2']       = array('type'=>'string',   'required'=>1, 'error'=>'Confirm password');
-        $f['prefix']        = array('type'=>'string',   'required'=>1, 'error'=>'Table prefix required');
-        $f['dbhost']        = array('type'=>'string',   'required'=>1, 'error'=>'Hostname required');
-        $f['dbname']        = array('type'=>'string',   'required'=>1, 'error'=>'Database name required');
-        $f['dbuser']        = array('type'=>'string',   'required'=>1, 'error'=>'Username required');
-        $f['dbpass']        = array('type'=>'string',   'required'=>1, 'error'=>'password required');
+        $f['name']          = array('type'=>'string',   'required'=>1, 'error'=>_('Name required'));
+        $f['email']         = array('type'=>'email',    'required'=>1, 'error'=>_('Valid email required'));
+        $f['fname']         = array('type'=>'string',   'required'=>1, 'error'=>_('First name required'));
+        $f['lname']         = array('type'=>'string',   'required'=>1, 'error'=>_('Last name required'));
+        $f['admin_email']   = array('type'=>'email',    'required'=>1, 'error'=>_('Valid email required'));
+        $f['username']      = array('type'=>'username', 'required'=>1, 'error'=>_('Username required'));
+        $f['passwd']        = array('type'=>'password', 'required'=>1, 'error'=>_('Password required'));
+        $f['passwd2']       = array('type'=>'string',   'required'=>1, 'error'=>_('Confirm password'));
+        $f['prefix']        = array('type'=>'string',   'required'=>1, 'error'=>_('Table prefix required'));
+        $f['dbhost']        = array('type'=>'string',   'required'=>1, 'error'=>_('Hostname required'));
+        $f['dbname']        = array('type'=>'string',   'required'=>1, 'error'=>_('Database name required'));
+        $f['dbuser']        = array('type'=>'string',   'required'=>1, 'error'=>_('Username required'));
+        $f['dbpass']        = array('type'=>'string',   'required'=>1, 'error'=>_('Password required'));
+
+	//LDAP Verification
+	$ldaprequired = 0;
+	if ($vars['logintype'] == "LDAP") $ldaprequired = 1;
+        $f['ldapfqdn']      = array('type'=>'string',   'required'=>$ldaprequired, 'error'=>_('LDAP FQDN required'));
+        $f['ldapnetbios']   = array('type'=>'string',   'required'=>$ldaprequired, 'error'=>_('NETBIOS name required'));
+        $f['ldapuser']      = array('type'=>'string',   'required'=>$ldaprequired, 'error'=>_('Username required'));
+        $f['ldappw']        = array('type'=>'string',   'required'=>$ldaprequired, 'error'=>_('Password required'));
+        $f['ldapdn']        = array('type'=>'string',   'required'=>$ldaprequired, 'error'=>_('LDAP Search DN required'));
         
 
         if(!Validator::process($f,$vars,$this->errors) && !$this->errors['err'])
-            $this->errors['err']='Missing or invalid data - correct the errors and try again.';
+            $this->errors['err']=_('Missing or invalid data - correct the errors and try again.');
 
 
         //Staff's email can't be same as system emails.
         if($vars['admin_email'] && $vars['email'] && !strcasecmp($vars['admin_email'],$vars['email']))
-            $this->errors['admin_email']='Conflicts with system email above';
+            $this->errors['admin_email']=_('Conflicts with system email above');
         //Admin's pass confirmation. 
         if(!$this->errors && strcasecmp($vars['passwd'],$vars['passwd2']))
-            $this->errors['passwd2']='passwords to not match!';
+            $this->errors['passwd2']=_('passwords to not match!');
         //Check table prefix underscore required at the end!
         if($vars['prefix'] && substr($vars['prefix'], -1)!='_')
-            $this->errors['prefix']='Bad prefix. Must have underscore (_) at the end. e.g \'ost_\'';
+            $this->errors['prefix']=_('Bad prefix. Must have underscore (_) at the end. e.g \'ost_\'');
 
         //Make sure admin username is not very predictable. XXX: feels dirty but necessary 
         if(!$this->errors['username'] && in_array(strtolower($vars['username']),array('admin','admins','username','osticket')))
-            $this->errors['username']='Bad username';
+            $this->errors['username']=_('Bad username');
 
         //MYSQL: Connect to the DB and check the version & database (create database if it doesn't exist!)
         if(!$this->errors) {
             if(!db_connect($vars['dbhost'],$vars['dbuser'],$vars['dbpass']))
-                $this->errors['db']='Unable to connect to MySQL server. Possibly invalid login info.';
+                $this->errors['db']=_('Unable to connect to MySQL server. Possibly invalid login info.');
             elseif(db_version()< $this->getMySQLVersion())
-                $this->errors['db']=sprintf('osTicket requires MySQL %s or better!',$this->getMySQLVersion());
+                $this->errors['db']=sprintf(_('osTicket requires MySQL %s or better!'),$this->getMySQLVersion());
             elseif(!db_select_database($vars['dbname']) && !db_create_database($vars['dbname'])) {
-                $this->errors['dbname']='Database doesn\'t exist';
-                $this->errors['db']='Unable to create the database.';
+                $this->errors['dbname']=_('Database doesn\'t exist');
+                $this->errors['db']=_('Unable to create the database.');
             } elseif(!db_select_database($vars['dbname'])) {
-                $this->errors['dbname']='Unable to select the database';
+                $this->errors['dbname']=_('Unable to select the database');
             } else {
                 //Abort if we have another installation (or table) with same prefix.
                 $sql = 'SELECT * FROM `'.$vars['prefix'].'config` LIMIT 1';
                 if(mysql_query($sql)) {
-                    $this->errors['err'] = 'We have a problem - another installation with same table prefix exists!';
-                    $this->errors['prefix'] = 'Prefix already in-use';
+                    $this->errors['err'] = _('We have a problem - another installation with same table prefix exists!');
+                    $this->errors['prefix'] = _('Prefix already in-use');
                 } else {
                     //Try changing charset and collation of the DB - no bigie if we fail.
                     mysql_query('ALTER DATABASE '.$vars['dbname'].' DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci');
@@ -114,15 +123,15 @@ class Installer extends SetupWizard {
 
         //Last minute checks.
         if(!file_exists($schemaFile))
-            $this->errors['err']='Internal Error - please make sure your download is the latest (#1)';
+            $this->errors['err']=_('Internal Error - please make sure your download is the latest (#1)');
         elseif(!($signature=trim(file_get_contents("$schemaFile.md5"))) || strcasecmp($signature, md5_file($schemaFile)))
-            $this->errors['err']='Unknown or invalid schema signature ('.$signature.' .. '.md5_file($schemaFile).')';
+            $this->errors['err']=_('Unknown or invalid schema signature').' ('.$signature.' .. '.md5_file($schemaFile).')';
         elseif(!file_exists($this->getConfigFile()) || !($configFile=file_get_contents($this->getConfigFile())))
-            $this->errors['err']='Unable to read config file. Permission denied! (#2)';
+            $this->errors['err']=_('Unable to read config file. Permission denied! (#2)');
         elseif(!($fp = @fopen($this->getConfigFile(),'r+')))
-            $this->errors['err']='Unable to open config file for writing. Permission denied! (#3)';
+            $this->errors['err']=_('Unable to open config file for writing. Permission denied! (#3)');
         elseif(!$this->load_sql_file($schemaFile,$vars['prefix'], true, $debug))
-            $this->errors['err']='Error parsing SQL schema! Get help from developers (#4)';
+            $this->errors['err']=_('Error parsing SQL schema! Get help from developers (#4)');
               
         if(!$this->errors) {
             //Create admin user.
@@ -134,7 +143,7 @@ class Installer extends SetupWizard {
                 .', username='.db_input($vars['username'])
                 .', passwd='.db_input(Passwd::hash($vars['passwd']));
             if(!mysql_query($sql) || !($uid=mysql_insert_id()))
-                $this->errors['err']='Unable to create admin user (#6)';
+                $this->errors['err']=_('Unable to create admin user (#6)');
         }
 
         if(!$this->errors) {
@@ -163,8 +172,20 @@ class Installer extends SetupWizard {
         $configFile= str_replace('%CONFIG-DBPASS',$vars['dbpass'],$configFile);
         $configFile= str_replace('%CONFIG-PREFIX',$vars['prefix'],$configFile);
         $configFile= str_replace('%CONFIG-SIRI',Misc::randcode(32),$configFile);
+
+	//LDAP Configuration
+        $configFile= str_replace('%CONFIG-LOGINTYPE',$vars['logintype'],$configFile);
+        $configFile= str_replace('%CONFIG-LDAPFQDN',$vars['ldapfqdn'],$configFile);
+        $configFile= str_replace('%CONFIG-LDAPNETBIOS',$vars['ldapnetbios'],$configFile);
+        $configFile= str_replace('%CONFIG-LDAPUSER',$vars['ldapuser'],$configFile);
+        $configFile= str_replace('%CONFIG-LDAPPW',$vars['ldappw'],$configFile);
+        $configFile= str_replace('%CONFIG-LDAPSEARCHDN',$vars['ldapdn'],$configFile);
+
+	//Language Definition
+        $configFile= str_replace('%CONFIG-LANG',LANG,$configFile);
+
         if(!$fp || !ftruncate($fp,0) || !fwrite($fp,$configFile)) {
-            $this->errors['err']='Unable to write to config file. Permission denied! (#5)';
+            $this->errors['err']=_('Unable to write to config file. Permission denied! (#5)');
             return false;
         }
         @fclose($fp);
@@ -188,7 +209,7 @@ class Installer extends SetupWizard {
             .' ,subject="osTicket Installed!"';
         if(mysql_query($sql) && ($tid=mysql_insert_id())) {
             if(!($msg=file_get_contents(INC_DIR.'msg/installed.txt')))
-                $msg='Congratulations and Thank you for choosing osTicket!';
+                $msg=_('Congratulations and Thank you for choosing osTicket!');
                         
             $sql='INSERT INTO '.PREFIX.'ticket_thread SET created=NOW()'
                 .', source="Web" '
@@ -201,7 +222,7 @@ class Installer extends SetupWizard {
         //TODO: create another personalized ticket and assign to admin??
                     
         //Log a message.
-        $msg="Congratulations osTicket basic installation completed!\n\nThank you for choosing osTicket!";
+        $msg=_("Congratulations osTicket basic installation completed!\n\nThank you for choosing osTicket!");
         $sql='INSERT INTO '.PREFIX.'syslog SET created=NOW(), updated=NOW(), log_type="Debug" '
             .', title="osTicket installed!"'
             .', log='.db_input($msg)

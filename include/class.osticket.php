@@ -113,9 +113,9 @@ class osTicket {
         if(isset($_SERVER['HTTP_X_CSRFTOKEN']) && $this->validateCSRFToken($_SERVER['HTTP_X_CSRFTOKEN']))
             return true;
 
-        $msg=sprintf('Invalid CSRF token [%s] on %s',
+        $msg=sprintf(_('Invalid CSRF token').' [%s] '._('on').' %s',
                 ($_POST[$name].''.$_SERVER['HTTP_X_CSRFTOKEN']), THISPAGE);
-        $this->logWarning('Invalid CSRF Token '.$name, $msg);
+        $this->logWarning(_('Invalid CSRF Token ').$name, $msg);
 
         return false;
     }
@@ -157,13 +157,13 @@ class osTicket {
             if($file['error'] && $file['error']==UPLOAD_ERR_NO_FILE) continue;
 
             if($file['error']) //PHP defined error!
-                $file['error'] = 'File upload error #'.$file['error'];
+                $file['error'] = _('File upload error #').$file['error'];
             elseif(!$file['tmp_name'] || !is_uploaded_file($file['tmp_name']))
-                $file['error'] = 'Invalid or bad upload POST';
+                $file['error'] = _('Invalid or bad upload POST');
             elseif(!$this->isFileTypeAllowed($file))
-                $file['error'] = 'Invalid file type for '.$file['name'];
+                $file['error'] = _('Invalid file type for').' '.$file['name'];
             elseif($file['size']>$this->getConfig()->getMaxFileSize())
-                $file['error'] = sprintf('File (%s) is too big. Maximum of %s allowed',
+                $file['error'] = sprintf(_('File (%s) is too big. Maximum of %s allowed'),
                         $file['name'], Format::file_size($this->getConfig()->getMaxFileSize()));
             
             if($file['error']) $errors++;
@@ -263,7 +263,7 @@ class osTicket {
         if($email) {
             $email->sendAlert($to, $subject, $message);
         } else {//no luck - try the system mail.
-            Email::sendmail($to, $subject, $message, sprintf('"osTicket Alerts"<%s>',$to));
+            Email::sendmail($to, $subject, $message, sprintf(_('"osTicket Alerts"').'<%s>',$to));
         }
 
         //log the alert? Watch out for loops here.

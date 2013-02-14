@@ -16,32 +16,32 @@
 require('admin.inc.php');
 $staff=null;
 if($_REQUEST['id'] && !($staff=Staff::lookup($_REQUEST['id'])))
-    $errors['err']='Unknown or invalid staff ID.';
+    $errors['err']=_('Unknown or invalid staff ID.');
 
 if($_POST){
     switch(strtolower($_POST['do'])){
         case 'update':
             if(!$staff){
-                $errors['err']='Unknown or invalid staff.';
+                $errors['err']=_('Unknown or invalid staff.');
             }elseif($staff->update($_POST,$errors)){
-                $msg='Staff updated successfully';
+                $msg=_('Staff updated successfully');
             }elseif(!$errors['err']){
-                $errors['err']='Unable to update staff. Correct any error(s) below and try again!';
+                $errors['err']=_('Unable to update staff. Correct any error(s) below and try again!');
             }
             break;
         case 'create':
             if(($id=Staff::create($_POST,$errors))){
-                $msg=Format::htmlchars($_POST['name']).' added successfully';
+                $msg=Format::htmlchars($_POST['name']).' '._('added successfully');
                 $_REQUEST['a']=null;
             }elseif(!$errors['err']){
-                $errors['err']='Unable to add staff. Correct any error(s) below and try again.';
+                $errors['err']=_('Unable to add staff. Correct any error(s) below and try again.');
             }
             break;
         case 'mass_process':
             if(!$_POST['ids'] || !is_array($_POST['ids']) || !count($_POST['ids'])) {
-                $errors['err'] = 'You must select at least one staff member.';
+                $errors['err'] = _('You must select at least one staff member.');
             } elseif(in_array($thisstaff->getId(),$_POST['ids'])) {
-                $errors['err'] = 'You can not disable/delete yourself - you could be the only admin!';
+                $errors['err'] = _('You can not disable/delete yourself - you could be the only admin!');
             } else {
                 $count=count($_POST['ids']);
                 switch(strtolower($_POST['a'])) {
@@ -51,11 +51,11 @@ if($_POST){
 
                         if(db_query($sql) && ($num=db_affected_rows())) {
                             if($num==$count)
-                                $msg = 'Selected staff activated';
+                                $msg = _('Selected staff activated');
                             else
-                                $warn = "$num of $count selected staff activated";
+                                $warn = "$num "._("of")." $count "._("selected staff activated");
                         } else {
-                            $errors['err'] = 'Unable to activate selected staff';
+                            $errors['err'] = _('Unable to activate selected staff');
                         }
                         break;
                     case 'disable':
@@ -64,11 +64,11 @@ if($_POST){
 
                         if(db_query($sql) && ($num=db_affected_rows())) {
                             if($num==$count)
-                                $msg = 'Selected staff disabled';
+                                $msg = _('Selected staff disabled');
                             else
-                                $warn = "$num of $count selected staff disabled";
+                                $warn = "$num "._("of")." $count "._("selected staff disabled");
                         } else {
-                            $errors['err'] = 'Unable to disable selected staff';
+                            $errors['err'] = _('Unable to disable selected staff');
                         }
                         break;
                     case 'delete':
@@ -78,20 +78,20 @@ if($_POST){
                         }
 
                         if($i && $i==$count)
-                            $msg = 'Selected staff deleted successfully';
+                            $msg = _('Selected staff deleted successfully');
                         elseif($i>0)
-                            $warn = "$i of $count selected staff deleted";
+                            $warn = "$i "._("of")." $count "._("selected staff deleted");
                         elseif(!$errors['err'])
-                            $errors['err'] = 'Unable to delete selected staff.';
+                            $errors['err'] = _('Unable to delete selected staff.');
                         break;
                     default:
-                        $errors['err'] = 'Unknown action. Get technical help!';
+                        $errors['err'] = _('Unknown action. Get technical help!');
                 }
                     
             }
             break;
         default:
-            $errors['err']='Unknown action/command';
+            $errors['err']=_('Unknown action/command');
             break;
     }
 }

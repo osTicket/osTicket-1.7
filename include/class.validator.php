@@ -38,9 +38,9 @@ class Validator {
         $this->errors=array();
         //Check the input and make sure the fields are specified.
         if(!$source || !is_array($source))
-            $this->errors['err']='Invalid input';
+            $this->errors['err']=_('Invalid input');
         elseif(!$this->fields || !is_array($this->fields))
-            $this->errors['err']='No fields setup';
+            $this->errors['err']=_('No fields setup');
         //Abort on error
         if($this->errors)
             return false;

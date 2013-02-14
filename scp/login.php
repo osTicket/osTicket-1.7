@@ -21,7 +21,7 @@ require_once(INCLUDE_DIR.'class.csrf.php');
 
 $dest = $_SESSION['_staff']['auth']['dest'];
 $msg = $_SESSION['_staff']['auth']['msg'];
-$msg = $msg?$msg:'Authentication Required';
+$msg = $msg?$msg:_('Authentication Required');
 if($_POST) {
     //$_SESSION['_staff']=array(); #Uncomment to disable login strikes.
     if(($user=Staff::login($_POST['username'], $_POST['passwd'], $errors))){

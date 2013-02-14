@@ -346,15 +346,15 @@ class Template {
         $vars['name']=Format::striptags(trim($vars['name']));
 
         if($id && $id!=$vars['id'])
-            $errors['err']='Internal error. Try again';
+            $errors['err']=_('Internal error. Try again');
 
         if(!$vars['name'])
-            $errors['name']='Name required';
+            $errors['name']=_('Name required');
         elseif(($tid=Template::getIdByName($vars['name'])) && $tid!=$id)
-            $errors['name']='Template name already exists';
+            $errors['name']=_('Template name already exists');
 
         if(!$id && (!$vars['tpl_id'] || !($tpl=Template::lookup($vars['tpl_id']))))
-            $errors['tpl_id']='Selection required';
+            $errors['tpl_id']=_('Selection required');
            
         if($errors) return false;
 

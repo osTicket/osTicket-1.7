@@ -59,6 +59,11 @@ form .row { clear: both; padding: 2px 0 0 24px; background: #F7FBFE; height: 24p
 form .row input { background: #fff; height: 22px; padding: 0; line-height: 22px; border: 1px solid #cccccc; }
 form .row label, form .row span { display: block; float: left; width: 150px; line-height: 24px; }
 form .row span { width: 600px; color: #666666; }
+form .ldaprow { clear: both; padding: 2px 0 0 24px; background: #F7FBFE; height: 24px; }
+form .ldaprow input { background: #fff; height: 22px; padding: 0; line-height: 22px; border: 1px solid #cccccc; }
+form .ldaprow label, form .row span { display: block; float: left; width: 150px; line-height: 24px; }
+form .ldaprow span { width: 600px; color: #666666; }
+
 
 .tip_box { display: block; height: 30px; position: absolute; z-index: 1000; }
 

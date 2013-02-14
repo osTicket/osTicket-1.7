@@ -85,134 +85,152 @@ class Staff {
         return $this->getHastable();
     }
 
-    /*compares user password*/
-    function check_passwd($password, $autoupdate=true) {
+    function chk_passwd_db ($password, $autoupdate) {
+          /*bcrypt based password match*/
+          if(Passwd::cmp($password, $this->getPasswd()))
+                return true;
+          //Fall back to MD5
+          if(!$password || strcmp($this->getPasswd(), MD5($password)))
+                return false;
+          //Password is a MD5 hash: rehash it (if enabled) otherwise force passwd change.
+          $sql='UPDATE '.STAFF_TABLE.' SET passwd='.db_input(Passwd::hash($password))
+             .' WHERE staff_id='.db_input($this->getId());
 
-        /*bcrypt based password match*/
-        if(Passwd::cmp($password, $this->getPasswd()))
-            return true;
+          if(!$autoupdate || !db_query($sql))
+                $this->forcePasswdRest();
 
-        //Fall back to MD5
-        if(!$password || strcmp($this->getPasswd(), MD5($password)))
-            return false;
-
-        //Password is a MD5 hash: rehash it (if enabled) otherwise force passwd change.
-        $sql='UPDATE '.STAFF_TABLE.' SET passwd='.db_input(Passwd::hash($password))
-            .' WHERE staff_id='.db_input($this->getId());
-
-        if(!$autoupdate || !db_query($sql))
-            $this->forcePasswdRest();
-
-        return true;
+          return true;
     }
 
+    /*compares user password*/
+    function check_passwd($password, $autoupdate=true) {
+        if (LOGIN_TYPE == 'LDAP') {
+		// Change made for LDAP Auth based on -> http://osticket.com/forums/showthread.php?t=3312
+		$ds=ldap_connect(LDAP_DOMAIN_FQDN) or die(_("Couldn't connect to LDAP!"));
+		if ($ds) {
+			$domain=LDAP_DOMAIN_NETBIOS;
+			$ldapbind = ldap_bind($ds);
+			if (!@ldap_bind( $ds, $domain."\\".$this->getUserName(), $password) ) {
+				// Auth failed! lets try at osTicket database
+				return $this->chk_passwd_db($password, $autoupdate); 
+			} else {
+				// Auth succeeded!
+				return true;
+			}
+		} else {
+			die(_("Couldn't connect to LDAP!"));
+		}
+	} else {
+		return $this->chk_passwd_db($password, $autoupdate);
+	}
+   }
+
     function cmp_passwd($password) {
-        return $this->check_passwd($password, false);
+	return $this->check_passwd($password, false);
     }
 
     function forcePasswdRest() {
-        return db_query('UPDATE '.STAFF_TABLE.' SET change_passwd=1 WHERE staff_id='.db_input($this->getId()));
+	return db_query('UPDATE '.STAFF_TABLE.' SET change_passwd=1 WHERE staff_id='.db_input($this->getId()));
     }
 
     /* check if passwd reset is due. */
     function isPasswdResetDue() {
-        global $cfg;
-        return ($cfg && $cfg->getPasswdResetPeriod() 
-                    && $this->ht['passwd_change']>($cfg->getPasswdResetPeriod()*30*24*60*60));
+	global $cfg;
+	return ($cfg && $cfg->getPasswdResetPeriod() 
+		    && $this->ht['passwd_change']>($cfg->getPasswdResetPeriod()*30*24*60*60));
     }
 
     function isPasswdChangeDue() {
-        return $this->isPasswdResetDue();
+	return $this->isPasswdResetDue();
     }
 
     function getTZoffset() {
-        return $this->ht['tz_offset'];
+	return $this->ht['tz_offset'];
     }
 
     function observeDaylight() {
-        return $this->ht['daylight_saving']?true:false;
+	return $this->ht['daylight_saving']?true:false;
     }
 
     function getRefreshRate() {
-        return $this->ht['auto_refresh_rate'];
+	return $this->ht['auto_refresh_rate'];
     }
 
     function getPageLimit() {
-        return $this->ht['max_page_size'];
+	return $this->ht['max_page_size'];
     }
 
     function getId() {
-        return $this->id;
+	return $this->id;
     }
 
     function getEmail() {
-        return $this->ht['email'];
+	return $this->ht['email'];
     }
 
     function getUserName() {
-        return $this->ht['username'];
+	return $this->ht['username'];
     }
 
     function getPasswd() {
-        return $this->ht['passwd'];
+	return $this->ht['passwd'];
     }
 
     function getName() {
-        return ucfirst($this->ht['firstname'].' '.$this->ht['lastname']);
+	return ucfirst($this->ht['firstname'].' '.$this->ht['lastname']);
     }
-        
+		
     function getFirstName() {
-        return $this->ht['firstname'];
+	return $this->ht['firstname'];
     }
-        
+		
     function getLastName() {
-        return $this->ht['lastname'];
+	return $this->ht['lastname'];
     }
-    
+	    
     function getSignature() {
-        return $this->ht['signature'];
+	return $this->ht['signature'];
     }
 
     function getDefaultSignatureType() {
-        return $this->ht['default_signature_type'];
+	return $this->ht['default_signature_type'];
     }
 
     function getDefaultPaperSize() {
-        return $this->ht['default_paper_size'];
+	return $this->ht['default_paper_size'];
     }
 
     function forcePasswdChange() {
-        return ($this->ht['change_passwd']);
+	return ($this->ht['change_passwd']);
     }
 
     function getDepartments() {
+	if($this->departments)
+	    return $this->departments;
 
-        if($this->departments)
-            return $this->departments;
+	//Departments the staff is "allowed" to access...
+	// based on the group they belong to + user's primary dept + user's managed depts.
+	$sql='SELECT DISTINCT d.dept_id FROM '.STAFF_TABLE.' s '
+	    .' LEFT JOIN '.GROUP_DEPT_TABLE.' g ON(s.group_id=g.group_id) '
+	    .' INNER JOIN '.DEPT_TABLE.' d ON(d.dept_id=s.dept_id OR d.manager_id=s.staff_id OR d.dept_id=g.dept_id) '
+	    .' WHERE s.staff_id='.db_input($this->getId());
 
-        //Departments the staff is "allowed" to access...
-        // based on the group they belong to + user's primary dept + user's managed depts.
-        $sql='SELECT DISTINCT d.dept_id FROM '.STAFF_TABLE.' s '
-            .' LEFT JOIN '.GROUP_DEPT_TABLE.' g ON(s.group_id=g.group_id) '
-            .' INNER JOIN '.DEPT_TABLE.' d ON(d.dept_id=s.dept_id OR d.manager_id=s.staff_id OR d.dept_id=g.dept_id) '
-            .' WHERE s.staff_id='.db_input($this->getId());
+	$depts = array();
+	if(($res=db_query($sql)) && db_num_rows($res)) {
+	    while(list($id)=db_fetch_row($res))
+		$depts[] = $id;
+	} else { //Neptune help us! (fallback)
+	    $depts = array_merge($this->getGroup()->getDepartments(), array($this->getDeptId()));
+	}
 
-        $depts = array();
-        if(($res=db_query($sql)) && db_num_rows($res)) {
-            while(list($id)=db_fetch_row($res))
-                $depts[] = $id;
-        } else { //Neptune help us! (fallback)
-            $depts = array_merge($this->getGroup()->getDepartments(), array($this->getDeptId()));
-        }
-
-        $this->departments = array_filter(array_unique($depts));
+	$this->departments = array_filter(array_unique($depts));
 
 
-        return $this->departments;
+	return $this->departments;
     }
 
     function getDepts() {
-        return $this->getDepartments();
+	return $this->getDepartments();
     }
 
     function getManagedDepartments() {
@@ -223,92 +241,92 @@ class Staff {
     }
      
     function getGroupId() {
-        return $this->ht['group_id'];
+	return $this->ht['group_id'];
     }
 
     function getGroup() {
      
-        if(!$this->group && $this->getGroupId())
-            $this->group = Group::lookup($this->getGroupId());
+	if(!$this->group && $this->getGroupId())
+	    $this->group = Group::lookup($this->getGroupId());
 
-        return $this->group;
+	return $this->group;
     }
 
     function getDeptId() {
-        return $this->ht['dept_id'];
+	return $this->ht['dept_id'];
     }
 
     function getDept() {
 
-        if(!$this->dept && $this->getDeptId())
-            $this->dept= Dept::lookup($this->getDeptId());
+	if(!$this->dept && $this->getDeptId())
+	    $this->dept= Dept::lookup($this->getDeptId());
 
-        return $this->dept;
+	return $this->dept;
     }
 
 
     function isManager() {
-        return (($dept=$this->getDept()) && $dept->getManagerId()==$this->getId());
+	return (($dept=$this->getDept()) && $dept->getManagerId()==$this->getId());
     }
 
     function isStaff() {
-        return TRUE;
+	return TRUE;
     }
 
     function isGroupActive() {
-        return ($this->ht['group_enabled']);
+	return ($this->ht['group_enabled']);
     }
 
     function isactive() {
-        return ($this->ht['isactive']);
+	return ($this->ht['isactive']);
     }
 
     function isVisible() {
-         return ($this->ht['isvisible']);
+	 return ($this->ht['isvisible']);
     }
-        
+		
     function onVacation() {
-        return ($this->ht['onvacation']);
+	return ($this->ht['onvacation']);
     }
 
     function isAvailable() {
-        return ($this->isactive() && $this->isGroupActive() && !$this->onVacation());
+	return ($this->isactive() && $this->isGroupActive() && !$this->onVacation());
     }
 
     function showAssignedOnly() {
-        return ($this->ht['assigned_only']);
+	return ($this->ht['assigned_only']);
     }
 
     function isAccessLimited() {
-        return $this->showAssignedOnly();
+	return $this->showAssignedOnly();
     }
-  
+	  
     function isAdmin() {
-        return ($this->ht['isadmin']);
+	return ($this->ht['isadmin']);
     }
 
     function isTeamMember($teamId) {
-        return ($teamId && in_array($teamId, $this->getTeams()));
+	return ($teamId && in_array($teamId, $this->getTeams()));
     }
 
     function canAccessDept($deptId) {
-        return ($deptId && in_array($deptId, $this->getDepts()) && !$this->isAccessLimited());
+	return ($deptId && in_array($deptId, $this->getDepts()) && !$this->isAccessLimited());
     }
 
     function canCreateTickets() {
-        return ($this->ht['can_create_tickets']);
+	return ($this->ht['can_create_tickets']);
     }
 
     function canEditTickets() {
-        return ($this->ht['can_edit_tickets']);
+	return ($this->ht['can_edit_tickets']);
     }
-
+    
     function canDeleteTickets() {
-        return ($this->ht['can_delete_tickets']);
+	return ($this->ht['can_delete_tickets']);
     }
-   
+	   
     function canCloseTickets() {
-        return ($this->ht['can_close_tickets']);
+	return ($this->ht['can_close_tickets']);
     }
 
     function canPostReply() {
@@ -320,158 +338,158 @@ class Staff {
     }
 
     function canAssignTickets() {
-        return ($this->ht['can_assign_tickets']);
+	return ($this->ht['can_assign_tickets']);
     }
 
     function canTransferTickets() {
-        return ($this->ht['can_transfer_tickets']);
+	return ($this->ht['can_transfer_tickets']);
     }
 
     function canBanEmails() {
-        return ($this->ht['can_ban_emails']);
+	return ($this->ht['can_ban_emails']);
     }
-  
+	  
     function canManageTickets() {
-        return ($this->isAdmin() 
-                 || $this->canDeleteTickets() 
-                    || $this->canCloseTickets());
+	return ($this->isAdmin() 
+		 || $this->canDeleteTickets() 
+		    || $this->canCloseTickets());
     }
 
     function canManagePremade() {
-        return ($this->ht['can_manage_premade']);
+	return ($this->ht['can_manage_premade']);
     }
 
     function canManageCannedResponses() {
-        return $this->canManagePremade();
+	return $this->canManagePremade();
     }
 
     function canManageFAQ() {
-        return ($this->ht['can_manage_faq']);
+	return ($this->ht['can_manage_faq']);
     }
 
     function canManageFAQs() {
-        return $this->canManageFAQ();
+	return $this->canManageFAQ();
     }
 
     function showAssignedTickets() {
-        return ($this->ht['show_assigned_tickets']
-                && ($this->isAdmin() || $this->isManager()));
+	return ($this->ht['show_assigned_tickets']
+		&& ($this->isAdmin() || $this->isManager()));
     }
 
     function getTeams() {
-        
-        if(!$this->teams) {
-            $sql='SELECT team_id FROM '.TEAM_MEMBER_TABLE
-                .' WHERE staff_id='.db_input($this->getId());
-            if(($res=db_query($sql)) && db_num_rows($res))
-                while(list($id)=db_fetch_row($res))
-                    $this->teams[] = $id;
-        }
+		
+	if(!$this->teams) {
+	    $sql='SELECT team_id FROM '.TEAM_MEMBER_TABLE
+		.' WHERE staff_id='.db_input($this->getId());
+	    if(($res=db_query($sql)) && db_num_rows($res))
+		while(list($id)=db_fetch_row($res))
+		    $this->teams[] = $id;
+	}
 
-        return $this->teams;
+	return $this->teams;
     }
-    /* stats */
 
+    /* stats */
     function resetStats() {
-        $this->stats = array();
+	$this->stats = array();
     }
 
     /* returns staff's quick stats - used on nav menu...etc && warnings */
     function getTicketsStats() {
 
-        if(!$this->stats['tickets'])
-            $this->stats['tickets'] = Ticket::getStaffStats($this);
+	if(!$this->stats['tickets'])
+	    $this->stats['tickets'] = Ticket::getStaffStats($this);
 
-        return  $this->stats['tickets'];
+	return  $this->stats['tickets'];
     }
 
     function getNumAssignedTickets() {
-        return ($stats=$this->getTicketsStats())?$stats['assigned']:0;
+	return ($stats=$this->getTicketsStats())?$stats['assigned']:0;
     }
 
     function getNumClosedTickets() {
-        return ($stats=$this->getTicketsStats())?$stats['closed']:0;
+	return ($stats=$this->getTicketsStats())?$stats['closed']:0;
     }
 
     //Staff profile update...unfortunately we have to separate it from admin update to avoid potential issues
     function updateProfile($vars, &$errors) {
 
-        $vars['firstname']=Format::striptags($vars['firstname']);
-        $vars['lastname']=Format::striptags($vars['lastname']);
-        $vars['signature']=Format::striptags($vars['signature']);
+	$vars['firstname']=Format::striptags($vars['firstname']);
+	$vars['lastname']=Format::striptags($vars['lastname']);
+	$vars['signature']=Format::striptags($vars['signature']);
 
-        if($this->getId()!=$vars['id'])
-            $errors['err']='Internal Error';
+	if($this->getId()!=$vars['id'])
+	    $errors['err']=_('Internal Error');
 
-        if(!$vars['firstname'])
-            $errors['firstname']='First name required';
-        
-        if(!$vars['lastname'])
-            $errors['lastname']='Last name required';
+	if(!$vars['firstname'])
+	    $errors['firstname']=_('First name required');
+	
+	if(!$vars['lastname'])
+	    $errors['lastname']=_('Last name required');
 
-        if(!$vars['email'] || !Validator::is_email($vars['email']))
-            $errors['email']='Valid email required';
-        elseif(Email::getIdByEmail($vars['email']))
-            $errors['email']='Already in-use as system email';
-        elseif(($uid=Staff::getIdByEmail($vars['email'])) && $uid!=$this->getId())
-            $errors['email']='Email already in-use by another staff member';
+	if(!$vars['email'] || !Validator::is_email($vars['email']))
+	    $errors['email']=_('Valid email required');
+	elseif(Email::getIdByEmail($vars['email']))
+	    $errors['email']=_('Already in-use as system email');
+	elseif(($uid=Staff::getIdByEmail($vars['email'])) && $uid!=$this->getId())
+	    $errors['email']=_('Email already in-use by another staff member');
 
-        if($vars['phone'] && !Validator::is_phone($vars['phone']))
-            $errors['phone']='Valid number required';
+	if($vars['phone'] && !Validator::is_phone($vars['phone']))
+	    $errors['phone']=_('Valid number required');
 
-        if($vars['mobile'] && !Validator::is_phone($vars['mobile']))
-            $errors['mobile']='Valid number required';
+	if($vars['mobile'] && !Validator::is_phone($vars['mobile']))
+	    $errors['mobile']=_('Valid number required');
 
-        if($vars['passwd1'] || $vars['passwd2'] || $vars['cpasswd']) {
+	if($vars['passwd1'] || $vars['passwd2'] || $vars['cpasswd']) {
 
-            if(!$vars['passwd1'])
-                $errors['passwd1']='New password required';
-            elseif($vars['passwd1'] && strlen($vars['passwd1'])<6)
-                $errors['passwd1']='Must be at least 6 characters';
-            elseif($vars['passwd1'] && strcmp($vars['passwd1'], $vars['passwd2']))
-                $errors['passwd2']='Password(s) do not match';
-            
-            if(!$vars['cpasswd'])
-                $errors['cpasswd']='Current password required';
-            elseif(!$this->cmp_passwd($vars['cpasswd']))
-                $errors['cpasswd']='Invalid current password!';
-            elseif(!strcasecmp($vars['passwd1'], $vars['cpasswd']))
-                $errors['passwd1']='New password MUST be different from the current password!';
-        }
+	    if(!$vars['passwd1'])
+		$errors['passwd1']=_('New password required');
+	    elseif($vars['passwd1'] && strlen($vars['passwd1'])<6)
+		$errors['passwd1']=_('Must be at least 6 characters');
+	    elseif($vars['passwd1'] && strcmp($vars['passwd1'], $vars['passwd2']))
+		$errors['passwd2']=_('Password(s) do not match');
+	    
+	    if(!$vars['cpasswd'])
+		$errors['cpasswd']=_('Current password required');
+	    elseif(!$this->cmp_passwd($vars['cpasswd']))
+		$errors['cpasswd']=_('Invalid current password!');
+	    elseif(!strcasecmp($vars['passwd1'], $vars['cpasswd']))
+		$errors['passwd1']=_('New password MUST be different from the current password!');
+	}
 
-        if(!$vars['timezone_id'])
-            $errors['timezone_id']='Time zone required';
+	if(!$vars['timezone_id'])
+	    $errors['timezone_id']=_('Time zone required');
 
-        if($vars['default_signature_type']=='mine' && !$vars['signature'])
-            $errors['default_signature_type'] = "You don't have a signature";
+	if($vars['default_signature_type']=='mine' && !$vars['signature'])
+	    $errors['default_signature_type'] = _("You don't have a signature");
 
-        if($errors) return false;
+	if($errors) return false;
 
-        $sql='UPDATE '.STAFF_TABLE.' SET updated=NOW() '
-            .' ,firstname='.db_input($vars['firstname'])
-            .' ,lastname='.db_input($vars['lastname'])
-            .' ,email='.db_input($vars['email'])
-            .' ,phone="'.db_input(Format::phone($vars['phone']),false).'"'
-            .' ,phone_ext='.db_input($vars['phone_ext'])
-            .' ,mobile="'.db_input(Format::phone($vars['mobile']),false).'"'
-            .' ,signature='.db_input($vars['signature'])
-            .' ,timezone_id='.db_input($vars['timezone_id'])
-            .' ,daylight_saving='.db_input(isset($vars['daylight_saving'])?1:0)
-            .' ,show_assigned_tickets='.db_input(isset($vars['show_assigned_tickets'])?1:0)
-            .' ,max_page_size='.db_input($vars['max_page_size'])
-            .' ,auto_refresh_rate='.db_input($vars['auto_refresh_rate'])
-            .' ,default_signature_type='.db_input($vars['default_signature_type'])
-            .' ,default_paper_size='.db_input($vars['default_paper_size']);
+	$sql='UPDATE '.STAFF_TABLE.' SET updated=NOW() '
+	    .' ,firstname='.db_input($vars['firstname'])
+	    .' ,lastname='.db_input($vars['lastname'])
+	    .' ,email='.db_input($vars['email'])
+	    .' ,phone="'.db_input(Format::phone($vars['phone']),false).'"'
+	    .' ,phone_ext='.db_input($vars['phone_ext'])
+	    .' ,mobile="'.db_input(Format::phone($vars['mobile']),false).'"'
+	    .' ,signature='.db_input($vars['signature'])
+	    .' ,timezone_id='.db_input($vars['timezone_id'])
+	    .' ,daylight_saving='.db_input(isset($vars['daylight_saving'])?1:0)
+	    .' ,show_assigned_tickets='.db_input(isset($vars['show_assigned_tickets'])?1:0)
+	    .' ,max_page_size='.db_input($vars['max_page_size'])
+	    .' ,auto_refresh_rate='.db_input($vars['auto_refresh_rate'])
+	    .' ,default_signature_type='.db_input($vars['default_signature_type'])
+	    .' ,default_paper_size='.db_input($vars['default_paper_size']);
 
 
-        if($vars['passwd1'])
-            $sql.=' ,change_passwd=0, passwdreset=NOW(), passwd='.db_input(Passwd::hash($vars['passwd1']));
+	if($vars['passwd1'])
+	    $sql.=' ,change_passwd=0, passwdreset=NOW(), passwd='.db_input(Passwd::hash($vars['passwd1']));
 
-        $sql.=' WHERE staff_id='.db_input($this->getId());
+	$sql.=' WHERE staff_id='.db_input($this->getId());
 
-        //echo $sql;
+	//echo $sql;
 
-        return (db_query($sql));
+	return (db_query($sql));
     }
 
 
@@ -491,7 +509,7 @@ class Staff {
         
         db_query($sql);
 
-        return true;
+	return true;
     }
 
     function update($vars, &$errors) {
@@ -499,53 +517,53 @@ class Staff {
         if(!$this->save($this->getId(), $vars, $errors))
             return false;
 
-        $this->updateTeams($vars['teams']);
-        $this->reload();
-        
-        return true;
+	$this->updateTeams($vars['teams']);
+	$this->reload();
+	
+	return true;
     }
 
     function delete() {
-        global $thisstaff;
+	global $thisstaff;
 
-        if(!$thisstaff || !($id=$this->getId()) || $id==$thisstaff->getId())
-            return 0;
+	if(!$thisstaff || !($id=$this->getId()) || $id==$thisstaff->getId())
+	    return 0;
 
-        $sql='DELETE FROM '.STAFF_TABLE.' WHERE staff_id='.db_input($id).' LIMIT 1';
-        if(db_query($sql) && ($num=db_affected_rows())) {
-            // DO SOME HOUSE CLEANING
-            //Move remove any ticket assignments...TODO: send alert to Dept. manager?
-            db_query('UPDATE '.TICKET_TABLE.' SET staff_id=0 WHERE status=\'open\' AND staff_id='.db_input($id));
-            //Cleanup Team membership table.
-            db_query('DELETE FROM '.TEAM_MEMBER_TABLE.' WHERE staff_id='.db_input($id));
-        }
+	$sql='DELETE FROM '.STAFF_TABLE.' WHERE staff_id='.db_input($id).' LIMIT 1';
+	if(db_query($sql) && ($num=db_affected_rows())) {
+	    // DO SOME HOUSE CLEANING
+	    //Move remove any ticket assignments...TODO: send alert to Dept. manager?
+	    db_query('UPDATE '.TICKET_TABLE.' SET staff_id=0 WHERE status=\'open\' AND staff_id='.db_input($id));
+	    //Cleanup Team membership table.
+	    db_query('DELETE FROM '.TEAM_MEMBER_TABLE.' WHERE staff_id='.db_input($id));
+	}
 
-        return $num;
+	return $num;
     }
 
-    /**** Static functions ********/
+    /*** Static functions ********/
     function getStaffMembers($availableonly=false) {
 
-        $sql='SELECT s.staff_id,CONCAT_WS(", ",s.lastname, s.firstname) as name '
-            .' FROM '.STAFF_TABLE.' s ';
+       $sql='SELECT s.staff_id,CONCAT_WS(", ",s.lastname, s.firstname) as name '
+           .' FROM '.STAFF_TABLE.' s ';
 
-        if($availableonly) {
-            $sql.=' INNER JOIN '.GROUP_TABLE.' g ON(g.group_id=s.group_id AND g.group_enabled=1) '
-                 .' WHERE s.isactive=1 AND s.onvacation=0';
-        }
+       if($availableonly) {
+           $sql.=' INNER JOIN '.GROUP_TABLE.' g ON(g.group_id=s.group_id AND g.group_enabled=1) '
+                .' WHERE s.isactive=1 AND s.onvacation=0';
+       }
 
-        $sql.='  ORDER BY s.lastname, s.firstname';
-        $users=array();
-        if(($res=db_query($sql)) && db_num_rows($res)) {
-            while(list($id, $name) = db_fetch_row($res))
-                $users[$id] = $name;
-        }
+       $sql.='  ORDER BY s.lastname, s.firstname';
+       $users=array();
+       if(($res=db_query($sql)) && db_num_rows($res)) {
+           while(list($id, $name) = db_fetch_row($res))
+               $users[$id] = $name;
+       }
 
-        return $users;
+	return $users;
     }
 
     function getAvailableStaffMembers() {
-        return self::getStaffMembers(true);
+	return self::getStaffMembers(true);
     }
 
     function getIdByUsername($username) {
@@ -575,7 +593,7 @@ class Staff {
 
         if($_SESSION['_staff']['laststrike']) {
             if((time()-$_SESSION['_staff']['laststrike'])<$cfg->getStaffLoginTimeout()) {
-                $errors['err']='Max. failed login attempts reached';
+                $errors['err']=_('Max. failed login attempts reached');
                 $_SESSION['_staff']['laststrike'] = time(); //reset timer.
             } else { //Timeout is over.
                 //Reset the counter for next round of attempts after the timeout.
@@ -585,7 +603,7 @@ class Staff {
         }
 
         if(!$username || !$passwd)
-            $errors['err'] = 'Username and password required';
+            $errors['err'] = _('Username and password required');
 
         if($errors) return false;
    
@@ -604,8 +622,8 @@ class Staff {
             $_SESSION['TZ_DST'] = $user->observeDaylight();
 
             //Log debug info.
-            $ost->logDebug('Staff login', 
-                    sprintf("%s logged in [%s]", $user->getUserName(), $_SERVER['REMOTE_ADDR'])); //Debug.
+            $ost->logDebug(_('Staff login'), 
+                    sprintf("%s "._("logged in")." [%s]", $user->getUserName(), $_SERVER['REMOTE_ADDR'])); //Debug.
 
             //Regenerate session id.
             $sid=session_id(); //Current id
@@ -620,17 +638,17 @@ class Staff {
         //If we get to this point we know the login failed.
         $_SESSION['_staff']['strikes']+=1;
         if(!$errors && $_SESSION['_staff']['strikes']>$cfg->getStaffMaxLogins()) {
-            $errors['err']='Forgot your login info? Contact Admin.';
+            $errors['err']=_('Forgot your login info? Contact Admin.');
             $_SESSION['_staff']['laststrike']=time();
-            $alert='Excessive login attempts by a staff member?'."\n".
-                   'Username: '.$username."\n".'IP: '.$_SERVER['REMOTE_ADDR']."\n".'TIME: '.date('M j, Y, g:i a T')."\n\n".
-                   'Attempts #'.$_SESSION['_staff']['strikes']."\n".'Timeout: '.($cfg->getStaffLoginTimeout()/60)." minutes \n\n";
-            $ost->logWarning('Excessive login attempts ('.$username.')', $alert, ($cfg->alertONLoginError()));
+            $alert=_('Excessive login attempts by a staff member?')."\n".
+                   _('Username').': '.$username."\n".'IP: '.$_SERVER['REMOTE_ADDR']."\n"._('TIME').': '.date('M j, Y, g:i a T')."\n\n".
+                   _('Attempts #').$_SESSION['_staff']['strikes']."\n"._('Timeout').': '.($cfg->getStaffLoginTimeout()/60)." "._("minutes")." \n\n";
+            $ost->logWarning(_('Excessive login attempts').' ('.$username.')', $alert, ($cfg->alertONLoginError()));
     
         } elseif($_SESSION['_staff']['strikes']%2==0) { //Log every other failed login attempt as a warning.
-            $alert='Username: '.$username."\n".'IP: '.$_SERVER['REMOTE_ADDR'].
-                   "\n".'TIME: '.date('M j, Y, g:i a T')."\n\n".'Attempts #'.$_SESSION['_staff']['strikes'];
-            $ost->logWarning('Failed staff login attempt ('.$username.')', $alert, false);
+            $alert=_('Username').': '.$username."\n".'IP: '.$_SERVER['REMOTE_ADDR'].
+                   "\n"._('TIME').': '.date('M j, Y, g:i a T')."\n\n"._('Attempts #').$_SESSION['_staff']['strikes'];
+            $ost->logWarning(_('Failed staff login attempt').' ('.$username.')', $alert, false);
         }
 
         return false;
@@ -651,50 +669,50 @@ class Staff {
         $vars['signature']=Format::striptags($vars['signature']);
 
         if($id && $id!=$vars['id'])
-            $errors['err']='Internal Error';
+            $errors['err']=_('Internal Error');
             
         if(!$vars['firstname'])
-            $errors['firstname']='First name required';
+            $errors['firstname']=_('First name required');
         if(!$vars['lastname'])
-            $errors['lastname']='Last name required';
+            $errors['lastname']=_('Last name required');
             
         if(!$vars['username'] || strlen($vars['username'])<2)
-            $errors['username']='Username required';
+            $errors['username']=_('Username required');
         elseif(($uid=Staff::getIdByUsername($vars['username'])) && $uid!=$id)
-            $errors['username']='Username already in-use';
+            $errors['username']=_('Username already in-use');
         
         if(!$vars['email'] || !Validator::is_email($vars['email']))
-            $errors['email']='Valid email required';
+            $errors['email']=_('Valid email required');
         elseif(Email::getIdByEmail($vars['email']))
-            $errors['email']='Already in-use system email';
+            $errors['email']=_('Already in-use system email');
         elseif(($uid=Staff::getIdByEmail($vars['email'])) && $uid!=$id)
-            $errors['email']='Email already in-use by another staff member';
+            $errors['email']=_('Email already in-use by another staff member');
 
         if($vars['phone'] && !Validator::is_phone($vars['phone']))
-            $errors['phone']='Valid number required';
+            $errors['phone']=_('Valid number required');
         
         if($vars['mobile'] && !Validator::is_phone($vars['mobile']))
-            $errors['mobile']='Valid number required';
+            $errors['mobile']=_('Valid number required');
 
         if($vars['passwd1'] || $vars['passwd2'] || !$id) {
             if(!$vars['passwd1'] && !$id) {
-                $errors['passwd1']='Temp. password required';
+                $errors['passwd1']=_('Temp. password required');
                 $errors['temppasswd']='Required';
             } elseif($vars['passwd1'] && strlen($vars['passwd1'])<6) {
-                $errors['passwd1']='Must be at least 6 characters';
+                $errors['passwd1']=_('Must be at least 6 characters');
             } elseif($vars['passwd1'] && strcmp($vars['passwd1'], $vars['passwd2'])) {
-                $errors['passwd2']='Password(s) do not match';
+                $errors['passwd2']=_('Password(s) do not match');
             }
         }
         
         if(!$vars['dept_id'])
-            $errors['dept_id']='Department required';
+            $errors['dept_id']=_('Department required');
             
         if(!$vars['group_id'])
-            $errors['group_id']='Group required';
+            $errors['group_id']=_('Group required');
 
         if(!$vars['timezone_id'])
-            $errors['timezone_id']='Time zone required';
+            $errors['timezone_id']=_('Time zone required');
 
         if($errors) return false;
 
@@ -730,13 +748,13 @@ class Staff {
             if(db_query($sql) && db_affected_rows())
                 return true;
                 
-            $errors['err']='Unable to update the user. Internal error occurred';
+            $errors['err']=_('Unable to update the user. Internal error occurred');
         } else {
             $sql='INSERT INTO '.STAFF_TABLE.' '.$sql.', created=NOW()';
             if(db_query($sql) && ($uid=db_insert_id()))
                 return $uid;
                 
-            $errors['err']='Unable to create user. Internal error';
+            $errors['err']=_('Unable to create user. Internal error');
         }
 
         return false;

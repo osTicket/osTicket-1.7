@@ -1,5 +1,5 @@
 <?php
-if(!defined('OSTADMININC') || !$thisstaff->isAdmin()) die('Access Denied');
+if(!defined('OSTADMININC') || !$thisstaff->isAdmin()) die(_('Access Denied'));
 
 $qstr='';
 $sql='SELECT * FROM '.API_KEY_TABLE.' WHERE 1';
@@ -33,17 +33,17 @@ $qstr.='&order='.($order=='DESC'?'ASC':'DESC');
 $query="$sql ORDER BY $order_by LIMIT ".$pageNav->getStart().",".$pageNav->getLimit();
 $res=db_query($query);
 if($res && ($num=db_num_rows($res)))
-    $showing=$pageNav->showing().' API Keys';
+    $showing=$pageNav->showing().' '._('API Keys');
 else
-    $showing='No API keys found!';
+    $showing=_('No API keys found!');
 
 ?>
 
 <div style="width:700;padding-top:5px; float:left;">
- <h2>API Keys</h2>
+ <h2><?= _('API Keys')?></h2>
 </div>
 <div style="float:right;text-align:right;padding-top:5px;padding-right:5px;">
- <b><a href="apikeys.php?a=add" class="Icon newapi">Add New API Key</a></b></div>
+ <b><a href="apikeys.php?a=add" class="Icon newapi"><?= _('Add New API Key') ?></a></b></div>
 <div class="clear"></div>
 <form action="apikeys.php" method="POST" name="keys">
  <?php csrf_token(); ?>
@@ -54,11 +54,11 @@ else
     <thead>
         <tr>
             <th width="7">&nbsp;</th>        
-            <th width="320"><a <?php echo $key_sort; ?> href="apikeys.php?<?php echo $qstr; ?>&sort=key">API Key</a></th>
-            <th width="120"><a  <?php echo $ip_sort; ?> href="apikeys.php?<?php echo $qstr; ?>&sort=ip">IP Addr.</a></th>
-            <th width="100"><a  <?php echo $status_sort; ?> href="apikeys.php?<?php echo $qstr; ?>&sort=status">Status</a></th>
-            <th width="150" nowrap><a  <?php echo $date_sort; ?>href="apikeys.php?<?php echo $qstr; ?>&sort=date">Date Added</a></th>
-            <th width="150" nowrap><a  <?php echo $updated_sort; ?>href="apikeys.php?<?php echo $qstr; ?>&sort=updated">Last Updated</a></th>
+            <th width="320"><a <?php echo $key_sort; ?> href="apikeys.php?<?php echo $qstr; ?>&sort=key"><?=_("API Key")?></a></th>
+            <th width="120"><a  <?php echo $ip_sort; ?> href="apikeys.php?<?php echo $qstr; ?>&sort=ip"><?=_("IP Addr.")?></a></th>
+            <th width="100"><a  <?php echo $status_sort; ?> href="apikeys.php?<?php echo $qstr; ?>&sort=status"><?=_("Status")?></a></th>
+            <th width="150" nowrap><a  <?php echo $date_sort; ?>href="apikeys.php?<?php echo $qstr; ?>&sort=date"><?=_("Date Added")?></a></th>
+            <th width="150" nowrap><a  <?php echo $updated_sort; ?>href="apikeys.php?<?php echo $qstr; ?>&sort=updated"><?=_("Last Updated")?></a></th>
         </tr>
     </thead>
     <tbody>
@@ -88,12 +88,12 @@ else
      <tr>
         <td colspan="7">
             <?php if($res && $num){ ?>
-            Select:&nbsp;
-            <a id="selectAll" href="#ckb">All</a>&nbsp;&nbsp;
-            <a id="selectNone" href="#ckb">None</a>&nbsp;&nbsp;
-            <a id="selectToggle" href="#ckb">Toggle</a>&nbsp;&nbsp;
+            <?=_('Select')?>:&nbsp;
+            <a id="selectAll" href="#ckb"><?=_('All')?></a>&nbsp;&nbsp;
+            <a id="selectNone" href="#ckb"><?=_('None')?></a>&nbsp;&nbsp;
+            <a id="selectToggle" href="#ckb"><?=_('Toggle')?></a>&nbsp;&nbsp;
             <?php }else{
-                echo 'No API keys found';
+                echo _('No API keys found');
             } ?>
         </td>
      </tr>
@@ -101,39 +101,39 @@ else
 </table>
 <?php
 if($res && $num): //Show options..
-    echo '<div>&nbsp;Page:'.$pageNav->getPageLinks().'&nbsp;</div>';
+    echo '<div>&nbsp;'._('Page').':'.$pageNav->getPageLinks().'&nbsp;</div>';
 ?>
 <p class="centered" id="actions">
-    <input class="button" type="submit" name="enable" value="Enable" >
-    <input class="button" type="submit" name="disable" value="Disable">
-    <input class="button" type="submit" name="delete" value="Delete">
+    <input class="button" type="submit" name="enable" value="<?=_('Enable')?>" >
+    <input class="button" type="submit" name="disable" value="<?=_('Disable')?>">
+    <input class="button" type="submit" name="delete" value="<?=_('Delete')?>">
 </p>
 <?php
 endif;
 ?>
 </form>
 <div style="display:none;" class="dialog" id="confirm-action">
-    <h3>Please Confirm</h3>
+    <h3><?=_('Please Confirm')?></h3>
     <a class="close" href="">&times;</a>
     <hr/>
     <p class="confirm-action" style="display:none;" id="enable-confirm">
-        Are you sure want to <b>enable</b> selected API keys?
+        <?=_('Are you sure want to <b>enable</b> selected API keys?')?>
     </p>
     <p class="confirm-action" style="display:none;" id="disable-confirm">
-        Are you sure want to <b>disable</b>  selected API keys?
+        <?=_('Are you sure want to <b>disable</b>  selected API keys?')?>
     </p>
     <p class="confirm-action" style="display:none;" id="delete-confirm">
-        <font color="red"><strong>Are you sure you want to DELETE selected API keys?</strong></font>
-        <br><br>Deleted keys CANNOT be recovered.
+        <font color="red"><strong><?=_('Are you sure you want to DELETE selected API keys?')?></strong></font>
+        <br><br><?=_('Deleted keys CANNOT be recovered.')?>
     </p>
-    <div>Please confirm to continue.</div>
+    <div><?=_('Please confirm to continue.')?></div>
     <hr style="margin-top:1em"/>
     <p class="full-width">
         <span class="buttons" style="float:left">
-            <input type="button" value="No, Cancel" class="close">
+            <input type="button" value="<?=_('No, Cancel')?>" class="close">
         </span>
         <span class="buttons" style="float:right">
-            <input type="button" value="Yes, Do it!" class="confirm">
+            <input type="button" value="<?=_('Yes, Do it!')?>" class="confirm">
         </span>
      </p>
     <div class="clear"></div>

@@ -140,8 +140,9 @@ class AttachmentFile {
         header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
         header('Cache-Control: public');
         header('Content-Type: '.($this->getType()?$this->getType():'application/octet-stream'));
-    
-        $filename=basename($this->getName());
+       
+	$encodings = array('ISO-8859-1', 'UTF-8', 'WINDOWS-1251', 'ISO-8859-5', 'KOI8-R'); 
+        $filename=mb_encode_mimeheader(basename($this->getName()), mb_detect_encoding(basename($this->getName()),$encodings,true));
         $user_agent = strtolower ($_SERVER['HTTP_USER_AGENT']);
         if ((is_integer(strpos($user_agent,'msie'))) && (is_integer(strpos($user_agent,'win')))) {
             header('Content-Disposition: filename='.$filename.';');

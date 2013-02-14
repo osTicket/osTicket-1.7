@@ -9,7 +9,7 @@
     Copyright (c)  2006-2010 osTicket
     http://www.osticket.com
 
-    Released under the GNU General Public License WITHOUT ANY WARRANTY.
+    Releasesage required under the GNU General Public License WITHOUT ANY WARRANTY.
     See LICENSE.TXT for details.
 
     vim: expandtab sw=4 ts=4 sts=4:

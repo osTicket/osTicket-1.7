@@ -146,14 +146,14 @@ class SLA {
 
 
         if(!$vars['grace_period'])
-            $errors['grace_period']='Grace period required';
+            $errors['grace_period']=_('Grace period required');
         elseif(!is_numeric($vars['grace_period']))
-            $errors['grace_period']='Numeric value required (in hours)';
+            $errors['grace_period']=_('Numeric value required (in hours)');
             
         if(!$vars['name'])
-            $errors['name']='Name required';
+            $errors['name']=_('Name required');
         elseif(($sid=SLA::getIdByName($vars['name'])) && $sid!=$id)
-            $errors['name']='Name already exists';
+            $errors['name']=_('Name already exists');
 
         if($errors) return false;
 
@@ -170,13 +170,13 @@ class SLA {
             if(db_query($sql))
                 return true;
 
-            $errors['err']='Unable to update SLA. Internal error occurred';
+            $errors['err']=_('Unable to update SLA. Internal error occurred');
         }else{
             $sql='INSERT INTO '.SLA_TABLE.' SET '.$sql.',created=NOW() ';
             if(db_query($sql) && ($id=db_insert_id()))
                 return $id;
 
-            $errors['err']='Unable to add SLA. Internal error';
+            $errors['err']=_('Unable to add SLA. Internal error');
         }
 
         return false;

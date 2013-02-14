@@ -23,9 +23,9 @@ require_once(INCLUDE_DIR.'class.email.php');
 
 //Make sure piping is enabled!
 if(!$cfg->isEmailPipingEnabled())
-    api_exit(EX_UNAVAILABLE,'Email piping not enabled - check MTA settings.');
+    api_exit(EX_UNAVAILABLE,_('Email piping not enabled - check MTA settings.'));
 elseif($apikey && !$apikey->canCreateTickets()) //apikey is ONLY set on remote post - local post don't need a key (for now).
-    api_exit(EX_NOPERM, 'API key not authorized');
+    api_exit(EX_NOPERM, _('API key not authorized'));
 
 //Get the input
 $data=isset($_SERVER['HTTP_HOST'])?file_get_contents('php://input'):file_get_contents('php://stdin');
@@ -36,7 +36,7 @@ if(empty($data)){
 //Parse the email.
 $parser= new Mail_Parse($data);
 if(!$parser->decode()){ //Decode...returns false on decoding errors
-    api_exit(EX_DATAERR,'Email parse failed ['.$parser->getError()."]\n\n".$data);    
+    api_exit(EX_DATAERR,_('Email parse failed [').$parser->getError()."]\n\n".$data);    
 }
 
 
@@ -45,7 +45,7 @@ if(!$parser->decode()){ //Decode...returns false on decoding errors
 $fromlist = $parser->getFromAddressList();
 //Check for parsing errors on FROM address.
 if(!$fromlist || PEAR::isError($fromlist)){
-    api_exit(EX_DATAERR,'Invalid FROM address ['.$fromlist?$fromlist->getMessage():''."]\n\n".$data);
+    api_exit(EX_DATAERR,_('Invalid FROM address [').$fromlist?$fromlist->getMessage():''."]\n\n".$data);
 }
 
 $from=$fromlist[0]; //Default.
@@ -105,7 +105,7 @@ $msgid=0;
 if($ticket) {
     //post message....postMessage does the cleanup.
     if(!($msgid=$ticket->postMessage($var['message'], 'Email',$var['mid'],$var['header'])))
-        api_exit(EX_DATAERR, 'Unable to post message');
+        api_exit(EX_DATAERR, _('Unable to post message'));
 
 } elseif(($ticket=Ticket::create($var, $errors, 'email'))) { // create new ticket.
     $msgid=$ticket->getLastMsgId();
@@ -117,11 +117,11 @@ if($ticket) {
 
     // check if it's a bounce!
     if($var['header'] && TicketFilter::isAutoBounce($var['header'])) {
-        $ost->logWarning('Bounced email', $var['message'], false);
+        $ost->logWarning(_('Bounced email'), $var['message'], false);
         api_exit(EX_SUCCESS); 
     }
     
-    api_exit(EX_DATAERR, 'Ticket create Failed '.implode("\n",$errors)."\n\n");
+    api_exit(EX_DATAERR, _('Ticket create Failed').' '.implode("\n",$errors)."\n\n");
 }
 
 //Ticket created...save attachments if enabled.

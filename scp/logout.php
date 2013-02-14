@@ -19,8 +19,8 @@ require('staff.inc.php');
 if(!$_GET['auth'] || !$ost->validateLinkToken($_GET['auth']))
     @header('Location: index.php');
 
-$ost->logDebug('Staff logout',
-        sprintf("%s logged out [%s]", 
+$ost->logDebug(_('Staff logout'),
+        sprintf(_("%s logged out [%s]"), 
             $thisstaff->getUserName(), $_SERVER['REMOTE_ADDR'])); //Debug.
 $_SESSION['_staff']=array();
 session_unset();

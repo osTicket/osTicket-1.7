@@ -19,6 +19,8 @@ require_once(INCLUDE_DIR.'class.ticket.php');
 require_once(INCLUDE_DIR.'class.dept.php');
 require_once(INCLUDE_DIR.'class.email.php');
 require_once(INCLUDE_DIR.'class.filter.php');
+require_once(INCLUDE_DIR.'tnef_decoder.php');
+
 
 class MailFetcher {
 
@@ -28,7 +30,7 @@ class MailFetcher {
     var $srvstr;
 
     var $charset = 'UTF-8';
-    var $encodings =array('UTF-8','WINDOWS-1251', 'ISO-8859-5', 'ISO-8859-1','KOI8-R');
+    var $encodings = array('UTF-8', 'ISO-8859-1', 'WINDOWS-1251', 'ISO-8859-5', 'KOI8-R');
     
     function MailFetcher($email, $charset='UTF-8') {
 
@@ -311,7 +313,6 @@ class MailFetcher {
 
      */
     function getAttachments($part, $index=0) {
-
         if($part && !$part->parts) {
             //Check if the part is an attachment.
             $filename = '';
@@ -334,9 +335,10 @@ class MailFetcher {
                         break;
                     }
                 }
-            }
+           } elseif(strtolower($this->getMimeType($part)) == "application/ms-tnef")
+                $filename = "winmail.dat";
 
-            if($filename) {
+           if($filename) {
                 return array(
                         array(
                             'name'  => $this->mime_decode($filename),
@@ -399,7 +401,7 @@ class MailFetcher {
 	    //Is the email address banned?
         if($mailinfo['email'] && TicketFilter::isBanned($mailinfo['email'])) {
 	        //We need to let admin know...
-            $ost->logWarning('Ticket denied', 'Banned email - '.$mailinfo['email'], false);
+            $ost->logWarning(_('Ticket denied'), _('Banned email').' - '.$mailinfo['email'], false);
 	        return true; //Report success (moved or delete)
         }
 
@@ -444,7 +446,7 @@ class MailFetcher {
 
             # check if it's a bounce!
             if($var['header'] && TicketFilter::isAutoBounce($var['header'])) {
-                $ost->logWarning('Bounced email', $var['message'], false);
+                $ost->logWarning(_('Bounced email'), $var['message'], false);
                 return true;
             }
 
@@ -462,7 +464,25 @@ class MailFetcher {
             //We're just checking the type of file - not size or number of attachments...
             // Restrictions are mainly due to PHP file uploads limitations
             foreach($attachments as $a ) {
-                if($ost->isFileTypeAllowed($a['name'], $a['mime'])) {
+		if(strtolower($a['mime']) == "application/ms-tnef"){ //unpack winmail.dat attachments
+		    $tnef = new tnef_decoder;
+		    $tnef_arr = $tnef->decompress($this->decode($a['encoding'], imap_fetchbody($this->mbox, $mid, $a['index'])));
+                    foreach ($tnef_arr as $tnef_file) {
+			$file = array(
+                            'name'  => $this->mime_encode($tnef_file['name']),
+                            'type'  => trim(strtolower($tnef_file['type']))."/".trim(strtolower($tnef_file['subtype'])),
+                            'data'  => $tnef_file['stream']
+                            );
+			if($ost->isFileTypeAllowed($file['name'], $file['type'])) {
+		    		$ost->logDebug($file['name'],$file['type']);
+				$ticket->saveAttachment($file, $msgid, 'M');
+			}else{
+				$error = sprintf(_('Attachment %s [%s] rejected because of file type'), $file['name'], $file['type']);
+                    		$ticket->postNote(_('Email Attachment Rejected'), $error, 'SYSTEM', false);
+                    		$ost->logDebug(_('Email Attachment Rejected (Ticket #').$ticket->getExtId().')', $error);
+			}
+		    } 	
+		} elseif($ost->isFileTypeAllowed($a['name'], $a['mime'])) {
                     $file = array(
                             'name'  => $a['name'],
                             'type'  => $a['mime'],
@@ -472,9 +492,9 @@ class MailFetcher {
                 } else {
                     //This should be really a comment on message - NoT an internal note.
                     //TODO: support comments on Messages and Responses.
-                    $error = sprintf('Attachment %s [%s] rejected because of file type', $a['name'], $a['mime']);
-                    $ticket->postNote('Email Attachment Rejected', $error, 'SYSTEM', false);
-                    $ost->logDebug('Email Attachment Rejected (Ticket #'.$ticket->getExtId().')', $error);
+                    $error = sprintf(_('Attachment %s [%s] rejected because of file type'), $a['name'], $a['mime']);
+                    $ticket->postNote(_('Email Attachment Rejected'), $error, 'SYSTEM', false);
+                    $ost->logDebug(_('Email Attachment Rejected (Ticket #').$ticket->getExtId().')', $error);
                 }
             }
         }
@@ -515,7 +535,7 @@ class MailFetcher {
 
         //Warn on excessive errors
         if($errors>$msgs) {
-            $warn=sprintf('Excessive errors processing emails for %s/%s. Please manually check the inbox.',
+            $warn=sprintf(_('Excessive errors processing emails for %s/%s. Please manually check the inbox.'),
                     $this->getHost(), $this->getUsername());
             $this->log($warn);
         }
@@ -527,7 +547,7 @@ class MailFetcher {
 
     function log($error) {
         global $ost;
-        $ost->logWarning('Mail Fetcher', $error);
+        $ost->logWarning(_('Mail Fetcher'), $error);
     }
 
     /*
@@ -544,8 +564,8 @@ class MailFetcher {
         //We require imap ext to fetch emails via IMAP/POP3
         //We check here just in case the extension gets disabled post email config...
         if(!function_exists('imap_open')) {
-            $msg='osTicket requires PHP IMAP extension enabled for IMAP/POP3 email fetch to work!';
-            $ost->logWarning('Mail Fetch Error', $msg);
+            $msg=_('osTicket requires PHP IMAP extension enabled for IMAP/POP3 email fetch to work!');
+            $ost->logWarning(_('Mail Fetch Error'), $msg);
             return;
         }
 
@@ -576,13 +596,13 @@ class MailFetcher {
                 db_query('UPDATE '.EMAIL_TABLE.' SET mail_errors=mail_errors+1, mail_lasterror=NOW() WHERE email_id='.db_input($emailId));
                 if(++$errors>=$MAXERRORS) {
                     //We've reached the MAX consecutive errors...will attempt logins at delayed intervals
-                    $msg="\nosTicket is having trouble fetching emails from the following mail account: \n".
-                        "\nUser: ".$fetcher->getUsername().
-                        "\nHost: ".$fetcher->getHost().
-                        "\nError: ".$fetcher->getLastError().
-                        "\n\n ".$errors.' consecutive errors. Maximum of '.$MAXERRORS. ' allowed'.
-                        "\n\n This could be connection issues related to the mail server. Next delayed login attempt in aprox. $TIMEOUT minutes";
-                    $ost->alertAdmin('Mail Fetch Failure Alert', $msg, true);
+                    $msg="\n"._("osTicket is having trouble fetching emails from the following mail account").": \n".
+                         "\n"._("User").": ".$fetcher->getUsername().
+                         "\n"._("Host").": ".$fetcher->getHost().
+                         "\n"._("Error").": ".$fetcher->getLastError().
+                         "\n\n ".$errors._(' consecutive errors. Maximum of').' '.$MAXERRORS. ' '._('allowed').
+                         "\n\n "._("This could be connection issues related to the mail server. Next delayed login attempt in aprox.")." ".$TIMEOUT." "._("minutes");
+                    $ost->alertAdmin(_('Mail Fetch Failure Alert'), $msg, true);
                 }
             }
         } //end while.

@@ -319,6 +319,50 @@ $(document).ready(function(){
         },
         property: "email"
     });
+  
+    /* Typeahead LDAP email lookup */
+    $('#ldapemail.typeahead').typeahead({
+        source: function (typeahead, query) {
+                $.ajax({
+                    url: "ajax.php/ldap?type=email&q="+query,
+                    dataType: 'json',
+                    success: function (data) {
+                        typeahead.process(data);
+                    }
+                });
+        },
+        onselect: function (obj) {
+            var fObj=$('#ldapemail.typeahead').closest('form');
+            if(obj.username) {
+                $('#username', fObj).val(obj.username);
+                $('#firstname', fObj).val(obj.firstname);
+                $('#lastname', fObj).val(obj.lastname);
+	    }	
+        },
+        property: "email"
+    });
+
+    /* Typeahead LDAP username lookup */
+    $('#username.typeahead').typeahead({
+        source: function (typeahead, query) {
+                $.ajax({
+                    url: "ajax.php/ldap?type=username&q="+query,
+                    dataType: 'json',
+                    success: function (data) {
+                        typeahead.process(data);
+                    }
+                });
+        },
+        onselect: function (obj) {
+            var fObj=$('#username.typeahead').closest('form');
+            if(obj.email) {
+                $('#ldapemail', fObj).val(obj.email);
+                $('#firstname', fObj).val(obj.firstname);
+                $('#lastname', fObj).val(obj.lastname);
+            }   
+        },  
+        property: "username"
+    });
 
     //Overlay
     $('#overlay').css({

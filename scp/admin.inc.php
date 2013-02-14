@@ -27,7 +27,7 @@ define('ADMINPAGE',TRUE);   //Used by the header to swap menus.
 //Some security related warnings - bitch until fixed!!! :)
 $sysnotice= '';
 if($ost->isUpgradePending()) {
-    $errors['err']=$sysnotice='System upgrade is pending <a href="upgrade.php">Upgrade Now</a>';
+    $errors['err']=$sysnotice=_('System upgrade is pending').' <a href="upgrade.php">'._('Upgrade Now').'</a>';
     if(!in_array(basename($_SERVER['SCRIPT_NAME']), array('upgrade.php', 'logs.php'))) {
         header('Location: upgrade.php');
         require('upgrade.php');
@@ -36,26 +36,26 @@ if($ost->isUpgradePending()) {
 } else {
     
     if(!strcasecmp(basename(CONFIG_FILE), 'settings.php')) {
-        $sysnotice=sprintf('Please rename config file include/%s to include/ost-config.php to avoid possible conflicts',
+        $sysnotice=sprintf(_('Please rename config file include/%s to include/ost-config.php to avoid possible conflicts'),
                                 basename(CONFIG_FILE));
         //Die gracefully - otherwise upgraded RC5 installations will die with confusing message. 
         if(!strcasecmp(basename($_SERVER['SCRIPT_NAME']), 'settings.php'))
             die($sysnotice);
 
     } elseif(file_exists('../setup/')) {
-        $sysnotice='Please take a minute to delete <strong>setup/install</strong> directory (../setup/) for security reasons.';
+        $sysnotice=_('Please take a minute to delete <strong>setup/install</strong> directory (../setup/) for security reasons.');
     } elseif(CONFIG_FILE && file_exists(CONFIG_FILE) && is_writable(CONFIG_FILE)) {
             //Confirm for real that the file is writable by group or world.
             clearstatcache(); //clear the cache!
             $perms = @fileperms(CONFIG_FILE);
             if(($perms & 0x0002) || ($perms & 0x0010)) {
-                $sysnotice=sprintf('Please change permission of config file (%s) to remove write access. e.g <i>chmod 644 %s</i>',
+                $sysnotice=sprintf(_('Please change permission of config file (%s) to remove write access. e.g <i>chmod 644 %s</i>'),
                                 basename(CONFIG_FILE), basename(CONFIG_FILE));
             }
     }
 
     if(!$sysnotice && ini_get('register_globals'))
-        $sysnotice='Please consider turning off register globals if possible';
+        $sysnotice=_('Please consider turning off register globals if possible');
 }
 
 //System notice displayed as a warning (if any).

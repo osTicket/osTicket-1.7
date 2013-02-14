@@ -13,6 +13,11 @@
 
     vim: expandtab sw=4 ts=4 sts=4:
 **********************************************************************/
+#Detect browser language for the installation proccess
+$langbase = substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2);
+$langext = strtoupper(substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 3, 2));
+define('LANG',$langbase."_".$langext);
+
 require('setup.inc.php');
 
 require_once INC_DIR.'class.installer.php';
@@ -24,11 +29,11 @@ define('OSTICKET_CONFIGFILE','../include/ost-config.php'); //XXX: Make sure the 
 
 $installer = new Installer(OSTICKET_CONFIGFILE); //Installer instance.
 $wizard=array();
-$wizard['title']='osTicket Installer';
-$wizard['tagline']='Installing osTicket v'.$installer->getVersionVerbose();
+$wizard['title']=_('osTicket Installer');
+$wizard['tagline']=_('Installing osTicket v').$installer->getVersionVerbose();
 $wizard['logo']='logo.png';
-$wizard['menu']=array('Installation Guide'=>'http://osticket.com/wiki/Installation',
-        'Get Professional Help'=>'http://osticket.com/support');
+$wizard['menu']=array(_('Installation Guide')=>'http://osticket.com/wiki/Installation',
+        _('Get Professional Help')=>'http://osticket.com/support');
 
 if($_POST && $_POST['s']) {
     $errors = array();
@@ -38,13 +43,13 @@ if($_POST && $_POST['s']) {
             if($installer->check_prereq())
                 $_SESSION['ost_installer']['s']='config';
             else
-                $errors['prereq']='Minimum requirements not met!';
+                $errors['prereq']=_('Minimum requirements not met!');
             break;
         case 'config':
             if(!$installer->config_exists())
-                $errors['err']='Configuration file does NOT exist. Follow steps below to add one.';
+                $errors['err']=_('Configuration file does NOT exist. Follow steps below to add one.');
             elseif(!$installer->config_writable())
-                $errors['err']='Write access required to continue';
+                $errors['err']=_('Write access required to continue');
             else
                 $_SESSION['ost_installer']['s']='install';
             break;
@@ -56,23 +61,23 @@ if($_POST && $_POST['s']) {
                 //TODO: Go to subscribe step.
                 $_SESSION['ost_installer']['s']='done';
             } elseif(!($errors=$installer->getErrors()) || !$errors['err']) {
-                $errors['err']='Error installing osTicket - correct the errors below and try again.';
+                $errors['err']=_('Error installing osTicket - correct the errors below and try again.');
             }
             break;
         case 'subscribe':
             if(!trim($_POST['name']))
-                $errors['name'] = 'Required';
+                $errors['name'] = _('Required');
 
             if(!$_POST['email'])
-                $errors['email'] = 'Required';
+                $errors['email'] = _('Required');
             elseif(!Validator::is_email($_POST['email']))
-                $errors['email'] = 'Invalid';
+                $errors['email'] = _('Invalid');
 
             if(!$_POST['alerts'] && !$_POST['news'])
-                $errors['notify'] = 'Check one or more';
+                $errors['notify'] = _('Check one or more');
 
             if(!$errors)
-                $_SESSION['ost_installer']['s'] = 'done';
+                $_SESSION['ost_installer']['s'] ='done';
             break;
     }
 

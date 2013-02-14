@@ -150,8 +150,8 @@ class Client {
         //Check time for last max failed login attempt strike.
         if($_SESSION['_client']['laststrike']) {
             if((time()-$_SESSION['_client']['laststrike'])<$cfg->getClientLoginTimeout()) {
-                $errors['login'] = 'Excessive failed login attempts';
-                $errors['err'] = 'You\'ve reached maximum failed login attempts allowed. Try again later or <a href="open.php">open a new ticket</a>';
+                $errors['login'] = _('Excessive failed login attempts');
+                $errors['err'] = _('You\'ve reached maximum failed login attempts allowed. Try again later or <a href="open.php">open a new ticket</a>');
                 $_SESSION['_client']['laststrike'] = time(); //renew the strike.
             } else { //Timeout is over.
                 //Reset the counter for next round of attempts after the timeout.
@@ -161,9 +161,9 @@ class Client {
         }
 
         if($auto_login && !$auth)
-            $errors['login'] = 'Invalid method';
+            $errors['login'] = _('Invalid method');
         elseif(!$ticketID || !Validator::is_email($email))
-            $errors['login'] = 'Valid email and ticket number required';
+            $errors['login'] = _('Valid email and ticket number required');
 
         //Bail out on error.
         if($errors) return false;
@@ -202,21 +202,21 @@ class Client {
         }
 
         //If we get to this point we know the login failed.
-        $errors['login'] = 'Invalid login';
+        $errors['login'] = _('Invalid login');
         $_SESSION['_client']['strikes']+=1;
         if(!$errors && $_SESSION['_client']['strikes']>$cfg->getClientMaxLogins()) {
-            $errors['login'] = 'Access Denied';
-            $errors['err'] = 'Forgot your login info? Please <a href="open.php">open a new ticket</a>.';
+            $errors['login'] = _('Access Denied');
+            $errors['err'] = _('Forgot your login info? Please').' <a href="open.php">'._('open a new ticket').'</a>.';
             $_SESSION['_client']['laststrike'] = time();
-            $alert='Excessive login attempts by a user.'."\n".
-                    'Email: '.$email."\n".'Ticket#: '.$ticketID."\n".
-                    'IP: '.$_SERVER['REMOTE_ADDR']."\n".'Time:'.date('M j, Y, g:i a T')."\n\n".
-                    'Attempts #'.$_SESSION['_client']['strikes'];
-            $ost->logError('Excessive login attempts (user)', $alert, ($cfg->alertONLoginError()));
+            $alert=_('Excessive login attempts by a user.')."\n".
+                    _('Email').': '.$email."\n"._('Ticket#').': '.$ticketID."\n".
+                    _('IP').': '.$_SERVER['REMOTE_ADDR']."\n"._('Time').':'.date('M j, Y, g:i a T')."\n\n".
+                    _('Attempts').' #'.$_SESSION['_client']['strikes'];
+            $ost->logError(_('Excessive login attempts (user)'), $alert, ($cfg->alertONLoginError()));
         } elseif($_SESSION['_client']['strikes']%2==0) { //Log every other failed login attempt as a warning.
-            $alert='Email: '.$email."\n".'Ticket #: '.$ticketID."\n".'IP: '.$_SERVER['REMOTE_ADDR'].
-                   "\n".'TIME: '.date('M j, Y, g:i a T')."\n\n".'Attempts #'.$_SESSION['_client']['strikes'];
-            $ost->logWarning('Failed login attempt (user)', $alert);
+            $alert=_('Email').': '.$email."\n"._('Ticket #').': '.$ticketID."\n"._('IP').': '.$_SERVER['REMOTE_ADDR'].
+                   "\n"._('TIME').': '.date('M j, Y, g:i a T')."\n\n"._('Attempts #').$_SESSION['_client']['strikes'];
+            $ost->logWarning(_('Failed login attempt (user)'), $alert);
         }
 
         return false;

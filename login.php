@@ -14,7 +14,7 @@
     vim: expandtab sw=4 ts=4 sts=4:
 **********************************************************************/
 require_once('client.inc.php');
-if(!defined('INCLUDE_DIR')) die('Fatal Error');
+if(!defined('INCLUDE_DIR')) die(_('Fatal Error'));
 define('CLIENTINC_DIR',INCLUDE_DIR.'client/');
 define('OSTCLIENTINC',TRUE); //make includes happy
 
@@ -29,7 +29,7 @@ if($_POST) {
         require_once('tickets.php'); //Just in case of 'header already sent' error.
         exit;
     } elseif(!$errors['err']) {
-        $errors['err'] = 'Authentication error - try again!';
+        $errors['err'] = _('Authentication error - try again!');
     }
 }
 

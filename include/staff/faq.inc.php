@@ -1,19 +1,19 @@
 <?php
-if(!defined('OSTSCPINC') || !$thisstaff || !$thisstaff->canManageFAQ()) die('Access Denied');
+if(!defined('OSTSCPINC') || !$thisstaff || !$thisstaff->canManageFAQ()) die(_('Access Denied'));
 $info=array();
 $qstr='';
 if($faq){
-    $title='Update FAQ: '.$faq->getQuestion();
+    $title=_('Update FAQ: ').$faq->getQuestion();
     $action='update';
-    $submit_text='Save Changes';
+    $submit_text=_('Save Changes');
     $info=$faq->getHashtable();
     $info['id']=$faq->getId();
     $info['topics']=$faq->getHelpTopicsIds();
     $qstr='id='.$faq->getId();
 }else {
-    $title='Add New FAQ';
+    $title=_('Add New FAQ');
     $action='create';
-    $submit_text='Add FAQ';
+    $submit_text=_('Add FAQ');
     if($category) {
         $qstr='cid='.$category->getId();
         $info['category_id']=$category->getId();
@@ -39,20 +39,20 @@ $info=Format::htmlchars(($errors && $_POST)?$_POST:$info);
     <tbody>
         <tr>
             <th colspan="2">
-                <em>FAQ Information</em>
+                <em><?= _('FAQ Information')?></em>
             </th>
         </tr>
         <tr>
             <td colspan=2>
-                <div style="padding-top:3px;"><b>Question</b>&nbsp;<span class="error">*&nbsp;<?php echo $errors['question']; ?></span></div>
+                <div style="padding-top:3px;"><b><?= _('Question')?></b>&nbsp;<span class="error">*&nbsp;<?php echo $errors['question']; ?></span></div>
                     <input type="text" size="70" name="question" value="<?php echo $info['question']; ?>">
             </td>
         </tr>
         <tr>
             <td colspan=2>
-                <div><b>Category Listing</b>:&nbsp;<span class="faded">FAQ category the question belongs to.</span></div>
+                <div><b><?= _('Category Listing')?></b>:&nbsp;<span class="faded"><?= _('FAQ category the question belongs to.')?></span></div>
                 <select name="category_id" style="width:350px;">
-                    <option value="0">Select FAQ Category </option>
+                    <option value="0"><?= _('Select FAQ Category')?> </option>
                     <?php
                     $sql='SELECT category_id, name, ispublic FROM '.FAQ_CATEGORY_TABLE;
                     if(($res=db_query($sql)) && db_num_rows($res)) {
@@ -71,24 +71,24 @@ $info=Format::htmlchars(($errors && $_POST)?$_POST:$info);
         </tr>
         <tr>
             <td colspan=2>
-                <div><b>Listing Type</b>:&nbsp;
-                    <span class="faded">Published questions are listed on public knowledgebase if the parent category is public.</span></div>
-                <input type="radio" name="ispublished" value="1" <?php echo $info['ispublished']?'checked="checked"':''; ?>>Public (publish)
+                <div><b><?= _('Listing Type')?></b>:&nbsp;
+                    <span class="faded"><?= _('Published questions are listed on public knowledgebase if the parent category is public.')?></span></div>
+                <input type="radio" name="ispublished" value="1" <?php echo $info['ispublished']?'checked="checked"':''; ?>><?= _('Public (publish)')?>
                 &nbsp;&nbsp;&nbsp;&nbsp;
-                <input type="radio" name="ispublished" value="0" <?php echo !$info['ispublished']?'checked="checked"':''; ?>>Internal (private)
+                <input type="radio" name="ispublished" value="0" <?php echo !$info['ispublished']?'checked="checked"':''; ?>><?= _('Internal (private)'?>
                 &nbsp;<span class="error">*&nbsp;<?php echo $errors['ispublished']; ?></span>
             </td>
         </tr>
         <tr>
             <td colspan=2>
                 <div>
-                    <b>Answer</b>&nbsp;<font class="error">*&nbsp;<?php echo $errors['answer']; ?></font></div>
+                    <b><?= _('Answer')?></b>&nbsp;<font class="error">*&nbsp;<?php echo $errors['answer']; ?></font></div>
                     <textarea name="answer" cols="21" rows="12" style="width:98%;" class="richtext"><?php echo $info['answer']; ?></textarea>
             </td>
         </tr>
         <tr>
             <td colspan=2>
-                <div><b>Attachments</b> (optional) <font class="error">&nbsp;<?php echo $errors['files']; ?></font></div>
+                <div><b><?= _('Attachments')?></b><?= _(' (optional)')?> <font class="error">&nbsp;<?php echo $errors['files']; ?></font></div>
                 <?php
                 if($faq && ($files=$faq->getAttachments())) {
                     echo '<div class="faq_attachments"><span class="faded">Uncheck to delete the attachment on submit</span><br>';
@@ -101,7 +101,7 @@ $info=Format::htmlchars(($errors && $_POST)?$_POST:$info);
                     echo '</div><br>';
                 }
                 ?>
-                <div class="faded">Select files to upload.</div>
+                <div class="faded"><?= _('Select files to upload.')?></div>
                 <div class="uploads"></div>
                 <div class="file_input">
                     <input type="file" class="multifile" name="attachments[]" size="30" value="" />
@@ -113,7 +113,7 @@ $info=Format::htmlchars(($errors && $_POST)?$_POST:$info);
         if(($res=db_query($sql)) && db_num_rows($res)) { ?>
         <tr>
             <th colspan="2">
-                <em><strong>Help Topics</strong>: Check all help topics related to this FAQ.</em>
+                <em><strong><?= _('Help Topics')?></strong>:<? _(' Check all help topics related to this FAQ.')?></em>
             </th>
         </tr>
         <tr><td>
@@ -131,7 +131,7 @@ $info=Format::htmlchars(($errors && $_POST)?$_POST:$info);
         } ?>
         <tr>
             <th colspan="2">
-                <em><strong>Internal Notes</strong>: &nbsp;</em>
+                <em><strong><?= _('Internal Notes')?></strong>: &nbsp;</em>
             </th>
         </tr>
         <tr>
@@ -143,7 +143,7 @@ $info=Format::htmlchars(($errors && $_POST)?$_POST:$info);
 </table>
 <p style="padding-left:225px;">
     <input type="submit" name="submit" value="<?php echo $submit_text; ?>">
-    <input type="reset"  name="reset"  value="Reset">
-    <input type="button" name="cancel" value="Cancel" onclick='window.location.href="faq.php?<?php echo $qstr; ?>"'>
+    <input type="reset"  name="reset"  value="<?= _('Reset')?>">
+    <input type="button" name="cancel" value="<?= _('Cancel')?>" onclick='window.location.href="faq.php?<?php echo $qstr; ?>"'>
 </p>
 </form>
