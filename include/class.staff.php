@@ -358,6 +358,11 @@ class Staff {
                 && ($this->isAdmin() || $this->isManager()));
     }
 
+    function showDepartmentTickets() {
+        return ($this->ht['show_department_tickets']
+                && ($this->isAdmin() || $this->isManager()));
+    }
+
     function getTeams() {
         
         if(!$this->teams) {
@@ -458,6 +463,7 @@ class Staff {
             .' ,timezone_id='.db_input($vars['timezone_id'])
             .' ,daylight_saving='.db_input(isset($vars['daylight_saving'])?1:0)
             .' ,show_assigned_tickets='.db_input(isset($vars['show_assigned_tickets'])?1:0)
+            .' ,show_department_tickets='.db_input(isset($vars['show_department_tickets'])?1:0)
             .' ,max_page_size='.db_input($vars['max_page_size'])
             .' ,auto_refresh_rate='.db_input($vars['auto_refresh_rate'])
             .' ,default_signature_type='.db_input($vars['default_signature_type'])

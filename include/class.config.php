@@ -483,6 +483,10 @@ class Config {
         return ($this->config['show_assigned_tickets']);
     }
 
+    function showDepartmentTickets() {
+        return ($this->config['show_department_tickets']);
+    }
+
     function showAnsweredTickets() {
         return ($this->config['show_answered_tickets']);
     }
@@ -676,6 +680,7 @@ class Config {
             .',log_ticket_activity='.db_input(isset($vars['log_ticket_activity'])?1:0)
             .',auto_assign_reopened_tickets='.db_input(isset($vars['auto_assign_reopened_tickets'])?1:0)
             .',show_assigned_tickets='.db_input(isset($vars['show_assigned_tickets'])?1:0)
+            .',show_department_tickets='.db_input(isset($vars['show_department_tickets'])?1:0)
             .',show_answered_tickets='.db_input(isset($vars['show_answered_tickets'])?1:0)
             .',show_related_tickets='.db_input(isset($vars['show_related_tickets'])?1:0)
             .',show_notes_inline='.db_input(isset($vars['show_notes_inline'])?1:0)
