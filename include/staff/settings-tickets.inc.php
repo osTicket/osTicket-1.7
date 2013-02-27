@@ -132,6 +132,13 @@ if(!($maxfileuploads=ini_get('max_file_uploads')))
             </td>
         </tr>
         <tr>
+            <td>Department Tickets:</td>
+            <td>
+                <input type="checkbox" name="show_department_tickets" <?php echo $config['show_department_tickets']?'checked="checked"':''; ?>>
+                Show department tickets on open queue.
+            </td>
+        </tr>
+        <tr>
             <td>Answered Tickets:</td>
             <td>
                 <input type="checkbox" name="show_answered_tickets" <?php echo $config['show_answered_tickets']?'checked="checked"':''; ?>>
