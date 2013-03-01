@@ -6,6 +6,8 @@ if($_REQUEST['status']) { //Query string status has nothing to do with the real 
     $qstr.='status='.urlencode($_REQUEST['status']);
 }
 
+$showoverdue=$showanswered=$showassigned=$showdepartment=false;
+
 //See if this is a search
 $search=($_REQUEST['a']=='search');
 $searchTerm='';
@@ -19,10 +21,21 @@ if($search) {
       $searchTerm='';
   }
 }
-$showoverdue=$showanswered=$showassigned=false;
+else
+{
+   //show Assigned To and/or Department column, if enabled. Admins and managers can overwrite system settings!
+   if($thisstaff->isAdmin() || $thisstaff->isManager())
+   {
+      $showassigned = $thisstaff->showAssignedTickets();
+      $showdepartment = $thisstaff->showDepartmentTickets();
+   }
+   else
+   {
+      $showassigned=$cfg->showAssignedTickets();
+      $showdepartment=$cfg->showDepartmentTickets();
+   }
+}
 $staffId=0; //Nothing for now...TODO: Allow admin and manager to limit tickets to single staff level.
-//show Assigned To column, if enabled. Admins and managers can overwrite system settings!
-$showassigned=(($cfg->showAssignedTickets() || $thisstaff->showAssignedTickets()) && !$search);
 
 //Get status we are actually going to use on the query...making sure it is clean!
 $status=null;
@@ -33,6 +46,7 @@ switch(strtolower($_REQUEST['status'])){ //Status is overloaded
     case 'closed':
         $status='closed';
         $showassigned=false;
+        $showdepartment=false;
         break;
     case 'overdue':
         $status='open';
@@ -133,6 +147,7 @@ if($search):
     }
     //department
     if($_REQUEST['deptId'] && in_array($_REQUEST['deptId'],$thisstaff->getDepts())) {
+       echo "test";
         //This is dept based search..perm taken care above..put the sucker in.
         $qwhere.=' AND ticket.dept_id='.db_input($_REQUEST['deptId']);
         $qstr.='&deptId='.urlencode($_REQUEST['deptId']);
@@ -340,7 +355,7 @@ $negorder=$order=='DESC'?'ASC':'DESC'; //Negate the sorting..
                         title="Sort By Status <?php echo $negorder; ?>">Status</a></th>
             <?php
             } else { ?>
-                <th width="60" <?php echo $pri_sort;?>>
+                <th width="80" <?php echo $pri_sort;?>>
                     <a <?php echo $pri_sort; ?> href="tickets.php?sort=pri&order=<?php echo $negorder; ?><?php echo $qstr; ?>" 
                         title="Sort By Priority <?php echo $negorder; ?>">Priority</a></th>
             <?php
@@ -351,12 +366,14 @@ $negorder=$order=='DESC'?'ASC':'DESC'; //Negate the sorting..
                 <a <?php echo $assignee_sort; ?> href="tickets.php?sort=assignee&order=<?php echo $negorder; ?><?php echo $qstr; ?>" 
                     title="Sort By Assignee <?php echo $negorder;?>">Assigned To</a></th>
             <?php 
-            } elseif(!strcasecmp($status,'closed')) { ?>
+            }
+            if(!strcasecmp($status,'closed')) { ?>
             <th width="150">
                 <a <?php echo $staff_sort; ?> href="tickets.php?sort=staff&order=<?php echo $negorder; ?><?php echo $qstr; ?>" 
                     title="Sort By Closing Staff Name <?php echo $negorder; ?>">Closed By</a></th>
             <?php 
-            } else { ?>
+            }
+            if($showdepartment) { ?>
             <th width="150">
                 <a <?php echo $dept_sort; ?> href="tickets.php?sort=dept&order=<?php echo $negorder;?><?php echo $qstr; ?>" 
                     title="Sort By Department <?php echo $negorder; ?>">Department</a></th>
@@ -378,16 +395,18 @@ $negorder=$order=='DESC'?'ASC':'DESC'; //Negate the sorting..
                 elseif($row['isoverdue'])
                     $flag='overdue';
 
-                $lc='';
+                $assigned='';
+                $dept='';
                 if($showassigned || !strcasecmp($status,'closed')) {
                     if($row['staff_id'])
-                        $lc=sprintf('<span class="Icon staffAssigned">%s</span>',Format::truncate($row['staff'],40));
+                        $assigned=sprintf('<span class="Icon staffAssigned">%s</span>',Format::truncate($row['staff'],40));
                     elseif($row['team_id'])
-                        $lc=sprintf('<span class="Icon teamAssigned">%s</span>',Format::truncate($row['team'],40));
+                        $assigned=sprintf('<span class="Icon teamAssigned">%s</span>',Format::truncate($row['team'],40));
                     else
-                        $lc=' ';
-                }else{
-                    $lc=Format::truncate($row['dept_name'],40);
+                        $assigned=' ';
+                }
+                if($showdepartment || !strcasecmp($status,'closed')){
+                    $dept=Format::truncate($row['dept_name'],40);
                 }
                 $tid=$row['ticketID'];
                 $subject = Format::truncate($row['subject'],40);
@@ -428,9 +447,16 @@ $negorder=$order=='DESC'?'ASC':'DESC'; //Negate the sorting..
                 <td class="nohover" align="center" style="background-color:<?php echo $row['priority_color']; ?>;">
                     <?php echo $row['priority_desc']; ?></td>
                 <?php
-                } 
+                }
+                if($showassigned){
                 ?>
-                <td nowrap>&nbsp;<?php echo $lc; ?></td>
+                <td nowrap>&nbsp;<?php echo $assigned; ?></td>
+                <?php
+                } 
+                if($showdepartment) {
+                ?>
+                <td nowrap>&nbsp;<?php echo $dept; ?></td>
+                <?php } ?>
             </tr>
             <?php
             } //end of while.
@@ -440,7 +466,7 @@ $negorder=$order=='DESC'?'ASC':'DESC'; //Negate the sorting..
     </tbody>
     <tfoot>
      <tr>
-        <td colspan="7">
+        <td colspan="8">
             <?php if($res && $num && $thisstaff->canManageTickets()){ ?>
             Select:&nbsp;
             <a id="selectAll" href="#ckb">All</a>&nbsp;&nbsp;

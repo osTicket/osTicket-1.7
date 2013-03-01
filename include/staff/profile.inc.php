@@ -175,13 +175,20 @@ $info['id']=$staff->getId();
             </td>
         </tr>
         <?php
-        //Show an option to show assigned tickets to admins & managers.
+        //Show an option to show assigned tickets and show department tickets to admins & managers.
         if($staff->isAdmin() || $staff->isManager()){ ?>
         <tr>
             <td>Show Assigned Tickets:</td>
             <td>
                 <input type="checkbox" name="show_assigned_tickets" <?php echo $info['show_assigned_tickets']?'checked="checked"':''; ?>>
                 <em>Show assigned tickets on open queue.</em>
+            </td>
+        </tr>
+        <tr>
+            <td>Show Department Tickets:</td>
+            <td>
+                <input type="checkbox" name="show_department_tickets" <?php echo $info['show_department_tickets']?'checked="checked"':''; ?>>
+                <em>Show department tickets on open queue.</em>
             </td>
         </tr>
         <?php } ?>
