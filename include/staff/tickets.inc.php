@@ -6,6 +6,8 @@ if($_REQUEST['status']) { //Query string status has nothing to do with the real 
     $qstr.='status='.urlencode($_REQUEST['status']);
 }
 
+$showoverdue=$showanswered=$showassigned=$showdepartment=false;
+
 //See if this is a search
 $search=($_REQUEST['a']=='search');
 $searchTerm='';
@@ -19,11 +21,21 @@ if($search) {
       $searchTerm='';
   }
 }
-$showoverdue=$showanswered=$showassigned=$showdepartment=false;
+else
+{
+   //show Assigned To and/or Department column, if enabled. Admins and managers can overwrite system settings!
+   if($thisstaff->isAdmin() || $thisstaff->isManager())
+   {
+      $showassigned = $thisstaff->showAssignedTickets();
+      $showdepartment = $thisstaff->showDepartmentTickets();
+   }
+   else
+   {
+      $showassigned=$cfg->showAssignedTickets();
+      $showdepartment=$cfg->showDepartmentTickets();
+   }
+}
 $staffId=0; //Nothing for now...TODO: Allow admin and manager to limit tickets to single staff level.
-//show Assigned To column, if enabled. Admins and managers can overwrite system settings!
-$showassigned=(($cfg->showAssignedTickets() || $thisstaff->showAssignedTickets()) && !$search);
-$showdepartment=(($cfg->showDepartmentTickets() || $thisstaff->showDepartmentTickets()) && !$search);
 
 //Get status we are actually going to use on the query...making sure it is clean!
 $status=null;
