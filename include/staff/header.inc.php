@@ -4,7 +4,7 @@
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
     <meta http-equiv="cache-control" content="no-cache" />
     <meta http-equiv="pragma" content="no-cache" />
-    <title><?php echo ($ost && ($title=$ost->getPageTitle()))?$title:'osTicket :: Staff Control Panel'; ?></title>
+    <title><?php echo ($ost && ($title=$ost->getPageTitle()))?$title:_('osTicket :: Staff Control Panel'); ?></title>
     <!--[if IE]>
     <style type="text/css">
         .tip_shadow { display:block !important; }
@@ -40,16 +40,16 @@
         echo sprintf('<div id="notice_bar">%s</div>', $ost->getNotice());
     ?>
     <div id="header">
-        <a href="index.php" id="logo">osTicket - Customer Support System</a>
-        <p id="info">Howdy, <strong><?php echo $thisstaff->getUserName(); ?></strong>
+        <a href="index.php" id="logo"><?php echo _('osTicket - Customer Support System');?></a>
+        <p id="info"><?php echo _('Howdy,');?> <strong><?php echo $thisstaff->getUserName(); ?></strong>
            <?php
             if($thisstaff->isAdmin() && !defined('ADMINPAGE')) { ?>
-            | <a href="admin.php">Admin Panel</a>
+            | <a href="admin.php"><?php echo _('Admin Panel');?></a>
             <?php }else{ ?>
-            | <a href="index.php">Staff Panel</a>
+            | <a href="index.php"><?php echo _('Staff Panel');?></a>
             <?php } ?>
-            | <a href="profile.php">My Preferences</a>
-            | <a href="logout.php?auth=<?php echo $ost->getLinkToken(); ?>">Log Out</a>
+            | <a href="profile.php"><?php echo _('My Preferences');?></a>
+            | <a href="logout.php?auth=<?php echo $ost->getLinkToken(); ?>"><?php echo _('Log Out');?></a>
         </p>
     </div>
     <ul id="nav">

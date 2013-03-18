@@ -13,6 +13,7 @@
 
     vim: expandtab sw=4 ts=4 sts=4:
 **********************************************************************/
+
 class Mcrypt {
     
     function encrypt($text, $salt) {
@@ -21,8 +22,8 @@ class Mcrypt {
         //if mcrypt extension is not installed--simply return unencryted text and log a warning (if enabled).
         if(!function_exists('mcrypt_encrypt') || !function_exists('mcrypt_decrypt')) {
             if($ost) {
-                $msg='Cryptography extension mcrypt is not enabled or installed. Important text/data is being stored as plain text in database.';
-                $ost->logWarning('mcrypt module missing', $msg);
+                $msg=_('Cryptography extension mcrypt is not enabled or installed. Important text/data is being stored as plain text in database.');
+                $ost->logWarning(_('mcrypt module missing'), $msg);
             }
 
             return $text;

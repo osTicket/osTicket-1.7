@@ -35,9 +35,8 @@ Class SetupWizard {
     }
 
     function load_sql_file($file, $prefix, $abort=true, $debug=false) {
-        
         if(!file_exists($file) || !($schema=file_get_contents($file)))
-            return $this->abort('Error accessing SQL file '.basename($file), $debug);
+            return $this->abort(sprintf(_('Error accessing SQL file %s'),basename($file)), $debug);
 
         return $this->load_sql($schema, $prefix, $abort, $debug);
     }
@@ -46,14 +45,13 @@ Class SetupWizard {
         load SQL schema - assumes MySQL && existing connection
         */
     function load_sql($schema, $prefix, $abort=true, $debug=false) {
-
         # Strip comments and remarks
         $schema=preg_replace('%^\s*(#|--).*$%m', '', $schema);
         # Replace table prefis
         $schema = str_replace('%TABLE_PREFIX%', $prefix, $schema);
         # Split by semicolons - and cleanup 
         if(!($statements = array_filter(array_map('trim', @explode(';', $schema)))))
-            return $this->abort('Error parsing SQL schema', $debug);
+            return $this->abort(_('Error parsing SQL schema'), $debug);
 
 
         @mysql_query('SET SESSION SQL_MODE =""');

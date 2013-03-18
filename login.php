@@ -23,14 +23,14 @@ require_once(INCLUDE_DIR.'class.ticket.php');
 
 if($_POST) {
 
-    if(($user=Client::login(trim($_POST['lticket']), trim($_POST['lemail']), null, $errors))) {
-        //XXX: Ticket owner is assumed.
-        @header('Location: tickets.php?id='.$user->getTicketID());
-        require_once('tickets.php'); //Just in case of 'header already sent' error.
-        exit;
-    } elseif(!$errors['err']) {
-        $errors['err'] = 'Authentication error - try again!';
-    }
+	if(($user=Client::login(trim($_POST['lticket']), trim($_POST['lemail']), null, $errors))) {
+		//XXX: Ticket owner is assumed.
+		@header('Location: tickets.php?id='.$user->getTicketID());
+		require_once('tickets.php'); //Just in case of 'header already sent' error.
+		exit;
+	} elseif(!$errors['err']) {
+		$errors['err'] = _('Authentication error - try again!');
+	}
 }
 
 $nav = new UserNav();

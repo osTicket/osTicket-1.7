@@ -105,7 +105,6 @@ class osTicket {
     }
 
     function checkCSRFToken($name='') {
-
         $name = $name?$name:$this->getCSRF()->getTokenName();
         if(isset($_POST[$name]) && $this->validateCSRFToken($_POST[$name]))
             return true;
@@ -113,9 +112,9 @@ class osTicket {
         if(isset($_SERVER['HTTP_X_CSRFTOKEN']) && $this->validateCSRFToken($_SERVER['HTTP_X_CSRFTOKEN']))
             return true;
 
-        $msg=sprintf('Invalid CSRF token [%s] on %s',
+        $msg=sprintf(_('Invalid CSRF token [%1$s] on %2$s'),
                 ($_POST[$name].''.$_SERVER['HTTP_X_CSRFTOKEN']), THISPAGE);
-        $this->logWarning('Invalid CSRF Token '.$name, $msg, false);
+        $this->logWarning(_('Invalid CSRF Token').' '.$name, $msg, false);
 
         return false;
     }
@@ -127,7 +126,7 @@ class osTicket {
     function validateLinkToken($token) {
             return ($token && !strcasecmp($token, $this->getLinkToken()));
     }
-
+    
     function isFileTypeAllowed($file, $mimeType='') {
 
         if(!$file || !($allowedFileTypes=$this->getConfig()->getAllowedFileTypes()))
@@ -237,7 +236,7 @@ class osTicket {
         if($email) {
             $email->sendAlert($to, $subject, $message);
         } else {//no luck - try the system mail.
-            Email::sendmail($to, $subject, $message, sprintf('"osTicket Alerts"<%s>',$to));
+            Email::sendmail($to, $subject, $message, sprintf(_('osTicket Alerts <%s>'),$to));
         }
 
         //log the alert? Watch out for loops here.
@@ -320,7 +319,7 @@ class osTicket {
         //System logs
         $sql='DELETE  FROM '.SYSLOG_TABLE.' WHERE DATE_ADD(created, INTERVAL '.$gp.' MONTH)<=NOW()';
         db_query($sql);
-
+        
         //TODO: Activity logs
 
         return true;

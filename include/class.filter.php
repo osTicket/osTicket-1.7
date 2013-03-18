@@ -13,6 +13,7 @@
 
     vim: expandtab sw=4 ts=4 sts=4:
 **********************************************************************/
+
 class Filter {
 
     var $id;
@@ -341,10 +342,10 @@ class Filter {
     /** static functions **/
     function getTargets() {
         return array(
-                'Any' => 'Any',
-                'Web' => 'Web Forms',
-                'API' => 'API Calls',
-                'Email' => 'Emails');
+                'Any' => _('Any'),
+                'Web' => _('Web Forms'),
+                'API' => _('API Calls'),
+                'Email' => _('Emails'));
     }
 
     function create($vars,&$errors) {
@@ -369,7 +370,6 @@ class Filter {
     }
 
     function save_rules($id,$vars,&$errors) {
-
         $matches = array_keys(self::getSupportedMatches());
         $types = array_keys(self::getSupportedMatchTypes());
 
@@ -377,17 +377,17 @@ class Filter {
         for($i=1; $i<=25; $i++) { //Expecting no more than 25 rules...
             if($vars["rule_w$i"] || $vars["rule_h$i"]) {
                 if(!$vars["rule_w$i"] || !in_array($vars["rule_w$i"],$matches))
-                    $errors["rule_$i"]='Invalid match selection';
+                    $errors["rule_$i"]=_('Invalid match selection');
                 elseif(!$vars["rule_h$i"] || !in_array($vars["rule_h$i"],$types))
-                    $errors["rule_$i"]='Invalid match type selection';
+                    $errors["rule_$i"]=_('Invalid match type selection');
                 elseif(!$vars["rule_v$i"])
-                    $errors["rule_$i"]='Value required';
+                    $errors["rule_$i"]=_('Value required');
                 elseif($vars["rule_w$i"]=='email' && $vars["rule_h$i"]=='equal' && !Validator::is_email($vars["rule_v$i"]))
-                    $errors["rule_$i"]='Valid email required for the match type';
+                    $errors["rule_$i"]=_('Valid email required for the match type');
                 else //for everything-else...we assume it's valid.
                     $rules[]=array('w'=>$vars["rule_w$i"],'h'=>$vars["rule_h$i"],'v'=>$vars["rule_v$i"]);
             }elseif($vars["rule_v$i"]) {
-                $errors["rule_$i"]='Incomplete selection';
+                $errors["rule_$i"]=_('Incomplete selection');
             }
         }
 
@@ -395,7 +395,7 @@ class Filter {
             # XXX: Validation bypass
             $rules = $vars["rules"];
         elseif(!$rules && !$errors)
-            $errors['rules']='You must set at least one rule.';
+            $errors['rules']=_('You must set at least one rule.');
 
         if($errors) return false;
 
@@ -415,25 +415,24 @@ class Filter {
 
     function save($id,$vars,&$errors) {
 
-
         if(!$vars['execorder'])
-            $errors['execorder'] = 'Order required';
+            $errors['execorder'] = _('Order required');
         elseif(!is_numeric($vars['execorder']))
-            $errors['execorder'] = 'Must be numeric value';
+            $errors['execorder'] = _('Must be numeric value');
             
         if(!$vars['name'])
-            $errors['name'] = 'Name required';
+            $errors['name'] = _('Name required');
         elseif(($sid=self::getIdByName($vars['name'])) && $sid!=$id)
-            $errors['name'] = 'Name already in-use';
+            $errors['name'] = _('Name already in-use');
 
         if(!$errors && !self::validate_rules($vars,$errors) && !$errors['rules'])
-            $errors['rules'] = 'Unable to validate rules as entered';
+            $errors['rules'] = _('Unable to validate rules as entered');
 
         $targets = self::getTargets();
         if(!$vars['target'])
-            $errors['target'] = 'Target required';
+            $errors['target'] = _('Target required');
         else if(!is_numeric($vars['target']) && !$targets[$vars['target']])
-            $errors['target'] = 'Unknown or invalid target';
+            $errors['target'] = _('Unknown or invalid target');
 
         if($errors) return false;
 
@@ -472,11 +471,11 @@ class Filter {
         if($id) {
             $sql='UPDATE '.FILTER_TABLE.' SET '.$sql.' WHERE id='.db_input($id);
             if(!db_query($sql))
-                $errors['err']='Unable to update the filter. Internal error occurred';
+                $errors['err']=_('Unable to update the filter. Internal error occurred');
         }else{
             $sql='INSERT INTO '.FILTER_TABLE.' SET '.$sql.',created=NOW() ';
             if(!db_query($sql) || !($id=db_insert_id()))
-                $errors['err']='Unable to add filter. Internal error';
+                $errors['err']=_('Unable to add filter. Internal error');
         }
 
         if($errors || !$id) return false;
@@ -573,9 +572,8 @@ class FilterRule {
     }
 
     /* static private */ function save($id,$vars,&$errors) {
-
         if(!$vars['filter_id'])
-            $errors['err']='Parent filter ID required';
+            $errors['err']=_('Parent filter ID required');
 
 
         if($errors) return false;

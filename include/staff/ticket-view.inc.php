@@ -10,7 +10,7 @@ $info=($_POST && $errors)?Format::input($_POST):array();
 
 //Auto-lock the ticket if locking is enabled.. If already locked by the user then it simply renews.
 if($cfg->getLockTime() && !$ticket->acquireLock($thisstaff->getId(),$cfg->getLockTime()))
-    $warn.='Unable to obtain a lock on the ticket';
+    $warn.=_('Unable to obtain a lock on the ticket');
 
 //Get the goodies.
 $dept  = $ticket->getDept();  //Dept
@@ -25,60 +25,60 @@ if($ticket->isAssigned() && (
             ($staff && $staff->getId()!=$thisstaff->getId())
          || ($team && !$team->hasMember($thisstaff))
         ))
-    $warn.='&nbsp;&nbsp;<span class="Icon assignedTicket">Ticket is assigned to '.implode('/', $ticket->getAssignees()).'</span>';
+    $warn.='&nbsp;&nbsp;<span class="Icon assignedTicket">'.sprintf(_('Ticket is assigned to %s'),implode('/', $ticket->getAssignees())).'</span>';
 if(!$errors['err'] && ($lock && $lock->getStaffId()!=$thisstaff->getId()))
-    $errors['err']='This ticket is currently locked by '.$lock->getStaffName();
+    $errors['err']=sprintf(_('This ticket is currently locked by %s'),$lock->getStaffName());
 if(!$errors['err'] && ($emailBanned=TicketFilter::isBanned($ticket->getEmail())))
-    $errors['err']='Email is in banlist! Must be removed before any reply/response';
+    $errors['err']=_('Email is in banlist! Must be removed before any reply/response');
 
 $unbannable=($emailBanned) ? BanList::includes($ticket->getEmail()) : false;
 
 if($ticket->isOverdue())
-    $warn.='&nbsp;&nbsp;<span class="Icon overdueTicket">Marked overdue!</span>';
+    $warn.='&nbsp;&nbsp;<span class="Icon overdueTicket">'._('Marked overdue!').'</span>';
 
 ?>
 <table width="940" cellpadding="2" cellspacing="0" border="0">
     <tr>
         <td width="50%" class="has_bottom_border">
-             <h2><a href="tickets.php?id=<?php echo $ticket->getId(); ?>" title="Reload"><i class="icon-refresh"></i> Ticket #<?php echo $ticket->getExtId(); ?></a></h2>
+             <h2><a href="tickets.php?id=<?php echo $ticket->getId(); ?>" title="Reload"><i class="icon-refresh"></i> <?php echo sprintf(_('Ticket #%d'), $ticket->getExtId()); ?></a></h2>
         </td>
         <td width="50%" class="right_align has_bottom_border">
             <?php
             if($thisstaff->canBanEmails() || ($dept && $dept->isManager($thisstaff))) { ?>
             <span class="action-button" data-dropdown="#action-dropdown-more">
-                <span ><i class="icon-cog"></i> More</span>
+                <span ><i class="icon-cog"></i> <?php echo _('More');?></span>
                 <i class="icon-caret-down"></i>
             </span>
             <?php
             } ?>
             <?php if($thisstaff->canDeleteTickets()) { ?>
-                <a id="ticket-delete" class="action-button" href="#delete"><i class="icon-trash"></i> Delete</a>
+                <a id="ticket-delete" class="action-button" href="#delete"><i class="icon-trash"></i> <?php echo _('Delete');?></a>
             <?php } ?>
             <?php 
             if($thisstaff->canCloseTickets()) {
                 if($ticket->isOpen()) {?>
-                <a id="ticket-close" class="action-button" href="#close"><i class="icon-remove-circle"></i> Close</a>
+                <a id="ticket-close" class="action-button" href="#close"><i class="icon-remove-circle"></i> <?php echo _('Close');?></a>
                 <?php
                 } else { ?>
-                <a id="ticket-reopen" class="action-button" href="#reopen"><i class="icon-undo"></i> Reopen</a>
+                <a id="ticket-reopen" class="action-button" href="#reopen"><i class="icon-undo"></i> <?php echo _('Reopen');?></a>
                 <?php
                 } ?>
             <?php 
             } ?>
             <?php 
             if($thisstaff->canEditTickets()) { ?>
-                <a class="action-button" href="tickets.php?id=<?php echo $ticket->getId(); ?>&a=edit"><i class="icon-edit"></i> Edit</a>
+                <a class="action-button" href="tickets.php?id=<?php echo $ticket->getId(); ?>&a=edit"><i class="icon-edit"></i> <?php echo _('Edit');?></a>
             <?php 
             } ?>
 
             <?php
             if($ticket->isOpen() && !$ticket->isAssigned() && $thisstaff->canAssignTickets()) {?>
-                <a id="ticket-claim" class="action-button" href="#claim"><i class="icon-user"></i> Claim</a>
+                <a id="ticket-claim" class="action-button" href="#claim"><i class="icon-user"></i> <?php echo _('Claim');?></a>
                 
             <?php
             }?>
 
-            <a id="ticket-print" class="action-button" href="tickets.php?id=<?php echo $ticket->getId(); ?>&a=print"><i class="icon-print"></i> Print</a>
+            <a id="ticket-print" class="action-button" href="tickets.php?id=<?php echo $ticket->getId(); ?>&a=print"><i class="icon-print"></i> <?php echo _('Print');?></a>
 
             <div id="action-dropdown-more" class="action-dropdown anchor-right">
               <ul>
@@ -86,30 +86,30 @@ if($ticket->isOverdue())
                 if($ticket->isOpen() && ($dept && $dept->isManager($thisstaff))) {
                         
                     if($ticket->isAssigned()) { ?>
-                        <li><a id="ticket-release" href="#release"><i class="icon-user"></i> Release (unassign) Ticket</a></li>
+                        <li><a id="ticket-release" href="#release"><i class="icon-user"></i> <?php echo _('Release (unassign) Ticket');?></a></li>
                     <?php
                     }
                     
                     if(!$ticket->isOverdue()) { ?>
-                        <li><a id="ticket-overdue" href="#overdue"><i class="icon-bell"></i> Mark as Overdue</a></li>
+                        <li><a id="ticket-overdue" href="#overdue"><i class="icon-bell"></i> <?php echo _('Mark as Overdue');?></a></li>
                     <?php
                     }
                     
                     if($ticket->isAnswered()) { ?>
-                        <li><a id="ticket-unanswered" href="#unanswered"><i class="icon-circle-arrow-left"></i> Mark as Unanswered</a></li>
+                        <li><a id="ticket-unanswered" href="#unanswered"><i class="icon-circle-arrow-left"></i> <?php echo _('Mark as Unanswered');?></a></li>
                     <?php
                     } else { ?>
-                        <li><a id="ticket-answered" href="#answered"><i class="icon-circle-arrow-right"></i> Mark as Answered</a></li>
+                        <li><a id="ticket-answered" href="#answered"><i class="icon-circle-arrow-right"></i> <?php echo _('Mark as Answered');?></a></li>
                     <?php
                     }
                 }
               
                 if($thisstaff->canBanEmails()) { 
                      if(!$emailBanned) {?>
-                        <li><a id="ticket-banemail" href="#banemail"><i class="icon-ban-circle"></i> Ban Email (<?php echo $ticket->getEmail(); ?>)</a></li>
+                        <li><a id="ticket-banemail" href="#banemail"><i class="icon-ban-circle"></i> <?php echo _('Ban Email');?> (<?php echo $ticket->getEmail(); ?>)</a></li>
                 <?php 
                      } elseif($unbannable) { ?>
-                        <li><a id="ticket-banemail" href="#unbanemail"><i class="icon-undo"></i> Unban Email (<?php echo $ticket->getEmail(); ?>)</a></li>
+                        <li><a id="ticket-banemail" href="#unbanemail"><i class="icon-undo"></i> <?php echo _('Unban Email');?> (<?php echo $ticket->getEmail(); ?>)</a></li>
                     <?php
                      }
                 }?>
@@ -123,19 +123,19 @@ if($ticket->isOverdue())
         <td width="50">
             <table border="0" cellspacing="" cellpadding="4" width="100%">
                 <tr>
-                    <th width="100">Status:</th>
+                    <th width="100"><?php echo _('Status');?>:</th>
                     <td><?php echo ucfirst($ticket->getStatus()); ?></td>
                 </tr>
                 <tr>
-                    <th>Priority:</th>
+                    <th><?php echo _('Priority');?>:</th>
                     <td><?php echo $ticket->getPriority(); ?></td>
                 </tr>
                 <tr>
-                    <th>Department:</th>
+                    <th><?php echo _('Department');?>:</th>
                     <td><?php echo Format::htmlchars($ticket->getDeptName()); ?></td>
                 </tr>
                 <tr>
-                    <th>Create Date:</th>
+                    <th><?php echo _('Create Date');?>:</th>
                     <td><?php echo Format::db_datetime($ticket->getCreateDate()); ?></td>
                 </tr>
             </table>
@@ -143,11 +143,11 @@ if($ticket->isOverdue())
         <td width="50%">
             <table border="0" cellspacing="" cellpadding="4" width="100%">
                 <tr>
-                    <th width="100">Name:</th>
+                    <th width="100"><?php echo _('Name');?>:</th>
                     <td><?php echo Format::htmlchars($ticket->getName()); ?></td>
                 </tr>
                 <tr>
-                    <th>Email:</th>
+                    <th><?php echo _('Email');?>:</th>
                     <td>
                     <?php
                         echo $ticket->getEmail();
@@ -159,13 +159,13 @@ if($ticket->isOverdue())
                                 <ul>
                                     <?php
                                     if(($open=$client->getNumOpenTickets()))
-                                        echo sprintf('<li><a href="tickets.php?a=search&status=open&query=%s"><i class="icon-folder-open-alt"></i> %d Open Tickets</a></li>',
+                                        echo sprintf('<li><a href="tickets.php?a=search&status=open&query=%s"><i class="icon-folder-open-alt"></i> '._('%d Open Tickets').'</a></li>',
                                                 $ticket->getEmail(), $open);
                                     if(($closed=$client->getNumClosedTickets()))
-                                        echo sprintf('<li><a href="tickets.php?a=search&status=closed&query=%s"><i class="icon-folder-close-alt"></i> %d Closed Tickets</a></li>',
+                                        echo sprintf('<li><a href="tickets.php?a=search&status=closed&query=%s"><i class="icon-folder-close-alt"></i> '._('%d Closed Tickets').'</a></li>',
                                                 $ticket->getEmail(), $closed);
                                     ?>
-                                    <li><a href="tickets.php?a=search&query=<?php echo $ticket->getEmail(); ?>"><i class="icon-double-angle-right"></i> All Tickets</a></li>
+                                    <li><a href="tickets.php?a=search&query=<?php echo $ticket->getEmail(); ?>"><i class="icon-double-angle-right"></i> <?php echo _('All Tickets');?></a></li>
                                 </u>
                             </div>
                     <?php
@@ -174,11 +174,11 @@ if($ticket->isOverdue())
                     </td>
                 </tr>
                 <tr>
-                    <th>Phone:</th>
+                    <th><?php echo _('Phone');?>:</th>
                     <td><?php echo $ticket->getPhoneNumber(); ?></td>
                 </tr>
                 <tr>
-                    <th>Source:</th>
+                    <th><?php echo _('Source');?>:</th>
                     <td><?php 
                         echo Format::htmlchars($ticket->getSource());
 
@@ -201,45 +201,45 @@ if($ticket->isOverdue())
                 <?php
                 if($ticket->isOpen()) { ?>
                 <tr>
-                    <th width="100">Assigned To:</th>
+                    <th width="100"><?php echo _('Assigned To');?>:</th>
                     <td>
                         <?php
                         if($ticket->isAssigned())
                             echo Format::htmlchars(implode('/', $ticket->getAssignees()));
                         else
-                            echo '<span class="faded">&mdash; Unassigned &mdash;</span>';
+                            echo '<span class="faded">&mdash; '._('Unassigned').' &mdash;</span>';
                         ?>
                     </td>
                 </tr>
                 <?php
                 } else { ?>
                 <tr>
-                    <th width="100">Closed By:</th>
+                    <th width="100"><?php echo _('Closed By');?>:</th>
                     <td>
                         <?php
                         if(($staff = $ticket->getStaff()))
                             echo Format::htmlchars($staff->getName());
                         else
-                            echo '<span class="faded">&mdash; Unknown &mdash;</span>';
+                            echo '<span class="faded">&mdash; '._('Unknown').' &mdash;</span>';
                         ?>
                     </td>
                 </tr>
                 <?php
                 } ?>
                 <tr>
-                    <th>SLA Plan:</th>
-                    <td><?php echo $sla?Format::htmlchars($sla->getName()):'<span class="faded">&mdash; none &mdash;</span>'; ?></td>
+                    <th><?php echo _('SLA Plan');?>:</th>
+                    <td><?php echo $sla?Format::htmlchars($sla->getName()):'<span class="faded">&mdash; '._('none').' &mdash;</span>'; ?></td>
                 </tr>
                 <?php
                 if($ticket->isOpen()){ ?>
                 <tr>
-                    <th>Due Date:</th>
+                    <th><?php echo _('Due Date');?>:</th>
                     <td><?php echo Format::db_datetime($ticket->getEstDueDate()); ?></td>
                 </tr>
                 <?php
                 }else { ?>
                 <tr>
-                    <th>Close Date:</th>
+                    <th><?php echo _('Close Date');?>:</th>
                     <td><?php echo Format::db_datetime($ticket->getCloseDate()); ?></td>
                 </tr>
                 <?php
@@ -250,15 +250,15 @@ if($ticket->isOverdue())
         <td width="50%">
             <table cellspacing="0" cellpadding="4" width="100%" border="0">
                 <tr>
-                    <th width="100">Help Topic:</th>
+                    <th width="100"><?php echo _('Help Topic');?>:</th>
                     <td><?php echo Format::htmlchars($ticket->getHelpTopic()); ?></td>
                 </tr>
                 <tr>
-                    <th nowrap>Last Message:</th>
+                    <th nowrap><?php echo _('Last Message');?>:</th>
                     <td><?php echo Format::db_datetime($ticket->getLastMsgDate()); ?></td>
                 </tr>
                 <tr>
-                    <th nowrap>Last Response:</th>
+                    <th nowrap><?php echo _('Last Response');?>:</th>
                     <td><?php echo Format::db_datetime($ticket->getLastRespDate()); ?></td>
                 </tr>
             </table>
@@ -273,10 +273,10 @@ if($cfg->showNotesInline())
     $tcount+= $ticket->getNumNotes();
 ?>
 <ul id="threads">
-    <li><a class="active" id="toggle_ticket_thread" href="#">Ticket Thread (<?php echo $tcount; ?>)</a></li>
+    <li><a class="active" id="toggle_ticket_thread" href="#"><?php echo _('Ticket Thread');?> (<?php echo $tcount; ?>)</a></li>
     <?php
     if(!$cfg->showNotesInline()) {?>
-    <li><a id="toggle_notes" href="#">Internal Notes (<?php echo $ticket->getNumNotes(); ?>)</a></li>
+    <li><a id="toggle_notes" href="#"><?php echo _('Internal Notes');?> (<?php echo $ticket->getNumNotes(); ?>)</a></li>
     <?php
     }?>
 </ul>
@@ -293,7 +293,7 @@ if(!$cfg->showNotesInline()) { ?>
             <tr>
                 <th width="640">
                     <?php
-                    echo sprintf('%s <em>posted by <b>%s</b></em>',
+                    echo sprintf('%s <em>'._('posted by <b>%s</b>').'</em>',
                             Format::htmlchars($note['title']),
                             Format::htmlchars($note['poster']));
                     ?>
@@ -318,7 +318,7 @@ if(!$cfg->showNotesInline()) { ?>
     <?php
         }
     } else {
-        echo "<p>No internal notes found.</p>";
+        echo "<p>"._('No internal notes found.')."</p>";
     }?>
 </div>
 <?php
@@ -355,7 +355,7 @@ if(!$cfg->showNotesInline()) { ?>
             $msgId=$entry['id'];
        }
     } else {
-        echo '<p>Error fetching ticket thread - get technical help.</p>';
+        echo '<p>'._('Error fetching ticket thread - get technical help.').'</p>';
     }?>
 </div>
 <div class="clear" style="padding-bottom:10px;"></div>
@@ -371,18 +371,18 @@ if(!$cfg->showNotesInline()) { ?>
     <ul>
         <?php
         if($thisstaff->canPostReply()) { ?>
-        <li><a id="reply_tab" href="#reply">Post Reply</a></li>
+        <li><a id="reply_tab" href="#reply"><?php echo _('Post Reply');?></a></li>
         <?php
         } ?>
-        <li><a id="note_tab" href="#note">Post Internal Note</a></li>
+        <li><a id="note_tab" href="#note"><?php echo _('Post Internal Note');?></a></li>
         <?php
         if($thisstaff->canTransferTickets()) { ?>
-        <li><a id="transfer_tab" href="#transfer">Dept. Transfer</a></li>
+        <li><a id="transfer_tab" href="#transfer"><?php echo _('Dept. Transfer');?></a></li>
         <?php
         }
 
         if($thisstaff->canAssignTickets()) { ?>
-        <li><a id="assign_tab" href="#assign"><?php echo $ticket->isAssigned()?'Reassign Ticket':'Assign Ticket'; ?></a></li>
+        <li><a id="assign_tab" href="#assign"><?php echo $ticket->isAssigned()?_('Reassign Ticket'):_('Assign Ticket'); ?></a></li>
         <?php
         } ?>
     </ul>
@@ -397,7 +397,7 @@ if(!$cfg->showNotesInline()) { ?>
         <table border="0" cellspacing="0" cellpadding="3">
             <tr>
                 <td width="160">
-                    <label><strong>TO:</strong></label>
+                    <label><strong><?php echo _('TO');?>:</strong></label>
                 </td>
                 <td width="765">
                     <?php
@@ -408,7 +408,7 @@ if(!$cfg->showNotesInline()) { ?>
                     ?>
                     &nbsp;&nbsp;&nbsp;
                     <label><input type='checkbox' value='1' name="emailreply" id="remailreply"
-                        <?php echo ((!$info['emailreply'] && !$errors) || isset($info['emailreply']))?'checked="checked"':''; ?>> Email Reply</label>
+                        <?php echo ((!$info['emailreply'] && !$errors) || isset($info['emailreply']))?'checked="checked"':''; ?>> <?php echo _('Email Reply');?></label>
                 </td>
             </tr>
             <?php
@@ -418,13 +418,13 @@ if(!$cfg->showNotesInline()) { ?>
             }?>
             <tr>
                 <td width="160">
-                    <label><strong>Response:</strong></label>
+                    <label><strong><?php echo _('Response');?>:</strong></label>
                 </td>
                 <td width="765">
                     <?php
                     if(($cannedResponses=Canned::responsesByDeptId($ticket->getDeptId()))) {?>
                         <select id="cannedResp" name="cannedResp">
-                            <option value="0" selected="selected">Select a canned response</option>
+                            <option value="0" selected="selected"><?php echo _('Select a canned response');?></option>
                             <?php
                             foreach($cannedResponses as $id =>$title) {
                                 echo sprintf('<option value="%d">%s</option>',$id,$title);
@@ -432,7 +432,7 @@ if(!$cfg->showNotesInline()) { ?>
                             ?>
                         </select>
                         &nbsp;&nbsp;&nbsp;
-                        <label><input type='checkbox' value='1' name="append" id="append" checked="checked"> Append</label>
+                        <label><input type='checkbox' value='1' name="append" id="append" checked="checked"> <?php echo _('Append');?></label>
                         <br>
                     <?php
                     }?>
@@ -443,7 +443,7 @@ if(!$cfg->showNotesInline()) { ?>
             if($cfg->allowAttachments()) { ?>
             <tr>
                 <td width="160">
-                    <label for="attachment">Attachments:</label>
+                    <label for="attachment"><?php echo _('Attachments');?>:</label>
                 </td>
                 <td width="765" id="reply_form_attachments" class="attachments">
                     <div class="canned_attachments">
@@ -459,17 +459,17 @@ if(!$cfg->showNotesInline()) { ?>
             }?>
             <tr>
                 <td width="160">
-                    <label for="signature" class="left">Signature:</label>
+                    <label for="signature" class="left"><?php echo _('Signature');?>:</label>
                 </td>
                 <td width="765">
                     <?php
                     $info['signature']=$info['signature']?$info['signature']:$thisstaff->getDefaultSignatureType();
                     ?>
-                    <label><input type="radio" name="signature" value="none" checked="checked"> None</label>
+                    <label><input type="radio" name="signature" value="none" checked="checked"> <?php echo _('None');?></label>
                     <?php
                     if($thisstaff->getSignature()) {?>
                     <label><input type="radio" name="signature" value="mine"
-                        <?php echo ($info['signature']=='mine')?'checked="checked"':''; ?>> My signature</label>
+                        <?php echo ($info['signature']=='mine')?'checked="checked"':''; ?>> <?php echo _('My Signature');?></label>
                     <?php
                     } ?>
                     <?php
@@ -485,18 +485,18 @@ if(!$cfg->showNotesInline()) { ?>
             if($ticket->isClosed() || $thisstaff->canCloseTickets()) { ?>
             <tr>
                 <td width="160">
-                    <label><strong>Ticket Status:</strong></label>
+                    <label><strong><?php echo _('Ticket Status');?>:</strong></label>
                 </td>
                 <td width="765">
                     <?php
                     $statusChecked=isset($info['reply_ticket_status'])?'checked="checked"':'';
                     if($ticket->isClosed()) { ?>
                         <label><input type="checkbox" name="reply_ticket_status" id="reply_ticket_status" value="Open"
-                            <?php echo $statusChecked; ?>> Reopen on Reply</label>
+                            <?php echo $statusChecked; ?>> <?php echo _('Reopen on Reply');?></label>
                    <?php
                     } elseif($thisstaff->canCloseTickets()) { ?>
                          <label><input type="checkbox" name="reply_ticket_status" id="reply_ticket_status" value="Closed"
-                              <?php echo $statusChecked; ?>> Close on Reply</label>
+                              <?php echo $statusChecked; ?>> <?php echo _('Close on Reply');?></label>
                    <?php
                     } ?>
                 </td>
@@ -506,8 +506,8 @@ if(!$cfg->showNotesInline()) { ?>
             </div>
         </table>
         <p  style="padding-left:165px;">
-            <input class="btn_sm" type="submit" value="Post Reply">
-            <input class="btn_sm" type="reset" value="Reset">
+            <input class="btn_sm" type="submit" value="<?php echo _('Post Reply');?>">
+            <input class="btn_sm" type="reset" value="<?php echo _('Reset');?>">
         </p>
     </form>
     <?php
@@ -528,14 +528,14 @@ if(!$cfg->showNotesInline()) { ?>
             } ?>
             <tr>
                 <td width="160">
-                    <label><strong>Internal Note:</strong></label>
+                    <label><strong><?php echo _('Internal Note');?>:</strong></label>
                 </td>
                 <td width="765">
-                    <div><span class="faded">Note details</span>&nbsp;
+                    <div><span class="faded"><?php echo _('Note details');?></span>&nbsp;
                         <span class="error">*&nbsp;<?php echo $errors['note']; ?></span></div>
                     <textarea name="note" id="internal_note" cols="80" rows="9" wrap="soft"><?php echo $info['note']; ?></textarea><br>
                     <div>
-                        <span class="faded">Note title - summarry of the note (optional)</span>&nbsp;
+                        <span class="faded"><?php echo _('Note title');?> - <?php echo _('summarry of the note (optional)');?></span>&nbsp;
                         <span class="error"&nbsp;<?php echo $errors['title']; ?></span>
                     </div>
                     <input type="text" name="title" id="title" size="60" value="<?php echo $info['title']; ?>" >
@@ -545,7 +545,7 @@ if(!$cfg->showNotesInline()) { ?>
             if($cfg->allowAttachments()) { ?>
             <tr>
                 <td width="160">
-                    <label for="attachment">Attachments:</label>
+                    <label for="attachment"><?php echo _('Attachments');?>:</label>
                 </td>
                 <td width="765" class="attachments">
                     <div class="uploads">
@@ -561,31 +561,31 @@ if(!$cfg->showNotesInline()) { ?>
             <tr><td colspan="2">&nbsp;</td></tr>
             <tr>
                 <td width="160">
-                    <label>Ticket Status:</label>
+                    <label><?php echo _('Ticket Status');?>:</label>
                 </td>
                 <td width="765">
                     <div class="faded"></div>
                     <select name="state">
-                        <option value="" selected="selected">&mdash; unchanged &mdash;</option>
+                        <option value="" selected="selected">&mdash; <?php echo _('unchanged');?> &mdash;</option>
                         <?php
                         $state = $info['state'];
                         if($ticket->isClosed()){ 
-                            echo sprintf('<option value="open" %s>Reopen Ticket</option>',
+                            echo sprintf('<option value="open" %s>'._('Reopen Ticket').'</option>',
                                     ($state=='reopen')?'selected="selelected"':'');
                         } else {
                             if($thisstaff->canCloseTickets())
-                                echo sprintf('<option value="closed" %s>Close Ticket</option>',
+                                echo sprintf('<option value="closed" %s>'._('Close Ticket').'</option>',
                                     ($state=='closed')?'selected="selelected"':'');
 
                             /* Ticket open - states */
-                            echo '<option value="" disabled="disabled">&mdash; Ticket States &mdash;</option>';
+                            echo '<option value="" disabled="disabled">&mdash; '._('Ticket States').' &mdash;</option>';
                        
                             //Answer - state
                             if($ticket->isAnswered())
-                                echo sprintf('<option value="unanswered" %s>Mark As Unanswered</option>',
+                                echo sprintf('<option value="unanswered" %s>'._('Mark as Unanswered').'</option>',
                                     ($state=='unanswered')?'selected="selelected"':'');
                             else 
-                                echo sprintf('<option value="answered" %s>Mark As Answered</option>',
+                                echo sprintf('<option value="answered" %s>'._('Mark as Answered').'</option>',
                                     ($state=='answered')?'selected="selelected"':'');
 
                             //overdue - state
@@ -593,14 +593,14 @@ if(!$cfg->showNotesInline()) { ?>
                             // Staff with edit perm. can still set overdue date & change SLA.
                             if($dept && $dept->isManager($thisstaff)) {
                                 if(!$ticket->isOverdue())
-                                    echo sprintf('<option value="overdue" %s>Flag As Overdue</option>',
+                                    echo sprintf('<option value="overdue" %s>'._('Flag As Overdue').'</option>',
                                         ($state=='answered')?'selected="selelected"':'');
                                 else
-                                    echo sprintf('<option value="notdue" %s>Clear Overdue Flag</option>',
+                                    echo sprintf('<option value="notdue" %s>'._('Clear Overdue Flag').'</option>',
                                         ($state=='notdue')?'selected="selelected"':'');
 
                                 if($ticket->isAssigned())
-                                    echo sprintf('<option value="unassigned" %s>Release (Unassign) Ticket</option>',
+                                    echo sprintf('<option value="unassigned" %s>'._('Release (Unassign) Ticket').'</option>',
                                         ($state=='unassigned')?'selected="selelected"':'');
                             }
                         }?>
@@ -612,8 +612,8 @@ if(!$cfg->showNotesInline()) { ?>
         </table>
 
        <p  style="padding-left:165px;">
-           <input class="btn_sm" type="submit" value="Post Note">
-           <input class="btn_sm" type="reset" value="Reset">
+           <input class="btn_sm" type="submit" value="<?php echo _('Post Note');?>">
+           <input class="btn_sm" type="reset" value="<?php echo _('Reset');?>">
        </p>
    </form>
     <?php
@@ -634,15 +634,15 @@ if(!$cfg->showNotesInline()) { ?>
             } ?>
             <tr>
                 <td width="160">
-                    <label for="deptId"><strong>Department:</strong></label>
+                    <label for="deptId"><strong><?php echo _('Department');?>:</strong></label>
                 </td>
                 <td width="765">
                     <?php
-                        echo sprintf('<span class="faded">Ticket is currently in <b>%s</b> department.</span>', $ticket->getDeptName());
+                        echo sprintf('<span class="faded">'._('Ticket is currently in <b>%s</b> department.').'</span>', $ticket->getDeptName());
                     ?>
                     <br>
                     <select id="deptId" name="deptId">
-                        <option value="0" selected="selected">&mdash; Select Target Department &mdash;</option>
+                        <option value="0" selected="selected">&mdash; <?php echo _('Select Target Department');?> &mdash;</option>
                         <?php
                         if($depts=Dept::getDepartments()) {
                             foreach($depts as $id =>$name) {
@@ -657,10 +657,10 @@ if(!$cfg->showNotesInline()) { ?>
             </tr>
             <tr>
                 <td width="160">
-                    <label><strong>Comments:</strong></label>
+                    <label><strong><?php echo _('Comments');?>:</strong></label>
                 </td>
                 <td width="765">
-                    <span class="faded">Enter reasons for the transfer.</span>
+                    <span class="faded"><?php echo _('Enter reasons for the transfer.');?></span>
                     <span class="error">*&nbsp;<?php echo $errors['transfer_comments']; ?></span><br>
                     <textarea name="transfer_comments" id="transfer_comments"
                         cols="80" rows="7" wrap="soft"><?php echo $info['transfer_comments']; ?></textarea>
@@ -668,8 +668,8 @@ if(!$cfg->showNotesInline()) { ?>
             </tr>
         </table>
         <p style="padding-left:165px;">
-           <input class="btn_sm" type="submit" value="Transfer">
-           <input class="btn_sm" type="reset" value="Reset">
+           <input class="btn_sm" type="submit" value="<?php echo _('Transfer');?>">
+           <input class="btn_sm" type="reset" value="<?php echo _('Reset');?>">
         </p>
     </form>
     <?php
@@ -693,27 +693,27 @@ if(!$cfg->showNotesInline()) { ?>
             } ?>
             <tr>
                 <td width="160">
-                    <label for="assignId"><strong>Assignee:</strong></label>
+                    <label for="assignId"><strong><?php echo _('Assignee');?>:</strong></label>
                 </td>
                 <td width="765">
                     <?php
                     if($ticket->isAssigned() && $ticket->isOpen()) {
-                        echo sprintf('<span class="faded">Ticket is currently assigned to <b>%s</b></span>',
+                        echo sprintf('<span class="faded">'._('Ticket is currently assigned to <b>%s</b>').'</span>',
                                 $ticket->getAssignee());
                     } else {
-                        echo '<span class="faded">Assigning a closed ticket will <b>reopen</b> it!</span>';
+                        echo '<span class="faded">'._('Assigning a closed ticket will <b>reopen</b> it!').'</span>';
                     }
                     ?>
                     <br>
                     <select id="assignId" name="assignId">
-                        <option value="0" selected="selected">&mdash; Select Staff Member OR a Team &mdash;</option>
+                        <option value="0" selected="selected">&mdash; <?php echo _('Select Staff Member OR a Team');?> &mdash;</option>
                         <?php
                         if($ticket->isOpen() && !$ticket->isAssigned())
-                            echo sprintf('<option value="%d">Claim Ticket (comments optional)</option>', $thisstaff->getId());
+                            echo sprintf('<option value="%d">'._('Claim Ticket (comments optional)').'</option>', $thisstaff->getId());
 
                         $sid=$tid=0;
                         if(($users=Staff::getAvailableStaffMembers())) {
-                            echo '<OPTGROUP label="Staff Members ('.count($users).')">';
+                            echo '<OPTGROUP label="'._('Staff Members').' ('.count($users).')">';
                             $staffId=$ticket->isAssigned()?$ticket->getStaffId():0;
                             foreach($users as $id => $name) {
                                 if($staffId && $staffId==$id)
@@ -727,7 +727,7 @@ if(!$cfg->showNotesInline()) { ?>
                         }
 
                         if(($teams=Team::getActiveTeams())) {
-                            echo '<OPTGROUP label="Teams ('.count($teams).')">';
+                            echo '<OPTGROUP label="'._('Teams').' ('.count($teams).')">';
                             $teamId=(!$sid && $ticket->isAssigned())?$ticket->getTeamId():0;
                             foreach($teams as $id => $name) {
                                 if($teamId && $teamId==$id)
@@ -745,25 +745,25 @@ if(!$cfg->showNotesInline()) { ?>
             </tr>
             <tr>
                 <td width="160">
-                    <label><strong>Comments:</strong><span class='error'>&nbsp;</span></label>
+                    <label><strong><?php echo _('Comments');?>:</strong><span class='error'>&nbsp;</span></label>
                 </td>
                 <td width="765">
-                    <span class="faded">Enter reasons for the assignment or instructions for assignee.</span>
+                    <span class="faded"><?php echo _('Enter reasons for the assignment or instructions for assignee.');?></span>
                     <span class="error">*&nbsp;<?php echo $errors['assign_comments']; ?></span><br>
                     <textarea name="assign_comments" id="assign_comments" cols="80" rows="7" wrap="soft"><?php echo $info['assign_comments']; ?></textarea>
                 </td>
             </tr>
         </table>
         <p  style="padding-left:165px;">
-            <input class="btn_sm" type="submit" value="<?php echo $ticket->isAssigned()?'Reassign':'Assign'; ?>">
-            <input class="btn_sm" type="reset" value="Reset">
+            <input class="btn_sm" type="submit" value="<?php echo $ticket->isAssigned()?_('Reassign'):_('Assign'); ?>">
+            <input class="btn_sm" type="reset" value="<?php echo _('Reset');?>">
         </p>
     </form>
     <?php
     } ?>
 </div>
 <div style="display:none;" class="dialog" id="print-options">
-    <h3>Ticket Print Options</h3>
+    <h3><?php echo _('Ticket Print Options');?></h3>
     <a class="close" href="">&times;</a>
     <hr/>
     <form action="tickets.php?id=<?php echo $ticket->getId(); ?>" method="post" id="print-form" name="print-form">
@@ -771,13 +771,13 @@ if(!$cfg->showNotesInline()) { ?>
         <input type="hidden" name="a" value="print">
         <input type="hidden" name="id" value="<?php echo $ticket->getId(); ?>">
         <fieldset class="notes">
-            <label for="notes">Print Notes:</label>
-            <input type="checkbox" id="notes" name="notes" value="1"> Print <b>Internal</b> Notes/Comments
+            <label for="notes"><?php echo _('Print Notes');?>:</label>
+            <input type="checkbox" id="notes" name="notes" value="1"> <?php echo _('Print <b>Internal</b> Notes/Comments');?>
         </fieldset>
         <fieldset>
-            <label for="psize">Paper Size:</label>
+            <label for="psize"><?php echo _('Paper Size');?>:</label>
             <select id="psize" name="psize">
-                <option value="">&mdash; Select Print Paper Size &mdash;</option>
+                <option value="">&mdash; <?php echo _('Select Print Paper Size');?> &mdash;</option>
                 <?php
                   $options=array('Letter', 'Legal', 'A4', 'A3');
                   $psize =$_SESSION['PAPER_SIZE']?$_SESSION['PAPER_SIZE']:$thisstaff->getDefaultPaperSize();
@@ -791,74 +791,74 @@ if(!$cfg->showNotesInline()) { ?>
         <hr style="margin-top:3em"/>
         <p class="full-width">
             <span class="buttons" style="float:left">
-                <input type="reset" value="Reset">
-                <input type="button" value="Cancel" class="close">
+                <input type="reset" value="<?php echo _('Reset');?>">
+                <input type="button" value="<?php echo _('Cancel');?>" class="close">
             </span>
             <span class="buttons" style="float:right">
-                <input type="submit" value="Print">
+                <input type="submit" value="<?php echo _('Print');?>">
             </span>
          </p>
     </form>
     <div class="clear"></div>
 </div>
 <div style="display:none;" class="dialog" id="ticket-status">
-    <h3><?php echo sprintf('%s Ticket #%s', ($ticket->isClosed()?'Reopen':'Close'), $ticket->getNumber()); ?></h3>
+    <h3><?php echo sprintf(_('%1$s Ticket #%2$s'), ($ticket->isClosed()?_('Reopen'):_('Close')), $ticket->getNumber()); ?></h3>
     <a class="close" href="">&times;</a>
     <hr/>
-    <?php echo sprintf('Are you sure you want to <b>%s</b> this ticket?', $ticket->isClosed()?'REOPEN':'CLOSE'); ?>
+    <?php echo sprintf(_('Are you sure you want to <b>%s</b> this ticket?'), $ticket->isClosed()?_('REOPEN'):_('CLOSE')); ?>
     <form action="tickets.php?id=<?php echo $ticket->getId(); ?>" method="post" id="status-form" name="status-form">
         <?php csrf_token(); ?>
         <input type="hidden" name="id" value="<?php echo $ticket->getId(); ?>">
         <input type="hidden" name="a" value="process">
         <input type="hidden" name="do" value="<?php echo $ticket->isClosed()?'reopen':'close'; ?>">
         <fieldset>
-            <em>Reasons for status change (internal note). Optional but highly recommended.</em><br>
+            <em><?php echo _('Reasons for status change (internal note). Optional but highly recommended.');?></em><br>
             <textarea name="ticket_status_notes" id="ticket_status_notes" cols="50" rows="5" wrap="soft"><?php echo $info['ticket_status_notes']; ?></textarea>
         </fieldset>
         <hr style="margin-top:1em"/>
         <p class="full-width">
             <span class="buttons" style="float:left">
-                <input type="reset" value="Reset">
-                <input type="button" value="Cancel" class="close">
+                <input type="reset" value="<?php echo _('Reset');?>">
+                <input type="button" value="<?php echo _('Cancel');?>" class="close">
             </span>
             <span class="buttons" style="float:right">
-                <input type="submit" value="<?php echo $ticket->isClosed()?'Reopen':'Close'; ?>">
+                <input type="submit" value="<?php echo $ticket->isClosed()?_('Reopen'):_('Close'); ?>">
             </span>
          </p>
     </form>
     <div class="clear"></div>
 </div>
 <div style="display:none;" class="dialog" id="confirm-action">
-    <h3>Please Confirm</h3>
+    <h3><?php echo _('Please Confirm');?></h3>
     <a class="close" href="">&times;</a>
     <hr/>
     <p class="confirm-action" style="display:none;" id="claim-confirm">
-        Are you sure want to <b>claim</b> (self assign) this ticket?
+        <?php echo _('Are you sure want to <b>claim</b> (self assign) this ticket?');?>
     </p>
     <p class="confirm-action" style="display:none;" id="answered-confirm">
-        Are you sure want to flag the ticket as <b>answered</b>?
+        <?php echo _('Are you sure want to flag the ticket as <b>answered</b>?');?>
     </p>    
     <p class="confirm-action" style="display:none;" id="unanswered-confirm">
-        Are you sure want to flag the ticket as <b>unanswered</b>?
+        <?php echo _('Are you sure want to flag the ticket as <b>unanswered</b>?');?>
     </p>
     <p class="confirm-action" style="display:none;" id="overdue-confirm">
-        Are you sure want to flag the ticket as <font color="red"><b>overdue</b></font>?
+        <?php echo _('Are you sure want to flag the ticket as <font color="red"><b>overdue</b></font>?');?>
     </p>
     <p class="confirm-action" style="display:none;" id="banemail-confirm">
-        Are you sure want to <b>ban</b> <?php echo $ticket->getEmail(); ?>? <br><br>
-        New tickets from the email address will be auto-rejected.
+        <?php echo sprintf(_('Are you sure want to <b>ban</b> %s?'), $ticket->getEmail());?> <br><br>
+        <?php echo _('New tickets from the email address will be auto-rejected.');?>
     </p>
     <p class="confirm-action" style="display:none;" id="unbanemail-confirm">
-        Are you sure want to <b>remove</b> <?php echo $ticket->getEmail(); ?> from ban list?
+        <?php echo sprintf(_('Are you sure want to <b>remove</b> %s from ban list?'), $ticket->getEmail()); ?> 
     </p>
     <p class="confirm-action" style="display:none;" id="release-confirm">
-        Are you sure want to <b>unassign</b> ticket from <b><?php echo $ticket->getAssigned(); ?></b>?
+        <?php echo sprintf(_('Are you sure want to <b>unassign</b> ticket from %s<b>?'), $ticket->getAssigned()); ?></b>
     </p>
     <p class="confirm-action" style="display:none;" id="delete-confirm">
-        <font color="red"><strong>Are you sure you want to DELETE this ticket?</strong></font>
-        <br><br>Deleted tickets CANNOT be recovered, including any associated attachments.
+        <font color="red"><strong><?php echo _('Are you sure you want to DELETE this ticket?');?></strong></font>
+        <br><br><?php echo _('Deleted tickets CANNOT be recovered, including any associated attachments.');?>
     </p>
-    <div>Please confirm to continue.</div>
+    <div><?php echo _('Please confirm to continue.');?></div>
     <form action="tickets.php?id=<?php echo $ticket->getId(); ?>" method="post" id="confirm-form" name="confirm-form">
         <?php csrf_token(); ?>
         <input type="hidden" name="id" value="<?php echo $ticket->getId(); ?>">
@@ -867,10 +867,10 @@ if(!$cfg->showNotesInline()) { ?>
         <hr style="margin-top:1em"/>
         <p class="full-width">
             <span class="buttons" style="float:left">
-                <input type="button" value="Cancel" class="close">
+                <input type="button" value="<?php echo _('Cancel');?>" class="close">
             </span>
             <span class="buttons" style="float:right">
-                <input type="submit" value="OK">
+                <input type="submit" value="<?php echo _('OK');?>">
             </span>
          </p>
     </form>

@@ -18,30 +18,30 @@ include_once(INCLUDE_DIR.'class.email.php');
 
 $email=null;
 if($_REQUEST['id'] && !($email=Email::lookup($_REQUEST['id'])))
-    $errors['err']='Unknown or invalid email ID.';
+    $errors['err']=_('Unknown or invalid email ID.');
 
 if($_POST){
     switch(strtolower($_POST['do'])){
         case 'update':
             if(!$email){
-                $errors['err']='Unknown or invalid email.';
+                $errors['err']=_('Unknown or invalid email.');
             }elseif($email->update($_POST,$errors)){
-                $msg='Email updated successfully';
+                $msg=_('Email updated successfully');
             }elseif(!$errors['err']){
-                $errors['err']='Error updating email. Try again!';
+                $errors['err']=_('Error updating email. Try again!');
             }
             break;
         case 'create':
             if(($id=Email::create($_POST,$errors))){
-                $msg='Email address added successfully';
+                $msg=_('Email address added successfully');
                 $_REQUEST['a']=null;
             }elseif(!$errors['err']){
-                $errors['err']='Unable to add email. Correct error(s) below and try again.';
+                $errors['err']=_('Unable to add email. Correct error(s) below and try again.');
             }
             break;
         case 'mass_process':
             if(!$_POST['ids'] || !is_array($_POST['ids']) || !count($_POST['ids'])) {
-                $errors['err'] = 'You must select at least one email address';
+                $errors['err'] = _('You must select at least one email address');
             } else {
                 $count=count($_POST['ids']);
 
@@ -51,7 +51,7 @@ if($_POST){
 
                 list($depts)=db_fetch_row(db_query($sql));
                 if($depts>0) {
-                    $errors['err'] = 'One or more of the selected emails is being used by a department. Remove association first!';
+                    $errors['err'] = _('One or more of the selected emails is being used by a department. Remove association first!');
                 } elseif(!strcasecmp($_POST['a'], 'delete')) {
                     $i=0;
                     foreach($_POST['ids'] as $k=>$v) {
@@ -60,19 +60,19 @@ if($_POST){
                     }
 
                     if($i && $i==$count)
-                        $msg = 'Selected emails deleted successfully';
+                        $msg = _('Selected emails deleted successfully');
                     elseif($i>0)
-                        $warn = "$i of $count selected emails deleted";
+                        $warn = sprintf(_('%1$d of %2$d selected emails deleted'), $i, $count);
                     elseif(!$errors['err'])
-                        $errors['err'] = 'Unable to delete selected emails';
+                        $errors['err'] = _('Unable to delete selected emails');
                     
                 } else {
-                    $errors['err'] = 'Unknown action - get technical help';
+                    $errors['err'] = _('Unknown action - get technical help');
                 }
             }
             break;
         default:
-            $errors['err'] = 'Unknown action/command';
+            $errors['err'] = _('Unknown action/command');
             break;
     }
 }

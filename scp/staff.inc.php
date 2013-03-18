@@ -33,7 +33,6 @@ define('OSTSTAFFINC',TRUE);
 /* Tables used by staff only */
 define('KB_PREMADE_TABLE',TABLE_PREFIX.'kb_premade');
 
-
 /* include what is needed on staff control panel */
 
 require_once(INCLUDE_DIR.'class.staff.php');
@@ -59,7 +58,7 @@ if(!function_exists('staffLoginPage')) { //Ajax interface can pre-declare the fu
 $thisstaff = new StaffSession($_SESSION['_staff']['userID']); //Set staff object.
 //1) is the user Logged in for real && is staff.
 if(!$thisstaff || !is_object($thisstaff) || !$thisstaff->getId() || !$thisstaff->isValid()){
-    $msg=(!$thisstaff || !$thisstaff->isValid())?'Authentication Required':'Session timed out due to inactivity';
+    $msg=(!$thisstaff || !$thisstaff->isValid())?_('Authentication Required'):_('Session timed out due to inactivity');
     staffLoginPage($msg);
     exit;
 }
@@ -67,13 +66,13 @@ if(!$thisstaff || !is_object($thisstaff) || !$thisstaff->getId() || !$thisstaff-
 if(!$thisstaff->isAdmin()) {
     //Check for disabled staff or group!
     if(!$thisstaff->isactive() || !$thisstaff->isGroupActive()) {
-        staffLoginPage('Access Denied. Contact Admin');
+        staffLoginPage(_('Access Denied. Contact Admin'));
         exit;
     }
 
     //Staff are not allowed to login in offline mode!!
     if(!$ost->isSystemOnline() || $ost->isUpgradePending()) {
-        staffLoginPage('System Offline');
+        staffLoginPage(_('System Offline'));
         exit;
     }
 }
@@ -84,7 +83,7 @@ $thisstaff->refreshSession();
 /******* CSRF Protectin *************/
 // Enforce CSRF protection for POSTS
 if ($_POST  && !$ost->checkCSRFToken()) {
-    Http::response(400, 'Valid CSRF Token Required');
+    Http::response(400, _('Valid CSRF Token Required'));
     exit;
 }
 
@@ -106,12 +105,12 @@ $submenu=array();
 $exempt = in_array(basename($_SERVER['SCRIPT_NAME']), array('logout.php', 'ajax.php', 'logs.php', 'upgrade.php'));
 
 if($ost->isUpgradePending() && !$exempt) {
-    $errors['err']=$sysnotice='System upgrade is pending <a href="upgrade.php">Upgrade Now</a>';
+    $errors['err']=$sysnotice=_('System upgrade is pending').' <a href="upgrade.php">'._('Upgrade Now').'</a>';
     require('upgrade.php');
     exit;
 } elseif($cfg->isHelpDeskOffline()) {
-    $sysnotice='<strong>System is set to offline mode</strong> - Client interface is disabled and ONLY admins can access staff control panel.';
-    $sysnotice.=' <a href="settings.php">Enable</a>.';
+    $sysnotice='<strong>'._('System is set to offline mode').'</strong> - '._('Client interface is disabled and ONLY admins can access staff control panel.');
+    $sysnotice.=' <a href="settings.php">'._('Enable').'</a>.';
 }
 
 $nav = new StaffNav($thisstaff);
@@ -119,11 +118,11 @@ $nav = new StaffNav($thisstaff);
 if($thisstaff->forcePasswdChange() && !$exempt) {
     # XXX: Call staffLoginPage() for AJAX and API requests _not_ to honor
     #      the request
-    $sysnotice = 'Password change required to continue';
+    $sysnotice = _('Password change required to continue');
     require('profile.php'); //profile.php must request this file as require_once to avoid problems.
     exit;
 }
 $ost->setWarning($sysnotice);
-$ost->setPageTitle('osTicket :: Staff Control Panel');
+$ost->setPageTitle(_('osTicket :: Staff Control Panel'));
 
 ?>

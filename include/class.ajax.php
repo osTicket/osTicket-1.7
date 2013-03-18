@@ -31,7 +31,7 @@ class AjaxController extends ApiController {
     function staffOnly() {
         global $thisstaff;
         if(!$thisstaff || !$thisstaff->isValid()) {
-            Http::response(401,'Access Denied. IP '.$_SERVER['REMOTE_ADDR']);
+            Http::response(401,sprintf(_('Access Denied. IP %s'),$_SERVER['REMOTE_ADDR']));
         }
     }
     /**

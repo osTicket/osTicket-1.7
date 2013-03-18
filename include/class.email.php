@@ -213,65 +213,66 @@ class Email {
 
     function save($id,$vars,&$errors) {
         global $cfg;
+		
         //very basic checks
 
         $vars['name']=Format::striptags(trim($vars['name']));
         $vars['email']=trim($vars['email']);
 
         if($id && $id!=$vars['id'])
-            $errors['err']='Internal error. Get technical help.';
+            $errors['err']=_('Internal error. Get technical help.');
 
         if(!$vars['email'] || !Validator::is_email($vars['email'])) {
-            $errors['email']='Valid email required';
+            $errors['email']=_('Valid email required');
         }elseif(($eid=Email::getIdByEmail($vars['email'])) && $eid!=$id) {
-            $errors['email']='Email already exits';
+            $errors['email']=_('Email already exits');
         }elseif($cfg && !strcasecmp($cfg->getAdminEmail(), $vars['email'])) {
-            $errors['email']='Email already used as admin email!';
+            $errors['email']=_('Email already used as admin email!');
         }elseif(Staff::getIdByEmail($vars['email'])) { //make sure the email doesn't belong to any of the staff 
-            $errors['email']='Email in-use by a staff member';
+            $errors['email']=_('Email in-use by a staff member');
         }
 
         if(!$vars['name'])
-            $errors['name']='Email name required';
+            $errors['name']=_('Email name required');
 
         if($vars['mail_active'] || ($vars['smtp_active'] && $vars['smtp_auth'])) {
             if(!$vars['userid'])
-                $errors['userid']='Username missing';
+                $errors['userid']=_('Username missing');
                 
             if(!$id && !$vars['passwd'])
-                $errors['passwd']='Password required';
+                $errors['passwd']=_('Password required');
         }
         
         if($vars['mail_active']) {
             //Check pop/imapinfo only when enabled.
             if(!function_exists('imap_open'))
-                $errors['mail_active']= 'IMAP doesn\'t exist. PHP must be compiled with IMAP enabled.';
+                $errors['mail_active']= _("IMAP doesn't exist. PHP must be compiled with IMAP enabled.");
             if(!$vars['mail_host'])
-                $errors['mail_host']='Host name required';
+                $errors['mail_host']=_('Host name required');
             if(!$vars['mail_port'])
-                $errors['mail_port']='Port required';
+                $errors['mail_port']=_('Port required');
             if(!$vars['mail_protocol'])
-                $errors['mail_protocol']='Select protocol';
+                $errors['mail_protocol']=_('Select protocol');
             if(!$vars['mail_fetchfreq'] || !is_numeric($vars['mail_fetchfreq']))
-                $errors['mail_fetchfreq']='Fetch interval required';
+                $errors['mail_fetchfreq']=_('Fetch interval required');
             if(!$vars['mail_fetchmax'] || !is_numeric($vars['mail_fetchmax']))
-                $errors['mail_fetchmax']='Maximum emails required';
+                $errors['mail_fetchmax']=_('Maximum emails required');
             if(!$vars['dept_id'] || !is_numeric($vars['dept_id']))
-                $errors['dept_id']='You must select a Dept.';
+                $errors['dept_id']=_('You must select a Dept.');
             if(!$vars['priority_id'])
-                $errors['priority_id']='You must select a priority';
+                $errors['priority_id']=_('You must select a priority');
 
             if(!isset($vars['postfetch']))
-                $errors['postfetch']='Indicate what to do with fetched emails';
+                $errors['postfetch']=_('Indicate what to do with fetched emails');
             elseif(!strcasecmp($vars['postfetch'],'archive') && !$vars['mail_archivefolder'] )
-                $errors['postfetch']='Valid folder required';
+                $errors['postfetch']=_('Valid folder required');
         }
         
         if($vars['smtp_active']) {
             if(!$vars['smtp_host'])
-                $errors['smtp_host']='Host name required';
+                $errors['smtp_host']=_('Host name required');
             if(!$vars['smtp_port'])
-                $errors['smtp_port']='Port required';
+                $errors['smtp_port']=_('Port required');
         }
 
         //abort on errors
@@ -284,7 +285,7 @@ class Email {
                 $sql.=' AND email_id!='.db_input($id);
                 
             if(db_num_rows(db_query($sql)))
-                $errors['userid']=$errors['host']='Host/userid combination already in-use.';
+                $errors['userid']=$errors['host']=_('Host/userid combination already in-use.');
         }
         
         $passwd=$vars['passwd']?$vars['passwd']:$vars['cpasswd'];
@@ -300,12 +301,14 @@ class Email {
                         'encryption' => $vars['mail_encryption'])
                     );
             if(!$fetcher->connect()) {
-                $errors['err']='Invalid login. Check '.Format::htmlchars($vars['mail_protocol']).' settings';
+                //$errors['err']='Invalid login. Check '.Format::htmlchars($vars['mail_protocol']).' settings';
+                $errors['err']=sprintf(_('Invalid login. Check %s settings'),Format::htmlchars($vars['mail_protocol']));
                 $errors['mail']='<br>'.$fetcher->getLastError();
             }elseif($vars['mail_archivefolder'] && !$fetcher->checkMailbox($vars['mail_archivefolder'],true)) {
-                 $errors['postfetch']='Invalid or unknown mail folder! >> '.$fetcher->getLastError().'';
+                 //$errors['postfetch']='Invalid or unknown mail folder! >> '.$fetcher->getLastError().'';
+                 $errors['postfetch']=sprintf(_('Invalid or unknown mail folder! >> %s'),$fetcher->getLastError());
                  if(!$errors['mail'])
-                     $errors['mail']='Invalid or unknown archive folder!';
+                     $errors['mail']=_('Invalid or unknown archive folder!');
             }
         }
         
@@ -322,7 +325,7 @@ class Email {
                            ));
             $mail = $smtp->connect();
             if(PEAR::isError($mail)) {
-                $errors['err']='Unable to login. Check SMTP settings.';
+                $errors['err']=_('Unable to login. Check SMTP settings.');
                 $errors['smtp']='<br>'.$mail->getMessage();
             }else{
                 $smtp->disconnect(); //Thank you, sir!
@@ -374,13 +377,13 @@ class Email {
             if(db_query($sql) && db_affected_rows())
                 return true;
                 
-            $errors['err']='Unable to update email. Internal error occurred';
+            $errors['err']=_('Unable to update email. Internal error occurred');
         }else {
             $sql='INSERT INTO '.EMAIL_TABLE.' SET '.$sql.',created=NOW()';
             if(db_query($sql) && ($id=db_insert_id()))
                 return $id;
 
-            $errors['err']='Unable to add email. Internal error';
+            $errors['err']=_('Unable to add email. Internal error');
         }
         
         return false;
