@@ -23,8 +23,8 @@ $info=($_POST && $errors)?Format::htmlchars($_POST):$info;
             if($thisclient && $thisclient->isValid()) {
                 echo $thisclient->getName();
             } else { ?>
-                <input id="name" type="text" name="name" size="30" value="<?php echo $info['name']; ?>">
-                <font class="error">*&nbsp;<?php echo $errors['name']; ?></font>
+                <input id="name" type="text" name="name" size="30" value="<?php echo @$info['name']; ?>">
+                <font class="error">*&nbsp;<?php echo @$errors['name']; ?></font>
             <?php
             } ?>
         </td>
@@ -36,8 +36,8 @@ $info=($_POST && $errors)?Format::htmlchars($_POST):$info;
             if($thisclient && $thisclient->isValid()) { 
                 echo $thisclient->getEmail();
             } else { ?>
-                <input id="email" type="text" name="email" size="30" value="<?php echo $info['email']; ?>">
-                <font class="error">*&nbsp;<?php echo $errors['email']; ?></font>
+                <input id="email" type="text" name="email" size="30" value="<?php echo @$info['email']; ?>">
+                <font class="error">*&nbsp;<?php echo @$errors['email']; ?></font>
             <?php
             } ?>
         </td>
@@ -46,10 +46,10 @@ $info=($_POST && $errors)?Format::htmlchars($_POST):$info;
         <th>Telephone:</th>
         <td>
 
-            <input id="phone" type="text" name="phone" size="17" value="<?php echo $info['phone']; ?>">
+            <input id="phone" type="text" name="phone" size="17" value="<?php echo @$info['phone']; ?>">
             <label for="ext" class="inline">Ext.:</label>
-            <input id="ext" type="text" name="phone_ext" size="3" value="<?php echo $info['phone_ext']; ?>">
-            <font class="error">&nbsp;<?php echo $errors['phone']; ?>&nbsp;&nbsp;<?php echo $errors['phone_ext']; ?></font>
+            <input id="ext" type="text" name="phone_ext" size="3" value="<?php echo @$info['phone_ext']; ?>">
+            <font class="error">&nbsp;<?php echo @$errors['phone']; ?>&nbsp;&nbsp;<?php echo @$errors['phone_ext']; ?></font>
         </td>   
     </tr>
     <tr><td colspan=2>&nbsp;</td></tr>
@@ -69,21 +69,21 @@ $info=($_POST && $errors)?Format::htmlchars($_POST):$info;
                 <?php
                 } ?>
             </select>
-            <font class="error">*&nbsp;<?php echo $errors['topicId']; ?></font>
+            <font class="error">*&nbsp;<?php echo @$errors['topicId']; ?></font>
         </td>
     </tr>
     <tr>
         <td class="required">Subject:</td>
         <td>
-            <input id="subject" type="text" name="subject" size="40" value="<?php echo $info['subject']; ?>">
-            <font class="error">*&nbsp;<?php echo $errors['subject']; ?></font>
+            <input id="subject" type="text" name="subject" size="40" value="<?php echo @$info['subject']; ?>">
+            <font class="error">*&nbsp;<?php echo @$errors['subject']; ?></font>
         </td>
     </tr>
     <tr>
         <td class="required">Message:</td>
         <td>
-            <div><em>Please provide as much detail as possible so we can best assist you.</em> <font class="error">*&nbsp;<?php echo $errors['message']; ?></font></div>
-            <textarea id="message" cols="60" rows="8" name="message"><?php echo $info['message']; ?></textarea>
+            <div><em>Please provide as much detail as possible so we can best assist you.</em> <font class="error">*&nbsp;<?php echo @$errors['message']; ?></font></div>
+            <textarea id="message" cols="60" rows="8" name="message"><?php echo @$info['message']; ?></textarea>
         </td>
     </tr>
 
@@ -94,7 +94,7 @@ $info=($_POST && $errors)?Format::htmlchars($_POST):$info;
         <td>
             <div class="uploads"></div><br>
             <input type="file" class="multifile" name="attachments[]" id="attachments" size="30" value="" />
-            <font class="error">&nbsp;<?php echo $errors['attachments']; ?></font>
+            <font class="error">&nbsp;<?php echo @$errors['attachments']; ?></font>
         </td>
     </tr>
     <tr><td colspan=2>&nbsp;</td></tr>
@@ -115,7 +115,7 @@ $info=($_POST && $errors)?Format::htmlchars($_POST):$info;
                     }
                 ?>
             </select>
-            <font class="error">&nbsp;<?php echo $errors['priorityId']; ?></font>
+            <font class="error">&nbsp;<?php echo @$errors['priorityId']; ?></font>
         </td>
     </tr>
     <?php
@@ -133,7 +133,7 @@ $info=($_POST && $errors)?Format::htmlchars($_POST):$info;
             &nbsp;&nbsp;
             <input id="captcha" type="text" name="captcha" size="6">
             <em>Enter the text shown on the image.</em>
-            <font class="error">*&nbsp;<?php echo $errors['captcha']; ?></font>
+            <font class="error">*&nbsp;<?php echo @$errors['captcha']; ?></font>
         </td>
     </tr>
     <?php

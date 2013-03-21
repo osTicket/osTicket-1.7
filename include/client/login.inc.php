@@ -8,7 +8,7 @@ $ticketid=Format::input($_POST['lticket']?$_POST['lticket']:$_GET['t']);
 <p>To view the status of a ticket, provide us with the login details below.</p>
 <form action="login.php" method="post" id="clientLogin">
     <?php csrf_token(); ?>
-    <strong><?php echo Format::htmlchars($errors['login']); ?></strong>
+    <strong><?php if(isset($errors['login'])) echo Format::htmlchars($errors['login']); ?></strong>
     <br>
     <div>
         <label for="email">E-Mail Address:</label>

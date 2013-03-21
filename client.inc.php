@@ -44,7 +44,7 @@ $errors=array();
 $msg='';
 $thisclient=$nav=null;
 //Make sure the user is valid..before doing anything else.
-if($_SESSION['_client']['userID'] && $_SESSION['_client']['key'])
+if(isset($_SESSION['_client']) && $_SESSION['_client']['userID'] && $_SESSION['_client']['key'])
     $thisclient = new ClientSession($_SESSION['_client']['userID'],$_SESSION['_client']['key']);
 
 //is the user logged in?
