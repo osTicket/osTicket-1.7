@@ -1,5 +1,5 @@
 <?php
-$title=($cfg && is_object($cfg) && $cfg->getTitle())?$cfg->getTitle():'osTicket :: Support Ticket System';
+$title=(isset($cfg) && $cfg && is_object($cfg) && $cfg->getTitle())?$cfg->getTitle():'osTicket :: Support Ticket System';
 header("Content-Type: text/html; charset=UTF-8\r\n");
 ?>
 <!DOCTYPE html>
@@ -23,7 +23,7 @@ header("Content-Type: text/html; charset=UTF-8\r\n");
             <a id="logo" href="<?php echo ROOT_PATH; ?>index.php" title="Support Center"><img src="<?php echo ASSETS_PATH; ?>images/logo.png" border=0 alt="Support Center"></a>
             <p>
              <?php
-             if($thisclient && is_object($thisclient) && $thisclient->isValid()) {
+             if(isset($thisclient) && $thisclient && is_object($thisclient) && $thisclient->isValid()) {
                  echo $thisclient->getName().'&nbsp;-&nbsp;';
                  ?>
                 <?php
@@ -45,7 +45,7 @@ header("Content-Type: text/html; charset=UTF-8\r\n");
             <?php
             if($nav && ($navs=$nav->getNavLinks()) && is_array($navs)){
                 foreach($navs as $name =>$nav) {
-                    echo sprintf('<li><a class="%s %s" href="%s">%s</a></li>%s',$nav['active']?'active':'',$name,(ROOT_PATH.$nav['href']),$nav['desc'],"\n");
+                    echo sprintf('<li><a class="%s %s" href="%s">%s</a></li>%s',isset($nav['active']) && $nav['active']?'active':'',$name,(ROOT_PATH.$nav['href']),$nav['desc'],"\n");
                 }
             } ?>
         </ul>
@@ -56,10 +56,10 @@ header("Content-Type: text/html; charset=UTF-8\r\n");
         } ?>
         <div id="content">
 
-         <?php if($errors['err']) { ?>
+         <?php if(isset($errors['err']) && $errors['err']) { ?>
             <div id="msg_error"><?php echo $errors['err']; ?></div>
-         <?php }elseif($msg) { ?>
+         <?php }elseif(isset($msg) && $msg) { ?>
             <div id="msg_notice"><?php echo $msg; ?></div>
-         <?php }elseif($warn) { ?>
+         <?php }elseif(isset($warn) && $warn) { ?>
             <div id="msg_warning"><?php echo $warn; ?></div>
          <?php } ?>

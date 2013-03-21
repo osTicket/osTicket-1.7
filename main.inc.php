@@ -46,6 +46,7 @@
     error_reporting($error_reporting); //Respect whatever is set in php.ini (sysadmin knows better??)
 
     #Don't display errors
+    // error_reporting(E_ALL); // To see more errors
     ini_set('display_errors', 1);
     ini_set('display_startup_errors', 1);
 
@@ -185,7 +186,7 @@
     define('TIMEZONE_TABLE',TABLE_PREFIX.'timezone');
 
     #Global overwrite
-    if($_SERVER['HTTP_X_FORWARDED_FOR']) //Can contain multiple IPs - use the last one.
+    if(isset($_SERVER['HTTP_X_FORWARDED_FOR']) && $_SERVER['HTTP_X_FORWARDED_FOR']) //Can contain multiple IPs - use the last one.
         $_SERVER['REMOTE_ADDR'] =  array_pop(explode(',', $_SERVER['HTTP_X_FORWARDED_FOR']));
 
     #Connect to the DB && get configuration from database

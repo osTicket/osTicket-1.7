@@ -30,7 +30,7 @@ class Misc {
     }
 
     /* misc date helpers...this will go away once we move to php 5 */ 
-    function db2gmtime($var){
+    function db2gmtime($var) {
         global $cfg;
         if(!$var) return;
         
@@ -39,7 +39,7 @@ class Misc {
     }
 
     //Take user time or gmtime and return db (mysql) time.
-    function dbtime($var=null){
+    function dbtime($var=null) {
          global $cfg;
              
         if(is_null($var) || !$var)
@@ -69,17 +69,17 @@ class Misc {
     function currentURL() {
         
         $str = 'http';
-        if ($_SERVER['HTTPS'] == 'on') {
+        if (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on') {
             $str .='s';
         }
         $str .= '://';
         if (!isset($_SERVER['REQUEST_URI'])) { //IIS???
-            $_SERVER['REQUEST_URI'] = substr($_SERVER['PHP_SELF'],1 );
+            $_SERVER['REQUEST_URI'] = substr($_SERVER['PHP_SELF'], 1);
             if (isset($_SERVER['QUERY_STRING'])) {
                 $_SERVER['REQUEST_URI'].='?'.$_SERVER['QUERY_STRING'];
             }
         } 
-        if ($_SERVER['SERVER_PORT']!=80) {
+        if ($_SERVER['SERVER_PORT'] != 80) {
             $str .= $_SERVER['SERVER_NAME'].':'.$_SERVER['SERVER_PORT'].$_SERVER['REQUEST_URI'];
         } else {
             $str .= $_SERVER['SERVER_NAME'].$_SERVER['REQUEST_URI'];
@@ -88,7 +88,7 @@ class Misc {
         return $str;
     }
 
-    function timeDropdown($hr=null, $min =null,$name='time') {
+    function timeDropdown($hr=null, $min =null, $name='time') {
         $hr =is_null($hr)?0:$hr;
         $min =is_null($min)?0:$min;
 
