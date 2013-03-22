@@ -124,7 +124,16 @@ if($ticket->isOverdue())
             <table border="0" cellspacing="" cellpadding="4" width="100%">
                 <tr>
                     <th width="100"><?php echo _('Status');?>:</th>
-                    <td><?php echo ucfirst($ticket->getStatus()); ?></td>
+                    <td><?php 
+					switch($ticket->getStatus()) {
+						case 'open':
+							$results_type=_('open');
+						break;
+						case 'closed':
+							$results_type=_('closed');
+						break;
+					}
+					echo $results_type; ?></td>
                 </tr>
                 <tr>
                     <th><?php echo _('Priority');?>:</th>

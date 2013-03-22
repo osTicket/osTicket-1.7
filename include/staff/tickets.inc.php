@@ -53,6 +53,7 @@ switch(strtolower($_REQUEST['status'])){ //Status is overloaded
     default:
         if(!$search)
             $_REQUEST['status']=$status='open';
+		$results_type=_('Open Tickets');
 }
 
 $qwhere ='';

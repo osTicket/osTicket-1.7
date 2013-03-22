@@ -23,7 +23,21 @@ if(!$dept || !$dept->isPublic())
             <table class="infoTable" cellspacing="1" cellpadding="3" width="100%" border="0">
                 <tr>
                     <th width="100"><?php echo _('Ticket Status');?>:</th>
-                    <td><?php echo ucfirst($ticket->getStatus()); ?></td>
+					<?php
+					
+						$ticketstatus='';
+						switch($ticket->getStatus()) {
+							case 'open':
+								$ticketstatus=_('open');
+								break;
+							case 'closed':
+								$ticketstatus=_('closed');
+								break;
+							default:
+								$ticketstatus=_('open');
+						}
+					?>
+                    <td><?php echo ucfirst($ticketstatus); ?></td>
                 </tr>
                 <tr>
                     <th><?php echo _('Department');?>:</th>

@@ -23,6 +23,28 @@
     <link type="text/css" rel="stylesheet" href="../css/font-awesome.min.css">
     <link type="text/css" rel="stylesheet" href="./css/dropdown.css">
     <script type="text/javascript" src="./js/jquery.dropdown.js"></script>
+	
+	<script>
+	jQuery(function($){
+		$.datepicker.regional["varlang"]={closeText:"<?php echo _('Done');?>",
+		prevText:"<?php echo _('Prev');?>",
+		nextText:"<?php echo _('Next');?>",
+		currentText:"<?php echo _('Today');?>",
+		monthNames:["<?php echo _('January');?>","<?php echo _('February');?>","<?php echo _('March');?>","<?php echo _('April');?>","<?php echo _('May');?>","<?php echo _('June');?>","<?php echo _('July');?>","<?php echo _('August');?>","<?php echo _('September');?>","<?php echo _('October');?>","<?php echo _('November');?>","<?php echo _('December');?>"],
+		monthNamesShort:["<?php echo _('Jan');?>","<?php echo _('Feb');?>","<?php echo _('Mar');?>","<?php echo _('Apr');?>","<?php echo _('May');?>","<?php echo _('Jun');?>","<?php echo _('Jul');?>","<?php echo _('Aug');?>","<?php echo _('Sep');?>","<?php echo _('Oct');?>","<?php echo _('Nov');?>","<?php echo _('Dec');?>"],
+		dayNames:["<?php echo _('Sunday');?>","<?php echo _('Monday');?>","<?php echo _('Tuesday');?>","<?php echo _('Wednesday');?>","<?php echo _('Thursday');?>","<?php echo _('Friday');?>","<?php echo _('Saturday');?>"],
+		dayNamesShort:["<?php echo _('Sun');?>","<?php echo _('Mon');?>","<?php echo _('Tue');?>","<?php echo _('Wed');?>","<?php echo _('Thu');?>","<?php echo _('Fri');?>","<?php echo _('Sat');?>"],
+		dayNamesMin:["<?php echo _('Su');?>","<?php echo _('Mo');?>","<?php echo _('Tu');?>","<?php echo _('We');?>","<?php echo _('Th');?>","<?php echo _('Fr');?>","<?php echo _('Sa');?>"],
+		weekHeader:"<?php echo _('Wk');?>",
+		dateFormat:"mm/dd/yy",
+		firstDay:0,
+		isRTL:!1,
+		showMonthAfterYear:!1,
+		yearSuffix:""
+		};
+		$.datepicker.setDefaults($.datepicker.regional['varlang']);
+	});
+	</script>
     <?php
     if($ost && ($headers=$ost->getExtraHeaders())) {
         echo "\n\t".implode("\n\t", $headers)."\n";

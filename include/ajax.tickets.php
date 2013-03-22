@@ -283,8 +283,18 @@ class TicketsAjaxAPI extends AjaxController {
             echo sprintf('<div id="msg_warning">%s</div>',$warn);
 
         echo '<table border="0" cellspacing="" cellpadding="1" width="100%" class="ticket_info">';
-
-        $ticket_state=sprintf('<span>%s</span>',ucfirst($ticket->getStatus()));
+		$ticketstatus='';
+		switch($ticket->getStatus()) {
+			case 'open':
+				$ticketstatus=_('open');
+				break;
+			case 'closed':
+				$ticketstatus=_('closed');
+				break;
+			default:
+				$ticketstatus=_('open');
+		}
+        $ticket_state=sprintf('<span>%s</span>',ucfirst($ticketstatus));
         if($ticket->isOpen()) {
             if($ticket->isOverdue())
                 $ticket_state.=' &mdash; <span>'._('Overdue').'</span>';

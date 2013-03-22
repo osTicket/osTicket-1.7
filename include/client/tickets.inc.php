@@ -8,14 +8,17 @@ if(isset($_REQUEST['status'])) { //Query string status has nothing to do with th
     //Status we are actually going to use on the query...making sure it is clean!
     switch(strtolower($_REQUEST['status'])) {
      case 'open':
+		$results_type=_('Open Tickets');
      case 'closed':
         $status=strtolower($_REQUEST['status']);
+		$results_type=_('Closed Tickets');
         break;
      default:
         $status=''; //ignore
     }
 } elseif($thisclient->getNumOpenTickets()) {
     $status='open'; //Defaulting to open
+	$results_type=_('Open Tickets');
 }
 
 $sortOptions=array('id'=>'ticketID', 'name'=>'ticket.name', 'subject'=>'ticket.subject',
@@ -82,7 +85,11 @@ $query="$qselect $qfrom $qwhere $qgroup ORDER BY $order_by $order LIMIT ".$pageN
 //echo $query;
 $res = db_query($query);
 $showing=($res && db_num_rows($res))?$pageNav->showing():"";
-$showing.=($status)?(' '.ucfirst($status).' Tickets'):' '._('All Tickets');
+if(!$results_type)
+{
+	$results_type=ucfirst($status).' Tickets';
+}
+$showing.=($status)?(' '.$results_type):' '._('All Tickets');
 if($search)
     $showing=_('Search Results').": $showing";
 
@@ -136,6 +143,17 @@ $negorder=$order=='DESC'?'ASC':'DESC'; //Negate the sorting
      if($res && ($num=db_num_rows($res))) {
         $defaultDept=Dept::getDefaultDeptName(); //Default public dept.
         while ($row = db_fetch_array($res)) {
+			$ticketstatus='';
+			switch($row['status']) {
+				case 'open':
+					$ticketstatus=_('open');
+					break;
+				case 'closed':
+					$ticketstatus=_('closed');
+					break;
+				default:
+					$ticketstatus=_('open');
+			}
             $dept=$row['ispublic']?$row['dept_name']:$defaultDept;
             $subject=Format::htmlchars(Format::truncate($row['subject'],40));
             if($row['attachments'])
@@ -156,7 +174,7 @@ $negorder=$order=='DESC'?'ASC':'DESC'; //Negate the sorting
                     href="tickets.php?id=<?php echo $row['ticketID']; ?>"><?php echo $ticketID; ?></a>
                 </td>
                 <td>&nbsp;<?php echo Format::db_date($row['created']); ?></td>
-                <td>&nbsp;<?php echo ucfirst($row['status']); ?></td>
+                <td>&nbsp;<?php echo ucfirst($ticketstatus); ?></td>
                 <td>
                     <a href="tickets.php?id=<?php echo $row['ticketID']; ?>"><?php echo $subject; ?></a>
                 </td>

@@ -35,6 +35,6 @@ function parseDefaultLanguage($http_accept, $deflang = "en") {
          }
       }
    }
-   return strtolower(substr($deflang,0,strpos($deflang,'-')));
+   return strtolower($deflang);
 }
 ?>
