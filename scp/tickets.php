@@ -545,7 +545,6 @@ if($ticket) {
     elseif($_REQUEST['a'] == 'print' && !$ticket->pdfExport($_REQUEST['psize'], $_REQUEST['notes']))
         $errors['err'] = _('Internal error: Unable to export the ticket to PDF for print.');
 } else {
-    //$inc = 'tickets.inc.php';
 	$inc = 'tickets.inc.php';
     if($_REQUEST['a']=='open' && $thisstaff->canCreateTickets())
         $inc = 'ticket-open.inc.php';

@@ -377,7 +377,7 @@ class MailFetcher {
         $vars['message']=Format::stripEmptyLines($this->getBody($mid));
         $vars['header']=$this->getHeader($mid);
         $vars['emailId']=$emailId?$emailId:$ost->getConfig()->getDefaultEmailId(); //ok to default?
-        $vars['name']=$var['name']?$var['name']:$var['email']; //No name? use email
+        $vars['name']=$vars['name']?$vars['name']:$vars['email']; //No name? use email
         $vars['mid']=$mailinfo['mid'];
 
         if(!$vars['message']) //An email with just attachments can have empty body.
