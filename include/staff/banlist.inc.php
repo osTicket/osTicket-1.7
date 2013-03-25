@@ -14,7 +14,7 @@ if($_REQUEST['q'] && strlen($_REQUEST['q'])>3) {
         $where.=' AND rule.val LIKE "%'.db_input($_REQUEST['q'],false).'%"';
 
 }elseif($_REQUEST['q']) {
-    $errors['q']=_('Term too short!');
+    $errors['q']=__('Term too short!');
 }
 
 $sortOptions=array('email'=>'rule.val','status'=>'isactive','created'=>'rule.created','created'=>'rule.updated');
@@ -46,27 +46,27 @@ $qstr.='&order='.($order=='DESC'?'ASC':'DESC');
 $query="$select $from $where ORDER BY $order_by LIMIT ".$pageNav->getStart().",".$pageNav->getLimit();
 //echo $query;
 ?>
-<h2><?php echo _('Banned Email Addresses');?></h2>
+<h2><?php echo __('Banned Email Addresses');?></h2>
 <div style="width:600; float:left;padding-top:5px;">
     <form action="banlist.php" method="GET" name="filter">
      <input type="hidden" name="a" value="filter" >
      <div>
-       <?php echo _('Query:');?> <input name="q" type="text" size="20" value="<?php echo Format::htmlchars($_REQUEST['q']); ?>">
+       <?php echo __('Query:');?> <input name="q" type="text" size="20" value="<?php echo Format::htmlchars($_REQUEST['q']); ?>">
         &nbsp;&nbsp;
-        <input type="submit" name="submit" value="<?php echo _('Search');?>"/>
+        <input type="submit" name="submit" value="<?php echo __('Search');?>"/>
      </div>
     </form>
  </div>
-<div style="float:right;text-align:right;padding-right:5px;"><b><a href="banlist.php?a=add" class="Icon newstaff"><?php echo _('Ban New Email');?></a></b></div>
+<div style="float:right;text-align:right;padding-right:5px;"><b><a href="banlist.php?a=add" class="Icon newstaff"><?php echo __('Ban New Email');?></a></b></div>
 <div class="clear"></div>
 <?php
 if(($res=db_query($query)) && ($num=db_num_rows($res)))
     $showing=$pageNav->showing();
 else
-    $showing=_('No banned emails matching the query found!');
+    $showing=__('No banned emails matching the query found!');
 
 if($search)
-    $showing=_('Search Results:').' '.$showing;
+    $showing=__('Search Results:').' '.$showing;
     
 ?>
 <form action="banlist.php" method="POST" name="banlist">
@@ -78,10 +78,10 @@ if($search)
     <thead>
         <tr>
             <th width="7px">&nbsp;</th>        
-            <th width="350"><a <?php echo $email_sort; ?> href="staff.php?<?php echo $qstr; ?>&sort=email"><?php echo _('Email Address');?></a></th>
-            <th width="200"><a  <?php echo $status_sort; ?> href="staff.php?<?php echo $qstr; ?>&sort=status"><?php echo _('Ban Status');?></a></th>
-            <th width="120"><a <?php echo $created_sort; ?> href="staff.php?<?php echo $qstr; ?>&sort=created"><?php echo _('Date Added');?></a></th>
-            <th width="120"><a <?php echo $updated_sort; ?> href="staff.php?<?php echo $qstr; ?>&sort=updated"><?php echo _('Last Updated');?></a></th>
+            <th width="350"><a <?php echo $email_sort; ?> href="staff.php?<?php echo $qstr; ?>&sort=email"><?php echo __('Email Address');?></a></th>
+            <th width="200"><a  <?php echo $status_sort; ?> href="staff.php?<?php echo $qstr; ?>&sort=status"><?php echo __('Ban Status');?></a></th>
+            <th width="120"><a <?php echo $created_sort; ?> href="staff.php?<?php echo $qstr; ?>&sort=created"><?php echo __('Date Added');?></a></th>
+            <th width="120"><a <?php echo $updated_sort; ?> href="staff.php?<?php echo $qstr; ?>&sort=updated"><?php echo __('Last Updated');?></a></th>
         </tr>
     </thead>
     <tbody>
@@ -98,7 +98,7 @@ if($search)
                   <input type="checkbox" class="ckb" name="ids[]" value="<?php echo $row['id']; ?>" <?php echo $sel?'checked="checked"':''; ?>>
                 </td>
                 <td>&nbsp;<a href="banlist.php?id=<?php echo $row['id']; ?>"><?php echo Format::htmlchars($row['val']); ?></a></td>
-                <td>&nbsp;&nbsp;<?php echo $row['isactive']?_('Active'):'<b>'._('Disabled').'</b>'; ?></td>
+                <td>&nbsp;&nbsp;<?php echo $row['isactive']?__('Active'):'<b>'.__('Disabled').'</b>'; ?></td>
                 <td><?php echo Format::db_date($row['created']); ?></td>
                 <td><?php echo Format::db_datetime($row['updated']); ?>&nbsp;</td>
                </tr>
@@ -109,12 +109,12 @@ if($search)
      <tr>
         <td colspan="5">
             <?php if($res && $num){ ?>
-            <?php echo _('Select:');?>&nbsp;
-            <a id="selectAll" href="#ckb"><?php echo _('All');?></a>&nbsp;&nbsp;
-            <a id="selectNone" href="#ckb"><?php echo _('None');?></a>&nbsp;&nbsp;
-            <a id="selectToggle" href="#ckb"><?php echo _('Toggle');?></a>&nbsp;&nbsp;
+            <?php echo __('Select:');?>&nbsp;
+            <a id="selectAll" href="#ckb"><?php echo __('All');?></a>&nbsp;&nbsp;
+            <a id="selectNone" href="#ckb"><?php echo __('None');?></a>&nbsp;&nbsp;
+            <a id="selectToggle" href="#ckb"><?php echo __('Toggle');?></a>&nbsp;&nbsp;
             <?php }else{
-                echo _('No banned emails found!');
+                echo __('No banned emails found!');
             } ?>
         </td>
      </tr>
@@ -122,14 +122,14 @@ if($search)
 </table>
 <?php
 if($res && $num): //Show options..
-    echo '<div>&nbsp;'._('Page').':'.$pageNav->getPageLinks().'&nbsp;</div>';
+    echo '<div>&nbsp;'.__('Page').':'.$pageNav->getPageLinks().'&nbsp;</div>';
 ?>
 <p class="centered" id="actions">
-    <input class="button" type="submit" name="enable" value="<?php echo _('Enable');?>" >
+    <input class="button" type="submit" name="enable" value="<?php echo __('Enable');?>" >
     &nbsp;&nbsp;
-    <input class="button" type="submit" name="disable" value="<?php echo _('Disable');?>" >
+    <input class="button" type="submit" name="disable" value="<?php echo __('Disable');?>" >
     &nbsp;&nbsp;
-    <input class="button" type="submit" name="delete" value="<?php echo _('Delete');?>">
+    <input class="button" type="submit" name="delete" value="<?php echo __('Delete');?>">
 </p>
 <?php
 endif;
@@ -137,26 +137,26 @@ endif;
 </form>
 
 <div style="display:none;" class="dialog" id="confirm-action">
-    <h3><?php echo _('Please Confirm');?></h3>
+    <h3><?php echo __('Please Confirm');?></h3>
     <a class="close" href="">&times;</a>
     <hr/>
     <p class="confirm-action" style="display:none;" id="enable-confirm">
-        <?php echo _('Are you sure want to <b>enable</b> selected ban rules?');?>
+        <?php echo __('Are you sure want to <b>enable</b> selected ban rules?');?>
     </p>
     <p class="confirm-action" style="display:none;" id="disable-confirm">
-        <?php echo _('Are you sure want to <b>disable</b>  selected ban rules?');?>
+        <?php echo __('Are you sure want to <b>disable</b>  selected ban rules?');?>
     </p>
     <p class="confirm-action" style="display:none;" id="delete-confirm">
-        <font color="red"><strong><?php echo _('Are you sure you want to DELETE selected ban rules?');?></strong></font>
+        <font color="red"><strong><?php echo __('Are you sure you want to DELETE selected ban rules?');?></strong></font>
     </p>
-    <div><?php echo _('Please confirm to continue.');?></div>
+    <div><?php echo __('Please confirm to continue.');?></div>
     <hr style="margin-top:1em"/>
     <p class="full-width">
         <span class="buttons" style="float:left">
-            <input type="button" value="<?php echo _('No, Cancel');?>" class="close">
+            <input type="button" value="<?php echo __('No, Cancel');?>" class="close">
         </span>
         <span class="buttons" style="float:right">
-            <input type="button" value="<?php echo _('Yes, Do it!');?>" class="confirm">
+            <input type="button" value="<?php echo __('Yes, Do it!');?>" class="confirm">
         </span>
      </p>
     <div class="clear"></div>

@@ -39,60 +39,67 @@ function parseDefaultLanguage($http_accept, $deflang = "en") {
 $language=getDefaultLanguage();
 echo "Your browser preferred language is: '".$language."'<br>";
 
-//check if language dir exists
-if(!file_exists('include/locale/'.$language)||!is_dir('include/locale/'.$language))
+//get the first and second part of the language code
+if(strpos($language,'_')!==false)
 {
-	//get the short language code
-	if(strpos($language,'_')!==false)
+	$language=substr($language,0,strpos($language,'_'));
+	$lang_dialect=substr($language,strpos($language,'_'));
+}
+elseif(strpos($language,'-')!==false)
+{
+	$language=substr($language,0,strpos($language,'-'));
+	$lang_dialect=substr($language,strpos($language,'-'));
+}
+$tmplangcode=$language.'-'.strtolower($lang_dialect);
+if(!file_exists('include/locale/'.$tmplangcode)||!is_dir('include/locale/'.$tmplangcode))
+{
+	$tmplangcode=$language.'_'.strtolower($lang_dialect);
+	if(!file_exists('include/locale/'.$tmplangcode)||!is_dir('include/locale/'.$tmplangcode))
 	{
-		$language=substr($language,0,strpos($language,'_'));
-	}
-	elseif(strpos($language,'-')!==false)
-	{
-		$language=substr($language,0,strpos($language,'-'));
-	}
-	//check if a default dir for this language exists
-	if(!file_exists('include/locale/'.$language)||!is_dir('include/locale/'.$language))
-	{
-		//do nothing
+		$tmplangcode=$language.'_'.strtoupper($lang_dialect);
+		if(!file_exists('include/locale/'.$tmplangcode)||!is_dir('include/locale/'.$tmplangcode))
+		{
+			$tmplangcode=$language.'-'.strtoupper($lang_dialect);
+			if(!file_exists('include/locale/'.$tmplangcode)||!is_dir('include/locale/'.$tmplangcode))
+			{
+				if(!file_exists('include/locale/'.$language)||!is_dir('include/locale/'.$language)) //check short langcode
+				{
+					$language='en'; //set as default
+				}
+			}
+			else
+			{
+				$language=$tmplangcode;
+			}
+		}
+		else
+		{
+			$language=$tmplangcode;
+		}
 	}
 	else
 	{
-		//check if a redirect file is in there
-		if(file_exists('include/locale/'.$language.'/redirect'))
-		{
-			$f = fopen('include/locale/'.$language.'/redirect','r');
-			if($f!==false)
-			{
-				$line = fgets($f);
-				if(strlen($line)>=2) //safety check
-				{
-					echo "using the redirect file include/locale/".$language."/redirect<br>";
-					$language=$line; //redirect language
-					echo "redirecting to '".$language."'<br>";
-				}
-				fclose($f);
-			}
-		}
+		$language=$tmplangcode;
 	}
 }
 else
 {
-	//check if a redirect file is in there
-	if(file_exists('include/locale/'.$language.'/redirect'))
+	$language=$tmplangcode;
+}
+//check if a redirect file is in there
+if(file_exists('include/locale/'.$language.'/redirect'))
+{
+	$f = fopen('include/locale/'.$language.'/redirect','r');
+	if($f!==false)
 	{
-		$f = fopen('include/locale/'.$language.'/redirect','r');
-		if($f!==false)
+		$line = fgets($f);
+		if(strlen($line)>=2) //safety check
 		{
-			$line = fgets($f);
-			if(strlen($line)>=2) //safety check
-			{
-				echo "using the redirect file include/locale/".$language."/redirect<br>";
-				$language=$line; //redirect language
-				echo "redirecting to '".$language."'<br>";
-			}
-			fclose($f);
+			echo "using the redirect file include/locale/".$language."/redirect<br>";
+			$language=$line; //redirect language
+			echo "redirecting to '".$language."'<br>";
 		}
+		fclose($f);
 	}
 }
 

@@ -24,11 +24,11 @@ define('OSTICKET_CONFIGFILE','../include/ost-config.php'); //XXX: Make sure the 
 
 $installer = new Installer(OSTICKET_CONFIGFILE); //Installer instance.
 $wizard=array();
-$wizard['title']=_('osTicket Installer');
-$wizard['tagline']=sprintf(_('Installing osTicket v%s'),$installer->getVersionVerbose());
+$wizard['title']=__('osTicket Installer');
+$wizard['tagline']=sprintf(__('Installing osTicket v%s'),$installer->getVersionVerbose());
 $wizard['logo']='logo.png';
-$wizard['menu']=array(_('Installation Guide')=>'http://osticket.com/wiki/Installation',
-        _('Get Professional Help')=>'http://osticket.com/support');
+$wizard['menu']=array(__('Installation Guide')=>'http://osticket.com/wiki/Installation',
+        __('Get Professional Help')=>'http://osticket.com/support');
 
 if($_POST && $_POST['s']) {
     $errors = array();
@@ -38,13 +38,13 @@ if($_POST && $_POST['s']) {
             if($installer->check_prereq())
                 $_SESSION['ost_installer']['s']='config';
             else
-                $errors['prereq']=_('Minimum requirements not met!');
+                $errors['prereq']=__('Minimum requirements not met!');
             break;
         case 'config':
             if(!$installer->config_exists())
-                $errors['err']=_('Configuration file does NOT exist. Follow steps below to add one.');
+                $errors['err']=__('Configuration file does NOT exist. Follow steps below to add one.');
             elseif(!$installer->config_writable())
-                $errors['err']=_('Write access required to continue');
+                $errors['err']=__('Write access required to continue');
             else
                 $_SESSION['ost_installer']['s']='install';
             break;
@@ -56,20 +56,20 @@ if($_POST && $_POST['s']) {
                 //TODO: Go to subscribe step.
                 $_SESSION['ost_installer']['s']='done';
             } elseif(!($errors=$installer->getErrors()) || !$errors['err']) {
-                $errors['err']=_('Error installing osTicket - correct the errors below and try again.');
+                $errors['err']=__('Error installing osTicket - correct the errors below and try again.');
             }
             break;
         case 'subscribe':
             if(!trim($_POST['name']))
-                $errors['name'] = _('Required');
+                $errors['name'] = __('Required');
 
             if(!$_POST['email'])
-                $errors['email'] = _('Required');
+                $errors['email'] = __('Required');
             elseif(!Validator::is_email($_POST['email']))
-                $errors['email'] = _('Invalid');
+                $errors['email'] = __('Invalid');
 
             if(!$_POST['alerts'] && !$_POST['news'])
-                $errors['notify'] = _('Check one or more');
+                $errors['notify'] = __('Check one or more');
 
             if(!$errors)
                 $_SESSION['ost_installer']['s'] = 'done';

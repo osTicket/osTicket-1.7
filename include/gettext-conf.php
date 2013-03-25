@@ -16,69 +16,106 @@
 //create a folder inside 'include/locale' called 'de-de'. then create the file 'redirect' in it. the path to this redirect should now look like 'include/locale/de-de/redirect'.
 //now open the redirect file you've created, type de in the first line and save it
 
-if(extension_loaded('gettext')==1)
+
+$use_php_gettext=true; //Set this to false to disable php_gettext
+
+require_once(INCLUDE_DIR.'locale/lang.php');
+
+if($use_php_gettext==true)
 {
-	require_once(INCLUDE_DIR.'locale/lang.php');
-	$language=getDefaultLanguage(); //if you want to use just one static language replace the call to getDefaultLanguage() with your language code (for example 'de-de')
-	//check if language dir exists
-	if(!file_exists(INCLUDE_DIR.'locale/'.$language)||!is_dir(INCLUDE_DIR.'locale/'.$language))
+	require_once(INCLUDE_DIR.'gettext.inc');
+}
+$language=getDefaultLanguage(); //if you want to use just one static language replace the call to getDefaultLanguage() with your language code (for example 'de-de')
+
+//get the first and second part of the language code
+if(strpos($language,'_')!==false)
+{
+	$language=substr($language,0,strpos($language,'_'));
+	$lang_dialect=substr($language,strpos($language,'_'));
+}
+elseif(strpos($language,'-')!==false)
+{
+	$language=substr($language,0,strpos($language,'-'));
+	$lang_dialect=substr($language,strpos($language,'-'));
+}
+
+$tmplangcode=$language.'-'.strtolower($lang_dialect);
+if(!file_exists(INCLUDE_DIR.'locale/'.$tmplangcode)||!is_dir(INCLUDE_DIR.'locale/'.$tmplangcode))
+{
+	$tmplangcode=$language.'_'.strtolower($lang_dialect);
+	if(!file_exists(INCLUDE_DIR.'locale/'.$tmplangcode)||!is_dir(INCLUDE_DIR.'locale/'.$tmplangcode))
 	{
-		//get the short language code
-		if(strpos($language,'_')!==false)
+		$tmplangcode=$language.'_'.strtoupper($lang_dialect);
+		if(!file_exists(INCLUDE_DIR.'locale/'.$tmplangcode)||!is_dir(INCLUDE_DIR.'locale/'.$tmplangcode))
 		{
-			$language=substr($language,0,strpos($language,'_'));
-		}
-		elseif(strpos($language,'-')!==false)
-		{
-			$language=substr($language,0,strpos($language,'-'));
-		}
-		//check if a default dir for this language exists
-		if(!file_exists(INCLUDE_DIR.'locale/'.$language)||!is_dir(INCLUDE_DIR.'locale/'.$language))
-		{
-			//do nothing
+			$tmplangcode=$language.'-'.strtoupper($lang_dialect);
+			if(!file_exists(INCLUDE_DIR.'locale/'.$tmplangcode)||!is_dir(INCLUDE_DIR.'locale/'.$tmplangcode))
+			{
+				if(!file_exists(INCLUDE_DIR.'locale/'.$language)||!is_dir(INCLUDE_DIR.'locale/'.$language)) //check short langcode
+				{
+					$language='en'; //set as default
+				}
+			}
+			else
+			{
+				$language=$tmplangcode;
+			}
 		}
 		else
 		{
-			//check if a redirect file is in there
-			if(file_exists(INCLUDE_DIR.'locale/'.$language.'/redirect'))
-			{
-				$f = fopen(INCLUDE_DIR.'locale/'.$language.'/redirect','r');
-				if($f!==false)
-				{
-					$line = fgets($f);
-					if(strlen($line)>=2) //safety check
-					{
-						$language=$line; //redirect language
-					}
-					fclose($f);
-				}
-			}
+			$language=$tmplangcode;
 		}
 	}
 	else
 	{
-		//check if a redirect file is in there
-		if(file_exists(INCLUDE_DIR.'locale/'.$language.'/redirect'))
-		{
-			$f = fopen(INCLUDE_DIR.'locale/'.$language.'/redirect','r');
-			if($f!==false)
-			{
-				$line = fgets($f);
-				if(strlen($line)>=2) //safety check
-				{
-					$language=$line; //redirect language
-				}
-				fclose($f);
-			}
-		}
+		$language=$tmplangcode;
 	}
-	putenv('LC_ALL=' . $language);
-	setlocale(LC_ALL, $language . '.UTF-8');
-	bindtextdomain('messages', INCLUDE_DIR.'locale');
-	textdomain('messages');
 }
 else
 {
-	function _($text){return $text;} //fallback definition: in case the gettext extension wasn't loaded osticket should at least work in english
+	$language=$tmplangcode;
+}
+//check if a redirect file is in there
+if(file_exists(INCLUDE_DIR.'locale/'.$language.'/redirect'))
+{
+	$f = fopen(INCLUDE_DIR.'locale/'.$language.'/redirect','r');
+	if($f!==false)
+	{
+		$line = fgets($f);
+		if(strlen($line)>=2) //safety check
+		{
+			$language=$line; //redirect language
+		}
+		fclose($f);
+	}
+}
+
+// gettext setup
+$domain = 'messages';
+if(extension_loaded('gettext')&&$use_php_gettext==false)
+{
+	putenv('LC_ALL=' . $language);
+	setlocale(LC_ALL, $language);
+	bindtextdomain($domain, INCLUDE_DIR.'locale');
+	textdomain($domain);
+	if(!function_exists('__'))
+	{
+		function __($text){return _($text);}
+	}
+}
+else if($use_php_gettext==true)
+{
+	T_setlocale(LC_ALL, $language);
+	// Set the text domain as 'messages'
+	T_bindtextdomain($domain, INCLUDE_DIR.'locale');
+	T_bind_textdomain_codeset($domain, 'UTF-8');
+	T_textdomain($domain);
+}
+else
+{
+	if(!function_exists('__'))
+	{
+		function __($text){return $text;} //fallback definition: in case the gettext extension wasn't loaded osticket should at least work in english
+	}
 }
 ?>

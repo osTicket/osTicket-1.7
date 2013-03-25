@@ -28,25 +28,25 @@ require(STAFFINC_DIR.'header.inc.php');
 <link rel="stylesheet" type="text/css" href="css/bootstrap.css"/>
 <link rel="stylesheet" type="text/css" href="css/dashboard.css"/>
 
-<h2><?php echo _('Ticket Activity');?></h2>
-<p><?php echo _('Select the starting time and period for the system activity graph');?></p>
+<h2><?php echo __('Ticket Activity');?></h2>
+<p><?php echo __('Select the starting time and period for the system activity graph');?></p>
 <form class="well form-inline" id="timeframe-form">
     <label>
-        <?php echo _('Report timeframe');?>:
+        <?php echo __('Report timeframe');?>:
         <input type="text" class="dp input-medium search-query"
-            name="start" placeholder="<?php echo _('Last month');?>"/>
+            name="start" placeholder="<?php echo __('Last month');?>"/>
     </label>
     <label>
-        <?php echo _('period');?>:
+        <?php echo __('period');?>:
         <select name="period">
-            <option value="now" selected="selected"><?php echo _('Up to today');?></option>
-            <option value="+7 days"><?php echo _('One Week');?></option>
-            <option value="+14 days"><?php echo _('Two Weeks');?></option>
-            <option value="+1 month"><?php echo _('One Month');?></option>
-            <option value="+3 months"><?php echo _('One Quarter');?></option>
+            <option value="now" selected="selected"><?php echo __('Up to today');?></option>
+            <option value="+7 days"><?php echo __('One Week');?></option>
+            <option value="+14 days"><?php echo __('Two Weeks');?></option>
+            <option value="+1 month"><?php echo __('One Month');?></option>
+            <option value="+3 months"><?php echo __('One Quarter');?></option>
         </select>
     </label>
-    <button class="btn" type="submit"><?php echo _('Refresh');?></button>
+    <button class="btn" type="submit"><?php echo __('Refresh');?></button>
 </form>
 
 <!-- Create a graph and fetch some data to create pretty dashboard -->
@@ -56,8 +56,8 @@ require(STAFFINC_DIR.'header.inc.php');
 </div>
 
 <hr/>
-<h2><?php echo _('Statistics');?></h2>
-<p><?php echo _('Statistics of tickets organized by department, help topic, and staff.');?></p>
+<h2><?php echo __('Statistics');?></h2>
+<p><?php echo __('Statistics of tickets organized by department, help topic, and staff.');?></p>
 <ul class="nav nav-tabs" id="tabular-navigation"></ul>
 
 <div id="table-here"></div>

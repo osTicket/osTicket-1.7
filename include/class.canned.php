@@ -247,17 +247,17 @@ class Canned {
         $vars['notes']=Format::striptags(trim($vars['notes']));
 
         if($id && $id!=$vars['id'])
-            $errors['err']=_('Internal error. Try again');
+            $errors['err']=__('Internal error. Try again');
 
         if(!$vars['title'])
-            $errors['title']=_('Title required');
+            $errors['title']=__('Title required');
         elseif(strlen($vars['title'])<3)
-            $errors['title']=_('Title is too short. 3 chars minimum');
+            $errors['title']=__('Title is too short. 3 chars minimum');
         elseif(($cid=self::getIdByTitle($vars['title'])) && $cid!=$id)
-            $errors['title']=_('Title already exists');
+            $errors['title']=__('Title already exists');
 
         if(!$vars['response'])
-            $errors['response']=_('Response text required');
+            $errors['response']=__('Response text required');
             
         if($errors) return false;
 
@@ -273,14 +273,14 @@ class Canned {
             if(db_query($sql))
                 return true;
 
-            $errors['err']=_('Unable to update canned response.');
+            $errors['err']=__('Unable to update canned response.');
 
         } else {
             $sql='INSERT INTO '.CANNED_TABLE.' SET '.$sql.',created=NOW()';
             if(db_query($sql) && ($id=db_insert_id()))
                 return $id;
 
-            $errors['err']=_('Unable to create the canned response. Internal error');
+            $errors['err']=__('Unable to create the canned response. Internal error');
         }
 
         return false;

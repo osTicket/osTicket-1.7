@@ -62,8 +62,8 @@ class Ticket2PDF extends FPDF
         $this->SetX($this->lMargin);
         $this->Cell(0, 3, '', "B", 2, 'L');
         $this->SetFont('Arial', 'I',10);
-        $this->Cell(0, 5, sprintf(_('Generated on %s'), Format::date($cfg->getDateTimeFormat(), Misc::gmtime(), $_SESSION['TZ_OFFSET'], $_SESSION['TZ_DST'])), 0, 0, 'L');
-        $this->Cell(0, 5, sprintf(_('Date & Time based on GMT %s'), $_SESSION['TZ_OFFSET']), 0, 1, 'R');
+        $this->Cell(0, 5, sprintf(__('Generated on %s'), Format::date($cfg->getDateTimeFormat(), Misc::gmtime(), $_SESSION['TZ_OFFSET'], $_SESSION['TZ_DST'])), 0, 0, 'L');
+        $this->Cell(0, 5, sprintf(__('Date & Time based on GMT %s'), $_SESSION['TZ_OFFSET']), 0, 1, 'R');
 		$this->Ln(10);
 	}
 
@@ -74,9 +74,9 @@ class Ticket2PDF extends FPDF
 		$this->SetY(-15);
         $this->Cell(0, 2, '', "T", 2, 'L');
 		$this->SetFont('Arial', 'I', 9);
-		$this->Cell(0, 7, sprintf(_('Ticket #%1$d printed by %2$s on %3$s'), $this->getTicket()->getNumber(), $thisstaff->getUserName(), date('r')), 0, 0, 'L');
+		$this->Cell(0, 7, sprintf(__('Ticket #%1$d printed by %2$s on %3$s'), $this->getTicket()->getNumber(), $thisstaff->getUserName(), date('r')), 0, 0, 'L');
 		//$this->Cell(0,10,'Page '.($this->PageNo()-$this->pageOffset).' of {nb} '.$this->pageOffset.' '.$this->PageNo(),0,0,'R');
-		$this->Cell(0, 7, sprintf(_('Page %d'),($this->PageNo() - $this->pageOffset)), 0, 0, 'R');
+		$this->Cell(0, 7, sprintf(__('Page %d'),($this->PageNo() - $this->pageOffset)), 0, 0, 'R');
 	}
 
     function Cell($w, $h=0, $txt='', $border=0, $ln=0, $align='', $fill=false, $link='') {
@@ -112,7 +112,7 @@ class Ticket2PDF extends FPDF
         $this->cMargin = 0;
         $this->SetFont('Arial', 'B', 11);
         $this->SetTextColor(10, 86, 142);
-        $this->Cell($w, 7,_('Ticket #').$ticket->getNumber(), 0, 0, 'L');
+        $this->Cell($w, 7,__('Ticket #').$ticket->getNumber(), 0, 0, 'L');
         $this->Ln(7);
         $this->cMargin = 3;
         $this->SetTextColor(0);
@@ -120,35 +120,35 @@ class Ticket2PDF extends FPDF
         $this->SetFillColor(244, 250, 255);
         $this->SetX($this->lMargin);
         $this->SetFont('Arial', 'B', 11);
-        $this->Cell($l, 7, _('Status'), 1, 0, 'L', true);
+        $this->Cell($l, 7, __('Status'), 1, 0, 'L', true);
         $this->SetFont('');
         $this->Cell($c, 7, $ticket->getStatus(), 1, 0, 'L', true);
         $this->SetFont('Arial', 'B', 11);
-        $this->Cell($l, 7, _('Name'), 1, 0, 'L', true);
+        $this->Cell($l, 7, __('Name'), 1, 0, 'L', true);
         $this->SetFont('');
         $this->Cell($c, 7, $ticket->getName(), 1, 1, 'L', true);
         $this->SetFont('Arial', 'B', 11);
-        $this->Cell($l, 7, _('Priority'), 1, 0, 'L', true);
+        $this->Cell($l, 7, __('Priority'), 1, 0, 'L', true);
         $this->SetFont('');
         $this->Cell($c, 7, $ticket->getPriority(), 1, 0, 'L', true);
         $this->SetFont('Arial', 'B', 11);
-        $this->Cell($l, 7, _('Email'), 1, 0, 'L', true);
+        $this->Cell($l, 7, __('Email'), 1, 0, 'L', true);
         $this->SetFont('');
         $this->Cell($c, 7, $ticket->getEmail(), 1, 1, 'L', true);
         $this->SetFont('Arial', 'B', 11);
-        $this->Cell($l, 7, _('Department'), 1, 0, 'L', true);
+        $this->Cell($l, 7, __('Department'), 1, 0, 'L', true);
         $this->SetFont('');
         $this->Cell($c, 7, $ticket->getDeptName(), 1, 0, 'L', true);
         $this->SetFont('Arial', 'B', 11);
-        $this->Cell($l, 7, _('Phone'), 1, 0, 'L', true);
+        $this->Cell($l, 7, __('Phone'), 1, 0, 'L', true);
         $this->SetFont('');
         $this->Cell($c, 7, $ticket->getPhoneNumber(), 1, 1, 'L', true);
         $this->SetFont('Arial', 'B', 11);
-        $this->Cell($l, 7, _('Create Date'), 1, 0, 'L', true);
+        $this->Cell($l, 7, __('Create Date'), 1, 0, 'L', true);
         $this->SetFont('');
         $this->Cell($c, 7, Format::db_datetime($ticket->getCreateDate()), 1, 0, 'L', true);
         $this->SetFont('Arial', 'B', 11);
-        $this->Cell($l, 7, _('Source'), 1, 0, 'L', true);
+        $this->Cell($l, 7, __('Source'), 1, 0, 'L', true);
         $this->SetFont('');
         $source = ucfirst($ticket->getSource());
         if($ticket->getIP())
@@ -158,46 +158,46 @@ class Ticket2PDF extends FPDF
 
         $this->SetFont('Arial', 'B', 11);
         if($ticket->isOpen()) {
-            $this->Cell($l, 7, _('Assigned To'), 1, 0, 'L', true);
+            $this->Cell($l, 7, __('Assigned To'), 1, 0, 'L', true);
             $this->SetFont('');
             $this->Cell($c, 7, $ticket->isAssigned()?$ticket->getAssigned():' -- ', 1, 0, 'L', true);
         } else {
 
-            $closedby = _('unknown');
+            $closedby = __('unknown');
             if(($staff = $ticket->getStaff()))
                 $closedby = $staff->getName();
 
-            $this->Cell($l, 7, _('Closed By'), 1, 0, 'L', true);
+            $this->Cell($l, 7, __('Closed By'), 1, 0, 'L', true);
             $this->SetFont('');
             $this->Cell($c, 7, $closedby, 1, 0, 'L', true);
         }
 
         $this->SetFont('Arial', 'B', 11);
-        $this->Cell($l, 7, _('Help Topic'), 1, 0, 'L', true);
+        $this->Cell($l, 7, __('Help Topic'), 1, 0, 'L', true);
         $this->SetFont('');
         $this->Cell($c, 7, $ticket->getHelpTopic(), 1, 1, 'L', true);
         $this->SetFont('Arial', 'B', 11);
-        $this->Cell($l, 7, _('SLA Plan'), 1, 0, 'L', true);
+        $this->Cell($l, 7, __('SLA Plan'), 1, 0, 'L', true);
         $this->SetFont('');
         $sla = $ticket->getSLA();
         $this->Cell($c, 7, $sla?$sla->getName():' -- ', 1, 0, 'L', true);
         $this->SetFont('Arial', 'B', 11);
-        $this->Cell($l, 7, _('Last Response'), 1, 0, 'L', true);
+        $this->Cell($l, 7, __('Last Response'), 1, 0, 'L', true);
         $this->SetFont('');
         $this->Cell($c, 7, Format::db_datetime($ticket->getLastRespDate()), 1, 1, 'L', true);
         $this->SetFont('Arial', 'B', 11);
         if($ticket->isOpen()) {
-            $this->Cell($l, 7, _('Due Date'), 1, 0, 'L', true);
+            $this->Cell($l, 7, __('Due Date'), 1, 0, 'L', true);
             $this->SetFont('');
             $this->Cell($c, 7, Format::db_datetime($ticket->getEstDueDate()), 1, 0, 'L', true);
         } else {
-            $this->Cell($l, 7, _('Close Date'), 1, 0, 'L', true);
+            $this->Cell($l, 7, __('Close Date'), 1, 0, 'L', true);
             $this->SetFont('');
             $this->Cell($c, 7, Format::db_datetime($ticket->getCloseDate()), 1, 0, 'L', true);
         }
 
         $this->SetFont('Arial', 'B', 11);
-        $this->Cell($l, 7, _('Last Message'), 1, 0, 'L', true);
+        $this->Cell($l, 7, __('Last Message'), 1, 0, 'L', true);
         $this->SetFont('');
         $this->Cell($c, 7, Format::db_datetime($ticket->getLastMsgDate()), 1, 1, 'L', true);
         $this->Ln(5);
@@ -238,7 +238,7 @@ class Ticket2PDF extends FPDF
                     foreach($attachments as $attachment)
                         $files[]= $attachment['name'];
 
-                    $text.="\n".sprintf(_('Files Attached: [%s]'),implode(', ',$files))."\n";
+                    $text.="\n".sprintf(__('Files Attached: [%s]'),implode(', ',$files))."\n";
                 }
                 $this->WriteText($w*2, $text, 1);
                 $this->Ln(5);

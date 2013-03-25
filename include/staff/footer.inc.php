@@ -15,8 +15,8 @@ if(is_object($thisstaff) && $thisstaff->isStaff()) { ?>
 </div>
 <div id="overlay"></div>
 <div id="loading">
-    <h4><?php echo _('Please Wait!');?></h4>
-    <p><?php echo _('Please wait... it will take a second!');?></p>
+    <h4><?php echo __('Please Wait!');?></h4>
+    <p><?php echo __('Please wait... it will take a second!');?></p>
 </div>
 </body>
 </html>

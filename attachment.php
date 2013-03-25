@@ -22,14 +22,14 @@ if(!$thisclient
         || !$_GET['h']
         || !($attachment=Attachment::lookup($_GET['id']))
         || !($file=$attachment->getFile()))
-    die(_('Unknown attachment!'));
+    die(__('Unknown attachment!'));
 
 //Validate session access hash - we want to make sure the link is FRESH! and the user has access to the parent ticket!!
 $vhash=md5($attachment->getFileId().session_id().$file->getHash());
 if(strcasecmp(trim($_GET['h']),$vhash) 
         || !($ticket=$attachment->getTicket()) 
         || !$ticket->checkClientAccess($thisclient)) 
-    die(_('Unknown or invalid attachment'));
+    die(__('Unknown or invalid attachment'));
 //Download the file..
 $file->download();
 

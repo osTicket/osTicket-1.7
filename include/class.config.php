@@ -573,7 +573,7 @@ class Config {
                 return $this->updateKBSettings($vars, $errors);
                 break;
             default:
-                $errors['err']=_('Unknown setting option. Get technical support.');
+                $errors['err']=__('Unknown setting option. Get technical support.');
         }
 
         return false;
@@ -582,18 +582,18 @@ class Config {
     function updateSystemSettings($vars, &$errors) {
 		
         $f=array();
-        $f['helpdesk_url']=array('type'=>'string',   'required'=>1, 'error'=>_('Helpdesk URl required'));
-        $f['helpdesk_title']=array('type'=>'string',   'required'=>1, 'error'=>_('Helpdesk title required'));
-        $f['default_dept_id']=array('type'=>'int',   'required'=>1, 'error'=>_('Default Dept. required'));
-        $f['default_template_id']=array('type'=>'int',   'required'=>1, 'error'=>_('You must select template.'));
-        $f['staff_session_timeout']=array('type'=>'int',   'required'=>1, 'error'=>_('Enter idle time in minutes'));
-        $f['client_session_timeout']=array('type'=>'int',   'required'=>1, 'error'=>_('Enter idle time in minutes'));
+        $f['helpdesk_url']=array('type'=>'string',   'required'=>1, 'error'=>__('Helpdesk URl required'));
+        $f['helpdesk_title']=array('type'=>'string',   'required'=>1, 'error'=>__('Helpdesk title required'));
+        $f['default_dept_id']=array('type'=>'int',   'required'=>1, 'error'=>__('Default Dept. required'));
+        $f['default_template_id']=array('type'=>'int',   'required'=>1, 'error'=>__('You must select template.'));
+        $f['staff_session_timeout']=array('type'=>'int',   'required'=>1, 'error'=>__('Enter idle time in minutes'));
+        $f['client_session_timeout']=array('type'=>'int',   'required'=>1, 'error'=>__('Enter idle time in minutes'));
         //Date & Time Options
-        $f['time_format']=array('type'=>'string',   'required'=>1, 'error'=>_('Time format required'));
-        $f['date_format']=array('type'=>'string',   'required'=>1, 'error'=>_('Date format required'));
-        $f['datetime_format']=array('type'=>'string',   'required'=>1, 'error'=>_('Datetime format required'));
-        $f['daydatetime_format']=array('type'=>'string',   'required'=>1, 'error'=>_('Day, Datetime format required'));
-        $f['default_timezone_id']=array('type'=>'int',   'required'=>1, 'error'=>_('Default Timezone required'));
+        $f['time_format']=array('type'=>'string',   'required'=>1, 'error'=>__('Time format required'));
+        $f['date_format']=array('type'=>'string',   'required'=>1, 'error'=>__('Date format required'));
+        $f['datetime_format']=array('type'=>'string',   'required'=>1, 'error'=>__('Datetime format required'));
+        $f['daydatetime_format']=array('type'=>'string',   'required'=>1, 'error'=>__('Day, Datetime format required'));
+        $f['default_timezone_id']=array('type'=>'int',   'required'=>1, 'error'=>__('Default Timezone required'));
 
 
         if(!Validator::process($f, $vars, $errors) || $errors)
@@ -630,38 +630,38 @@ class Config {
     function updateTicketsSettings($vars, &$errors) {
 
         $f=array();
-        $f['default_sla_id']=array('type'=>'int',   'required'=>1, 'error'=>_('Selection required'));
-        $f['default_priority_id']=array('type'=>'int',   'required'=>1, 'error'=>_('Selection required'));
-        $f['max_open_tickets']=array('type'=>'int',   'required'=>1, 'error'=>_('Enter valid numeric value'));
-        $f['autolock_minutes']=array('type'=>'int',   'required'=>1, 'error'=>_('Enter lock time in minutes'));
+        $f['default_sla_id']=array('type'=>'int',   'required'=>1, 'error'=>__('Selection required'));
+        $f['default_priority_id']=array('type'=>'int',   'required'=>1, 'error'=>__('Selection required'));
+        $f['max_open_tickets']=array('type'=>'int',   'required'=>1, 'error'=>__('Enter valid numeric value'));
+        $f['autolock_minutes']=array('type'=>'int',   'required'=>1, 'error'=>__('Enter lock time in minutes'));
 
 
         if($vars['enable_captcha']) {
             if (!extension_loaded('gd'))
-                $errors['enable_captcha']=_('The GD extension required');
+                $errors['enable_captcha']=__('The GD extension required');
             elseif(!function_exists('imagepng'))
-                $errors['enable_captcha']=_('PNG support required for Image Captcha');
+                $errors['enable_captcha']=__('PNG support required for Image Captcha');
         }
 
         if($vars['allow_attachments']) {
 
             if(!ini_get('file_uploads'))
-                $errors['err']=_('The "file_uploads" directive is disabled in php.ini');
+                $errors['err']=__('The "file_uploads" directive is disabled in php.ini');
 
             if(!is_numeric($vars['max_file_size']))
-                $errors['max_file_size']=_('Maximum file size required');
+                $errors['max_file_size']=__('Maximum file size required');
 
             if(!$vars['allowed_filetypes'])
-                $errors['allowed_filetypes']=_('Allowed file extentions required');
+                $errors['allowed_filetypes']=__('Allowed file extentions required');
 
             if(!($maxfileuploads=ini_get('max_file_uploads')))
                 $maxfileuploads=DEFAULT_MAX_FILE_UPLOADS;
 
             if(!$vars['max_user_file_uploads'] || $vars['max_user_file_uploads']>$maxfileuploads)
-                $errors['max_user_file_uploads']=sprintf(_('Invalid selection. Must be less than %d'),$maxfileuploads);
+                $errors['max_user_file_uploads']=sprintf(__('Invalid selection. Must be less than %d'),$maxfileuploads);
 
             if(!$vars['max_staff_file_uploads'] || $vars['max_staff_file_uploads']>$maxfileuploads)
-                $errors['max_staff_file_uploads']=sprintf(_('Invalid selection. Must be less than %d'),$maxfileuploads);
+                $errors['max_staff_file_uploads']=sprintf(__('Invalid selection. Must be less than %d'),$maxfileuploads);
         }
 
 
@@ -703,15 +703,15 @@ class Config {
 
     function updateEmailsSettings($vars, &$errors) {
         $f=array();
-        $f['default_email_id']=array('type'=>'int',   'required'=>1, 'error'=>_('Default email required'));
-        $f['alert_email_id']=array('type'=>'int',   'required'=>1, 'error'=>_('Selection required'));
-        $f['admin_email']=array('type'=>'email',   'required'=>1, 'error'=>_('System admin email required'));
+        $f['default_email_id']=array('type'=>'int',   'required'=>1, 'error'=>__('Default email required'));
+        $f['alert_email_id']=array('type'=>'int',   'required'=>1, 'error'=>__('Selection required'));
+        $f['admin_email']=array('type'=>'email',   'required'=>1, 'error'=>__('System admin email required'));
 
         if($vars['strip_quoted_reply'] && !$vars['reply_separator'])
-            $errors['reply_separator']=_('Reply separator required to strip quoted reply.');
+            $errors['reply_separator']=__('Reply separator required to strip quoted reply.');
 
         if($vars['admin_email'] && Email::getIdByEmail($vars['admin_email'])) //Make sure admin email is not also a system email.
-            $errors['admin_email']=_('Email already setup as system email');
+            $errors['admin_email']=__('Email already setup as system email');
 
         if(!Validator::process($f,$vars,$errors) || $errors)
             return false;
@@ -737,22 +737,22 @@ class Config {
         if($vars['allow_attachments']) {
 
             if(!ini_get('file_uploads'))
-                $errors['err']=_('The "file_uploads" directive is disabled in php.ini');
+                $errors['err']=__('The "file_uploads" directive is disabled in php.ini');
 
             if(!is_numeric($vars['max_file_size']))
-                $errors['max_file_size']=_('Maximum file size required');
+                $errors['max_file_size']=__('Maximum file size required');
 
             if(!$vars['allowed_filetypes'])
-                $errors['allowed_filetypes']=_('Allowed file extentions required');
+                $errors['allowed_filetypes']=__('Allowed file extentions required');
 
             if(!($maxfileuploads=ini_get('max_file_uploads')))
                 $maxfileuploads=DEFAULT_MAX_FILE_UPLOADS;
 
             if(!$vars['max_user_file_uploads'] || $vars['max_user_file_uploads']>$maxfileuploads)
-                $errors['max_user_file_uploads']=sprintf(_('Invalid selection. Must be less than %d'),$maxfileuploads);
+                $errors['max_user_file_uploads']=sprintf(__('Invalid selection. Must be less than %d'),$maxfileuploads);
 
             if(!$vars['max_staff_file_uploads'] || $vars['max_staff_file_uploads']>$maxfileuploads)
-                $errors['max_staff_file_uploads']=sprintf(_('Invalid selection. Must be less than %d'),$maxfileuploads);
+                $errors['max_staff_file_uploads']=sprintf(__('Invalid selection. Must be less than %d'),$maxfileuploads);
         }
 
         if($errors) return false;
@@ -806,41 +806,41 @@ class Config {
                 && (!isset($vars['ticket_alert_admin'])
                     && !isset($vars['ticket_alert_dept_manager'])
                     && !isset($vars['ticket_alert_dept_members']))) {
-            $errors['ticket_alert_active']=_('Select recipient(s)');
+            $errors['ticket_alert_active']=__('Select recipient(s)');
         }
         if($vars['message_alert_active']
                 && (!isset($vars['message_alert_laststaff'])
                     && !isset($vars['message_alert_assigned'])
                     && !isset($vars['message_alert_dept_manager']))) {
-            $errors['message_alert_active']=_('Select recipient(s)');
+            $errors['message_alert_active']=__('Select recipient(s)');
         }
 
         if($vars['note_alert_active']
                 && (!isset($vars['note_alert_laststaff'])
                     && !isset($vars['note_alert_assigned'])
                     && !isset($vars['note_alert_dept_manager']))) {
-            $errors['note_alert_active']=_('Select recipient(s)');
+            $errors['note_alert_active']=__('Select recipient(s)');
         }
 
         if($vars['transfer_alert_active']
                 && (!isset($vars['transfer_alert_assigned'])
                     && !isset($vars['transfer_alert_dept_manager'])
                     && !isset($vars['transfer_alert_dept_members']))) {
-            $errors['transfer_alert_active']=_('Select recipient(s)');
+            $errors['transfer_alert_active']=__('Select recipient(s)');
         }
 
         if($vars['overdue_alert_active']
                 && (!isset($vars['overdue_alert_assigned'])
                     && !isset($vars['overdue_alert_dept_manager'])
                     && !isset($vars['overdue_alert_dept_members']))) {
-            $errors['overdue_alert_active']=_('Select recipient(s)');
+            $errors['overdue_alert_active']=__('Select recipient(s)');
         }
 
         if($vars['assigned_alert_active']
                 && (!isset($vars['assigned_alert_staff'])
                     && !isset($vars['assigned_alert_team_lead'])
                     && !isset($vars['assigned_alert_team_members']))) {
-            $errors['assigned_alert_active']=_('Select recipient(s)');
+            $errors['assigned_alert_active']=__('Select recipient(s)');
         }
 
         if($errors) return false;

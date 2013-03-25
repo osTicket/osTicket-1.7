@@ -15,7 +15,7 @@ if($search) {
   if( ($_REQUEST['query'] && strlen($_REQUEST['query'])<3) 
       || (!$_REQUEST['query'] && isset($_REQUEST['basic_search'])) ){ //Why do I care about this crap...
       $search=false; //Instead of an error page...default back to regular query..with no search.
-      $errors['err']=_('Search term must be more than 3 chars');
+      $errors['err']=__('Search term must be more than 3 chars');
       $searchTerm='';
   }
 }
@@ -28,32 +28,32 @@ $status=null;
 switch(strtolower($_REQUEST['status'])){ //Status is overloaded
     case 'open':
         $status='open';
-		$results_type=_('Open Tickets');
+		$results_type=__('Open Tickets');
         break;
     case 'closed':
         $status='closed';
-		$results_type=_('Closed Tickets');
+		$results_type=__('Closed Tickets');
         $showassigned=true; //closed by.
         break;
     case 'overdue':
         $status='open';
         $showoverdue=true;
-        $results_type=_('Overdue Tickets');
+        $results_type=__('Overdue Tickets');
         break;
     case 'assigned':
         $status='open';
         $staffId=$thisstaff->getId();
-        $results_type=_('My Tickets');
+        $results_type=__('My Tickets');
         break;
     case 'answered':
         $status='open';
         $showanswered=true;
-        $results_type=_('Answered Tickets');
+        $results_type=__('Answered Tickets');
         break;
     default:
         if(!$search)
             $_REQUEST['status']=$status='open';
-		$results_type=_('Open Tickets');
+		$results_type=__('Open Tickets');
 }
 
 $qwhere ='';
@@ -81,7 +81,7 @@ if($status) {
 
 //Queues: Overloaded sub-statuses  - you've got to just have faith!
 if($staffId && ($staffId==$thisstaff->getId())) { //My tickets
-    $results_type=_('Assigned Tickets');
+    $results_type=__('Assigned Tickets');
     $qwhere.=' AND ticket.staff_id='.db_input($staffId);
     $showassigned=false; //My tickets...already assigned to the staff.
 }elseif($showoverdue) { //overdue
@@ -187,7 +187,7 @@ if($search):
     $startTime  =($_REQUEST['startDate'] && (strlen($_REQUEST['startDate'])>=8))?strtotime($_REQUEST['startDate']):0;
     $endTime    =($_REQUEST['endDate'] && (strlen($_REQUEST['endDate'])>=8))?strtotime($_REQUEST['endDate']):0;
     if( ($startTime && $startTime>time()) or ($startTime>$endTime && $endTime>0)){
-        $errors['err']=_('Entered date span is invalid. Selection ignored.');
+        $errors['err']=__('Entered date span is invalid. Selection ignored.');
         $startTime=$endTime=0;
     }else{
         //Have fun with dates.
@@ -306,7 +306,7 @@ if(!$results_type)
     $results_type = ucfirst($status).' Tickets';
 
 if($search)
-    $results_type.= ' ('._('Search Results').')';
+    $results_type.= ' ('.__('Search Results').')';
 
 $negorder=$order=='DESC'?'ASC':'DESC'; //Negate the sorting..
 
@@ -321,8 +321,8 @@ $negorder=$order=='DESC'?'ASC':'DESC'; //Negate the sorting..
         <tr>
             <td><input type="text" id="basic-ticket-search" name="query" size=30 value="<?php echo Format::htmlchars($_REQUEST['query']); ?>"
                 autocomplete="off" autocorrect="off" autocapitalize="off"></td>
-            <td><input type="submit" name="basic_search" class="button" value="<?php echo _('Search');?>"></td>
-            <td>&nbsp;&nbsp;<a href="" id="go-advanced">[<?php echo _('advanced');?>]</a></td>
+            <td><input type="submit" name="basic_search" class="button" value="<?php echo __('Search');?>"></td>
+            <td>&nbsp;&nbsp;<a href="" id="go-advanced">[<?php echo __('advanced');?>]</a></td>
         </tr>
     </table>
     </form>
@@ -332,7 +332,7 @@ $negorder=$order=='DESC'?'ASC':'DESC'; //Negate the sorting..
 <div style="margin-bottom:20px">
 <form action="tickets.php" method="POST" name='tickets'>
 <?php csrf_token(); ?>
- <a class="refresh" href="<?php echo $_SERVER['REQUEST_URI']; ?>"><?php echo _('Refresh');?></a>
+ <a class="refresh" href="<?php echo $_SERVER['REQUEST_URI']; ?>"><?php echo __('Refresh');?></a>
  <input type="hidden" name="a" value="mass_process" >
  <input type="hidden" name="do" id="action" value="" >
  <input type="hidden" name="status" value="<?php echo Format::htmlchars($_REQUEST['status']); ?>" >
@@ -345,26 +345,26 @@ $negorder=$order=='DESC'?'ASC':'DESC'; //Negate the sorting..
             <?php } ?>
 	        <th width="70">
                 <a <?php echo $id_sort; ?> href="tickets.php?sort=ID&order=<?php echo $negorder; ?><?php echo $qstr; ?>" 
-                    title="<?php echo _('Sort By Ticket ID');?> <?php echo $negorder; ?>"><?php echo _('Ticket');?></a></th>
+                    title="<?php echo __('Sort By Ticket ID');?> <?php echo $negorder; ?>"><?php echo __('Ticket');?></a></th>
 	        <th width="70">
                 <a  <?php echo $date_sort; ?> href="tickets.php?sort=date&order=<?php echo $negorder; ?><?php echo $qstr; ?>" 
-                    title="<?php echo _('Sort By Date');?> <?php echo $negorder; ?>"><?php echo _('Date');?></a></th>
+                    title="<?php echo __('Sort By Date');?> <?php echo $negorder; ?>"><?php echo __('Date');?></a></th>
 	        <th width="280">
                  <a <?php echo $subj_sort; ?> href="tickets.php?sort=subj&order=<?php echo $negorder; ?><?php echo $qstr; ?>" 
-                    title="<?php echo _('Sort By Subject');?> <?php echo $negorder; ?>"><?php echo _('Subject');?></a></th>
+                    title="<?php echo __('Sort By Subject');?> <?php echo $negorder; ?>"><?php echo __('Subject');?></a></th>
             <th width="170">
                 <a <?php echo $name_sort; ?> href="tickets.php?sort=name&order=<?php echo $negorder; ?><?php echo $qstr; ?>"
-                     title="<?php echo _('Sort By Name');?> <?php echo $negorder; ?>"><?php echo _('From');?></a></th>
+                     title="<?php echo __('Sort By Name');?> <?php echo $negorder; ?>"><?php echo __('From');?></a></th>
             <?php
             if($search && !$status) { ?>
                 <th width="60">
                     <a <?php echo $status_sort; ?> href="tickets.php?sort=status&order=<?php echo $negorder; ?><?php echo $qstr; ?>"
-                        title="<?php echo _('Sort By Status');?> <?php echo $negorder; ?>"><?php echo _('Status');?></a></th>
+                        title="<?php echo __('Sort By Status');?> <?php echo $negorder; ?>"><?php echo __('Status');?></a></th>
             <?php
             } else { ?>
                 <th width="60" <?php echo $pri_sort;?>>
                     <a <?php echo $pri_sort; ?> href="tickets.php?sort=pri&order=<?php echo $negorder; ?><?php echo $qstr; ?>" 
-                        title="<?php echo _('Sort By Priority');?> <?php echo $negorder; ?>"><?php echo _('Priority');?></a></th>
+                        title="<?php echo __('Sort By Priority');?> <?php echo $negorder; ?>"><?php echo __('Priority');?></a></th>
             <?php
             }
 
@@ -373,18 +373,18 @@ $negorder=$order=='DESC'?'ASC':'DESC'; //Negate the sorting..
                 if(!strcasecmp($status,'closed')) { ?>
                     <th width="150">
                         <a <?php echo $staff_sort; ?> href="tickets.php?sort=staff&order=<?php echo $negorder; ?><?php echo $qstr; ?>" 
-                            title="<?php echo _('Sort By Closing Staff Name');?> <?php echo $negorder; ?>"><?php echo _('Closed By');?></a></th>
+                            title="<?php echo __('Sort By Closing Staff Name');?> <?php echo $negorder; ?>"><?php echo __('Closed By');?></a></th>
                 <?php
                 } else { //assigned to ?>
                     <th width="150">
                         <a <?php echo $assignee_sort; ?> href="tickets.php?sort=assignee&order=<?php echo $negorder; ?><?php echo $qstr; ?>" 
-                            title="<?php echo _('Sort By Assignee');?> <?php echo $negorder;?>"><?php echo _('Assigned To');?></a></th>
+                            title="<?php echo __('Sort By Assignee');?> <?php echo $negorder;?>"><?php echo __('Assigned To');?></a></th>
                 <?php
                 }
             } else { ?>
                 <th width="150">
                     <a <?php echo $dept_sort; ?> href="tickets.php?sort=dept&order=<?php echo $negorder;?><?php echo $qstr; ?>" 
-                        title="<?php echo _('Sort By Department');?> <?php echo $negorder; ?>"><?php echo _('Department');?></a></th>
+                        title="<?php echo __('Sort By Department');?> <?php echo $negorder; ?>"><?php echo __('Department');?></a></th>
             <?php
             } ?>
         </tr>
@@ -460,20 +460,20 @@ $negorder=$order=='DESC'?'ASC':'DESC'; //Negate the sorting..
             <?php
             } //end of while.
         else: //not tickets found!! set fetch error.
-            $ferror=_('There are no tickets here. (Leave a little early today).');  
+            $ferror=__('There are no tickets here. (Leave a little early today).');  
         endif; ?>
     </tbody>
     <tfoot>
      <tr>
         <td colspan="7">
             <?php if($res && $num && $thisstaff->canManageTickets()){ ?>
-            <?php echo _('Select');?>:&nbsp;
-            <a id="selectAll" href="#ckb"><?php echo _('All');?></a>&nbsp;&nbsp;
-            <a id="selectNone" href="#ckb"><?php echo _('None');?></a>&nbsp;&nbsp;
-            <a id="selectToggle" href="#ckb"><?php echo _('Toggle');?></a>&nbsp;&nbsp;
+            <?php echo __('Select');?>:&nbsp;
+            <a id="selectAll" href="#ckb"><?php echo __('All');?></a>&nbsp;&nbsp;
+            <a id="selectNone" href="#ckb"><?php echo __('None');?></a>&nbsp;&nbsp;
+            <a id="selectToggle" href="#ckb"><?php echo __('Toggle');?></a>&nbsp;&nbsp;
             <?php }else{
                 echo '<i>';
-                echo $ferror?Format::htmlchars($ferror):_('Query returned 0 results.');
+                echo $ferror?Format::htmlchars($ferror):__('Query returned 0 results.');
                 echo '</i>';
             } ?>
         </td>
@@ -482,9 +482,9 @@ $negorder=$order=='DESC'?'ASC':'DESC'; //Negate the sorting..
     </table>
     <?php
     if($num>0){ //if we actually had any tickets returned.
-        echo '<div>&nbsp;'._('Page').':'.$pageNav->getPageLinks().'&nbsp;';
+        echo '<div>&nbsp;'.__('Page').':'.$pageNav->getPageLinks().'&nbsp;';
         echo '<a class="export-csv" href="?a=export&h='
-            .$hash.'&status='.$_REQUEST['status'] .'">'._('Export').'</a></div>';
+            .$hash.'&status='.$_REQUEST['status'] .'">'.__('Export').'</a></div>';
     ?>
         <?php
          if($thisstaff->canManageTickets()) { ?>
@@ -493,30 +493,30 @@ $negorder=$order=='DESC'?'ASC':'DESC'; //Negate the sorting..
             $status=$_REQUEST['status']?$_REQUEST['status']:$status;
             switch (strtolower($status)) {
                 case 'closed': ?>
-                    <input class="button" type="submit" name="reopen" value="<?php echo _('Reopen');?>" >
+                    <input class="button" type="submit" name="reopen" value="<?php echo __('Reopen');?>" >
                     <?php
                     break;
                 case 'open':
                 case 'answered':
                 case 'assigned':
                     ?>
-                    <input class="button" type="submit" name="mark_overdue" value="<?php echo _('Overdue');?>" >
-                    <input class="button" type="submit" name="close" value="<?php echo _('Close');?>">
+                    <input class="button" type="submit" name="mark_overdue" value="<?php echo __('Overdue');?>" >
+                    <input class="button" type="submit" name="close" value="<?php echo __('Close');?>">
                     <?php
                     break;
                 case 'overdue':
                     ?>
-                    <input class="button" type="submit" name="close" value="<?php echo _('Close');?>">
+                    <input class="button" type="submit" name="close" value="<?php echo __('Close');?>">
                     <?php
                     break;
                 default: //search??
                     ?>
-                    <input class="button" type="submit" name="close" value="<?php echo _('Close');?>" >
-                    <input class="button" type="submit" name="reopen" value="<?php echo _('Reopen');?>">
+                    <input class="button" type="submit" name="close" value="<?php echo __('Close');?>" >
+                    <input class="button" type="submit" name="reopen" value="<?php echo __('Reopen');?>">
             <?php
             }
             if($thisstaff->canDeleteTickets()) { ?>
-                <input class="button" type="submit" name="delete" value="<?php echo _('Delete');?>">
+                <input class="button" type="submit" name="delete" value="<?php echo __('Delete');?>">
             <?php } ?>
         </p>
         <?php
@@ -526,60 +526,60 @@ $negorder=$order=='DESC'?'ASC':'DESC'; //Negate the sorting..
 </div>
 
 <div style="display:none;" class="dialog" id="confirm-action">
-    <h3><?php echo _('Please Confirm');?></h3>
+    <h3><?php echo __('Please Confirm');?></h3>
     <a class="close" href="">&times;</a>
     <hr/>
     <p class="confirm-action" style="display:none;" id="close-confirm">
-        <?php echo _('Are you sure want to <b>close</b> selected open tickets?');?>
+        <?php echo __('Are you sure want to <b>close</b> selected open tickets?');?>
     </p>
     <p class="confirm-action" style="display:none;" id="reopen-confirm">
-        <?php echo _('Are you sure want to <b>reopen</b> selected closed tickets?');?>
+        <?php echo __('Are you sure want to <b>reopen</b> selected closed tickets?');?>
     </p>
     <p class="confirm-action" style="display:none;" id="mark_overdue-confirm">
-        <?php echo _('Are you sure want to flag the selected tickets as <font color="red"><b>overdue</b></font>?');?>
+        <?php echo __('Are you sure want to flag the selected tickets as <font color="red"><b>overdue</b></font>?');?>
     </p>
     <p class="confirm-action" style="display:none;" id="delete-confirm">
-        <font color="red"><strong><?php echo _('Are you sure you want to DELETE selected tickets?');?></strong></font>
-        <br><br><?php echo _('Deleted tickets CANNOT be recovered, including any associated attachments.');?>
+        <font color="red"><strong><?php echo __('Are you sure you want to DELETE selected tickets?');?></strong></font>
+        <br><br><?php echo __('Deleted tickets CANNOT be recovered, including any associated attachments.');?>
     </p>
-    <div><?php echo _('Please confirm to continue.');?></div>
+    <div><?php echo __('Please confirm to continue.');?></div>
     <hr style="margin-top:1em"/>
     <p class="full-width">
         <span class="buttons" style="float:left">
-            <input type="button" value="<?php echo _('No, Cancel');?>" class="close">
+            <input type="button" value="<?php echo __('No, Cancel');?>" class="close">
         </span>
         <span class="buttons" style="float:right">
-            <input type="button" value="<?php echo _('Yes, Do it!');?>" class="confirm">
+            <input type="button" value="<?php echo __('Yes, Do it!');?>" class="confirm">
         </span>
      </p>
     <div class="clear"></div>
 </div>
 
 <div class="dialog" style="display:none;" id="advanced-search">
-    <h3><?php echo _('Advanced Ticket Search');?></h3>
+    <h3><?php echo __('Advanced Ticket Search');?></h3>
     <a class="close" href="">&times;</a>
     <form action="tickets.php" method="post" id="search" name="search">
         <input type="hidden" name="a" value="search">
         <fieldset class="query">
-            <label for="query"><?php echo _('Keyword');?>:</label>
-            <input type="input" id="query" name="query" size="20"> <em><?php echo _('Optional');?></em>
+            <label for="query"><?php echo __('Keyword');?>:</label>
+            <input type="input" id="query" name="query" size="20"> <em><?php echo __('Optional');?></em>
         </fieldset>
         <fieldset>
-            <label for="status"><?php echo _('Status');?>:</label>
+            <label for="status"><?php echo __('Status');?>:</label>
             <select id="status" name="status">
-                <option value="">&mdash; <?php echo _('Any Status');?> &mdash;</option>
-                <option value="open"><?php echo _('Open');?></option>
+                <option value="">&mdash; <?php echo __('Any Status');?> &mdash;</option>
+                <option value="open"><?php echo __('Open');?></option>
                 <?php
                 if(!$cfg->showAnsweredTickets()) {?>
-                <option value="answered"><?php echo _('Answered');?></option>
+                <option value="answered"><?php echo __('Answered');?></option>
                 <?php
                 } ?>
-                <option value="overdue"><?php echo _('Overdue');?></option>
-                <option value="closed"><?php echo _('Closed');?></option>
+                <option value="overdue"><?php echo __('Overdue');?></option>
+                <option value="closed"><?php echo __('Closed');?></option>
             </select>
-            <label for="deptId"><?php echo _('Dept');?>:</label>
+            <label for="deptId"><?php echo __('Dept');?>:</label>
             <select id="deptId" name="deptId">
-                <option value="">&mdash; <?php echo _('All Departments');?> &mdash;</option>
+                <option value="">&mdash; <?php echo __('All Departments');?> &mdash;</option>
                 <?php
                 if(($mydepts = $thisstaff->getDepts()) && ($depts=Dept::getDepartments())) {
                     foreach($depts as $id =>$name) {
@@ -591,14 +591,14 @@ $negorder=$order=='DESC'?'ASC':'DESC'; //Negate the sorting..
             </select>
         </fieldset>
         <fieldset class="owner">
-            <label for="assignee"><?php echo _('Assigned To');?>:</label>
+            <label for="assignee"><?php echo __('Assigned To');?>:</label>
             <select id="assignee" name="assignee">
-                <option value="">&mdash; <?php echo _('Anyone');?> &mdash;</option>
-                <option value="0">&mdash; <?php echo _('Unassigned');?> &mdash;</option>
-                <option value="<?php echo $thisstaff->getId(); ?>"><?php echo _('Me');?></option>
+                <option value="">&mdash; <?php echo __('Anyone');?> &mdash;</option>
+                <option value="0">&mdash; <?php echo __('Unassigned');?> &mdash;</option>
+                <option value="<?php echo $thisstaff->getId(); ?>"><?php echo __('Me');?></option>
                 <?php
                 if(($users=Staff::getStaffMembers())) {
-                    echo '<OPTGROUP label="'._('Staff Members').' ('.count($users).')">';
+                    echo '<OPTGROUP label="'.__('Staff Members').' ('.count($users).')">';
                     foreach($users as $id => $name) {
                         $k="s$id";
                         echo sprintf('<option value="%s">%s</option>', $k, $name);
@@ -607,7 +607,7 @@ $negorder=$order=='DESC'?'ASC':'DESC'; //Negate the sorting..
                 }
                 
                 if(($teams=Team::getTeams())) {
-                    echo '<OPTGROUP label="'._('Teams').' ('.count($teams).')">';
+                    echo '<OPTGROUP label="'.__('Teams').' ('.count($teams).')">';
                     foreach($teams as $id => $name) {
                         $k="t$id";
                         echo sprintf('<option value="%s">%s</option>', $k, $name);
@@ -616,10 +616,10 @@ $negorder=$order=='DESC'?'ASC':'DESC'; //Negate the sorting..
                 }
                 ?>
             </select>
-            <label for="staffId"><?php echo _('Closed By');?>:</label>
+            <label for="staffId"><?php echo __('Closed By');?>:</label>
             <select id="staffId" name="staffId">
-                <option value="0">&mdash; <?php echo _('Anyone');?> &mdash;</option>
-                <option value="<?php echo $thisstaff->getId(); ?>"><?php echo _('Me');?></option>
+                <option value="0">&mdash; <?php echo __('Anyone');?> &mdash;</option>
+                <option value="<?php echo $thisstaff->getId(); ?>"><?php echo __('Me');?></option>
                 <?php
                 if(($users=Staff::getStaffMembers())) {
                     foreach($users as $id => $name)
@@ -629,9 +629,9 @@ $negorder=$order=='DESC'?'ASC':'DESC'; //Negate the sorting..
             </select>
         </fieldset>
         <fieldset>
-            <label for="topicId"><?php echo _('Help Topic');?>:</label>
+            <label for="topicId"><?php echo __('Help Topic');?>:</label>
             <select id="topicId" name="topicId">
-                <option value="" selected >&mdash; <?php echo _('All Help Topics');?> &mdash;</option>
+                <option value="" selected >&mdash; <?php echo __('All Help Topics');?> &mdash;</option>
                 <?php
                 if($topics=Topic::getHelpTopics()) {
                     foreach($topics as $id =>$name)
@@ -641,16 +641,16 @@ $negorder=$order=='DESC'?'ASC':'DESC'; //Negate the sorting..
             </select>
         </fieldset>
         <fieldset class="date_range">
-            <label><?php echo _('Date Range');?>:</label>
+            <label><?php echo __('Date Range');?>:</label>
             <input class="dp" type="input" size="20" name="startDate">
-            <span><?php echo _('TO');?></span>
+            <span><?php echo __('TO');?></span>
             <input class="dp" type="input" size="20" name="endDate">
         </fieldset>
         <p>
             <span class="buttons">
-                <input type="submit" value="<?php echo _('Search');?>">
-                <input type="reset" value="<?php echo _('Reset');?>">
-                <input type="button" value="<?php echo _('Cancel');?>" class="close">
+                <input type="submit" value="<?php echo __('Search');?>">
+                <input type="reset" value="<?php echo __('Reset');?>">
+                <input type="button" value="<?php echo __('Cancel');?>" class="close">
             </span>
             <span class="spinner">
                 <img src="./images/ajax-loader.gif" width="16" height="16">

@@ -29,7 +29,7 @@ if($_POST) {
 		require_once('tickets.php'); //Just in case of 'header already sent' error.
 		exit;
 	} elseif(!$errors['err']) {
-		$errors['err'] = _('Authentication error - try again!');
+		$errors['err'] = __('Authentication error - try again!');
 	}
 }
 

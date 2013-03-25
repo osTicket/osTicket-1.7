@@ -20,9 +20,9 @@ require_once(INCLUDE_DIR.'class.ticket.php');
 $ticket=null;
 if($_REQUEST['id']) {
     if(!($ticket=Ticket::lookupByExtId($_REQUEST['id']))) {
-        $errors['err']=_('Unknown or invalid ticket ID.');
+        $errors['err']=__('Unknown or invalid ticket ID.');
     }elseif(!$ticket->checkClientAccess($thisclient)) {
-        $errors['err']=_('Unknown or invalid ticket ID.'); //Using generic message on purpose!
+        $errors['err']=__('Unknown or invalid ticket ID.'); //Using generic message on purpose!
         $ticket=null;
     }
 }
@@ -33,10 +33,10 @@ if($_POST && is_object($ticket) && $ticket->getId()):
     switch(strtolower($_POST['a'])){
     case 'reply':
         if(!$ticket->checkClientAccess($thisclient)) //double check perm again!
-            $errors['err']=_('Access Denied. Possibly invalid ticket ID');
+            $errors['err']=__('Access Denied. Possibly invalid ticket ID');
 
         if(!$_POST['message'])
-            $errors['message']=_('Message required');
+            $errors['message']=__('Message required');
 
         if(!$errors) {
             //Everything checked out...do the magic.
@@ -45,17 +45,17 @@ if($_POST && is_object($ticket) && $ticket->getId()):
                 $vars['files'] = AttachmentFile::format($_FILES['attachments'], true);
 
             if(($msgid=$ticket->postMessage($vars, 'Web'))) {
-                $msg=_('Message Posted Successfully');
+                $msg=__('Message Posted Successfully');
             } else {
-                $errors['err']=_('Unable to post the message. Try again');
+                $errors['err']=__('Unable to post the message. Try again');
             }
 
         } elseif(!$errors['err']) {
-            $errors['err']=_('Error(s) occurred. Please try again');
+            $errors['err']=__('Error(s) occurred. Please try again');
         }
         break;
     default:
-        $errors['err']=_('Unknown action');
+        $errors['err']=__('Unknown action');
     }
     $ticket->reload();
 endif;

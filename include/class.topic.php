@@ -184,20 +184,20 @@ class Topic {
         $vars['topic']=Format::striptags(trim($vars['topic']));
 
         if($id && $id!=$vars['id'])
-            $errors['err']=_('Internal error. Try again');
+            $errors['err']=__('Internal error. Try again');
 
         if(!$vars['topic'])
-            $errors['topic']=_('Help topic required');
+            $errors['topic']=__('Help topic required');
         elseif(strlen($vars['topic'])<5)
-            $errors['topic']=_('Topic is too short. 5 chars minimum');
+            $errors['topic']=__('Topic is too short. 5 chars minimum');
         elseif(($tid=self::getIdByName($vars['topic'], $vars['pid'])) && $tid!=$id)
-            $errors['topic']=_('Topic already exists');
+            $errors['topic']=__('Topic already exists');
 
         if(!$vars['dept_id'])
-            $errors['dept_id']=_('You must select a department');
+            $errors['dept_id']=__('You must select a department');
             
         if(!$vars['priority_id'])
-            $errors['priority_id']=_('You must select a priority');
+            $errors['priority_id']=__('You must select a priority');
         
         if($errors) return false;
 
@@ -225,13 +225,13 @@ class Topic {
             if(db_query($sql))
                 return true;
 
-            $errors['err']=_('Unable to update topic. Internal error occurred');
+            $errors['err']=__('Unable to update topic. Internal error occurred');
         } else {
             $sql='INSERT INTO '.TOPIC_TABLE.' SET '.$sql.',created=NOW()';
             if(db_query($sql) && ($id=db_insert_id()))
                 return $id;
             
-            $errors['err']=_('Unable to create the topic. Internal error');
+            $errors['err']=__('Unable to create the topic. Internal error');
         }
         
         return false;

@@ -194,17 +194,17 @@
     #Connect to the DB && get configuration from database
     $ferror=null;
     if (!db_connect(DBHOST,DBUSER,DBPASS) || !db_select_database(DBNAME)) {
-        $ferror=_('Unable to connect to the database');
+        $ferror=__('Unable to connect to the database');
     } elseif(!($ost=osTicket::start(1)) || !($cfg = $ost->getConfig())) {
-        $ferror=_('Unable to load config info from DB. Get tech support.');
+        $ferror=__('Unable to load config info from DB. Get tech support.');
     }
 
     if($ferror) { //Fatal error
         //try alerting admin using email in config file
         $msg=$ferror."\n\n".THISPAGE;
-        Mailer::sendmail(ADMIN_EMAIL, _('osTicket Fatal Error'), $msg, sprintf(_('"osTicket Alerts"<%s>'), ADMIN_EMAIL));
+        Mailer::sendmail(ADMIN_EMAIL, __('osTicket Fatal Error'), $msg, sprintf(__('"osTicket Alerts"<%s>'), ADMIN_EMAIL));
         //Display generic error to the user
-        die("<b>"._('Fatal Error:')."</b> "._('Contact system administrator.'));
+        die("<b>".__('Fatal Error:')."</b> ".__('Contact system administrator.'));
         exit;
     }
 

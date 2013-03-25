@@ -18,30 +18,30 @@ include_once(INCLUDE_DIR.'class.api.php');
 
 $api=null;
 if($_REQUEST['id'] && !($api=API::lookup($_REQUEST['id'])))
-    $errors['err']=_('Unknown or invalid API key ID.');
+    $errors['err']=__('Unknown or invalid API key ID.');
 
 if($_POST){
     switch(strtolower($_POST['do'])){
         case 'update':
             if(!$api){
-                $errors['err']=_('Unknown or invalid API key.');
+                $errors['err']=__('Unknown or invalid API key.');
             }elseif($api->update($_POST,$errors)){
-                $msg=_('API key updated successfully');
+                $msg=__('API key updated successfully');
             }elseif(!$errors['err']){
-                $errors['err']=_('Error updating API key. Try again!');
+                $errors['err']=__('Error updating API key. Try again!');
             }
             break;
         case 'add':
             if(($id=API::add($_POST,$errors))){
-                $msg=_('API key added successfully');
+                $msg=__('API key added successfully');
                 $_REQUEST['a']=null;
             }elseif(!$errors['err']){
-                $errors['err']=_('Unable to add an API key. Correct error(s) below and try again.');
+                $errors['err']=__('Unable to add an API key. Correct error(s) below and try again.');
             }
             break;
         case 'mass_process':
             if(!$_POST['ids'] || !is_array($_POST['ids']) || !count($_POST['ids'])) {
-                $errors['err'] = _('You must select at least one API key');
+                $errors['err'] = __('You must select at least one API key');
             } else {
                 $count=count($_POST['ids']);
                 switch(strtolower($_POST['a'])) {
@@ -50,11 +50,11 @@ if($_POST){
                             .' WHERE id IN ('.implode(',', db_input($_POST['ids'])).')';
                         if(db_query($sql) && ($num=db_affected_rows())) {
                             if($num==$count)
-                                $msg = _('Selected API keys enabled');
+                                $msg = __('Selected API keys enabled');
                             else
-                                $warn = sprintf(_('%1$d of %2$d selected API keys enabled'), $num, $count);
+                                $warn = sprintf(__('%1$d of %2$d selected API keys enabled'), $num, $count);
                         } else {
-                            $errors['err'] = _('Unable to enable selected API keys.');
+                            $errors['err'] = __('Unable to enable selected API keys.');
                         }
                         break;
                     case 'disable':
@@ -62,11 +62,11 @@ if($_POST){
                             .' WHERE id IN ('.implode(',', db_input($_POST['ids'])).')';
                         if(db_query($sql) && ($num=db_affected_rows())) {
                             if($num==$count)
-                                $msg = _('Selected API keys disabled');
+                                $msg = __('Selected API keys disabled');
                             else
-                                $warn = sprintf(_('%1$d of %2$d selected API keys disabled'), $num, $count);
+                                $warn = sprintf(__('%1$d of %2$d selected API keys disabled'), $num, $count);
                         } else {
-                            $errors['err']=_('Unable to disable selected API keys');
+                            $errors['err']=__('Unable to disable selected API keys');
                         }
                         break;
                     case 'delete':
@@ -76,19 +76,19 @@ if($_POST){
                                 $i++;
                         }
                         if($i && $i==$count)
-                            $msg = _('Selected API keys deleted successfully');
+                            $msg = __('Selected API keys deleted successfully');
                         elseif($i>0)
-                            $warn = sprintf(_('%1$d of %2$d selected API keys deleted'), $num, $count);
+                            $warn = sprintf(__('%1$d of %2$d selected API keys deleted'), $num, $count);
                         elseif(!$errors['err'])
-                            $errors['err'] = _('Unable to delete selected API keys');
+                            $errors['err'] = __('Unable to delete selected API keys');
                         break;
                     default:
-                        $errors['err']=_('Unknown action - get technical help');
+                        $errors['err']=__('Unknown action - get technical help');
                 }
             }
             break;
         default:
-            $errors['err']=_('Unknown action/command');
+            $errors['err']=__('Unknown action/command');
             break;
     }
 }

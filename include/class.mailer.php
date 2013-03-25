@@ -163,7 +163,7 @@ class Mailer {
             if(!PEAR::isError($result))
                 return $messageId;
 
-            $alert=sprintf( _('Unable to email via SMTP:%1$s:%2$d [%3$s]\n\n%4$s\n') ,
+            $alert=sprintf( __('Unable to email via SMTP:%1$s:%2$d [%3$s]\n\n%4$s\n') ,
                     $smtp['host'], $smtp['port'], $smtp['username'], $result->getMessage());
             $this->logError($alert);
         }
@@ -177,7 +177,7 @@ class Mailer {
     function logError($error) {
         global $ost;
         //NOTE: Admin alert overwrite - don't email when having email trouble!
-        $ost->logError(_('Mailer Error'), $error, false);
+        $ost->logError(__('Mailer Error'), $error, false);
     }
 
     /******* Static functions ************/

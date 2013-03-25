@@ -8,17 +8,17 @@ if(isset($_REQUEST['status'])) { //Query string status has nothing to do with th
     //Status we are actually going to use on the query...making sure it is clean!
     switch(strtolower($_REQUEST['status'])) {
      case 'open':
-		$results_type=_('Open Tickets');
+		$results_type=__('Open Tickets');
      case 'closed':
         $status=strtolower($_REQUEST['status']);
-		$results_type=_('Closed Tickets');
+		$results_type=__('Closed Tickets');
         break;
      default:
         $status=''; //ignore
     }
 } elseif($thisclient->getNumOpenTickets()) {
     $status='open'; //Defaulting to open
-	$results_type=_('Open Tickets');
+	$results_type=__('Open Tickets');
 }
 
 $sortOptions=array('id'=>'ticketID', 'name'=>'ticket.name', 'subject'=>'ticket.subject',
@@ -89,53 +89,53 @@ if(!$results_type)
 {
 	$results_type=ucfirst($status).' Tickets';
 }
-$showing.=($status)?(' '.$results_type):' '._('All Tickets');
+$showing.=($status)?(' '.$results_type):' '.__('All Tickets');
 if($search)
-    $showing=_('Search Results').": $showing";
+    $showing=__('Search Results').": $showing";
 
 $negorder=$order=='DESC'?'ASC':'DESC'; //Negate the sorting
 
 ?>
-<h1><?php echo _('My Tickets');?></h1>
+<h1><?php echo __('My Tickets');?></h1>
 <br>
 <form action="tickets.php" method="get" id="ticketSearchForm">
     <input type="hidden" name="a"  value="search">
     <input type="text" name="q" size="20" value="<?php echo Format::htmlchars($_REQUEST['q']); ?>">
     <select name="status">
-        <option value="">&mdash; <?php echo _('Any Status');?> &mdash;</option>
+        <option value="">&mdash; <?php echo __('Any Status');?> &mdash;</option>
         <option value="open"
-            <?php echo ($status=='open')?'selected="selected"':'';?>><?php echo _('Open');?> (<?php echo $thisclient->getNumOpenTickets(); ?>)</option>
+            <?php echo ($status=='open')?'selected="selected"':'';?>><?php echo __('Open');?> (<?php echo $thisclient->getNumOpenTickets(); ?>)</option>
         <?php
         if($thisclient->getNumClosedTickets()) {
             ?>
         <option value="closed"
-            <?php echo ($status=='closed')?'selected="selected"':'';?>><?php echo _('Closed');?> (<?php echo $thisclient->getNumClosedTickets(); ?>)</option>
+            <?php echo ($status=='closed')?'selected="selected"':'';?>><?php echo __('Closed');?> (<?php echo $thisclient->getNumClosedTickets(); ?>)</option>
         <?php
         } ?>
     </select>
-    <input type="submit" value="<?php echo _('Go');?>">
+    <input type="submit" value="<?php echo __('Go');?>">
 </form>
-<a class="refresh" href="<?php echo $_SERVER['REQUEST_URI']; ?>"><?php echo _('Refresh');?></a>
+<a class="refresh" href="<?php echo $_SERVER['REQUEST_URI']; ?>"><?php echo __('Refresh');?></a>
 <table id="ticketTable" width="800" border="0" cellspacing="0" cellpadding="0">
     <caption><?php echo $showing; ?></caption>
     <thead>
         <tr>
             <th width="70" nowrap>
-                <a href="tickets.php?sort=ID&order=<?php echo $negorder; ?><?php echo $qstr; ?>" title="Sort By Ticket ID"><?php echo _('Ticket #');?></a>
+                <a href="tickets.php?sort=ID&order=<?php echo $negorder; ?><?php echo $qstr; ?>" title="Sort By Ticket ID"><?php echo __('Ticket #');?></a>
             </th>
             <th width="100">
-                <a href="tickets.php?sort=date&order=<?php echo $negorder; ?><?php echo $qstr; ?>" title="Sort By Date"><?php echo _('Create Date');?></a>
+                <a href="tickets.php?sort=date&order=<?php echo $negorder; ?><?php echo $qstr; ?>" title="Sort By Date"><?php echo __('Create Date');?></a>
             </th>
             <th width="80">
-                <a href="tickets.php?sort=status&order=<?php echo $negorder; ?><?php echo $qstr; ?>" title="Sort By Status"><?php echo _('Status');?></a>
+                <a href="tickets.php?sort=status&order=<?php echo $negorder; ?><?php echo $qstr; ?>" title="Sort By Status"><?php echo __('Status');?></a>
             </th>
             <th width="300">
-                <a href="tickets.php?sort=subj&order=<?php echo $negorder; ?><?php echo $qstr; ?>" title="Sort By Subject"><?php echo _('Subject');?></a>
+                <a href="tickets.php?sort=subj&order=<?php echo $negorder; ?><?php echo $qstr; ?>" title="Sort By Subject"><?php echo __('Subject');?></a>
             </th>
             <th width="150">
-                <a href="tickets.php?sort=dept&order=<?php echo $negorder; ?><?php echo $qstr; ?>" title="Sort By Department"><?php echo _('Department');?></a>
+                <a href="tickets.php?sort=dept&order=<?php echo $negorder; ?><?php echo $qstr; ?>" title="Sort By Department"><?php echo __('Department');?></a>
             </th>
-            <th width="100"><?php echo _('Phone Number');?></th>
+            <th width="100"><?php echo __('Phone Number');?></th>
         </tr>
     </thead>
     <tbody>
@@ -146,13 +146,13 @@ $negorder=$order=='DESC'?'ASC':'DESC'; //Negate the sorting
 			$ticketstatus='';
 			switch($row['status']) {
 				case 'open':
-					$ticketstatus=_('open');
+					$ticketstatus=__('open');
 					break;
 				case 'closed':
-					$ticketstatus=_('closed');
+					$ticketstatus=__('closed');
 					break;
 				default:
-					$ticketstatus=_('open');
+					$ticketstatus=__('open');
 			}
             $dept=$row['ispublic']?$row['dept_name']:$defaultDept;
             $subject=Format::htmlchars(Format::truncate($row['subject'],40));
@@ -185,13 +185,13 @@ $negorder=$order=='DESC'?'ASC':'DESC'; //Negate the sorting
         }
 
      } else {
-         echo '<tr><td colspan="7">'._('Your query did not match any records').'</td></tr>';
+         echo '<tr><td colspan="7">'.__('Your query did not match any records').'</td></tr>';
      }
     ?>
     </tbody>
 </table>
 <?php
 if($res && $num>0) {
-    echo '<div>&nbsp;'._('Page').':'.$pageNav->getPageLinks().'&nbsp;</div>';
+    echo '<div>&nbsp;'.__('Page').':'.$pageNav->getPageLinks().'&nbsp;</div>';
 }
 ?>

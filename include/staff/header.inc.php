@@ -4,7 +4,7 @@
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
     <meta http-equiv="cache-control" content="no-cache" />
     <meta http-equiv="pragma" content="no-cache" />
-    <title><?php echo ($ost && ($title=$ost->getPageTitle()))?$title:_('osTicket :: Staff Control Panel'); ?></title>
+    <title><?php echo ($ost && ($title=$ost->getPageTitle()))?$title:__('osTicket :: Staff Control Panel'); ?></title>
     <!--[if IE]>
     <style type="text/css">
         .tip_shadow { display:block !important; }
@@ -26,16 +26,16 @@
 	
 	<script>
 	jQuery(function($){
-		$.datepicker.regional["varlang"]={closeText:"<?php echo _('Done');?>",
-		prevText:"<?php echo _('Prev');?>",
-		nextText:"<?php echo _('Next');?>",
-		currentText:"<?php echo _('Today');?>",
-		monthNames:["<?php echo _('January');?>","<?php echo _('February');?>","<?php echo _('March');?>","<?php echo _('April');?>","<?php echo _('May');?>","<?php echo _('June');?>","<?php echo _('July');?>","<?php echo _('August');?>","<?php echo _('September');?>","<?php echo _('October');?>","<?php echo _('November');?>","<?php echo _('December');?>"],
-		monthNamesShort:["<?php echo _('Jan');?>","<?php echo _('Feb');?>","<?php echo _('Mar');?>","<?php echo _('Apr');?>","<?php echo _('May');?>","<?php echo _('Jun');?>","<?php echo _('Jul');?>","<?php echo _('Aug');?>","<?php echo _('Sep');?>","<?php echo _('Oct');?>","<?php echo _('Nov');?>","<?php echo _('Dec');?>"],
-		dayNames:["<?php echo _('Sunday');?>","<?php echo _('Monday');?>","<?php echo _('Tuesday');?>","<?php echo _('Wednesday');?>","<?php echo _('Thursday');?>","<?php echo _('Friday');?>","<?php echo _('Saturday');?>"],
-		dayNamesShort:["<?php echo _('Sun');?>","<?php echo _('Mon');?>","<?php echo _('Tue');?>","<?php echo _('Wed');?>","<?php echo _('Thu');?>","<?php echo _('Fri');?>","<?php echo _('Sat');?>"],
-		dayNamesMin:["<?php echo _('Su');?>","<?php echo _('Mo');?>","<?php echo _('Tu');?>","<?php echo _('We');?>","<?php echo _('Th');?>","<?php echo _('Fr');?>","<?php echo _('Sa');?>"],
-		weekHeader:"<?php echo _('Wk');?>",
+		$.datepicker.regional["varlang"]={closeText:"<?php echo __('Done');?>",
+		prevText:"<?php echo __('Prev');?>",
+		nextText:"<?php echo __('Next');?>",
+		currentText:"<?php echo __('Today');?>",
+		monthNames:["<?php echo __('January');?>","<?php echo __('February');?>","<?php echo __('March');?>","<?php echo __('April');?>","<?php echo __('May');?>","<?php echo __('June');?>","<?php echo __('July');?>","<?php echo __('August');?>","<?php echo __('September');?>","<?php echo __('October');?>","<?php echo __('November');?>","<?php echo __('December');?>"],
+		monthNamesShort:["<?php echo __('Jan');?>","<?php echo __('Feb');?>","<?php echo __('Mar');?>","<?php echo __('Apr');?>","<?php echo __('May');?>","<?php echo __('Jun');?>","<?php echo __('Jul');?>","<?php echo __('Aug');?>","<?php echo __('Sep');?>","<?php echo __('Oct');?>","<?php echo __('Nov');?>","<?php echo __('Dec');?>"],
+		dayNames:["<?php echo __('Sunday');?>","<?php echo __('Monday');?>","<?php echo __('Tuesday');?>","<?php echo __('Wednesday');?>","<?php echo __('Thursday');?>","<?php echo __('Friday');?>","<?php echo __('Saturday');?>"],
+		dayNamesShort:["<?php echo __('Sun');?>","<?php echo __('Mon');?>","<?php echo __('Tue');?>","<?php echo __('Wed');?>","<?php echo __('Thu');?>","<?php echo __('Fri');?>","<?php echo __('Sat');?>"],
+		dayNamesMin:["<?php echo __('Su');?>","<?php echo __('Mo');?>","<?php echo __('Tu');?>","<?php echo __('We');?>","<?php echo __('Th');?>","<?php echo __('Fr');?>","<?php echo __('Sa');?>"],
+		weekHeader:"<?php echo __('Wk');?>",
 		dateFormat:"mm/dd/yy",
 		firstDay:0,
 		isRTL:!1,
@@ -62,16 +62,16 @@
         echo sprintf('<div id="notice_bar">%s</div>', $ost->getNotice());
     ?>
     <div id="header">
-        <a href="index.php" id="logo"><?php echo _('osTicket - Customer Support System');?></a>
-        <p id="info"><?php echo _('Howdy,');?> <strong><?php echo $thisstaff->getUserName(); ?></strong>
+        <a href="index.php" id="logo"><?php echo __('osTicket - Customer Support System');?></a>
+        <p id="info"><?php echo __('Howdy,');?> <strong><?php echo $thisstaff->getUserName(); ?></strong>
            <?php
             if($thisstaff->isAdmin() && !defined('ADMINPAGE')) { ?>
-            | <a href="admin.php"><?php echo _('Admin Panel');?></a>
+            | <a href="admin.php"><?php echo __('Admin Panel');?></a>
             <?php }else{ ?>
-            | <a href="index.php"><?php echo _('Staff Panel');?></a>
+            | <a href="index.php"><?php echo __('Staff Panel');?></a>
             <?php } ?>
-            | <a href="profile.php"><?php echo _('My Preferences');?></a>
-            | <a href="logout.php?auth=<?php echo $ost->getLinkToken(); ?>"><?php echo _('Log Out');?></a>
+            | <a href="profile.php"><?php echo __('My Preferences');?></a>
+            | <a href="logout.php?auth=<?php echo $ost->getLinkToken(); ?>"><?php echo __('Log Out');?></a>
         </p>
     </div>
     <ul id="nav">

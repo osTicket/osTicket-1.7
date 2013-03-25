@@ -28,13 +28,13 @@ header("Content-Type: text/html; charset=UTF-8\r\n");
                  ?>
                 <?php
                 if($cfg->showRelatedTickets()) {?>
-                <a href="<?php echo ROOT_PATH; ?>tickets.php"><?php echo _('My Tickets');?> <b>(<?php echo $thisclient->getNumTickets(); ?>)</b></a> -
+                <a href="<?php echo ROOT_PATH; ?>tickets.php"><?php echo __('My Tickets');?> <b>(<?php echo $thisclient->getNumTickets(); ?>)</b></a> -
                 <?php
                 } ?>
-                <a href="<?php echo ROOT_PATH; ?>logout.php?auth=<?php echo $ost->getLinkToken(); ?>"><?php echo _('Log Out');?></a>
+                <a href="<?php echo ROOT_PATH; ?>logout.php?auth=<?php echo $ost->getLinkToken(); ?>"><?php echo __('Log Out');?></a>
              <?php
              }elseif($nav){ ?>
-                 <?php echo _('Guest User');?> - <a href="<?php echo ROOT_PATH; ?>login.php"><?php echo _('Log In');?></a>
+                 <?php echo __('Guest User');?> - <a href="<?php echo ROOT_PATH; ?>login.php"><?php echo __('Log In');?></a>
               <?php
              } ?>
             </p>

@@ -350,24 +350,24 @@ class Dept {
         global $cfg;
                 
         if($id && $id!=$vars['id'])
-            $errors['err']=_('Missing or invalid Dept ID (internal error).');
+            $errors['err']=__('Missing or invalid Dept ID (internal error).');
             
         if(!$vars['email_id'] || !is_numeric($vars['email_id']))
-            $errors['email_id']=_('Email selection required');
+            $errors['email_id']=__('Email selection required');
             
         if(!is_numeric($vars['tpl_id']))
-            $errors['tpl_id']=_('Template selection required');
+            $errors['tpl_id']=__('Template selection required');
 
         if(!$vars['name']) {
-            $errors['name']=_('Name required');
+            $errors['name']=__('Name required');
         } elseif(strlen($vars['name'])<4) {
-            $errors['name']=_('Name is too short.');
+            $errors['name']=__('Name is too short.');
         } elseif(($did=Dept::getIdByName($vars['name'])) && $did!=$id) {
-            $errors['name']=_('Department already exist');
+            $errors['name']=__('Department already exist');
         }
         
         if(!$vars['ispublic'] && ($vars['id']==$cfg->getDefaultDeptId()))
-            $errors['ispublic']=_('System default department can not be private');
+            $errors['ispublic']=__('System default department can not be private');
 
         if($errors) return false;
 
@@ -392,7 +392,7 @@ class Dept {
                 return true;
             
             //$errors['err']='Unable to update '.Format::htmlchars($vars['name']).' Dept. Error occurred';
-            $errors['err']=sprintf(_('Unable to update %s Dept. Error occurred'),Format::htmlchars($vars['name']));
+            $errors['err']=sprintf(__('Unable to update %s Dept. Error occurred'),Format::htmlchars($vars['name']));
            
         } else {
             $sql='INSERT INTO '.DEPT_TABLE.' '.$sql.',created=NOW()';
@@ -400,7 +400,7 @@ class Dept {
                 return $id;
 
             
-            $errors['err']=_('Unable to create department. Internal error');
+            $errors['err']=__('Unable to create department. Internal error');
             
         }
 

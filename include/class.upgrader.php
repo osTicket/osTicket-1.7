@@ -57,7 +57,7 @@ class Upgrader extends SetupWizard {
     function onError($error) {
         global $ost, $thisstaff;
 
-        $ost->logError(_('Upgrader Error'), $error);
+        $ost->logError(__('Upgrader Error'), $error);
         $this->setError($error);
         $this->setState('aborted');
 
@@ -70,11 +70,11 @@ class Upgrader extends SetupWizard {
         if(!($email=$ost->getConfig()->getAlertEmail()))
             $email=$ost->getConfig()->getDefaultEmail(); //will take the default email.
 
-        $subject = _('Upgrader Error');
+        $subject = __('Upgrader Error');
         if($email) {
             $email->sendAlert($thisstaff->getEmail(), $subject, $error);
         } else {//no luck - try the system mail.
-            Mailer::sendmail($thisstaff->getEmail(), $subject, $error, sprintf(_('"osTicket Alerts"<%s>'), $thisstaff->getEmail()));
+            Mailer::sendmail($thisstaff->getEmail(), $subject, $error, sprintf(__('"osTicket Alerts"<%s>'), $thisstaff->getEmail()));
         }
 
     }
@@ -160,13 +160,13 @@ class Upgrader extends SetupWizard {
 
     function getNextAction() {
 
-        $action=sprintf(_('Upgrade osTicket to %s'), $this->getVersion());
+        $action=sprintf(__('Upgrade osTicket to %s'), $this->getVersion());
         if($this->getNumPendingTasks() && ($task=$this->getNextTask())) {
             $action = $task['desc'];
             if($task['status']) //Progress report...
                 $action.=' ('.$task['status'].')';
         } elseif($this->isUpgradable() && ($nextversion = $this->getNextVersion())) {
-            $action = sprintf(_("Upgrade to %s"),$nextversion);
+            $action = sprintf(__("Upgrade to %s"),$nextversion);
         }
 
         return $action;
@@ -223,8 +223,8 @@ class Upgrader extends SetupWizard {
 
         $c = count($tasks);
         $ost->logDebug(
-                sprintf(_('Upgrader - %1$s (%2$d pending tasks).'), $this->getShash(), $c),
-                sprintf(_('There are %1$d pending upgrade tasks for %2$s patch'), $c, $this->getShash())
+                sprintf(__('Upgrader - %1$s (%2$d pending tasks).'), $this->getShash(), $c),
+                sprintf(__('There are %1$d pending upgrade tasks for %2$s patch'), $c, $this->getShash())
                 );
         $start_time = Misc::micro_time();
         foreach($tasks as $k => $task) {
@@ -261,11 +261,11 @@ class Upgrader extends SetupWizard {
             $shash = substr($phash, 9, 8);
 
             //Log the patch info
-            $logMsg = sprintf(_("Patch %s applied successfully "), $phash);
+            $logMsg = sprintf(__("Patch %s applied successfully "), $phash);
             if(($info = $this->readPatchInfo($patch)) && $info['version'])
                 $logMsg.= ' ('.$info['version'].') ';
 
-            $ost->logDebug(sprintf(_("Upgrader - %s applied"), $shash), $logMsg);
+            $ost->logDebug(sprintf(__("Upgrader - %s applied"), $shash), $logMsg);
             $this->signature = $shash; //Update signature to the *new* HEAD
 
             //Check if the said patch has scripted tasks
@@ -297,19 +297,19 @@ class Upgrader extends SetupWizard {
         switch($phash) { //Add  patch specific scripted tasks.
             case 'c00511c7-7be60a84': //V1.6 ST- 1.7 * {{MD5('1.6 ST') -> c00511c7c1db65c0cfad04b4842afc57}}
                 $tasks[] = array('func' => 'migrateSessionFile2DB',
-                                 'desc' => _('Transitioning to db-backed sessions'));
+                                 'desc' => __('Transitioning to db-backed sessions'));
                 break;
             case '98ae1ed2-e342f869': //v1.6 RC1-4 -> v1.6 RC5
                 $tasks[] = array('func' => 'migrateAPIKeys',
-                                 'desc' => _('Migrating API keys to a new table'));
+                                 'desc' => __('Migrating API keys to a new table'));
                 break;
             case '435c62c3-2e7531a2':
                 $tasks[] = array('func' => 'migrateGroupDeptAccess',
-                                 'desc' => _('Migrating group\'s department access to a new table'));
+                                 'desc' => __('Migrating group\'s department access to a new table'));
                 break;
             case '15b30765-dd0022fb':
                 $tasks[] = array('func' => 'migrateAttachments2DB',
-                                 'desc' => _('Migrating attachments to database, it might take a while depending on the number of files.'));
+                                 'desc' => __('Migrating attachments to database, it might take a while depending on the number of files.'));
                 break;
         }
 
@@ -317,7 +317,7 @@ class Upgrader extends SetupWizard {
         $file=$this->getSQLDir().$phash.'.cleanup.sql';
         if(file_exists($file))
             $tasks[] = array('func' => 'cleanup',
-                             'desc' => _('Post-upgrade cleanup!'),
+                             'desc' => __('Post-upgrade cleanup!'),
                              'phash' => $phash);
 
         return $tasks;
@@ -337,7 +337,7 @@ class Upgrader extends SetupWizard {
         if($this->load_sql_file($file, $this->getTablePrefix(), false, true))
             return 0;
 
-        $ost->logDebug(_('Upgrader'), sprintf(_("%s: Unable to process cleanup file"),
+        $ost->logDebug(__('Upgrader'), sprintf(__("%s: Unable to process cleanup file"),
                         $phash));
         return 0;
     }

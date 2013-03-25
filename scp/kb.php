@@ -18,7 +18,7 @@ require_once(INCLUDE_DIR.'class.faq.php');
 
 $category=null;
 if($_REQUEST['cid'] && !($category=Category::lookup($_REQUEST['cid'])))
-    $errors['err']=_('Unknown or invalid FAQ category');
+    $errors['err']=__('Unknown or invalid FAQ category');
 
 $inc='faq-categories.inc.php'; //KB landing page.
 if($category && $_REQUEST['a']!='search') {

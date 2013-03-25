@@ -38,9 +38,9 @@ class Validator {
         $this->errors=array();
         //Check the input and make sure the fields are specified.
         if(!$source || !is_array($source))
-            $this->errors['err']=_('Invalid input');
+            $this->errors['err']=__('Invalid input');
         elseif(!$this->fields || !is_array($this->fields))
-            $this->errors['err']=_('No fields setup');
+            $this->errors['err']=__('No fields setup');
         //Abort on error
         if($this->errors)
             return false;
@@ -117,7 +117,7 @@ class Validator {
                     $this->errors[$k]=$field['error'];   
                 break;
             default://If param type is not set...or handle..error out...
-                $this->errors[$k]=$field['error'].' '._('(type not set)');
+                $this->errors[$k]=$field['error'].' '.__('(type not set)');
             endswitch;
         }
         return ($this->errors)?(FALSE):(TRUE);

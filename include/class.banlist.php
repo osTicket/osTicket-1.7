@@ -51,7 +51,7 @@ class Banlist {
             'match_all_rules' => false,
             'reject_ticket'  => true,
             'rules'         => array(),
-            'notes'         => _('Internal list for email banning. Do not remove')
+            'notes'         => __('Internal list for email banning. Do not remove')
         ), $errors);
     }
 

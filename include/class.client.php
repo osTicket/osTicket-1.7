@@ -153,8 +153,8 @@ class Client {
         //Check time for last max failed login attempt strike.
         if($_SESSION['_client']['laststrike']) {
             if((time()-$_SESSION['_client']['laststrike'])<$cfg->getClientLoginTimeout()) {
-                $errors['login'] = _('Excessive failed login attempts');
-                $errors['err'] = _('You\'ve reached maximum failed login attempts allowed. Try again later or').' <a href="open.php">'._('open a new ticket').'</a>';
+                $errors['login'] = __('Excessive failed login attempts');
+                $errors['err'] = __('You\'ve reached maximum failed login attempts allowed. Try again later or').' <a href="open.php">'.__('open a new ticket').'</a>';
                 $_SESSION['_client']['laststrike'] = time(); //renew the strike.
             } else { //Timeout is over.
                 //Reset the counter for next round of attempts after the timeout.
@@ -164,9 +164,9 @@ class Client {
         }
 
         if($auto_login && !$auth)
-            $errors['login'] = _('Invalid method');
+            $errors['login'] = __('Invalid method');
         elseif(!$ticketID || !Validator::is_email($email))
-            $errors['login'] = _('Valid email and ticket number required');
+            $errors['login'] = __('Valid email and ticket number required');
 
         //Bail out on error.
         if($errors) return false;
@@ -190,8 +190,8 @@ class Client {
                 $_SESSION['TZ_DST'] = $cfg->observeDaylightSaving();
                 $user->refreshSession(); //set the hash.
                 //Log login info...
-                $msg=sprintf(_('%1$s/%2$s logged in [%3$s]'), $ticket->getEmail(), $ticket->getExtId(), $_SERVER['REMOTE_ADDR']);
-                $ost->logDebug(_('User login'), $msg);
+                $msg=sprintf(__('%1$s/%2$s logged in [%3$s]'), $ticket->getEmail(), $ticket->getExtId(), $_SERVER['REMOTE_ADDR']);
+                $ost->logDebug(__('User login'), $msg);
         
                 //Regenerate session ID.
                 $sid=session_id(); //Current session id.
@@ -205,23 +205,23 @@ class Client {
         }
 
         //If we get to this point we know the login failed.
-        $errors['login'] = _('Invalid login');
+        $errors['login'] = __('Invalid login');
         $_SESSION['_client']['strikes']+=1;
         if(!$errors && $_SESSION['_client']['strikes']>$cfg->getClientMaxLogins()) {
-            $errors['login'] = _('Access Denied');
-            $errors['err'] = _('Forgot your login info? Please').' <a href="open.php">'._('open a new ticket').'</a>.';
+            $errors['login'] = __('Access Denied');
+            $errors['err'] = __('Forgot your login info? Please').' <a href="open.php">'.__('open a new ticket').'</a>.';
             $_SESSION['_client']['laststrike'] = time();
-            $alert=sprintf(_('Excessive login attempts by a user.\nEmail: %1$s\nTicket#: %2$s\nIP: %3$s\nTime: %4$s\n\nAttempts # %5$s'), $email, $ticketID, $_SERVER['REMOTE_ADDR'], date('M j, Y, g:i a T'), $_SESSION['_client']['strikes']);
+            $alert=sprintf(__('Excessive login attempts by a user.\nEmail: %1$s\nTicket#: %2$s\nIP: %3$s\nTime: %4$s\n\nAttempts # %5$s'), $email, $ticketID, $_SERVER['REMOTE_ADDR'], date('M j, Y, g:i a T'), $_SESSION['_client']['strikes']);
             /*$alert='Excessive login attempts by a user.'."\n".
                     'Email:'.' '.$email."\n".'Ticket#:'.' '.$ticketID."\n".
                     'IP:'.' '.$_SERVER['REMOTE_ADDR']."\n".'Time:'.date('M j, Y, g:i a T')."\n\n".
                     'Attempts #'.$_SESSION['_client']['strikes'];*/
-            $ost->logError(_('Excessive login attempts (user)'), $alert, ($cfg->alertONLoginError()));
+            $ost->logError(__('Excessive login attempts (user)'), $alert, ($cfg->alertONLoginError()));
         } elseif($_SESSION['_client']['strikes']%2==0) { //Log every other failed login attempt as a warning.
-            $alert=sprintf(_('Email: %1$s\nTicket #: %2$s\nIP: %3$s\nTIME: %4$s\n\nAttempts # %5$s'), $email, $ticketID, $_SERVER['REMOTE_ADDR'], date('M j, Y, g:i a T'), $_SESSION['_client']['strikes']);
+            $alert=sprintf(__('Email: %1$s\nTicket #: %2$s\nIP: %3$s\nTIME: %4$s\n\nAttempts # %5$s'), $email, $ticketID, $_SERVER['REMOTE_ADDR'], date('M j, Y, g:i a T'), $_SESSION['_client']['strikes']);
             /*$alert='Email: '.$email."\n".'Ticket #:'.' '.$ticketID."\n".'IP:'.' '.$_SERVER['REMOTE_ADDR'].
                    "\n".'TIME:'.' '.date('M j, Y, g:i a T')."\n\n".'Attempts #'.$_SESSION['_client']['strikes'];*/
-            $ost->logWarning(_('Failed login attempt (user)'), $alert);
+            $ost->logWarning(__('Failed login attempt (user)'), $alert);
         }
 
         return false;

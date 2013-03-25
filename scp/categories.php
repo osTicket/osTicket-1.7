@@ -25,30 +25,30 @@ if(!$thisstaff || !$thisstaff->canManageFAQ()) {
 
 $category=null;
 if($_REQUEST['id'] && !($category=Category::lookup($_REQUEST['id'])))
-    $errors['err']=_('Unknown or invalid category ID.');
+    $errors['err']=__('Unknown or invalid category ID.');
 
 if($_POST){
     switch(strtolower($_POST['do'])) {
         case 'update':
             if(!$category) {
-                $errors['err']=_('Unknown or invalid category.');
+                $errors['err']=__('Unknown or invalid category.');
             } elseif($category->update($_POST,$errors)) {
-                $msg=_('Category updated successfully');
+                $msg=__('Category updated successfully');
             } elseif(!$errors['err']) {
-                $errors['err']=_('Error updating category. Try again!');
+                $errors['err']=__('Error updating category. Try again!');
             }
             break;
         case 'create':
             if(($id=Category::create($_POST,$errors))) {
-                $msg=_('Category added successfully');
+                $msg=__('Category added successfully');
                 $_REQUEST['a']=null;
             } elseif(!$errors['err']) {
-                $errors['err']=_('Unable to add category. Correct error(s) below and try again.');
+                $errors['err']=__('Unable to add category. Correct error(s) below and try again.');
             }
             break;
         case 'mass_process':
             if(!$_POST['ids'] || !is_array($_POST['ids']) || !count($_POST['ids'])) {
-                $errors['err']=_('You must select at least one category');
+                $errors['err']=__('You must select at least one category');
             } else {
                 $count=count($_POST['ids']);
                 switch(strtolower($_POST['a'])) {
@@ -58,11 +58,11 @@ if($_POST){
                     
                         if(db_query($sql) && ($num=db_affected_rows())) {
                             if($num==$count)
-                                $msg = _('Selected categories made PUBLIC');
+                                $msg = __('Selected categories made PUBLIC');
                             else
-                                $warn = sprintf(_('%1$d of %2$d selected categories made PUBLIC'), $num, $count);
+                                $warn = sprintf(__('%1$d of %2$d selected categories made PUBLIC'), $num, $count);
                         } else {
-                            $errors['err'] = _('Unable to enable selected categories public.');
+                            $errors['err'] = __('Unable to enable selected categories public.');
                         }
                         break;
                     case 'make_private':
@@ -71,11 +71,11 @@ if($_POST){
 
                         if(db_query($sql) && ($num=db_affected_rows())) {
                             if($num==$count)
-                                $msg = _('Selected categories made PRIVATE');
+                                $msg = __('Selected categories made PRIVATE');
                             else
-                                $warn = sprintf(_('%1$d of %2$d selected categories made PRIVATE'), $num, $count);
+                                $warn = sprintf(__('%1$d of %2$d selected categories made PRIVATE'), $num, $count);
                         } else {
-                            $errors['err'] = _('Unable to disable selected categories PRIVATE');
+                            $errors['err'] = __('Unable to disable selected categories PRIVATE');
                         }
                         break;
                     case 'delete':
@@ -86,19 +86,19 @@ if($_POST){
                         }
 
                         if($i==$count)
-                            $msg = _('Selected categories deleted successfully');
+                            $msg = __('Selected categories deleted successfully');
                         elseif($i>0)
-                            $warn = sprintf(_('%1$d of %2$d selected categories deleted'), $i, $count);
+                            $warn = sprintf(__('%1$d of %2$d selected categories deleted'), $i, $count);
                         elseif(!$errors['err'])
-                            $errors['err'] = _('Unable to delete selected categories');
+                            $errors['err'] = __('Unable to delete selected categories');
                         break;
                     default:
-                        $errors['err']=_('Unknown action/command');
+                        $errors['err']=__('Unknown action/command');
                 }
             }
             break;
         default:
-            $errors['err']=_('Unknown action');
+            $errors['err']=__('Unknown action');
             break;
     }
 }

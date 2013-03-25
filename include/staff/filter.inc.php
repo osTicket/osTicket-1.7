@@ -7,16 +7,16 @@ $match_types=Filter::getSupportedMatchTypes();
 $info=array();
 $qstr='';
 if($filter && $_REQUEST['a']!='add'){
-    $title=_('Update Filter');
+    $title=__('Update Filter');
     $action='update';
-    $submit_text=_('Save Changes');
+    $submit_text=__('Save Changes');
     $info=array_merge($filter->getInfo(),$filter->getFlatRules());
     $info['id']=$filter->getId();
     $qstr.='&id='.$filter->getId();
 }else {
-    $title=_('Add New Filter');
+    $title=__('Add New Filter');
     $action='add';
-    $submit_text=_('Add Filter');
+    $submit_text=__('Add Filter');
     $info['isactive']=isset($info['isactive'])?$info['isactive']:0;
     $qstr.='&a='.urlencode($_REQUEST['a']);
 }
@@ -27,20 +27,20 @@ $info=Format::htmlchars(($errors && $_POST)?$_POST:$info);
  <input type="hidden" name="do" value="<?php echo $action; ?>">
  <input type="hidden" name="a" value="<?php echo Format::htmlchars($_REQUEST['a']); ?>">
  <input type="hidden" name="id" value="<?php echo $info['id']; ?>">
- <h2><?php echo _('Incoming Email Filter');?></h2>
+ <h2><?php echo __('Incoming Email Filter');?></h2>
  <table class="form_table" width="940" border="0" cellspacing="0" cellpadding="2">
     <thead>
         <tr>
             <th colspan="2">
                 <h4><?php echo $title; ?></h4>
-                <em><?php echo _('Filters are executed based on execution order. Filter can target specific ticket source.');?></em>
+                <em><?php echo __('Filters are executed based on execution order. Filter can target specific ticket source.');?></em>
             </th>
         </tr>
     </thead>
     <tbody>
         <tr>
             <td width="180" class="required">
-              <?php echo _('Filter Name:');?>
+              <?php echo __('Filter Name:');?>
             </td>
             <td>
                 <input type="text" size="30" name="name" value="<?php echo $info['name']; ?>">
@@ -49,7 +49,7 @@ $info=Format::htmlchars(($errors && $_POST)?$_POST:$info);
         </tr>
         <tr>
             <td width="180" class="required">
-              <?php echo _('Execution Order:');?>
+              <?php echo __('Execution Order:');?>
             </td>
             <td>
                 <input type="text" size="6" name="execorder" value="<?php echo $info['execorder']; ?>">
@@ -57,26 +57,26 @@ $info=Format::htmlchars(($errors && $_POST)?$_POST:$info);
                 &nbsp;<span class="error">*&nbsp;<?php echo $errors['execorder']; ?></span>
                 &nbsp;&nbsp;&nbsp;
                 <input type="checkbox" name="stop_onmatch" value="1" <?php echo $info['stop_onmatch']?'checked="checked"':''; ?> >
-                <?php echo _('<strong>Stop</strong> processing further on match!');?>
+                <?php echo __('<strong>Stop</strong> processing further on match!');?>
             </td>
         </tr>
         <tr>
             <td width="180" class="required">
-                <?php echo _('Filter Status:');?>
+                <?php echo __('Filter Status:');?>
             </td>
             <td>
-                <input type="radio" name="isactive" value="1" <?php echo $info['isactive']?'checked="checked"':''; ?>><strong><?php echo _('Active');?></strong>
-                <input type="radio" name="isactive" value="0" <?php echo !$info['isactive']?'checked="checked"':''; ?>><?php echo _('Disabled');?>
+                <input type="radio" name="isactive" value="1" <?php echo $info['isactive']?'checked="checked"':''; ?>><strong><?php echo __('Active');?></strong>
+                <input type="radio" name="isactive" value="0" <?php echo !$info['isactive']?'checked="checked"':''; ?>><?php echo __('Disabled');?>
                 &nbsp;<span class="error">*&nbsp;</span>
             </td>
         </tr>
         <tr>
             <td width="180" class="required">
-                <?php echo _('Target:');?>
+                <?php echo __('Target:');?>
             </td>
             <td>
                 <select name="target">
-                   <option value="">&mdash; <?php echo _('Select a Target');?> &dash;</option>
+                   <option value="">&mdash; <?php echo __('Select a Target');?> &dash;</option>
                    <?php
                    foreach(Filter::getTargets() as $k => $v) {
                        echo sprintf('<option value="%s" %s>%s</option>',
@@ -101,18 +101,18 @@ $info=Format::htmlchars(($errors && $_POST)?$_POST:$info);
         </tr>
         <tr>
             <th colspan="2">
-                <em><strong><?php echo _('Filter Rules');?></strong>: <?php echo _('Rules are applied based on the criteria.');?>&nbsp;<span class="error">*&nbsp;<?php echo $errors['rules']; ?></span></em>
+                <em><strong><?php echo __('Filter Rules');?></strong>: <?php echo __('Rules are applied based on the criteria.');?>&nbsp;<span class="error">*&nbsp;<?php echo $errors['rules']; ?></span></em>
             </th>
         </tr>
         <tr>
             <td colspan=2>
-               <em><?php echo _('Rules Matching Criteria:');?></em>
+               <em><?php echo __('Rules Matching Criteria:');?></em>
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <input type="radio" name="match_all_rules" value="1" <?php echo $info['match_all_rules']?'checked="checked"':''; ?>><?php echo _('Match All');?>
+                <input type="radio" name="match_all_rules" value="1" <?php echo $info['match_all_rules']?'checked="checked"':''; ?>><?php echo __('Match All');?>
                 &nbsp;&nbsp;&nbsp;
-                <input type="radio" name="match_all_rules" value="0" <?php echo !$info['match_all_rules']?'checked="checked"':''; ?>><?php echo _('Match Any');?>
+                <input type="radio" name="match_all_rules" value="0" <?php echo !$info['match_all_rules']?'checked="checked"':''; ?>><?php echo __('Match Any');?>
                 &nbsp;<span class="error">*&nbsp;</span>
-                <em>(<?php echo _('case-insensitive comparison');?>)</em>
+                <em>(<?php echo __('case-insensitive comparison');?>)</em>
                 
             </td>
         </tr>
@@ -123,7 +123,7 @@ $info=Format::htmlchars(($errors && $_POST)?$_POST:$info);
             <td colspan="2">
                 <div  style="width:700; float:left;">
                     <select name="rule_w<?php echo $i; ?>">
-                        <option value="">&mdash; <?php echo _('Select One');?> &dash;</option>
+                        <option value="">&mdash; <?php echo __('Select One');?> &dash;</option>
                         <?php
                         foreach($matches as $k=>$v){
                             $sel=($info["rule_w$i"]==$k)?'selected="selected"':'';
@@ -132,7 +132,7 @@ $info=Format::htmlchars(($errors && $_POST)?$_POST:$info);
                         ?>
                     </select>
                     <select name="rule_h<?php echo $i; ?>">
-                        <option value="0">&mdash; <?php echo _('Select One');?> &dash;</option>
+                        <option value="0">&mdash; <?php echo __('Select One');?> &dash;</option>
                         <?php
                         foreach($match_types as $k=>$v){
                             $sel=($info["rule_h$i"]==$k)?'selected="selected"':'';
@@ -145,7 +145,7 @@ $info=Format::htmlchars(($errors && $_POST)?$_POST:$info);
                 </div>
                 <?php 
                 if($info["rule_w$i"] || $info["rule_h$i"] || $info["rule_v$i"]){ ?>
-                <div style="float:right;text-align:right;padding-right:20px;"><a href="#" class="clearrule">(<?php echo _('clear');?>)</a></div>
+                <div style="float:right;text-align:right;padding-right:20px;"><a href="#" class="clearrule">(<?php echo __('clear');?>)</a></div>
                 <?php
                 } ?>
                 <div class="clear"></div>
@@ -157,43 +157,43 @@ $info=Format::htmlchars(($errors && $_POST)?$_POST:$info);
         } ?>
         <tr>
             <th colspan="2">
-                <em><strong><?php echo _('Filter Actions');?></strong>: <?php echo _('Can be overwriten by other filters depending on processing order.');?>&nbsp;</em>
+                <em><strong><?php echo __('Filter Actions');?></strong>: <?php echo __('Can be overwriten by other filters depending on processing order.');?>&nbsp;</em>
             </th>
         </tr>
         <tr>
             <td width="180">
-                <?php echo _('Reject Ticket:');?>
+                <?php echo __('Reject Ticket:');?>
             </td>
             <td>
                 <input type="checkbox" name="reject_ticket" value="1" <?php echo $info['reject_ticket']?'checked="checked"':''; ?> >
-                    <strong><font class="error"><?php echo _('Reject Ticket');?></font></strong> <em>(<?php echo _('All other actions and filters are ignored');?>)</em>
+                    <strong><font class="error"><?php echo __('Reject Ticket');?></font></strong> <em>(<?php echo __('All other actions and filters are ignored');?>)</em>
             </td>
         </tr>
         <tr>
             <td width="180">
-                <?php echo _('Reply-To Email:');?>
+                <?php echo __('Reply-To Email:');?>
             </td>
             <td>
                 <input type="checkbox" name="use_replyto_email" value="1" <?php echo $info['use_replyto_email']?'checked="checked"':''; ?> >
-                    <?php echo _('<strong>Use</strong> Reply-To Email');?> <em>(<?php echo _('if available');?>)</em>
+                    <?php echo __('<strong>Use</strong> Reply-To Email');?> <em>(<?php echo __('if available');?>)</em>
             </td>
         </tr>
         <tr>
             <td width="180">
-                <?php echo _('Ticket auto-response:');?>
+                <?php echo __('Ticket auto-response:');?>
             </td>
             <td>
                 <input type="checkbox" name="disable_autoresponder" value="1" <?php echo $info['disable_autoresponder']?'checked="checked"':''; ?> >
-                    <?php echo _('<strong>Disable</strong> auto-response.');?> <em>(<?php echo _('Overwrites Dept. settings');?>)</em>
+                    <?php echo __('<strong>Disable</strong> auto-response.');?> <em>(<?php echo __('Overwrites Dept. settings');?>)</em>
             </td>
         </tr>
         <tr>
             <td width="180">
-                <?php echo _('Canned Response:');?>
+                <?php echo __('Canned Response:');?>
             </td>
                 <td>
                 <select name="canned_response_id">
-                    <option value="">&mdash; <?php echo _('None');?> &mdash;</option>
+                    <option value="">&mdash; <?php echo __('None');?> &mdash;</option>
                     <?php
                     $sql='SELECT canned_id,title FROM '.CANNED_TABLE
                         .' WHERE isenabled ORDER by title';
@@ -208,16 +208,16 @@ $info=Format::htmlchars(($errors && $_POST)?$_POST:$info);
                     }
                     ?>
                 </select>
-                <em>(<?php echo _('Automatically respond with this canned response');?>)</em>
+                <em>(<?php echo __('Automatically respond with this canned response');?>)</em>
             </td>
         </tr>
         <tr>
             <td width="180">
-                <?php echo _('Department:');?>
+                <?php echo __('Department:');?>
             </td>
             <td>
                 <select name="dept_id">
-                    <option value="">&mdash; <?php echo _('Default');?> &mdash;</option>
+                    <option value="">&mdash; <?php echo __('Default');?> &mdash;</option>
                     <?php
                     $sql='SELECT dept_id,dept_name FROM '.DEPT_TABLE.' dept ORDER by dept_name';
                     if(($res=db_query($sql)) && db_num_rows($res)){
@@ -233,11 +233,11 @@ $info=Format::htmlchars(($errors && $_POST)?$_POST:$info);
         </tr>
         <tr>
             <td width="180">
-                <?php echo _('Priority:');?>
+                <?php echo __('Priority:');?>
             </td>
             <td>
                 <select name="priority_id">
-                    <option value="">&mdash; <?php echo _('Default');?> &mdash;</option>
+                    <option value="">&mdash; <?php echo __('Default');?> &mdash;</option>
                     <?php
                     $sql='SELECT priority_id,priority_desc FROM '.PRIORITY_TABLE.' pri ORDER by priority_urgency DESC';
                     if(($res=db_query($sql)) && db_num_rows($res)){
@@ -249,16 +249,16 @@ $info=Format::htmlchars(($errors && $_POST)?$_POST:$info);
                     ?>
                 </select>
                 &nbsp;<span class="error">*&nbsp;<?php echo $errors['priority_id']; ?></span>
-                <em>(<?php echo _("Overwrites department's priority");?>)</em>
+                <em>(<?php echo __("Overwrites department's priority");?>)</em>
             </td>
         </tr>
         <tr>
             <td width="180">
-                <?php echo _('SLA Plan:');?>
+                <?php echo __('SLA Plan:');?>
             </td>
             <td>
                 <select name="sla_id">
-                    <option value="0">&mdash; <?php echo _('System Default');?> &mdash;</option>
+                    <option value="0">&mdash; <?php echo __('System Default');?> &mdash;</option>
                     <?php
                     if($slas=SLA::getSLAs()) {
                         foreach($slas as $id =>$name) {
@@ -269,16 +269,16 @@ $info=Format::htmlchars(($errors && $_POST)?$_POST:$info);
                     ?>
                 </select>
                 &nbsp;<span class="error">&nbsp;<?php echo $errors['sla_id']; ?></span>
-                <em>(<?php echo _("Overwrites department's SLA");?>)</em>
+                <em>(<?php echo __("Overwrites department's SLA");?>)</em>
             </td>
         </tr>
         <tr>
             <td width="180">
-                <?php echo _('Auto-assign To:');?>
+                <?php echo __('Auto-assign To:');?>
             </td>
             <td>
                 <select name="assign">
-                    <option value="0">&mdash; <?php echo _('Unassigned');?> &mdash;</option>
+                    <option value="0">&mdash; <?php echo __('Unassigned');?> &mdash;</option>
 
 
                     <?php
@@ -288,7 +288,7 @@ $info=Format::htmlchars(($errors && $_POST)?$_POST:$info);
                          ' FROM '.STAFF_TABLE.' WHERE isactive=1 ORDER BY name';
 
                     if(($res=db_query($sql)) && db_num_rows($res)){
-                        echo '<OPTGROUP label="'._('Staff Members').'">';
+                        echo '<OPTGROUP label="'.__('Staff Members').'">';
                         while (list($id,$name) = db_fetch_row($res)){
                             $k="s$id";
                             $selected = ($info['assign']==$k || $info['staff_id']==$id)?'selected="selected"':'';
@@ -301,7 +301,7 @@ $info=Format::htmlchars(($errors && $_POST)?$_POST:$info);
                     }
                     $sql='SELECT team_id, name FROM '.TEAM_TABLE.' WHERE isenabled=1';
                     if(($res=db_query($sql)) && db_num_rows($res)){
-                        echo '<OPTGROUP label="'._('Teams').'">';
+                        echo '<OPTGROUP label="'.__('Teams').'">';
                         while (list($id,$name) = db_fetch_row($res)){
                             $k="t$id";
                             $selected = ($info['assign']==$k || $info['team_id']==$id)?'selected="selected"':'';
@@ -318,7 +318,7 @@ $info=Format::htmlchars(($errors && $_POST)?$_POST:$info);
         </tr>
         <tr>
             <th colspan="2">
-                <em><strong><?php echo _('Admin Notes');?></strong>: <?php echo _('Internal notes');?>.&nbsp;</em>
+                <em><strong><?php echo __('Admin Notes');?></strong>: <?php echo __('Internal notes');?>.&nbsp;</em>
             </th>
         </tr>
         <tr>
@@ -330,7 +330,7 @@ $info=Format::htmlchars(($errors && $_POST)?$_POST:$info);
 </table>
 <p style="padding-left:225px;">
     <input type="submit" name="submit" value="<?php echo $submit_text; ?>">
-    <input type="reset"  name="reset"  value="<?php echo _('Reset');?>">
-    <input type="button" name="cancel" value="<?php echo _('Cancel');?>" onclick='window.location.href="filters.php"'>
+    <input type="reset"  name="reset"  value="<?php echo __('Reset');?>">
+    <input type="button" name="cancel" value="<?php echo __('Cancel');?>" onclick='window.location.href="filters.php"'>
 </p>
 </form>
