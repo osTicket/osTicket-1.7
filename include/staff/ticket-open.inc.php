@@ -191,112 +191,119 @@ $info=Format::htmlchars(($errors && $_POST)?$_POST:$info);
         </tbody>
         <tbody>
         <tr>
-        <th colspan="2">
-        <em><strong>Issue</strong>: The user will be able to see the issue summary below and any associated responses.</em>
-        </th>
-    </tr>
-    <tr>
-        <td colspan=2>
-            <div><em><strong>Issue</strong>: Details on the reason(s) for opening the ticket.</em> <font class="error">*&nbsp;<?php echo $errors['issue']; ?></font></div>
-            <textarea name="issue" cols="21" rows="8" style="width:80%;"><?php echo $info['issue']; ?></textarea>
-        </td>
-    </tr>
-    <tr>
-        <th colspan="2">
-            <em><strong>Response</strong>: Optional response to the above issue.</em>
-        </th>
-    </tr>
-    <tr>
-        <td colspan=2>
+            <th colspan="2">
+                <em><strong>Issue</strong>: The user will be able to see the issue summary below and any associated responses.</em>
+            </th>
+        </tr>
+        <tr>
+            <td colspan=2>
+                <div><em><strong>Issue</strong>: Details on the reason(s) for opening the ticket.</em> <font class="error">*&nbsp;<?php echo $errors['issue']; ?></font></div>
+                <textarea name="issue" cols="21" rows="8" style="width:80%;"><?php echo $info['issue']; ?></textarea>
+            </td>
+        </tr>
         <?php
-        if(($cannedResponses=Canned::getCannedResponses())) {
+        //is the user allowed to post replies??
+        if($thisstaff->canPostReply()) {
             ?>
-            <div>
-                Canned Response:&nbsp;
-                <select id="cannedResp" name="cannedResp">
-                    <option value="0" selected="selected">&mdash; Select a canned response &mdash;</option>
-                    <?php
-                    foreach($cannedResponses as $id =>$title) {
-                        echo sprintf('<option value="%d">%s</option>',$id,$title);
-                    }
-                    ?>
-                </select>
-                &nbsp;&nbsp;&nbsp;
-                <label><input type='checkbox' value='1' name="append" id="append" checked="checked">Append</label>
-            </div>
-        <?php
-        } ?>
-            <textarea name="response" id="response" cols="21" rows="8" style="width:80%;"><?php echo $info['response']; ?></textarea>
-            <table border="0" cellspacing="0" cellpadding="2" width="100%">
+        <tr>
+            <th colspan="2">
+                <em><strong>Response</strong>: Optional response to the above issue.</em>
+            </th>
+        </tr>
+        <tr>
+            <td colspan=2>
             <?php
-            if($cfg->allowAttachments()) { ?>
-                <tr><td width="100" valign="top">Attachments:</td>
-                    <td>
-                        <div class="canned_attachments">
+            if(($cannedResponses=Canned::getCannedResponses())) {
+                ?>
+                <div>
+                    Canned Response:&nbsp;
+                    <select id="cannedResp" name="cannedResp">
+                        <option value="0" selected="selected">&mdash; Select a canned response &mdash;</option>
                         <?php
-                        if($info['cannedattachments']) {
-                            foreach($info['cannedattachments'] as $k=>$id) {
-                                if(!($file=AttachmentFile::lookup($id))) continue;
-                                $hash=$file->getHash().md5($file->getId().session_id().$file->getHash());
-                                echo sprintf('<label><input type="checkbox" name="cannedattachments[]" 
-                                        id="f%d" value="%d" checked="checked" 
-                                        <a href="file.php?h=%s">%s</a>&nbsp;&nbsp;</label>&nbsp;',
-                                        $file->getId(), $file->getId() , $hash, $file->getName());
-                            }
+                        foreach($cannedResponses as $id =>$title) {
+                            echo sprintf('<option value="%d">%s</option>',$id,$title);
                         }
                         ?>
-                        </div>
-                        <div class="uploads"></div>
-                        <div class="file_input">
-                            <input type="file" class="multifile" name="attachments[]" size="30" value="" />
-                        </div>
-                    </td>
-                </tr>
-        <?php
-        } ?>
-
-        <?php
-        if($thisstaff->canCloseTickets()) { ?>
-            <tr>
-                <td width="100">Ticket Status:</td>
-                <td>
-                    <input type="checkbox" name="ticket_state" value="closed" <?php echo $info['ticket_state']?'checked="checked"':''; ?>>
-                    <b>Close On Response</b>&nbsp;<em>(Only applicable if response is entered)</em>
-                </td>
-            </tr>
-        <?php
-        } ?>
-         <tr>
-            <td width="100">Signature:</td>
-            <td>
+                    </select>
+                    &nbsp;&nbsp;&nbsp;
+                    <label><input type='checkbox' value='1' name="append" id="append" checked="checked">Append</label>
+                </div>
+            <?php
+            } ?>
+                <textarea name="response" id="response" cols="21" rows="8" style="width:80%;"><?php echo $info['response']; ?></textarea>
+                <table border="0" cellspacing="0" cellpadding="2" width="100%">
                 <?php
-                $info['signature']=$info['signature']?$info['signature']:$thisstaff->getDefaultSignatureType();
-                ?>
-                <label><input type="radio" name="signature" value="none" checked="checked"> None</label>
-                <?php
-                if($thisstaff->getSignature()) { ?>
-                    <label><input type="radio" name="signature" value="mine"
-                        <?php echo ($info['signature']=='mine')?'checked="checked"':''; ?>> My signature</label>
+                if($cfg->allowAttachments()) { ?>
+                    <tr><td width="100" valign="top">Attachments:</td>
+                        <td>
+                            <div class="canned_attachments">
+                            <?php
+                            if($info['cannedattachments']) {
+                                foreach($info['cannedattachments'] as $k=>$id) {
+                                    if(!($file=AttachmentFile::lookup($id))) continue;
+                                    $hash=$file->getHash().md5($file->getId().session_id().$file->getHash());
+                                    echo sprintf('<label><input type="checkbox" name="cannedattachments[]" 
+                                            id="f%d" value="%d" checked="checked" 
+                                            <a href="file.php?h=%s">%s</a>&nbsp;&nbsp;</label>&nbsp;',
+                                            $file->getId(), $file->getId() , $hash, $file->getName());
+                                }
+                            }
+                            ?>
+                            </div>
+                            <div class="uploads"></div>
+                            <div class="file_input">
+                                <input type="file" class="multifile" name="attachments[]" size="30" value="" />
+                            </div>
+                        </td>
+                    </tr>
                 <?php
                 } ?>
-                <label><input type="radio" name="signature" value="dept"
-                    <?php echo ($info['signature']=='dept')?'checked="checked"':''; ?>> Dept. Signature (if set)</label>
+
+            <?php
+            if($thisstaff->canCloseTickets()) { ?>
+                <tr>
+                    <td width="100">Ticket Status:</td>
+                    <td>
+                        <input type="checkbox" name="ticket_state" value="closed" <?php echo $info['ticket_state']?'checked="checked"':''; ?>>
+                        <b>Close On Response</b>&nbsp;<em>(Only applicable if response is entered)</em>
+                    </td>
+                </tr>
+            <?php
+            } ?>
+             <tr>
+                <td width="100">Signature:</td>
+                <td>
+                    <?php
+                    $info['signature']=$info['signature']?$info['signature']:$thisstaff->getDefaultSignatureType();
+                    ?>
+                    <label><input type="radio" name="signature" value="none" checked="checked"> None</label>
+                    <?php
+                    if($thisstaff->getSignature()) { ?>
+                        <label><input type="radio" name="signature" value="mine"
+                            <?php echo ($info['signature']=='mine')?'checked="checked"':''; ?>> My signature</label>
+                    <?php
+                    } ?>
+                    <label><input type="radio" name="signature" value="dept"
+                        <?php echo ($info['signature']=='dept')?'checked="checked"':''; ?>> Dept. Signature (if set)</label>
+                </td>
+             </tr>
+            </table>
             </td>
-         </tr>
-        </table>
-        </td>
-    </tr>
-    <tr>
-        <th colspan="2">
-            <em><strong>Internal Note</strong>: Optional internal note (recommended on assignment) <font class="error">&nbsp;<?php echo $errors['note']; ?></font></em>
-        </th>
-    </tr>
-    <tr>
-        <td colspan=2>
-            <textarea name="note" cols="21" rows="6" style="width:80%;"><?php echo $info['note']; ?></textarea>
-        </td>
-    </tr>
-</tbody>
+        </tr>
+        <?php
+        } //end canPostReply
+        ?>
+        <tr>
+            <th colspan="2">
+                <em><strong>Internal Note</strong>: Optional internal note (recommended on assignment) <font class="error">&nbsp;<?php echo $errors['note']; ?></font></em>
+            </th>
+        </tr>
+        <tr>
+            <td colspan=2>
+                <textarea name="note" cols="21" rows="6" style="width:80%;"><?php echo $info['note']; ?></textarea>
+            </td>
+        </tr>
+    </tbody>
 </table>
 <p style="padding-left:250px;">
     <input type="submit" name="submit" value="Open">

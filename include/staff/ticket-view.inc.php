@@ -151,10 +151,24 @@ if($ticket->isOverdue())
                     <td>
                     <?php
                         echo $ticket->getEmail();
-                        if(($related=$ticket->getRelatedTicketsCount())) {
-                            echo sprintf('&nbsp;&nbsp;<a href="tickets.php?a=search&query=%s" title="Related Tickets">(<b>%d</b>)</a>',
-                                    urlencode($ticket->getEmail()),$related);
-
+                        if(($client=$ticket->getClient())) {
+                            echo sprintf('&nbsp;&nbsp;<a href="tickets.php?a=search&query=%s" title="Related Tickets" data-dropdown="#action-dropdown-stats">(<b>%d</b>)</a>',
+                                    urlencode($ticket->getEmail()), $client->getNumTickets());
+                        ?>
+                            <div id="action-dropdown-stats" class="action-dropdown anchor-right">
+                                <ul>
+                                    <?php
+                                    if(($open=$client->getNumOpenTickets()))
+                                        echo sprintf('<li><a href="tickets.php?a=search&status=open&query=%s"><i class="icon-folder-open-alt"></i> %d Open Tickets</a></li>',
+                                                $ticket->getEmail(), $open);
+                                    if(($closed=$client->getNumClosedTickets()))
+                                        echo sprintf('<li><a href="tickets.php?a=search&status=closed&query=%s"><i class="icon-folder-close-alt"></i> %d Closed Tickets</a></li>',
+                                                $ticket->getEmail(), $closed);
+                                    ?>
+                                    <li><a href="tickets.php?a=search&query=<?php echo $ticket->getEmail(); ?>"><i class="icon-double-angle-right"></i> All Tickets</a></li>
+                                </u>
+                            </div>
+                    <?php
                         }
                     ?>
                     </td>
@@ -220,7 +234,7 @@ if($ticket->isOverdue())
                 if($ticket->isOpen()){ ?>
                 <tr>
                     <th>Due Date:</th>
-                    <td><?php echo Format::db_datetime($ticket->getDueDate()); ?></td>
+                    <td><?php echo Format::db_datetime($ticket->getEstDueDate()); ?></td>
                 </tr>
                 <?php
                 }else { ?>
@@ -325,7 +339,9 @@ if(!$cfg->showNotesInline()) { ?>
                 </td>
             </tr>
             <?php
-            if($note['attachments'] && ($links=$ticket->getAttachmentsLinks($note['id'],'N'))) {?>
+             if($note['attachments'] 
+                    && ($tentry=$ticket->getThreadEntry($note['id'])) 
+                    && ($links=$tentry->getAttachmentsLinks())) { ?>
             <tr>
                 <td class="info" colspan="2"><?php echo $links; ?></td>
             </tr>
@@ -344,7 +360,10 @@ if(!$cfg->showNotesInline()) { ?>
     <?php
     $threadTypes=array('M'=>'message','R'=>'response', 'N'=>'note');
     /* -------- Messages & Responses & Notes (if inline)-------------*/
-    if(($thread=$ticket->getThread($cfg->showNotesInline()))) {
+    $types = array('M', 'R');
+    if($cfg->showNotesInline())
+        $types[] = 'N';
+    if(($thread=$ticket->getThreadEntries($types))) {
        foreach($thread as $entry) {
            ?>
         <table class="<?php echo $threadTypes[$entry['thread_type']]; ?>" cellspacing="0" cellpadding="1" width="940" border="0">
@@ -355,7 +374,9 @@ if(!$cfg->showNotesInline()) { ?>
             </tr>
             <tr><td colspan=3><?php echo Format::display($entry['body']); ?></td></tr>
             <?php
-            if($entry['attachments'] && ($links=$ticket->getAttachmentsLinks($entry['id'], $entry['thread_type']))) {?>
+            if($entry['attachments'] 
+                    && ($tentry=$ticket->getThreadEntry($entry['id']))
+                    && ($links=$tentry->getAttachmentsLinks())) {?>
             <tr>
                 <td class="info" colspan=3><?php echo $links; ?></td>
             </tr>
@@ -531,7 +552,7 @@ if(!$cfg->showNotesInline()) { ?>
         <input type="hidden" name="a" value="postnote">
         <table border="0" cellspacing="0" cellpadding="3">
             <?php 
-            if($errors['note']) {?>
+            if($errors['postnote']) {?>
             <tr>
                 <td width="160">&nbsp;</td>
                 <td class="error"><?php echo $errors['postnote']; ?></td>

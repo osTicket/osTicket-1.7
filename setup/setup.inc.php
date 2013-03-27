@@ -5,7 +5,7 @@
     Master include file for setup/install scripts.
 
     Peter Rotich <peter@osticket.com>
-    Copyright (c)  2006-2012 osTicket
+    Copyright (c)  2006-2013 osTicket
     http://www.osticket.com
 
     Released under the GNU General Public License WITHOUT ANY WARRANTY.
@@ -15,7 +15,7 @@
 **********************************************************************/
 
 #This  version - changed on every release
-define('THIS_VERSION', '1.7-RC4+');
+define('THIS_VERSION', '1.7-RC6+');
 
 #inits - error reporting.
 $error_reporting = E_ALL & ~E_NOTICE;
@@ -24,7 +24,7 @@ if (defined('E_STRICT')) # 5.4.0
 if (defined('E_DEPRECATED')) # 5.3.0
     $error_reporting &= ~(E_DEPRECATED | E_USER_DEPRECATED);
 
-error_reporting($error_reporting); 
+error_reporting($error_reporting);
 ini_set('magic_quotes_gpc', 0);
 ini_set('session.use_trans_sid', 0);
 ini_set('session.cache_limiter', 'nocache');

@@ -6,7 +6,7 @@
     Note that we are using external ID. The real (local) ids are hidden from user.
 
     Peter Rotich <peter@osticket.com>
-    Copyright (c)  2006-2012 osTicket
+    Copyright (c)  2006-2013 osTicket
     http://www.osticket.com
 
     Released under the GNU General Public License WITHOUT ANY WARRANTY.
@@ -40,13 +40,11 @@ if($_POST && is_object($ticket) && $ticket->getId()):
 
         if(!$errors) {
             //Everything checked out...do the magic.
-            if(($msgid=$ticket->postMessage($_POST['message'],'Web'))) {
-                if($cfg->allowOnlineAttachments() 
-                        && $_FILES['attachments']
-                        && ($files=Format::files($_FILES['attachments']))) {
-                    $ost->validateFileUploads($files); //Validator sets errors - if any.
-                    $ticket->uploadAttachments($files, $msgid, 'M');
-                }
+            $vars = array('message'=>$_POST['message']);
+            if($cfg->allowOnlineAttachments() && $_FILES['attachments'])
+                $vars['files'] = AttachmentFile::format($_FILES['attachments'], true);
+
+            if(($msgid=$ticket->postMessage($vars, 'Web'))) {
                 $msg='Message Posted Successfully';
             } else {
                 $errors['err']='Unable to post the message. Try again';

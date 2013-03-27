@@ -7,7 +7,7 @@
     It's mainly PEAR MAIL wrapper for now (more improvements planned).
 
     Peter Rotich <peter@osticket.com>
-    Copyright (c)  2006-2012 osTicket
+    Copyright (c)  2006-2013 osTicket
     http://www.osticket.com
 
     Released under the GNU General Public License WITHOUT ANY WARRANTY.
@@ -94,7 +94,8 @@ class Mailer {
         //do some cleanup
         $to = preg_replace("/(\r\n|\r|\n)/s",'', trim($to));
         $subject = preg_replace("/(\r\n|\r|\n)/s",'', trim($subject));
-        $body = preg_replace("/(\r\n|\r)/s", "\n", trim($message));
+        //We're decoding html entities here becasuse we only support plain text for now - html support comming.
+        $body = Format::htmldecode(preg_replace("/(\r\n|\r)/s", "\n", trim($message)));
 
         /* Message ID - generated for each outgoing email */
         $messageId = sprintf('<%s%d-%s>', Misc::randCode(6), time(),

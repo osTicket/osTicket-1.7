@@ -6,6 +6,7 @@ CREATE TABLE `%TABLE_PREFIX%api_key` (
   `ipaddr` varchar(64) NOT NULL,
   `apikey` varchar(255) NOT NULL,
   `can_create_tickets` TINYINT( 1 ) UNSIGNED NOT NULL DEFAULT  '1',
+  `can_exec_cron` TINYINT( 1 ) UNSIGNED NOT NULL DEFAULT  '1',
   `notes` text,
   `updated` datetime NOT NULL,
   `created` datetime NOT NULL,
@@ -97,7 +98,6 @@ CREATE TABLE `%TABLE_PREFIX%config` (
   `enable_captcha` tinyint(1) unsigned NOT NULL default '0',
   `enable_auto_cron` tinyint(1) unsigned NOT NULL default '0',
   `enable_mail_polling` tinyint(1) unsigned NOT NULL default '0',
-  `enable_email_piping` tinyint(1) unsigned NOT NULL default '0',
   `send_sys_errors` tinyint(1) unsigned NOT NULL default '1',
   `send_sql_errors` tinyint(1) unsigned NOT NULL default '1',
   `send_mailparse_errors` tinyint(1) unsigned NOT NULL default '1',
@@ -303,7 +303,7 @@ CREATE TABLE `%TABLE_PREFIX%department` (
   `email_id` int(10) unsigned NOT NULL default '0',
   `autoresp_email_id` int(10) unsigned NOT NULL default '0',
   `manager_id` int(10) unsigned NOT NULL default '0',
-  `dept_name` varchar(32) NOT NULL default '',
+  `dept_name` varchar(128) NOT NULL default '',
   `dept_signature` tinytext NOT NULL,
   `ispublic` tinyint(1) unsigned NOT NULL default '1',
   `group_membership` tinyint(1) NOT NULL default '0',
@@ -328,12 +328,12 @@ CREATE TABLE `%TABLE_PREFIX%email` (
   `noautoresp` tinyint(1) unsigned NOT NULL default '0',
   `priority_id` tinyint(3) unsigned NOT NULL default '2',
   `dept_id` tinyint(3) unsigned NOT NULL default '0',
-  `email` varchar(125) NOT NULL default '',
-  `name` varchar(32) NOT NULL default '',
-  `userid` varchar(125) NOT NULL,
+  `email` varchar(255) NOT NULL default '',
+  `name` varchar(255) NOT NULL default '',
+  `userid` varchar(255) NOT NULL,
   `userpass` varchar(125) NOT NULL,
   `mail_active` tinyint(1) NOT NULL default '0',
-  `mail_host` varchar(125) NOT NULL,
+  `mail_host` varchar(255) NOT NULL,
   `mail_protocol` enum('POP','IMAP') NOT NULL default 'POP',
   `mail_encryption` enum('NONE','SSL') NOT NULL,
   `mail_port` int(6) default NULL,
@@ -345,7 +345,7 @@ CREATE TABLE `%TABLE_PREFIX%email` (
   `mail_lasterror` datetime default NULL,
   `mail_lastfetch` datetime default NULL,
   `smtp_active` tinyint(1) default '0',
-  `smtp_host` varchar(125) NOT NULL,
+  `smtp_host` varchar(255) NOT NULL,
   `smtp_port` int(6) default NULL,
   `smtp_secure` tinyint(1) NOT NULL default '1',
   `smtp_auth` tinyint(1) NOT NULL default '1',
@@ -513,7 +513,7 @@ CREATE TABLE `%TABLE_PREFIX%group_dept_access` (
   `dept_id` int(10) unsigned NOT NULL default '0',
   UNIQUE KEY `group_dept` (`group_id`,`dept_id`),
   KEY `dept_id`  (`dept_id`)
-) ENGINE=MyISAM;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
 
 INSERT INTO `%TABLE_PREFIX%group_dept_access` (`group_id`, `dept_id`) VALUES
     (1, 1), (1, 2), (2, 1), (2, 2), (3, 1), (3, 2);
@@ -580,7 +580,7 @@ INSERT INTO `%TABLE_PREFIX%canned_attachment` (`canned_id`, `file_id`) VALUES (1
 
 DROP TABLE IF EXISTS `%TABLE_PREFIX%session`;
 CREATE TABLE `%TABLE_PREFIX%session` (
-  `session_id` varchar(32) collate utf8_unicode_ci NOT NULL default '',
+  `session_id` varchar(256) collate utf8_unicode_ci NOT NULL default '',
   `session_data` longtext collate utf8_unicode_ci,
   `session_expire` datetime default NULL,
   `session_updated` datetime default NULL,
@@ -689,7 +689,7 @@ CREATE TABLE `%TABLE_PREFIX%team_member` (
   `staff_id` int(10) unsigned NOT NULL,
   `updated` datetime NOT NULL,
   PRIMARY KEY  (`team_id`,`staff_id`)
-) ENGINE=MyISAM;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS `%TABLE_PREFIX%ticket`;
 CREATE TABLE `%TABLE_PREFIX%ticket` (

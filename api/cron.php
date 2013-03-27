@@ -2,10 +2,10 @@
 /*********************************************************************
     cron.php
 
-    File to handle cron job calls (local and remote).
+    File to handle LOCAL cron job calls.
 
     Peter Rotich <peter@osticket.com>
-    Copyright (c)  2006-2012 osTicket
+    Copyright (c)  2006-2013 osTicket
     http://www.osticket.com
 
     Released under the GNU General Public License WITHOUT ANY WARRANTY.
@@ -15,7 +15,12 @@
 **********************************************************************/
 @chdir(realpath(dirname(__FILE__)).'/'); //Change dir.
 require('api.inc.php');
-require_once(INCLUDE_DIR.'class.cron.php');
-Cron::run();
-$ost->logDebug('Cron Job','External cron job executed ['.$_SERVER['REMOTE_ADDR'].']');
+
+if (!osTicket::is_cli())
+    die('cron.php only supports local cron calls - use http -> api/tasks/cron');
+
+@chdir(realpath(dirname(__FILE__)).'/'); //Change dir.
+require('api.inc.php');
+require_once(INCLUDE_DIR.'api.cron.php');
+LocalCronApiController::call();
 ?>

@@ -4,7 +4,7 @@
 
     Backend support for article creates, edits, deletes, and attachments.
 
-    Copyright (c)  2006-2012 osTicket
+    Copyright (c)  2006-2013 osTicket
     http://www.osticket.com
 
     Released under the GNU General Public License WITHOUT ANY WARRANTY.
@@ -89,9 +89,9 @@ class FAQ {
      
         if (!isset($this->topics)) {
             $this->topics = array();
-            $sql='SELECT t.topic_id, t.topic  FROM '.TOPIC_TABLE.' t '
-                .' INNER JOIN '.FAQ_TOPIC_TABLE.' ft USING(topic_id) '
-                .' WHERE ft.faq_id='.db_input($this->id)
+            $sql='SELECT t.topic_id, CONCAT_WS(" / ", pt.topic, t.topic) as name  FROM '.TOPIC_TABLE.' t '
+                .' INNER JOIN '.FAQ_TOPIC_TABLE.' ft ON(ft.topic_id=t.topic_id AND ft.faq_id='.db_input($this->id).') '
+                .' LEFT JOIN '.TOPIC_TABLE.' pt ON(pt.topic_id=t.topic_pid) '
                 .' ORDER BY t.topic';
             if (($res=db_query($sql)) && db_num_rows($res)) {
                 while(list($id,$name) = db_fetch_row($res))
@@ -170,7 +170,7 @@ class FAQ {
         }
 
         //Upload new attachments IF any.
-        if($_FILES['attachments'] && ($files=Format::files($_FILES['attachments'])))
+        if($_FILES['attachments'] && ($files=AttachmentFile::format($_FILES['attachments'])))
             $this->uploadAttachments($files);
 
         $this->reload();
@@ -282,7 +282,7 @@ class FAQ {
         if(($faq=self::lookup($id))) {
             $faq->updateTopics($vars['topics']);
                
-            if($_FILES['attachments'] && ($files=Format::files($_FILES['attachments'])))
+            if($_FILES['attachments'] && ($files=AttachmentFile::format($_FILES['attachments'])))
                 $faq->uploadAttachments($files);
 
             $faq->reload();

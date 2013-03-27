@@ -5,7 +5,7 @@
     mail fetcher class. Uses IMAP ext for now.
 
     Peter Rotich <peter@osticket.com>
-    Copyright (c)  2006-2012 osTicket
+    Copyright (c)  2006-2013 osTicket
     http://www.osticket.com
 
     Released under the GNU General Public License WITHOUT ANY WARRANTY.
@@ -29,20 +29,20 @@ class MailFetcher {
 
     var $charset = 'UTF-8';
     var $encodings =array('UTF-8','WINDOWS-1251', 'ISO-8859-5', 'ISO-8859-1','KOI8-R');
-    
+
     function MailFetcher($email, $charset='UTF-8') {
 
-        
+
         if($email && is_numeric($email)) //email_id
             $email=Email::lookup($email);
 
         if(is_object($email))
             $this->ht = $email->getMailAccountInfo();
         elseif(is_array($email) && $email['host']) //hashtable of mail account info
-            $this->ht = $email; 
+            $this->ht = $email;
         else
             $this->ht = null;
-           
+
         $this->charset = $charset;
 
         if($this->ht) {
@@ -59,12 +59,12 @@ class MailFetcher {
             $this->srvstr=sprintf('{%s:%d/%s', $this->getHost(), $this->getPort(), $this->getProtocol());
             if(!strcasecmp($this->getEncryption(), 'SSL'))
                 $this->srvstr.='/ssl';
-        
+
             $this->srvstr.='/novalidate-cert}';
 
         }
 
-        //Set timeouts 
+        //Set timeouts
         if(function_exists('imap_timeout')) imap_timeout(1,20);
 
     }
@@ -92,7 +92,7 @@ class MailFetcher {
     function getUsername() {
         return $this->ht['username'];
     }
-    
+
     function getPassword() {
         return $this->ht['password'];
     }
@@ -112,7 +112,7 @@ class MailFetcher {
     }
 
     /* Core */
-    
+
     function connect() {
         return ($this->mbox && $this->ping())?$this->mbox:$this->open();
     }
@@ -123,7 +123,7 @@ class MailFetcher {
 
     /* Default folder is inbox - TODO: provide user an option to fetch from diff folder/label */
     function open($box='INBOX') {
-      
+
         if($this->mbox)
            $this->close();
 
@@ -157,7 +157,7 @@ class MailFetcher {
     function createMailbox($folder) {
 
         if(!$folder) return false;
-            
+
         return imap_createmailbox($this->mbox, imap_utf7_encode($this->srvstr.trim($folder)));
     }
 
@@ -171,7 +171,7 @@ class MailFetcher {
     }
 
 
-    function decode($encoding, $text) {
+    function decode($text, $encoding) {
 
         switch($encoding) {
             case 1:
@@ -186,39 +186,24 @@ class MailFetcher {
             case 4:
             $text=imap_qprint($text);
             break;
-            case 5:
-            default:
-             $text=$text;
-        } 
+        }
+
         return $text;
     }
 
     //Convert text to desired encoding..defaults to utf8
-    function mime_encode($text, $charset=null, $enc='utf-8') { //Thank in part to afterburner 
-
-        if($charset && in_array(trim($charset), array('default','x-user-defined')))
-            $charset = 'ASCII';
-        
-        if(function_exists('iconv') and ($charset or function_exists('mb_detect_encoding'))) {
-            if($charset)
-                return iconv($charset, $enc.'//IGNORE', $text);
-            elseif(function_exists('mb_detect_encoding'))
-                return iconv(mb_detect_encoding($text, $this->encodings), $enc, $text);
-        } elseif(function_exists('iconv_mime_decode')) {
-            return iconv_mime_decode($text, 0, $enc);
-        }
-
-        return utf8_encode($text);
+    function mime_encode($text, $charset=null, $encoding='utf-8') { //Thank in part to afterburner
+        return Format::encode($text, $charset, $encoding);
     }
-    
+
     //Generic decoder - resulting text is utf8 encoded -> mirrors imap_utf8
-    function mime_decode($text, $enc='utf-8') {
-        
+    function mime_decode($text, $encoding='utf-8') {
+
         $str = '';
         $parts = imap_mime_header_decode($text);
         foreach ($parts as $part)
-            $str.= $this->mime_encode($part->text, $part->charset, $enc);
-        
+            $str.= $this->mime_encode($part->text, $part->charset, $encoding);
+
         return $str?$str:imap_utf8($text);
     }
 
@@ -230,12 +215,12 @@ class MailFetcher {
         $mimeType = array('TEXT', 'MULTIPART', 'MESSAGE', 'APPLICATION', 'AUDIO', 'IMAGE', 'VIDEO', 'OTHER');
         if(!$struct || !$struct->subtype)
             return 'TEXT/PLAIN';
-        
+
         return $mimeType[(int) $struct->type].'/'.$struct->subtype;
     }
 
     function getHeaderInfo($mid) {
-        
+
         if(!($headerinfo=imap_headerinfo($this->mbox, $mid)) || !$headerinfo->from)
             return null;
 
@@ -250,23 +235,9 @@ class MailFetcher {
         return $header;
     }
 
-    function getAttachment($part) {
-
-        if(!$part) return null;
-
-        if($part->ifdisposition && in_array(strtolower($part->disposition), array('attachment', 'inline')))
-            return $part->dparameters[0]->value;
-
-        if($part->ifparameters && $part->type == 5)
-            return $part->parameters[0]->value;
-
-
-        return null;
-    }
-
     //search for specific mime type parts....encoding is the desired encoding.
     function getPart($mid, $mimeType, $encoding=false, $struct=null, $partNumber=false) {
-          
+
         if(!$struct && $mid)
             $struct=@imap_fetchstructure($this->mbox, $mid);
 
@@ -275,7 +246,7 @@ class MailFetcher {
             $partNumber=$partNumber?$partNumber:1;
             if(($text=imap_fetchbody($this->mbox, $mid, $partNumber))) {
                 if($struct->encoding==3 or $struct->encoding==4) //base64 and qp decode.
-                    $text=$this->decode($struct->encoding, $text);
+                    $text=$this->decode($text, $struct->encoding);
 
                 $charset=null;
                 if($encoding) { //Convert text to desired mime encoding...
@@ -293,7 +264,7 @@ class MailFetcher {
         $text='';
         if($struct && $struct->parts) {
             while(list($i, $substruct) = each($struct->parts)) {
-                if($partNumber) 
+                if($partNumber)
                     $prefix = $partNumber . '.';
                 if(($result=$this->getPart($mid, $mimeType, $encoding, $substruct, $prefix.($i+1))))
                     $text.=$result;
@@ -320,19 +291,16 @@ class MailFetcher {
                 //Some inline attachments have multiple parameters.
                 if(count($part->dparameters)>1) {
                     foreach($part->dparameters as $dparameter) {
-                        if(strcasecmp($dparameter->attribute, 'FILENAME')) continue;
+                        if(!in_array(strtoupper($dparameter->attribute), array('FILENAME', 'NAME'))) continue;
                         $filename = $dparameter->value;
                         break;
                     }
                 }
-            } elseif($part->ifparameters && $part->type == 5) { //inline image without disposition.
-                $filename = $part->parameters[0]->value;
-                if(count($part->parameters)>1) {
-                    foreach($part->parameters as $parameter) {
-                        if(strcasecmp($parameter->attribute, 'FILENAME')) continue;
-                        $filename = $parameter->value;
-                        break;
-                    }
+            } elseif($part->ifparameters && $part->parameters && $part->type > 0) { //inline attachments without disposition.
+                foreach($part->parameters as $parameter) {
+                    if(!in_array(strtoupper($parameter->attribute), array('FILENAME', 'NAME'))) continue;
+                    $filename = $parameter->value;
+                    break;
                 }
             }
 
@@ -340,7 +308,7 @@ class MailFetcher {
                 return array(
                         array(
                             'name'  => $this->mime_decode($filename),
-                            'mime'  => $this->getMimeType($part),
+                            'type'  => $this->getMimeType($part),
                             'encoding' => $part->encoding,
                             'index' => ($index?$index:1)
                             )
@@ -364,29 +332,28 @@ class MailFetcher {
         return imap_fetchheader($this->mbox, $mid,FT_PREFETCHTEXT);
     }
 
-    
+
     function getPriority($mid) {
         return Mail_Parse::parsePriority($this->getHeader($mid));
     }
 
     function getBody($mid) {
-        
+
         $body ='';
         if(!($body = $this->getPart($mid,'TEXT/PLAIN', $this->charset))) {
             if(($body = $this->getPart($mid,'TEXT/HTML', $this->charset))) {
                 //Convert tags of interest before we striptags
                 $body=str_replace("</DIV><DIV>", "\n", $body);
                 $body=str_replace(array("<br>", "<br />", "<BR>", "<BR />"), "\n", $body);
-                $body=Format::html($body); //Balance html tags before stripping.
-                $body=Format::striptags($body); //Strip tags??
+                $body=Format::safe_html($body); //Balance html tags & neutralize unsafe tags.
             }
         }
 
         return $body;
     }
 
-    //email to ticket 
-    function createTicket($mid) { 
+    //email to ticket
+    function createTicket($mid) {
         global $ost;
 
         if(!($mailinfo = $this->getHeaderInfo($mid)))
@@ -404,47 +371,47 @@ class MailFetcher {
         }
 
         $emailId = $this->getEmailId();
+        $vars = array();
+        $vars['name']=$this->mime_decode($mailinfo['name']);
+        $vars['email']=$mailinfo['email'];
+        $vars['subject']=$mailinfo['subject']?$this->mime_decode($mailinfo['subject']):'[No Subject]';
+        $vars['message']=Format::stripEmptyLines($this->getBody($mid));
+        $vars['header']=$this->getHeader($mid);
+        $vars['emailId']=$emailId?$emailId:$ost->getConfig()->getDefaultEmailId(); //ok to default?
+        $vars['name']=$vars['name']?$vars['name']:$vars['email']; //No name? use email
+        $vars['mid']=$mailinfo['mid'];
 
-        $var['name']=$this->mime_decode($mailinfo['name']);
-        $var['email']=$mailinfo['email'];
-        $var['subject']=$mailinfo['subject']?$this->mime_decode($mailinfo['subject']):'[No Subject]';
-        $var['message']=Format::stripEmptyLines($this->getBody($mid));
-        $var['header']=$this->getHeader($mid);
-        $var['emailId']=$emailId?$emailId:$ost->getConfig()->getDefaultEmailId(); //ok to default?
-        $var['name']=$var['name']?$var['name']:$var['email']; //No name? use email
-        $var['mid']=$mailinfo['mid'];
-
-        if(!$var['message']) //An email with just attachments can have empty body.
-            $var['message'] = '(EMPTY)';
+        if(!$vars['message']) //An email with just attachments can have empty body.
+            $vars['message'] = '(EMPTY)';
 
         if($ost->getConfig()->useEmailPriority())
-            $var['priorityId']=$this->getPriority($mid);
-       
+            $vars['priorityId']=$this->getPriority($mid);
+
         $ticket=null;
         $newticket=true;
         //Check the subject line for possible ID.
-        if($var['subject'] && preg_match ("[[#][0-9]{1,10}]", $var['subject'], $regs)) {
+        if($vars['subject'] && preg_match ("[[#][0-9]{1,10}]", $vars['subject'], $regs)) {
             $tid=trim(preg_replace("/[^0-9]/", "", $regs[0]));
             //Allow mismatched emails?? For now NO.
-            if(!($ticket=Ticket::lookupByExtId($tid)) || strcasecmp($ticket->getEmail(), $var['email']))
+            if(!($ticket=Ticket::lookupByExtId($tid, $vars['email'])))
                 $ticket=null;
         }
-        
+
         $errors=array();
         if($ticket) {
-            if(!($msgid=$ticket->postMessage($var['message'], 'Email', $var['mid'], $var['header'])))
+            if(!($message=$ticket->postMessage($vars, 'Email')))
                 return false;
 
-        } elseif (($ticket=Ticket::create($var, $errors, 'Email'))) {
-            $msgid = $ticket->getLastMsgId();
+        } elseif (($ticket=Ticket::create($vars, $errors, 'Email'))) {
+            $message = $ticket->getLastMessage();
         } else {
             //Report success if the email was absolutely rejected.
             if(isset($errors['errno']) && $errors['errno'] == 403)
                 return true;
 
             # check if it's a bounce!
-            if($var['header'] && TicketFilter::isAutoBounce($var['header'])) {
-                $ost->logWarning('Bounced email', $var['message'], false);
+            if($vars['header'] && TicketFilter::isAutoBounce($vars['header'])) {
+                $ost->logWarning('Bounced email', $vars['message'], false);
                 return true;
             }
 
@@ -453,29 +420,22 @@ class MailFetcher {
         }
 
         //Save attachments if any.
-        if($msgid 
+        if($message
                 && $ost->getConfig()->allowEmailAttachments()
-                && ($struct = imap_fetchstructure($this->mbox, $mid)) 
-                && $struct->parts 
+                && ($struct = imap_fetchstructure($this->mbox, $mid))
+                && $struct->parts
                 && ($attachments=$this->getAttachments($struct))) {
-                
-            //We're just checking the type of file - not size or number of attachments...
-            // Restrictions are mainly due to PHP file uploads limitations
+
             foreach($attachments as $a ) {
-                if($ost->isFileTypeAllowed($a['name'], $a['mime'])) {
-                    $file = array(
-                            'name'  => $a['name'],
-                            'type'  => $a['mime'],
-                            'data'  => $this->decode($a['encoding'], imap_fetchbody($this->mbox, $mid, $a['index']))
-                            );
-                    $ticket->saveAttachment($file, $msgid, 'M');
-                } else {
-                    //This should be really a comment on message - NoT an internal note.
-                    //TODO: support comments on Messages and Responses.
-                    $error = sprintf('Attachment %s [%s] rejected because of file type', $a['name'], $a['mime']);
-                    $ticket->postNote('Email Attachment Rejected', $error, 'SYSTEM', false);
-                    $ost->logDebug('Email Attachment Rejected (Ticket #'.$ticket->getExtId().')', $error);
-                }
+                $file = array('name'  => $a['name'], 'type'  => $a['type']);
+
+                //Check the file  type
+                if(!$ost->isFileTypeAllowed($file))
+                    $file['error'] = 'Invalid file type (ext) for '.Format::htmlchars($file['name']);
+                else //only fetch the body if necessary TODO: Make it a callback.
+                    $file['data'] = $this->decode(imap_fetchbody($this->mbox, $mid, $a['index']), $a['encoding']);
+
+                $message->importAttachment($file);
             }
         }
 
@@ -533,11 +493,11 @@ class MailFetcher {
     /*
        MailFetcher::run()
 
-       Static function called to initiate email polling 
+       Static function called to initiate email polling
      */
     function run() {
         global $ost;
-      
+
         if(!$ost->getConfig()->isEmailPollingEnabled())
             return;
 
@@ -549,7 +509,7 @@ class MailFetcher {
             return;
         }
 
-        //Hardcoded error control... 
+        //Hardcoded error control...
         $MAXERRORS = 5; //Max errors before we start delayed fetch attempts
         $TIMEOUT = 10; //Timeout in minutes after max errors is reached.
 

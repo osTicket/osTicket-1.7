@@ -34,11 +34,12 @@ if(!($maxfileuploads=ini_get('max_file_uploads')))
                 <select name="default_sla_id">
                     <option value="0">&mdash; None &mdash;</option>
                     <?php
-                    $sql='SELECT id,name FROM '.SLA_TABLE.' sla ORDER by name';
-                    if(($res=db_query($sql)) && db_num_rows($res)){
-                        while(list($id,$name)=db_fetch_row($res)){
-                            $selected=($config['default_sla_id'] && $id==$config['default_sla_id'])?'selected="selected"':'';
-                            echo sprintf('<option value="%d" %s>%s</option>',$id,$selected,$name);
+                    if($slas=SLA::getSLAs()) {
+                        foreach($slas as $id => $name) {
+                            echo sprintf('<option value="%d" %s>%s</option>',
+                                    $id,
+                                    ($config['default_sla_id'] && $id==$config['default_sla_id'])?'selected="selected"':'',
+                                    $name);
                         }
                     }
                     ?>
@@ -95,7 +96,7 @@ if(!($maxfileuploads=ini_get('max_file_uploads')))
                 <input type="checkbox" name="show_related_tickets" value="1" <?php echo $config['show_related_tickets'] ?'checked="checked"':''; ?> >
                 <em>(Show all related tickets on user login - otherwise access is restricted to one ticket view per login)</em>
             </td>
-        </tr>        
+        </tr>
         <tr>
             <td width="180">Show Notes Inline:</td>
             <td>
@@ -153,7 +154,7 @@ if(!($maxfileuploads=ini_get('max_file_uploads')))
         </tr>
         <tr>
             <th colspan="2">
-                <em><b>Attachments</b>:  Size setting mainly apply to web tickets.</em>
+                <em><b>Attachments</b>:  Size and max. uploads setting mainly apply to web tickets.</em>
             </th>
         </tr>
         <tr>
@@ -165,14 +166,14 @@ if(!($maxfileuploads=ini_get('max_file_uploads')))
             </td>
         </tr>
         <tr>
-            <td width="180">Emailed Attachments:</td>
+            <td width="180">Emailed/API Attachments:</td>
             <td>
-                <input type="checkbox" name="allow_email_attachments" <?php echo $config['allow_email_attachments']?'checked="checked"':''; ?>> Accept emailed files
+                <input type="checkbox" name="allow_email_attachments" <?php echo $config['allow_email_attachments']?'checked="checked"':''; ?>> Accept emailed/API attachments.
                     &nbsp;<font class="error">&nbsp;<?php echo $errors['allow_email_attachments']; ?></font>
             </td>
         </tr>
         <tr>
-            <td width="180">Online Attachments:</td>
+            <td width="180">Online/Web Attachments:</td>
             <td>
                 <input type="checkbox" name="allow_online_attachments" <?php echo $config['allow_online_attachments']?'checked="checked"':''; ?> >
                     Allow web upload &nbsp;&nbsp;&nbsp;&nbsp;

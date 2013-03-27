@@ -6,15 +6,15 @@
     The brain of the whole sytem. Don't monkey with it.
 
     Peter Rotich <peter@osticket.com>
-    Copyright (c)  2006-2012 osTicket
+    Copyright (c)  2006-2013 osTicket
     http://www.osticket.com
 
     Released under the GNU General Public License WITHOUT ANY WARRANTY.
     See LICENSE.TXT for details.
 
     vim: expandtab sw=4 ts=4 sts=4:
-**********************************************************************/    
-    
+**********************************************************************/
+
     #Disable direct access.
     if(!strcasecmp(basename($_SERVER['SCRIPT_NAME']),basename(__FILE__))) die('kwaheri rafiki!');
 
@@ -44,9 +44,22 @@
     if (defined('E_DEPRECATED')) # 5.3.0
         $error_reporting &= ~(E_DEPRECATED | E_USER_DEPRECATED);
     error_reporting($error_reporting); //Respect whatever is set in php.ini (sysadmin knows better??)
+
     #Don't display errors
-    ini_set('display_errors',1);
-    ini_set('display_startup_errors',1);
+    ini_set('display_errors', 1);
+    ini_set('display_startup_errors', 1);
+
+    //Default timezone
+    if (!ini_get('date.timezone')) {
+        if(function_exists('date_default_timezone_set')) {
+            if(@date_default_timezone_get()) //Let PHP determine the timezone.
+                @date_default_timezone_set(@date_default_timezone_get());
+            else //Default to EST - if PHP can't figure it out.
+                date_default_timezone_set('America/New_York');
+        } else { //Default when all fails. PHP < 5.
+            ini_set('date.timezone', 'America/New_York');
+        }
+    }
 
     #Set Dir constants
     if(!defined('ROOT_PATH')) define('ROOT_PATH','./'); //root path. Damn directories
@@ -62,15 +75,15 @@
     /*############## Do NOT monkey with anything else beyond this point UNLESS you really know what you are doing ##############*/
 
     #Current version && schema signature (Changes from version to version)
-    define('THIS_VERSION','1.7-RC4+'); //Shown on admin panel
-    define('SCHEMA_SIGNATURE','9f3b454c06dfd5ee96003eae5182ac13'); //MD5 signature of the db schema. (used to trigger upgrades)
+    define('THIS_VERSION','1.7-RC6+'); //Shown on admin panel
+    define('SCHEMA_SIGNATURE', 'd959a00e55c75e0c903b9e37324fd25d'); //MD5 signature of the db schema. (used to trigger upgrades)
     #load config info
     $configfile='';
     if(file_exists(ROOT_DIR.'ostconfig.php')) //Old installs prior to v 1.6 RC5
         $configfile=ROOT_DIR.'ostconfig.php';
     elseif(file_exists(INCLUDE_DIR.'settings.php')) { //OLD config file.. v 1.6 RC5
         $configfile=INCLUDE_DIR.'settings.php';
-        //Die gracefully on upgraded v1.6 RC5 installation - otherwise script dies with confusing message. 
+        //Die gracefully on upgraded v1.6 RC5 installation - otherwise script dies with confusing message.
         if(!strcasecmp(basename($_SERVER['SCRIPT_NAME']), 'settings.php'))
             die('Please rename config file include/settings.php to include/ost-config.php to continue!');
     } elseif(file_exists(INCLUDE_DIR.'ost-config.php')) //NEW config file v 1.6 stable ++
@@ -82,18 +95,18 @@
 
     require($configfile);
     define('CONFIG_FILE',$configfile); //used in admin.php to check perm.
-   
+
    //Path separator
     if(!defined('PATH_SEPARATOR')){
         if(strpos($_ENV['OS'],'Win')!==false || !strcasecmp(substr(PHP_OS, 0, 3),'WIN'))
             define('PATH_SEPARATOR', ';' ); //Windows
-        else 
+        else
             define('PATH_SEPARATOR',':'); //Linux
     }
 
     //Set include paths. Overwrite the default paths.
     ini_set('include_path', './'.PATH_SEPARATOR.INCLUDE_DIR.PATH_SEPARATOR.PEAR_DIR);
-   
+
 
     #include required files
     require(INCLUDE_DIR.'class.osticket.php');
@@ -121,7 +134,7 @@
     #Session related
     define('SESSION_SECRET', MD5(SECRET_SALT)); //Not that useful anymore...
     define('SESSION_TTL', 86400); // Default 24 hours
-   
+
     define('DEFAULT_MAX_FILE_UPLOADS',ini_get('max_file_uploads')?ini_get('max_file_uploads'):5);
     define('DEFAULT_PRIORITY_ID',1);
 
@@ -157,7 +170,7 @@
     define('TICKET_LOCK_TABLE',TABLE_PREFIX.'ticket_lock');
     define('TICKET_EVENT_TABLE',TABLE_PREFIX.'ticket_event');
     define('TICKET_EMAIL_INFO_TABLE',TABLE_PREFIX.'ticket_email_info');
-  
+
     define('EMAIL_TABLE',TABLE_PREFIX.'email');
     define('EMAIL_TEMPLATE_TABLE',TABLE_PREFIX.'email_template');
 
@@ -180,12 +193,12 @@
     define('SLA_TABLE',TABLE_PREFIX.'sla');
 
     define('API_KEY_TABLE',TABLE_PREFIX.'api_key');
-    define('TIMEZONE_TABLE',TABLE_PREFIX.'timezone'); 
+    define('TIMEZONE_TABLE',TABLE_PREFIX.'timezone');
 
     #Global overwrite
     if($_SERVER['HTTP_X_FORWARDED_FOR']) //Can contain multiple IPs - use the last one.
         $_SERVER['REMOTE_ADDR'] =  array_pop(explode(',', $_SERVER['HTTP_X_FORWARDED_FOR']));
-   
+
     #Connect to the DB && get configuration from database
     $ferror=null;
     if (!db_connect(DBHOST,DBUSER,DBPASS) || !db_select_database(DBNAME)) {
@@ -202,7 +215,7 @@
         die("<b>Fatal Error:</b> Contact system administrator.");
         exit;
     }
-    
+
     //Init
     $session = $ost->getSession();
 
