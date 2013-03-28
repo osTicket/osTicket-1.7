@@ -252,7 +252,7 @@ if($ticket->isOverdue())
                 <tr>
                     <th width="100">Help Topic:</th>                    
                     <td>
-                     <a href="/scp/kb.php?a=search&q=&cid=&topicId=<?php echo $ticket->getTopicId()?>">
+                     <a href="<?php echo sprintf("%s/scp/kb.php?a=search&topicId=%s", $cfg->getBaseUrl(), $ticket->getTopicId()); ?>">
                         <?php echo Format::htmlchars($ticket->getTopic()->getName()); ?></a></td>
                 </tr>
                 <tr>
