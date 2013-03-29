@@ -2,10 +2,13 @@
 /*********************************************************************
     class.dynamic_forms.php
 
-    Classes to support dynamic forms for osTicket
-    
+    Forms models built on the VerySimpleModel paradigm. Allows for arbitrary
+    data to be associated with tickets. Eventually this model can be
+    extended to associate arbitrary data with registered clients and thread
+    entries.
+
     Jared Hancock <jared@osticket.com>
-    Copyright (c)  2006-2012 osTicket
+    Copyright (c)  2006-2013 osTicket
     http://www.osticket.com
 
     Released under the GNU General Public License WITHOUT ANY WARRANTY.
@@ -13,193 +16,7 @@
 
     vim: expandtab sw=4 ts=4 sts=4:
 **********************************************************************/
-
-class VerySimpleModel {
-    function VerySimpleModel($row) {
-        # Not called in PHP5
-        call_user_func_array(array(&$this, '__construct'), func_get_args());
-    }
-
-    function __construct($row) {
-        $this->ht = $row;
-        $this->dirty = array();
-    }
-
-    function get($field) {
-        return $this->ht[$field];
-    }
-
-    function set($field, $value) {
-        $old = isset($this->ht[$field]) ? $this->ht[$field] : null;
-        if ($old != $value) {
-            $this->dirty[$field] = $old;
-            $this->ht[$field] = $value;
-        }
-    }
-
-    function setAll($props) {
-        foreach ($props as $field=>$value)
-            $this->set($field, $value);
-    }
-
-    function all($class, $table, $sort=false, $limit=false, $offset=false) {
-        return self::find($class, $table, false, $sort, $limit, $offset);
-    }
-
-    function _get_joins_and_field($class, $field) {
-        $joins = array();
-        $parts = explode('__', $field);
-        $field = array_pop($parts);
-        foreach ($parts as $p) {
-            $context = call_user_func(array($class, 'getJoins'));
-            list($left, $class, $table, $right) = $context[$p];
-            $joins[] = ' INNER JOIN '.$table
-                .' ON ('.$left.' = '.$table.'.'.$right.')';
-        }
-        if ($table)
-            $field = $table.'.'.$field;
-        return array($joins, $field);
-    }
-
-    function _compile_where($class, $where) {
-        $joins = array();
-        $filter = array();
-        foreach ($where as $field=>$value) {
-            list($js, $field) = self::_get_joins_and_field($class, $field);
-            $joins = array_merge($joins, $js);
-            $filter[] = $field.' = '.db_input($value);
-        }
-        return array($joins, $filter);
-    }
-
-    function count($class, $table, $where=false) {
-        if ($where) {
-            list($joins, $filter) = self::_compile_where($class, $where);
-            $where = ' WHERE ' . implode(' AND ', $filter);
-            $joins = implode('', array_unique($joins));
-        }
-        $sql = 'SELECT COUNT(*) FROM '.$table.$joins.$where;
-        return db_count($sql);
-    }
-
-    function find($class, $table, $where=false, $sort=false, $limit=false,
-            $offset=false) {
-        if ($where) {
-            list($joins, $filter) = self::_compile_where($class, $where);
-            $where = ' WHERE ' . implode(' AND ', $filter);
-        }
-        if ($sort) {
-            $dir = 'ASC';
-            if (substr($sort, 0, 1) == '-') {
-                $dir = 'DESC';
-                $sort = substr($sort, 1);
-            }
-            list($js, $field) = self::_get_joins_and_field($class, $sort);
-            $joins = ($joins) ? array_merge($joins, $js) : $js;
-            $sort = ' ORDER BY '.$field.' '.$dir;
-        }
-        if (is_array($joins))
-            # XXX: This will change the order of the joins
-            $joins = implode('', array_unique($joins));
-        $sql = 'SELECT '.$table.'.* FROM '.$table.$joins.$where.$sort;
-        if ($limit)
-            $sql .= ' LIMIT '.$limit;
-        if ($offset)
-            $sql .= ' OFFSET '.$offset;
-
-        $res = db_query($sql);
-        $list = array();
-        while ($row = db_fetch_array($res))
-            $list[] = new $class($row);
-        return $list;
-    }
-
-    function lookup($class, $table, $where) {
-        $list = self::find($class, $table, $where, false, 1);
-        return $list[0];
-    }
-
-    function delete($table, $pk) {
-        $sql = 'DELETE FROM '.$table;
-        if (!is_array($pk)) $pk=array($pk);
-        foreach ($pk as $p)
-            $filter[] = $p.' = '.db_input($this->get($p));
-        $sql .= ' WHERE '.implode(' AND ', $filter).' LIMIT 1';
-        return db_affected_rows(db_query($sql)) == 1;
-    }
-
-    function save($table, $pk, $refetch=false) {
-        if (!$this->validate())
-            return false;
-        if (!is_array($pk)) $pk=array($pk);
-        if ($this->__new__)
-            $sql = 'INSERT INTO '.$table;
-        else
-            $sql = 'UPDATE '.$table;
-        $filter = $fields = array();
-        if (count($this->dirty) === 0)
-            return;
-        foreach ($this->dirty as $field=>$old)
-            if ($this->__new__ or !in_array($field, $pk))
-                if (@get_class($this->ht[$field]) == 'SqlFunction')
-                    $fields[] = $field.' = '.$this->ht[$field]->toSql();
-                else
-                    $fields[] = $field.' = '.db_input($this->ht[$field]);
-        foreach ($pk as $p)
-            $filter[] = $p.' = '.db_input($this->get($p));
-        $sql .= ' SET '.implode(', ', $fields);
-        if (!$this->__new__) {
-            $sql .= ' WHERE '.implode(' AND ', $filter);
-            $sql .= ' LIMIT 1';
-        }
-        if (db_affected_rows(db_query($sql)) != 1)
-            return false;
-        if ($this->__new__ && count($pk) == 1) {
-            $this->ht[$pk[0]] = db_insert_id();
-            $this->__new__ = false;
-        }
-        # Refetch row from database
-        # XXX: Too much voodoo
-        if ($refetch)
-            # XXX: Support composite PK
-            $this->ht = self::lookup(get_class(), $table,
-                array($pk[0] => $this->get($pk[0])))->ht;
-        return $this->get($pk[0]);
-    }
-
-    function create($class, $ht=false) {
-        if (!$ht) $ht=array();
-        $i = new $class(array());
-        $i->__new__ = true;
-        foreach ($ht as $field=>$value)
-            $i->set($field, $value);
-        return $i;
-    }
-
-    function validate() {
-        return $this->isValid();
-    }
-
-    function isValid() {
-        return true;
-    }
-
-    function getJoins() {
-        return array();
-    }
-}
-
-class SqlFunction {
-    function SqlFunction($name) {
-        $this->func = $name;
-        $this->args = array_slice(func_get_args(), 1);
-    }
-
-    function toSql() {
-        $args = (count($this->args)) ? implode(',', db_input($this->args)) : "";
-        return sprintf('%s(%s)', $this->func, $args);
-    }
-}
+require_once(INCLUDE_DIR . 'class.orm.php');
 
 /**
  * Form template, used for designing the custom form and for entering custom
@@ -212,7 +29,7 @@ class DynamicFormSection extends VerySimpleModel {
         $this->id = $row['id'];
         $this->_errors = false;
     }
-    
+
     function getFields() {
         if (!$this->_fields) {
             $this->_fields = array();
@@ -233,7 +50,8 @@ class DynamicFormSection extends VerySimpleModel {
     }
 
     function instanciate() {
-        return DynamicFormEntry::create(array('section_id'=>$this->get('id')));
+        return DynamicFormEntry::create(array(
+            'section_id'=>$this->get('id'), 'sort'=>$this->get('sort')));
     }
 
     function all($sort='title', $limit=false, $offset=false) {
@@ -283,8 +101,7 @@ class DynamicFormField extends VerySimpleModel {
     function getClean() {
         $value = $this->getWidget()->value;
         $value = $this->parse($value);
-        if (!$this->_validated)
-            $this->validateEntry($value);
+        $this->validateEntry($value);
         return $value;
     }
 
@@ -294,7 +111,7 @@ class DynamicFormField extends VerySimpleModel {
     }
 
     /**
-     * validate
+     * isValid
      *
      * Validates the contents of $this->ht before the model should be
      * committed to the database. This is the validation for the field
@@ -326,13 +143,12 @@ class DynamicFormField extends VerySimpleModel {
     function validateEntry($value) {
         # Validates a user-input into an instance of this field on a dynamic
         # form
-        $this->_validated = true;
+        if (!is_array($this->_errors)) {
+            $this->_errors = array();
 
-        if (!is_array($this->_errors)) $this->_errors = array();
-
-        if ($this->get('required'))
-            if (!$value)
+            if ($this->get('required') && !$value)
                 $this->_errors[] = $this->getLabel() . ' is a required field';
+        }
     }
 
     /**
@@ -363,7 +179,7 @@ class DynamicFormField extends VerySimpleModel {
     function to_php($value) {
         return $value;
     }
-    
+
     /**
      * to_database
      *
@@ -398,10 +214,21 @@ class DynamicFormField extends VerySimpleModel {
 
     function getLabel() { return $this->get('label'); }
 
+    /**
+     * getImpl
+     *
+     * Magic method that will return an implementation instance of this
+     * field based on the simple text value of the 'type' value of this
+     * field instance. The list of registered fields is determined by the
+     * global get_dynamic_field_types() function. The data from this model
+     * will be used to initialize the returned instance.
+     *
+     * For instance, if the value of this field is 'text', a TextField
+     * instance will be returned.
+     */
     function getImpl() {
         $type = get_dynamic_field_types();
-        $type = $type[$this->get('type')];
-        $clazz = $type[1];
+        $clazz = $type[$this->get('type')][1];
         return new $clazz($this->ht);
     }
 
@@ -429,6 +256,25 @@ class DynamicFormField extends VerySimpleModel {
         return $this->_cform;
     }
 
+    /**
+     * setConfiguration
+     *
+     * Used in the POST request of the configuration process. The
+     * ::getConfigurationForm() method should be used to retrieve a
+     * configuration form for this field. That form should be submitted via
+     * a POST request, and this method should be called in that request. The
+     * data from the POST request will be interpreted and will adjust the
+     * configuration of this field
+     *
+     * Parameters:
+     * errors - (OUT array) receives validation errors of the parsed
+     *      configuration form
+     *
+     * Returns:
+     * (bool) true if the configuration was updated, false if there were
+     * errors. If false, the errors were written into the received errors
+     * array.
+     */
     function setConfiguration($errors) {
         $errors = $config = array();
         foreach ($this->getConfigurationForm() as $name=>$field) {
@@ -440,7 +286,7 @@ class DynamicFormField extends VerySimpleModel {
         $this->set('hint', $_POST['hint']);
         return count($errors) === 0;
     }
-    
+
     /**
      * getConfiguration
      *
@@ -508,7 +354,13 @@ class DynamicFormField extends VerySimpleModel {
 
 /**
  * Represents an entry to a dynamic form. Used to render the completed form
- * in reference to the attached ticket, etc.
+ * in reference to the attached ticket, etc. A form is used to represent the
+ * template of enterable data. This represents the data entered into an
+ * instance of that template.
+ *
+ * The data of the entry is called 'answers' in this model. This model
+ * represents an instance of a form entry. The data / answers to that entry
+ * are represented individually in the DynamicFormEntryAnswer model.
  */
 class DynamicFormEntry extends VerySimpleModel {
 
@@ -545,18 +397,13 @@ class DynamicFormEntry extends VerySimpleModel {
     function getFields() {
         if (!$this->_fields) {
             $this->_fields = array();
-            foreach ($this->getAnswers() as $a) {
+            foreach ($this->getAnswers() as $a)
                 $this->_fields[] = $a->getField();
-            }
         }
         return $this->_fields;
     }
 
     function isValid() {
-        return $this->validate();
-    }
-    
-    function validate() {
         if (!is_array($this->_errors)) {
             $this->_errors = array();
             $this->getClean();
@@ -637,6 +484,11 @@ class DynamicFormEntry extends VerySimpleModel {
     }
 }
 
+/**
+ * Represents a single answer to a single field on a dynamic form section.
+ * The data / answer to the field is linked back to the form section and
+ * field which was originally used for the submission.
+ */
 class DynamicFormEntryAnswer extends VerySimpleModel {
 
     function getEntry() {
@@ -688,6 +540,12 @@ class DynamicFormEntryAnswer extends VerySimpleModel {
     }
 }
 
+/**
+ * A collection of form sections makes up a "form" in the context of dynamic
+ * forms. This model represents that list of sections. The individual
+ * association of form sections to this form are delegated to the
+ * DynamicFormsetSections model
+ */
 class DynamicFormset extends VerySimpleModel {
 
     function getForms() {
@@ -698,7 +556,7 @@ class DynamicFormset extends VerySimpleModel {
     }
 
     function hasField($name) {
-        foreach ($this->getForms() as $form) 
+        foreach ($this->getForms() as $form)
             foreach ($form->getForm()->getFields() as $f)
                 if ($f->get('name') == $name)
                     return true;
@@ -750,6 +608,10 @@ class DynamicFormset extends VerySimpleModel {
     }
 }
 
+/**
+ * Represents an assocation of form section (DynamicFormSection) with a
+ * "form" (DynamicFormset).
+ */
 class DynamicFormsetSections extends VerySimpleModel {
     function find($where, $sort='sort') {
         return parent::find(get_class(), DYNAMIC_FORMSET_SEC_TABLE, $where,
@@ -760,14 +622,6 @@ class DynamicFormsetSections extends VerySimpleModel {
         if (!$this->_section)
             $this->_section = DynamicFormSection::lookup($this->get('section_id'));
         return $this->_section;
-    }
-
-    function getTitle() {
-        $title = $this->get('title');
-        if ($title)
-            return $title;
-        else
-            return $this->getForm()->get('title');
     }
 
     function errors() {
@@ -795,6 +649,12 @@ class DynamicFormsetSections extends VerySimpleModel {
     }
 }
 
+/**
+ * Dynamic lists are used to represent list of arbitrary data that can be
+ * used as dropdown or typeahead selections in dynamic forms. This model
+ * defines a list. The individual items are stored in the DynamicListItem
+ * model.
+ */
 class DynamicList extends VerySimpleModel {
 
     function getSortModes() {
@@ -864,11 +724,23 @@ class DynamicList extends VerySimpleModel {
     }
 }
 
+/**
+ * Represents a single item in a dynamic list
+ *
+ * Fields:
+ * value - (char * 255) Actual list item content
+ * extra - (char * 255) Other values that represent the same item in the
+ *      list, such as an abbreviation. In practice, should be a
+ *      space-separated list of tokens which should hit this list item in a
+ *      search
+ * sort - (int) If sorting by this field, represents the numeric sort order
+ *      that this item should come in the dropdown list
+ */
 class DynamicListItem extends VerySimpleModel {
     function toString() {
         return $this->get('value');
     }
-    
+
     function lookup($id) {
         return parent::lookup(get_class(), DYNAMIC_LIST_ITEM_TABLE,
             array('id'=>$id));
@@ -907,7 +779,7 @@ class TextboxField extends DynamicFormField {
     function getConfigurationOptions() {
         return array(
             'size'  =>  new TextboxField(array(
-                'id'=>1, 'label'=>'Size', 'required'=>false, 'default'=>16, 
+                'id'=>1, 'label'=>'Size', 'required'=>false, 'default'=>16,
                     'validator' => 'number')),
             'length' => new TextboxField(array(
                 'id'=>2, 'label'=>'Max Length', 'required'=>false, 'default'=>30,
@@ -1187,7 +1059,7 @@ class Widget {
     function getValue() {
         return $_POST[$this->name];
     }
-}   
+}
 
 class TextboxWidget extends Widget {
     function render() {
@@ -1282,7 +1154,7 @@ class ChoicesWidget extends Widget {
                 $this->_choices = array();
                 $config = $this->field->getConfiguration();
                 $choices = explode("\n", $config['choices']);
-                foreach ($choices as $choice) { 
+                foreach ($choices as $choice) {
                     // Allow choices to be key: value
                     list($key, $val) = explode(':', $choice);
                     if ($val == null)
@@ -1379,7 +1251,7 @@ class DatetimePickerWidget extends Widget {
         $config = $this->field->getConfiguration();
         if ($this->value) {
             $this->value = (is_int($this->value) ? $this->value :
-                    strtotime($this->value)); 
+                    strtotime($this->value));
             if ($config['gmt'])
                 $this->value += 3600 *
                     $_SESSION['TZ_OFFSET']+($_SESSION['TZ_DST']?date('I',$time):0);
