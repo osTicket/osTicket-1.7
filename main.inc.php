@@ -76,7 +76,7 @@
 
     #Current version && schema signature (Changes from version to version)
     define('THIS_VERSION','1.7-RC6+'); //Shown on admin panel
-    define('SCHEMA_SIGNATURE', 'd959a00e55c75e0c903b9e37324fd25d'); //MD5 signature of the db schema. (used to trigger upgrades)
+    define('SCHEMA_SIGNATURE', 'e432ac42d77ce1cab5b4207b7d128f37'); //MD5 signature of the db schema. (used to trigger upgrades)
     #load config info
     $configfile='';
     if(file_exists(ROOT_DIR.'ostconfig.php')) //Old installs prior to v 1.6 RC5
@@ -176,7 +176,7 @@
 
     define('FILTER_TABLE',TABLE_PREFIX.'filter');
     define('FILTER_RULE_TABLE',TABLE_PREFIX.'filter_rule');
-    
+
     define('DYNAMIC_FORM_SEC_TABLE',TABLE_PREFIX.'dynamic_form_section');
     define('DYNAMIC_FORM_FIELD_TABLE',TABLE_PREFIX.'dynamic_form_field');
     define('DYNAMIC_FORMSET_TABLE',TABLE_PREFIX.'dynamic_formset');
@@ -187,7 +187,7 @@
 
     define('DYNAMIC_FORM_ENTRY_TABLE',TABLE_PREFIX.'dynamic_form_entry');
     define('DYNAMIC_FORM_ANSWER_TABLE',TABLE_PREFIX.'dynamic_form_entry_values');
-    
+
     define('BANLIST_TABLE',TABLE_PREFIX.'email_banlist'); //Not in use anymore....as of v 1.7
 
     define('SLA_TABLE',TABLE_PREFIX.'sla');

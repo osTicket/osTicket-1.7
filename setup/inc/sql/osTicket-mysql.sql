@@ -143,7 +143,7 @@ CREATE TABLE `%TABLE_PREFIX%config` (
   `allow_attachments` tinyint(1) unsigned NOT NULL default '0',
   `allow_email_attachments` tinyint(1) unsigned NOT NULL default '0',
   `allow_online_attachments` tinyint(1) unsigned NOT NULL default '0',
-  `allow_online_attachments_onlogin` tinyint(1) unsigned NOT NULL default 
+  `allow_online_attachments_onlogin` tinyint(1) unsigned NOT NULL default
     '0',
   `random_ticket_ids` tinyint(1) unsigned NOT NULL default '1',
   `log_level` tinyint(1) unsigned NOT NULL default '2',
@@ -156,7 +156,7 @@ CREATE TABLE `%TABLE_PREFIX%config` (
   `daydatetime_format` varchar(60) NOT NULL default 'D, M j Y g:ia',
   `reply_separator` varchar(60) NOT NULL default '-- do not edit --',
   `admin_email` varchar(125) NOT NULL default '',
-  `helpdesk_title` varchar(255) NOT NULL default 
+  `helpdesk_title` varchar(255) NOT NULL default
     'osTicket Support Ticket System',
   `helpdesk_url` varchar(255) NOT NULL default '',
   `schema_signature` char(32) NOT NULL default '',
@@ -187,9 +187,9 @@ CREATE TABLE `%TABLE_PREFIX%dynamic_formset_sections` (
     `sort` int(11) NOT NULL DEFAULT 1,
     PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
- 
+
 DROP TABLE IF EXISTS `%TABLE_PREFIX%dynamic_form_section`;
-CREATE TABLE `%TABLE_PREFIX%dynamic_form` (
+CREATE TABLE `%TABLE_PREFIX%dynamic_form_section` (
     `id` int(11) unsigned NOT NULL auto_increment,
     `title` varchar(255) NOT NULL,
     `instructions` varchar(512),
@@ -404,7 +404,7 @@ CREATE TABLE `%TABLE_PREFIX%filter_rule` (
   `updated` datetime NOT NULL,
   PRIMARY KEY  (`id`),
   KEY `filter_id` (`filter_id`),
-  UNIQUE `filter` (`filter_id`, `what`, `how`, `val`) 
+  UNIQUE `filter` (`filter_id`, `what`, `how`, `val`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
 
 INSERT INTO `%TABLE_PREFIX%filter_rule` (
@@ -544,9 +544,11 @@ CREATE TABLE `%TABLE_PREFIX%help_topic` (
   KEY `sla_id` (`sla_id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
 
-INSERT INTO `%TABLE_PREFIX%help_topic` (`topic_id`, `isactive`, `ispublic`, `noautoresp`, `priority_id`, `dept_id`, `staff_id`, `team_id`, `sla_id`, `topic`, `notes`) VALUES
-    (1, 1, 1, 0, 2, 1, 0, 0, 1, 'Support', NULL),
-    (2, 1, 1, 0, 3, 1, 0, 0, 0, 'Billing', NULL);
+INSERT INTO `%TABLE_PREFIX%help_topic` (`topic_id`, `isactive`, `ispublic`,
+        `noautoresp`, `priority_id`, `dept_id`, `staff_id`, `team_id`,
+        `sla_id`, `formset_id`, `topic`, `notes`) VALUES
+    (1, 1, 1, 0, 2, 1, 0, 0, 1, 1, 'Support', NULL),
+    (2, 1, 1, 0, 3, 1, 0, 0, 0, 1, 'Billing', NULL);
 
 DROP TABLE IF EXISTS `%TABLE_PREFIX%canned_response`;
 CREATE TABLE `%TABLE_PREFIX%canned_response` (
