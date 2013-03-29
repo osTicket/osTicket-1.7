@@ -1053,7 +1053,7 @@ class Widget {
             $this->value = $this->getValue();
         elseif (is_object($field->getAnswer()))
             $this->value = $field->getAnswer()->getValue();
-        elseif ($field->value)
+        if (!$this->value && $field->value)
             $this->value = $field->value;
     }
 
