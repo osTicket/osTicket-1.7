@@ -32,7 +32,7 @@ CREATE TABLE `%TABLE_PREFIX%dynamic_formset_sections` (
     `sort` int(11) NOT NULL DEFAULT 1,
     PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
- 
+
 DROP TABLE IF EXISTS `%TABLE_PREFIX%dynamic_form_section`;
 CREATE TABLE `%TABLE_PREFIX%dynamic_form` (
     `id` int(11) unsigned NOT NULL auto_increment,
@@ -181,7 +181,7 @@ INSERT INTO `%TABLE_PREFIX%dynamic_form_entry_values` (
 
 INSERT INTO `%TABLE_PREFIX%dynamic_form_entry_values` (
     `field_id`, `entry_id`, `value`)
-    SELECT A3.`field_id`, A2.`id`, A1.`phone`
+    SELECT A3.`field_id`, A2.`id`, CONCAT(A1.`phone`, 'X', A1.`phone_ext`)
     FROM `%TABLE_PREFIX%ticket` A1
         INNER JOIN `%TABLE_PREFIX%dynamic_form_entry` A2 ON (A1.`ticket_id`
                 = A2.`ticket_id` AND A2.`section_id` = 1),
@@ -205,6 +205,7 @@ ALTER TABLE `%TABLE_PREFIX%ticket`
     DROP COLUMN `name`,
     DROP COLUMN `email`,
     DROP COLUMN `phone`,
+    DROP COLUMN `phone_ext`,
     DROP COLUMN `subject`;
 
 -- 5. Cleanup ticket table with dropped varchar columns
