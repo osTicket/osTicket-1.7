@@ -270,21 +270,17 @@ class Ticket {
     }
 
     function getPhone() {
-        list($phone, $ext) = explode("X", $this->_answers['phone'], 2);
+        list($phone, $ext) = explode(" ", $this->_answers['phone'], 2);
         return $phone;
     }
 
     function getPhoneExt() {
-        list($phone, $ext) = explode("X", $this->_answers['phone'], 2);
+        list($phone, $ext) = explode(" ", $this->_answers['phone'], 2);
         return $ext;
     }
 
     function getPhoneNumber() {
-        $phone=Format::phone($this->getPhone());
-        if(($ext=$this->getPhoneExt()))
-            $phone.=" $ext";
-
-        return $phone;
+        return $this->_answers['phone'];
     }
 
     function getSource() {

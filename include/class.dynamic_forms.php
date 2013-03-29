@@ -853,8 +853,9 @@ class PhoneField extends DynamicFormField {
     function toString($value) {
         list($phone, $ext) = explode("X", $value, 2);
         $phone=Format::phone($phone);
-        if($ext)
-            $phone.=" $ext";
+        if ($ext)
+            $phone.=" x$ext";
+        return $phone;
     }
 }
 
