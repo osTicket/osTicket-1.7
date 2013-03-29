@@ -86,12 +86,8 @@ class Ticket {
         $this->id       = $this->ht['ticket_id'];
         $this->number   = $this->ht['ticketID'];
 
-        $this->_answers = array();
-        foreach (DynamicFormEntry::forTicket($this->getId()) as $form)
-            foreach ($form->getAnswers() as $answer)
-                $this->_answers[$answer->getField()->get('name')] =
-                    $answer->toString();
-        
+        $this->loadDynamicData();
+
         //Reset the sub classes (initiated ondemand)...good for reloads.
         $this->staff = null;
         $this->client = null;
@@ -107,6 +103,14 @@ class Ticket {
         $this->getThread();
 
         return true;
+    }
+
+    function loadDynamicData() {
+        $this->_answers = array();
+        foreach (DynamicFormEntry::forTicket($this->getId()) as $form)
+            foreach ($form->getAnswers() as $answer)
+                $this->_answers[$answer->getField()->get('name')] =
+                    $answer->toString();
     }
 
     function reload() {
@@ -176,7 +180,7 @@ class Ticket {
     function getNumber() {
         return $this->number;
     }
-   
+
     function getEmail(){
         return $this->_answers['email'];
     }
@@ -1661,7 +1665,7 @@ class Ticket {
              .' LEFT JOIN '.DYNAMIC_FORM_ANSWER_TABLE.' email ON email.entry_id = entry.id '
              .' LEFT JOIN '.DYNAMIC_FORM_FIELD_TABLE.' field ON email.field_id = field.id '
              .' WHERE field.name = "email" AND ticeket.ticketID='.db_input($extId);
-        
+
         if($email)
             $sql .= ' AND email.value = '.db_input($email);
 
@@ -1856,7 +1860,7 @@ class Ticket {
                 $errors['err']=$errors['origin'] = 'Invalid origin given';
         }
         $fields['priorityId']   = array('type'=>'int',      'required'=>0, 'error'=>'Invalid Priority');
-        
+
         if(!Validator::process($fields, $vars, $errors) && !$errors['err'])
             $errors['err'] ='Missing or invalid data - check the errors and try again';
 
@@ -1925,7 +1929,7 @@ class Ticket {
             .' ,dept_id='.db_input($deptId)
             .' ,topic_id='.db_input($topicId)
             .' ,priority_id='.db_input($priorityId)
-            .' ,ip_address='.db_input($ipaddress) 
+            .' ,ip_address='.db_input($ipaddress)
             .' ,source='.db_input($source);
 
         //Make sure the origin is staff - avoid firebug hack!

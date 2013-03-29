@@ -477,6 +477,7 @@ if($_POST && !$errors):
                             $f->set('ticket_id', $ticket->getId());
                             $f->save();
                         }
+                        $ticket->loadDynamicData();
                         if(!$ticket->checkStaffAccess($thisstaff) || $ticket->isClosed())
                             $ticket=null;
                     } elseif(!$errors['err']) {
