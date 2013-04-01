@@ -114,22 +114,22 @@ if($search):
         }elseif(strpos($searchTerm,'@') && Validator::is_email($searchTerm)){ //pulling all tricks!
             # XXX: What about searching for email addresses in the body of
             #      the thread message
-            $qwhere.=" AND ticket.email='$queryterm'";
+            $qwhere.=" AND email.value='$queryterm'";
         }else{//Deep search!
             //This sucks..mass scan! search anything that moves! 
             
             $deep_search=true;
             if($_REQUEST['stype'] && $_REQUEST['stype']=='FT') { //Using full text on big fields.
-                $qwhere.=" AND ( ticket.email LIKE '%$queryterm%'".
-                            " OR ticket.name LIKE '%$queryterm%'".
-                            " OR ticket.subject LIKE '%$queryterm%'".
+                $qwhere.=" AND ( email.value LIKE '%$queryterm%'".
+                            " OR name.value LIKE '%$queryterm%'".
+                            " OR subject.value LIKE '%$queryterm%'".
                             " OR thread.title LIKE '%$queryterm%'".
                             " OR MATCH(thread.body)   AGAINST('$queryterm')".
                             ' ) ';
             }else{
-                $qwhere.=" AND ( ticket.email LIKE '%$queryterm%'".
-                            " OR ticket.name LIKE '%$queryterm%'".
-                            " OR ticket.subject LIKE '%$queryterm%'".
+                $qwhere.=" AND ( email.value LIKE '%$queryterm%'".
+                            " OR name.value LIKE '%$queryterm%'".
+                            " OR subject.value LIKE '%$queryterm%'".
                             " OR thread.body LIKE '%$queryterm%'".
                             " OR thread.title LIKE '%$queryterm%'".
                             ' ) ';
@@ -201,8 +201,8 @@ if($search):
 
 endif;
 
-$sortOptions=array('date'=>'ticket.created','ID'=>'ticketID','pri'=>'priority_urgency','name'=>'ticket.name',
-                   'subj'=>'ticket.subject','status'=>'ticket.status','assignee'=>'assigned','staff'=>'staff',
+$sortOptions=array('date'=>'ticket.created','ID'=>'ticketID','pri'=>'priority_urgency','name'=>'name.value',
+                   'subj'=>'subject.value','status'=>'ticket.status','assignee'=>'assigned','staff'=>'staff',
                    'dept'=>'dept_name');
 
 $orderWays=array('DESC'=>'DESC','ASC'=>'ASC');
@@ -252,12 +252,23 @@ $$x=' class="'.strtolower($order).'" ';
 if($_GET['limit'])
     $qstr.='&limit='.urlencode($_GET['limit']);
 
+$dynfields='(SELECT entry.ticket_id, value FROM '.DYNAMIC_FORM_ANSWER_TABLE.' ans '.
+         'LEFT JOIN '.DYNAMIC_FORM_ENTRY_TABLE.' entry ON entry.id=ans.entry_id '.
+         'LEFT JOIN '.DYNAMIC_FORM_FIELD_TABLE.' field ON field.id=ans.field_id '.
+         'WHERE field.name = "%1$s")';
+$subject_sql=sprintf($dynfields, 'subject');
+$name_sql=sprintf($dynfields, 'name');
+$email_sql=sprintf($dynfields, 'email');
+
 $qselect ='SELECT DISTINCT ticket.ticket_id,lock_id,ticketID,ticket.dept_id,ticket.staff_id,ticket.team_id '
-         .' ,ticket.subject,ticket.name,ticket.email,dept_name '
+         .' ,subject.value as subject,name.value as name,email.value as email,dept_name '
          .' ,ticket.status,ticket.source,isoverdue,isanswered,ticket.created,pri.* ';
 
 $qfrom=' FROM '.TICKET_TABLE.' ticket '.
-       ' LEFT JOIN '.DEPT_TABLE.' dept ON ticket.dept_id=dept.dept_id ';
+       ' LEFT JOIN '.DEPT_TABLE.' dept ON ticket.dept_id=dept.dept_id '.
+       ' LEFT JOIN '.$subject_sql.' subject ON subject.ticket_id = ticket.ticket_id '.
+       ' LEFT JOIN '.$name_sql.' name ON name.ticket_id = ticket.ticket_id '.
+       ' LEFT JOIN '.$email_sql.' email ON email.ticket_id = ticket.ticket_id ';
 
 $sjoin='';
 if($search && $deep_search) {

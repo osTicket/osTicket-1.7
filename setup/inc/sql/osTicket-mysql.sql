@@ -143,7 +143,7 @@ CREATE TABLE `%TABLE_PREFIX%config` (
   `allow_attachments` tinyint(1) unsigned NOT NULL default '0',
   `allow_email_attachments` tinyint(1) unsigned NOT NULL default '0',
   `allow_online_attachments` tinyint(1) unsigned NOT NULL default '0',
-  `allow_online_attachments_onlogin` tinyint(1) unsigned NOT NULL default 
+  `allow_online_attachments_onlogin` tinyint(1) unsigned NOT NULL default
     '0',
   `random_ticket_ids` tinyint(1) unsigned NOT NULL default '1',
   `log_level` tinyint(1) unsigned NOT NULL default '2',
@@ -156,13 +156,143 @@ CREATE TABLE `%TABLE_PREFIX%config` (
   `daydatetime_format` varchar(60) NOT NULL default 'D, M j Y g:ia',
   `reply_separator` varchar(60) NOT NULL default '-- do not edit --',
   `admin_email` varchar(125) NOT NULL default '',
-  `helpdesk_title` varchar(255) NOT NULL default 
+  `helpdesk_title` varchar(255) NOT NULL default
     'osTicket Support Ticket System',
   `helpdesk_url` varchar(255) NOT NULL default '',
   `schema_signature` char(32) NOT NULL default '',
   `updated` timestamp NOT NULL default CURRENT_TIMESTAMP,
   PRIMARY KEY  (`id`),
   KEY `isoffline` (`isonline`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `%TABLE_PREFIX%dynamic_formset`;
+CREATE TABLE `%TABLE_PREFIX%dynamic_formset` (
+    `id` int(11) unsigned auto_increment,
+    `title` varchar(255) NOT NULL,
+    `instructions` varchar(512),
+    `notes` text,
+    `created` datetime NOT NULL,
+    `updated` datetime NOT NULL,
+    PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `%TABLE_PREFIX%dynamic_formset_sections`;
+CREATE TABLE `%TABLE_PREFIX%dynamic_formset_sections` (
+    `id` int(11) unsigned NOT NULL auto_increment,
+    `formset_id` int(11) NOT NULL,
+    `section_id` int(11) NOT NULL,
+    `title` varchar(255),
+    `instructions` text,
+    -- Allow more than one form, sorted in this order
+    `sort` int(11) NOT NULL DEFAULT 1,
+    PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `%TABLE_PREFIX%dynamic_form_section`;
+CREATE TABLE `%TABLE_PREFIX%dynamic_form_section` (
+    `id` int(11) unsigned NOT NULL auto_increment,
+    `title` varchar(255) NOT NULL,
+    `instructions` varchar(512),
+    `notes` text,
+    `created` datetime NOT NULL,
+    `updated` datetime NOT NULL,
+    PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `%TABLE_PREFIX%dynamic_form_field`;
+CREATE TABLE `%TABLE_PREFIX%dynamic_form_field` (
+    `id` int(11) unsigned NOT NULL auto_increment,
+    `section_id` int(11) unsigned NOT NULL,
+    `type` varchar(255) NOT NULL DEFAULT 'text',
+    `label` varchar(255) NOT NULL,
+    `required` tinyint(1) NOT NULL DEFAULT 0,
+    `private` tinyint(1) NOT NULL DEFAULT 0,
+    `name` varchar(64) NOT NULL,
+    `configuration` text,
+    `sort` int(11) unsigned NOT NULL,
+    `hint` varchar(512),
+    `created` datetime NOT NULL,
+    `updated` datetime NOT NULL,
+    PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
+
+-- Create a default form to mimic the previous default form of osTicket < 1.7.1
+INSERT INTO `%TABLE_PREFIX%dynamic_form_section` SET
+    `id` = 1, `title` = 'User Information', `created` = NOW(),
+    `updated` = NOW();
+INSERT INTO `%TABLE_PREFIX%dynamic_form_section` SET
+    `id` = 2, `title` = 'Ticket Details', `created` = NOW(),
+    `updated` = NOW();
+
+INSERT INTO `%TABLE_PREFIX%dynamic_formset` SET
+    `id` = 1, `title` = 'Default', `created` = NOW(), `updated` = NOW();
+
+INSERT INTO `%TABLE_PREFIX%dynamic_formset_sections` SET
+    `formset_id` = 1, `section_id` = 1, `sort` = 10;
+INSERT INTO `%TABLE_PREFIX%dynamic_formset_sections` SET
+    `formset_id` = 1, `section_id` = 2, `sort` = 20;
+
+INSERT INTO `%TABLE_PREFIX%dynamic_form_field` SET
+    `section_id` = 1, `type` = 'text', `label` = 'Email Address',
+    `required` = 1, `configuration` = '{"size":40,"length":40,"validator":"email"}',
+    `name` = 'email', `sort` = 10, `created` = NOW(), `updated` = NOW();
+INSERT INTO `%TABLE_PREFIX%dynamic_form_field` SET
+    `section_id` = 1, `type` = 'text', `label` = 'Full Name',
+    `required` = 1, `configuration` = '{"size":40,"length":40}',
+    `name` = 'name', `sort` = 20, `created` = NOW(), `updated` = NOW();
+INSERT INTO `%TABLE_PREFIX%dynamic_form_field` SET
+    `section_id` = 1, `type` = 'phone', `label` = 'Phone Number',
+    `name` = 'phone', `sort` = 30, `created` = NOW(), `updated` = NOW();
+
+INSERT INTO `%TABLE_PREFIX%dynamic_form_field` SET
+    `section_id` = 2, `type` = 'text', `label` = 'Subject',
+    `hint` = 'Issue summary', `required` = 1,
+    `configuration` = '{"size":40,"length":50}',
+    `name` = 'subject', `sort` = 10, `created` = NOW(), `updated` = NOW();
+
+DROP TABLE IF EXISTS `%TABLE_PREFIX%dynamic_form_entry`;
+CREATE TABLE `%TABLE_PREFIX%dynamic_form_entry` (
+    `id` int(11) unsigned NOT NULL auto_increment,
+    `section_id` int(11) unsigned NOT NULL,
+    `ticket_id` int(11) unsigned,
+    `sort` int(11) unsigned NOT NULL DEFAULT 1,
+    `created` datetime NOT NULL,
+    `updated` datetime NOT NULL,
+    PRIMARY KEY (`id`),
+    KEY `ticket_dyn_form_lookup` (`ticket_id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `%TABLE_PREFIX%dynamic_form_entry_values`;
+CREATE TABLE `%TABLE_PREFIX%dynamic_form_entry_values` (
+    -- references dynamic_form_entry.id
+    `entry_id` int(11) unsigned NOT NULL,
+    `field_id` int(11) unsigned NOT NULL,
+    `value` text,
+    PRIMARY KEY (`entry_id`, `field_id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `%TABLE_PREFIX%dynamic_list`;
+CREATE TABLE `%TABLE_PREFIX%dynamic_list` (
+    `id` int(11) unsigned NOT NULL auto_increment,
+    `name` varchar(255) NOT NULL,
+    `name_plural` varchar(255),
+    `sort_mode` enum('Alpha', '-Alpha', 'SortCol') NOT NULL DEFAULT 'Alpha',
+    `notes` text,
+    `created` datetime NOT NULL,
+    `updated` datetime NOT NULL,
+    PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `%TABLE_PREFIX%dynamic_list_items`;
+CREATE TABLE `%TABLE_PREFIX%dynamic_list_items` (
+    `id` int(11) unsigned NOT NULL auto_increment,
+    `list_id` int(11),
+    `value` varchar(255) NOT NULL,
+    -- extra value such as abbreviation
+    `extra` varchar(255),
+    `sort` int(11) NOT NULL DEFAULT 1,
+    PRIMARY KEY (`id`),
+    KEY `dynamic_list_item_lookup` (`list_id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS `%TABLE_PREFIX%department`;
@@ -274,7 +404,7 @@ CREATE TABLE `%TABLE_PREFIX%filter_rule` (
   `updated` datetime NOT NULL,
   PRIMARY KEY  (`id`),
   KEY `filter_id` (`filter_id`),
-  UNIQUE `filter` (`filter_id`, `what`, `how`, `val`) 
+  UNIQUE `filter` (`filter_id`, `what`, `how`, `val`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
 
 INSERT INTO `%TABLE_PREFIX%filter_rule` (
@@ -400,6 +530,7 @@ CREATE TABLE `%TABLE_PREFIX%help_topic` (
   `staff_id` int(10) unsigned NOT NULL default '0',
   `team_id` int(10) unsigned NOT NULL default '0',
   `sla_id` int(10) unsigned NOT NULL default '0',
+  `formset_id` int(11) unsigned NOT NULL default '0',
   `topic` varchar(32) NOT NULL default '',
   `notes` text,
   `created` datetime NOT NULL,
@@ -413,9 +544,11 @@ CREATE TABLE `%TABLE_PREFIX%help_topic` (
   KEY `sla_id` (`sla_id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
 
-INSERT INTO `%TABLE_PREFIX%help_topic` (`topic_id`, `isactive`, `ispublic`, `noautoresp`, `priority_id`, `dept_id`, `staff_id`, `team_id`, `sla_id`, `topic`, `notes`) VALUES
-    (1, 1, 1, 0, 2, 1, 0, 0, 1, 'Support', NULL),
-    (2, 1, 1, 0, 3, 1, 0, 0, 0, 'Billing', NULL);
+INSERT INTO `%TABLE_PREFIX%help_topic` (`topic_id`, `isactive`, `ispublic`,
+        `noautoresp`, `priority_id`, `dept_id`, `staff_id`, `team_id`,
+        `sla_id`, `formset_id`, `topic`, `notes`) VALUES
+    (1, 1, 1, 0, 2, 1, 0, 0, 1, 1, 'Support', NULL),
+    (2, 1, 1, 0, 3, 1, 0, 0, 0, 1, 'Billing', NULL);
 
 DROP TABLE IF EXISTS `%TABLE_PREFIX%canned_response`;
 CREATE TABLE `%TABLE_PREFIX%canned_response` (
@@ -570,11 +703,6 @@ CREATE TABLE `%TABLE_PREFIX%ticket` (
   `topic_id` int(10) unsigned NOT NULL default '0',
   `staff_id` int(10) unsigned NOT NULL default '0',
   `team_id` int(10) unsigned NOT NULL default '0',
-  `email` varchar(255) NOT NULL default '',
-  `name` varchar(255) NOT NULL default '',
-  `subject` varchar(255) NOT NULL default '[no subject]',
-  `phone` varchar(16) default NULL,
-  `phone_ext` varchar(8) default NULL,
   `ip_address` varchar(64) NOT NULL default '',
   `status` enum('open','closed') NOT NULL default 'open',
   `source` enum('Web','Email','Phone','API','Other') NOT NULL default
@@ -589,7 +717,6 @@ CREATE TABLE `%TABLE_PREFIX%ticket` (
   `created` datetime NOT NULL,
   `updated` datetime NOT NULL,
   PRIMARY KEY  (`ticket_id`),
-  UNIQUE KEY `email_extid` (`ticketID`,`email`),
   KEY `dept_id` (`dept_id`),
   KEY `staff_id` (`staff_id`),
   KEY `team_id` (`staff_id`),

@@ -193,6 +193,15 @@ class Topic {
         elseif(($tid=self::getIdByName($vars['topic'], $vars['pid'])) && $tid!=$id)
             $errors['topic']='Topic already exists';
 
+        if (!$vars['formset-id'])
+            $errors['formset-id'] = 'You must select a form';
+        else {
+            $group=DynamicFormset::lookup($vars['formset-id']);
+            foreach (array('name', 'email', 'subject') as $f)
+                    if (!$group->hasField($f))
+                        $errors['formset-id']="Form set must define the '$f' field";
+        }
+
         if(!$vars['dept_id'])
             $errors['dept_id']='You must select a department';
             
@@ -207,6 +216,7 @@ class Topic {
             .',dept_id='.db_input($vars['dept_id'])
             .',priority_id='.db_input($vars['priority_id'])
             .',sla_id='.db_input($vars['sla_id'])
+            .',formset_id='.db_input($vars['formset-id'])
             .',isactive='.db_input($vars['isactive'])
             .',ispublic='.db_input($vars['ispublic'])
             .',noautoresp='.db_input(isset($vars['noautoresp'])?1:0)

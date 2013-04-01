@@ -202,7 +202,22 @@ $info=Format::htmlchars(($errors && $_POST)?$_POST:$info);
                     <strong>Disable</strong> new ticket auto-response for this topic (Overwrites Dept. settings).
             </td>
         </tr>
-
+       <tr>
+           <td><strong>Formset</strong>:</td>
+           <td><select name="formset-id">
+               <option value="0">&mdash; Select a Formset &mdash;</option>
+               <?php foreach (DynamicFormset::all() as $group) { ?>
+                   <option value="<?php echo $group->get('id'); ?>"
+                       <?php if ($group->get('id') == $info['formset_id'])
+                            echo 'selected="selected"'; ?>>
+                       <?php echo $group->get('title'); ?>
+                   </option>
+               <?php } ?>
+               </select>
+               <em>Information for tickets associated with this help topic</em>
+               &nbsp;<span class="error">&nbsp;<?php echo $errors['formset-id']; ?></span>
+           </td>
+       </tr>
         <tr>
             <th colspan="2">
                 <em><strong>Admin Notes</strong>: Internal notes about the help topic.&nbsp;</em>

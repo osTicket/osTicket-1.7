@@ -264,6 +264,39 @@ if($ticket->isOverdue())
             </table>
         </td>
     </tr>
+    <tr style="vertical-align:top">
+<?php
+function __notCoreField($a) {
+    return !in_array($a->getField()->get('name'),
+            array('email','subject','name','phone'));
+}
+$idx = 0;
+foreach (DynamicFormEntry::forTicket($ticket->getId()) as $form) {
+    // Skip core fields shown earlier in the ticket view
+    $answers = array_filter($form->getAnswers(), '__notCoreField');
+    if (count($answers) == 0)
+        continue;
+    if ($idx > 0 and $idx % 2 == 0) { ?>
+        </tr><tr>
+    <?php } ?>
+        <td width="50%">
+            <table cellspacing="0" cellpadding="4" width="100%" border="0">
+            <?php foreach($answers as $a) { ?>
+                <tr>
+                    <th width="100"><?php
+    echo $a->getField()->get('label');
+                    ?>:</th>
+                    <td><?php
+    echo $a->toString();
+                    ?></td>
+                </tr>
+                <?php } ?>
+            </table>
+        </td>
+    <?php
+    $idx++;
+    } ?>
+    </tr>
 </table>
 <div class="clear"></div>
 <h2 style="padding:10px 0 5px 0; font-size:11pt;"><?php echo Format::htmlchars($ticket->getSubject()); ?></h2>
