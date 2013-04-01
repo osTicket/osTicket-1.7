@@ -386,7 +386,7 @@ class ApiJsonDataParser extends JsonDataParser {
                         # for the database. Otherwise, assume utf-8
                         list($param,$charset) = explode('=', $extra);
                         if ($param == 'charset' && $charset)
-                            $contents = Formart::utf8encode($contents, $charset);
+                            $contents = Format::utf8encode($contents, $charset);
                     }
                 }
                 unset($value);
