@@ -27,7 +27,7 @@ $info=Format::htmlchars(($errors && $_POST)?$_POST:$info);
  <input type="hidden" name="do" value="<?php echo $action; ?>">
  <input type="hidden" name="a" value="<?php echo Format::htmlchars($_REQUEST['a']); ?>">
  <input type="hidden" name="id" value="<?php echo $info['id']; ?>">
- <h2><?php echo __('Incoming Email Filter');?></h2>
+ <h2>Incoming Email Filter</h2>
  <table class="form_table" width="940" border="0" cellspacing="0" cellpadding="2">
     <thead>
         <tr>
@@ -106,14 +106,14 @@ $info=Format::htmlchars(($errors && $_POST)?$_POST:$info);
         </tr>
         <tr>
             <td colspan=2>
-               <em><?php echo __('Rules Matching Criteria:');?></em>
+               <em>Rules Matching Criteria:</em>
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <input type="radio" name="match_all_rules" value="1" <?php echo $info['match_all_rules']?'checked="checked"':''; ?>><?php echo __('Match All');?>
+                <input type="radio" name="match_all_rules" value="1" <?php echo $info['match_all_rules']?'checked="checked"':''; ?>>Match All
                 &nbsp;&nbsp;&nbsp;
-                <input type="radio" name="match_all_rules" value="0" <?php echo !$info['match_all_rules']?'checked="checked"':''; ?>><?php echo __('Match Any');?>
+                <input type="radio" name="match_all_rules" value="0" <?php echo !$info['match_all_rules']?'checked="checked"':''; ?>>Match Any
                 &nbsp;<span class="error">*&nbsp;</span>
-                <em>(<?php echo __('case-insensitive comparison');?>)</em>
-                
+                <em>(case-insensitive comparison)</em>
+
             </td>
         </tr>
         <?php
@@ -123,7 +123,7 @@ $info=Format::htmlchars(($errors && $_POST)?$_POST:$info);
             <td colspan="2">
                 <div  style="width:700; float:left;">
                     <select name="rule_w<?php echo $i; ?>">
-                        <option value="">&mdash; <?php echo __('Select One');?> &dash;</option>
+                        <option value="">&mdash; Select One &dash;</option>
                         <?php
                         foreach($matches as $k=>$v){
                             $sel=($info["rule_w$i"]==$k)?'selected="selected"':'';
@@ -132,7 +132,7 @@ $info=Format::htmlchars(($errors && $_POST)?$_POST:$info);
                         ?>
                     </select>
                     <select name="rule_h<?php echo $i; ?>">
-                        <option value="0">&mdash; <?php echo __('Select One');?> &dash;</option>
+                        <option value="0">&mdash; Select One &dash;</option>
                         <?php
                         foreach($match_types as $k=>$v){
                             $sel=($info["rule_h$i"]==$k)?'selected="selected"':'';
@@ -143,9 +143,9 @@ $info=Format::htmlchars(($errors && $_POST)?$_POST:$info);
                     <input type="text" size="30" name="rule_v<?php echo $i; ?>" value="<?php echo $info["rule_v$i"]; ?>">
                     &nbsp;<span class="error">&nbsp;<?php echo $errors["rule_$i"]; ?></span>
                 </div>
-                <?php 
+                <?php
                 if($info["rule_w$i"] || $info["rule_h$i"] || $info["rule_v$i"]){ ?>
-                <div style="float:right;text-align:right;padding-right:20px;"><a href="#" class="clearrule">(<?php echo __('clear');?>)</a></div>
+                <div style="float:right;text-align:right;padding-right:20px;"><a href="#" class="clearrule">(clear)</a></div>
                 <?php
                 } ?>
                 <div class="clear"></div>
