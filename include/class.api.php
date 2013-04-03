@@ -122,7 +122,7 @@ class API {
     function save($id, $vars, &$errors) {
 
         if(!$id && (!$vars['ipaddr'] || !Validator::is_ip($vars['ipaddr'])))
-            $errors['ipaddr'] = 'Valid IP required';
+            $errors['ipaddr'] = __('Valid IP required');
         
         if($errors) return false;
 
