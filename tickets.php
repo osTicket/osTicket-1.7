@@ -16,57 +16,57 @@
 **********************************************************************/
 require('secure.inc.php');
 if(!is_object($thisclient) || !$thisclient->isValid()) die('Access denied'); //Double check again.
-require_once(INCLUDE_DIR.'class.ticket.php');
-$ticket=null;
+require_once (INCLUDE_DIR.'class.ticket.php');
+$ticket = null;
 if($_REQUEST['id']) {
-    if(!($ticket=Ticket::lookupByExtId($_REQUEST['id']))) {
-        $errors['err']='Unknown or invalid ticket ID.';
-    }elseif(!$ticket->checkClientAccess($thisclient)) {
-        $errors['err']='Unknown or invalid ticket ID.'; //Using generic message on purpose!
-        $ticket=null;
+    if(!($ticket = Ticket::lookupByExtId($_REQUEST['id']))) {
+        $errors['err'] = 'Unknown or invalid ticket ID.';
+    } elseif(!$ticket->checkClientAccess($thisclient)) {
+        $errors['err'] = 'Unknown or invalid ticket ID.'; //Using generic message on purpose!
+        $ticket = null;
     }
 }
 
 //Process post...depends on $ticket object above.
-if($_POST && is_object($ticket) && $ticket->getId()):
-    $errors=array();
-    switch(strtolower($_POST['a'])){
-    case 'reply':
-        if(!$ticket->checkClientAccess($thisclient)) //double check perm again!
-            $errors['err']='Access Denied. Possibly invalid ticket ID';
+if($_POST && is_object($ticket) && $ticket->getId()) :
+    $errors = array();
+    switch(strtolower($_POST['a'])) {
+        case 'reply' :
+            if(!$ticket->checkClientAccess($thisclient)) //double check perm again!
+                $errors['err'] = 'Access Denied. Possibly invalid ticket ID';
 
-        if(!$_POST['message'])
-            $errors['message']='Message required';
+            if(!$_POST['message'])
+                $errors['message'] = 'Message required';
 
-        if(!$errors) {
-            //Everything checked out...do the magic.
-            $vars = array('message'=>$_POST['message']);
-            if($cfg->allowOnlineAttachments() && $_FILES['attachments'])
-                $vars['files'] = AttachmentFile::format($_FILES['attachments'], true);
+            if(!$errors) {
+                //Everything checked out...do the magic.
+                $vars = array('message' => $_POST['message']);
+                if($cfg->allowOnlineAttachments() && $_FILES['attachments'])
+                    $vars['files'] = AttachmentFile::format($_FILES['attachments'], true);
 
-            if(($msgid=$ticket->postMessage($vars, 'Web'))) {
-                $msg='Message Posted Successfully';
-            } else {
-                $errors['err']='Unable to post the message. Try again';
+                if(($msgid = $ticket->postMessage($vars, 'Web'))) {
+                    $msg = 'Message Posted Successfully';
+                } else {
+                    $errors['err'] = 'Unable to post the message. Try again';
+                }
+
+            } elseif(!$errors['err']) {
+                $errors['err'] = 'Error(s) occurred. Please try again';
             }
-
-        } elseif(!$errors['err']) {
-            $errors['err']='Error(s) occurred. Please try again';
-        }
-        break;
-    default:
-        $errors['err']='Unknown action';
+            break;
+        default :
+            $errors['err'] = 'Unknown action';
     }
     $ticket->reload();
 endif;
 $nav->setActiveNav('tickets');
 if($ticket && $ticket->checkClientAccess($thisclient)) {
-    $inc='view.inc.php';
+    $inc = 'view.inc.php';
 } elseif($cfg->showRelatedTickets() && $thisclient->getNumTickets()) {
-    $inc='tickets.inc.php';
+    $inc = 'tickets.inc.php';
 } else {
     $nav->setActiveNav('new');
-    $inc='open.inc.php';
+    $inc = 'open.inc.php';
 }
 include(CLIENTINC_DIR.'header.inc.php');
 include(CLIENTINC_DIR.$inc);

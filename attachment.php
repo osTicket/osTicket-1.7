@@ -25,8 +25,8 @@ if(!$thisclient
     die('Unknown attachment!');
 
 //Validate session access hash - we want to make sure the link is FRESH! and the user has access to the parent ticket!!
-$vhash=md5($attachment->getFileId().session_id().$file->getHash());
-if(strcasecmp(trim($_GET['h']),$vhash) 
+$vhash = md5($attachment->getFileId().session_id().$file->getHash());
+if(strcasecmp(trim($_GET['h']), $vhash) 
         || !($ticket=$attachment->getTicket()) 
         || !$ticket->checkClientAccess($thisclient)) 
     die('Unknown or invalid attachment');
