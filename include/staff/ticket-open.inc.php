@@ -30,7 +30,9 @@ $info=Format::htmlchars(($errors && $_POST)?$_POST:$info);
             <?php 
             if($cfg->notifyONNewStaffTicket()) { ?>
                &nbsp;&nbsp;&nbsp;
-               <input type="checkbox" name="alertuser" <?php echo (!$errors || $info['alertuser'])? 'checked="checked"': ''; ?>>Send alert to user.
+               <label>
+               	<input type="checkbox" name="alertuser" <?php echo (!$errors || $info['alertuser'])? 'checked="checked"': ''; ?>>Send alert to user.
+               </label>
             <?php 
              } ?>
             </td>
@@ -282,8 +284,10 @@ $info=Format::htmlchars(($errors && $_POST)?$_POST:$info);
                 <tr>
                     <td width="100">Ticket Status:</td>
                     <td>
-                        <input type="checkbox" name="ticket_state" value="closed" <?php echo $info['ticket_state']?'checked="checked"':''; ?>>
-                        <b>Close On Response</b>&nbsp;<em>(Only applicable if response is entered)</em>
+                    	<label>
+                        	<input type="checkbox" name="ticket_state" value="closed" <?php echo $info['ticket_state']?'checked="checked"':''; ?>>
+                        	<b>Close On Response</b>&nbsp;<em>(Only applicable if response is entered)</em>
+                        </label>
                     </td>
                 </tr>
             <?php
