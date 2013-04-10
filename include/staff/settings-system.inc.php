@@ -21,8 +21,12 @@ $gmtime = Misc::gmtime();
         <tr>
             <td width="220" class="required">Helpdesk Status:</td>
             <td>
+            	<label>
                 <input type="radio" name="isonline"  value="1"   <?php echo $config['isonline']?'checked="checked"':''; ?> /><b>Online</b> (Active)
+                </label>
+                <label>
                 <input type="radio" name="isonline"  value="0"   <?php echo !$config['isonline']?'checked="checked"':''; ?> /><b>Offline</b> (Disabled)
+                <label>
                 &nbsp;<font class="error">&nbsp;<?php echo $config['isoffline']?'osTicket offline':''; ?></font>
             </td>
         </tr>
@@ -128,8 +132,10 @@ $gmtime = Misc::gmtime();
         </tr>
         <tr><td>Bind Staff Session to IP:</td>
             <td>
+              <label>
               <input type="checkbox" name="staff_ip_binding" <?php echo $config['staff_ip_binding']?'checked="checked"':''; ?>>
               <em>(binds staff session to originating IP address upon login)</em>
+              <label>
             </td>
         </tr>
         <tr><td>Staff Excessive Logins:</td>
@@ -231,7 +237,9 @@ $gmtime = Misc::gmtime();
         <tr>
             <td width="220">Daylight Saving:</td>
             <td>
+            	<label>
                 <input type="checkbox" name="enable_daylight_saving" <?php echo $config['enable_daylight_saving'] ? 'checked="checked"': ''; ?>>Observe daylight savings
+                <label>
             </td>
         </tr>
     </tbody>

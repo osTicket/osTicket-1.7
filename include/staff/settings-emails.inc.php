@@ -64,17 +64,25 @@ if(!defined('OSTADMININC') || !$thisstaff || !$thisstaff->isAdmin() || !$config)
         <tr><th colspan=2><em><strong>Incoming Emails</strong>: For mail fetcher (polling) to work you must set an external cron job or enable auto-cron polling</em></th>
         <tr>
             <td width="180">Email Polling:</td>
-            <td><input type="checkbox" name="enable_mail_polling" value=1 <?php echo $config['enable_mail_polling']? 'checked="checked"': ''; ?>  > Enable POP/IMAP polling
+            <td>
+            <label>
+            <input type="checkbox" name="enable_mail_polling" value=1 <?php echo $config['enable_mail_polling']? 'checked="checked"': ''; ?>  > Enable POP/IMAP polling
+            </label>
                  &nbsp;&nbsp;
+				 <label>
                  <input type="checkbox" name="enable_auto_cron" <?php echo $config['enable_auto_cron']?'checked="checked"':''; ?>>
-                 Poll on auto-cron <em>(Poll based on staff activity - NOT recommended)</em>
+                 Poll on auto-cron
+                 </label>
+                  <em>(Poll based on staff activity - NOT recommended)</em>
             </td>
         </tr>
         <tr>
             <td width="180">Strip Quoted Reply:</td>
             <td>
+            	<label>
                 <input type="checkbox" name="strip_quoted_reply" <?php echo $config['strip_quoted_reply'] ? 'checked="checked"':''; ?>>
                 <em>(depends on the reply separator tag set below)</em>
+                </label>
                 &nbsp;<font class="error">&nbsp;<?php echo $errors['strip_quoted_reply']; ?></font>
             </td>
         </tr>
