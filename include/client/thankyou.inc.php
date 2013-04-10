@@ -13,7 +13,7 @@ if(!defined('OSTCLIENTINC') || !is_object($ticket)) die('Kwaheri rafiki!');
         You'll need the ticket number along with your email to view status and progress online. 
     </p>
     <p>
-     If you wish to send additional comments or information regarding same issue, please follow the instructions on the email.
+     If you wish to send additional comments or information regarding same issue, please follow the instructions in the email.
     </p>
     <?php } ?>
     <p>Support Team </p>
