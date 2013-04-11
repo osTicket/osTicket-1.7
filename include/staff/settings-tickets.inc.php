@@ -19,10 +19,14 @@ if(!($maxfileuploads=ini_get('max_file_uploads')))
     <tbody>
         <tr><td width="220" class="required">Ticket IDs:</td>
             <td>
+            	<label>
                 <input type="radio" name="random_ticket_ids"  value="0" <?php echo !$config['random_ticket_ids']?'checked="checked"':''; ?> />
                 Sequential
+                </label>
+                <label>
                 <input type="radio" name="random_ticket_ids"  value="1" <?php echo $config['random_ticket_ids']?'checked="checked"':''; ?> />
                 Random  <em>(highly recommended)</em>
+                </label>
             </td>
         </tr>
 
@@ -79,77 +83,100 @@ if(!($maxfileuploads=ini_get('max_file_uploads')))
         <tr>
                     <td width="180">Web Tickets Priority:</td>
                     <td>
+                        <label>
                         <input type="checkbox" name="allow_priority_change" value="1" <?php echo $config['allow_priority_change'] ?'checked="checked"':''; ?>>
                         <em>(Allow user to overwrite/set priority)</em>
+                        </label>
                     </td>
                 </tr>
                 <tr>
                     <td width="180">Emailed Tickets Priority:</td>
                     <td>
+                        <label>
                         <input type="checkbox" name="use_email_priority" value="1" <?php echo $config['use_email_priority'] ?'checked="checked"':''; ?> >
                         <em>(Use email priority when available)</em>
+                        </label>
             </td>
         </tr>
         <tr>
             <td width="180">Show Related Tickets:</td>
             <td>
+                <label>
                 <input type="checkbox" name="show_related_tickets" value="1" <?php echo $config['show_related_tickets'] ?'checked="checked"':''; ?> >
                 <em>(Show all related tickets on user login - otherwise access is restricted to one ticket view per login)</em>
+                </label>
             </td>
         </tr>
         <tr>
             <td width="180">Show Notes Inline:</td>
             <td>
+                <label>
                 <input type="checkbox" name="show_notes_inline" value="1" <?php echo $config['show_notes_inline'] ?'checked="checked"':''; ?> >
-                <em>(Show internal notes  inline)</em>
+                <em>(Show internal notes inline)</em>
+                </label>
               </td>
         </tr>
         <tr><td>Clickable URLs:</td>
             <td>
+              <label>
               <input type="checkbox" name="clickable_urls" <?php echo $config['clickable_urls']?'checked="checked"':''; ?>>
                <em>(converts URLs in ticket thread to clickable links)</em>
+              </label>
             </td>
         </tr>
         <tr>
             <td>Human Verification:</td>
             <td>
+                <label>
                 <input type="checkbox" name="enable_captcha" <?php echo $config['enable_captcha']?'checked="checked"':''; ?>>
-                Enable CAPTCHA on new web tickets.<em>(requires GDLib)</em> &nbsp;<font class="error">&nbsp;<?php echo $errors['enable_captcha']; ?></font><br/>
+                Enable CAPTCHA on new web tickets.<em>(requires GDLib)</em>
+                </label>
+                 &nbsp;<font class="error">&nbsp;<?php echo $errors['enable_captcha']; ?></font><br/>
             </td>
         </tr>
         <tr>
             <td>Reopened Tickets:</td>
             <td>
+                <label>
                 <input type="checkbox" name="auto_assign_reopened_tickets" <?php echo $config['auto_assign_reopened_tickets']?'checked="checked"':''; ?>>
                 Auto-assign reopened tickets to the last available respondent.
+                </label>
             </td>
         </tr>
         <tr>
             <td>Assigned Tickets:</td>
             <td>
+                <label>
                 <input type="checkbox" name="show_assigned_tickets" <?php echo $config['show_assigned_tickets']?'checked="checked"':''; ?>>
                 Show assigned tickets on open queue.
+                </label>
             </td>
         </tr>
         <tr>
             <td>Answered Tickets:</td>
             <td>
+                <label>
                 <input type="checkbox" name="show_answered_tickets" <?php echo $config['show_answered_tickets']?'checked="checked"':''; ?>>
                 Show answered tickets on open queue.
+                </label>
             </td>
         </tr>
         <tr>
             <td>Ticket Activity Log:</td>
             <td>
+                <label>
                 <input type="checkbox" name="log_ticket_activity" <?php echo $config['log_ticket_activity']?'checked="checked"':''; ?>>
                 Log ticket activity as internal notes.
+                </label>
             </td>
         </tr>
         <tr>
             <td>Staff Identity Masking:</td>
             <td>
+                <label>
                 <input type="checkbox" name="hide_staff_name" <?php echo $config['hide_staff_name']?'checked="checked"':''; ?>>
                 Hide staff's name on responses.
+                </label>
             </td>
         </tr>
         <tr>
@@ -160,25 +187,35 @@ if(!($maxfileuploads=ini_get('max_file_uploads')))
         <tr>
             <td width="180">Allow Attachments:</td>
             <td>
+              <label>
               <input type="checkbox" name="allow_attachments" <?php echo $config['allow_attachments']?'checked="checked"':''; ?>><b>Allow Attachments</b>
                 &nbsp; <em>(Global Setting)</em>
+              </label>
                 &nbsp;<font class="error">&nbsp;<?php echo $errors['allow_attachments']; ?></font>
             </td>
         </tr>
         <tr>
             <td width="180">Emailed/API Attachments:</td>
             <td>
+            	<label>
                 <input type="checkbox" name="allow_email_attachments" <?php echo $config['allow_email_attachments']?'checked="checked"':''; ?>> Accept emailed/API attachments.
+                </label>
                     &nbsp;<font class="error">&nbsp;<?php echo $errors['allow_email_attachments']; ?></font>
             </td>
         </tr>
         <tr>
             <td width="180">Online/Web Attachments:</td>
             <td>
+            	<label>
                 <input type="checkbox" name="allow_online_attachments" <?php echo $config['allow_online_attachments']?'checked="checked"':''; ?> >
-                    Allow web upload &nbsp;&nbsp;&nbsp;&nbsp;
+                    Allow web upload
+                    </label>
+                     &nbsp;&nbsp;&nbsp;&nbsp;
+            	<label>
                 <input type="checkbox" name="allow_online_attachments_onlogin" <?php echo $config['allow_online_attachments_onlogin'] ?'checked="checked"':''; ?> >
-                    Limit to authenticated users only. <em>(User must be logged in to upload files)</em>
+                    Limit to authenticated users only.
+                    </label>
+                     <em>(User must be logged in to upload files)</em>
                     <font class="error">&nbsp;<?php echo $errors['allow_online_attachments']; ?></font>
             </td>
         </tr>
@@ -225,7 +262,9 @@ if(!($maxfileuploads=ini_get('max_file_uploads')))
         <tr>
             <td width="180">Ticket Response Files:</td>
             <td>
+            	<label>
                 <input type="checkbox" name="email_attachments" <?php echo $config['email_attachments']?'checked="checked"':''; ?> >Email attachments to the user
+				</label>
             </td>
         </tr>
         <tr>

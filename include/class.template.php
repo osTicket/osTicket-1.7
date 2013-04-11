@@ -256,7 +256,7 @@ class Template {
     function update($vars,&$errors) {
 
         if(!$vars['isactive'] && $this->isInUse())
-            $errors['isactive']='Template in-use can not be disabled!';
+            $errors['isactive']='Template in use cannot be disabled!';
 
         if(!$this->save($this->getId(),$vars,$errors))
             return false;
@@ -302,7 +302,7 @@ class Template {
                         'ticket_notice'=>array('name'=>'New Ticket Notice',
                                                'desc'=>'Notice sent to user, if enabled, on new ticket created by staff on their behalf (e.g phone calls).'),
                         'overlimit_notice'=>array('name'=>'Over Limit Notice',
-                                                  'desc'=>'A one time notice sent, if enabled, when user has reached the maximum allowed open tickets.'),
+                                                  'desc'=>'A one-time notice sent, if enabled, when user has reached the maximum allowed open tickets.'),
                         'ticket_reply'=>array('name'=>'Response/Reply Template',
                                               'desc'=>'Template used on ticket response/reply'),
                         'ticket_alert'=>array('name'=>'New Ticket Alert',
