@@ -21,7 +21,7 @@ $use_php_gettext=true; //Set this to false to disable php_gettext
 
 require_once(INCLUDE_DIR.'locale/lang.php');
 
-if($use_php_gettext==true)
+if($use_php_gettext==true&&function_exists('mb_detect_encoding'))
 {
 	require_once(INCLUDE_DIR.'gettext.inc');
 }
@@ -37,6 +37,10 @@ elseif(strpos($language,'-')!==false)
 {
 	$language=substr($language,0,strpos($language,'-'));
 	$lang_dialect=substr($language,strpos($language,'-'));
+}
+if(!isset($lang_dialect))
+{
+	$lang_dialect=$language;
 }
 
 $tmplangcode=$language.'-'.strtolower($lang_dialect);
@@ -103,7 +107,7 @@ if(extension_loaded('gettext')&&$use_php_gettext==false)
 		function __($text){return _($text);}
 	}
 }
-else if($use_php_gettext==true)
+else if($use_php_gettext==true&&function_exists('mb_detect_encoding'))
 {
 	T_setlocale(LC_ALL, $language);
 	// Set the text domain as 'messages'

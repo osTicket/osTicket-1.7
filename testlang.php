@@ -50,6 +50,10 @@ elseif(strpos($language,'-')!==false)
 	$language=substr($language,0,strpos($language,'-'));
 	$lang_dialect=substr($language,strpos($language,'-'));
 }
+if(!isset($lang_dialect))
+{
+	$lang_dialect=$language;
+}
 $tmplangcode=$language.'-'.strtolower($lang_dialect);
 if(!file_exists('include/locale/'.$tmplangcode)||!is_dir('include/locale/'.$tmplangcode))
 {
@@ -104,4 +108,19 @@ if(file_exists('include/locale/'.$language.'/redirect'))
 }
 
 echo "The following folder will be used to translate your osticket: '".$language."'";
+
+
+$old_error_reporting = error_reporting();
+error_reporting (E_ERROR);
+$f = fopen('include/locale/'.$language.'/LC_MESSAGES/messages.mo', 'r');
+$meta = stream_get_meta_data($f);
+if($meta['mode']==NULL)
+{
+	echo '<br><b>ERROR: The translation file "include/locale/'.$language.'/LC_MESSAGES/messages.mo" isn\'t readable, check permissions.</b><br>';
+}
+else
+{
+	fclose($f);
+}
+error_reporting($old_error_reporting);
 ?>

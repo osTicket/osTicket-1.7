@@ -25,7 +25,27 @@ if(!defined('SETUPINC')) die('Kwaheri!');
                 <li class="<?php echo extension_loaded('mcrypt')?'yes':'no'; ?>">Mcrypt <?php echo __('extension');?></li>
                 <li class="<?php echo extension_loaded('gd')?'yes':'no'; ?>">Gdlib <?php echo __('extension');?></li>
                 <li class="<?php echo extension_loaded('imap')?'yes':'no'; ?>">PHP IMAP <?php echo __('extension');?></li>
-                <li class="<?php echo extension_loaded('gettext')?'yes':'no'; ?>">Gettext <?php echo __('extension');?></li>
+                <li class="<?php if((extension_loaded('gettext')&&$use_php_gettext==false)||(extension_loaded('mbstring')&&$use_php_gettext==true)){echo 'yes';}else{echo 'no';} ?>">Gettext <?php echo __('extension'); if(!extension_loaded('mbstring')&&$use_php_gettext==true){echo '&nbsp;<b>(mbstring extension required)</b>';}?></li>
+                <li class="<?php echo extension_loaded('mbstring')?'yes':'no'; ?>">mbstring <?php echo __('extension');?></li>
+            </ul>
+			<?php
+			if($use_php_gettext==true&&function_exists('mb_detect_encoding'))
+			{
+				$old_error_reporting = error_reporting();
+				error_reporting (E_ERROR);
+				$f = fopen(INCLUDE_DIR.'locale/'.$language.'/LC_MESSAGES/messages.mo', 'r');
+				$meta = stream_get_meta_data($f);
+				if($meta['mode']==NULL)
+				{
+					echo '<b>ERROR: The translation file "include/locale/'.$language.'/LC_MESSAGES/messages.mo" isn\'t readable, check permissions.</b><br>';
+				}
+				else
+				{
+					fclose($f);
+				}
+				error_reporting($old_error_reporting);
+			}
+			?>
             </ul>
             <div id="bar">
                 <form method="post" action="install.php">

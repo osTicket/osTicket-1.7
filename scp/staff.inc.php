@@ -113,6 +113,24 @@ if($ost->isUpgradePending() && !$exempt) {
     $sysnotice.=' <a href="settings.php">'.__('Enable').'</a>.';
 }
 
+if($use_php_gettext==true&&!function_exists('mb_detect_encoding'))
+{
+	$sysnotice='mbstring extension is required to use php_gettext';
+}
+if($use_php_gettext==true&&function_exists('mb_detect_encoding'))
+{
+	$f = fopen(INCLUDE_DIR.'locale/'.$language.'/LC_MESSAGES/messages.mo', 'r');
+	$meta = stream_get_meta_data($f);
+	if($meta['mode']==NULL)
+	{
+		$sysnotice='The translation file "include/locale/'.$language.'/LC_MESSAGES/messages.mo" isn\'t readable, check permissions.';
+	}
+	else
+	{
+		fclose($f);
+	}
+}
+
 $nav = new StaffNav($thisstaff);
 //Check for forced password change.
 if($thisstaff->forcePasswdChange() && !$exempt) {
