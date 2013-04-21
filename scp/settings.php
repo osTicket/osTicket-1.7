@@ -13,22 +13,23 @@
 
     vim: expandtab sw=4 ts=4 sts=4:
 **********************************************************************/
+
 require('admin.inc.php');
 $errors=array();
 $settingOptions=array(
-                'system' => 'System Settings',
-                'tickets' => 'Ticket Settings and Options',
-                'emails' => 'Email Settings',
-                'kb' => 'Knowledgebase Settings',
-                'autoresp' => 'Autoresponder Settings',
-                'alerts' => 'Alerts and Notices Settings');
+                'system' => __('System Settings'),
+                'tickets' => __('Ticket Settings and Options'),
+                'emails' => __('Email Settings'),
+                'kb' => __('Knowledgebase Settings'),
+                'autoresp' => __('Autoresponder Settings'),
+                'alerts' => __('Alerts and Notices Settings'));
 //Handle a POST.
 if($_POST && !$errors) {
     if($cfg && $cfg->updateSettings($_POST,$errors)) {
-        $msg=Format::htmlchars($settingOptions[$_POST['t']]).' Updated Successfully';
+        $msg=sprintf(__('%s updated successfully'),Format::htmlchars($settingOptions[$_POST['t']]));
         $cfg->reload();
     } elseif(!$errors['err']) {
-        $errors['err']='Unable to update settings - correct errors below and try again';
+        $errors['err']=__('Unable to update settings - correct errors below and try again');
     }
 }
 

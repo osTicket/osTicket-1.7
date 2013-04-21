@@ -68,7 +68,7 @@ class Knowledgebase {
         # TODO: Validate current values ($this->yada)
         # Apply hashtable to this -- return error list
         $validation = array(
-            'title' => array('is_string', 'Title is required')
+            'title' => array('is_string', __('Title is required'))
         );
         foreach ($validation as $key=>$details) {
             list($func, $error) = $details;

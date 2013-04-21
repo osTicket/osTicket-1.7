@@ -93,7 +93,7 @@ class Template {
 
     function getMsgTemplate($name) {
         global $ost;
-
+		
         //TODO: Don't preload - do ondemand fetch!
         $tpl=array();
         switch(strtolower($name)) {
@@ -134,7 +134,7 @@ class Template {
                  $tpl=array('subj'=>$this->ht['ticket_overdue_subj'],'body'=>$this->ht['ticket_overdue_body']);
                  break;
             default:
-                 $ost->logWarning('Template Fetch Error', "Unable to fetch '$name' template - id #".$this->getId());
+                 $ost->logWarning(__('Template Fetch Error'), sprintf(__("Unable to fetch '%s' template - id #") . $this->getId(), $name));
                  $tpl=array();
         }
 
@@ -193,13 +193,13 @@ class Template {
     function updateMsgTemplate($vars, &$errors) {
 
         if(!($tpls=Template::message_templates()) || !$tpls[$vars['tpl']])
-            $errors['tpl']='Unknown or invalid template';
+            $errors['tpl']=__('Unknown or invalid template');
 
         if(!$vars['subj'])
-            $errors['subj']='Message subject required';
+            $errors['subj']=__('Message subject required');
 
         if(!$vars['body'])
-            $errors['body']='Message body required';
+            $errors['body']=__('Message body required');
 
 
         if($errors) return false;
@@ -243,7 +243,7 @@ class Template {
                 $sql.=',ticket_overdue_subj='.db_input($vars['subj']).',ticket_overdue_body='.db_input($vars['body']);
                 break;
             default:
-                $errors['tpl']='Unknown or invalid template';
+                $errors['tpl']=__('Unknown or invalid template');
                 return false;
         }
 
@@ -254,9 +254,8 @@ class Template {
     }
 
     function update($vars,&$errors) {
-
         if(!$vars['isactive'] && $this->isInUse())
-            $errors['isactive']='Template in-use can not be disabled!';
+            $errors['isactive']=__('Template in-use can not be disabled!');
 
         if(!$this->save($this->getId(),$vars,$errors))
             return false;
@@ -291,32 +290,31 @@ class Template {
 
     /*** Static functions ***/
     function message_templates(){
-
         //TODO: Make it database driven and dynamic
-        $messages=array('ticket_autoresp'=>array('name'=>'New Ticket Auto-response',
-                                                 'desc'=>'Autoresponse sent to user, if enabled, on new ticket.'),
-                        'ticket_autoreply'=>array('name'=>'New Ticket Auto-reply',
-                                                 'desc'=>'Canned Auto-reply sent to user on new ticket, based on filter matches. Overwrites "normal" auto-response.'),
-                        'msg_autoresp'=>array('name'=>'New Message Auto-response',
-                                              'desc'=>'Confirmation sent to user when a new message is appended to an existing ticket.'),
-                        'ticket_notice'=>array('name'=>'New Ticket Notice',
-                                               'desc'=>'Notice sent to user, if enabled, on new ticket created by staff on their behalf (e.g phone calls).'),
-                        'overlimit_notice'=>array('name'=>'Over Limit Notice',
-                                                  'desc'=>'A one time notice sent, if enabled, when user has reached the maximum allowed open tickets.'),
-                        'ticket_reply'=>array('name'=>'Response/Reply Template',
-                                              'desc'=>'Template used on ticket response/reply'),
-                        'ticket_alert'=>array('name'=>'New Ticket Alert',
-                                              'desc'=>'Alert sent to staff, if enabled, on new ticket.'),
-                        'msg_alert'=>array('name'=>'New Message Alert',
-                                           'desc'=>'Alert sent to staff, if enabled, when user replies to an existing ticket.'),
-                        'note_alert'=>array('name'=>'Internal Note Alert',
-                                            'desc'=>'Alert sent to selected staff, if enabled, on new internal note.'),
-                        'assigned_alert'=>array('name'=>'Ticket Assignment Alert',
-                                                'desc'=>'Alert sent to staff on ticket assignment.'),
-                        'transfer_alert'=>array('name'=>'Ticket Transfer Alert',
-                                                'desc'=>'Alert sent to staff on ticket transfer.'),
-                        'overdue_alert'=>array('name'=>'Overdue Ticket Alert',
-                                               'desc'=>'Alert sent to staff on stale or overdue tickets.')
+        $messages=array('ticket_autoresp'=>array('name'=>__('New Ticket Auto-response'),
+                                                 'desc'=>__('Autoresponse sent to user, if enabled, on new ticket.')),
+                        'ticket_autoreply'=>array('name'=>__('New Ticket Auto-reply'),
+                                                 'desc'=>__('Canned Auto-reply sent to user on new ticket, based on filter matches. Overwrites "normal" auto-response.')),
+                        'msg_autoresp'=>array('name'=>__('New Message Auto-response'),
+                                              'desc'=>__('Confirmation sent to user when a new message is appended to an existing ticket.')),
+                        'ticket_notice'=>array('name'=>__('New Ticket Notice'),
+                                               'desc'=>__('Notice sent to user, if enabled, on new ticket created by staff on their behalf (e.g phone calls).')),
+                        'overlimit_notice'=>array('name'=>__('Over Limit Notice'),
+                                                  'desc'=>__('A one time notice sent, if enabled, when user has reached the maximum allowed open tickets.')),
+                        'ticket_reply'=>array('name'=>__('Response/Reply Template'),
+                                              'desc'=>__('Template used on ticket response/reply')),
+                        'ticket_alert'=>array('name'=>__('New Ticket Alert'),
+                                              'desc'=>__('Alert sent to staff, if enabled, on new ticket.')),
+                        'msg_alert'=>array('name'=>__('New Message Alert'),
+                                           'desc'=>__('Alert sent to staff, if enabled, when user replies to an existing ticket.')),
+                        'note_alert'=>array('name'=>__('Internal Note Alert'),
+                                            'desc'=>__('Alert sent to selected staff, if enabled, on new internal note.')),
+                        'assigned_alert'=>array('name'=>__('Ticket Assignment Alert'),
+                                                'desc'=>__('Alert sent to staff on ticket assignment.')),
+                        'transfer_alert'=>array('name'=>__('Ticket Transfer Alert'),
+                                                'desc'=>__('Alert sent to staff on ticket transfer.')),
+                        'overdue_alert'=>array('name'=>__('Overdue Ticket Alert'),
+                                               'desc'=>__('Alert sent to staff on stale or overdue tickets.'))
                         );
         return $messages;
     }
@@ -346,15 +344,15 @@ class Template {
         $vars['name']=Format::striptags(trim($vars['name']));
 
         if($id && $id!=$vars['id'])
-            $errors['err']='Internal error. Try again';
+            $errors['err']=__('Internal error. Try again');
 
         if(!$vars['name'])
-            $errors['name']='Name required';
+            $errors['name']=__('Name required');
         elseif(($tid=Template::getIdByName($vars['name'])) && $tid!=$id)
-            $errors['name']='Template name already exists';
+            $errors['name']=__('Template name already exists');
 
         if(!$id && (!$vars['tpl_id'] || !($tpl=Template::lookup($vars['tpl_id']))))
-            $errors['tpl_id']='Selection required';
+            $errors['tpl_id']=__('Selection required');
            
         if($errors) return false;
 
@@ -368,7 +366,7 @@ class Template {
             if(db_query($sql))
                 return true;
 
-            $errors['err']='Unable to update the template. Internal error occurred';
+            $errors['err']=__('Unable to update the template. Internal error occurred');
         
         } elseif($tpl && ($info=$tpl->getInfo())) {
 
@@ -403,7 +401,7 @@ class Template {
             if(db_query($sql) && ($id=db_insert_id()))
                 return $id;
             
-            $errors['err']='Unable to create template. Internal error';
+            $errors['err']=__('Unable to create template. Internal error');
         }
         
         return false;

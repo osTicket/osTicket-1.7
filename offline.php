@@ -23,8 +23,8 @@ $nav=null;
 require(CLIENTINC_DIR.'header.inc.php');
 ?>
 <div id="landing_page">
-    <h1>Support Ticket System Offline</h1>
-    <p>Thank you for your interest in contacting us.</p>
-    <p>Our helpdesk is offline at the moment, please check back at a later time.</p>
+    <h1><?php echo __('Support Ticket System Offline');?></h1>
+    <p><?php echo __('Thank you for your interest in contacting us.');?></p>
+    <p><?php echo __('Our helpdesk is offline at the moment, please check back at a later time.');?></p>
 </div>
 <?php require(CLIENTINC_DIR.'footer.inc.php'); ?>

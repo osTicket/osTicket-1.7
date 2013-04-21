@@ -4,18 +4,18 @@ $info=array();
 $qstr='';
 if($dept && $_REQUEST['a']!='add') {
     //Editing Department.
-    $title='Update Department';
+    $title=__('Update Department');
     $action='update';
-    $submit_text='Save Changes';
+    $submit_text=__('Save Changes');
     $info=$dept->getInfo();
     $info['id']=$dept->getId();
     $info['groups'] = $dept->getAllowedGroups();
 
     $qstr.='&id='.$dept->getId();
 } else {
-    $title='Add New Department';
+    $title=__('Add New Department');
     $action='create';
-    $submit_text='Create Dept';
+    $submit_text=__('Create Dept');
     $info['ispublic']=isset($info['ispublic'])?$info['ispublic']:1;
     $info['ticket_auto_response']=isset($info['ticket_auto_response'])?$info['ticket_auto_response']:1;
     $info['message_auto_response']=isset($info['message_auto_response'])?$info['message_auto_response']:1;
@@ -28,20 +28,20 @@ $info=Format::htmlchars(($errors && $_POST)?$_POST:$info);
  <input type="hidden" name="do" value="<?php echo $action; ?>">
  <input type="hidden" name="a" value="<?php echo Format::htmlchars($_REQUEST['a']); ?>">
  <input type="hidden" name="id" value="<?php echo $info['id']; ?>">
- <h2>Department</h2>
+ <h2><?php echo __('Department');?></h2>
  <table class="form_table" width="940" border="0" cellspacing="0" cellpadding="2">
     <thead>
         <tr>
             <th colspan="2">
                 <h4><?php echo $title; ?></h4>
-                <em>Department Information</em>
+                <em><?php echo __('Department Information');?></em>
             </th>
         </tr>
     </thead>
     <tbody>
         <tr>
             <td width="180" class="required">
-                Name:
+                <?php echo __('Name:');?>
             </td>
             <td>
                 <input type="text" size="30" name="name" value="<?php echo $info['name']; ?>">
@@ -50,21 +50,21 @@ $info=Format::htmlchars(($errors && $_POST)?$_POST:$info);
         </tr>
         <tr>
             <td width="180" class="required">
-                Type:
+                <?php echo __('Type:');?>
             </td>
             <td>
-                <input type="radio" name="ispublic" value="1" <?php echo $info['ispublic']?'checked="checked"':''; ?>><strong>Public</strong>
-                <input type="radio" name="ispublic" value="0" <?php echo !$info['ispublic']?'checked="checked"':''; ?>><strong>Private</strong> (Internal)
+                <input type="radio" name="ispublic" value="1" <?php echo $info['ispublic']?'checked="checked"':''; ?>><strong><?php echo __('Public');?></strong>
+                <input type="radio" name="ispublic" value="0" <?php echo !$info['ispublic']?'checked="checked"':''; ?>><strong><?php echo __('Private');?></strong> <?php echo __('(Internal)');?>
                 &nbsp;<span class="error">*&nbsp;</span>
             </td>
         </tr>
         <tr>
             <td width="180" class="required">
-                Email:
+                <?php echo __('Email:');?>
             </td>
             <td>
                 <select name="email_id">
-                    <option value="0">&mdash; Select Department Email &mdash;</option>
+                    <option value="0">&mdash; <?php echo __('Select Department Email');?> &mdash;</option>
                     <?php
                     $sql='SELECT email_id,email,name FROM '.EMAIL_TABLE.' email ORDER by name';
                     if(($res=db_query($sql)) && db_num_rows($res)){
@@ -82,11 +82,11 @@ $info=Format::htmlchars(($errors && $_POST)?$_POST:$info);
         </tr>
         <tr>
             <td width="180" class="required">
-                Template:
+                <?php echo __('Template:');?>
             </td>
             <td>
                 <select name="tpl_id">
-                    <option value="0">&mdash; System default &mdash;</option>
+                    <option value="0">&mdash; <?php echo __('System default');?> &mdash;</option>
                     <?php
                     $sql='SELECT tpl_id,name FROM '.EMAIL_TEMPLATE_TABLE.' tpl WHERE isactive=1 ORDER by name';
                     if(($res=db_query($sql)) && db_num_rows($res)){
@@ -102,11 +102,11 @@ $info=Format::htmlchars(($errors && $_POST)?$_POST:$info);
         </tr>
         <tr>
             <td width="180" class="required">
-                SLA:
+                <?php echo __('SLA:');?>
             </td>
             <td>
                 <select name="sla_id">
-                    <option value="0">&mdash; System default &mdash;</option>
+                    <option value="0">&mdash; <?php echo __('System default');?> &mdash;</option>
                     <?php
                     if($slas=SLA::getSLAs()) {
                         foreach($slas as $id =>$name) {
@@ -123,12 +123,12 @@ $info=Format::htmlchars(($errors && $_POST)?$_POST:$info);
         if($dept && $dept->getNumUsers()){ ?>
         <tr>
             <td width="180" class="required">
-                Manager:
+                <?php echo __('Manager:');?>
             </td>
             <td>
                 <select name="manager_id">
-                    <option value="0">&mdash; None &mdash;</option>
-                    <option value="0" disabled="disabled">Select Department Manager (Optional)</option>
+                    <option value="0">&mdash; <?php echo __('None');?> &mdash;</option>
+                    <option value="0" disabled="disabled"><?php echo __('Select Department Manager (Optional)');?></option>
                     <?php
                     $sql='SELECT staff_id,CONCAT_WS(", ",lastname, firstname) as name '
                         .' FROM '.STAFF_TABLE.' staff '
@@ -149,45 +149,45 @@ $info=Format::htmlchars(($errors && $_POST)?$_POST:$info);
 
         <tr>
             <td width="180">
-                Group Membership:
+                <?php echo __('Group Membership:');?>
             </td>
             <td>
                 <input type="checkbox" name="group_membership" value="0" <?php echo $info['group_membership']?'checked="checked"':''; ?> >
-                Extend membership to groups with access. <i>(Alerts and  notices will include groups)</i>
+                <?php echo __('Extend membership to groups with access.');?> <i>( <?php echo __('Alerts and  notices will include groups');?>)</i>
             </td>
         </tr>
         <tr>
             <th colspan="2">
-                <em><strong>Auto Response Settings</strong>: Overwrite global auto-response settings for tickets routed to the Dept.</em>
+                <em><strong><?php echo __('Auto Response Settings');?></strong>: <?php echo __('Overwrite global auto-response settings for tickets routed to the Dept.');?></em>
             </th>
         </tr>
         <tr>
             <td width="180">
-                New Ticket:
+                <?php echo __('New Ticket:');?>
             </td>
             <td>
                 <input type="checkbox" name="ticket_auto_response" value="0" <?php echo !$info['ticket_auto_response']?'checked="checked"':''; ?> >
                 
-                <strong>Disable</strong> new ticket auto-response for this Dept.
+                <?php echo __('<strong>Disable</strong> new ticket auto-response for this Dept.');?>
             </td>
         </tr>
         <tr>
             <td width="180">
-                New Message:
+                <?php echo __('New Message:');?>
             </td>
             <td>
                 <input type="checkbox" name="message_auto_response" value="0" <?php echo !$info['message_auto_response']?'checked="checked"':''; ?> >
-                    <strong>Disable</strong> new message auto-response for this Dept.
+                    <?php echo __('<strong>Disable</strong> new message auto-response for this Dept.');?>
             </td>
         </tr>
         <tr>
             <td width="180">
-                Auto Response Email:
+                <?php echo __('Auto Response Email:');?>
             </td>
             <td>
                 <select name="autoresp_email_id">
-                    <option value=""  disabled="disabled">Select Outgoing  Email</option>
-                    <option value="0">&mdash; Department Email (Above) &mdash;</option>
+                    <option value=""  disabled="disabled"><?php echo __('Select Outgoing  Email');?></option>
+                    <option value="0">&mdash; <?php echo __('Department Email (Above)');?> &mdash;</option>
                     <?php
                     $sql='SELECT email_id,email,name FROM '.EMAIL_TABLE.' email ORDER by name';
                     if(($res=db_query($sql)) && db_num_rows($res)){
@@ -205,10 +205,10 @@ $info=Format::htmlchars(($errors && $_POST)?$_POST:$info);
         </tr>
         <tr>
             <th colspan="2">
-                <em><strong>Department Access</strong>: Check all groups allowed to access this department.</em>
+                <em><strong><?php echo __('Department Access');?></strong>: <?php echo __('Check all groups allowed to access this department.');?></em>
             </th>
         </tr>
-        <tr><td colspan=2><em>Department manager and primary members will always have access independent of group selection or assignment.</em></td></tr>
+        <tr><td colspan=2><em><?php echo __('Department manager and primary members will always have access independent of group selection or assignment.');?></em></td></tr>
         <?php
          $sql='SELECT group_id, group_name, count(staff.staff_id) as members '
              .' FROM '.GROUP_TABLE.' grp '
@@ -228,20 +228,20 @@ $info=Format::htmlchars(($errors && $_POST)?$_POST:$info);
         ?>
         <tr>
             <th colspan="2">
-                <em><strong>Department Signature</strong>: Optional signature used on outgoing emails. &nbsp;<span class="error">&nbsp;<?php echo $errors['signature']; ?></span></em>
+                <em><strong><?php echo __('Department Signature');?></strong>: <?php echo __('Optional signature used on outgoing emails.');?> &nbsp;<span class="error">&nbsp;<?php echo $errors['signature']; ?></span></em>
             </th>
         </tr>
         <tr>
             <td colspan=2>
                 <textarea name="signature" cols="21" rows="5" style="width: 60%;"><?php echo $info['signature']; ?></textarea>
-                <br><em>Signature is made available as a choice, for public departments, on ticket reply.</em>
+                <br><em><?php echo __('Signature is made available as a choice, for public departments, on ticket reply.');?></em>
             </td>
         </tr>
     </tbody>
 </table>
 <p style="padding-left:225px;">
     <input type="submit" name="submit" value="<?php echo $submit_text; ?>">
-    <input type="reset"  name="reset"  value="Reset">
-    <input type="button" name="cancel" value="Cancel" onclick='window.location.href="departments.php"'>
+    <input type="reset"  name="reset"  value="<?php echo __('Reset');?>">
+    <input type="button" name="cancel" value="<?php echo __('Cancel');?>" onclick='window.location.href="departments.php"'>
 </p>
 </form>
