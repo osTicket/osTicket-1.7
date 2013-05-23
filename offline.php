@@ -19,7 +19,7 @@ if(is_object($ost) && $ost->isSystemOnline()) {
     include('index.php');
     exit;
 }
-$nav=null;
+$nav = null;
 require(CLIENTINC_DIR.'header.inc.php');
 ?>
 <div id="landing_page">

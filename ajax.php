@@ -14,8 +14,8 @@
     vim: expandtab sw=4 ts=4 sts=4:
 **********************************************************************/
 
-function clientLoginPage($msg='Unauthorized') {
-    Http::response(403,'Must login: '.Format::htmlchars($msg));
+function clientLoginPage($msg = 'Unauthorized') {
+    Http::response(403, 'Must login: '.Format::htmlchars($msg));
     exit;
 }
 

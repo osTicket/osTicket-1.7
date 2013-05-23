@@ -44,7 +44,7 @@ require(CLIENTINC_DIR.'header.inc.php');
 </div>
 <div class="clear"></div>
 <?php
-if($cfg && $cfg->isKnowledgebaseEnabled()){
+if($cfg && $cfg->isKnowledgebaseEnabled()) {
     //FIXME: provide ability to feature or select random FAQs ??
 ?>
 <p>Be sure to browse our <a href="kb/index.php">Frequently Asked Questions (FAQs)</a>, before opening a ticket.</p>

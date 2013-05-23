@@ -15,19 +15,18 @@
 **********************************************************************/
 require_once('client.inc.php');
 if(!defined('INCLUDE_DIR')) die('Fatal Error');
-define('CLIENTINC_DIR',INCLUDE_DIR.'client/');
-define('OSTCLIENTINC',TRUE); //make includes happy
+define('CLIENTINC_DIR', INCLUDE_DIR.'client/');
+define('OSTCLIENTINC', TRUE); //make includes happy
 
 require_once(INCLUDE_DIR.'class.client.php');
 require_once(INCLUDE_DIR.'class.ticket.php');
-
 if($_POST) {
 
-    if(($user=Client::login(trim($_POST['lticket']), trim($_POST['lemail']), null, $errors))) {
+    if(($user = Client::login(trim($_POST['lticket']), trim($_POST['lemail']), null, $errors))) {
         //XXX: Ticket owner is assumed.
         @header('Location: tickets.php?id='.$user->getTicketID());
         require_once('tickets.php'); //Just in case of 'header already sent' error.
-        exit;
+        exit ;
     } elseif(!$errors['err']) {
         $errors['err'] = 'Authentication error - try again!';
     }

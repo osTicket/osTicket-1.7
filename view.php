@@ -27,7 +27,7 @@ if(!$thisclient || !$thisclient->isValid()) {
 
     //XXX: For now we're assuming the user is the ticket owner
     // (multi-view based on auth token will come later).
-    if($user && $user->getTicketID()==trim($_GET['t']))
+    if($user && $user->getTicketID() == trim($_GET['t']))
         @header('Location: tickets.php?id='.$user->getTicketID());
 }
 
