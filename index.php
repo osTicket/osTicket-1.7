@@ -19,26 +19,26 @@ require(CLIENTINC_DIR.'header.inc.php');
 ?>
 
 <div id="landing_page">
-    <h1>Welcome to the Support Center</h1>
+    <h1><?php echo __('Welcome to the Support Center');?></h1>
     <p>
-        In order to streamline support requests and better serve you, we utilize a support ticket system. Every support request is assigned a unique ticket number which you can use to track the progress and responses online. For your reference we provide complete archives and history of all your support requests. A valid email address is required to submit a ticket.
+        <?php echo __('In order to streamline support requests and better serve you, we utilize a support ticket system. Every support request is assigned a unique ticket number which you can use to track the progress and responses online. For your reference we provide complete archives and history of all your support requests. A valid email address is required to submit a ticket.');?>
     </p>
 
     <div id="new_ticket">
-        <h3>Open A New Ticket</h3>
+        <h3><?php echo __('Open A New Ticket');?></h3>
         <br>
-        <div>Please provide as much detail as possible so we can best assist you. To update a previously submitted ticket, please login.</div>
+        <div><?php echo __('Please provide as much detail as possible so we can best assist you. To update a previously submitted ticket, please login.');?></div>
         <p>
-            <a href="open.php" class="green button">Open a New Ticket</a>
+            <a href="open.php" class="green button"><?php echo __('Open a New Ticket');?></a>
         </p>
     </div>
 
     <div id="check_status">
-        <h3>Check Ticket Status</h3>
+        <h3><?php echo __('Check Ticket Status');?></h3>
         <br>
-        <div>We provide archives and history of all your current and past support requests complete with responses.</div>
+        <div><?php echo __('We provide archives and history of all your current and past support requests complete with responses.');?></div>
         <p>
-            <a href="view.php" class="blue button">Check Ticket Status</a>
+            <a href="view.php" class="blue button"><?php echo __('Check Ticket Status');?></a>
         </p>
     </div>
 </div>
@@ -47,7 +47,7 @@ require(CLIENTINC_DIR.'header.inc.php');
 if($cfg && $cfg->isKnowledgebaseEnabled()){
     //FIXME: provide ability to feature or select random FAQs ??
 ?>
-<p>Be sure to browse our <a href="kb/index.php">Frequently Asked Questions (FAQs)</a>, before opening a ticket.</p>
+<p><?php echo __('Be sure to browse our');?> <a href="kb/index.php"><?php echo __('Frequently Asked Questions (FAQs)');?></a><?php echo __(', before opening a ticket.');?></p>
 </div>
 <?php
 } ?>

@@ -6,14 +6,14 @@ $tpl=$msgtemplates[$info['tpl']];
 $info=array_merge($template->getMsgTemplate($info['tpl']),$info);
 
 ?>
-<h2>Email Template Message - <span><?php echo $template->getName(); ?></span></h2>
+<h2><?php echo __('Email Template Message');?> - <span><?php echo $template->getName(); ?></span></h2>
 <div style="padding-top:10px;padding-bottom:5px;">
     <form method="get" action="templates.php">
     <input type="hidden" name="id" value="<?php echo $template->getId(); ?>">
     <input type="hidden" name="a" value="manage">
-    Message Template:
+    <?php echo __('Message Template');?>:
     <select id="tpl_options" name="tpl" style="width:300px;">
-        <option value="">&mdash; Select Setting Group &mdash;</option>
+        <option value="">&mdash; <?php echo __('Select Setting Group');?> &mdash;</option>
         <?php
         foreach($msgtemplates as $k=>$v) {
             $sel=($info['tpl']==$k)?'selected="selected"':'';
@@ -21,7 +21,7 @@ $info=array_merge($template->getMsgTemplate($info['tpl']),$info);
         }
         ?>
     </select>
-    <input type="submit" value="Go">
+    <input type="submit" value="<?php echo __('Go');?>">
     &nbsp;&nbsp;&nbsp;<font color="red"><?php echo $errors['tpl']; ?></font>
     </form>
 </div>
@@ -37,28 +37,28 @@ $info=array_merge($template->getMsgTemplate($info['tpl']),$info);
      <tr>
         <th colspan="2">
             <h4><?php echo Format::htmlchars($tpl['desc']); ?></h4>
-            <em>Subject and body required.  <a class="tip" href="ticket_variables.txt">Supported Variables</a>.</em>
+            <em><?php echo __('Subject and body required.');?>  <a class="tip" href="ticket_variables.txt"><?php echo __('Supported Variables');?></a>.</em>
         </th>
      </tr>
     </thead>
     <tbody>
         <tr>
             <td colspan=2>
-                <strong>Message Subject:</strong> <em>Email message subject</em> <font class="error">*&nbsp;<?php echo $errors['subj']; ?></font><br>
+                <strong><?php echo __('Message Subject');?>:</strong> <em><?php echo __('Email message subject');?></em> <font class="error">*&nbsp;<?php echo $errors['subj']; ?></font><br>
                 <input type="text" name="subj" size="60" value="<?php echo $info['subj']; ?>" >
             </td>
         </tr>
         <tr>
             <td colspan="2">
-                <strong>Message Body:</strong> <em>Email message body.</em> <font class="error">*&nbsp;<?php echo $errors['body']; ?></font><br>
+                <strong><?php echo __('Message Body');?>:</strong> <em><?php echo __('Email message body.');?></em> <font class="error">*&nbsp;<?php echo $errors['body']; ?></font><br>
                 <textarea name="body" cols="21" rows="16" style="width:98%;" wrap="soft" ><?php echo $info['body']; ?></textarea>
             </td>
         </tr>
     </tbody>
 </table>
 <p style="padding-left:210px;">
-    <input class="button" type="submit" name="submit" value="Save Changes">
-    <input class="button" type="reset" name="reset" value="Reset Changes">
-    <input class="button" type="button" name="cancel" value="Cancel Changes" onclick='window.location.href="templates.php?id=<?php echo $template->getId(); ?>"'>
+    <input class="button" type="submit" name="submit" value="<?php echo __('Save Changes');?>">
+    <input class="button" type="reset" name="reset" value="<?php echo __('Reset Changes');?>">
+    <input class="button" type="button" name="cancel" value="<?php echo __('Cancel Changes');?>" onclick='window.location.href="templates.php?id=<?php echo $template->getId(); ?>"'>
 </p>
 </form>

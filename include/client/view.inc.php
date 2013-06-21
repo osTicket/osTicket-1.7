@@ -13,7 +13,7 @@ if(!$dept || !$dept->isPublic())
     <tr>
         <td colspan="2" width="100%">
             <h1>
-                Ticket #<?php echo $ticket->getExtId(); ?> &nbsp;
+                <?php echo __('Ticket #').$ticket->getExtId(); ?> &nbsp;
                 <a href="view.php?id=<?php echo $ticket->getExtId(); ?>" title="Reload"><span class="Icon refresh">&nbsp;</span></a>
             </h1>
         </td>
@@ -22,15 +22,29 @@ if(!$dept || !$dept->isPublic())
         <td width="50%">   
             <table class="infoTable" cellspacing="1" cellpadding="3" width="100%" border="0">
                 <tr>
-                    <th width="100">Ticket Status:</th>
-                    <td><?php echo ucfirst($ticket->getStatus()); ?></td>
+                    <th width="100"><?php echo __('Ticket Status');?>:</th>
+					<?php
+					
+						$ticketstatus='';
+						switch($ticket->getStatus()) {
+							case 'open':
+								$ticketstatus=__('open');
+								break;
+							case 'closed':
+								$ticketstatus=__('closed');
+								break;
+							default:
+								$ticketstatus=__('open');
+						}
+					?>
+                    <td><?php echo ucfirst($ticketstatus); ?></td>
                 </tr>
                 <tr>
-                    <th>Department:</th>
+                    <th><?php echo __('Department');?>:</th>
                     <td><?php echo Format::htmlchars($dept->getName()); ?></td>
                 </tr>
                 <tr>
-                    <th>Create Date:</th>
+                    <th><?php echo __('Create Date');?>:</th>
                     <td><?php echo Format::db_datetime($ticket->getCreateDate()); ?></td>
                 </tr>
            </table>
@@ -38,15 +52,15 @@ if(!$dept || !$dept->isPublic())
        <td width="50%">
            <table class="infoTable" cellspacing="1" cellpadding="3" width="100%" border="0">
                <tr>
-                   <th width="100">Name:</th>
+                   <th width="100"><?php echo __('Name');?>:</th>
                    <td><?php echo ucfirst($ticket->getName()); ?></td>
                </tr>
                <tr>
-                   <th width="100">Email:</th>
+                   <th width="100"><?php echo __('Email');?>:</th>
                    <td><?php echo Format::htmlchars($ticket->getEmail()); ?></td>
                </tr>
                <tr>
-                   <th>Phone:</th>
+                   <th><?php echo __('Phone');?>:</th>
                    <td><?php echo $ticket->getPhoneNumber(); ?></td>
                </tr>
             </table>
@@ -54,9 +68,9 @@ if(!$dept || !$dept->isPublic())
     </tr>
 </table>
 <br>
-<h2>Subject:<?php echo Format::htmlchars($ticket->getSubject()); ?></h2>
+<h2><?php echo __('Subject');?>: <?php echo Format::htmlchars($ticket->getSubject()); ?></h2>
 <br>
-<span class="Icon thread">Ticket Thread</span>
+<span class="Icon thread"><?php echo __('Ticket Thread');?></span>
 <div id="ticketThread">
 <?php    
 if($ticket->getThreadCount() && ($thread=$ticket->getClientThread())) {
@@ -94,20 +108,20 @@ if($ticket->getThreadCount() && ($thread=$ticket->getClientThread())) {
 <?php } ?>
 <form id="reply" action="tickets.php?id=<?php echo $ticket->getExtId(); ?>#reply" name="reply" method="post" enctype="multipart/form-data">
     <?php csrf_token(); ?>
-    <h2>Post a Reply</h2>
+    <h2><?php echo __('Post a Reply');?></h2>
     <input type="hidden" name="id" value="<?php echo $ticket->getExtId(); ?>">
     <input type="hidden" name="a" value="reply">
     <table border="0" cellspacing="0" cellpadding="3" width="800">
         <tr>
             <td width="160">
-                <label>Message:</label>
+                <label><?php echo __('Message');?>:</label>
             </td>
             <td width="640">
                 <?php
                 if($ticket->isClosed()) {
-                    $msg='<b>Ticket will be reopened on message post</b>';
+                    $msg='<b>'.__('Ticket will be reopened on message post').'</b>';
                 } else {
-                    $msg='To best assist you, please be specific and detailed';
+                    $msg=__('To best assist you, please be specific and detailed');
                 }
                 ?>
                 <span id="msg"><em><?php echo $msg; ?> </em></span><font class="error">*&nbsp;<?php echo $errors['message']; ?></font><br/>
@@ -118,7 +132,7 @@ if($ticket->getThreadCount() && ($thread=$ticket->getClientThread())) {
         if($cfg->allowOnlineAttachments()) { ?>
         <tr>
             <td width="160">
-                <label for="attachment">Attachments:</label>
+                <label for="attachment"><?php echo __('Attachments');?>:</label>
             </td>
             <td width="640" id="reply_form_attachments" class="attachments">
                 <div class="uploads">
@@ -132,8 +146,8 @@ if($ticket->getThreadCount() && ($thread=$ticket->getClientThread())) {
         } ?>
     </table>
     <p style="padding-left:165px;">
-        <input type="submit" value="Post Reply">
-        <input type="reset" value="Reset">
-        <input type="button" value="Cancel" onClick="history.go(-1)">
+        <input type="submit" value="<?php echo __('Post Reply');?>">
+        <input type="reset" value="<?php echo __('Reset');?>">
+        <input type="button" value="<?php echo __('Cancel');?>" onClick="history.go(-1)">
     </p>
 </form>

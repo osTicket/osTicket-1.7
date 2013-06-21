@@ -72,4 +72,5 @@ if (extension_loaded('mysqli'))
 else
     require(INCLUDE_DIR.'mysql.php');
 
+require_once(INCLUDE_DIR.'gettext-conf.php');
 ?>
