@@ -16,6 +16,7 @@
 require('client.inc.php');
 define('SOURCE','Web'); //Ticket source.
 $inc='open.inc.php';    //default include.
+
 $errors=array();
 if($_POST):
     $vars = $_POST;
@@ -25,9 +26,9 @@ if($_POST):
         $vars['email']=$thisclient->getEmail();
     } elseif($cfg->isCaptchaEnabled()) {
         if(!$_POST['captcha'])
-            $errors['captcha']='Enter text shown on the image';
+            $errors['captcha']=__('Enter text shown on the image');
         elseif(strcmp($_SESSION['captcha'],md5($_POST['captcha'])))
-            $errors['captcha']='Invalid - try again!';
+            $errors['captcha']=__('Invalid - try again!');
     }
 
     if(!$errors && $cfg->allowOnlineAttachments() && $_FILES['attachments'])
@@ -35,7 +36,7 @@ if($_POST):
 
     //Ticket::create...checks for errors..
     if(($ticket=Ticket::create($vars, $errors, SOURCE))){
-        $msg='Support ticket request created';
+        $msg=__('Support ticket request created');
         //Logged in...simply view the newly created ticket.
         if($thisclient && $thisclient->isValid()) {
             if(!$cfg->showRelatedTickets())
@@ -47,7 +48,7 @@ if($_POST):
         //Thank the user and promise speedy resolution!
         $inc='thankyou.inc.php';
     }else{
-        $errors['err']=$errors['err']?$errors['err']:'Unable to create a ticket. Please correct errors below and try again!';
+        $errors['err']=$errors['err']?$errors['err']:__('Unable to create a ticket. Please correct errors below and try again!');
     }
 endif;
 

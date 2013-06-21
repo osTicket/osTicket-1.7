@@ -33,8 +33,8 @@ class Format {
     function file_name($filename) {
         return preg_replace('/\s+/', '_', $filename);
     }
-
-    /* encode text into desired encoding - taking into accout charset when available. */
+	
+	/* encode text into desired encoding - taking into accout charset when available. */
     function encode($text, $charset=null, $encoding='utf-8') {
 
         //Try auto-detecting charset/encoding
@@ -204,7 +204,6 @@ class Format {
                     sprintf('return "<a href=\"l.php?url=".urlencode("http://".$matches[2])."&auth=%s\" target=\"_blank\">".$matches[2]."</a>";',
                         $token)),
                 $text);
-
         $text=preg_replace("/(^|[ \\n\\r\\t])([_\.0-9a-z-]+@([0-9a-z][0-9a-z-]+\.)+[a-z]{2,4})/",
             '\\1<a href="mailto:\\2" target="_blank">\\2</a>', $text);
 

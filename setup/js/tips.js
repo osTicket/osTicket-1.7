@@ -18,7 +18,7 @@ jQuery(function($) {
 
             var tip_arrow = $('<img>').attr('src', './images/tip_arrow.png').addClass('tip_arrow');
             var tip_box = $('<div>').addClass('tip_box');
-            var tip_content = $('<div>').addClass('tip_content').load('tips.html '+elem.attr('href'), function() {
+            var tip_content = $('<div>').addClass('tip_content').load('tips.php '+elem.attr('href'), function() {
                 tip_content.prepend('<a href="#" class="tip_close">x</a>');
             });
 

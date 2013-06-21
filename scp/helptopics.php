@@ -18,30 +18,30 @@ include_once(INCLUDE_DIR.'class.topic.php');
 
 $topic=null;
 if($_REQUEST['id'] && !($topic=Topic::lookup($_REQUEST['id'])))
-    $errors['err']='Unknown or invalid help topic ID.';
+    $errors['err']=__('Unknown or invalid help topic ID.');
 
 if($_POST){
     switch(strtolower($_POST['do'])){
         case 'update':
             if(!$topic){
-                $errors['err']='Unknown or invalid help topic.';
+                $errors['err']=__('Unknown or invalid help topic.');
             }elseif($topic->update($_POST,$errors)){
-                $msg='Help topic updated successfully';
+                $msg=__('Help topic updated successfully');
             }elseif(!$errors['err']){
-                $errors['err']='Error updating help topic. Try again!';
+                $errors['err']=__('Error updating help topic. Try again!');
             }
             break;
         case 'create':
             if(($id=Topic::create($_POST,$errors))){
-                $msg='Help topic added successfully';
+                $msg=__('Help topic added successfully');
                 $_REQUEST['a']=null;
             }elseif(!$errors['err']){
-                $errors['err']='Unable to add help topic. Correct error(s) below and try again.';
+                $errors['err']=__('Unable to add help topic. Correct error(s) below and try again.');
             }
             break;
         case 'mass_process':
             if(!$_POST['ids'] || !is_array($_POST['ids']) || !count($_POST['ids'])) {
-                $errors['err'] = 'You must select at least one help topic';
+                $errors['err'] = __('You must select at least one help topic');
             } else {
                 $count=count($_POST['ids']);
 
@@ -52,11 +52,11 @@ if($_POST){
                     
                         if(db_query($sql) && ($num=db_affected_rows())) {
                             if($num==$count)
-                                $msg = 'Selected help topics enabled';
+                                $msg = __('Selected help topics enabled');
                             else
-                                $warn = "$num of $count selected help topics enabled";
+                                $warn = sprintf(__('%1$d of %2$d selected help topics enabled'), $num, $count);
                         } else {
-                            $errors['err'] = 'Unable to enable selected help topics.';
+                            $errors['err'] = __('Unable to enable selected help topics.');
                         }
                         break;
                     case 'disable':
@@ -64,11 +64,11 @@ if($_POST){
                             .' WHERE topic_id IN ('.implode(',', db_input($_POST['ids'])).')';
                         if(db_query($sql) && ($num=db_affected_rows())) {
                             if($num==$count)
-                                $msg = 'Selected help topics disabled';
+                                $msg = __('Selected help topics disabled');
                             else
-                                $warn = "$num of $count selected help topics disabled";
+                                $warn = sprintf(__('%1$d of %2$d selected help topics disabled'), $num, $count);
                         } else {
-                            $errors['err'] ='Unable to disable selected help topic(s)';
+                            $errors['err'] =__('Unable to disable selected help topic(s)');
                         }
                         break;
                     case 'delete':
@@ -79,20 +79,20 @@ if($_POST){
                         }
 
                         if($i && $i==$count)
-                            $msg = 'Selected help topics deleted successfully';
+                            $msg = __('Selected help topics deleted successfully');
                         elseif($i>0)
-                            $warn = "$i of $count selected help topics deleted";
+                            $warn = sprintf(__('%1$d of %2$d selected help topics deleted'), $i, $count);
                         elseif(!$errors['err'])
-                            $errors['err']  = 'Unable to delete selected help topics';
+                            $errors['err']  = __('Unable to delete selected help topics');
 
                         break;
                     default:
-                        $errors['err']='Unknown action - get technical help.';
+                        $errors['err']=__('Unknown action - get technical help.');
                 }
             }
             break;
         default:
-            $errors['err']='Unknown command/action';
+            $errors['err']=__('Unknown command/action');
             break;
     }
 }

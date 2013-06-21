@@ -44,7 +44,7 @@
     if (defined('E_DEPRECATED')) # 5.3.0
         $error_reporting &= ~(E_DEPRECATED | E_USER_DEPRECATED);
     error_reporting($error_reporting); //Respect whatever is set in php.ini (sysadmin knows better??)
-
+	
     #Don't display errors
     ini_set('display_errors', 1);
     ini_set('display_startup_errors', 1);
@@ -127,6 +127,9 @@
         require_once INCLUDE_DIR.'mysqli.php';
     else
         require(INCLUDE_DIR.'mysql.php');
+
+	//Multilanguage Support
+	require_once(INCLUDE_DIR.'gettext-conf.php');
 
     #CURRENT EXECUTING SCRIPT.
     define('THISPAGE', Misc::currentURL());
@@ -213,9 +216,9 @@
     if($ferror) { //Fatal error
         //try alerting admin using email in config file
         $msg=$ferror."\n\n".THISPAGE;
-        Mailer::sendmail(ADMIN_EMAIL, 'osTicket Fatal Error', $msg, sprintf('"osTicket Alerts"<%s>', ADMIN_EMAIL));
+        Mailer::sendmail(ADMIN_EMAIL, __('osTicket Fatal Error'), $msg, sprintf(__('"osTicket Alerts"<%s>'), ADMIN_EMAIL));
         //Display generic error to the user
-        die("<b>Fatal Error:</b> Contact system administrator.");
+        die("<b>".__('Fatal Error:')."</b> ".__('Contact system administrator.'));
         exit;
     }
 

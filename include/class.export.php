@@ -35,15 +35,15 @@ class Export {
     /* static */ function dumpTickets($sql, $how='csv') {
         return self::dumpQuery($sql,
             array(
-                'ticketID' =>       'Ticket Id',
-                'created' =>        'Date',
-                'subject' =>        'Subject',
-                'name' =>           'From',
-                'priority_desc' =>  'Priority',
-                'dept_name' =>      'Department',
-                'helptopic' =>      'Help Topic',
-                'source' =>         'Source',
-                'status' =>         'Current Status'
+                'ticketID' =>       __('Ticket Id'),
+                'created' =>        __('Date'),
+                'subject' =>        __('Subject'),
+                'name' =>           __('From'),
+                'priority_desc' =>  __('Priority'),
+                'dept_name' =>      __('Department'),
+                'helptopic' =>      __('Help Topic'),
+                'source' =>         __('Source'),
+                'status' =>         __('Current Status')
             ),
             $how);
     }
