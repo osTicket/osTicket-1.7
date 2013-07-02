@@ -1,6 +1,6 @@
 /**
  * @version v1.7.1
- * @signature eb8dbba5cb0eecdadded8c5691b899bf
+ * @signature 740428f9986da6ad85f88ec841b57bfe
  *
  *  - Migrates the email template table to two tables, groups and templates.
  *    Templates organized in a separate table by group will allow for a more
@@ -131,7 +131,11 @@ ALTER TABLE  `%TABLE_PREFIX%help_topic`
     ADD  `page_id` INT UNSIGNED NOT NULL DEFAULT  '0' AFTER  `sla_id` ,
     ADD INDEX (  `page_id` );
 
+ALTER TABLE  `%TABLE_PREFIX%file`
+    ADD  `ft` CHAR( 1 ) NOT NULL DEFAULT  'T' AFTER `id`,
+    ADD INDEX (  `ft` );
+
 -- Finished with patch
 UPDATE `%TABLE_PREFIX%config`
-    SET `value` = 'eb8dbba5cb0eecdadded8c5691b899bf'
+    SET `value` = '740428f9986da6ad85f88ec841b57bfe'
 	WHERE `key` = 'schema_signature' AND `namespace` = 'core';
