@@ -28,15 +28,18 @@ $tpl=$msgtemplates[$info['tpl']];
 <h2>Email Template Message - <span><?php echo $name; ?></span></h2>
 <div style="padding-top:10px;padding-bottom:5px;">
     <form method="get" action="templates.php">
-    <input type="hidden" name="id" value="<?php echo $id; ?>">
     <input type="hidden" name="a" value="manage">
     Message Template:
-    <select id="tpl_options" name="tpl" style="width:300px;">
+    <select id="tpl_options" name="id" style="width:300px;">
         <option value="">&mdash; Select Setting Group &mdash;</option>
         <?php
-        foreach($msgtemplates as $k=>$v) {
-            $sel=($selected==$k)?'selected="selected"':'';
-            echo sprintf('<option value="%s" %s>%s</option>',$k,$sel,$v['name']);
+        foreach($template->getGroup()->getTemplates() as $cn=>$t) {
+            $nfo=$t->getDescription();
+            if (!$nfo['name'])
+                continue;
+            $sel=($selected==$cn)?'selected="selected"':'';
+            echo sprintf('<option value="%s" %s>%s</option>',
+                    $t->getId(),$sel,$nfo['name']);
         }
         ?>
     </select>
