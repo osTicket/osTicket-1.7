@@ -15,7 +15,7 @@
 **********************************************************************/
 require('client.inc.php');
 define('SOURCE','Web'); //Ticket source.
-$inc='open.inc.php';    //default include.
+$ticket = null;
 $errors=array();
 if($_POST):
     $vars = $_POST;
@@ -44,8 +44,6 @@ if($_POST):
             session_regenerate_id();
             @header('Location: tickets.php?id='.$ticket->getExtId());
         }
-        //Thank the user and promise speedy resolution!
-        $inc='thankyou.inc.php';
     }else{
         $errors['err']=$errors['err']?$errors['err']:'Unable to create a ticket. Please correct errors below and try again!';
     }
@@ -54,6 +52,15 @@ endif;
 //page
 $nav->setActiveNav('new');
 require(CLIENTINC_DIR.'header.inc.php');
-require(CLIENTINC_DIR.$inc);
+if($ticket
+        && (
+            (($topic = $ticket->getTopic()) && ($page = $topic->getPage()))
+            || ($page = $cfg->getThankYouPage())
+            )) { //Thank the user and promise speedy resolution!
+    //Hide ticket number -  it should only be delivered via email.
+    echo  str_replace($ticket->getNumber(), 'XXXXXX', Format::safe_html($ticket->replaceVars($page->getBody())));
+} else {
+    require(CLIENTINC_DIR.'open.inc.php');
+}
 require(CLIENTINC_DIR.'footer.inc.php');
 ?>
