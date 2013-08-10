@@ -141,6 +141,7 @@ class OsticketConfig extends Config {
     var $defaults = array(
         'allow_pw_reset' =>     true,
         'pw_reset_window' =>    30,
+        'search_phone' =>       true
     );
 
     function OsticketConfig($section=null) {
@@ -719,6 +720,10 @@ class OsticketConfig extends Config {
         return $this->get('upload_dir');
     }
 
+    function getSearchPhone() {
+        return $this->get('search_phone');
+    }
+
     function updateSettings($vars, &$errors) {
 
         if(!$vars || $errors)
@@ -872,6 +877,7 @@ class OsticketConfig extends Config {
             'allow_email_attachments'=>isset($vars['allow_email_attachments'])?1:0,
             'allow_online_attachments'=>isset($vars['allow_online_attachments'])?1:0,
             'allow_online_attachments_onlogin'=>isset($vars['allow_online_attachments_onlogin'])?1:0,
+            'search_phone'=>isset($vars['search_phone'])?1:0
         ));
     }
 

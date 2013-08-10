@@ -31,15 +31,31 @@ class UsersAjaxAPI extends AjaxController {
         $limit = isset($_REQUEST['limit']) ? (int) $_REQUEST['limit']:25;
         $users=array();
 
-        $sql='SELECT DISTINCT email, name '
+        $sql='SELECT DISTINCT email, name, phone, phone_ext '
             .' FROM '.TICKET_TABLE
             .' WHERE email LIKE \'%'.db_input(strtolower($_REQUEST['q']), false).'%\' '
             .' ORDER BY created '
             .' LIMIT '.$limit;
-           
+
+        global $cfg;
+
         if(($res=db_query($sql)) && db_num_rows($res)){
-            while(list($email,$name)=db_fetch_row($res)) {
-                $users[] = array('email'=>$email, 'name'=>$name, 'info'=>"$email - $name");
+
+            while(list($email,$name,$phone,$phone_ext)=db_fetch_row($res)) {
+                $record = array('email'=>$email,
+                    'name'=>$name,
+                    'info'=>"$email - $name"
+                );  
+
+                if($cfg->getSearchPhone()) {
+                    $record = array_merge($record, array(
+                        'phone' =>$phone,
+                        'phone_ext' =>$phone_ext
+                    ));
+                    $record['info'] .= " - $phone $phone_ext";
+                }
+
+                $users[] = $record;
             }                    
         }  
         

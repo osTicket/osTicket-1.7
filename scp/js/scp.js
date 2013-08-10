@@ -331,6 +331,10 @@ $(document).ready(function(){
             var fObj=$('#email.typeahead').closest('form');
             if(obj.name)
                 $('#name', fObj).val(obj.name);
+            if(obj.phone)
+                $('#phone', fObj).val(obj.phone);
+            if(obj.phone_ext)
+                $('#phone_ext', fObj).val(obj.phone_ext);
         },
         property: "email"
     });
