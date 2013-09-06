@@ -149,12 +149,16 @@ class Misc {
         $path = '';
         while (strpos($_SERVER['DOCUMENT_ROOT'], $root) === false) {
             $lastslash = strrpos($root, '/');
-            if ($lastslash === false)
+            if ($lastslash === false) {
                 // Unable to find any commonality between $root and
                 // DOCUMENT_ROOT
                 return './';
+            }
             $path = substr($root, $lastslash) . $path;
             $root = substr($root, 0, $lastslash);
+            if ($root === '') {
+                return './';
+            }
         }
         return $path;
     }
