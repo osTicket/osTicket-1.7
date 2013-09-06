@@ -57,6 +57,19 @@ if(!function_exists('staffLoginPage')) { //Ajax interface can pre-declare the fu
 }
 
 $thisstaff = new StaffSession($_SESSION['_staff']['userID']); //Set staff object.
+
+if (!$thisstaff->isValid() && isset($_SERVER['AUTH_TYPE'])) {
+    $thisstaff = Staff::login($_SERVER['PHP_AUTH_USER'], $_SERVER['PHP_AUTH_PW'], $errors);
+
+    if ($thisstaff !== false) {
+        $thisstaff->session->session_id = session_id();
+        $thisstaff->refreshSession();
+    } else {
+        //The credentials provided via HTTP auth don't match whats in the database. Reset the object back to a "valid" one.
+        $thisstaff = new StaffSession($_SESSION['_staff']['userID']); //Set staff object.
+    }
+}
+
 //1) is the user Logged in for real && is staff.
 if(!$thisstaff->getId() || !$thisstaff->isValid()){
     if (isset($_SESSION['_staff']['auth']['msg'])) {
@@ -71,6 +84,7 @@ if(!$thisstaff->getId() || !$thisstaff->isValid()){
     staffLoginPage($msg);
     exit;
 }
+
 //2) if not super admin..check system status and group status
 if(!$thisstaff->isAdmin()) {
     //Check for disabled staff or group!
