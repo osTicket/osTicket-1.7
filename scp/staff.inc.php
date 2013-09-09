@@ -57,6 +57,55 @@ if(!function_exists('staffLoginPage')) { //Ajax interface can pre-declare the fu
 }
 
 $thisstaff = new StaffSession($_SESSION['_staff']['userID']); //Set staff object.
+
+if (!$thisstaff->isValid() && isset($_SERVER['AUTH_TYPE']) && $ost->getConfig()->allowHttpAuth()) {
+    $username = $_SERVER['PHP_AUTH_USER'];
+    $id = Staff::getIdByUsername($username);
+
+    $isNew = false;
+    if ($id === null || $id === false) {
+        $isNew = true;
+
+        $config = $ost->getConfig();
+        $vars = array(
+            'id' => '',
+            'username' => $username,
+            'passwd1' =>  $_SERVER['PHP_AUTH_PW'],
+            'passwd2' =>  $_SERVER['PHP_AUTH_PW'],
+            'firstname' => 'Change',
+            'lastname' => 'Me',
+            'email' => sprintf('%s@%s', $username, $config->defaultEmailDomain()),
+            'phone' => '',
+            'phone_ext' => '',
+            'mobile' => '',
+            'signature' => '',
+            'isadmin' => '0',
+            'isactive' => '1',
+            'group_id' => $config->defaultGroupId(),
+            'dept_id' => $config->getDefaultDept()->getId(),
+            'timezone_id' => $config->defaultTimezoneId(),
+            'daylight_saving' => '1',
+            'isvisible' => '1',
+            'notes' => 'Auto-created'
+        );
+
+        $id = Staff::create($vars, $errors);
+        if (is_array($errors) || count($errors) > 0) {
+            var_dump($errors);die();
+        }
+    }
+
+    $thisstaff = new StaffSession($id);
+    Staff::_do_login($thisstaff, null);
+    $thisstaff->session->session_id = session_id();
+    $thisstaff->refreshSession();
+
+    if ($isNew) {
+        require(SCP_DIR.'firstlogin.php');
+        exit;
+    }
+}
+
 //1) is the user Logged in for real && is staff.
 if(!$thisstaff->getId() || !$thisstaff->isValid()){
     if (isset($_SESSION['_staff']['auth']['msg'])) {
@@ -71,6 +120,7 @@ if(!$thisstaff->getId() || !$thisstaff->isValid()){
     staffLoginPage($msg);
     exit;
 }
+
 //2) if not super admin..check system status and group status
 if(!$thisstaff->isAdmin()) {
     //Check for disabled staff or group!

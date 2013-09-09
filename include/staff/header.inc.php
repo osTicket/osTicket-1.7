@@ -41,7 +41,7 @@
     ?>
     <div id="header">
         <a href="index.php" id="logo">osTicket - Customer Support System</a>
-        <p id="info">Howdy, <strong><?php echo $thisstaff->getUserName(); ?></strong>
+        <p id="info">Howdy, <strong><?php echo $thisstaff->getName(); ?></strong>
            <?php
             if($thisstaff->isAdmin() && !defined('ADMINPAGE')) { ?>
             | <a href="admin.php">Admin Panel</a>
@@ -49,7 +49,9 @@
             | <a href="index.php">Staff Panel</a>
             <?php } ?>
             | <a href="profile.php">My Preferences</a>
+            <?php if (!isset($_SERVER['AUTH_TYPE'])) { ?>
             | <a href="logout.php?auth=<?php echo $ost->getLinkToken(); ?>">Log Out</a>
+            <?php } ?>
         </p>
     </div>
     <ul id="nav">

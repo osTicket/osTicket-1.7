@@ -117,7 +117,7 @@ $gmtime = Misc::gmtime();
                 <em><b>Authentication Settings</b></em>
             </th>
         </tr>
-        <tr><td>Password Change Policy:</th>
+        <tr><td>Password Change Policy:</td>
             <td>
                 <select name="passwd_reset_period">
                    <option value="0"> &mdash; None &mdash;</option>
@@ -131,14 +131,14 @@ $gmtime = Misc::gmtime();
                 &nbsp;<font class="error">&nbsp;<?php echo $errors['passwd_reset_period']; ?></font>
             </td>
         </tr>
-        <tr><td>Allow Password Resets:</th>
+        <tr><td>Allow Password Resets:</td>
             <td>
               <input type="checkbox" name="allow_pw_reset" <?php echo $config['allow_pw_reset']?'checked="checked"':''; ?>>
               <em>Enables the <u>Forgot my password</u> link on the staff
               control panel</em>
             </td>
         </tr>
-        <tr><td>Password Reset Window:</th>
+        <tr><td>Password Reset Window:</td>
             <td>
               <input type="text" name="pw_reset_window" size="6" value="<?php
                     echo $config['pw_reset_window']; ?>">
@@ -203,6 +203,46 @@ $gmtime = Misc::gmtime();
               <em>(binds staff session to originating IP address upon login)</em>
             </td>
         </tr>
+        <tr>
+            <th colspan="2">
+                <em><b>HTTP Authentication</b>
+            </th>
+        </tr>
+        <tr><td>Enabled:</td>
+            <td>
+                <input type="checkbox" name="allow_http_auth" <?php echo $config['allow_http_auth']?'checked="checked"':''; ?>>
+                <em>Enables HTTP pass-though authentication</em>
+            </td>
+        </tr>
+        <tr><td>Auto Create Users:</td>
+            <td>
+                <input type="checkbox" name="auto_create_users" <?php echo $config['auto_create_users']?'checked="checked"':''; ?>>
+                <em>Automatically creates users in osTicket if they do not exist</em>
+            </td>
+        </tr>
+        <tr><td>Default Group:</td>
+            <td>
+                <select name="default_group_id" id="group_id">
+                    <option value="0">&mdash; Select Group &mdash;</option>
+                    <?php
+                    $sql='SELECT group_id, group_name, group_enabled as isactive FROM '.GROUP_TABLE.' ORDER BY group_name';
+                    if(($res=db_query($sql)) && db_num_rows($res)){
+                        while(list($id,$name,$isactive)=db_fetch_row($res)){
+                            $sel=($config['default_group_id']==$id)?'selected="selected"':'';
+                            echo sprintf('<option value="%d" %s>%s %s</option>',$id,$sel,$name,($isactive?'':' (Disabled)'));
+                        }
+                    }
+                    ?>
+                </select>
+            </td>
+        </tr>
+        <tr><td>Default Email Domain:</td>
+            <td>
+                <input type="text" name="default_email_domain" value="<?php echo $config['default_email_domain']; ?>">
+                &nbsp;<em>example.net</em>
+            </td>
+        </tr>
+
         <tr>
             <th colspan="2">
                 <em><b>Date and Time Options</b>: Please refer to <a href="http://php.net/date" target="_blank">PHP Manual</a> for supported parameters.</em>
