@@ -719,6 +719,62 @@ class OsticketConfig extends Config {
         return $this->get('upload_dir');
     }
 
+    /**
+     * Returns true if HTTP pass-though authentication is enabled, otherwise false.
+     *
+     * Configuration: allow_http_auth
+     *
+     * @return bool
+     */
+    function allowHttpAuth() {
+        return (int)$this->get('allow_http_auth') === 1;
+    }
+
+    /**
+     * Returns true if users that pass through HTTP authentication should be automatically created, otherwise false.
+     *
+     * Configuration: auto_create_users
+     *
+     * @return bool
+     */
+    function autoCreateUsers() {
+        return (int)$this->get('auto_create_users') === 1;
+    }
+
+    /**
+     * Default domain for users when auto-created.
+     *
+     * Configuration: default_email_domain
+     *
+     * @return string
+     */
+    function defaultEmailDomain() {
+        return $this->get('default_email_domain');
+    }
+
+    /**
+     * Default timezone id.
+     *
+     * Configuration: default_timezone_id
+     *
+     * @return int
+     */
+    function defaultTimezoneId() {
+        return $this->get('default_timezone_id');
+    }
+
+
+    /**
+     * Returns the id of the default group automatically created users should use.
+     *
+     * Configuration: default_group_id
+     *
+     * @return int
+     */
+    function defaultGroupId() {
+        return $this->get('default_group_id');
+    }
+
     function updateSettings($vars, &$errors) {
 
         if(!$vars || $errors)
@@ -800,6 +856,10 @@ class OsticketConfig extends Config {
             'daydatetime_format'=>$vars['daydatetime_format'],
             'default_timezone_id'=>$vars['default_timezone_id'],
             'enable_daylight_saving'=>isset($vars['enable_daylight_saving'])?1:0,
+            'allow_http_auth'=>isset($vars['allow_http_auth'])?1:0,
+            'auto_create_users'=>isset($vars['auto_create_users'])?1:0,
+            'default_group_id'=>$vars['default_group_id'],
+            'default_email_domain'=>$vars['default_email_domain']
         ));
     }
 

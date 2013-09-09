@@ -58,15 +58,51 @@ if(!function_exists('staffLoginPage')) { //Ajax interface can pre-declare the fu
 
 $thisstaff = new StaffSession($_SESSION['_staff']['userID']); //Set staff object.
 
-if (!$thisstaff->isValid() && isset($_SERVER['AUTH_TYPE'])) {
-    $thisstaff = Staff::login($_SERVER['PHP_AUTH_USER'], $_SERVER['PHP_AUTH_PW'], $errors);
+if (!$thisstaff->isValid() && isset($_SERVER['AUTH_TYPE']) && $ost->getConfig()->allowHttpAuth()) {
+    $username = $_SERVER['PHP_AUTH_USER'];
+    $id = Staff::getIdByUsername($username);
 
-    if ($thisstaff !== false) {
-        $thisstaff->session->session_id = session_id();
-        $thisstaff->refreshSession();
-    } else {
-        //The credentials provided via HTTP auth don't match whats in the database. Reset the object back to a "valid" one.
-        $thisstaff = new StaffSession($_SESSION['_staff']['userID']); //Set staff object.
+    $isNew = false;
+    if ($id === null || $id === false) {
+        $isNew = true;
+
+        $config = $ost->getConfig();
+        $vars = array(
+            'id' => '',
+            'username' => $username,
+            'passwd1' =>  $_SERVER['PHP_AUTH_PW'],
+            'passwd2' =>  $_SERVER['PHP_AUTH_PW'],
+            'firstname' => 'Change',
+            'lastname' => 'Me',
+            'email' => sprintf('%s@%s', $username, $config->defaultEmailDomain()),
+            'phone' => '',
+            'phone_ext' => '',
+            'mobile' => '',
+            'signature' => '',
+            'isadmin' => '0',
+            'isactive' => '1',
+            'group_id' => $config->defaultGroupId(),
+            'dept_id' => $config->getDefaultDept()->getId(),
+            'timezone_id' => $config->defaultTimezoneId(),
+            'daylight_saving' => '1',
+            'isvisible' => '1',
+            'notes' => 'Auto-created'
+        );
+
+        $id = Staff::create($vars, $errors);
+        if (is_array($errors) || count($errors) > 0) {
+            var_dump($errors);die();
+        }
+    }
+
+    $thisstaff = new StaffSession($id);
+    Staff::_do_login($thisstaff, null);
+    $thisstaff->session->session_id = session_id();
+    $thisstaff->refreshSession();
+
+    if ($isNew) {
+        require(SCP_DIR.'firstlogin.php');
+        exit;
     }
 }
 
