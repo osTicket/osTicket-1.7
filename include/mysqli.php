@@ -1,28 +1,29 @@
 <?php
-/*********************************************************************
-    mysqli.php
 
-    Collection of MySQL helper interface functions.
+/* * *******************************************************************
+  mysqli.php
 
-    Mostly wrappers with error/resource checking.
+  Collection of MySQL helper interface functions.
 
-    Peter Rotich <peter@osticket.com>
-    Jared Hancock <jared@osticket.com>
-    Copyright (c)  2006-2013 osTicket
-    http://www.osticket.com
+  Mostly wrappers with error/resource checking.
 
-    Released under the GNU General Public License WITHOUT ANY WARRANTY.
-    See LICENSE.TXT for details.
+  Peter Rotich <peter@osticket.com>
+  Jared Hancock <jared@osticket.com>
+  Copyright (c)  2006-2013 osTicket
+  http://www.osticket.com
 
-    vim: expandtab sw=4 ts=4 sts=4:
-**********************************************************************/
+  Released under the GNU General Public License WITHOUT ANY WARRANTY.
+  See LICENSE.TXT for details.
+
+  vim: expandtab sw=4 ts=4 sts=4:
+ * ******************************************************************** */
 $__db = null;
 
 function db_connect($host, $user, $passwd, $options = array()) {
     global $__db;
 
     //Assert
-    if(!strlen($user) || !strlen($host))
+    if (!strlen($user) || !strlen($host))
         return NULL;
 
     if (!($__db = mysqli_init()))
@@ -30,22 +31,25 @@ function db_connect($host, $user, $passwd, $options = array()) {
 
     // Setup SSL if enabled
     if (isset($options['ssl']))
-        $__db->ssl_set( # nolint
-                $options['ssl']['key'],
-                $options['ssl']['cert'],
-                $options['ssl']['ca'],
-                null, null);
-    elseif(!$passwd)
+        $__db->ssl_set(# nolint
+                $options['ssl']['key'], $options['ssl']['cert'], $options['ssl']['ca'], null, null);
+    elseif (!$passwd)
         return NULL;
 
     //Connectr
     $start = microtime(true);
-    if(!@$__db->real_connect($host, $user, $passwd)) # nolint
+    $port = 3306;
+    if (strpos($host, ':') !== false) {
+        $_host = explode(':', $host);
+        $host = $_host[0];
+        $port = (int) $_host[1];
+    }
+    if (!@$__db->real_connect($host, $user, $passwd, null, $port)) # nolint
         return NULL;
 
     //Select the database, if any.
-    if(isset($options['db'])) $__db->select_db($options['db']); # nolint
-
+    if (isset($options['db']))
+        $__db->select_db($options['db']);# nolint
     //set desired encoding just in case mysql charset is not UTF-8 - Thanks to FreshMedia
     @$__db->query('SET NAMES "utf8"');                          # nolint
     @$__db->query('SET CHARACTER SET "utf8"');                  # nolint
@@ -66,11 +70,9 @@ function db_close() {
 
 function db_version() {
 
-    $version=0;
-    if(preg_match('/(\d{1,2}\.\d{1,2}\.\d{1,2})/',
-            db_result(db_query('SELECT VERSION()')),
-            $matches))                                      # nolint
-        $version=$matches[1];                               # nolint
+    $version = 0;
+    if (preg_match('/(\d{1,2}\.\d{1,2}\.\d{1,2})/', db_result(db_query('SELECT VERSION()')), $matches))                                      # nolint
+        $version = $matches[1];# nolint
 
     return $version;
 }
@@ -79,39 +81,36 @@ function db_timezone() {
     return db_get_variable('time_zone');
 }
 
-function db_get_variable($variable, $type='session') {
-    $sql =sprintf('SELECT @@%s.%s', $type, $variable);
+function db_get_variable($variable, $type = 'session') {
+    $sql = sprintf('SELECT @@%s.%s', $type, $variable);
     return db_result(db_query($sql));
 }
 
-function db_set_variable($variable, $value, $type='session') {
-    $sql =sprintf('SET %s %s=%s',strtoupper($type), $variable, db_input($value));
+function db_set_variable($variable, $value, $type = 'session') {
+    $sql = sprintf('SET %s %s=%s', strtoupper($type), $variable, db_input($value));
     return db_query($sql);
 }
-
 
 function db_select_database($database) {
     global $__db;
     return ($database && @$__db->select_db($database)); # nolint
 }
 
-function db_create_database($database, $charset='utf8',
-        $collate='utf8_general_ci') {
+function db_create_database($database, $charset = 'utf8', $collate = 'utf8_general_ci') {
     global $__db;
-    return @$__db->query( # nolint
-        sprintf('CREATE DATABASE %s DEFAULT CHARACTER SET %s COLLATE %s',
-            $database, $charset, $collate));
+    return @$__db->query(# nolint
+                    sprintf('CREATE DATABASE %s DEFAULT CHARACTER SET %s COLLATE %s', $database, $charset, $collate));
 }
 
 // execute sql query
-function db_query($query, $logError=true) {
+function db_query($query, $logError = true) {
     global $ost, $__db;
 
     $res = $__db->query($query);
 
-    if(!$res && $logError && $ost) { //error reporting
-        $msg='['.$query.']'."\n\n".db_error();
-        $ost->logDBError('DB Error #'.db_errno(), $msg);
+    if (!$res && $logError && $ost) { //error reporting
+        $msg = '[' . $query . ']' . "\n\n" . db_error();
+        $ost->logDBError('DB Error #' . db_errno(), $msg);
         //echo $msg; #uncomment during debuging or dev.
     }
 
@@ -119,11 +118,10 @@ function db_query($query, $logError=true) {
 }
 
 function db_squery($query) { //smart db query...utilizing args and sprintf
-
-    $args  = func_get_args();
+    $args = func_get_args();
     $query = array_shift($args);
     $query = str_replace("?", "%s", $query);
-    $args  = array_map('db_real_escape', $args);
+    $args = array_map('db_real_escape', $args);
     array_unshift($args, $query);
     $query = call_user_func_array('sprintf', $args);
     return db_query($query);
@@ -133,7 +131,7 @@ function db_count($query) {
     return db_result(db_query($query));
 }
 
-function db_result($res, $row=0) {
+function db_result($res, $row = 0) {
     if (!$res)
         return NULL;
 
@@ -142,7 +140,7 @@ function db_result($res, $row=0) {
     return $value;
 }
 
-function db_fetch_array($res, $mode=MYSQL_ASSOC) {
+function db_fetch_array($res, $mode = MYSQL_ASSOC) {
     return ($res) ? db_output($res->fetch_array($mode)) : NULL; # nolint
 }
 
@@ -154,10 +152,10 @@ function db_fetch_field($res) {
     return ($res) ? $res->fetch_field() : NULL; # nolint
 }
 
-function db_assoc_array($res, $mode=false) {
-    if($res && db_num_rows($res)) {
-        while ($row=db_fetch_array($res, $mode))
-            $result[]=$row;
+function db_assoc_array($res, $mode = false) {
+    if ($res && db_num_rows($res)) {
+        while ($row = db_fetch_array($res, $mode))
+            $result[] = $row;
     }
     return $result;
 }
@@ -190,37 +188,36 @@ function db_free_result($res) {
 
 function db_output($var) {
 
-    if(!function_exists('get_magic_quotes_runtime') || !get_magic_quotes_runtime()) //Sucker is NOT on - thanks.
+    if (!function_exists('get_magic_quotes_runtime') || !get_magic_quotes_runtime()) //Sucker is NOT on - thanks.
         return $var;
 
     if (is_array($var))
         return array_map('db_output', $var);
 
-    return (!is_numeric($var))?stripslashes($var):$var;
-
+    return (!is_numeric($var)) ? stripslashes($var) : $var;
 }
 
 //Do not call this function directly...use db_input
-function db_real_escape($val, $quote=false) {
+function db_real_escape($val, $quote = false) {
     global $__db;
 
     //Magic quotes crap is taken care of in main.inc.php
-    $val=$__db->real_escape_string($val);
+    $val = $__db->real_escape_string($val);
 
-    return ($quote)?"'$val'":$val;
+    return ($quote) ? "'$val'" : $val;
 }
 
-function db_input($var, $quote=true) {
+function db_input($var, $quote = true) {
 
-    if(is_array($var))
+    if (is_array($var))
         return array_map('db_input', $var, array_fill(0, count($var), $quote));
-    elseif($var && preg_match("/^\d+(\.\d+)?$/", $var))
+    elseif ($var && preg_match("/^\d+(\.\d+)?$/", $var))
         return $var;
 
     return db_real_escape($var, $quote);
 }
 
-function db_field_type($res, $col=0) {
+function db_field_type($res, $col = 0) {
     global $__db;
     return $res->fetch_field_direct($col); # nolint
 }
@@ -239,4 +236,5 @@ function db_errno() {
     global $__db;
     return $__db->errno;
 }
+
 ?>
