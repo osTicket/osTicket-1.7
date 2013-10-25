@@ -10,7 +10,7 @@ if(!defined('OSTADMININC') || !$thisstaff || !$thisstaff->isAdmin() || !$config)
         <tr>
             <th colspan="2">
                 <h4>Email Settings</h4>
-                <em>Note that some of the global settings can be overridden at department/email level.</em>
+                <em>Note that some of the global settings can be overwritten at department/email level.</em>
             </th>
         </tr>
     </thead>
@@ -58,7 +58,7 @@ if(!defined('OSTADMININC') || !$thisstaff || !$thisstaff->isAdmin() || !$config)
             <td>
                 <input type="text" size=40 name="admin_email" value="<?php echo $config['admin_email']; ?>">
                     &nbsp;<font class="error">*&nbsp;<?php echo $errors['admin_email']; ?></font>
-                &nbsp;&nbsp;<em>(System administrator's email)</em>
+                &nbsp;&nbsp;<em>(System administrator's email)</em> 
             </td>
         </tr>
         <tr><th colspan=2><em><strong>Incoming Emails</strong>: For mail fetcher (polling) to work you must set an external cron job or enable auto-cron polling</em></th>
@@ -103,6 +103,9 @@ if(!defined('OSTADMININC') || !$thisstaff || !$thisstaff->isAdmin() || !$config)
                  </select>&nbsp;&nbsp;<font class="error">&nbsp;<?php echo $errors['default_smtp_id']; ?></font>
            </td>
        </tr>
+	    <tr><th>HTML Email Template:</th><?php //BSK HTML email template ?>
+        <td><textarea rows="15" name="html_email_template" style="width:600px;"><?=$config['html_email_template']?></textarea><br><i>Will be used for all outgoing emails.<br />Insert %message where you want the message text to be replaced in the template.</i></td>
+        </tr>
     </tbody>
 </table>
 <p style="padding-left:250px;">
