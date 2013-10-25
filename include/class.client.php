@@ -107,11 +107,15 @@ class Client {
     }
 
     function getNumTickets() {
-        return ($stats=$this->getTicketStats())?($stats['open']+$stats['closed']):0;
+        return ($stats=$this->getTicketStats())?($stats['open']+$stats['pending']+$stats['closed']):0;
     }
 
     function getNumOpenTickets() {
         return ($stats=$this->getTicketStats())?$stats['open']:0;
+    }
+
+    function getNumPendingTickets() {
+        return ($stats=$this->getTicketStats())?$stats['pending']:0;
     }
 
     function getNumClosedTickets() {
@@ -167,7 +171,7 @@ class Client {
         if($auto_login && !$auth)
             $errors['login'] = 'Invalid method';
         elseif(!$ticketID || !Validator::is_email($email))
-            $errors['login'] = 'Valid email and ticket number required';
+            $errors['login'] = LDAP::ldapClientActive()?'Valid Windows Username and Password required':'Valid email and ticket number required';
 
         //Bail out on error.
         if($errors) return false;
