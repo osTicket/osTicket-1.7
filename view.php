@@ -16,6 +16,7 @@
     $Id: $
 **********************************************************************/
 require_once('client.inc.php');
+require_once(INCLUDE_DIR.'class.ldap.php');
 
 //If the user is NOT logged in - try auto-login (if params exists).
 if(!$thisclient || !$thisclient->isValid()) {
@@ -29,6 +30,12 @@ if(!$thisclient || !$thisclient->isValid()) {
     // (multi-view based on auth token will come later).
     if($user && $user->getTicketID()==trim($_GET['t']))
         @header('Location: tickets.php?id='.$user->getTicketID());
+		
+	//redirect to login.php for sso
+	if(LDAP::ldapClientActive()&&LDAP::useSSO()&&!$user)
+	{
+        @header('Location: login.php');
+	}
 }
 
 //Simply redirecting to tickets.php until multiview is implemented.
