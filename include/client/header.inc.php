@@ -20,10 +20,7 @@ header("Content-Type: text/html; charset=UTF-8\r\n");
 <body>
     <div id="container">
         <div id="header">
-            <a id="logo" href="<?php echo ROOT_PATH; ?>index.php"
-            title="Support Center"><img src="<?php echo ROOT_PATH; ?>logo.php" border=0 alt="<?php
-                echo $ost->getConfig()->getTitle(); ?>"
-                style="height: 5em"></a>
+            <a id="logo" href="<?php echo ROOT_PATH; ?>index.php" title="Support Center"><img src="<?php echo ASSETS_PATH; ?>images/logo.png" border=0 alt="Support Center"></a>
             <p>
              <?php
              if($thisclient && is_object($thisclient) && $thisclient->isValid()) {
@@ -31,7 +28,16 @@ header("Content-Type: text/html; charset=UTF-8\r\n");
                  ?>
                 <?php
                 if($cfg->showRelatedTickets()) {?>
-                <a href="<?php echo ROOT_PATH; ?>tickets.php">My Tickets <b>(<?php echo $thisclient->getNumTickets(); ?>)</b></a> -
+                <a href="<?php echo ROOT_PATH; ?>tickets.php">My Tickets <b>(
+				<?php 
+				$ldapTempTickets=0;
+				if(LDAP::ldapClientAutofill())
+				{
+					$ldapTempTickets=LDAP::getTemporaryTicketNum($thisclient->getEmail());
+				}
+				echo $thisclient->getNumTickets()-$ldapTempTickets; 
+				?>
+				)</b></a> -
                 <?php
                 } ?>
                 <a href="<?php echo ROOT_PATH; ?>logout.php?auth=<?php echo $ost->getLinkToken(); ?>">Log Out</a>
