@@ -16,31 +16,47 @@
 require('client.inc.php');
 $section = 'home';
 require(CLIENTINC_DIR.'header.inc.php');
+require_once(INCLUDE_DIR.'class.ldap.php');
+/*if(LDAP::ldapActive())
+{
+	if(LDAP::ldapClientForceLogin())
+	{
+		if(!$thisclient)
+		{
+			//XXX: Ticket owner is assumed.
+			@header('Location: login.php');
+			require_once('login.php'); //Just in case of 'header already sent' error.
+			exit;
+		}
+	}
+}
+*/
 ?>
-<div id="landing_page">
-    <?php
-    if($cfg && ($page = $cfg->getLandingPage()))
-        echo $page->getBody();
-    else
-        echo  '<h1>Welcome to the Support Center</h1>';
-    ?>
-    <div id="new_ticket">
-        <h3>Open A New Ticket</h3>
-        <br>
-        <div>Please provide as much detail as possible so we can best assist you. To update a previously submitted ticket, please login.</div>
-        <p>
-            <a href="open.php" class="green button">Open a New Ticket</a>
-        </p>
-    </div>
 
-    <div id="check_status">
-        <h3>Check Ticket Status</h3>
-        <br>
-        <div>We provide archives and history of all your current and past support requests complete with responses.</div>
-        <p>
-            <a href="view.php" class="blue button">Check Ticket Status</a>
-        </p>
-    </div>
+<div id="landing_page">
+    <h1>Welcome to the Support Center</h1>
+    <p>
+        In order to streamline support requests and better serve you, we utilize a support ticket system. Every support request is assigned a unique ticket number which you can use to track the progress and responses online. For your reference we provide complete archives and history of all your support requests. A valid City of Tallmadge Windows Login is required to submit a ticket.
+    </p>
+
+
+	 <div id="new_ticket">
+	<h3><?php echo LDAP::ldapClientActive()?'Open A New Ticket':'Open A New Ticket';?></h3>
+	<br>
+	<div>Please provide as much detail as possible so we can best assist you. To update a previously submitted ticket, please login.</div>
+	<p>
+	<a href="open.php" class="green button"><?php echo LDAP::ldapClientActive()?'Open a New Ticket':'Open a New Ticket';?></a>
+	</p>
+	</div>
+
+	<div id="check_status">
+	<h3><?php echo LDAP::ldapClientActive()?'Log In':'Check Ticket Status';?></h3>
+	<br>
+	<div>We provide archives and history of all your current and past support requests complete with responses.</div>
+	<p>
+	<a href="view.php" class="blue button"><?php echo LDAP::ldapClientActive()?'Log In':'Check Ticket Status';?></a>
+	</p>
+	</div>
 </div>
 <div class="clear"></div>
 <?php
@@ -48,7 +64,11 @@ if($cfg && $cfg->isKnowledgebaseEnabled()){
     //FIXME: provide ability to feature or select random FAQs ??
 ?>
 <p>Be sure to browse our <a href="kb/index.php">Frequently Asked Questions (FAQs)</a>, before opening a ticket.</p>
-</div>
+
+
 <?php
 } ?>
+<? include(CLIENTINC_DIR.'display_open_topics.inc.php'); ?>
+
+</div>
 <?php require(CLIENTINC_DIR.'footer.inc.php'); ?>
