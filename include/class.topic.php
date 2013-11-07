@@ -13,15 +13,14 @@
 
     vim: expandtab sw=4 ts=4 sts=4:
 **********************************************************************/
+require_once(INCLUDE_DIR.'languages/language_control/languages_processor.php');
 
 class Topic {
     var $id;
-
+ 
     var $ht;
-
     var $parent;
-    var $page;
-
+    
     function Topic($id) {
         $this->id=0;
         $this->load($id);
@@ -42,14 +41,11 @@ class Topic {
             return false;
 
         $this->ht = db_fetch_array($res);
-        $this->id = $this->ht['topic_id'];
-
-        $this->page = null;
-
-
+        $this->id=$this->ht['topic_id'];
+    
         return true;
     }
-
+  
     function reload() {
         return $this->load();
     }
@@ -57,7 +53,7 @@ class Topic {
     function asVar() {
         return $this->getName();
     }
-
+    
     function getId() {
         return $this->id;
     }
@@ -76,7 +72,7 @@ class Topic {
     function getName() {
         return $this->ht['name'];
     }
-
+    
     function getDeptId() {
         return $this->ht['dept_id'];
     }
@@ -96,18 +92,7 @@ class Topic {
     function getTeamId() {
         return $this->ht['team_id'];
     }
-
-    function getPageId() {
-        return $this->ht['page_id'];
-    }
-
-    function getPage() {
-        if(!$this->page && $this->getPageId())
-            $this->page = Page::lookup($this->getPageId());
-
-        return $this->page;
-    }
-
+    
     function autoRespond() {
         return (!$this->ht['noautoresp']);
     }
@@ -153,7 +138,7 @@ class Topic {
         return $num;
     }
     /*** Static functions ***/
-    function create($vars, &$errors) {
+    function create($vars,&$errors) { 
         return self::save(0, $vars, $errors);
     }
 
@@ -200,21 +185,21 @@ class Topic {
         $vars['topic']=Format::striptags(trim($vars['topic']));
 
         if($id && $id!=$vars['id'])
-            $errors['err']='Internal error. Try again';
+            $errors['err']=lang('internal_error_try');
 
         if(!$vars['topic'])
-            $errors['topic']='Help topic required';
+            $errors['topic']=lang('help_topic_req');
         elseif(strlen($vars['topic'])<5)
-            $errors['topic']='Topic is too short. 5 chars minimum';
+            $errors['topic']=lang('topic_too_short');
         elseif(($tid=self::getIdByName($vars['topic'], $vars['pid'])) && $tid!=$id)
-            $errors['topic']='Topic already exists';
+            $errors['topic']=lang('topic_exist');
 
         if(!$vars['dept_id'])
-            $errors['dept_id']='You must select a department';
-
+            $errors['dept_id']=lang('select_department');
+            
         if(!$vars['priority_id'])
-            $errors['priority_id']='You must select a priority';
-
+            $errors['priority_id']=lang('select_priority');
+        
         if($errors) return false;
 
         $sql=' updated=NOW() '
@@ -223,7 +208,6 @@ class Topic {
             .',dept_id='.db_input($vars['dept_id'])
             .',priority_id='.db_input($vars['priority_id'])
             .',sla_id='.db_input($vars['sla_id'])
-            .',page_id='.db_input($vars['page_id'])
             .',isactive='.db_input($vars['isactive'])
             .',ispublic='.db_input($vars['ispublic'])
             .',noautoresp='.db_input(isset($vars['noautoresp'])?1:0)
@@ -236,21 +220,21 @@ class Topic {
             $sql.=',staff_id=0, team_id='.db_input(preg_replace("/[^0-9]/", "", $vars['assign']));
         else
             $sql.=',staff_id=0, team_id=0 '; //no auto-assignment!
-
+            
         if($id) {
             $sql='UPDATE '.TOPIC_TABLE.' SET '.$sql.' WHERE topic_id='.db_input($id);
             if(db_query($sql))
                 return true;
 
-            $errors['err']='Unable to update topic. Internal error occurred';
+            $errors['err']=lang('cant_update_topic');
         } else {
             $sql='INSERT INTO '.TOPIC_TABLE.' SET '.$sql.',created=NOW()';
             if(db_query($sql) && ($id=db_insert_id()))
                 return $id;
-
-            $errors['err']='Unable to create the topic. Internal error';
+            
+            $errors['err']=lang('cant_create_topic');
         }
-
+        
         return false;
     }
 }

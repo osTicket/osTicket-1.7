@@ -20,6 +20,8 @@
  * URL resolver and dispatcher. It's meant to be quite lightweight, so the
  * functions aren't separated
  */
+require_once(INCLUDE_DIR.'languages/language_control/languages_processor.php');
+
 class Dispatcher {
     function Dispatcher($file=false) {
         $this->urls = array();
@@ -38,7 +40,7 @@ class Dispatcher {
                 return $matcher->dispatch($url, $args);
             }
         }
-        Http::response(400, "URL not supported");
+        Http::response(400, lang("url_not_support"));
     }
     /**
      * Returns the url for the given function and arguments (arguments
@@ -136,7 +138,7 @@ class UrlMatcher {
             }
             if (!is_callable($func))
                 Http::response(500, 
-                    'Dispatcher compile error. Function not callable');
+                    lang('dispatc_compile'));
             return call_user_func_array($func, $args);
         }
     }

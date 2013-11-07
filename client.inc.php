@@ -19,6 +19,7 @@ $thisdir=str_replace('\\', '/', realpath(dirname(__FILE__))).'/';
 if(!file_exists($thisdir.'main.inc.php')) die('Fatal Error.');
 
 require_once($thisdir.'main.inc.php');
+require_once(INCLUDE_DIR.'languages/language_control/languages_processor.php');
 
 if(!defined('INCLUDE_DIR')) die('Fatal error');
 
@@ -60,7 +61,7 @@ if($thisclient && $thisclient->getId() && $thisclient->isValid()){
 if ($_POST  && !$ost->checkCSRFToken()) {
     @header('Location: index.php');
     //just incase redirect fails
-    die('Action denied (400)!');
+    die(lang('action_denied').' (400)!');
 }
 
 /* Client specific defaults */

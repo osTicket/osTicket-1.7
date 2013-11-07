@@ -300,20 +300,20 @@ class Filter {
     }
     /* static */ function getSupportedMatches() {
         return array(
-            'name'=>    'Name',
-            'email'=>   'Email',
-            'subject'=> 'Subject',
-            'body'=>    'Body/Text'
+            'name'=>    lang('name'),
+            'email'=>   lang('email'),
+            'subject'=> lang('subject'),
+            'body'=>    lang('body_text')
         );
     }
     /* static */ function getSupportedMatchTypes() {
         return array(
-            'equal'=>       'Equal',
-            'not_equal'=>   'Not Equal',
-            'contains'=>    'Contains',
-            'dn_contain'=>  'Does Not Contain',
-            'starts'=>      'Starts With',
-            'ends'=>        'Ends With'
+            'equal'=>       lang('equal'),
+            'not_equal'=>   lang('not_equal'),
+            'contains'=>    lang('contains'),
+            'dn_contain'=>  lang('does_not_contain'),
+            'starts'=>      lang('starts_with'),
+            'ends'=>        lang('ends_with')
         );
     }
 
@@ -395,7 +395,7 @@ class Filter {
             # XXX: Validation bypass
             $rules = $vars["rules"];
         elseif(!$rules && !$errors)
-            $errors['rules']='You must set at least one rule.';
+            $errors['rules']=lang('select_one_rule');
 
         if($errors) return false;
 
@@ -417,23 +417,23 @@ class Filter {
 
 
         if(!$vars['execorder'])
-            $errors['execorder'] = 'Order required';
+            $errors['execorder'] = lang('order_required');
         elseif(!is_numeric($vars['execorder']))
-            $errors['execorder'] = 'Must be numeric value';
+            $errors['execorder'] = lang('number_value');
 
         if(!$vars['name'])
-            $errors['name'] = 'Name required';
+            $errors['name'] = lang('name_required');
         elseif(($sid=self::getIdByName($vars['name'])) && $sid!=$id)
-            $errors['name'] = 'Name already in use';
+            $errors['name'] = lang('name_in_use');
 
         if(!$errors && !self::validate_rules($vars,$errors) && !$errors['rules'])
-            $errors['rules'] = 'Unable to validate rules as entered';
+            $errors['rules'] = lang('cant_valid_as_ent');
 
         $targets = self::getTargets();
         if(!$vars['target'])
-            $errors['target'] = 'Target required';
+            $errors['target'] = lang('target_required');
         else if(!is_numeric($vars['target']) && !$targets[$vars['target']])
-            $errors['target'] = 'Unknown or invalid target';
+            $errors['target'] = lang('invalid_target');
 
         if($errors) return false;
 

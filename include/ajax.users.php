@@ -18,6 +18,7 @@
 if(!defined('INCLUDE_DIR')) die('403');
 
 include_once(INCLUDE_DIR.'class.ticket.php');
+require_once(INCLUDE_DIR.'languages/language_control/languages_processor.php');
 
 class UsersAjaxAPI extends AjaxController {
    
@@ -25,7 +26,7 @@ class UsersAjaxAPI extends AjaxController {
     function search() {
 
         if(!isset($_REQUEST['q'])) {
-            Http::response(400, 'Query argument is required');
+            Http::response(400, lang('query_arg_req'));
         }
 
         $limit = isset($_REQUEST['limit']) ? (int) $_REQUEST['limit']:25;

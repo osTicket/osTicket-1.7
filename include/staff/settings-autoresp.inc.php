@@ -1,4 +1,4 @@
-<h2>Autoresponder Settings</h2>
+<h2><?php echo lang("Auto_res_Settings"); ?></h2>
 <form action="settings.php?t=autoresp" method="post" id="save">
 <?php csrf_token(); ?>
 <input type="hidden" name="t" value="autoresp" >
@@ -6,53 +6,53 @@
     <thead>
         <tr>
             <th colspan="2">
-                <h4>Autoresponder Setting</h4>
-                <em>Global setting - can be disabled at department or email level.</em>
+                <h4><?php echo lang("Auto_res_Settings"); ?> </h4>
+                <em><?php echo lang("global_settings"); ?>.</em>
             </th>
         </tr>
     </thead>
     <tbody>
 
         <tr>
-            <td width="160">New Ticket:</td>
+            <td width="160"><?php echo lang("new_ticket"); ?> :</td>
             <td>
-                <input type="radio" name="ticket_autoresponder"  value="1"   <?php echo $config['ticket_autoresponder']?'checked="checked"':''; ?> /><b>Enable</b>
-                <input type="radio" name="ticket_autoresponder"  value="0"   <?php echo !$config['ticket_autoresponder']?'checked="checked"':''; ?> />Disable
+                <input type="radio" name="ticket_autoresponder"  value="1"   <?php echo $config['ticket_autoresponder']?'checked="checked"':''; ?> /><b><?php echo lang('enable') ?></b>
+                <input type="radio" name="ticket_autoresponder"  value="0"   <?php echo !$config['ticket_autoresponder']?'checked="checked"':''; ?> /><?php echo lang('disable') ?>
                 &nbsp;&nbsp;&nbsp;
-                <em>(Autoresponse includes the ticket ID required to check status of the ticket)</em>
+                <em>(<?php echo lang("check_status_ticket"); ?>)</em>
             </td>
         </tr>
         <tr>
-            <td width="160">New Ticket by staff:</td>
+            <td width="160"><?php echo lang("new_ticket_staff"); ?>:</td>
             <td>
-                <input type="radio" name="ticket_notice_active"  value="1"   <?php echo $config['ticket_notice_active']?'checked="checked"':''; ?> /><b>Enable</b>
-                <input type="radio" name="ticket_notice_active"  value="0"   <?php echo !$config['ticket_notice_active']?'checked="checked"':''; ?> />Disable
+                <input type="radio" name="ticket_notice_active"  value="1"   <?php echo $config['ticket_notice_active']?'checked="checked"':''; ?> /><b><?php echo lang('enable') ?></b>
+                <input type="radio" name="ticket_notice_active"  value="0"   <?php echo !$config['ticket_notice_active']?'checked="checked"':''; ?> /><?php echo lang('disable') ?>
                  &nbsp;&nbsp;&nbsp;
-                 <em>(Notice sent when staff creates a ticket on behalf of the user (Staff can override))</em>
+                 <em>(<?php echo lang("ticket_behalf_user"); ?> (<?php echo lang("staff_can_owrite"); ?> ))</em>
             </td>
         </tr>
         <tr>
-            <td width="160">New Message:</td>
+            <td width="160"><?php echo lang("new_message"); ?>:</td>
             <td>
-                <input type="radio" name="message_autoresponder"  value="1"   <?php echo $config['message_autoresponder']?'checked="checked"':''; ?> /><b>Enable</b>
-                <input type="radio" name="message_autoresponder"  value="0"   <?php echo !$config['message_autoresponder']?'checked="checked"':''; ?> />Disable
+                <input type="radio" name="message_autoresponder"  value="1"   <?php echo $config['message_autoresponder']?'checked="checked"':''; ?> /><b><?php echo lang('enable') ?></b>
+                <input type="radio" name="message_autoresponder"  value="0"   <?php echo !$config['message_autoresponder']?'checked="checked"':''; ?> /><?php echo lang('disable') ?>
                 &nbsp;&nbsp;&nbsp;
-                <em>(Confirmation notice sent when a new message is appended to an existing ticket)</em>
+                <em>(<?php echo lang("append_ticket"); ?>)</em>
             </td>
         </tr>
         <tr>
-            <td width="160">Overlimit notice:</td>
+            <td width="160"><?php echo lang("overlimit_notice"); ?>:</td>
             <td>
-                <input type="radio" name="overlimit_notice_active"  value="1"   <?php echo $config['overlimit_notice_active']?'checked="checked"':''; ?> /><b>Enable</b>
-                <input type="radio" name="overlimit_notice_active"  value="0"   <?php echo !$config['overlimit_notice_active']?'checked="checked"':''; ?> />Disable
+                <input type="radio" name="overlimit_notice_active"  value="1"   <?php echo $config['overlimit_notice_active']?'checked="checked"':''; ?> /><b><?php echo lang('enable') ?></b>
+                <input type="radio" name="overlimit_notice_active"  value="0"   <?php echo !$config['overlimit_notice_active']?'checked="checked"':''; ?> /><?php echo lang('disable') ?>
                 &nbsp;&nbsp;&nbsp;
-                <em>(Ticket denied notice sent to user on limit violation. Admin gets alerts on ALL denials by default)</em>
+                <em>(<?php echo lang("ticket_denied"); ?>)</em>
             </td>
         </tr>
     </tbody>
 </table>
 <p style="padding-left:200px;">
-    <input class="button" type="submit" name="submit" value="Save Changes">
-    <input class="button" type="reset" name="reset" value="Reset Changes">
+    <input class="button" type="submit" name="submit" value="<?php echo lang("save_changes"); ?> ">
+    <input class="button" type="reset" name="reset" value="<?php echo lang("reset_changes"); ?> ">
 </p>
 </form>

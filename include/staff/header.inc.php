@@ -27,6 +27,8 @@
     if($ost && ($headers=$ost->getExtraHeaders())) {
         echo "\n\t".implode("\n\t", $headers)."\n";
     }
+
+        require_once(INCLUDE_DIR.'languages/language_control/languages_processor.php');
     ?>
 </head>
 <body>
@@ -41,15 +43,15 @@
     ?>
     <div id="header">
         <a href="index.php" id="logo">osTicket - Customer Support System</a>
-        <p id="info">Welcome, <strong><?php echo $thisstaff->getFirstName(); ?></strong>
+        <p id="info"><?php echo lang('howdy'); ?>, <strong><?php echo $thisstaff->getUserName(); ?></strong>
            <?php
             if($thisstaff->isAdmin() && !defined('ADMINPAGE')) { ?>
-            | <a href="admin.php">Admin Panel</a>
+            | <a href="admin.php"><?php echo lang('admin_panel'); ?></a>
             <?php }else{ ?>
-            | <a href="index.php">Staff Panel</a>
+            | <a href="index.php"><?php echo lang('staff_panel'); ?></a>
             <?php } ?>
-            | <a href="profile.php">My Preferences</a>
-            | <a href="logout.php?auth=<?php echo $ost->getLinkToken(); ?>">Log Out</a>
+            | <a href="profile.php"><?php echo lang('my_preferences'); ?></a>
+            | <a href="logout.php?auth=<?php echo $ost->getLinkToken(); ?>"><?php echo lang('log_out'); ?></a>
         </p>
     </div>
     <ul id="nav">

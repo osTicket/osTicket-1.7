@@ -16,19 +16,18 @@
 require('admin.inc.php');
 $errors=array();
 $settingOptions=array(
-                'system' => 'System Settings',
-                'tickets' => 'Ticket Settings and Options',
-                'emails' => 'Email Settings',
-                'pages' => 'Site Pages',
-                'kb' => 'Knowledgebase Settings',
-                'autoresp' => 'Autoresponder Settings',
-                'alerts' => 'Alerts and Notices Settings');
+                'system' => lang('system_settings'),
+                'tickets' => lang('ticket_settings'),
+                'emails' => lang('email_settings'),
+                'kb' => lang('knowl_settings'),
+                'autoresp' => lang('Auto_res_Settings'),
+                'alerts' => lang('nottice_settings'));
 //Handle a POST.
 if($_POST && !$errors) {
     if($cfg && $cfg->updateSettings($_POST,$errors)) {
-        $msg=Format::htmlchars($settingOptions[$_POST['t']]).' Updated Successfully';
+        $msg=Format::htmlchars($settingOptions[$_POST['t']]).' '.lang('update_successful');
     } elseif(!$errors['err']) {
-        $errors['err']='Unable to update settings - correct errors below and try again';
+        $errors['err']=lang('error_update_set');
     }
 }
 

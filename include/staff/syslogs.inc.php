@@ -1,5 +1,5 @@
 <?php
-if(!defined('OSTADMININC') || !$thisstaff || !$thisstaff->isAdmin()) die('Access Denied');
+if(!defined('OSTADMININC') || !$thisstaff || !$thisstaff->isAdmin()) die(lang('access_denied'));
 
 $qstr='';
 if($_REQUEST['type']) {
@@ -8,20 +8,20 @@ if($_REQUEST['type']) {
 $type=null;
 switch(strtolower($_REQUEST['type'])){
     case 'error':
-        $title='Errors';
+        $title=lang('errors');
         $type=$_REQUEST['type'];
         break;
     case 'warning':
-        $title='Warnings';
+        $title=lang('warnings');
         $type=$_REQUEST['type'];
         break;
     case 'debug':
-        $title='Debug logs';
+        $title=lang('debug_logs');
         $type=$_REQUEST['type'];
         break;
     default:
         $type=null;
-        $title='All logs';
+        $title=lang('all_logs');
 }
 
 $qwhere =' WHERE 1';
@@ -80,27 +80,27 @@ $res=db_query($query);
 if($res && ($num=db_num_rows($res)))
     $showing=$pageNav->showing().' '.$title;
 else
-    $showing='No logs found!';
+    $showing=lang('no_logs_found');
 ?>
 
-<h2>System Logs</h2>
+<h2><?php echo lang('system_logs'); ?></h2>
 <div id='filter' >
  <form action="logs.php" method="get">
     <div style="padding-left:2px;">
-        <b>Date Span</b>:
-        &nbsp;From&nbsp;<input class="dp" id="sd" size=15 name="startDate" value="<?php echo Format::htmlchars($_REQUEST['startDate']); ?>" autocomplete=OFF>
-            &nbsp;&nbsp; to &nbsp;&nbsp;
+        <b><?php echo lang('date_span'); ?></b>:
+        &nbsp;<?php echo ucfirst(lang('from')); ?>&nbsp;<input class="dp" id="sd" size=15 name="startDate" value="<?php echo Format::htmlchars($_REQUEST['startDate']); ?>" autocomplete=OFF>
+            &nbsp;&nbsp; <?php echo lang('to'); ?> &nbsp;&nbsp;
             <input class="dp" id="ed" size=15 name="endDate" value="<?php echo Format::htmlchars($_REQUEST['endDate']); ?>" autocomplete=OFF>
             &nbsp;&nbsp;
-            &nbsp;Type:
+            &nbsp;<?php echo lang('type'); ?>:
             <select name='type'>
-                <option value="" selected>All</option>
-                <option value="Error" <?php echo ($type=='Error')?'selected="selected"':''; ?>>Errors</option>
-                <option value="Warning" <?php echo ($type=='Warning')?'selected="selected"':''; ?>>Warnings</option>
-                <option value="Debug" <?php echo ($type=='Debug')?'selected="selected"':''; ?>>Debug</option>
+                <option value="" selected><?php echo lang('all'); ?></option>
+                <option value="Error" <?php echo ($type=='Error')?'selected="selected"':''; ?>><?php echo lang('errors'); ?></option>
+                <option value="Warning" <?php echo ($type=='Warning')?'selected="selected"':''; ?>><?php echo lang('warnings'); ?></option>
+                <option value="Debug" <?php echo ($type=='Debug')?'selected="selected"':''; ?>><?php echo lang('debug_logs'); ?></option>
             </select>
             &nbsp;&nbsp;
-            <input type="submit" Value="Go!" />
+            <input type="submit" Value="<?php echo lang('go'); ?>!" />
     </div>
  </form>
 </div>
@@ -113,10 +113,10 @@ else
     <thead>
         <tr>
             <th width="7">&nbsp;</th>        
-            <th width="320"><a <?php echo $title_sort; ?> href="logs.php?<?php echo $qstr; ?>&sort=title">Log Title</a></th>
-            <th width="100"><a  <?php echo $type_sort; ?> href="logs.php?<?php echo $qstr; ?>&sort=type">Log Type</a></th>
-            <th width="200" nowrap><a  <?php echo $date_sort; ?>href="logs.php?<?php echo $qstr; ?>&sort=date">Log Date</a></th>
-            <th width="120"><a  <?php echo $ip_sort; ?> href="logs.php?<?php echo $qstr; ?>&sort=ip">IP Address</a></th>
+            <th width="320"><a <?php echo $title_sort; ?> href="logs.php?<?php echo $qstr; ?>&sort=title"><?php echo lang('log_title'); ?></a></th>
+            <th width="100"><a  <?php echo $type_sort; ?> href="logs.php?<?php echo $qstr; ?>&sort=type"><?php echo lang('log_type'); ?></a></th>
+            <th width="200" nowrap><a  <?php echo $date_sort; ?>href="logs.php?<?php echo $qstr; ?>&sort=date"><?php echo lang('log_date'); ?></a></th>
+            <th width="120"><a  <?php echo $ip_sort; ?> href="logs.php?<?php echo $qstr; ?>&sort=ip"><?php echo lang('ip_address'); ?></a></th>
         </tr>
     </thead>
     <tbody>
@@ -146,12 +146,12 @@ else
      <tr>
         <td colspan="6">
             <?php if($res && $num){ ?>
-            Select:&nbsp;
-            <a id="selectAll" href="#ckb">All</a>&nbsp;&nbsp;
-            <a id="selectNone" href="#ckb">None</a>&nbsp;&nbsp;
-            <a id="selectToggle" href="#ckb">Toggle</a>&nbsp;&nbsp;
+            <?php echo lang('select'); ?>:&nbsp;
+            <a id="selectAll" href="#ckb"><?php echo lang('all'); ?></a>&nbsp;&nbsp;
+            <a id="selectNone" href="#ckb"><?php echo lang('none'); ?></a>&nbsp;&nbsp;
+            <a id="selectToggle" href="#ckb"><?php echo lang('toggle'); ?></a>&nbsp;&nbsp;
             <?php }else{
-                echo 'No logs found';
+                echo lang('no_logs_found');
             } ?>
         </td>
      </tr>
@@ -159,10 +159,10 @@ else
 </table>
 <?php
 if($res && $num): //Show options..
-    echo '<div>&nbsp;Page:'.$pageNav->getPageLinks().'&nbsp;</div>';
+    echo '<div>&nbsp;'.lang('page').':'.$pageNav->getPageLinks().'&nbsp;</div>';
 ?>
 <p class="centered" id="actions">
-    <input class="button" type="submit" name="delete" value="Delete Selected Entries">
+    <input class="button" type="submit" name="delete" value="<?php echo lang('delete_entries'); ?>">
 </p>
 <?php
 endif;
@@ -170,21 +170,21 @@ endif;
 </form>
 
 <div style="display:none;" class="dialog" id="confirm-action">
-    <h3>Please Confirm</h3>
-    <a class="close" href="">&times;</a>
+    <h3><?php echo lang('please_confirm'); ?></h3>
+    <a class="close" href="">X</a>
     <hr/>
     <p class="confirm-action" style="display:none;" id="delete-confirm">
-        <font color="red"><strong>Are you sure you want to DELETE selected logs?</strong></font>
-        <br><br>Deleted logs CANNOT be recovered.
+        <font color="red"><strong><?php echo lang('sure_delete_logs'); ?> </strong></font>
+        <br><br><?php echo lang('del_logs_cant_rec'); ?>
     </p>
-    <div>Please confirm to continue.</div>
+    <div><?php echo lang('confirm_to_continue'); ?></div>
     <hr style="margin-top:1em"/>
     <p class="full-width">
         <span class="buttons" style="float:left">
-            <input type="button" value="No, Cancel" class="close">
+            <input type="button" value="<?php echo lang('no_cancel'); ?>" class="close">
         </span>
         <span class="buttons" style="float:right">
-            <input type="button" value="Yes, Do it!" class="confirm">
+            <input type="button" value="<?php echo lang('yes_doit'); ?>!" class="confirm">
         </span>
      </p>
     <div class="clear"></div>

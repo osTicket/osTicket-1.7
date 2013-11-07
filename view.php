@@ -18,7 +18,7 @@
 require_once('client.inc.php');
 
 //If the user is NOT logged in - try auto-login (if params exists).
-if(!$thisclient || !$thisclient->isValid()) {
+if((!$thisclient || !$thisclient->isValid()) || isset($_GET['login']) ) {
     // * On login Client::login will redirect the user to tickets.php view.
     // * See TODO above for planned multi-view.
     $user = null;

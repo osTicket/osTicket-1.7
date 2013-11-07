@@ -1,5 +1,5 @@
 <?php
-if(!defined('OSTCLIENTINC')) die('Access Denied!');
+if(!defined('OSTCLIENTINC')) die(lang('access_denied'));
 $info=array();
 if($thisclient && $thisclient->isValid()) {
     $info=array('name'=>$thisclient->getName(),
@@ -10,27 +10,81 @@ if($thisclient && $thisclient->isValid()) {
 
 $info=($_POST && $errors)?Format::htmlchars($_POST):$info;
 ?>
-<h1>Open a New Ticket</h1>
-<p>Please fill in the form below to open a new ticket.</p>
+<style type="text/css">
+    #ticketForm {}
+    #ticketForm table tr {}
+    #ticketForm table input {padding: 2px}
+</style>
+<h1><?php echo lang('open_new_ticket'); ?></h1>
+<p><?php echo lang('fill_form_open_tic'); ?></p>
+<script src="./js/jquery.ui-1.8.23.custom.min.js"></script>
+<link rel="stylesheet" href="./css/ui-lightness/jquery-ui-1.8.18.custom.css" media="screen">
+<script type="text/javascript">
+    $(function(){
+        var user_tickets = {names: [], data: []};
+        
+        function search() {
+            user_tickets = {names: [], data: []};
+            $('#show-loading').show();
+            $.post('autocomplete.php?method=user_ticket',{
+                name: $('#name').val()
+            },function(d){
+                $('#show-loading').hide();
+                if(d.result) {
+                    user_tickets.data = d.data;
+                    for(var i in d.data)
+                        user_tickets.names.push(d.data[i].name);
+                }
+                
+                $( "#name" ).autocomplete({
+                  source: user_tickets.names,
+                  select: function(event, ui){
+                    fillAutocomleteByName(ui.item.value);
+                  }
+                });
+            },'json');
+        }
+
+        function fillAutocomleteByName(name) {
+            for(var i in user_tickets.data) {
+                if(user_tickets.data[i].name == name) {
+                    $('#email').val(user_tickets.data[i].email);
+                    $('#phone').val(user_tickets.data[i].phone);
+                    $('#ext').val(user_tickets.data[i].phone_ext);
+                }
+            }
+        }
+
+        var _timeout = null;
+        $('#name').bind('keyup',function(k){
+            if(k.which == 38 || k.which == 40)
+                return;
+            if(_timeout)
+                window.clearTimeout(_timeout);            
+            _timeout = window.setTimeout(search,100);
+        });
+    });
+</script>
 <form id="ticketForm" method="post" action="open.php" enctype="multipart/form-data">
   <?php csrf_token(); ?>
   <input type="hidden" name="a" value="open">
   <table width="800" cellpadding="1" cellspacing="0" border="0">
     <tr>
-        <th class="required" width="160">Full Name:</th>
+        <th class="required" width="160"><?php echo lang('full_name'); ?>:</th>
         <td>
             <?php
             if($thisclient && $thisclient->isValid()) {
                 echo $thisclient->getName();
             } else { ?>
-                <input id="name" type="text" name="name" size="30" value="<?php echo $info['name']; ?>">
+                <input id="name" type="text" name="name" autocomplete="off" size="30" value="<?php echo $info['name']; ?>">
                 <font class="error">*&nbsp;<?php echo $errors['name']; ?></font>
             <?php
             } ?>
+            <img id="show-loading" src="./images/FhHRx-Spinner.gif" style="display:none;width:20px;height:20px;">
         </td>
     </tr>
     <tr>
-        <th class="required" width="160">Email Address:</th>
+        <th class="required" width="160"><?php echo lang('email_address'); ?>:</th>
         <td>
             <?php
             if($thisclient && $thisclient->isValid()) { 
@@ -43,21 +97,25 @@ $info=($_POST && $errors)?Format::htmlchars($_POST):$info;
         </td>
     </tr>
     <tr>
-        <th>Telephone:</th>
+        <th><?php echo lang('telephone'); ?>:</th>
         <td>
-
             <input id="phone" type="text" name="phone" size="17" value="<?php echo $info['phone']; ?>">
-            <label for="ext" class="inline">Ext.:</label>
+            <font class="error">*&nbsp;<?php echo $errors['phone']; ?></font>            
+        </td>
+    </tr>
+    <tr>
+        <th><label for="ext" class="inline"><?php echo lang('ext'); ?>.:</label></th>
+        <td>            
             <input id="ext" type="text" name="phone_ext" size="3" value="<?php echo $info['phone_ext']; ?>">
-            <font class="error">&nbsp;<?php echo $errors['phone']; ?>&nbsp;&nbsp;<?php echo $errors['phone_ext']; ?></font>
+            <font class="error">*&nbsp;<?php echo $errors['phone_ext']; ?></font>
         </td>   
     </tr>
     <tr><td colspan=2>&nbsp;</td></tr>
     <tr>
-        <td class="required">Help Topic:</td>
+        <td class="required"><?php echo lang('help_topic'); ?>: </td>
         <td>
             <select id="topicId" name="topicId">
-                <option value="" selected="selected">&mdash; Select a Help Topic &mdash;</option>
+                <option value="" selected="selected">&mdash; <?php echo lang('select_help_topic'); ?> &mdash;</option>
                 <?php
                 if($topics=Topic::getPublicHelpTopics()) {
                     foreach($topics as $id =>$name) {
@@ -65,7 +123,7 @@ $info=($_POST && $errors)?Format::htmlchars($_POST):$info;
                                 $id, ($info['topicId']==$id)?'selected="selected"':'', $name);
                     }
                 } else { ?>
-                    <option value="0" >General Inquiry</option>
+                    <option value="0" ><?php echo lang('general_inquiry'); ?></option>
                 <?php
                 } ?>
             </select>
@@ -73,16 +131,16 @@ $info=($_POST && $errors)?Format::htmlchars($_POST):$info;
         </td>
     </tr>
     <tr>
-        <td class="required">Subject:</td>
+        <td class="required"><?php echo lang('subject'); ?>:</td>
         <td>
             <input id="subject" type="text" name="subject" size="40" value="<?php echo $info['subject']; ?>">
             <font class="error">*&nbsp;<?php echo $errors['subject']; ?></font>
         </td>
     </tr>
     <tr>
-        <td class="required">Message:</td>
+        <td class="required"><?php echo lang('message'); ?>:</td>
         <td>
-            <div><em>Please provide as much detail as possible so we can best assist you.</em> <font class="error">*&nbsp;<?php echo $errors['message']; ?></font></div>
+            <div><em><?php echo lang('provide_det_only'); ?></em> <font class="error">*&nbsp;<?php echo $errors['message']; ?></font></div>
             <textarea id="message" cols="60" rows="8" name="message"><?php echo $info['message']; ?></textarea>
         </td>
     </tr>
@@ -90,7 +148,7 @@ $info=($_POST && $errors)?Format::htmlchars($_POST):$info;
     <?php if(($cfg->allowOnlineAttachments() && !$cfg->allowAttachmentsOnlogin())
             || ($cfg->allowAttachmentsOnlogin() && ($thisclient && $thisclient->isValid()))) { ?>
     <tr>
-        <td>Attachments:</td>
+        <td><?php echo lang('attachments'); ?>:</td>
         <td>
             <div class="uploads"></div><br>
             <input type="file" class="multifile" name="attachments[]" id="attachments" size="30" value="" />
@@ -102,7 +160,7 @@ $info=($_POST && $errors)?Format::htmlchars($_POST):$info;
     <?php
     if($cfg->allowPriorityChange() && ($priorities=Priority::getPriorities())) { ?>
     <tr>
-        <td>Ticket Priority:</td>
+        <td><?php echo lang('tique_priority'); ?>:</td>
         <td>
             <select id="priority" name="priorityId">
                 <?php
@@ -124,15 +182,15 @@ $info=($_POST && $errors)?Format::htmlchars($_POST):$info;
     <?php
     if($cfg && $cfg->isCaptchaEnabled() && (!$thisclient || !$thisclient->isValid())) {
         if($_POST && $errors && !$errors['captcha'])
-            $errors['captcha']='Please re-enter the text again';
+            $errors['captcha']=lang('reenter_text');
         ?>
     <tr class="captchaRow">
-        <td class="required">CAPTCHA Text:</td>
+        <td class="required"><?php echo lang('captcha_text'); ?>:</td>
         <td>
             <span class="captcha"><img src="captcha.php" border="0" align="left"></span>
             &nbsp;&nbsp;
             <input id="captcha" type="text" name="captcha" size="6">
-            <em>Enter the text shown on the image.</em>
+            <em><?php echo lang('enter_text_show'); ?></em>
             <font class="error">*&nbsp;<?php echo $errors['captcha']; ?></font>
         </td>
     </tr>
@@ -141,8 +199,8 @@ $info=($_POST && $errors)?Format::htmlchars($_POST):$info;
     <tr><td colspan=2>&nbsp;</td></tr>
   </table>
   <p style="padding-left:150px;">
-        <input type="submit" value="Create Ticket">
-        <input type="reset" value="Reset">
-        <input type="button" value="Cancel" onClick='window.location.href="index.php"'>
+        <input type="submit" value="<?php echo lang('create_ticket'); ?>">
+        <input type="reset" value="<?php echo lang('reset'); ?>">
+        <input type="button" value="<?php echo lang('cancel'); ?>" onClick='window.location.href="index.php"'>
   </p>
 </form>

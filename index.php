@@ -16,29 +16,40 @@
 require('client.inc.php');
 $section = 'home';
 require(CLIENTINC_DIR.'header.inc.php');
+require_once(INCLUDE_DIR.'languages/language_control/languages_processor.php');
+
+
 ?>
+
+<?php session_start(); if (isset($_SESSION['error'])): ?>
+
+    <p id="sysmsg" class="error">
+        <?php echo lang('this_link_is_not_valid'); ?>
+    </p>
+    <script type="text/javascript">setTimeout("$('#sysmsg').fadeOut('slow');",1500);</script>
+<?php unset($_SESSION['error']); endif; ?>
+
 <div id="landing_page">
-    <?php
-    if($cfg && ($page = $cfg->getLandingPage()))
-        echo $page->getBody();
-    else
-        echo  '<h1>Welcome to the Support Center</h1>';
-    ?>
+    <h1><?php echo lang('welcome_support'); ?></h1>
+    <p>
+        <?php echo lang('welcome_text'); ?>
+    </p>
+
     <div id="new_ticket">
-        <h3>Open A New Ticket</h3>
+        <h3><?php echo lang('open_new_ticket'); ?></h3>
         <br>
-        <div>Please provide as much detail as possible so we can best assist you. To update a previously submitted ticket, please login.</div>
+        <div style="min-height:65px"><?php echo lang('provide_details'); ?></div>
         <p>
-            <a href="open.php" class="green button">Open a New Ticket</a>
+            <a href="open.php" class="green button"><?php echo lang('open_new_ticket'); ?></a>
         </p>
     </div>
 
     <div id="check_status">
-        <h3>Check Ticket Status</h3>
+        <h3><?php echo lang('check_ticket_stat'); ?></h3>
         <br>
-        <div>We provide archives and history of all your current and past support requests complete with responses.</div>
+        <div style="min-height:65px"><?php echo lang('provide_archives'); ?></div>
         <p>
-            <a href="view.php" class="blue button">Check Ticket Status</a>
+            <a href="view.php" class="blue button"><?php echo lang('check_ticket_stat'); ?></a>
         </p>
     </div>
 </div>
@@ -47,7 +58,7 @@ require(CLIENTINC_DIR.'header.inc.php');
 if($cfg && $cfg->isKnowledgebaseEnabled()){
     //FIXME: provide ability to feature or select random FAQs ??
 ?>
-<p>Be sure to browse our <a href="kb/index.php">Frequently Asked Questions (FAQs)</a>, before opening a ticket.</p>
+<p><?php echo lang('sure_to_browse'); ?> <a href="kb/index.php"><?php echo lang('freq_asked_quest'); ?></a>, <?php echo lang('before_open_ticket'); ?></p>
 </div>
 <?php
 } ?>

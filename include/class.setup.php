@@ -13,7 +13,7 @@
 
     vim: expandtab sw=4 ts=4 sts=4:
 **********************************************************************/
-
+require_once(INCLUDE_DIR.'languages/language_control/languages_processor.php');
 Class SetupWizard {
 
     //Mimimum requirements
@@ -37,7 +37,7 @@ Class SetupWizard {
     function load_sql_file($file, $prefix, $abort=true, $debug=false) {
 
         if(!file_exists($file) || !($schema=file_get_contents($file)))
-            return $this->abort('Error accessing SQL file '.basename($file), $debug);
+            return $this->abort(lang('error_accesing').' '.basename($file), $debug);
 
         return $this->load_sql($schema, $prefix, $abort, $debug);
     }

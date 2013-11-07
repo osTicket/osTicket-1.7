@@ -13,6 +13,7 @@
 
     vim: expandtab sw=4 ts=4 sts=4:
 **********************************************************************/
+require_once(INCLUDE_DIR.'languages/language_control/languages_processor.php');
 class PageNate {
     
     var $start;
@@ -72,9 +73,9 @@ class PageNate {
         } else {
             $to= $this->total;
         }
-        $html="&nbsp;Showing&nbsp;&nbsp;";
+        $html="&nbsp;".lang('showing')."&nbsp;&nbsp;";
         if ($this->total > 0) {
-            $html .= "$from - $to of " .$this->total;
+            $html .= "$from - $to ".lang('of')." " .$this->total;
         }else{
             $html .= " 0 ";
         }

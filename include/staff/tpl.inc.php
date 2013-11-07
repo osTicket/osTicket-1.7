@@ -32,11 +32,11 @@ if (is_a($template, EmailTemplateGroup)) {
 $tpl=$msgtemplates[$selected];
 
 ?>
-<h2>Email Template Message - <span><?php echo $name; ?></span></h2>
+<h2><?php echo lang('email_temp_mg') ?> - <span><?php echo $name; ?></span></h2>
 <div style="padding-top:10px;padding-bottom:5px;">
     <form method="get" action="templates.php">
     <input type="hidden" name="a" value="manage">
-    Message Template:
+    <?php echo lang('message_temp'); ?>:
     <select id="tpl_options" name="id" style="width:300px;">
         <option value="">&mdash; Select Setting Group &mdash;</option>
         <?php
@@ -72,20 +72,20 @@ $tpl=$msgtemplates[$selected];
      <tr>
         <th colspan="2">
             <h4><?php echo Format::htmlchars($tpl['desc']); ?></h4>
-            <em>Subject and body required.  <a class="tip" href="ticket_variables.txt">Supported Variables</a>.</em>
+            <em><?php echo lang('sb_required'); ?>  <a class="tip" href="ticket_variables.txt"><?php echo lang('support_var'); ?></a>.</em>
         </th>
      </tr>
     </thead>
     <tbody>
         <tr>
             <td colspan=2>
-                <strong>Message Subject:</strong> <em>Email message subject</em> <font class="error">*&nbsp;<?php echo $errors['subj']; ?></font><br>
+                <strong><?php echo lang('message_subject'); ?>:</strong> <em><?php echo lang('email_s_message'); ?></em> <font class="error">*&nbsp;<?php echo $errors['subj']; ?></font><br>
                 <input type="text" name="subj" size="60" value="<?php echo $info['subj']; ?>" >
             </td>
         </tr>
         <tr>
             <td colspan="2">
-                <strong>Message Body:</strong> <em>Email message body.</em> <font class="error">*&nbsp;<?php echo $errors['body']; ?></font><br>
+                <strong><?php echo lang('message_body'); ?>:</strong> <em><?php echo lang('email_mg_body'); ?></em> <font class="error">*&nbsp;<?php echo $errors['body']; ?></font><br>
                 <textarea name="body" cols="21" rows="16" style="width:98%;" wrap="soft" ><?php echo $info['body']; ?></textarea>
             </td>
         </tr>

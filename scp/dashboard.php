@@ -28,25 +28,25 @@ require(STAFFINC_DIR.'header.inc.php');
 <link rel="stylesheet" type="text/css" href="css/bootstrap.css"/>
 <link rel="stylesheet" type="text/css" href="css/dashboard.css"/>
 
-<h2>Ticket Activity</h2>
-<p>Select the starting time and period for the system activity graph</p>
+<h2><?php echo lang('ticket_act_only'); ?></h2>
+<p><?php echo lang('start_time_graph'); ?></p>
 <form class="well form-inline" id="timeframe-form">
     <label>
-        Report timeframe:
+        <?php echo lang('report_timeframe'); ?>:
         <input type="text" class="dp input-medium search-query"
-            name="start" placeholder="Last month"/>
+            name="start" placeholder="<?php echo lang('last_month'); ?>"/>
     </label>
     <label>
-        period:
+        <?php echo lang('period'); ?>:
         <select name="period">
-            <option value="now" selected="selected">Up to today</option>
-            <option value="+7 days">One Week</option>
-            <option value="+14 days">Two Weeks</option>
-            <option value="+1 month">One Month</option>
-            <option value="+3 months">One Quarter</option>
+            <option value="now" selected="selected"><?php echo lang('up_to_today'); ?></option>
+            <option value="+7 days"><?php echo lang('on_week'); ?></option>
+            <option value="+14 days"><?php echo lang('two_weeks'); ?></option>
+            <option value="+1 month"><?php echo lang('one_month'); ?></option>
+            <option value="+3 months"><?php echo lang('one_quater'); ?></option>
         </select>
     </label>
-    <button class="btn" type="submit">Refresh</button>
+    <button class="btn" type="submit"><?php echo lang('refresh'); ?></button>
 </form>
 
 <!-- Create a graph and fetch some data to create pretty dashboard -->
@@ -56,8 +56,8 @@ require(STAFFINC_DIR.'header.inc.php');
 </div>
 
 <hr/>
-<h2>Statistics</h2>
-<p>Statistics of tickets organized by department, help topic, and staff.</p>
+<h2><?php echo lang('statistics'); ?></h2>
+<p><?php echo lang('statist_of_tickets'); ?></p>
 <ul class="nav nav-tabs" id="tabular-navigation"></ul>
 
 <div id="table-here"></div>

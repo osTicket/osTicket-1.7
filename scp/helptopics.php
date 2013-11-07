@@ -15,33 +15,34 @@
 **********************************************************************/
 require('admin.inc.php');
 include_once(INCLUDE_DIR.'class.topic.php');
+require_once(INCLUDE_DIR.'languages/language_control/languages_processor.php');
 
 $topic=null;
 if($_REQUEST['id'] && !($topic=Topic::lookup($_REQUEST['id'])))
-    $errors['err']='Unknown or invalid help topic ID.';
+    $errors['err']=lang('inv_help_topic_id');
 
 if($_POST){
     switch(strtolower($_POST['do'])){
         case 'update':
             if(!$topic){
-                $errors['err']='Unknown or invalid help topic.';
+                $errors['err']=lang('inv_help_topic');
             }elseif($topic->update($_POST,$errors)){
-                $msg='Help topic updated successfully';
+                $msg=lang('help_topc_updated');
             }elseif(!$errors['err']){
-                $errors['err']='Error updating help topic. Try again!';
+                $errors['err']=lang('cant_update_topic');
             }
             break;
         case 'create':
             if(($id=Topic::create($_POST,$errors))){
-                $msg='Help topic added successfully';
+                $msg=lang('help_topic_added');
                 $_REQUEST['a']=null;
             }elseif(!$errors['err']){
-                $errors['err']='Unable to add help topic. Correct error(s) below and try again.';
+                $errors['err']=lang('cant_add_topic');
             }
             break;
         case 'mass_process':
             if(!$_POST['ids'] || !is_array($_POST['ids']) || !count($_POST['ids'])) {
-                $errors['err'] = 'You must select at least one help topic';
+                $errors['err'] = lang('select_one_topic');
             } else {
                 $count=count($_POST['ids']);
 
@@ -52,11 +53,11 @@ if($_POST){
                     
                         if(db_query($sql) && ($num=db_affected_rows())) {
                             if($num==$count)
-                                $msg = 'Selected help topics enabled';
+                                $msg = lang('select_help_topic');
                             else
-                                $warn = "$num of $count selected help topics enabled";
+                                $warn = "$num ".lang('of')." $count ".lang('select_help_topic');
                         } else {
-                            $errors['err'] = 'Unable to enable selected help topics.';
+                            $errors['err'] = lang('cant_enable_help');
                         }
                         break;
                     case 'disable':
@@ -64,11 +65,11 @@ if($_POST){
                             .' WHERE topic_id IN ('.implode(',', db_input($_POST['ids'])).')';
                         if(db_query($sql) && ($num=db_affected_rows())) {
                             if($num==$count)
-                                $msg = 'Selected help topics disabled';
+                                $msg = lang('help_topic_dis');
                             else
-                                $warn = "$num of $count selected help topics disabled";
+                                $warn = "$num ".lang('of')." $count ".lang('help_topic_dis');
                         } else {
-                            $errors['err'] ='Unable to disable selected help topic(s)';
+                            $errors['err'] =lang('cant_disable_topic');
                         }
                         break;
                     case 'delete':
@@ -79,20 +80,20 @@ if($_POST){
                         }
 
                         if($i && $i==$count)
-                            $msg = 'Selected help topics deleted successfully';
+                            $msg = lang('topics_deleted');
                         elseif($i>0)
-                            $warn = "$i of $count selected help topics deleted";
+                            $warn = "$i ".lang('of')." $count ".lang('topics_deleted_only');
                         elseif(!$errors['err'])
-                            $errors['err']  = 'Unable to delete selected help topics';
+                            $errors['err']  = lang('cant_del_topic');
 
                         break;
                     default:
-                        $errors['err']='Unknown action - get technical help.';
+                        $errors['err']=lang('unknown_action');
                 }
             }
             break;
         default:
-            $errors['err']='Unknown command/action';
+            $errors['err']=lang('unknown_command');
             break;
     }
 }
@@ -100,6 +101,7 @@ if($_POST){
 $page='helptopics.inc.php';
 if($topic || ($_REQUEST['a'] && !strcasecmp($_REQUEST['a'],'add')))
     $page='helptopic.inc.php';
+
 
 $nav->setTabActive('manage');
 require(STAFFINC_DIR.'header.inc.php');

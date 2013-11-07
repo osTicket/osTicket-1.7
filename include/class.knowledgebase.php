@@ -14,6 +14,7 @@
     vim: expandtab sw=4 ts=4 sts=4:
 **********************************************************************/
 require_once("class.file.php");
+require_once(INCLUDE_DIR.'languages/language_control/languages_processor.php');
 
 class Knowledgebase {
 
@@ -68,7 +69,7 @@ class Knowledgebase {
         # TODO: Validate current values ($this->yada)
         # Apply hashtable to this -- return error list
         $validation = array(
-            'title' => array('is_string', 'Title is required')
+            'title' => array('is_string', lang('title_required'))
         );
         foreach ($validation as $key=>$details) {
             list($func, $error) = $details;

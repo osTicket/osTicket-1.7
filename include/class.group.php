@@ -13,7 +13,7 @@
 
     vim: expandtab sw=4 ts=4 sts=4:
 **********************************************************************/
-
+require_once(INCLUDE_DIR.'languages/language_control/languages_processor.php');
 class Group {
 
     var $id;
@@ -185,14 +185,14 @@ class Group {
     function save($id,$vars,&$errors) {
 
         if($id && $vars['id']!=$id)
-            $errors['err']='Missing or invalid group ID';
+            $errors['err']=lang('invalid_group_id');
             
         if(!$vars['name']) {
-            $errors['name']='Group name required';
+            $errors['name']=lang('group_name_req');
         }elseif(strlen($vars['name'])<3) {
-            $errors['name']='Group name must be at least 3 chars.';
+            $errors['name']=lang('group_name_at');
         }elseif(($gid=Group::getIdByName($vars['name'])) && $gid!=$id){
-            $errors['name']='Group name already exists';
+            $errors['name']=lang('group_name_exist');
         }
         
         if($errors) return false;
@@ -219,14 +219,14 @@ class Group {
             if(($res=db_query($sql)))
                 return true;
 
-            $errors['err']='Unable to update group. Internal error occurred.';
+            $errors['err']=lang('cant_update_group');
             
         }else{
             $sql='INSERT INTO '.GROUP_TABLE.' '.$sql.',created=NOW()';
             if(($res=db_query($sql)) && ($id=db_insert_id()))
                 return $id;
                 
-            $errors['err']='Unable to create the group. Internal error';
+            $errors['err']=lang('cant_create_group');
         }
         
         return false;

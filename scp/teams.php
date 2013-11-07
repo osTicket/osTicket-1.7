@@ -14,32 +14,33 @@
     vim: expandtab sw=4 ts=4 sts=4:
 **********************************************************************/
 require('admin.inc.php');
+require_once(INCLUDE_DIR.'languages/language_control/languages_processor.php');
 $team=null;
 if($_REQUEST['id'] && !($team=Team::lookup($_REQUEST['id'])))
-    $errors['err']='Unknown or invalid team ID.';
+    $errors['err']=lang('invalid_team_id');
 
 if($_POST){
     switch(strtolower($_POST['do'])){
         case 'update':
             if(!$team){
-                $errors['err']='Unknown or invalid team.';
+                $errors['err']=lang('invalid_team');
             }elseif($team->update($_POST,$errors)){
-                $msg='Team updated successfully';
+                $msg=lang('team_update_success');
             }elseif(!$errors['err']){
-                $errors['err']='Unable to update team. Correct any error(s) below and try again!';
+                $errors['err']=lang('unable_update_team');
             }
             break;
         case 'create':
             if(($id=Team::create($_POST,$errors))){
-                $msg=Format::htmlchars($_POST['team']).' added successfully';
+                $msg=Format::htmlchars($_POST['team']).' '.lang('added_succesfully');
                 $_REQUEST['a']=null;
             }elseif(!$errors['err']){
-                $errors['err']='Unable to add team. Correct any error(s) below and try again.';
+                $errors['err']=lang('unable_add_team').' '.lang('correct_errors');
             }
             break;
         case 'mass_process':
             if(!$_POST['ids'] || !is_array($_POST['ids']) || !count($_POST['ids'])) {
-                $errors['err']='You must select at least one team.';
+                $errors['err']=lang('select_one_team');
             } else {
                 $count=count($_POST['ids']);
                 switch(strtolower($_POST['a'])) {
@@ -49,11 +50,11 @@ if($_POST){
 
                         if(db_query($sql) && ($num=db_affected_rows())) {
                             if($num==$count)
-                                $msg = 'Selected teams activated';
+                                $msg = lang('team_activated');
                             else
-                                $warn = "$num of $count selected teams activated";
+                                $warn = "$num of $count ".lang('team_activated');
                         } else {
-                            $errors['err'] = 'Unable to activate selected teams';
+                            $errors['err'] = lang('unable_activate_team');
                         }
                         break;
                     case 'disable':
@@ -62,11 +63,11 @@ if($_POST){
 
                         if(db_query($sql) && ($num=db_affected_rows())) {
                             if($num==$count)
-                                $msg = 'Selected teams disabled';
+                                $msg = lang('teams_disabled');
                             else
-                                $warn = "$num of $count selected teams disabled";
+                                $warn = "$num of $count ".lang('teams_disabled');
                         } else {
-                            $errors['err'] = 'Unable to disable selected teams';
+                            $errors['err'] = lang('not_desable_teams');
                         }
                         break;
                     case 'delete':
@@ -75,19 +76,19 @@ if($_POST){
                                 $i++;
                         }
                         if($i && $i==$count)
-                            $msg = 'Selected teams deleted successfully';
+                            $msg = lang('team_deleted_success');
                         elseif($i>0)
-                            $warn = "$i of $count selected teams deleted";
+                            $warn = "$i of $count ".lang('team_deleted');
                         elseif(!$errors['err'])
-                            $errors['err'] = 'Unable to delete selected teams';
+                            $errors['err'] = lang('unable_delete_team');
                         break;
                     default:
-                        $errors['err'] = 'Unknown action. Get technical help!';
+                        $errors['err'] = lang('unknown_action');
                 }
             }
             break;
         default:
-            $errors['err']='Unknown action/command';
+            $errors['err']=lang('unknown_command');
             break;
     }
 }

@@ -15,6 +15,8 @@
     vim: expandtab sw=4 ts=4 sts=4:
 **********************************************************************/
 require('staff.inc.php');
+require_once(INCLUDE_DIR.'languages/language_control/languages_processor.php');
+
 ignore_user_abort(1);//Leave me a lone bro!
 @set_time_limit(0); //useless when safe_mode is on
 $data=sprintf ("%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%",
@@ -32,14 +34,14 @@ ob_start(); //Keep the image output clean. Hide our dirt.
 $sec=time()-$_SESSION['lastcroncall'];
 $caller = $thisstaff->getUserName();
 
-if($sec>180 && $ost && !$ost->isUpgradePending()): //user can call cron once every 3 minutes.
+if($sec>180): //user can call cron once every 3 minutes.
 require_once(INCLUDE_DIR.'class.cron.php');
 
 $thisstaff = null; //Clear staff obj to avoid false credit internal notes & auto-assignment
 Cron::TicketMonitor(); //Age tickets: We're going to age tickets regardless of cron settings. 
 if($cfg && $cfg->isAutoCronEnabled()) { //ONLY fetch tickets if autocron is enabled!
     Cron::MailFetcher();  //Fetch mail.
-    $ost->logDebug('Auto Cron', 'Mail fetcher cron call ['.$caller.']');
+    $ost->logDebug(lang('auto_cron'), lang('mail_fetcher_cron').' ['.$caller.']');
 }
 
 $_SESSION['lastcroncall']=time();

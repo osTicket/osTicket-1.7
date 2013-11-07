@@ -48,6 +48,7 @@
  */
 
 require_once 'Net/SMTP.php';
+require_once(INCLUDE_DIR.'languages/language_control/languages_processor.php');
 
 /**
  * SMTP MX implementation of the PEAR Mail interface. Requires the Net_SMTP class.
@@ -149,43 +150,43 @@ class Mail_smtpmx extends Mail {
     var $errorCode = array(
         'not_connected' => array(
             'code'  => 1,
-            'msg'   => 'Could not connect to any mail server ({HOST}) at port {PORT} to send mail to {RCPT}.'
+            'msg'   => lang('coudnt_connect').' ({HOST}) '.lang('at_port').' {PORT} '.lang('send_email_to').' {RCPT}.'
         ),
         'failed_vrfy_rcpt' => array(
             'code'  => 2,
-            'msg'   => 'Recipient "{RCPT}" could not be veryfied.'
+            'msg'   => lang('recipient').' "{RCPT}" '.lang('not_be_veryfied')
         ),
         'failed_set_from' => array(
             'code'  => 3,
-            'msg'   => 'Failed to set sender: {FROM}.'
+            'msg'   => lang('failed_set_sender').': {FROM}.'
         ),
         'failed_set_rcpt' => array(
             'code'  => 4,
-            'msg'   => 'Failed to set recipient: {RCPT}.'
+            'msg'   => lang('fail_set_recip').': {RCPT}.'
         ),
         'failed_send_data' => array(
             'code'  => 5,
-            'msg'   => 'Failed to send mail to: {RCPT}.'
+            'msg'   => lang('fail_sent_email').': {RCPT}.'
         ),
         'no_from' => array(
             'code'  => 5,
-            'msg'   => 'No from address has be provided.'
+            'msg'   => lang('no_from_adress')
         ),
         'send_data' => array(
             'code'  => 7,
-            'msg'   => 'Failed to create Net_SMTP object.'
+            'msg'   => lang('fail_create_smtp')
         ),
         'no_mx' => array(
             'code'  => 8,
-            'msg'   => 'No MX-record for {RCPT} found.'
+            'msg'   => lang('no_mx_record').' {RCPT} '.lang('found').'.'
         ),
         'no_resolver' => array(
             'code'  => 9,
-            'msg'   => 'Could not start resolver! Install PEAR:Net_DNS or switch off "netdns"'
+            'msg'   => lang('install_pear')
         ),
         'failed_rset' => array(
             'code'  => 10,
-            'msg'   => 'RSET command failed, SMTP-connection corrupt.'
+            'msg'   => lang('command_failed')
         ),
     );
 
@@ -274,7 +275,7 @@ class Mail_smtpmx extends Mail {
     function send($recipients, $headers, $body)
     {
         if (!is_array($headers)) {
-            return PEAR::raiseError('$headers must be an array');
+            return PEAR::raiseError('$headers '.lang('must_be_array'));
         }
 
         $result = $this->_sanitizeHeaders($headers);

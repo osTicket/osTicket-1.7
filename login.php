@@ -2,7 +2,7 @@
 /*********************************************************************
     login.php
 
-    Client Login
+    Client Login 
 
     Peter Rotich <peter@osticket.com>
     Copyright (c)  2006-2013 osTicket
@@ -14,7 +14,9 @@
     vim: expandtab sw=4 ts=4 sts=4:
 **********************************************************************/
 require_once('client.inc.php');
-if(!defined('INCLUDE_DIR')) die('Fatal Error');
+require_once(INCLUDE_DIR.'languages/language_control/languages_processor.php');
+
+if(!defined('INCLUDE_DIR')) die(lang('fatal_error'));
 define('CLIENTINC_DIR',INCLUDE_DIR.'client/');
 define('OSTCLIENTINC',TRUE); //make includes happy
 
@@ -29,7 +31,7 @@ if($_POST) {
         require_once('tickets.php'); //Just in case of 'header already sent' error.
         exit;
     } elseif(!$errors['err']) {
-        $errors['err'] = 'Authentication error - try again!';
+        $errors['err'] = lang('auth_error');
     }
 }
 

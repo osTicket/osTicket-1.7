@@ -13,6 +13,8 @@
 
     vim: expandtab sw=4 ts=4 sts=4:
 **********************************************************************/
+require_once(INCLUDE_DIR.'languages/language_control/languages_processor.php');
+
 class Validator {
 
     var $input=array();
@@ -38,9 +40,9 @@ class Validator {
         $this->errors=array();
         //Check the input and make sure the fields are specified.
         if(!$source || !is_array($source))
-            $this->errors['err']='Invalid input';
+            $this->errors['err']=lang('invalid_input');
         elseif(!$this->fields || !is_array($this->fields))
-            $this->errors['err']='No fields set up';
+            $this->errors['err']=lang('no_fields_setup');
         //Abort on error
         if($this->errors)
             return false;
@@ -120,7 +122,7 @@ class Validator {
                     $this->errors[$k]=$field['error'];
                 break;
             default://If param type is not set...or handle..error out...
-                $this->errors[$k]=$field['error'].' (type not set)';
+                $this->errors[$k]=$field['error'].' ('.lang('type_not_set').')';
             endswitch;
         }
         return ($this->errors)?(FALSE):(TRUE);

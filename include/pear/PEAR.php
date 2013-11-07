@@ -150,7 +150,7 @@ class PEAR
     {
         $classname = strtolower(get_class($this));
         if ($this->_debug) {
-            print "PEAR constructor called, class=$classname\n";
+            print lang('pear_const_caleld').", class=$classname\n";
         }
 
         if ($error_class !== null) {
@@ -186,7 +186,7 @@ class PEAR
      */
     function _PEAR() {
         if ($this->_debug) {
-            printf("PEAR destructor called, class=%s\n", strtolower(get_class($this)));
+            printf(lang('pear_dest_caleld').", class=%s\n", strtolower(get_class($this)));
         }
     }
 
@@ -327,12 +327,12 @@ class PEAR
                 if (is_callable($options)) {
                     $setoptions = $options;
                 } else {
-                    trigger_error("invalid error callback", E_USER_WARNING);
+                    trigger_error(lang("invalid_error"), E_USER_WARNING);
                 }
                 break;
 
             default:
-                trigger_error("invalid error mode", E_USER_WARNING);
+                trigger_error(lang("invalid_error_mo"), E_USER_WARNING);
                 break;
         }
     }
@@ -418,18 +418,18 @@ class PEAR
                 $deleted =  $this->_checkDelExpect($error) ? true : false;
             }
 
-            return $deleted ? true : PEAR::raiseError("The expected error you submitted does not exist"); // IMPROVE ME
+            return $deleted ? true : PEAR::raiseError(lang("expected_error")); // IMPROVE ME
         } elseif (!empty($error_code)) {
             // $error_code comes alone, trying to unset it
             if ($this->_checkDelExpect($error_code)) {
                 return true;
             }
 
-            return PEAR::raiseError("The expected error you submitted does not exist"); // IMPROVE ME
+            return PEAR::raiseError(lang("expected_error")); // IMPROVE ME
         }
 
         // $error_code is empty
-        return PEAR::raiseError("The expected error you submitted is empty"); // IMPROVE ME
+        return PEAR::raiseError("exp_error_empty"); // IMPROVE ME
     }
 
     /**
@@ -586,12 +586,12 @@ class PEAR
                 if (is_callable($options)) {
                     $def_options = $options;
                 } else {
-                    trigger_error("invalid error callback", E_USER_WARNING);
+                    trigger_error(lang("invalid_error"), E_USER_WARNING);
                 }
                 break;
 
             default:
-                trigger_error("invalid error mode", E_USER_WARNING);
+                trigger_error(lang("invalid_error_mo"), E_USER_WARNING);
                 break;
         }
         $stack[] = array($mode, $options);
@@ -623,12 +623,12 @@ class PEAR
                 if (is_callable($options)) {
                     $setoptions = $options;
                 } else {
-                    trigger_error("invalid error callback", E_USER_WARNING);
+                    trigger_error(lang("invalid_error"), E_USER_WARNING);
                 }
                 break;
 
             default:
-                trigger_error("invalid error mode", E_USER_WARNING);
+                trigger_error(lang("invalid_error_mo"), E_USER_WARNING);
                 break;
         }
         return true;
@@ -891,7 +891,7 @@ class PEAR_Error
         }
 
         if ($this->mode & PEAR_ERROR_EXCEPTION) {
-            trigger_error("PEAR_ERROR_EXCEPTION is obsolete, use class PEAR_Exception for exceptions", E_USER_WARNING);
+            trigger_error("PEAR_ERROR_EXCEPTION ".lang('is_obsolet').' PEAR_Exception '.lang('for_exceptions'), E_USER_WARNING);
             eval('$e = new Exception($this->message, $this->code);throw($e);');
         }
     }

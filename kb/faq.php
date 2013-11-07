@@ -15,13 +15,14 @@
 **********************************************************************/
 require('kb.inc.php');
 require_once(INCLUDE_DIR.'class.faq.php');
+require_once(INCLUDE_DIR.'languages/language_control/languages_processor.php');
 
 $faq=$category=null;
 if($_REQUEST['id'] && !($faq=FAQ::lookup($_REQUEST['id'])))
-   $errors['err']='Unknown or invalid FAQ';
+   $errors['err']=lang('invalid_faq');
 
 if(!$faq && $_REQUEST['cid'] && !($category=Category::lookup($_REQUEST['cid'])))
-    $errors['err']='Unknown or invalid FAQ category';
+    $errors['err']=lang('invalid_faq_catg');
 
 
 $inc='knowledgebase.inc.php'; //FAQs landing page.

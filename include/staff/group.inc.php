@@ -1,19 +1,19 @@
 <?php
-if(!defined('OSTADMININC') || !$thisstaff || !$thisstaff->isAdmin()) die('Access Denied');
+if(!defined('OSTADMININC') || !$thisstaff || !$thisstaff->isAdmin()) die(lang('access_denied'));
 $info=array();
 $qstr='';
 if($group && $_REQUEST['a']!='add'){
-    $title='Update Group';
+    $title=lang('update_group');
     $action='update';
-    $submit_text='Save Changes';
+    $submit_text=lang('save_changes');
     $info=$group->getInfo();
     $info['id']=$group->getId();
     $info['depts']=$group->getDepartments();
     $qstr.='&id='.$group->getId();
 }else {
-    $title='Add New Group';
+    $title=lang('add_new_group');
     $action='create';
-    $submit_text='Create Group';
+    $submit_text=lang('create_group');
     $info['isactive']=isset($info['isactive'])?$info['isactive']:1;
     $info['can_create_tickets']=isset($info['can_create_tickets'])?$info['can_create_tickets']:1;
     $qstr.='&a='.$_REQUEST['a'];
@@ -25,20 +25,20 @@ $info=Format::htmlchars(($errors && $_POST)?$_POST:$info);
  <input type="hidden" name="do" value="<?php echo $action; ?>">
  <input type="hidden" name="a" value="<?php echo Format::htmlchars($_REQUEST['a']); ?>">
  <input type="hidden" name="id" value="<?php echo $info['id']; ?>">
- <h2>User Group</h2>
+ <h2><?php echo lang("user_group"); ?></h2>
  <table class="form_table" width="940" border="0" cellspacing="0" cellpadding="2">
     <thead>
         <tr>
             <th colspan="2">
                 <h4><?php echo $title; ?></h4>
-                <em><strong>Group Information</strong>: Disabled group will limit staff members access. Admins are exempted.</em>
+                <em><strong><?php echo lang("group_info"); ?></strong>: <?php echo lang("limit_staff_memb_acc"); ?>.</em>
             </th>
         </tr>
     </thead>
     <tbody>
         <tr>
             <td width="180" class="required">
-                Name:
+                <?php echo lang("name"); ?>:
             </td>
             <td>
                 <input type="text" size="30" name="name" value="<?php echo $info['name']; ?>">
@@ -47,110 +47,110 @@ $info=Format::htmlchars(($errors && $_POST)?$_POST:$info);
         </tr>
         <tr>
             <td width="180" class="required">
-                Status:
+                <?php echo lang("status"); ?>:
             </td>
             <td>
-                <input type="radio" name="isactive" value="1" <?php echo $info['isactive']?'checked="checked"':''; ?>><strong>Active</strong>
-                <input type="radio" name="isactive" value="0" <?php echo !$info['isactive']?'checked="checked"':''; ?>><strong>Disabled</strong>
+                <input type="radio" name="isactive" value="1" <?php echo $info['isactive']?'checked="checked"':''; ?>><strong><?php echo lang("active"); ?></strong>
+                <input type="radio" name="isactive" value="0" <?php echo !$info['isactive']?'checked="checked"':''; ?>><strong><?php echo lang("disabled"); ?></strong>
                 &nbsp;<span class="error">*&nbsp;<?php echo $errors['status']; ?></span>
             </td>
         </tr>
         <tr>
             <th colspan="2">
-                <em><strong>Group Permissions</strong>: Applies to all group members&nbsp;</em>
+                <em><strong><?php echo lang("group_permissions"); ?></strong>: <?php echo lang("applies_to_group_memb"); ?>&nbsp;</em>
             </th>
         </tr>
-        <tr><td>Can <b>Create</b> Tickets</td>
+        <tr><td><?php echo lang("can_create_tickets"); ?></td>
             <td>
-                <input type="radio" name="can_create_tickets"  value="1"   <?php echo $info['can_create_tickets']?'checked="checked"':''; ?> />Yes
+                <input type="radio" name="can_create_tickets"  value="1"   <?php echo $info['can_create_tickets']?'checked="checked"':''; ?> /><?php echo lang("yes"); ?>
                 &nbsp;&nbsp;
-                <input type="radio" name="can_create_tickets"  value="0"   <?php echo !$info['can_create_tickets']?'checked="checked"':''; ?> />No
-                &nbsp;&nbsp;<i>Ability to open tickets on behalf of clients.</i>
+                <input type="radio" name="can_create_tickets"  value="0"   <?php echo !$info['can_create_tickets']?'checked="checked"':''; ?> /><?php echo lang("no"); ?>
+                &nbsp;&nbsp;<i><?php echo lang("ability_open_ticket"); ?>.</i>
             </td>
         </tr>
-        <tr><td>Can <b>Edit</b> Tickets</td>
+        <tr><td><?php echo lang("can_edit_tickets"); ?></td>
             <td>
-                <input type="radio" name="can_edit_tickets"  value="1"   <?php echo $info['can_edit_tickets']?'checked="checked"':''; ?> />Yes
+                <input type="radio" name="can_edit_tickets"  value="1"   <?php echo $info['can_edit_tickets']?'checked="checked"':''; ?> /><?php echo lang("yes"); ?>
                 &nbsp;&nbsp;
-                <input type="radio" name="can_edit_tickets"  value="0"   <?php echo !$info['can_edit_tickets']?'checked="checked"':''; ?> />No
-                &nbsp;&nbsp;<i>Ability to edit tickets.</i>
+                <input type="radio" name="can_edit_tickets"  value="0"   <?php echo !$info['can_edit_tickets']?'checked="checked"':''; ?> /><?php echo lang("no"); ?>
+                &nbsp;&nbsp;<i><?php echo lang("ability_open_ticket"); ?>.</i>
             </td>
         </tr>
-        <tr><td>Can <b>Post Reply</b></td>
+        <tr><td><?php echo lang("can_post_reply"); ?></td>
             <td>
-                <input type="radio" name="can_post_ticket_reply"  value="1"   <?php echo $info['can_post_ticket_reply']?'checked="checked"':''; ?> />Yes
+                <input type="radio" name="can_post_ticket_reply"  value="1"   <?php echo $info['can_post_ticket_reply']?'checked="checked"':''; ?> /><?php echo lang("yes"); ?>
                 &nbsp;&nbsp;
-                <input type="radio" name="can_post_ticket_reply"  value="0"   <?php echo !$info['can_post_ticket_reply']?'checked="checked"':''; ?> />No
-                &nbsp;&nbsp;<i>Ability to post a ticket reply.</i>
+                <input type="radio" name="can_post_ticket_reply"  value="0"   <?php echo !$info['can_post_ticket_reply']?'checked="checked"':''; ?> /><?php echo lang("no"); ?>
+                &nbsp;&nbsp;<i><?php echo lang("ability_post_ticket"); ?>.</i>
             </td>
         </tr>
-        <tr><td>Can <b>Close</b> Tickets</td>
+        <tr><td><?php echo lang("can_close_tickets"); ?></td>
             <td>
-                <input type="radio" name="can_close_tickets"  value="1" <?php echo $info['can_close_tickets']?'checked="checked"':''; ?> />Yes
+                <input type="radio" name="can_close_tickets"  value="1" <?php echo $info['can_close_tickets']?'checked="checked"':''; ?> /><?php echo lang("yes"); ?>
                 &nbsp;&nbsp;
-                <input type="radio" name="can_close_tickets"  value="0" <?php echo !$info['can_close_tickets']?'checked="checked"':''; ?> />No
-                &nbsp;&nbsp;<i>Ability to close tickets. Staff can still post a response.</i>
+                <input type="radio" name="can_close_tickets"  value="0" <?php echo !$info['can_close_tickets']?'checked="checked"':''; ?> /><?php echo lang("no"); ?>
+                &nbsp;&nbsp;<i><?php echo lang("ability_close_ticket"); ?>.</i>
             </td>
         </tr>
-        <tr><td>Can <b>Assign</b> Tickets</td>
+        <tr><td><?php echo lang("can_assign_ticket"); ?></td>
             <td>
-                <input type="radio" name="can_assign_tickets"  value="1" <?php echo $info['can_assign_tickets']?'checked="checked"':''; ?> />Yes
+                <input type="radio" name="can_assign_tickets"  value="1" <?php echo $info['can_assign_tickets']?'checked="checked"':''; ?> /><?php echo lang("yes"); ?>
                 &nbsp;&nbsp;
-                <input type="radio" name="can_assign_tickets"  value="0" <?php echo !$info['can_assign_tickets']?'checked="checked"':''; ?> />No
-                &nbsp;&nbsp;<i>Ability to assign tickets to staff members.</i>
+                <input type="radio" name="can_assign_tickets"  value="0" <?php echo !$info['can_assign_tickets']?'checked="checked"':''; ?> /><?php echo lang("no"); ?>
+                &nbsp;&nbsp;<i><?php echo lang("ability_assign_ticket"); ?>.</i>
             </td>
         </tr>
-        <tr><td>Can <b>Transfer</b> Tickets</td>
+        <tr><td><?php echo lang("can_transfer_tickets"); ?></td>
             <td>
-                <input type="radio" name="can_transfer_tickets"  value="1" <?php echo $info['can_transfer_tickets']?'checked="checked"':''; ?> />Yes
+                <input type="radio" name="can_transfer_tickets"  value="1" <?php echo $info['can_transfer_tickets']?'checked="checked"':''; ?> /><?php echo lang("yes"); ?>
                 &nbsp;&nbsp;
-                <input type="radio" name="can_transfer_tickets"  value="0" <?php echo !$info['can_transfer_tickets']?'checked="checked"':''; ?> />No
-                &nbsp;&nbsp;<i>Ability to transfer tickets between departments.</i>
+                <input type="radio" name="can_transfer_tickets"  value="0" <?php echo !$info['can_transfer_tickets']?'checked="checked"':''; ?> /><?php echo lang("no"); ?>
+                &nbsp;&nbsp;<i><?php echo lang("ability_transfer_ticket"); ?>.</i>
             </td>
         </tr>
-        <tr><td>Can <b>Delete</b> Tickets</td>
+        <tr><td><?php echo lang("can_delete_tickets"); ?></td>
             <td>
-                <input type="radio" name="can_delete_tickets"  value="1"   <?php echo $info['can_delete_tickets']?'checked="checked"':''; ?> />Yes
+                <input type="radio" name="can_delete_tickets"  value="1"   <?php echo $info['can_delete_tickets']?'checked="checked"':''; ?> /><?php echo lang("yes"); ?>
                 &nbsp;&nbsp;
-                <input type="radio" name="can_delete_tickets"  value="0"   <?php echo !$info['can_delete_tickets']?'checked="checked"':''; ?> />No
-                &nbsp;&nbsp;<i>Ability to delete tickets (Deleted tickets can't be recovered!)</i>
+                <input type="radio" name="can_delete_tickets"  value="0"   <?php echo !$info['can_delete_tickets']?'checked="checked"':''; ?> /><?php echo lang("no"); ?>
+                &nbsp;&nbsp;<i><?php echo lang("ability_delete_ticket"); ?> (<?php echo lang("cant_recover_d_ticket"); ?>!)</i>
             </td>
         </tr>
-        <tr><td>Can Ban Emails</td>
+        <tr><td><?php echo lang("can_ban_emails"); ?></td>
             <td>
-                <input type="radio" name="can_ban_emails"  value="1" <?php echo $info['can_ban_emails']?'checked="checked"':''; ?> />Yes
+                <input type="radio" name="can_ban_emails"  value="1" <?php echo $info['can_ban_emails']?'checked="checked"':''; ?> /><?php echo lang("yes"); ?>
                 &nbsp;&nbsp;
-                <input type="radio" name="can_ban_emails"  value="0" <?php echo !$info['can_ban_emails']?'checked="checked"':''; ?> />No
-                &nbsp;&nbsp;<i>Ability to add/remove emails from banlist via ticket interface.</i>
+                <input type="radio" name="can_ban_emails"  value="0" <?php echo !$info['can_ban_emails']?'checked="checked"':''; ?> /><?php echo lang("no"); ?>
+                &nbsp;&nbsp;<i><?php echo lang("ability_add_email"); ?>.</i>
             </td>
         </tr>
-        <tr><td>Can Manage Premade</td>
+        <tr><td><?php echo lang("can_manage_premade"); ?></td>
             <td>
-                <input type="radio" name="can_manage_premade"  value="1" <?php echo $info['can_manage_premade']?'checked="checked"':''; ?> />Yes
+                <input type="radio" name="can_manage_premade"  value="1" <?php echo $info['can_manage_premade']?'checked="checked"':''; ?> /><?php echo lang("yes"); ?>
                 &nbsp;&nbsp;
-                <input type="radio" name="can_manage_premade"  value="0" <?php echo !$info['can_manage_premade']?'checked="checked"':''; ?> />No
-                &nbsp;&nbsp;<i>Ability to add/update/disable/delete canned responses and attachments.</i>
+                <input type="radio" name="can_manage_premade"  value="0" <?php echo !$info['can_manage_premade']?'checked="checked"':''; ?> /><?php echo lang("no"); ?>
+                &nbsp;&nbsp;<i><?php echo lang("attach_not_apply"); ?>.</i>
             </td>
         </tr>
-        <tr><td>Can Manage FAQ</td>
+        <tr><td><?php echo lang("can_manage_faq"); ?></td>
             <td>
-                <input type="radio" name="can_manage_faq"  value="1" <?php echo $info['can_manage_faq']?'checked="checked"':''; ?> />Yes
+                <input type="radio" name="can_manage_faq"  value="1" <?php echo $info['can_manage_faq']?'checked="checked"':''; ?> /><?php echo lang("yes"); ?>
                 &nbsp;&nbsp;
-                <input type="radio" name="can_manage_faq"  value="0" <?php echo !$info['can_manage_faq']?'checked="checked"':''; ?> />No
-                &nbsp;&nbsp;<i>Ability to add/update/disable/delete knowledgebase categories and FAQs.</i>
+                <input type="radio" name="can_manage_faq"  value="0" <?php echo !$info['can_manage_faq']?'checked="checked"':''; ?> /><?php echo lang("no"); ?>
+                &nbsp;&nbsp;<i><?php echo lang("ability_knowledgbase"); ?>.</i>
             </td>
         </tr>
-        <tr><td>Can View Staff Stats.</td>
+        <tr><td><?php echo lang("can_view_staff"); ?></td>
             <td>
-                <input type="radio" name="can_view_staff_stats"  value="1" <?php echo $info['can_view_staff_stats']?'checked="checked"':''; ?> />Yes
+                <input type="radio" name="can_view_staff_stats"  value="1" <?php echo $info['can_view_staff_stats']?'checked="checked"':''; ?> /><?php echo lang("yes"); ?>
                 &nbsp;&nbsp;
-                <input type="radio" name="can_view_staff_stats"  value="0" <?php echo !$info['can_view_staff_stats']?'checked="checked"':''; ?> />No
-                &nbsp;&nbsp;<i>Ability to view stats of other staff members in allowed departments.</i>
+                <input type="radio" name="can_view_staff_stats"  value="0" <?php echo !$info['can_view_staff_stats']?'checked="checked"':''; ?> /><?php echo lang("no"); ?>
+                &nbsp;&nbsp;<i><?php echo lang("ability_view_stats"); ?>.</i>
             </td>
         </tr>
         <tr>
             <th colspan="2">
-                <em><strong>Department Access</strong>: Check all departments the group members are allowed to access.&nbsp;&nbsp;&nbsp;<a id="selectAll" href="#deptckb">Select All</a>&nbsp;&nbsp;<a id="selectNone" href="#deptckb">Select None</a>&nbsp;&nbsp;</em>
+                <em><strong><?php echo lang("department_access"); ?></strong>: <?php echo lang("check_departm"); ?>.&nbsp;&nbsp;&nbsp;<a id="selectAll" href="#deptckb"><?php echo lang("select_all"); ?></a>&nbsp;&nbsp;<a id="selectNone" href="#deptckb">Select None</a>&nbsp;&nbsp;</em>
             </th>
         </tr>
         <?php
@@ -164,7 +164,7 @@ $info=Format::htmlchars(($errors && $_POST)?$_POST:$info);
         ?>
         <tr>
             <th colspan="2">
-                <em><strong>Admin Notes</strong>: Internal notes viewable by all admins.&nbsp;</em>
+                <em><strong><?php echo lang("admin_notes"); ?></strong>: <?php echo lang("internal_notes_view"); ?>.&nbsp;</em>
             </th>
         </tr>
         <tr>
@@ -176,7 +176,7 @@ $info=Format::htmlchars(($errors && $_POST)?$_POST:$info);
 </table>
 <p style="padding-left:225px;">
     <input type="submit" name="submit" value="<?php echo $submit_text; ?>">
-    <input type="reset"  name="reset"  value="Reset">
-    <input type="button" name="cancel" value="Cancel" onclick='window.location.href="groups.php"'>
+    <input type="reset"  name="<?php echo lang("reset"); ?>"  value="<?php echo lang("reset"); ?>">
+    <input type="button" name="cancel" value="<?php echo lang("cancel"); ?>" onclick='window.location.href="groups.php"'>
 </p>
 </form>

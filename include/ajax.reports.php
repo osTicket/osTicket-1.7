@@ -19,19 +19,20 @@
 if(!defined('INCLUDE_DIR')) die('403');
 
 include_once(INCLUDE_DIR.'class.ticket.php');
+require_once(INCLUDE_DIR.'languages/language_control/languages_processor.php');
 
 /**
  * Overview Report
- *
+ * 
  * The overview report allows for the display of basic ticket statistics in
  * both graphical and tabular formats.
  */
 class OverviewReportAjaxAPI extends AjaxController {
     function enumTabularGroups() {
-        return $this->encode(array("dept"=>"Department", "topic"=>"Topics",
+        return $this->encode(array("dept"=>lang("department"), "topic"=>lang("topics"),
             # XXX: This will be relative to permissions based on the
             # logged-in-staff. For basic staff, this will be 'My Stats'
-            "staff"=>"Staff"));
+            "staff"=>lang("staff")));
     }
 
     function getData() {
@@ -55,7 +56,7 @@ class OverviewReportAjaxAPI extends AjaxController {
                 "pk" => "dept_id",
                 "sort" => 'T1.dept_name',
                 "fields" => 'T1.dept_name',
-                "headers" => array('Department'),
+                "headers" => array(lang('department')),
                 "filter" => ('T1.dept_id IN ('.implode(',', db_input($thisstaff->getDepts())).')')
             ),
             "topic" => array(
@@ -65,7 +66,7 @@ class OverviewReportAjaxAPI extends AjaxController {
                 "fields" => "CONCAT_WS(' / ',"
                     ."(SELECT P.topic FROM ".TOPIC_TABLE." P WHERE P.topic_id = T1.topic_pid),"
                     ."T1.topic) as name ",
-                "headers" => array('Help Topic'),
+                "headers" => array(lang('help_topic')),
                 "filter" => '1'
             ),
             "staff" => array(
@@ -73,17 +74,17 @@ class OverviewReportAjaxAPI extends AjaxController {
                 "pk" => 'staff_id',
                 "sort" => 'name',
                 "fields" => "CONCAT_WS(' ', T1.firstname, T1.lastname) as name",
-                "headers" => array('Staff Member'),
+                "headers" => array(lang('staff_members')),
                 "filter" =>
                     ('T1.staff_id=S1.staff_id
-                      AND
+                      AND 
                       (T1.staff_id='.db_input($thisstaff->getId())
                         .(($depts=$thisstaff->getManagedDepartments())?
                             (' OR T1.dept_id IN('.implode(',', db_input($depts)).')'):'')
                         .(($thisstaff->canViewStaffStats())?
                             (' OR T1.dept_id IN('.implode(',', db_input($thisstaff->getDepts())).')'):'')
                      .')'
-                     )
+                     ) 
             )
         );
         $group = $this->get('group', 'dept');
@@ -98,10 +99,10 @@ class OverviewReportAjaxAPI extends AjaxController {
                 COUNT(*)-COUNT(NULLIF(A1.state, "overdue")) AS Overdue,
                 COUNT(*)-COUNT(NULLIF(A1.state, "closed")) AS Closed,
                 COUNT(*)-COUNT(NULLIF(A1.state, "reopened")) AS Reopened
-            FROM '.$info['table'].' T1
-                LEFT JOIN '.TICKET_EVENT_TABLE.' A1
+            FROM '.$info['table'].' T1 
+                LEFT JOIN '.TICKET_EVENT_TABLE.' A1 
                     ON (A1.'.$info['pk'].'=T1.'.$info['pk'].'
-                         AND NOT annulled
+                         AND NOT annulled 
                          AND (A1.timestamp BETWEEN '.$start.' AND '.$stop.'))
                 LEFT JOIN '.STAFF_TABLE.' S1 ON (S1.staff_id=A1.staff_id)
             WHERE '.$info['filter'].'
@@ -110,7 +111,7 @@ class OverviewReportAjaxAPI extends AjaxController {
 
             array(1, 'SELECT '.$info['fields'].',
                 FORMAT(AVG(DATEDIFF(T2.closed, T2.created)),1) AS ServiceTime
-            FROM '.$info['table'].' T1
+            FROM '.$info['table'].' T1 
                 LEFT JOIN '.TICKET_TABLE.' T2 ON (T2.'.$info['pk'].'=T1.'.$info['pk'].')
                 LEFT JOIN '.STAFF_TABLE.' S1 ON (S1.staff_id=T2.staff_id)
             WHERE '.$info['filter'].' AND T2.closed BETWEEN '.$start.' AND '.$stop.'
@@ -119,7 +120,7 @@ class OverviewReportAjaxAPI extends AjaxController {
 
             array(1, 'SELECT '.$info['fields'].',
                 FORMAT(AVG(DATEDIFF(B2.created, B1.created)),1) AS ResponseTime
-            FROM '.$info['table'].' T1
+            FROM '.$info['table'].' T1 
                 LEFT JOIN '.TICKET_TABLE.' T2 ON (T2.'.$info['pk'].'=T1.'.$info['pk'].')
                 LEFT JOIN '.TICKET_THREAD_TABLE.' B2 ON (B2.ticket_id = T2.ticket_id
                     AND B2.thread_type="R")
@@ -153,8 +154,8 @@ class OverviewReportAjaxAPI extends AjaxController {
                     $r[] = null;
         }
         return array("columns" => array_merge($info['headers'],
-                        array('Opened','Assigned','Overdue','Closed','Reopened',
-                              'Service Time','Response Time')),
+                        array(lang('opened'),lang('assigned'),lang('overdue'),lang('closed'),lang('reopened'),
+                              lang('service_time'),lang('response_time'))),
                      "data" => $rows);
     }
 
@@ -174,7 +175,7 @@ class OverviewReportAjaxAPI extends AjaxController {
 
     function getPlotData() {
 
-
+                
         if(($start = $this->get('start', 'last month'))) {
             $stop = $this->get('stop', 'now');
             if (substr($stop, 0, 1) == '+')
@@ -193,7 +194,7 @@ class OverviewReportAjaxAPI extends AjaxController {
                 .') AND FROM_UNIXTIME('.db_input($stop)
                 .') ORDER BY 1');
         $events = array();
-        while ($row = db_fetch_row($res)) $events[] = $row[0];
+        while ($row = db_fetch_row($res)) $events[] = lang($row[0]);
 
         # TODO: Handle user => db timezone offset
         # XXX: Implement annulled column from the %ticket_event table
@@ -211,7 +212,6 @@ class OverviewReportAjaxAPI extends AjaxController {
 
         $time = null; $times = array();
         # Iterate over result set, adding zeros for missing ticket events
-        $slots = array();
         while ($row = db_fetch_row($res)) {
             $row_time = strtotime($row[1]);
             if ($time != $row_time) {
@@ -227,11 +227,12 @@ class OverviewReportAjaxAPI extends AjaxController {
                 $times[] = $time = $row_time;
             }
             # Keep track of states for this timeframe
-            $slots[] = $row[0];
-            $plots[$row[0]][] = (int)$row[2];
+            $slots[] = lang($row[0]);
+            $plots[lang($row[0])][] = (int)$row[2];
         }
         foreach (array_diff($events, $slots) as $slot)
             $plots[$slot][] = 0;
+
         return $this->encode(array("times" => $times, "plots" => $plots,
             "events"=>$events));
     }

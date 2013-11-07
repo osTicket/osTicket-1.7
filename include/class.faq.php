@@ -14,6 +14,7 @@
 **********************************************************************/
 require_once('class.file.php');
 require_once('class.category.php');
+require_once(INCLUDE_DIR.'languages/language_control/languages_processor.php');
 
 class FAQ {
 
@@ -38,7 +39,7 @@ class FAQ {
             .' WHERE faq.faq_id='.db_input($id)
             .' GROUP BY faq.faq_id';
 
-        if (!($res=db_query($sql)) || !db_num_rows($res))
+        if (!($res=db_query($sql)) || !db_num_rows($res)) 
             return false;
 
         $this->ht = db_fetch_array($res);
@@ -66,9 +67,9 @@ class FAQ {
 
     function getCreateDate() { return $this->ht['created']; }
     function getUpdateDate() { return $this->ht['updated']; }
-
+    
     function getCategoryId() { return $this->ht['category_id']; }
-    function getCategory() {
+    function getCategory() { 
         if(!$this->category && $this->getCategoryId())
             $this->category = Category::lookup($this->getCategoryId());
 
@@ -86,7 +87,7 @@ class FAQ {
 
     function getHelpTopics() {
         //XXX: change it to obj (when needed)!
-
+     
         if (!isset($this->topics)) {
             $this->topics = array();
             $sql='SELECT t.topic_id, CONCAT_WS(" / ", pt.topic, t.topic) as name  FROM '.TOPIC_TABLE.' t '
@@ -159,7 +160,7 @@ class FAQ {
             return false;
 
         $this->updateTopics($vars['topics']);
-
+                    
         //Delete removed attachments.
         $keepers = $vars['files']?$vars['files']:array();
         if(($attachments = $this->getAttachments())) {
@@ -211,12 +212,12 @@ class FAQ {
 
             $str.=sprintf('<a class="Icon file" href="file.php?h=%s" target="%s">%s</a>%s&nbsp;%s',
                     $hash, $target, Format::htmlchars($attachment['name']), $size, $separator);
-
+        
             }
         }
         return $str;
     }
-
+    
     function uploadAttachments($files) {
 
         $i=0;
@@ -258,40 +259,40 @@ class FAQ {
 
 
     function delete() {
-
+       
         $sql='DELETE FROM '.FAQ_TABLE
             .' WHERE faq_id='.db_input($this->getId())
             .' LIMIT 1';
         if(!db_query($sql) || !db_affected_rows())
             return false;
-
+        
         //Cleanup help topics.
         db_query('DELETE FROM '.FAQ_TOPIC_TABLE.' WHERE faq_id='.db_input($this->id));
         //Cleanup attachments.
         $this->deleteAttachments();
-
+        
         return true;
     }
 
     /* ------------------> Static methods <--------------------- */
-
+   
     function add($vars, &$errors) {
         if(!($id=self::create($vars, $errors)))
             return false;
 
         if(($faq=self::lookup($id))) {
             $faq->updateTopics($vars['topics']);
-
+               
             if($_FILES['attachments'] && ($files=AttachmentFile::format($_FILES['attachments'])))
                 $faq->uploadAttachments($files);
 
             $faq->reload();
         }
-
+            
         return $faq;
     }
 
-    function create($vars, &$errors) {
+    function create($vars, &$errors) {   
         return self::save(0, $vars, $errors);
     }
 
@@ -319,12 +320,12 @@ class FAQ {
 
     function findByQuestion($question) {
 
-        if(($id=self::findIdByQuestion($question)))
+        if(($id=self::getIdByQuestion($question)))
             return self::lookup($id);
 
         return false;
     }
-
+    
     function save($id, $vars, &$errors, $validation=false) {
 
         //Cleanup.
@@ -332,18 +333,18 @@ class FAQ {
 
         //validate
         if($id && $id!=$vars['id'])
-            $errors['err'] = 'Internal error. Try again';
+            $errors['err'] = lang('internal_error_try');
 
         if(!$vars['question'])
-            $errors['question'] = 'Question required';
+            $errors['question'] = lang('question_req');
         elseif(($qid=self::findIdByQuestion($vars['question'])) && $qid!=$id)
-            $errors['question'] = 'Question already exists';
+            $errors['question'] = lang('question_exist');
 
         if(!$vars['category_id'] || !($category=Category::lookup($vars['category_id'])))
-            $errors['category_id'] = 'Category is required';
+            $errors['category_id'] = lang('categ_reqired');
 
         if(!$vars['answer'])
-            $errors['answer'] = 'FAQ answer is required';
+            $errors['answer'] = lang('faq_answer_req');
 
         if($errors || $validation) return (!$errors);
 
@@ -359,15 +360,15 @@ class FAQ {
             $sql='UPDATE '.FAQ_TABLE.' SET '.$sql.' WHERE faq_id='.db_input($id);
             if(db_query($sql))
                 return true;
-
-            $errors['err']='Unable to update FAQ.';
+           
+            $errors['err']=lang('cant_upd_faq');
 
         } else {
             $sql='INSERT INTO '.FAQ_TABLE.' SET '.$sql.',created=NOW()';
             if(db_query($sql) && ($id=db_insert_id()))
                 return $id;
 
-            $errors['err']='Unable to create FAQ. Internal error';
+            $errors['err']=lang('cant_creat_faq_only');
         }
 
         return false;

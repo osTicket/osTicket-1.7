@@ -15,6 +15,7 @@
 **********************************************************************/
 require('staff.inc.php');
 include_once(INCLUDE_DIR.'class.category.php');
+require_once(INCLUDE_DIR.'languages/language_control/languages_processor.php');
 
 /* check permission */
 if(!$thisstaff || !$thisstaff->canManageFAQ()) {
@@ -25,30 +26,30 @@ if(!$thisstaff || !$thisstaff->canManageFAQ()) {
 
 $category=null;
 if($_REQUEST['id'] && !($category=Category::lookup($_REQUEST['id'])))
-    $errors['err']='Unknown or invalid category ID.';
+    $errors['err']=lang('invalid_catg_id');
 
 if($_POST){
     switch(strtolower($_POST['do'])) {
         case 'update':
             if(!$category) {
-                $errors['err']='Unknown or invalid category.';
+                $errors['err']=lang('invalid_category');
             } elseif($category->update($_POST,$errors)) {
-                $msg='Category updated successfully';
+                $msg=lang('category_updated');
             } elseif(!$errors['err']) {
-                $errors['err']='Error updating category. Try again!';
+                $errors['err']=lang('error_update_cat');
             }
             break;
         case 'create':
             if(($id=Category::create($_POST,$errors))) {
-                $msg='Category added successfully';
+                $msg=lang('catg_added_success');
                 $_REQUEST['a']=null;
             } elseif(!$errors['err']) {
-                $errors['err']='Unable to add category. Correct error(s) below and try again.';
+                $errors['err']=lang('cant_add_category').' '.lang('correct_errors');
             }
             break;
         case 'mass_process':
             if(!$_POST['ids'] || !is_array($_POST['ids']) || !count($_POST['ids'])) {
-                $errors['err']='You must select at least one category';
+                $errors['err']=lang('select_one_catg');
             } else {
                 $count=count($_POST['ids']);
                 switch(strtolower($_POST['a'])) {
@@ -58,11 +59,11 @@ if($_POST){
                     
                         if(db_query($sql) && ($num=db_affected_rows())) {
                             if($num==$count)
-                                $msg = 'Selected categories made PUBLIC';
+                                $msg = lang('catg_make_public');
                             else
-                                $warn = "$num of $count selected categories made PUBLIC";
+                                $warn = "$num ".lang('of')." $count ".lang('catg_make_public');
                         } else {
-                            $errors['err'] = 'Unable to enable selected categories public.';
+                            $errors['err'] = lang('cant_enable_catg');
                         }
                         break;
                     case 'make_private':
@@ -71,11 +72,11 @@ if($_POST){
 
                         if(db_query($sql) && ($num=db_affected_rows())) {
                             if($num==$count)
-                                $msg = 'Selected categories made PRIVATE';
+                                $msg = lang('categories_private');
                             else
-                                $warn = "$num of $count selected categories made PRIVATE";
+                                $warn = "$num ".lang('of')." $count ".lang('categories_private');
                         } else {
-                            $errors['err'] = 'Unable to disable selected categories PRIVATE';
+                            $errors['err'] = lang('cant_disable_pcatg');
                         }
                         break;
                     case 'delete':
@@ -86,19 +87,19 @@ if($_POST){
                         }
 
                         if($i==$count)
-                            $msg = 'Selected categories deleted successfully';
+                            $msg = lang('categories_deleted');
                         elseif($i>0)
-                            $warn = "$i of $count selected categories deleted";
+                            $warn = "$i ".lang('of')." $count ".lang('scatg_deleted');
                         elseif(!$errors['err'])
-                            $errors['err'] = 'Unable to delete selected categories';
+                            $errors['err'] = lang('cant_delete_catg');
                         break;
                     default:
-                        $errors['err']='Unknown action/command';
+                        $errors['err']=lang('unknown_command');
                 }
             }
             break;
         default:
-            $errors['err']='Unknown action';
+            $errors['err']=lang('unknown_action_only');
             break;
     }
 }

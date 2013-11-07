@@ -16,19 +16,21 @@
 # Override staffLoginPage() defined in staff.inc.php to return an
 # HTTP/Forbidden status rather than the actual login page.
 # XXX: This should be moved to the AjaxController class
+
 function staffLoginPage($msg='Unauthorized') {
-    Http::response(403,'Must login: '.Format::htmlchars($msg));
+    Http::response(403,lang('must_login').': '.Format::htmlchars($msg));
     exit;
 }
 
 require('staff.inc.php');
+require_once(INCLUDE_DIR.'languages/language_control/languages_processor.php');
 
 //Clean house...don't let the world see your crap.
-ini_set('display_errors','0'); //Disable error display
-ini_set('display_startup_errors','0');
+ini_set('display_errors','1'); //Disable error display
+ini_set('display_startup_errors','1');
 
 //TODO: disable direct access via the browser? i,e All request must have REFER?
-if(!defined('INCLUDE_DIR'))	Http::response(500, 'Server configuration error');
+if(!defined('INCLUDE_DIR'))	Http::response(500, lang('server_conf_error'));
 
 require_once INCLUDE_DIR.'/class.dispatcher.php';
 require_once INCLUDE_DIR.'/class.ajax.php';
@@ -53,6 +55,7 @@ $dispatcher = patterns('',
         url_get('^table$', 'getTabularData')
     )),
     url_get('^/users$', array('ajax.users.php:UsersAjaxAPI', 'search')),
+    url_get('^/template$', array('ajax.template.php:TemplateAjaxAPI', 'getTemplateByLang')),
     url('^/tickets/', patterns('ajax.tickets.php:TicketsAjaxAPI',
         url_get('^(?P<tid>\d+)/preview', 'previewTicket'),
         url_post('^(?P<tid>\d+)/lock', 'acquireLock'),

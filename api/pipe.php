@@ -17,10 +17,11 @@
 ini_set('memory_limit', '256M'); //The concern here is having enough mem for emails with attachments.
 @chdir(realpath(dirname(__FILE__)).'/'); //Change dir.
 require('api.inc.php');
+require_once(INCLUDE_DIR.'languages/language_control/languages_processor.php');
 
 //Only local piping supported via pipe.php
 if (!osTicket::is_cli())
-    die('pipe.php only supports local piping - use http -> api/tickets.email');
+    die('pipe.php '.lang('only_support_local_p').' http -> api/tickets.email');
 
 require_once(INCLUDE_DIR.'api.tickets.php');
 PipeApiController::process();

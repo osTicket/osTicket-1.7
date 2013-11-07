@@ -15,57 +15,58 @@
 **********************************************************************/
 require('admin.inc.php');
 include_once(INCLUDE_DIR.'class.template.php');
+require_once(INCLUDE_DIR.'languages/language_control/languages_processor.php');
 $template=null;
 if($_REQUEST['tpl_id'] &&
         !($template=EmailTemplateGroup::lookup($_REQUEST['tpl_id'])))
-    $errors['err']='Unknown or invalid template group ID.';
+    $errors['err']=lang('Unknown or invalid template group ID.');
 elseif($_REQUEST['id'] &&
         !($template=EmailTemplate::lookup($_REQUEST['id'])))
-    $errors['err']='Unknown or invalid template ID.';
+    $errors['err']=lang('Unknown or invalid template ID.');
 
 if($_POST){
     switch(strtolower($_POST['do'])){
         case 'updatetpl':
             if(!$template){
-                $errors['err']='Unknown or invalid template';
+                $errors['err']=lang('Unknown or invalid template');
             }elseif($template->update($_POST,$errors)){
                 $template->reload();
-                $msg='Message template updated successfully';
+                $msg=lang('Message template updated successfully');
             }elseif(!$errors['err']){
-                $errors['err']='Error updating message template. Try again!';
+                $errors['err']=lang('error_update_temp');
             }
             break;
         case 'implement':
             if(!$template){
-                $errors['err']='Unknown or invalid template';
+                $errors['err']=lang('Unknown or invalid template');
             }elseif($new = EmailTemplate::add($_POST,$errors)){
                 $template = $new;
-                $msg='Message template updated successfully';
+                $msg=lang('Message template updated successfully');
             }elseif(!$errors['err']){
-                $errors['err']='Error updating message template. Try again!';
+                $errors['err']=lang('error_update_temp');
             }
             break;
         case 'update':
             if(!$template){
-                $errors['err']='Unknown or invalid template';
+                $errors['err']=lang('Unknown or invalid template');
             }elseif($template->update($_POST,$errors)){
-                $msg='Template updated successfully';
+                $msg=lang('Template updated successfully');
             }elseif(!$errors['err']){
-                $errors['err']='Error updating template. Try again!';
+                $errors['err']=lang('Error updating template. Try again!');
             }
             break;
         case 'add':
             if(($new=EmailTemplateGroup::add($_POST,$errors))){
                 $template=$new;
-                $msg='Template added successfully';
+                $msg=lang('Template added successfully');
                 $_REQUEST['a']=null;
             }elseif(!$errors['err']){
-                $errors['err']='Unable to add template. Correct error(s) below and try again.';
+                $errors['err']=lang('Unable to add template. Correct error(s) below and try again.');
             }
             break;
         case 'mass_process':
             if(!$_POST['ids'] || !is_array($_POST['ids']) || !count($_POST['ids'])) {
-                $errors['err']='You must select at least one template to process.';
+                $errors['err']=lang('You must select at least one template to process.');
             } else {
                 $count=count($_POST['ids']);
                 switch(strtolower($_POST['a'])) {
@@ -74,11 +75,11 @@ if($_POST){
                             .' WHERE tpl_id IN ('.implode(',', db_input($_POST['ids'])).')';
                         if(db_query($sql) && ($num=db_affected_rows())){
                             if($num==$count)
-                                $msg = 'Selected templates enabled';
+                                $msg = lang('Selected templates enabled');
                             else
-                                $warn = "$num of $count selected templates enabled";
+                                $warn = "$num ".lang('of')." $count ".lang("selected templates enabled");
                         } else {
-                            $errors['err'] = 'Unable to enable selected templates';
+                            $errors['err'] = lang('Unable to enable selected templates');
                         }
                         break;
                     case 'disable':
@@ -88,11 +89,11 @@ if($_POST){
                                 $i++;
                         }
                         if($i && $i==$count)
-                            $msg = 'Selected templates disabled';
+                            $msg = lang('Selected templates disabled');
                         elseif($i)
-                            $warn = "$i of $count selected templates disabled (in-use templates can't be disabled)";
+                            $warn = "$i ".lang('of')." $count ".lang("selected templates disabled (in-use templates can't be disabled)");
                         else
-                            $errors['err'] = "Unable to disable selected templates (in-use or default template can't be disabled)";
+                            $errors['err'] = lang("Unable to disable selected templates (in-use or default template can't be disabled)");
                         break;
                     case 'delete':
                         $i=0;
@@ -102,19 +103,19 @@ if($_POST){
                         }
 
                         if($i && $i==$count)
-                            $msg = 'Selected templates deleted successfully';
+                            $msg = lang('Selected templates deleted successfully');
                         elseif($i>0)
-                            $warn = "$i of $count selected templates deleted";
+                            $warn = "$i ".lang('of')." $count ".lang("selected templates deleted");
                         elseif(!$errors['err'])
-                            $errors['err'] = 'Unable to delete selected templates';
+                            $errors['err'] = lang('Unable to delete selected templates');
                         break;
                     default:
-                        $errors['err']='Unknown template action';
+                        $errors['err']=lang('Unknown template action');
                 }
             }
             break;
         default:
-            $errors['err']='Unknown action';
+            $errors['err']=lang('Unknown action');
             break;
     }
 }

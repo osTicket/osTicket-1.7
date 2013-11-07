@@ -73,6 +73,9 @@
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/Mail_mime
  */
+
+require_once(INCLUDE_DIR.'languages/language_control/languages_processor.php');
+
 class Mail_mimePart
 {
     /**
@@ -368,12 +371,12 @@ class Mail_mimePart
     function encodeToFile($filename, $boundary=null, $skip_head=false)
     {
         if (file_exists($filename) && !is_writable($filename)) {
-            $err = PEAR::raiseError('File is not writeable: ' . $filename);
+            $err = PEAR::raiseError(lang('file_not_writable').': ' . $filename);
             return $err;
         }
 
         if (!($fh = fopen($filename, 'ab'))) {
-            $err = PEAR::raiseError('Unable to open file: ' . $filename);
+            $err = PEAR::raiseError(lang('cant_open_file').': ' . $filename);
             return $err;
         }
 
@@ -511,12 +514,12 @@ class Mail_mimePart
     function _getEncodedDataFromFile($filename, $encoding, $fh=null)
     {
         if (!is_readable($filename)) {
-            $err = PEAR::raiseError('Unable to read file: ' . $filename);
+            $err = PEAR::raiseError(lang('cant_read_file').': ' . $filename);
             return $err;
         }
 
         if (!($fd = fopen($filename, 'rb'))) {
-            $err = PEAR::raiseError('Could not open file: ' . $filename);
+            $err = PEAR::raiseError(lang('cant_open_file').': ' . $filename);
             return $err;
         }
 

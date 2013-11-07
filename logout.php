@@ -19,9 +19,10 @@ require('client.inc.php');
 if(!$_GET['auth'] || !$ost->validateLinkToken($_GET['auth']))
    @header('Location: index.php');
 
-$_SESSION['_client']=array();
 session_unset();
-session_destroy();
+//session_destroy();
+$_SESSION['_client']=array();
+$_SESSION['_client']['token'] = null;
 header('Location: index.php');
 require('index.php');
 ?>

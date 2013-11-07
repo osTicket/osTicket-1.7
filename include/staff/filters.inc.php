@@ -1,5 +1,5 @@
 <?php
-if(!defined('OSTADMININC') || !$thisstaff->isAdmin()) die('Access Denied');
+if(!defined('OSTADMININC') || !$thisstaff->isAdmin()) die(lang('access_denied'));
 $targets = Filter::getTargets();
 $qstr='';
 $sql='SELECT filter.*,count(rule.id) as rules '.
@@ -37,17 +37,17 @@ $qstr.='&order='.($order=='DESC'?'ASC':'DESC');
 $query="$sql ORDER BY $order_by LIMIT ".$pageNav->getStart().",".$pageNav->getLimit();
 $res=db_query($query);
 if($res && ($num=db_num_rows($res)))
-    $showing=$pageNav->showing().' filters';
+    $showing=$pageNav->showing().' '.lang('filters');
 else
-    $showing='No filters found!';
+    $showing=lang('no_group').'!';
 
 ?>
 
-<div style="width:700px;padding-top:5px; float:left;">
- <h2>Ticket Filters</h2>
+<div style="width:700;padding-top:5px; float:left;">
+ <h2><?php echo lang('tickets_filters'); ?></h2>
 </div>
 <div style="float:right;text-align:right;padding-top:5px;padding-right:5px;">
- <b><a href="filters.php?a=add" class="Icon newEmailFilter">Add New Filter</a></b></div>
+ <b><a href="filters.php?a=add" class="Icon newEmailFilter"><?php echo lang('add_new_filter'); ?></a></b></div>
 <div class="clear"></div>
 <form action="filters.php" method="POST" name="filters">
  <?php csrf_token(); ?>
@@ -58,13 +58,13 @@ else
     <thead>
         <tr>
             <th width="7">&nbsp;</th>        
-            <th width="320"><a <?php echo $name_sort; ?> href="filters.php?<?php echo $qstr; ?>&sort=name">Name</a></th>
-            <th width="80"><a  <?php echo $status_sort; ?> href="filters.php?<?php echo $qstr; ?>&sort=status">Status</a></th>
-            <th width="80" style="text-align:center;"><a  <?php echo $order_sort; ?> href="filters.php?<?php echo $qstr; ?>&sort=order">Order</a></th>
-            <th width="80" style="text-align:center;"><a  <?php echo $rules_sort; ?> href="filters.php?<?php echo $qstr; ?>&sort=rules">Rules</a></th>
-            <th width="100"><a  <?php echo $target_sort; ?> href="filters.php?<?php echo $qstr; ?>&sort=target">Target</a></th>
-            <th width="120" nowrap><a  <?php echo $created_sort; ?>href="filters.php?<?php echo $qstr; ?>&sort=created">Date Added</a></th>
-            <th width="150" nowrap><a  <?php echo $updated_sort; ?>href="filters.php?<?php echo $qstr; ?>&sort=updated">Last Updated</a></th>
+            <th width="320"><a <?php echo $name_sort; ?> href="filters.php?<?php echo $qstr; ?>&sort=name"><?php echo lang('name'); ?></a></th>
+            <th width="80"><a  <?php echo $status_sort; ?> href="filters.php?<?php echo $qstr; ?>&sort=status"><?php echo lang('status'); ?></a></th>
+            <th width="80" style="text-align:center;"><a  <?php echo $order_sort; ?> href="filters.php?<?php echo $qstr; ?>&sort=order"><?php echo lang('order'); ?></a></th>
+            <th width="80" style="text-align:center;"><a  <?php echo $rules_sort; ?> href="filters.php?<?php echo $qstr; ?>&sort=rules"><?php echo lang('rules'); ?></a></th>
+            <th width="100"><a  <?php echo $target_sort; ?> href="filters.php?<?php echo $qstr; ?>&sort=target"><?php echo lang('target'); ?></a></th>
+            <th width="120" nowrap><a  <?php echo $created_sort; ?>href="filters.php?<?php echo $qstr; ?>&sort=created"><?php echo lang('date_added'); ?></a></th>
+            <th width="150" nowrap><a  <?php echo $updated_sort; ?>href="filters.php?<?php echo $qstr; ?>&sort=updated"><?php echo lang('last_update'); ?></a></th>
         </tr>
     </thead>
     <tbody>
@@ -83,7 +83,7 @@ else
                             <?php echo $sel?'checked="checked"':''; ?>>
                 </td>
                 <td>&nbsp;<a href="filters.php?id=<?php echo $row['id']; ?>"><?php echo Format::htmlchars($row['name']); ?></a></td>
-                <td><?php echo $row['isactive']?'Active':'<b>Disabled</b>'; ?></td>
+                <td><?php echo $row['isactive']?lang('active'):'<b>'.lang('disabled').'</b>'; ?></td>
                 <td style="text-align:right;padding-right:25px;"><?php echo $row['execorder']; ?>&nbsp;</td>
                 <td style="text-align:right;padding-right:25px;"><?php echo $row['rules']; ?>&nbsp;</td>
                 <td>&nbsp;<?php echo Format::htmlchars($targets[$row['target']]); ?></td>
@@ -97,12 +97,12 @@ else
      <tr>
         <td colspan="8">
             <?php if($res && $num){ ?>
-            Select:&nbsp;
-            <a id="selectAll" href="#ckb">All</a>&nbsp;&nbsp;
-            <a id="selectNone" href="#ckb">None</a>&nbsp;&nbsp;
-            <a id="selectToggle" href="#ckb">Toggle</a>&nbsp;&nbsp;
+            <?php echo lang('select'); ?>:&nbsp;
+            <a id="selectAll" href="#ckb"><?php echo lang('all'); ?></a>&nbsp;&nbsp;
+            <a id="selectNone" href="#ckb"><?php echo lang('none'); ?></a>&nbsp;&nbsp;
+            <a id="selectToggle" href="#ckb"><?php echo lang('toggle'); ?></a>&nbsp;&nbsp;
             <?php }else{
-                echo 'No filters found';
+                echo lang('no_filters_found');
             } ?>
         </td>
      </tr>
@@ -110,12 +110,12 @@ else
 </table>
 <?php
 if($res && $num): //Show options..
-    echo '<div>&nbsp;Page:'.$pageNav->getPageLinks().'&nbsp;</div>';
+    echo '<div>&nbsp;'.lang('page').':'.$pageNav->getPageLinks().'&nbsp;</div>';
 ?>
 <p class="centered" id="actions">
-    <input class="button" type="submit" name="enable" value="Enable">
-    <input class="button" type="submit" name="disable" value="Disable">
-    <input class="button" type="submit" name="delete" value="Delete">
+    <input class="button" type="submit" name="enable" value="<?php echo lang('enable'); ?>" >
+    <input class="button" type="submit" name="disable" value="<?php echo ucfirst(lang('disable')); ?>">
+    <input class="button" type="submit" name="delete" value="<?php echo lang('delete'); ?>">
 </p>
 <?php
 endif;
@@ -123,27 +123,27 @@ endif;
 </form>
 
 <div style="display:none;" class="dialog" id="confirm-action">
-    <h3>Please Confirm</h3>
-    <a class="close" href="">&times;</a>
+    <h3><?php echo lang('please_confirm'); ?></h3>
+    <a class="close" href="">X</a>
     <hr/>
     <p class="confirm-action" style="display:none;" id="enable-confirm">
-        Are you sure want to <b>enable</b> selected filters?
+        <?php echo lang('sure_you_want_to'); ?> <b><?php echo lang('enable'); ?></b> <?php echo lang('selected_filters'); ?>?
     </p>
     <p class="confirm-action" style="display:none;" id="disable-confirm">
-        Are you sure want to <b>disable</b>  selected filters?
+        <?php echo lang('sure_you_want_to'); ?> <b><?php echo lang('disable'); ?></b>  <?php echo lang('selected_filters'); ?>?
     </p>
     <p class="confirm-action" style="display:none;" id="delete-confirm">
-        <font color="red"><strong>Are you sure you want to DELETE selected filters?</strong></font>
-        <br><br>Deleted filters CANNOT be recovered, including any associated rules.
+        <font color="red"><strong><?php echo lang('sure_delete_filter'); ?>?</strong></font>
+        <br><br><?php echo lang('dfilter_cant_rec'); ?>.
     </p>
-    <div>Please confirm to continue.</div>
+    <div><?php echo lang('confirm_to_continue'); ?></div>
     <hr style="margin-top:1em"/>
     <p class="full-width">
         <span class="buttons" style="float:left">
-            <input type="button" value="No, Cancel" class="close">
+            <input type="button" value="<?php echo lang('no_cancel'); ?>" class="close">
         </span>
         <span class="buttons" style="float:right">
-            <input type="button" value="Yes, Do it!" class="confirm">
+            <input type="button" value="<?php echo lang('yes_doit'); ?>" class="confirm">
         </span>
      </p>
     <div class="clear"></div>

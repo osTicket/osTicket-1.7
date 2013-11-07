@@ -15,33 +15,34 @@
 **********************************************************************/
 require('admin.inc.php');
 include_once(INCLUDE_DIR.'class.api.php');
+require_once(INCLUDE_DIR.'languages/language_control/languages_processor.php');
 
 $api=null;
 if($_REQUEST['id'] && !($api=API::lookup($_REQUEST['id'])))
-    $errors['err']='Unknown or invalid API key ID.';
+    $errors['err']=lang('invalid_api');
 
 if($_POST){
     switch(strtolower($_POST['do'])){
         case 'update':
             if(!$api){
-                $errors['err']='Unknown or invalid API key.';
+                $errors['err']=lang('invalid_api_key');
             }elseif($api->update($_POST,$errors)){
-                $msg='API key updated successfully';
+                $msg=lang('api_key_added');
             }elseif(!$errors['err']){
-                $errors['err']='Error updating API key. Try again!';
+                $errors['err']=lang('api_key_updated');
             }
             break;
         case 'add':
             if(($id=API::add($_POST,$errors))){
-                $msg='API key added successfully';
+                $msg=lang('api_key_added');
                 $_REQUEST['a']=null;
             }elseif(!$errors['err']){
-                $errors['err']='Unable to add an API key. Correct error(s) below and try again.';
+                $errors['err']=lang('cant_add_api');
             }
             break;
         case 'mass_process':
             if(!$_POST['ids'] || !is_array($_POST['ids']) || !count($_POST['ids'])) {
-                $errors['err'] = 'You must select at least one API key';
+                $errors['err'] = lang('select_one_api');
             } else {
                 $count=count($_POST['ids']);
                 switch(strtolower($_POST['a'])) {
@@ -50,11 +51,11 @@ if($_POST){
                             .' WHERE id IN ('.implode(',', db_input($_POST['ids'])).')';
                         if(db_query($sql) && ($num=db_affected_rows())) {
                             if($num==$count)
-                                $msg = 'Selected API keys enabled';
+                                $msg = lang('api_key_enabled');
                             else
-                                $warn = "$num of $count selected API keys enabled";
+                                $warn = "$num ".lang('of')." $count ".lang('api_key_enabled');
                         } else {
-                            $errors['err'] = 'Unable to enable selected API keys.';
+                            $errors['err'] = lang('cant_enable_api');
                         }
                         break;
                     case 'disable':
@@ -62,11 +63,11 @@ if($_POST){
                             .' WHERE id IN ('.implode(',', db_input($_POST['ids'])).')';
                         if(db_query($sql) && ($num=db_affected_rows())) {
                             if($num==$count)
-                                $msg = 'Selected API keys disabled';
+                                $msg = lang('api_key_disabled');
                             else
-                                $warn = "$num of $count selected API keys disabled";
+                                $warn = "$num ".lang('of')." $count ".lang('api_key_disabled');
                         } else {
-                            $errors['err']='Unable to disable selected API keys';
+                            $errors['err']=lang('cant_disable_api');
                         }
                         break;
                     case 'delete':
@@ -76,19 +77,19 @@ if($_POST){
                                 $i++;
                         }
                         if($i && $i==$count)
-                            $msg = 'Selected API keys deleted successfully';
+                            $msg = lang('api_key_deleted').' '.lang('successfully');
                         elseif($i>0)
-                            $warn = "$i of $count selected API keys deleted";
+                            $warn = "$i ".lang('of')." $count ".lang('api_key_deleted');
                         elseif(!$errors['err'])
-                            $errors['err'] = 'Unable to delete selected API keys';
+                            $errors['err'] = lang('cant_delete_api');
                         break;
                     default:
-                        $errors['err']='Unknown action - get technical help';
+                        $errors['err']=lang('unknown_action');
                 }
             }
             break;
         default:
-            $errors['err']='Unknown action/command';
+            $errors['err']=lang('unknown_command');
             break;
     }
 }
