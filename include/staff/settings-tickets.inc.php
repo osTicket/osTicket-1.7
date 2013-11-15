@@ -77,10 +77,18 @@ if(!($maxfileuploads=ini_get('max_file_uploads')))
             </td>
         </tr>
         <tr>
+            <td>Ticket Pending Auto Close:</td>
+            <td>
+                <input type="text" name="autoclose_grace_period" size=4 value="<?php echo $config['autoclose_grace_period']; ?>">
+                <font class="error"><?php echo $errors['autoclose_grace_period']; ?></font>
+                <em>(Days to Auto Close a ticket - enter 0 to disable auto close)</em>
+            </td>
+        </tr>
+        <tr>
                     <td width="180">Web Tickets Priority:</td>
                     <td>
                         <input type="checkbox" name="allow_priority_change" value="1" <?php echo $config['allow_priority_change'] ?'checked="checked"':''; ?>>
-                        <em>(Allow user to override/set priority)</em>
+                        <em>(Allow user to overwrite/set priority)</em>
                     </td>
                 </tr>
                 <tr>
@@ -247,4 +255,3 @@ if(!($maxfileuploads=ini_get('max_file_uploads')))
     <input class="button" type="reset" name="reset" value="Reset Changes">
 </p>
 </form>
-
