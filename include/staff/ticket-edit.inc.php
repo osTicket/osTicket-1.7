@@ -53,7 +53,7 @@ if ($_POST)
         </tr>
         <tr>
             <th colspan="2">
-                <em><strong>Ticket Information</strong>: Due date overrides SLA's grace period.</em>
+                <em><strong>Ticket Information</strong>: Due date overwrites SLA's grace period.</em>
             </th>
         </tr>
         <tr>
@@ -66,6 +66,9 @@ if ($_POST)
                     <option value="Phone" <?php echo ($info['source']=='Phone')?'selected="selected"':''; ?>>Phone</option>
                     <option value="Email" <?php echo ($info['source']=='Email')?'selected="selected"':''; ?>>Email</option>
                     <option value="Web"   <?php echo ($info['source']=='Web')?'selected="selected"':''; ?>>Web</option>
+                    <option value="Verbal" <?php echo ($info['source']=='Verbal')?'selected="selected"':''; ?>>Verbal</option>
+                    <option value="Self" <?php echo ($info['source']=='Self')?'selected="selected"':''; ?>>Self</option>
+                    <option value="Online" <?php echo ($info['source']=='Online')?'selected="selected"':''; ?>>Online</option>
                     <option value="API"   <?php echo ($info['source']=='API')?'selected="selected"':''; ?>>API</option>
                     <option value="Other" <?php echo ($info['source']=='Other')?'selected="selected"':''; ?>>Other</option>
                 </select>
@@ -149,7 +152,7 @@ if ($_POST)
                 $min=$hr=null;
                 if($info['time'])
                     list($hr, $min)=explode(':', $info['time']);
-
+                    
                 echo Misc::timeDropdown($hr, $min, 'time');
                 ?>
                 &nbsp;<font class="error">&nbsp;<?php echo $errors['duedate']; ?>&nbsp;<?php echo $errors['time']; ?></font>

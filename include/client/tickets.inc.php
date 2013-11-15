@@ -8,6 +8,9 @@ if(isset($_REQUEST['status'])) { //Query string status has nothing to do with th
     //Status we are actually going to use on the query...making sure it is clean!
     switch(strtolower($_REQUEST['status'])) {
      case 'open':
+     case 'pending':
+        $status=strtolower($_REQUEST['status']);
+        break;
      case 'closed':
         $status=strtolower($_REQUEST['status']);
         break;
@@ -98,12 +101,14 @@ $negorder=$order=='DESC'?'ASC':'DESC'; //Negate the sorting
         <option value="">&mdash; Any Status &mdash;</option>
         <option value="open"
             <?php echo ($status=='open')?'selected="selected"':'';?>>Open (<?php echo $thisclient->getNumOpenTickets(); ?>)</option>
+        <option value="pending"
+            <?php echo ($status=='pending')?'selected="selected"':'';?>>Pending (<?php echo $thisclient->getNumPendingTickets(); ?>)</option>
         <?php
         if($thisclient->getNumClosedTickets()) {
             ?>
-        <option value="closed"
-            <?php echo ($status=='closed')?'selected="selected"':'';?>>Closed (<?php echo $thisclient->getNumClosedTickets(); ?>)</option>
-        <?php
+<option value="closed"
+<?php echo ($status=='closed')?'selected="selected"':'';?>>Closed (<?php echo $thisclient->getNumClosedTickets(); ?>)</option>
+<?php
         } ?>
     </select>
     <input type="submit" value="Go">

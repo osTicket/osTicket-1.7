@@ -54,7 +54,7 @@ $info=Format::htmlchars(($errors && $_POST)?$_POST:$info);
                 <select name="category_id" style="width:350px;">
                     <option value="0">Select FAQ Category </option>
                     <?php
-                    $sql='SELECT category_id, name, ispublic FROM '.FAQ_CATEGORY_TABLE;
+                    $sql='SELECT category_id, name, ispublic FROM '.FAQ_CATEGORY_TABLE.' ORDER BY name';
                     if(($res=db_query($sql)) && db_num_rows($res)) {
                         while($row=db_fetch_array($res)) {
                             echo sprintf('<option value="%d" %s>%s (%s)</option>',
@@ -111,7 +111,7 @@ $info=Format::htmlchars(($errors && $_POST)?$_POST:$info);
         <?php
         $sql='SELECT ht.topic_id, CONCAT_WS(" / ", pht.topic, ht.topic) as name '
             .' FROM '.TOPIC_TABLE.' ht '
-            .' LEFT JOIN '.TOPIC_TABLE.' pht ON(pht.topic_id=ht.topic_pid) ';
+            .' LEFT JOIN '.TOPIC_TABLE.' pht ON(pht.topic_id=ht.topic_pid)  ORDER BY name';
         if(($res=db_query($sql)) && db_num_rows($res)) { ?>
         <tr>
             <th colspan="2">

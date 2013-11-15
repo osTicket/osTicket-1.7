@@ -29,6 +29,9 @@ switch(strtolower($_REQUEST['status'])){ //Status is overloaded
     case 'open':
         $status='open';
         break;
+    case 'pending':
+        $status='pending';
+        break;  
     case 'closed':
         $status='closed';
         $showassigned=true; //closed by.
@@ -119,12 +122,21 @@ if($search):
             //This sucks..mass scan! search anything that moves! 
             
             $deep_search=true;
-            $qwhere.=" AND ( ticket.email LIKE '%$queryterm%'".
-                        " OR ticket.name LIKE '%$queryterm%'".
-                        " OR ticket.subject LIKE '%$queryterm%'".
-                        " OR thread.body LIKE '%$queryterm%'".
-                        " OR thread.title LIKE '%$queryterm%'".
-                        ' ) ';
+            if($_REQUEST['stype'] && $_REQUEST['stype']=='FT') { //Using full text on big fields.
+                $qwhere.=" AND ( ticket.email LIKE '%$queryterm%'".
+                            " OR ticket.name LIKE '%$queryterm%'".
+                            " OR ticket.subject LIKE '%$queryterm%'".
+                            " OR thread.title LIKE '%$queryterm%'".
+                            " OR MATCH(thread.body)   AGAINST('$queryterm')".
+                            ' ) ';
+            }else{
+                $qwhere.=" AND ( ticket.email LIKE '%$queryterm%'".
+                            " OR ticket.name LIKE '%$queryterm%'".
+                            " OR ticket.subject LIKE '%$queryterm%'".
+                            " OR thread.body LIKE '%$queryterm%'".
+                            " OR thread.title LIKE '%$queryterm%'".
+                            ' ) ';
+            }
         }
     }
     //department
@@ -407,7 +419,7 @@ $negorder=$order=='DESC'?'ASC':'DESC'; //Negate the sorting..
                 $subject = Format::truncate($row['subject'],40);
                 $threadcount=$row['thread_count'];
                 if(!strcasecmp($row['status'],'open') && !$row['isanswered'] && !$row['lock_id']) {
-                    $tid=sprintf('<b>%s</b>',$tid);
+                    $tid=sprintf('<i><b>%s</b></i>',$tid);
                 }
                 ?>
             <tr id="<?php echo $row['ticket_id']; ?>">
