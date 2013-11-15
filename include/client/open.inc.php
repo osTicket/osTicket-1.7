@@ -11,7 +11,14 @@ if($thisclient && $thisclient->isValid()) {
 $info=($_POST && $errors)?Format::htmlchars($_POST):$info;
 ?>
 <h1>Open a New Ticket</h1>
-<p>Please fill in the form below to open a new ticket.</p>
+<?php
+if($cfg && $cfg->isKnowledgebaseEnabled()){
+    //FIXME: provide ability to feature or select random FAQs ??
+?>
+<p>Be sure to browse our <a href="kb/index.php">Frequently Asked Questions (FAQs)</a>, before opening a ticket.</p>
+<?php
+} ?>
+<p>Please fill in the form below to open a new ticket</p>
 <form id="ticketForm" method="post" action="open.php" enctype="multipart/form-data">
   <?php csrf_token(); ?>
   <input type="hidden" name="a" value="open">
@@ -54,21 +61,49 @@ $info=($_POST && $errors)?Format::htmlchars($_POST):$info;
     </tr>
     <tr><td colspan=2>&nbsp;</td></tr>
     <tr>
-        <td class="required">Help Topic:</td>
+        <td class="required">Department:</td>
         <td>
-            <select id="topicId" name="topicId">
-                <option value="" selected="selected">&mdash; Select a Help Topic &mdash;</option>
+            <select id="deptId" name="deptId" style="min-width:200px;" onChange="getTopic('findtopic.php?dept_id='+this.value)">
+                <option value="" selected >&mdash; Select Department &mdash;</option>
                 <?php
-                if($topics=Topic::getPublicHelpTopics()) {
-                    foreach($topics as $id =>$name) {
+                if($depts=Dept::getPublicDepartments()) {
+                    foreach($depts as $id =>$name) {
                         echo sprintf('<option value="%d" %s>%s</option>',
-                                $id, ($info['topicId']==$id)?'selected="selected"':'', $name);
+                                $id, ($info['deptId']==$id)?'selected="selected"':'', $name);
                     }
                 } else { ?>
                     <option value="0" >General Inquiry</option>
                 <?php
                 } ?>
             </select>
+            <font class="error">*&nbsp;<?php echo $errors['deptId']; ?></font>
+        </td>
+    </tr>
+    <tr>
+        <td class="required">Help Topic:</td>
+        <td> <span id="topicdiv">
+            <select id="topicId" name="topicId" style="min-width:200px;">
+                <option value="" selected="selected">&mdash; Select a Help Topic &mdash;</option>
+                <?php
+        $topicsbydept=array();
+	if($dept_id=$info["deptId"]) {
+	        $query="SELECT topic_id,topic FROM ".TOPIC_TABLE."
+			WHERE isactive=1 AND ispublic=1 AND dept_id = ".$dept_id."
+			ORDER BY topic";
+		$result=db_query($query);
+		while (list($id, $name) = db_fetch_row($result)){$topicsbydept[$id]=$name;}
+	}
+        if($topics=$topicsbydept) {
+                    foreach($topics as $id =>$name) {
+                        echo sprintf('<option value="%d" %s>%s</option>',
+                                $id, ($info['topicId']==$id)?'selected="selected"':'', $name);
+                    }
+                } 
+        else { ?>
+<!--                    <option value="0" >General Inquiry</option>-->
+                <?php
+                } ?>
+            </select></span>
             <font class="error">*&nbsp;<?php echo $errors['topicId']; ?></font>
         </td>
     </tr>
@@ -146,3 +181,49 @@ $info=($_POST && $errors)?Format::htmlchars($_POST):$info;
         <input type="button" value="Cancel" onClick='window.location.href="index.php"'>
   </p>
 </form>
+<script>
+
+function getXMLHTTP() { //fuction to return the xml http object
+        var xmlhttp=false; 
+        try{
+            xmlhttp=new XMLHttpRequest();
+        }
+        catch(e)    {      
+            try{           
+                xmlhttp= new ActiveXObject("Microsoft.XMLHTTP");
+            }
+            catch(e){
+                try{
+                xmlhttp = new ActiveXObject("Msxml2.XMLHTTP");
+                }
+                catch(e1){
+                    xmlhttp=false;
+                }
+            }
+        }
+
+        return xmlhttp;
+    }
+
+    function getTopic(strURL)
+    {        
+     var req = getXMLHTTP(); // fuction to get xmlhttp object
+     if (req)
+     {
+      req.onreadystatechange = function()
+     {
+      if (req.readyState == 4) { //data is retrieved from server
+       if (req.status == 200) { // which reprents ok status                    
+         document.getElementById('topicdiv').innerHTML=req.responseText;
+      }
+      else
+      {
+         alert("There was a problem while using XMLHTTP:\n");
+      }
+      }            
+      }        
+    req.open("GET", strURL, true); //open url using get method
+    req.send(null);
+     }
+    }
+</script>
