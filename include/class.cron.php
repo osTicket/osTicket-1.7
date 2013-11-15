@@ -27,6 +27,7 @@ class Cron {
         require_once(INCLUDE_DIR.'class.ticket.php');
         require_once(INCLUDE_DIR.'class.lock.php');
         Ticket::checkOverdue(); //Make stale tickets overdue
+        Ticket::autoClose(); //Close pending tickets
         TicketLock::cleanup(); //Remove expired locks 
     }
 
@@ -41,10 +42,6 @@ class Cron {
     }
 
     function run(){ //called by outside cron NOT autocron
-        global $ost;
-        if (!$ost || $ost->isUpgradePending())
-            return;
-
         self::MailFetcher();
         self::TicketMonitor();
         self::PurgeLogs();
