@@ -363,14 +363,14 @@ class ApiJsonDataParser extends JsonDataParser {
             } else if ($key == "autorespond") {
                 $value = (bool)$value;
             } else if ($key == "attachments") {
-                foreach ($value as &$info) {
-                    $data = reset($info);
+                foreach ($value as $name=>&$info) {
+                    $data = $info;
                     # PHP5: fopen("data://$data[5:]");
                     if (substr($data, 0, 5) != "data:") {
                         $info = array(
                             "data" => $data,
                             "type" => "text/plain",
-                            "name" => key($info));
+                            "name" => $name);
                     } else {
                         $data = substr($data,5);
                         list($meta, $contents) = explode(",", $data);
@@ -378,7 +378,7 @@ class ApiJsonDataParser extends JsonDataParser {
                         $info = array(
                             "data" => $contents,
                             "type" => ($type) ? $type : "text/plain",
-                            "name" => key($info));
+                            "name" => $name);
                         # XXX: Handle decoding here??
                         if (substr($extra, -6) == "base64")
                             $info["encoding"] = "base64";
