@@ -167,7 +167,7 @@ class Ticket2PDF extends FPDF
         $this->SetFont('Arial', 'B', 11);
         $this->Cell($l, 7, 'Email', 1, 0, 'L', true);
         $this->SetFont('');
-        if(strlen($ticket->getEmail()>37))
+        if(strlen($ticket->getEmail())>37)
        		$this->setFont('Arial', '', 8);
         $this->Cell($c, 7, $ticket->getEmail(), 1, 1, 'L', true);
         $this->SetFont('Arial', 'B', 11);
