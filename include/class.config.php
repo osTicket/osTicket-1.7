@@ -652,6 +652,10 @@ class OsticketConfig extends Config {
     function autoAssignReopenedTickets() {
         return ($this->get('auto_assign_reopened_tickets'));
     }
+    
+    function autoAssignOnReply(){
+        return ($this->get('auto_assign_on_reply'));
+    }
 
     function showAssignedTickets() {
         return ($this->get('show_assigned_tickets'));
@@ -857,6 +861,7 @@ class OsticketConfig extends Config {
             'enable_captcha'=>isset($vars['enable_captcha'])?1:0,
             'log_ticket_activity'=>isset($vars['log_ticket_activity'])?1:0,
             'auto_assign_reopened_tickets'=>isset($vars['auto_assign_reopened_tickets'])?1:0,
+            'auto_assign_on_reply'=>isset($vars['auto_assign_on_reply'])?1:0,
             'show_assigned_tickets'=>isset($vars['show_assigned_tickets'])?1:0,
             'show_answered_tickets'=>isset($vars['show_answered_tickets'])?1:0,
             'show_related_tickets'=>isset($vars['show_related_tickets'])?1:0,
