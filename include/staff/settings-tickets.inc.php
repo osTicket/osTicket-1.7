@@ -125,6 +125,13 @@ if(!($maxfileuploads=ini_get('max_file_uploads')))
             </td>
         </tr>
         <tr>
+            <td>Assign on Reply to Tickets:</td>
+            <td>
+                <input type="checkbox" name="auto_assign_on_reply" <?php echo $config['auto_assign_on_reply']?'checked="checked"':''; ?>>
+                Auto-assigns ticket to the first staff respondent who is able to claim it.
+            </td>
+        </tr>
+        <tr>
             <td>Assigned Tickets:</td>
             <td>
                 <input type="checkbox" name="show_assigned_tickets" <?php echo $config['show_assigned_tickets']?'checked="checked"':''; ?>>
