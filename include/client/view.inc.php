@@ -97,6 +97,7 @@ if($ticket->getThreadCount() && ($thread=$ticket->getClientThread())) {
 <?php } ?>
 <form id="reply" action="tickets.php?id=<?php echo $ticket->getExtId(); ?>#reply" name="reply" method="post" enctype="multipart/form-data">
     <?php csrf_token(); ?>
+    <?php activity_token(); ?>
     <h2>Post a Reply</h2>
     <input type="hidden" name="id" value="<?php echo $ticket->getExtId(); ?>">
     <input type="hidden" name="a" value="reply">

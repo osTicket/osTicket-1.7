@@ -121,6 +121,8 @@ if($ost->isUpgradePending() && !$exempt) {
 } elseif($cfg->isHelpDeskOffline()) {
     $sysnotice='<strong>System is set to offline mode</strong> - Client interface is disabled and ONLY admins can access staff control panel.';
     $sysnotice.=' <a href="settings.php">Enable</a>.';
+} elseif ($_POST && !$ost->checkActivityToken()) {
+    $errors['err'] = 'Cowardly refusing to repeat previous activity';
 }
 
 $nav = new StaffNav($thisstaff);

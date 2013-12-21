@@ -61,6 +61,8 @@ if ($_POST  && !$ost->checkCSRFToken()) {
     @header('Location: index.php');
     //just incase redirect fails
     die('Action denied (400)!');
+} elseif ($_POST && !$ost->checkActivityToken()) {
+    $errors['err'] = 'Cowardly refusing to repeat previous activity';
 }
 
 /* Client specific defaults */

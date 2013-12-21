@@ -392,6 +392,7 @@ if(!$cfg->showNotesInline()) { ?>
     if($thisstaff->canPostReply()) { ?>
     <form id="reply" action="tickets.php?id=<?php echo $ticket->getId(); ?>#reply" name="reply" method="post" enctype="multipart/form-data">
         <?php csrf_token(); ?>
+        <?php activity_token(); ?>
         <input type="hidden" name="id" value="<?php echo $ticket->getId(); ?>">
         <input type="hidden" name="msgId" value="<?php echo $msgId; ?>">
         <input type="hidden" name="a" value="reply">
@@ -516,6 +517,7 @@ if(!$cfg->showNotesInline()) { ?>
     } ?>
     <form id="note" action="tickets.php?id=<?php echo $ticket->getId(); ?>#note" name="note" method="post" enctype="multipart/form-data">
         <?php csrf_token(); ?>
+        <?php activity_token(); ?>
         <input type="hidden" name="id" value="<?php echo $ticket->getId(); ?>">
         <input type="hidden" name="locktime" value="<?php echo $cfg->getLockTime(); ?>">
         <input type="hidden" name="a" value="postnote">
@@ -622,6 +624,7 @@ if(!$cfg->showNotesInline()) { ?>
     if($thisstaff->canTransferTickets()) { ?>
     <form id="transfer" action="tickets.php?id=<?php echo $ticket->getId(); ?>#transfer" name="transfer" method="post" enctype="multipart/form-data">
         <?php csrf_token(); ?>
+        <?php activity_token(); ?>
         <input type="hidden" name="ticket_id" value="<?php echo $ticket->getId(); ?>">
         <input type="hidden" name="a" value="transfer">
         <table border="0" cellspacing="0" cellpadding="3">
@@ -680,6 +683,7 @@ if(!$cfg->showNotesInline()) { ?>
     if($thisstaff->canAssignTickets()) { ?>
     <form id="assign" action="tickets.php?id=<?php echo $ticket->getId(); ?>#assign" name="assign" method="post" enctype="multipart/form-data">
         <?php csrf_token(); ?>
+        <?php activity_token(); ?>
         <input type="hidden" name="id" value="<?php echo $ticket->getId(); ?>">
         <input type="hidden" name="a" value="assign">
         <table border="0" cellspacing="0" cellpadding="3">
@@ -770,6 +774,7 @@ if(!$cfg->showNotesInline()) { ?>
     <hr/>
     <form action="tickets.php?id=<?php echo $ticket->getId(); ?>" method="post" id="print-form" name="print-form">
         <?php csrf_token(); ?>
+        <?php activity_token(); ?>
         <input type="hidden" name="a" value="print">
         <input type="hidden" name="id" value="<?php echo $ticket->getId(); ?>">
         <fieldset class="notes">
@@ -810,6 +815,7 @@ if(!$cfg->showNotesInline()) { ?>
     <?php echo sprintf('Are you sure you want to <b>%s</b> this ticket?', $ticket->isClosed()?'REOPEN':'CLOSE'); ?>
     <form action="tickets.php?id=<?php echo $ticket->getId(); ?>" method="post" id="status-form" name="status-form">
         <?php csrf_token(); ?>
+        <?php activity_token(); ?>
         <input type="hidden" name="id" value="<?php echo $ticket->getId(); ?>">
         <input type="hidden" name="a" value="process">
         <input type="hidden" name="do" value="<?php echo $ticket->isClosed()?'reopen':'close'; ?>">
@@ -863,6 +869,7 @@ if(!$cfg->showNotesInline()) { ?>
     <div>Please confirm to continue.</div>
     <form action="tickets.php?id=<?php echo $ticket->getId(); ?>" method="post" id="confirm-form" name="confirm-form">
         <?php csrf_token(); ?>
+        <?php activity_token(); ?>
         <input type="hidden" name="id" value="<?php echo $ticket->getId(); ?>">
         <input type="hidden" name="a" value="process">
         <input type="hidden" name="do" id="action" value="">

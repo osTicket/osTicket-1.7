@@ -5,6 +5,7 @@ $info=Format::htmlchars(($errors && $_POST)?$_POST:$info);
 ?>
 <form action="tickets.php?a=open" method="post" id="save"  enctype="multipart/form-data">
  <?php csrf_token(); ?>
+ <?php activity_token(); ?>
  <input type="hidden" name="do" value="create">
  <input type="hidden" name="a" value="open">
  <h2>Open New Ticket</h2>

@@ -24,6 +24,7 @@ class UserSession {
    var $browser = '';
    var $ip = '';
    var $validated=FALSE;
+   var $activity;
 
    function UserSession($userid){
 
@@ -31,6 +32,7 @@ class UserSession {
       $this->ip=(!empty($_SERVER['REMOTE_ADDR'])) ? $_SERVER['REMOTE_ADDR'] : getenv('REMOTE_ADDR');
       $this->session_id=session_id();
       $this->userID=$userid;
+      $this->activity = &$_SESSION['activity:token'];
    }
 
    function isStaff(){
@@ -55,6 +57,17 @@ class UserSession {
    }
    function refreshSession(){
        //nothing to do...clients need to worry about it.
+   }
+
+   function getActivityToken() {
+       if (!$this->activity)
+           $this->rollActivityToken();
+
+       return $this->activity;
+   }
+
+   function rollActivityToken() {
+       $this->activity = sha1(session_id().microtime(true).$this->ip);
    }
 
    function sessionToken(){
@@ -137,7 +150,14 @@ class ClientSession extends Client {
     
     function getIP(){
         return $this->session->getIP();
-    }    
+    }
+
+    function getActivityToken() {
+        return $this->session->getActivityToken();
+    }
+    function rollActivityToken() {
+        return $this->session->rollActivityToken();
+    }
 }
 
 
@@ -175,7 +195,26 @@ class StaffSession extends Staff {
     function getIP(){
         return $this->session->getIP();
     }
-    
+
+    function getActivityToken() {
+        return $this->session->getActivityToken();
+    }
+    function rollActivityToken() {
+        return $this->session->rollActivityToken();
+    }
+}
+
+function activity_token() {
+    global $thisstaff, $thisclient;
+
+    if (defined('OSTSTAFFINC') && $thisstaff) { ?>
+        <input type="hidden" name="__activity__" value="<?php
+        echo $thisstaff->getActivityToken(); ?>"/>
+<?php }
+    elseif (defined('OSTCLIENTINC') && $thisclient) { ?>
+        <input type="hidden" name="__activity__" value="<?php
+        echo $thisclient->getActivityToken(); ?>"/>
+<?php }
 }
 
 ?>

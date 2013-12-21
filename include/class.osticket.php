@@ -117,6 +117,30 @@ class osTicket {
         return false;
     }
 
+    function checkActivityToken($name='__activity__') {
+        global $thisstaff, $thisclient;
+        $user = null;
+
+        if (defined('OSTSTAFFINC') && $thisstaff) {
+            $user = $thisstaff;
+        }
+        elseif (defined('OSTCLIENTINC') && $thisclient) {
+            $user = $thisclient;
+        }
+        if (isset($_POST[$name]) && $user) {
+            // Ensure the token matches the current token for the user. If
+            // they don't match, this is likely a stale form post
+            $pass = ($user->getActivityToken() == $_POST[$name]);
+            // Regardless, the same token CANNOT be used in a future post
+            $user->rollActivityToken();
+            return $pass;
+        }
+        else {
+            // Token not found. Pass by default
+            return true;
+        }
+    }
+
     function getLinkToken() {
         return md5($this->getCSRFToken().SECRET_SALT.session_id());
     }

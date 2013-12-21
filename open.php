@@ -16,8 +16,7 @@
 require('client.inc.php');
 define('SOURCE','Web'); //Ticket source.
 $ticket = null;
-$errors=array();
-if($_POST):
+if($_POST && !$errors):
     $vars = $_POST;
     $vars['deptId']=$vars['emailId']=0; //Just Making sure we don't accept crap...only topicId is expected.
     if($thisclient) {
