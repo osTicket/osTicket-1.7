@@ -1,4 +1,3 @@
-
 DROP TABLE IF EXISTS `%TABLE_PREFIX%api_key`;
 CREATE TABLE `%TABLE_PREFIX%api_key` (
   `id` int(10) unsigned NOT NULL auto_increment,
@@ -771,7 +770,7 @@ CREATE TABLE IF NOT EXISTS `%TABLE_PREFIX%page` (
 
 INSERT INTO `%TABLE_PREFIX%page` (`id`, `isactive`, `type`, `name`, `body`, `notes`, `created`, `updated`) VALUES
 ('', 1, 'offline', 'Offline', '<div>\r\n<h1><span style="font-size: medium">Support Ticket System Offline</span></h1>\r\n<p>Thank you for your interest in contacting us.</p>\r\n<p>Our helpdesk is offline at the moment, please check back at a later time.</p>\r\n</div>', 'Default offline page', NOW(), NOW()),
-('', 1, 'thank-you', 'Thank you', '<div>%{ticket.name},<br />\r\n    \r\n<p>\r\nThank you for contacting us.</p><p> A support ticket request #%{ticket.number} has been created and a representative will be getting back to you shortly if necessary.</p>\r\n          \r\n<p>Support Team </p>\r\n</div>', 'Default "thank you" page displayed after the end-user creates a web ticket.', NOW(), NOW()),
+('', 1, 'thank-you', 'Thank you', '<div>%{ticket.name},<br />\r\n    \r\n<p>\r\nThank you for contacting us.</p><p> A support ticket has been created and a representative will be getting back to you shortly if necessary.</p><p>Please check your email for login information.</p>\r\n          \r\n<p>Support Team </p>\r\n</div>', 'Default "thank you" page displayed after the end-user creates a web ticket.', NOW(), NOW()),
 ('', 1, 'landing', 'Landing', '<h1>Welcome to the Support Center</h1>\r\n<p>In order to streamline support requests and better serve you, we utilize a support ticket system. Every support request is assigned a unique ticket number which you can use to track the progress and responses online. For your reference we provide complete archives and history of all your support requests. A valid email address is required to submit a ticket.\r\n</p>\r\n', 'Introduction text on the landing page.', NOW(), NOW());
 
 INSERT INTO `%TABLE_PREFIX%config` (`key`, `value`, `namespace`) VALUES
