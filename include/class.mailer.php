@@ -142,7 +142,20 @@ class Mailer {
             }
         }
 
-        $mime = new Mail_mime();
+        // The Suhosin patch will muck up the line endings in some
+        // cases
+        //
+        // References:
+        // https://github.com/osTicket/osTicket-1.8/issues/202
+        // http://pear.php.net/bugs/bug.php?id=12032
+        // http://us2.php.net/manual/en/function.mail.php#97680
+        if ((extension_loaded('suhosin') || defined("SUHOSIN_PATCH"))
+                && !$this->getSMTPInfo())
+            $mime = new Mail_mime("\n");
+        else
+            // Use defaults
+            $mime = new Mail_mime();
+
         $mime->setTXTBody($body);
         //XXX: Attachments
         if(($attachments=$this->getAttachments())) {
