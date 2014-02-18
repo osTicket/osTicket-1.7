@@ -172,11 +172,7 @@ class OverviewReportAjaxAPI extends AjaxController {
             $stop = $this->get('period', 'now');
         }
 
-        if ($start != 'last month')
-            $start = DateTime::createFromFormat($cfg->getDateFormat(),
-                $start)->format('U');
-        else
-            $start = strtotime($start);
+        $start = strtotime($start);
 
         if (substr($stop, 0, 1) == '+')
             $stop = strftime('%Y-%m-%d ', $start) . $stop;
