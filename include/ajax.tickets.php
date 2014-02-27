@@ -90,13 +90,14 @@ class TicketsAjaxAPI extends AjaxController {
         $result=array();
         $select = 'SELECT count( DISTINCT ticket.ticket_id) as tickets ';
         $from = ' FROM '.TICKET_TABLE.' ticket ';
-        $where = ' WHERE 1 ';
 
         //Access control.
-        $where.=' AND ( ticket.staff_id='.db_input($thisstaff->getId());
+        $where = ' WHERE ( (ticket.staff_id='.db_input($thisstaff->getId())
+                    .' AND ticket.status="open" )';
 
         if(($teams=$thisstaff->getTeams()) && count(array_filter($teams)))
-            $where.=' OR ticket.team_id IN('.implode(',', db_input(array_filter($teams))).')';
+            $where.=' OR (ticket.team_id IN ('.implode(',', db_input(array_filter($teams)))
+                   .' ) AND ticket.status="open")';
 
         if(!$thisstaff->showAssignedOnly() && ($depts=$thisstaff->getDepts()))
             $where.=' OR ticket.dept_id IN ('.implode(',', db_input($depts)).')';
