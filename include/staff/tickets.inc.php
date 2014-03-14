@@ -1,5 +1,5 @@
 <?php
-if(!defined('OSTSCPINC') || !$thisstaff || !@$thisstaff->isStaff()) die('Access Denied');
+if(!defined('OSTSCPINC') || !$thisstaff || !@$thisstaff->isStaff()) die(lang('access_denied'));
 
 $qstr='&'; //Query string collector
 if($_REQUEST['status']) { //Query string status has nothing to do with the real status used below; gets overloaded.
@@ -15,7 +15,7 @@ if($search) {
   if( ($_REQUEST['query'] && strlen($_REQUEST['query'])<3) 
       || (!$_REQUEST['query'] && isset($_REQUEST['basic_search'])) ){ //Why do I care about this crap...
       $search=false; //Instead of an error page...default back to regular query..with no search.
-      $errors['err']='Search term must be more than 3 chars';
+      $errors['err']=lang('search_term');
       $searchTerm='';
   }
 }
@@ -28,29 +28,37 @@ $status=null;
 switch(strtolower($_REQUEST['status'])){ //Status is overloaded
     case 'open':
         $status='open';
+        $title=lang('open_tickets');
         break;
     case 'closed':
         $status='closed';
+        $title=lang('closed_tickets');
         $showassigned=true; //closed by.
         break;
     case 'overdue':
         $status='open';
+        $title=lang('open_tickets');
         $showoverdue=true;
-        $results_type='Overdue Tickets';
+        $results_type=lang('overdue_tickets');
         break;
     case 'assigned':
         $status='open';
+        $title=lang('open_tickets');
         $staffId=$thisstaff->getId();
-        $results_type='My Tickets';
+        $results_type=lang('my_tickets');
         break;
     case 'answered':
         $status='open';
+        $title=lang('open_tickets');
         $showanswered=true;
-        $results_type='Answered Tickets';
+        $results_type=lang('answered_tickets');
         break;
     default:
         if(!$search)
+        {
             $_REQUEST['status']=$status='open';
+            $title=lang('open_tickets');
+        }
 }
 
 $qwhere ='';
@@ -78,7 +86,7 @@ if($status) {
 
 //Queues: Overloaded sub-statuses  - you've got to just have faith!
 if($staffId && ($staffId==$thisstaff->getId())) { //My tickets
-    $results_type='Assigned Tickets';
+    $results_type=lang('assigned_tickets');
     $qwhere.=' AND ticket.staff_id='.db_input($staffId);
     $showassigned=false; //My tickets...already assigned to the staff.
 }elseif($showoverdue) { //overdue
@@ -119,12 +127,21 @@ if($search):
             //This sucks..mass scan! search anything that moves! 
             
             $deep_search=true;
-            $qwhere.=" AND ( ticket.email LIKE '%$queryterm%'".
-                        " OR ticket.name LIKE '%$queryterm%'".
-                        " OR ticket.subject LIKE '%$queryterm%'".
-                        " OR thread.body LIKE '%$queryterm%'".
-                        " OR thread.title LIKE '%$queryterm%'".
-                        ' ) ';
+            if($_REQUEST['stype'] && $_REQUEST['stype']=='FT') { //Using full text on big fields.
+                $qwhere.=" AND ( ticket.email LIKE '%$queryterm%'".
+                            " OR ticket.name LIKE '%$queryterm%'".
+                            " OR ticket.subject LIKE '%$queryterm%'".
+                            " OR thread.title LIKE '%$queryterm%'".
+                            " OR MATCH(thread.body)   AGAINST('$queryterm')".
+                            ' ) ';
+            }else{
+                $qwhere.=" AND ( ticket.email LIKE '%$queryterm%'".
+                            " OR ticket.name LIKE '%$queryterm%'".
+                            " OR ticket.subject LIKE '%$queryterm%'".
+                            " OR thread.body LIKE '%$queryterm%'".
+                            " OR thread.title LIKE '%$queryterm%'".
+                            ' ) ';
+            }
         }
     }
     //department
@@ -292,10 +309,10 @@ $_SESSION['search_'.$hash] = $query;
 $res = db_query($query);
 $showing=db_num_rows($res)?$pageNav->showing():"";
 if(!$results_type)
-    $results_type = ucfirst($status).' Tickets';
+    $results_type = ucfirst($title);
 
 if($search)
-    $results_type.= ' (Search Results)';
+    $results_type.= ' ('.lang('search_results').')';
 
 $negorder=$order=='DESC'?'ASC':'DESC'; //Negate the sorting..
 
@@ -310,8 +327,8 @@ $negorder=$order=='DESC'?'ASC':'DESC'; //Negate the sorting..
         <tr>
             <td><input type="text" id="basic-ticket-search" name="query" size=30 value="<?php echo Format::htmlchars($_REQUEST['query']); ?>"
                 autocomplete="off" autocorrect="off" autocapitalize="off"></td>
-            <td><input type="submit" name="basic_search" class="button" value="Search"></td>
-            <td>&nbsp;&nbsp;<a href="" id="go-advanced">[advanced]</a></td>
+            <td><input type="submit" name="basic_search" class="button" value="<?php echo lang('search'); ?>"></td>
+            <td>&nbsp;&nbsp;<a href="" id="go-advanced">[<?php echo lang('advanced'); ?>]</a></td>
         </tr>
     </table>
     </form>
@@ -321,7 +338,7 @@ $negorder=$order=='DESC'?'ASC':'DESC'; //Negate the sorting..
 <div style="margin-bottom:20px">
 <form action="tickets.php" method="POST" name='tickets'>
 <?php csrf_token(); ?>
- <a class="refresh" href="<?php echo $_SERVER['REQUEST_URI']; ?>">Refresh</a>
+ <a class="refresh" href="<?php echo $_SERVER['REQUEST_URI']; ?>"><?php echo lang('refresh'); ?></a>
  <input type="hidden" name="a" value="mass_process" >
  <input type="hidden" name="do" id="action" value="" >
  <input type="hidden" name="status" value="<?php echo Format::htmlchars($_REQUEST['status']); ?>" >
@@ -334,26 +351,26 @@ $negorder=$order=='DESC'?'ASC':'DESC'; //Negate the sorting..
             <?php } ?>
 	        <th width="70">
                 <a <?php echo $id_sort; ?> href="tickets.php?sort=ID&order=<?php echo $negorder; ?><?php echo $qstr; ?>" 
-                    title="Sort By Ticket ID <?php echo $negorder; ?>">Ticket</a></th>
+                    title="<?php echo lang('sort_by_ticket'); ?> <?php echo $negorder; ?>"><?php echo lang('ticket'); ?></a></th>
 	        <th width="70">
                 <a  <?php echo $date_sort; ?> href="tickets.php?sort=date&order=<?php echo $negorder; ?><?php echo $qstr; ?>" 
-                    title="Sort By Date <?php echo $negorder; ?>">Date</a></th>
+                    title="<?php echo lang('sort_by_date'); ?> <?php echo $negorder; ?>"><?php echo lang('date'); ?></a></th>
 	        <th width="280">
                  <a <?php echo $subj_sort; ?> href="tickets.php?sort=subj&order=<?php echo $negorder; ?><?php echo $qstr; ?>" 
-                    title="Sort By Subject <?php echo $negorder; ?>">Subject</a></th>
+                    title="<?php echo lang('sort_by_subject'); ?> <?php echo $negorder; ?>"><?php echo lang('subject'); ?></a></th>
             <th width="170">
                 <a <?php echo $name_sort; ?> href="tickets.php?sort=name&order=<?php echo $negorder; ?><?php echo $qstr; ?>"
-                     title="Sort By Name <?php echo $negorder; ?>">From</a></th>
+                     title="<?php echo lang('sort_by_name'); ?> <?php echo $negorder; ?>"><?php echo lang('from'); ?></a></th>
             <?php
             if($search && !$status) { ?>
                 <th width="60">
                     <a <?php echo $status_sort; ?> href="tickets.php?sort=status&order=<?php echo $negorder; ?><?php echo $qstr; ?>"
-                        title="Sort By Status <?php echo $negorder; ?>">Status</a></th>
+                        title="<?php echo lang('sort_by_status'); ?> <?php echo $negorder; ?>"><?php echo lang('status'); ?></a></th>
             <?php
             } else { ?>
                 <th width="60" <?php echo $pri_sort;?>>
                     <a <?php echo $pri_sort; ?> href="tickets.php?sort=pri&order=<?php echo $negorder; ?><?php echo $qstr; ?>" 
-                        title="Sort By Priority <?php echo $negorder; ?>">Priority</a></th>
+                        title="<?php echo lang('sort_by_priority'); ?> <?php echo $negorder; ?>"><?php echo lang('priority'); ?></a></th>
             <?php
             }
 
@@ -362,18 +379,18 @@ $negorder=$order=='DESC'?'ASC':'DESC'; //Negate the sorting..
                 if(!strcasecmp($status,'closed')) { ?>
                     <th width="150">
                         <a <?php echo $staff_sort; ?> href="tickets.php?sort=staff&order=<?php echo $negorder; ?><?php echo $qstr; ?>" 
-                            title="Sort By Closing Staff Name <?php echo $negorder; ?>">Closed By</a></th>
+                            title="<?php echo lang('sort_by_staff'); ?> <?php echo $negorder; ?>"><?php echo lang('closed_by'); ?></a></th>
                 <?php
                 } else { //assigned to ?>
                     <th width="150">
                         <a <?php echo $assignee_sort; ?> href="tickets.php?sort=assignee&order=<?php echo $negorder; ?><?php echo $qstr; ?>" 
-                            title="Sort By Assignee <?php echo $negorder;?>">Assigned To</a></th>
+                            title="<?php echo lang('sort_by_assignee'); ?> <?php echo $negorder;?>"><?php echo lang('assigned_to'); ?></a></th>
                 <?php
                 }
             } else { ?>
                 <th width="150">
                     <a <?php echo $dept_sort; ?> href="tickets.php?sort=dept&order=<?php echo $negorder;?><?php echo $qstr; ?>" 
-                        title="Sort By Department <?php echo $negorder; ?>">Department</a></th>
+                        title="<?php echo lang('sort_by_depart'); ?> <?php echo $negorder; ?>"><?php echo lang('department'); ?></a></th>
             <?php
             } ?>
         </tr>
@@ -422,7 +439,7 @@ $negorder=$order=='DESC'?'ASC':'DESC'; //Negate the sorting..
                 </td>
                 <?php } ?>
                 <td align="center" title="<?php echo $row['email']; ?>" nowrap>
-                  <a class="Icon <?php echo strtolower($row['source']); ?>Ticket ticketPreview" title="Preview Ticket" 
+                  <a class="Icon <?php echo strtolower($row['source']); ?>Ticket ticketPreview" title="<?php echo lang('preview_ticket'); ?>" 
                     href="tickets.php?id=<?php echo $row['ticket_id']; ?>"><?php echo $tid; ?></a></td>
                 <td align="center" nowrap><?php echo Format::db_date($row['created']); ?></td>
                 <td><a <?php if($flag) { ?> class="Icon <?php echo $flag; ?>Ticket" title="<?php echo ucfirst($flag); ?> Ticket" <?php } ?> 
@@ -449,20 +466,20 @@ $negorder=$order=='DESC'?'ASC':'DESC'; //Negate the sorting..
             <?php
             } //end of while.
         else: //not tickets found!! set fetch error.
-            $ferror='There are no tickets here. (Leave a little early today).';  
+            $ferror=lang('no_tickets');  
         endif; ?>
     </tbody>
     <tfoot>
      <tr>
         <td colspan="7">
             <?php if($res && $num && $thisstaff->canManageTickets()){ ?>
-            Select:&nbsp;
-            <a id="selectAll" href="#ckb">All</a>&nbsp;&nbsp;
-            <a id="selectNone" href="#ckb">None</a>&nbsp;&nbsp;
-            <a id="selectToggle" href="#ckb">Toggle</a>&nbsp;&nbsp;
+            <?php echo lang('select'); ?>:&nbsp;
+            <a id="selectAll" href="#ckb"><?php echo lang('all'); ?></a>&nbsp;&nbsp;
+            <a id="selectNone" href="#ckb"><?php echo lang('none'); ?></a>&nbsp;&nbsp;
+            <a id="selectToggle" href="#ckb"><?php echo lang('toggle'); ?></a>&nbsp;&nbsp;
             <?php }else{
                 echo '<i>';
-                echo $ferror?Format::htmlchars($ferror):'Query returned 0 results.';
+                echo $ferror?Format::htmlchars($ferror):lang('query_no-results');
                 echo '</i>';
             } ?>
         </td>
@@ -473,7 +490,7 @@ $negorder=$order=='DESC'?'ASC':'DESC'; //Negate the sorting..
     if($num>0){ //if we actually had any tickets returned.
         echo '<div>&nbsp;Page:'.$pageNav->getPageLinks().'&nbsp;';
         echo '<a class="export-csv" href="?a=export&h='
-            .$hash.'&status='.$_REQUEST['status'] .'">Export</a></div>';
+            .$hash.'&status='.$_REQUEST['status'] .'">'.lang('export').'</a></div>';
     ?>
         <?php
          if($thisstaff->canManageTickets()) { ?>
@@ -482,30 +499,30 @@ $negorder=$order=='DESC'?'ASC':'DESC'; //Negate the sorting..
             $status=$_REQUEST['status']?$_REQUEST['status']:$status;
             switch (strtolower($status)) {
                 case 'closed': ?>
-                    <input class="button" type="submit" name="reopen" value="Reopen" >
+                    <input class="button" type="submit" name="reopen" value="<?php echo lang('reopen'); ?>" >
                     <?php
                     break;
                 case 'open':
                 case 'answered':
                 case 'assigned':
                     ?>
-                    <input class="button" type="submit" name="mark_overdue" value="Overdue" >
-                    <input class="button" type="submit" name="close" value="Close">
+                    <input class="button" type="submit" name="mark_overdue" value="<?php echo lang('overdue'); ?>" >
+                    <input class="button" type="submit" name="close" value="<?php echo lang('close'); ?>">
                     <?php
                     break;
                 case 'overdue':
                     ?>
-                    <input class="button" type="submit" name="close" value="Close">
+                    <input class="button" type="submit" name="close" value="<?php echo lang('close'); ?>">
                     <?php
                     break;
                 default: //search??
                     ?>
-                    <input class="button" type="submit" name="close" value="Close" >
-                    <input class="button" type="submit" name="reopen" value="Reopen">
+                    <input class="button" type="submit" name="close" value="<?php echo lang('close'); ?>" >
+                    <input class="button" type="submit" name="reopen" value="<?php echo lang('reopen'); ?>">
             <?php
             }
             if($thisstaff->canDeleteTickets()) { ?>
-                <input class="button" type="submit" name="delete" value="Delete">
+                <input class="button" type="submit" name="delete" value="<?php echo lang('delete'); ?>">
             <?php } ?>
         </p>
         <?php
@@ -515,60 +532,60 @@ $negorder=$order=='DESC'?'ASC':'DESC'; //Negate the sorting..
 </div>
 
 <div style="display:none;" class="dialog" id="confirm-action">
-    <h3>Please Confirm</h3>
-    <a class="close" href="">&times;</a>
+    <h3><?php echo lang('please_confirm'); ?></h3>
+    <a class="close" href="">X</a>
     <hr/>
     <p class="confirm-action" style="display:none;" id="close-confirm">
-        Are you sure want to <b>close</b> selected open tickets?
+        <?php echo lang('sure_you_want_to'); ?> <b><?php echo lang('close'); ?></b> <?php echo lang('selected_open_tic'); ?>?
     </p>
     <p class="confirm-action" style="display:none;" id="reopen-confirm">
-        Are you sure want to <b>reopen</b> selected closed tickets?
+        <?php echo lang('sure_you_want_to'); ?> <b><?php echo lang('reopen'); ?></b> <?php echo lang('selt_close_tickets'); ?>?
     </p>
     <p class="confirm-action" style="display:none;" id="mark_overdue-confirm">
-        Are you sure want to flag the selected tickets as <font color="red"><b>overdue</b></font>?
+        <?php echo lang('sure_flag_ticket'); ?> <font color="red"><b><?php echo lang('overdue'); ?></b></font>?
     </p>
     <p class="confirm-action" style="display:none;" id="delete-confirm">
-        <font color="red"><strong>Are you sure you want to DELETE selected tickets?</strong></font>
-        <br><br>Deleted tickets CANNOT be recovered, including any associated attachments.
+        <font color="red"><strong><?php echo lang('sure_delete_ticket'); ?></strong></font>
+        <br><br><?php echo lang('d_ticket_cant_rec'); ?>
     </p>
-    <div>Please confirm to continue.</div>
+    <div><?php echo lang('confirm_to_continue'); ?></div>
     <hr style="margin-top:1em"/>
     <p class="full-width">
         <span class="buttons" style="float:left">
-            <input type="button" value="No, Cancel" class="close">
+            <input type="button" value="<?php echo lang('no_cancel'); ?>" class="close">
         </span>
         <span class="buttons" style="float:right">
-            <input type="button" value="Yes, Do it!" class="confirm">
+            <input type="button" value="<?php echo lang('yes_doit'); ?>!" class="confirm">
         </span>
      </p>
     <div class="clear"></div>
 </div>
 
 <div class="dialog" style="display:none;" id="advanced-search">
-    <h3>Advanced Ticket Search</h3>
-    <a class="close" href="">&times;</a>
+    <h3><?php echo lang('ticket_searh'); ?></h3>
+    <a class="close" href="">X</a>
     <form action="tickets.php" method="post" id="search" name="search">
         <input type="hidden" name="a" value="search">
         <fieldset class="query">
-            <label for="query">Keyword:</label>
-            <input type="input" id="query" name="query" size="20"> <em>Optional</em>
+            <label for="query"><?php echo lang('keyword'); ?>:</label>
+            <input type="input" id="query" name="query" size="20"> <em><?php echo lang('optional'); ?></em>
         </fieldset>
         <fieldset>
-            <label for="status">Status:</label>
+            <label for="status"><?php echo lang('status'); ?>:</label>
             <select id="status" name="status">
-                <option value="">&mdash; Any Status &mdash;</option>
-                <option value="open">Open</option>
+                <option value="">&mdash; <?php echo lang('any_status'); ?> &mdash;</option>
+                <option value="open"><?php echo lang('open'); ?></option>
                 <?php
                 if(!$cfg->showAnsweredTickets()) {?>
-                <option value="answered">Answered</option>
+                <option value="answered"><?php echo lang('answered'); ?></option>
                 <?php
                 } ?>
-                <option value="overdue">Overdue</option>
-                <option value="closed">Closed</option>
+                <option value="overdue"><?php echo lang('overdue'); ?></option>
+                <option value="closed"><?php echo lang('closed'); ?></option>
             </select>
-            <label for="deptId">Dept:</label>
+            <label for="deptId"><?php echo lang('department'); ?>:</label>
             <select id="deptId" name="deptId">
-                <option value="">&mdash; All Departments &mdash;</option>
+                <option value="">&mdash; <?php echo lang('all_department'); ?> &mdash;</option>
                 <?php
                 if(($mydepts = $thisstaff->getDepts()) && ($depts=Dept::getDepartments())) {
                     foreach($depts as $id =>$name) {
@@ -580,11 +597,11 @@ $negorder=$order=='DESC'?'ASC':'DESC'; //Negate the sorting..
             </select>
         </fieldset>
         <fieldset class="owner">
-            <label for="assignee">Assigned To:</label>
+            <label for="assignee"><?php echo lang('assigned_to'); ?>:</label>
             <select id="assignee" name="assignee">
-                <option value="">&mdash; Anyone &mdash;</option>
-                <option value="0">&mdash; Unassigned &mdash;</option>
-                <option value="<?php echo $thisstaff->getId(); ?>">Me</option>
+                <option value="">&mdash; <?php echo lang('anyone'); ?> &mdash;</option>
+                <option value="0">&mdash;<?php echo lang('unassigned'); ?>  &mdash;</option>
+                <option value="<?php echo $thisstaff->getId(); ?>"><?php echo lang('me'); ?></option>
                 <?php
                 if(($users=Staff::getStaffMembers())) {
                     echo '<OPTGROUP label="Staff Members ('.count($users).')">';
@@ -605,10 +622,10 @@ $negorder=$order=='DESC'?'ASC':'DESC'; //Negate the sorting..
                 }
                 ?>
             </select>
-            <label for="staffId">Closed By:</label>
+            <label for="staffId"><?php echo lang('closed_by'); ?>:</label>
             <select id="staffId" name="staffId">
-                <option value="0">&mdash; Anyone &mdash;</option>
-                <option value="<?php echo $thisstaff->getId(); ?>">Me</option>
+                <option value="0">&mdash; <?php echo lang('anyone'); ?> &mdash;</option>
+                <option value="<?php echo $thisstaff->getId(); ?>"><?php echo lang('me'); ?></option>
                 <?php
                 if(($users=Staff::getStaffMembers())) {
                     foreach($users as $id => $name)
@@ -618,9 +635,9 @@ $negorder=$order=='DESC'?'ASC':'DESC'; //Negate the sorting..
             </select>
         </fieldset>
         <fieldset>
-            <label for="topicId">Help Topic:</label>
+            <label for="topicId"><?php echo lang('help_topic'); ?>:</label>
             <select id="topicId" name="topicId">
-                <option value="" selected >&mdash; All Help Topics &mdash;</option>
+                <option value="" selected >&mdash; <?php echo lang('all_help_topics'); ?> &mdash;</option>
                 <?php
                 if($topics=Topic::getHelpTopics()) {
                     foreach($topics as $id =>$name)
@@ -630,16 +647,16 @@ $negorder=$order=='DESC'?'ASC':'DESC'; //Negate the sorting..
             </select>
         </fieldset>
         <fieldset class="date_range">
-            <label>Date Range:</label>
+            <label><?php echo lang('date_range'); ?>:</label>
             <input class="dp" type="input" size="20" name="startDate">
-            <span>TO</span>
+            <span><?php echo lang('to'); ?></span>
             <input class="dp" type="input" size="20" name="endDate">
         </fieldset>
         <p>
             <span class="buttons">
-                <input type="submit" value="Search">
-                <input type="reset" value="Reset">
-                <input type="button" value="Cancel" class="close">
+                <input type="submit" value="<?php echo lang('search'); ?>">
+                <input type="reset" value="<?php echo lang('reset'); ?>">
+                <input type="button" value="<?php echo lang('cancel'); ?>" class="close">
             </span>
             <span class="spinner">
                 <img src="./images/ajax-loader.gif" width="16" height="16">

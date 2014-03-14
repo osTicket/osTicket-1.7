@@ -14,54 +14,59 @@
     vim: expandtab sw=4 ts=4 sts=4:
 **********************************************************************/
 require_once INCLUDE_DIR.'class.yaml.php';
+require_once(INCLUDE_DIR.'languages/language_control/languages_processor.php');
 
 class EmailTemplateGroup {
 
     var $id;
     var $ht;
     var $_templates;
-    var $all_names=array(
+
+    function all_names()
+    {
+        return $all_names=array(
         'ticket.autoresp'=>array(
-            'name'=>'New Ticket Auto-response',
-            'desc'=>'Autoresponse sent to user, if enabled, on new ticket.'),
+            'name'=>lang('tic_auto_response'),
+            'desc'=>lang('auto_resp_sent')),
         'ticket.autoreply'=>array(
-            'name'=>'New Ticket Auto-reply',
-            'desc'=>'Canned Auto-reply sent to user on new ticket, based on filter matches. Overwrites "normal" auto-response.'),
+            'name'=>lang('new_ticket_reply'),
+            'desc'=>lang('cant_auto_sent')),
         'message.autoresp'=>array(
-            'name'=>'New Message Auto-response',
-            'desc'=>'Confirmation sent to user when a new message is appended to an existing ticket.'),
+            'name'=>lang('mess_auto_resp'),
+            'desc'=>lang('confirm_sent')),
         'ticket.notice'=>array(
-            'name'=>'New Ticket Notice',
-            'desc'=>'Notice sent to user, if enabled, on new ticket created by staff on their behalf (e.g phone calls).'),
+            'name'=>lang('new_ticket_notice'),
+            'desc'=>lang('notice_sent_user')),
         'ticket.overlimit'=>array(
-            'name'=>'Over Limit Notice',
-            'desc'=>'A one-time notice sent, if enabled, when user has reached the maximum allowed open tickets.'),
+            'name'=>lang('over_limit_not'),
+            'desc'=>lang('one_time_notice')),
         'ticket.reply'=>array(
-            'name'=>'Response/Reply Template',
-            'desc'=>'Template used on ticket response/reply'),
+            'name'=>lang('response_temp'),
+            'desc'=>lang('temp_in_ticket_r')),
         'ticket.alert'=>array(
-            'name'=>'New Ticket Alert',
-            'desc'=>'Alert sent to staff, if enabled, on new ticket.'),
+            'name'=>lang('new_ticket_alert'),
+            'desc'=>lang('alert_sent_staff')),
         'message.alert'=>array(
-            'name'=>'New Message Alert',
-            'desc'=>'Alert sent to staff, if enabled, when user replies to an existing ticket.'),
+            'name'=>lang('new_message_alert'),
+            'desc'=>lang('alert_staff_enab')),
         'note.alert'=>array(
-            'name'=>'Internal Note Alert',
-            'desc'=>'Alert sent to selected staff, if enabled, on new internal note.'),
+            'name'=>lang('intern_note_alert'),
+            'desc'=>lang('alert_sl_staff')),
         'assigned.alert'=>array(
-            'name'=>'Ticket Assignment Alert',
-            'desc'=>'Alert sent to staff on ticket assignment.'),
+            'name'=>lang('ticket_assig_alert'),
+            'desc'=>lang('alert_to_staff')),
         'transfer.alert'=>array(
-            'name'=>'Ticket Transfer Alert',
-            'desc'=>'Alert sent to staff on ticket transfer.'),
+            'name'=>lang('ticket_transfer'),
+            'desc'=>lang('alert_ticket_trans')),
         'ticket.overdue'=>array(
-            'name'=>'Overdue Ticket Alert',
-            'desc'=>'Alert sent to staff on stale or overdue tickets.'),
+            'name'=>lang('overdue_ticket'),
+            'desc'=>lang('alert_on_overdue')),
         'staff.pwreset' => array(
-            'name' => 'Staff Password Reset',
-            'desc' => 'Notice sent to staff with the password reset link.',
+            'name' => lang('staff_reset_pass'),
+            'desc' => lang('pass_reset_link'),
             'default' => 'templates/staff.pwreset.txt'),
         );
+    }
 
     function EmailTemplateGroup($id){
         $this->id=0;
@@ -140,7 +145,8 @@ class EmailTemplateGroup {
     }
 
     function getTemplateDescription($name) {
-        return $this->all_names[$name];
+        $names = $this->all_names();
+        return $names[$name];
     }
 
     function getMsgTemplate($name) {
@@ -157,10 +163,13 @@ class EmailTemplateGroup {
     }
 
     function getTemplates() {
+        $lang = getDefaultLanguage(true);
+
         if (!$this->_tempates) {
             $this->_templates = array();
             $sql = 'SELECT id, code_name FROM '.EMAIL_TEMPLATE_TABLE
                 .' WHERE tpl_id='.db_input($this->getId())
+                .' AND lang="'.$lang.'" '
                 .' ORDER BY code_name';
             $res = db_query($sql);
             while (list($id, $cn)=db_fetch_row($res))
@@ -170,7 +179,7 @@ class EmailTemplateGroup {
     }
 
     function getUndefinedTemplateNames() {
-        $list = $this->all_names;
+        $list = $this->all_names();
         foreach ($this->getTemplates() as $cn=>$tpl)
             unset($list[$cn]);
         return $list;
@@ -224,11 +233,11 @@ class EmailTemplateGroup {
     function getOverdueAlertMsgTemplate() {
         return $this->getMsgTemplate('ticket.overdue');
     }
-
+    
     function update($vars,&$errors) {
 
         if(!$vars['isactive'] && $this->isInUse())
-            $errors['isactive']='Template in use cannot be disabled!';
+            $errors['isactive']=lang('template_cant_disabled');
 
         if(!$this->save($this->getId(),$vars,$errors))
             return false;
@@ -291,15 +300,15 @@ class EmailTemplateGroup {
         $vars['name']=Format::striptags(trim($vars['name']));
 
         if($id && $id!=$vars['tpl_id'])
-            $errors['err']='Internal error. Try again';
+            $errors['err']=lang('internal_error_try');
 
         if(!$vars['name'])
-            $errors['name']='Name required';
+            $errors['name']=lang('name_required');
         elseif(($tid=EmailTemplateGroup::getIdByName($vars['name'])) && $tid!=$id)
-            $errors['name']='Template name already exists';
+            $errors['name']=lang('temp_exist');
 
         if(!$id && (!$vars['tpl_id'] || !($tpl=EmailTemplateGroup::lookup($vars['tpl_id']))))
-            $errors['tpl_id']='Selection required';
+            $errors['tpl_id']=lang('selection_requir');
 
         if($errors) return false;
 
@@ -313,14 +322,14 @@ class EmailTemplateGroup {
             if(db_query($sql))
                 return true;
 
-            $errors['err']='Unable to update the template. Internal error occurred';
+            $errors['err']=lang('inter_error_temp');
 
         } elseif($tpl && ($info=$tpl->getInfo())) {
 
             $sql='INSERT INTO '.EMAIL_TEMPLATE_GRP_TABLE
                 .' SET created=NOW(), '.$sql;
             if(!db_query($sql) || !($new_id=db_insert_id())) {
-                $errors['err']='Unable to create template. Internal error';
+                $errors['err']=lang('unable_cr_temp');
                 return false;
             }
 
@@ -424,16 +433,16 @@ class EmailTemplate {
 
     function save($id, $vars, &$errors) {
         if(!$vars['subj'])
-            $errors['subj']='Message subject required';
+            $errors['subj']=lang('message_subject_req');
 
         if(!$vars['body'])
-            $errors['body']='Message body required';
+            $errors['body']=lang('message_body_req');
 
         if (!$id) {
             if (!$vars['tpl_id'])
-                $errors['tpl_id']='Template group required';
+                $errors['tpl_id']=lang('template_cant_disabled');
             if (!$vars['code_name'])
-                $errprs['code_name']='Code name required';
+                $errprs['code_name']=lang('code_name_required');
         }
 
         if ($errors)
@@ -467,8 +476,10 @@ class EmailTemplate {
     }
 
     function lookupByName($tpl_id, $name, $group=null) {
+        $lang = getDefaultLanguage(true);
         $sql = 'SELECT id FROM '.EMAIL_TEMPLATE_TABLE
             .' WHERE tpl_id='.db_input($tpl_id)
+            .' AND lang="'.$lang.'" '
             .' AND code_name='.db_input($name);
         if (($res=db_query($sql)) && ($id=db_result($res)))
             return self::lookup($id, $group);
@@ -494,7 +505,7 @@ class EmailTemplate {
             return $templ;
         }
         raise_error("$lang/templates/$name.yaml: "
-            . 'Email templates must define both "subject" and "body" parts of the template',
+            . lang('temp_def_sub_body'),
             'InitialDataError');
         return false;
     }

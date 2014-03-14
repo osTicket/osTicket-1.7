@@ -64,7 +64,7 @@
  */
 
 require_once 'PEAR.php';
-
+require_once(INCLUDE_DIR.'languages/language_control/languages_processor.php');
 
 /**
  * The Mail_mimeDecode class is used to decode mail/mime messages
@@ -209,7 +209,7 @@ class Mail_mimeDecode extends PEAR
 
         // Called statically but no input
         } elseif ($isStatic) {
-            return PEAR::raiseError('Called statically and no input given');
+            return PEAR::raiseError(lang('called_statically'));
 
         // Called via an object
         } else {
@@ -317,7 +317,7 @@ class Mail_mimeDecode extends PEAR
                 case 'multipart/related':
                 case 'multipart/mixed':
                     if(!isset($content_type['other']['boundary'])){
-                        $this->_error = 'No boundary found for ' . $content_type['value'] . ' part';
+                        $this->_error = lang('no_boundary_found').' '. $content_type['value'] . ' '.lang('part');
                         return false;
                     }
 
@@ -414,7 +414,7 @@ class Mail_mimeDecode extends PEAR
         if (preg_match("/^(.*?)\r?\n\r?\n(.*)/s", $input, $match)) {
             return array($match[1], $match[2]);
         }
-        $this->_error = 'Could not split header and body';
+        $this->_error = lang('not_split_header');
         return false;
     }
 
@@ -735,7 +735,7 @@ class Mail_mimeDecode extends PEAR
         $to = "";
         $header = array();
         if (!$headerlist) {
-            return $this->raiseError("Message did not contain headers");
+            return $this->raiseError(lang("message_not_c_head"));
         }
         foreach($headerlist as $item) {
             $header[$item['name']] = $item['value'];
@@ -749,7 +749,7 @@ class Mail_mimeDecode extends PEAR
             }
         }
         if ($to == "") {
-            return $this->raiseError("Message did not contain any recipents");
+            return $this->raiseError(lang("message_not_c_reci"));
         }
         $to = substr($to,1);
         return array($to,$header,$this->_body);

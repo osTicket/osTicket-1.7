@@ -1,5 +1,5 @@
 <?php
-if(!defined('OSTCLIENTINC') || !$thisclient || !$ticket || !$ticket->checkClientAccess($thisclient)) die('Access Denied!');
+if(!defined('OSTCLIENTINC') || !$thisclient || !$ticket || !$ticket->checkClientAccess($thisclient)) die(lang('access_denied!'));
 
 $info=($_POST && $errors)?Format::htmlchars($_POST):array();
 
@@ -9,28 +9,30 @@ if(!$dept || !$dept->isPublic())
     $dept = $cfg->getDefaultDept();
 
 ?>
+
 <table width="800" cellpadding="1" cellspacing="0" border="0" id="ticketInfo">
     <tr>
         <td colspan="2" width="100%">
             <h1>
-                Ticket #<?php echo $ticket->getExtId(); ?> &nbsp;
+                <?php echo lang('ticket'); ?> #<?php echo $ticket->getExtId(); ?> &nbsp;
                 <a href="view.php?id=<?php echo $ticket->getExtId(); ?>" title="Reload"><span class="Icon refresh">&nbsp;</span></a>
             </h1>
         </td>
-    </tr>
+    </tr> 
     <tr>
-        <td width="50%">
+        <td width="50%">   
             <table class="infoTable" cellspacing="1" cellpadding="3" width="100%" border="0">
                 <tr>
-                    <th width="100">Ticket Status:</th>
+
+                    <th width="<?php echo (getDefaultLanguage(true) == 'eng' ? '90' :  '130'); ?>px"><?php echo lang('ticket_status'); ?>:</th>
                     <td><?php echo ucfirst($ticket->getStatus()); ?></td>
                 </tr>
                 <tr>
-                    <th>Department:</th>
+                    <th><?php echo lang('department'); ?>:</th>
                     <td><?php echo Format::htmlchars($dept->getName()); ?></td>
                 </tr>
                 <tr>
-                    <th>Create Date:</th>
+                    <th><?php echo lang('create_date'); ?>:</th>
                     <td><?php echo Format::db_datetime($ticket->getCreateDate()); ?></td>
                 </tr>
            </table>
@@ -38,15 +40,15 @@ if(!$dept || !$dept->isPublic())
        <td width="50%">
            <table class="infoTable" cellspacing="1" cellpadding="3" width="100%" border="0">
                <tr>
-                   <th width="100">Name:</th>
+                   <th width="<?php echo (getDefaultLanguage(true) == 'eng' ? '50' :  '60'); ?>px"><?php echo lang('name'); ?>:</th>
                    <td><?php echo ucfirst($ticket->getName()); ?></td>
                </tr>
                <tr>
-                   <th width="100">Email:</th>
+                   <th><?php echo lang('email'); ?>:</th>
                    <td><?php echo Format::htmlchars($ticket->getEmail()); ?></td>
                </tr>
                <tr>
-                   <th>Phone:</th>
+                   <th><?php echo lang('phone'); ?>:</th>
                    <td><?php echo $ticket->getPhoneNumber(); ?></td>
                </tr>
             </table>
@@ -54,17 +56,14 @@ if(!$dept || !$dept->isPublic())
     </tr>
 </table>
 <br>
-<h2>Subject:<?php echo Format::htmlchars($ticket->getSubject()); ?></h2>
+<h2><?php echo lang('subject'); ?>:<?php echo Format::htmlchars($ticket->getSubject()); ?></h2>
 <br>
-<span class="Icon thread">Ticket Thread</span>
+<span class="Icon thread"><?php echo lang('ticket_thread_only'); ?></span>
 <div id="ticketThread">
-<?php
+<?php    
 if($ticket->getThreadCount() && ($thread=$ticket->getClientThread())) {
     $threadType=array('M' => 'message', 'R' => 'response');
     foreach($thread as $entry) {
-        if ($entry['body'] == '-')
-            $entry['body'] = '(EMPTY)';
-
         //Making sure internal notes are not displayed due to backend MISTAKES!
         if(!$threadType[$entry['thread_type']]) continue;
         $poster = $entry['poster'];
@@ -97,20 +96,20 @@ if($ticket->getThreadCount() && ($thread=$ticket->getClientThread())) {
 <?php } ?>
 <form id="reply" action="tickets.php?id=<?php echo $ticket->getExtId(); ?>#reply" name="reply" method="post" enctype="multipart/form-data">
     <?php csrf_token(); ?>
-    <h2>Post a Reply</h2>
+    <h2><?php echo lang('post_a_reply'); ?></h2>
     <input type="hidden" name="id" value="<?php echo $ticket->getExtId(); ?>">
     <input type="hidden" name="a" value="reply">
     <table border="0" cellspacing="0" cellpadding="3" width="800">
         <tr>
             <td width="160">
-                <label>Message:</label>
+                <label><?php echo lang('message'); ?>:</label>
             </td>
             <td width="640">
                 <?php
                 if($ticket->isClosed()) {
-                    $msg='<b>Ticket will be reopened on message post</b>';
+                    $msg='<b>'.lang('tick_reopen_on_mss').'</b>';
                 } else {
-                    $msg='To best assist you, please be specific and detailed';
+                    $msg=lang('provide_det_only');
                 }
                 ?>
                 <span id="msg"><em><?php echo $msg; ?> </em></span><font class="error">*&nbsp;<?php echo $errors['message']; ?></font><br/>
@@ -121,7 +120,7 @@ if($ticket->getThreadCount() && ($thread=$ticket->getClientThread())) {
         if($cfg->allowOnlineAttachments()) { ?>
         <tr>
             <td width="160">
-                <label for="attachment">Attachments:</label>
+                <label for="attachment"><?php echo lang('attachments'); ?>:</label>
             </td>
             <td width="640" id="reply_form_attachments" class="attachments">
                 <div class="uploads">
@@ -135,8 +134,8 @@ if($ticket->getThreadCount() && ($thread=$ticket->getClientThread())) {
         } ?>
     </table>
     <p style="padding-left:165px;">
-        <input type="submit" value="Post Reply">
-        <input type="reset" value="Reset">
-        <input type="button" value="Cancel" onClick="history.go(-1)">
+        <input type="submit" value="<?php echo lang('post_reply'); ?>">
+        <input type="reset" value="<?php echo lang('reset'); ?>">
+        <input type="button" value="<?php echo lang('cancel'); ?>" onClick="history.go(-1)">
     </p>
 </form>

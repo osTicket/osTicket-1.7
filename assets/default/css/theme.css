@@ -213,7 +213,6 @@ h2 {
 #msg_error {
   margin: 0;
   padding: 5px 10px 5px 36px;
-  height: 16px;
   line-height: 16px;
   margin-bottom: 10px;
   border: 1px solid #a00;
@@ -782,6 +781,7 @@ a.refresh {
 }
 .infoTable th {
   text-align: left;
+  font-weight: bold;
 }
 #ticketThread table {
   margin-top: 10px;
@@ -806,7 +806,7 @@ a.refresh {
   background: #d8efff;
 }
 #ticketThread .response th {
-  background: #ddd;
+  background: #FFE0B3;
 }
 #ticketThread .info {
   padding: 2px;
@@ -823,4 +823,15 @@ a.refresh {
   line-height: 16px;
   background-position: 0 50%;
   background-repeat: no-repeat;
+}
+
+#sysmsg{ position: absolute;  width: 753px; top: 27px; padding: 5px 10px 5px 36px; height: 16px; line-height: 16px; margin-bottom: 10px; border: 1px solid #0a0; background: url('../images/icons/ok.png') 10px 50% no-repeat #e0ffe0; }
+#sysmsg.error{
+  margin: 0;
+  padding: 5px 10px 5px 36px;
+  line-height: 16px;
+  margin-bottom: 10px;
+  border: 1px solid #a00;
+  background: url('../images/icons/error.png') 10px 50% no-repeat #fff0f0;
+  top: 40px;
 }

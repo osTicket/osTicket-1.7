@@ -44,6 +44,7 @@
  */
 
 require_once 'PEAR.php';
+require_once(INCLUDE_DIR.'languages/language_control/languages_processor.php');
 
 /**
  * PEAR's Mail:: interface. Defines the interface for implementing
@@ -80,7 +81,7 @@ class Mail
             $mailer = new $class($params);
             return $mailer;
         } else {
-            return PEAR::raiseError('Unable to find class for driver ' . $driver);
+            return PEAR::raiseError(lang('unab_find_class').' ' . $driver);
         }
     }
 
@@ -114,7 +115,7 @@ class Mail
     function send($recipients, $headers, $body)
     {
         if (!is_array($headers)) {
-            return PEAR::raiseError('$headers must be an array');
+            return PEAR::raiseError('$headers '.lang('must_be_array'));
         }
 
         $result = $this->_sanitizeHeaders($headers);

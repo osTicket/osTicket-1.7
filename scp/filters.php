@@ -16,9 +16,10 @@
 require('admin.inc.php');
 include_once(INCLUDE_DIR.'class.filter.php');
 require_once(INCLUDE_DIR.'class.canned.php');
+require_once(INCLUDE_DIR.'languages/language_control/languages_processor.php');
 $filter=null;
 if($_REQUEST['id'] && !($filter=Filter::lookup($_REQUEST['id'])))
-    $errors['err']='Unknown or invalid filter.';
+    $errors['err']=lang('invalid_filter');
 
 /* NOTE: Banlist has its own interface*/
 if($filter && $filter->isSystemBanlist())
@@ -28,24 +29,24 @@ if($_POST){
     switch(strtolower($_POST['do'])){
         case 'update':
             if(!$filter){
-                $errors['err']='Unknown or invalid filter.';
+                $errors['err']=lang('invalid_filter');
             }elseif($filter->update($_POST,$errors)){
-                $msg='Filter updated successfully';
+                $msg=lang('filter_upd_success');
             }elseif(!$errors['err']){
-                $errors['err']='Error updating filter. Try again!';
+                $errors['err']=lang('error_update_filt');
             }
             break;
         case 'add':
             if((Filter::create($_POST,$errors))){
-                $msg='Filter added successfully';
+                $msg=lang('filter_added');
                 $_REQUEST['a']=null;
             }elseif(!$errors['err']){
-                $errors['err']='Unable to add filter. Correct error(s) below and try again.';
+                $errors['err']=lang('cant_add_filter');
             }
             break;
         case 'mass_process':
             if(!$_POST['ids'] || !is_array($_POST['ids']) || !count($_POST['ids'])) {
-                $errors['err'] = 'You must select at least one filter to process.';
+                $errors['err'] = lang('select_one_filter');
             } else {
                 $count=count($_POST['ids']);
                 switch(strtolower($_POST['a'])) {
@@ -54,11 +55,11 @@ if($_POST){
                             .' WHERE id IN ('.implode(',', db_input($_POST['ids'])).')';
                         if(db_query($sql) && ($num=db_affected_rows())) {
                             if($num==$count)
-                                $msg = 'Selected filters enabled';
+                                $msg = lang('select_filter_enab');
                             else
-                                $warn = "$num of $count selected filters enabled";
+                                $warn = "$num ".lang('of')." $count ".lang('select_filter_enab');
                         } else {
-                            $errors['err'] = 'Unable to enable selected filters';
+                            $errors['err'] = lang('cant_enable_filter');
                         }
                         break;
                     case 'disable':
@@ -66,11 +67,11 @@ if($_POST){
                             .' WHERE id IN ('.implode(',', db_input($_POST['ids'])).')';
                         if(db_query($sql) && ($num=db_affected_rows())) {
                             if($num==$count)
-                                $msg = 'Selected filters disabled';
+                                $msg = lang('filters_disabled');
                             else
-                                $warn = "$num of $count selected filters disabled";
+                                $warn = "$num ".lang('of')." $count ".lang('filters_disabled');
                         } else {
-                            $errors['err'] = 'Unable to disable selected filters';
+                            $errors['err'] = lang('cant_disable_filter');
                         }
                         break;
                     case 'delete':
@@ -81,19 +82,19 @@ if($_POST){
                         }
                         
                         if($i && $i==$count)
-                            $msg = 'Selected filters deleted successfully';
+                            $msg = lang('select_filter_delet');
                         elseif($i>0)
-                            $warn = "$i of $count selected filters deleted";
+                            $warn = "$i ".lang('of')." $count ".lang('filters_deleted');
                         elseif(!$errors['err'])
-                            $errors['err'] = 'Unable to delete selected filters';
+                            $errors['err'] = lang('cant_delete_filter');
                         break;
                     default:
-                        $errors['err']='Unknown action - get technical help';
+                        $errors['err']=lang('unknown_action');
                 }
             }
             break;
         default:
-            $errors['err']='Unknown commande/action';
+            $errors['err']=lang('unknown_command');
             break;
     }
 }

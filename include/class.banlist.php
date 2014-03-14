@@ -15,6 +15,7 @@
 **********************************************************************/
 
 require_once "class.filter.php";
+require_once(INCLUDE_DIR.'languages/language_control/languages_processor.php');
 
 class Banlist {
     
@@ -47,12 +48,12 @@ class Banlist {
         $errors=array();
         return Filter::create(array(
             'execorder'     => 99,
-            'name'          => 'SYSTEM BAN LIST',
+            'name'          => lang('system_ban_list'),
             'isactive'      => 1,
             'match_all_rules' => false,
             'reject_ticket'  => true,
             'rules'         => array(),
-            'notes'         => 'Internal list for email banning. Do not remove'
+            'notes'         => lang('list_email_bann')
         ), $errors);
     }
 

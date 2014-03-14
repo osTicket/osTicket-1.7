@@ -1,5 +1,5 @@
 <?php
-if(!defined('OSTADMININC') || !$thisstaff->isAdmin()) die('Access Denied');
+if(!defined('OSTADMININC') || !$thisstaff->isAdmin()) die(lang('access_denied'));
 
 $qstr='';
 $sql='SELECT email.*,dept.dept_name as department,priority_desc as priority '.
@@ -37,16 +37,16 @@ $qstr.='&order='.($order=='DESC'?'ASC':'DESC');
 $query="$sql GROUP BY email.email_id ORDER BY $order_by LIMIT ".$pageNav->getStart().",".$pageNav->getLimit();
 $res=db_query($query);
 if($res && ($num=db_num_rows($res)))
-    $showing=$pageNav->showing().' emails';
+    $showing=$pageNav->showing().' '.lang('emails');
 else
-    $showing='No emails found!';
+    $showing=lang('no_emails_found');
 
 ?>
-<div style="width:700px;padding-top:5px; float:left;">
- <h2>Email Addresses</h2>
+<div style="width:700;padding-top:5px; float:left;">
+ <h2><?php echo lang('email_addresses'); ?></h2>
  </div>
 <div style="float:right;text-align:right;padding-top:5px;padding-right:5px;">
-    <b><a href="emails.php?a=add" class="Icon newEmail">Add New Email</a></b></div>
+    <b><a href="emails.php?a=add" class="Icon newEmail"><?php echo lang('add_new_email'); ?></a></b></div>
 <div class="clear"></div>
 <form action="emails.php" method="POST" name="emails">
  <?php csrf_token(); ?>
@@ -57,11 +57,11 @@ else
     <thead>
         <tr>
             <th width="7">&nbsp;</th>        
-            <th width="400"><a <?php echo $email_sort; ?> href="emails.php?<?php echo $qstr; ?>&sort=email">Email</a></th>
-            <th width="120"><a  <?php echo $priority_sort; ?> href="emails.php?<?php echo $qstr; ?>&sort=priority">Priority</a></th>
-            <th width="250"><a  <?php echo $dept_sort; ?> href="emails.php?<?php echo $qstr; ?>&sort=dept">Department</a></th>
-            <th width="110" nowrap><a  <?php echo $created_sort; ?>href="emails.php?<?php echo $qstr; ?>&sort=created">Created</a></th>
-            <th width="150" nowrap><a  <?php echo $updated_sort; ?>href="emails.php?<?php echo $qstr; ?>&sort=updated">Last Updated</a></th>
+            <th width="400"><a <?php echo $email_sort; ?> href="emails.php?<?php echo $qstr; ?>&sort=email"><?php echo lang('email'); ?></a></th>
+            <th width="120"><a  <?php echo $priority_sort; ?> href="emails.php?<?php echo $qstr; ?>&sort=priority"><?php echo lang('priority'); ?></a></th>
+            <th width="250"><a  <?php echo $dept_sort; ?> href="emails.php?<?php echo $qstr; ?>&sort=dept"><?php echo lang('department'); ?></a></th>
+            <th width="110" nowrap><a  <?php echo $created_sort; ?>href="emails.php?<?php echo $qstr; ?>&sort=created"><?php echo lang('created'); ?></a></th>
+            <th width="150" nowrap><a  <?php echo $updated_sort; ?>href="emails.php?<?php echo $qstr; ?>&sort=updated"><?php echo lang('last_update'); ?></a></th>
         </tr>
     </thead>
     <tbody>
@@ -97,12 +97,13 @@ else
      <tr>
         <td colspan="6">
             <?php if($res && $num){ ?>
-            Select:&nbsp;
-            <a id="selectAll" href="#ckb">All</a>&nbsp;&nbsp;
-            <a id="selectNone" href="#ckb">None</a>&nbsp;&nbsp;
-            <a id="selectToggle" href="#ckb">Toggle</a>&nbsp;&nbsp;
+            <?php echo lang('select'); ?>:&nbsp;
+            <a id="selectAll" href="#ckb"><?php echo lang('all'); ?></a>&nbsp;&nbsp;
+            <a id="selectNone" href="#ckb"><?php echo lang('none'); ?></a>&nbsp;&nbsp;
+            <a id="selectToggle" href="#ckb"><?php echo lang('toggle'); ?></a>&nbsp;&nbsp;
+            
             <?php }else{
-                echo 'No help emails found';
+                echo lang('no_help_mail_foun');
             } ?>
         </td>
      </tr>
@@ -110,10 +111,10 @@ else
 </table>
 <?php
 if($res && $num): //Show options..
-    echo '<div>&nbsp;Page:'.$pageNav->getPageLinks().'&nbsp;</div>';
+    echo '<div>&nbsp;'.lang('page').':'.$pageNav->getPageLinks().'&nbsp;</div>';
 ?>
 <p class="centered" id="actions">
-    <input class="button" type="submit" name="delete" value="Delete Email(s)" >
+    <input class="button" type="submit" name="delete" value="<?php echo lang('delete_email'); ?>" >
 </p>
 <?php
 endif;
@@ -121,21 +122,21 @@ endif;
 </form>
 
 <div style="display:none;" class="dialog" id="confirm-action">
-    <h3>Please Confirm</h3>
-    <a class="close" href="">&times;</a>
+    <h3><?php echo lang('please_confirm'); ?></h3>
+    <a class="close" href="">X</a>
     <hr/>
     <p class="confirm-action" style="display:none;" id="delete-confirm">
-        <font color="red"><strong>Are you sure you want to DELETE selected emails?</strong></font>
-        <br><br>Deleted emails CANNOT be recovered.
+        <font color="red"><strong><?php echo lang('sure_delete_email'); ?></strong></font>
+        <br><br><?php echo lang('d_email_cant_recov'); ?>
     </p>
-    <div>Please confirm to continue.</div>
+    <div><?php echo lang('confirm_to_continue'); ?></div>
     <hr style="margin-top:1em"/>
     <p class="full-width">
         <span class="buttons" style="float:left">
-            <input type="button" value="No, Cancel" class="close">
+            <input type="button" value="<?php echo lang('no_cancel'); ?>" class="close">
         </span>
         <span class="buttons" style="float:right">
-            <input type="button" value="Yes, Do it!" class="confirm">
+            <input type="button" value="<?php echo lang('yes_doit'); ?>!" class="confirm">
         </span>
      </p>
     <div class="clear"></div>

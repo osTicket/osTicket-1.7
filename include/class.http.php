@@ -13,20 +13,21 @@
 
     vim: expandtab sw=4 ts=4 sts=4:
 **********************************************************************/
+require_once(INCLUDE_DIR.'languages/language_control/languages_processor.php');
 class Http {
     
     function header_code_verbose($code) {
         switch($code):
-        case 200: return '200 OK';
-        case 201: return '201 Created';
-        case 204: return '204 NoContent';
-        case 400: return '400 Bad Request';
-        case 401: return '401 Unauthorized';
-        case 403: return '403 Forbidden';
-        case 404: return '404 Not Found';
-        case 405: return '405 Method Not Allowed';
-        case 416: return '416 Requested Range Not Satisfiable';
-        default:  return '500 Internal Server Error';
+        case 200: return '200 '.lang('ok');
+        case 201: return '201 '.lang('created');
+        case 204: return '204 '.lang('nocontent');
+        case 400: return '400 '.lang('bad_request');
+        case 401: return '401 '.lang('unauthorized');
+        case 403: return '403 '.lang('forbidden');
+        case 404: return '404 '.lang('not_found');
+        case 405: return '405 '.lang('method_not_allow');
+        case 416: return '416 '.lang('request_range');
+        default:  return '500 '.lang('int_server_error');
         endswitch;
     }
     

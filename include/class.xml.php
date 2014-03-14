@@ -15,6 +15,7 @@
     vim: expandtab sw=4 ts=4 sts=4:
     $Id: $
 **********************************************************************/
+require_once(INCLUDE_DIR.'languages/language_control/languages_processor.php');
 
 class XmlDataParser {
 
@@ -39,7 +40,7 @@ class XmlDataParser {
     }
 
     function lastError() {
-        return sprintf("XML error: %s at line %d:%d",
+        return sprintf(lang('xml_error').": %s ".lang('at_line')." %d:%d",
             xml_error_string(xml_get_error_code($this->parser)),
             xml_get_current_line_number($this->parser),
             xml_get_current_column_number($this->parser));

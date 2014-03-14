@@ -1,13 +1,14 @@
 <?php
 
 include_once INCLUDE_DIR.'class.cron.php';
+require_once(INCLUDE_DIR.'languages/language_control/languages_processor.php');
 
 class CronApiController extends ApiController {
 
     function execute() {
 
         if(!($key=$this->requireApiKey()) || !$key->canExecuteCron())
-            return $this->exerr(401, 'API key not authorized');
+            return $this->exerr(401, lang('api_key_not_aut'));
 
         $this->run();
     }
@@ -18,7 +19,7 @@ class CronApiController extends ApiController {
 
         Cron::run();
        
-        $ost->logDebug('Cron Job','Cron job executed ['.$_SERVER['REMOTE_ADDR'].']');
+        $ost->logDebug('Cron Job',lang('cron_job_exec').' ['.$_SERVER['REMOTE_ADDR'].']');
         $this->response(200,'Completed');
     }
 }

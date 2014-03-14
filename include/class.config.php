@@ -15,6 +15,7 @@
 **********************************************************************/
 
 require_once(INCLUDE_DIR.'class.email.php');
+require_once(INCLUDE_DIR.'languages/language_control/languages_processor.php');
 
 class Config {
     var $config = array();
@@ -747,7 +748,7 @@ class OsticketConfig extends Config {
                 return $this->updateKBSettings($vars, $errors);
                 break;
             default:
-                $errors['err']='Unknown setting option. Get technical support.';
+                $errors['err']=lang('Unknown setting option. Get technical support.');
         }
 
         return false;
@@ -756,21 +757,25 @@ class OsticketConfig extends Config {
     function updateSystemSettings($vars, &$errors) {
 
         $f=array();
-        $f['helpdesk_url']=array('type'=>'string',   'required'=>1, 'error'=>'Helpdesk URl required');
-        $f['helpdesk_title']=array('type'=>'string',   'required'=>1, 'error'=>'Helpdesk title required');
-        $f['default_dept_id']=array('type'=>'int',   'required'=>1, 'error'=>'Default Dept. required');
-        $f['default_template_id']=array('type'=>'int',   'required'=>1, 'error'=>'You must select template.');
-        $f['staff_session_timeout']=array('type'=>'int',   'required'=>1, 'error'=>'Enter idle time in minutes');
-        $f['client_session_timeout']=array('type'=>'int',   'required'=>1, 'error'=>'Enter idle time in minutes');
+        $f['helpdesk_url']=array('type'=>'string',   'required'=>1, 'error'=>lang('Helpdesk URl required'));
+        $f['helpdesk_title']=array('type'=>'string',   'required'=>1, 'error'=>lang('Helpdesk title required'));
+        $f['default_dept_id']=array('type'=>'int',   'required'=>1, 'error'=>lang('Default Dept. required'));
+        $f['default_template_id']=array('type'=>'int',   'required'=>1, 'error'=>lang('You must select template.'));
+        $f['staff_session_timeout']=array('type'=>'int',   'required'=>1, 'error'=>lang('Enter idle time in minutes'));
+        $f['client_session_timeout']=array('type'=>'int',   'required'=>1, 'error'=>lang('Enter idle time in minutes'));
         //Date & Time Options
-        $f['time_format']=array('type'=>'string',   'required'=>1, 'error'=>'Time format required');
-        $f['date_format']=array('type'=>'string',   'required'=>1, 'error'=>'Date format required');
-        $f['datetime_format']=array('type'=>'string',   'required'=>1, 'error'=>'Datetime format required');
-        $f['daydatetime_format']=array('type'=>'string',   'required'=>1, 'error'=>'Day, Datetime format required');
-        $f['default_timezone_id']=array('type'=>'int',   'required'=>1, 'error'=>'Default Timezone required');
+        $f['time_format']=array('type'=>'string',   'required'=>1, 'error'=>lang('Time format required'));
+        $f['date_format']=array('type'=>'string',   'required'=>1, 'error'=>lang('Date format required'));
+        $f['datetime_format']=array('type'=>'string',   'required'=>1, 'error'=>lang('Datetime format required'));
+        $f['daydatetime_format']=array('type'=>'string',   'required'=>1, 'error'=>lang('Day, Datetime format required'));
+        $f['default_timezone_id']=array('type'=>'int',   'required'=>1, 'error'=>lang('Default Timezone required'));
         $f['pw_reset_window']=array('type'=>'int', 'required'=>1, 'min'=>1,
-            'error'=>'Valid password reset window required');
+            'error'=>lang('Valid password reset window required'));
 
+        //Process to change language
+        if(isset($_REQUEST['default_language']))
+            changeLaguage($_REQUEST['default_language']);
+        //End
 
         if(!Validator::process($f, $vars, $errors) || $errors)
             return false;
@@ -807,38 +812,38 @@ class OsticketConfig extends Config {
 
 
         $f=array();
-        $f['default_sla_id']=array('type'=>'int',   'required'=>1, 'error'=>'Selection required');
-        $f['default_priority_id']=array('type'=>'int',   'required'=>1, 'error'=>'Selection required');
-        $f['max_open_tickets']=array('type'=>'int',   'required'=>1, 'error'=>'Enter valid numeric value');
-        $f['autolock_minutes']=array('type'=>'int',   'required'=>1, 'error'=>'Enter lock time in minutes');
+        $f['default_sla_id']=array('type'=>'int',   'required'=>1, 'error'=>lang('Selection required'));
+        $f['default_priority_id']=array('type'=>'int',   'required'=>1, 'error'=>lang('Selection required'));
+        $f['max_open_tickets']=array('type'=>'int',   'required'=>1, 'error'=>lang('Enter valid numeric value'));
+        $f['autolock_minutes']=array('type'=>'int',   'required'=>1, 'error'=>lang('Enter lock time in minutes'));
 
 
         if($vars['enable_captcha']) {
             if (!extension_loaded('gd'))
-                $errors['enable_captcha']='The GD extension required';
+                $errors['enable_captcha']=lang('The GD extension required');
             elseif(!function_exists('imagepng'))
-                $errors['enable_captcha']='PNG support required for Image Captcha';
+                $errors['enable_captcha']=lang('PNG support required for Image Captcha');
         }
 
         if($vars['allow_attachments']) {
 
             if(!ini_get('file_uploads'))
-                $errors['err']='The \'file_uploads\' directive is disabled in php.ini';
+                $errors['err']=lang('The \'file_uploads\' directive is disabled in php.ini');
 
             if(!is_numeric($vars['max_file_size']))
-                $errors['max_file_size']='Maximum file size required';
+                $errors['max_file_size']=lang('Maximum file size required');
 
             if(!$vars['allowed_filetypes'])
-                $errors['allowed_filetypes']='Allowed file extentions required';
+                $errors['allowed_filetypes']=lang('Allowed file extentions required');
 
             if(!($maxfileuploads=ini_get('max_file_uploads')))
                 $maxfileuploads=DEFAULT_MAX_FILE_UPLOADS;
 
             if(!$vars['max_user_file_uploads'] || $vars['max_user_file_uploads']>$maxfileuploads)
-                $errors['max_user_file_uploads']='Invalid selection. Must be less than '.$maxfileuploads;
+                $errors['max_user_file_uploads']=lang('Invalid selection. Must be less than ').$maxfileuploads;
 
             if(!$vars['max_staff_file_uploads'] || $vars['max_staff_file_uploads']>$maxfileuploads)
-                $errors['max_staff_file_uploads']='Invalid selection. Must be less than '.$maxfileuploads;
+                $errors['max_staff_file_uploads']=lang('Invalid selection. Must be less than ').$maxfileuploads;
         }
 
 
@@ -879,9 +884,9 @@ class OsticketConfig extends Config {
     function updateEmailsSettings($vars, &$errors) {
 
         $f=array();
-        $f['default_email_id']=array('type'=>'int',   'required'=>1, 'error'=>'Default email required');
-        $f['alert_email_id']=array('type'=>'int',   'required'=>1, 'error'=>'Selection required');
-        $f['admin_email']=array('type'=>'email',   'required'=>1, 'error'=>'System admin email required');
+        $f['default_email_id']=array('type'=>'int',   'required'=>1, 'error'=>lang('default_email_req'));
+        $f['alert_email_id']=array('type'=>'int',   'required'=>1, 'error'=>lang('selection_requir'));
+        $f['admin_email']=array('type'=>'email',   'required'=>1, 'error'=>lang('system_admin_email'));
 
         if($vars['strip_quoted_reply'] && !trim($vars['reply_separator']))
             $errors['reply_separator']='Reply separator required to strip quoted reply.';

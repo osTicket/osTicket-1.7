@@ -44,6 +44,7 @@
 */
 
 require_once('PEAR.php');
+require_once(INCLUDE_DIR.'languages/language_control/languages_processor.php');
 
 class Auth_SASL
 {
@@ -109,7 +110,8 @@ class Auth_SASL
                     $parameter = $hash;
                     break;
                 }
-                return PEAR::raiseError('Invalid SASL mechanism type');
+                return PEAR::raiseError(lang('invalid_sasl'));
+
                 break;
         }
 

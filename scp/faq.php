@@ -15,13 +15,14 @@
 **********************************************************************/
 require('staff.inc.php');
 require_once(INCLUDE_DIR.'class.faq.php');
+require_once(INCLUDE_DIR.'languages/language_control/languages_processor.php');
 
 $faq=$category=null;
 if($_REQUEST['id'] && !($faq=FAQ::lookup($_REQUEST['id'])))
-   $errors['err']='Unknown or invalid FAQ';
+   $errors['err']=lang('invalid_faq');
 
 if($_REQUEST['cid'] && !$faq && !($category=Category::lookup($_REQUEST['cid'])))
-    $errors['err']='Unknown or invalid FAQ category';
+    $errors['err']=lang('invalid_faq_catg');
 
 if($_POST):
     $errors=array();
@@ -29,24 +30,24 @@ if($_POST):
         case 'create':
         case 'add':
             if(($faq=FAQ::add($_POST,$errors)))
-                $msg='FAQ added successfully';
+                $msg=lang('faq_added_success');
             elseif(!$errors['err'])
-                $errors['err'] = 'Unable to add FAQ. Try again!';
+                $errors['err'] = lang('cant_add_faq');
         break;
         case 'update':
         case 'edit';
             if(!$faq)
-                $errors['err'] = 'Invalid or unknown FAQ';
+                $errors['err'] = lang('invalid_faq');
             elseif($faq->update($_POST,$errors)) {
-                $msg='FAQ updated successfully';
+                $msg=lang('faq_apdated');
                 $_REQUEST['a']=null; //Go back to view
                 $faq->reload();
             } elseif(!$errors['err'])
-                $errors['err'] = 'Unable to update FAQ. Try again!';     
+                $errors['err'] = lang('cant_upd_faq_only');     
             break;
         case 'manage-faq':
             if(!$faq) {
-                $errors['err']='Unknown or invalid FAQ';
+                $errors['err']=lang('invalid_faq');
             } else {
                 switch(strtolower($_POST['a'])) {
                     case 'edit':
@@ -54,32 +55,32 @@ if($_POST):
                         break;
                     case 'publish';
                         if($faq->publish())
-                            $msg='FAQ published successfully';
+                            $msg=lang('faq_published');
                         else
-                            $errors['err']='Unable to publish the FAQ. Try editing it.';
+                            $errors['err']=lang('cant_publish_faq');
                         break;
                     case 'unpublish';
                         if($faq->unpublish())
-                            $msg='FAQ unpublished successfully';
+                            $msg=lang('faq_unpublished');
                         else
-                            $errors['err']='Unable to unpublish the FAQ. Try editing it.';
+                            $errors['err']=lang('cant_anpublish_faq');
                         break;
                     case 'delete':
                         $category = $faq->getCategory();
                         if($faq->delete()) {
-                            $msg='FAQ deleted successfully';
+                            $msg=lang('faq_deleted');
                             $faq=null;
                         } else {
-                            $errors['err']='Unable to delete FAQ. Try again';
+                            $errors['err']=lang('cant_delete_faq');
                         }
                         break;
                     default:
-                        $errors['err']='Invalid action';
+                        $errors['err']=lang('invalid_action');
                 }
             }
             break;
         default:
-            $errors['err']='Unknown action';
+            $errors['err']=lang('unknown_action_only');
     
     }
 endif;

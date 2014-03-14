@@ -20,6 +20,7 @@
 
 require_once(INCLUDE_DIR.'class.csrf.php'); //CSRF token class.
 require_once(INCLUDE_DIR.'class.migrater.php');
+require_once(INCLUDE_DIR.'languages/language_control/languages_processor.php');
 
 define('LOG_WARN',LOG_WARNING);
 
@@ -110,9 +111,9 @@ class osTicket {
         if(isset($_SERVER['HTTP_X_CSRFTOKEN']) && $this->validateCSRFToken($_SERVER['HTTP_X_CSRFTOKEN']))
             return true;
 
-        $msg=sprintf('Invalid CSRF token [%s] on %s',
+        $msg=sprintf(lang('Invalid CSRF token').'[%s] '.lang('on').' %s',
                 ($_POST[$name].''.$_SERVER['HTTP_X_CSRFTOKEN']), THISPAGE);
-        $this->logWarning('Invalid CSRF Token '.$name, $msg, false);
+        $this->logWarning(lang('Invalid CSRF token').$name, $msg, false);
 
         return false;
     }
@@ -234,7 +235,7 @@ class osTicket {
         if($email) {
             $email->sendAlert($to, $subject, $message);
         } else {//no luck - try the system mail.
-            Mailer::sendmail($to, $subject, $message, sprintf('"osTicket Alerts"<%s>',$to));
+            Email::sendmail($to, $subject, $message, sprintf('"'.lang('osticket_alert').'"<%s>',$to));
         }
 
         //log the alert? Watch out for loops here.

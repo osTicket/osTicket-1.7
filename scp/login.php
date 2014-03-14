@@ -14,14 +14,15 @@
     vim: expandtab sw=4 ts=4 sts=4:
 **********************************************************************/
 require_once('../main.inc.php');
-if(!defined('INCLUDE_DIR')) die('Fatal Error. Kwaheri!');
+require_once(INCLUDE_DIR.'languages/language_control/languages_processor.php');
+if(!defined('INCLUDE_DIR')) die(lang('fatal_error_kwah'));
 
 require_once(INCLUDE_DIR.'class.staff.php');
 require_once(INCLUDE_DIR.'class.csrf.php');
 
 $dest = $_SESSION['_staff']['auth']['dest'];
 $msg = $_SESSION['_staff']['auth']['msg'];
-$msg = $msg?$msg:'Authentication Required';
+$msg = $msg?$msg:lang('auth_required');
 if($_POST) {
     //$_SESSION['_staff']=array(); #Uncomment to disable login strikes.
     if(($user=Staff::login($_POST['userid'], $_POST['passwd'], $errors))){
@@ -31,7 +32,7 @@ if($_POST) {
         exit;
     }
 
-    $msg = $errors['err']?$errors['err']:'Invalid login';
+    $msg = $errors['err']?$errors['err']:lang('invalid_login');
 }
 define("OSTSCPINC",TRUE); //Make includes happy!
 include_once(INCLUDE_DIR.'staff/login.tpl.php');

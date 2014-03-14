@@ -22,6 +22,7 @@
 
 require_once 'PEAR.php';
 require_once 'Net/Socket.php';
+require_once(INCLUDE_DIR.'languages/language_control/languages_processor.php');
 
 /**
  * Provides an implementation of the SMTP protocol using PEAR's
@@ -241,7 +242,7 @@ class Net_SMTP
                 call_user_func_array($this->_debug_handler,
                                      array(&$this, $message));
             } else {
-                echo "DEBUG: $message\n";
+                echo lang('debug').": $message\n";
             }
         }
     }
@@ -263,8 +264,8 @@ class Net_SMTP
 
         $result = $this->_socket->write($data);
         if (!$result || PEAR::isError($result)) {
-            $msg = ($result) ? $result->getMessage() : "unknown error";
-            return PEAR::raiseError("Failed to write to socket: $msg",
+            $msg = ($result) ? $result->getMessage() : lang("unknown_error");
+            return PEAR::raiseError(lang('fail_write_sock').": $msg",
                                     null, PEAR_ERROR_RETURN);
         }
 
@@ -295,7 +296,7 @@ class Net_SMTP
         }
 
         if (strcspn($command, "\r\n") !== strlen($command)) {
-            return PEAR::raiseError('Commands cannot contain newlines',
+            return PEAR::raiseError(lang('command_cont_line'),
                                     null, PEAR_ERROR_RETURN);
         }
 
@@ -338,7 +339,7 @@ class Net_SMTP
                 /* If we receive an empty line, the connection was closed. */
                 if (empty($line)) {
                     $this->disconnect();
-                    return PEAR::raiseError('Connection was closed',
+                    return PEAR::raiseError(lang('conect_was_closed'),
                                             null, PEAR_ERROR_RETURN);
                 }
 
@@ -370,7 +371,7 @@ class Net_SMTP
             return true;
         }
 
-        return PEAR::raiseError('Invalid response code received from server',
+        return PEAR::raiseError(lang('invalid_response'),
                                 $this->_code, PEAR_ERROR_RETURN);
     }
 
@@ -448,7 +449,7 @@ class Net_SMTP
                                           $persistent, $timeout,
                                           $this->_socket_options);
         if (PEAR::isError($result)) {
-            return PEAR::raiseError('Failed to connect socket: ' .
+            return PEAR::raiseError(lang('failed_con_socket').': ' .
                                     $result->getMessage());
         }
 
@@ -495,7 +496,7 @@ class Net_SMTP
             return $error;
         }
         if (PEAR::isError($error = $this->_socket->disconnect())) {
-            return PEAR::raiseError('Failed to disconnect socket: ' .
+            return PEAR::raiseError(lang('failed_disc_socket').': ' .
                                     $error->getMessage());
         }
 
@@ -529,7 +530,7 @@ class Net_SMTP
                 return $error;
             }
             if (PEAR::isError($this->_parseResponse(250))) {
-                return PEAR::raiseError('HELO was not accepted: ', $this->_code,
+                return PEAR::raiseError(lang('helo_not_acepted').': ', $this->_code,
                                         PEAR_ERROR_RETURN);
             }
 
@@ -570,7 +571,7 @@ class Net_SMTP
             }
         }
 
-        return PEAR::raiseError('No supported authentication methods',
+        return PEAR::raiseError(lang('no_sopport_meth'),
                                 null, PEAR_ERROR_RETURN);
     }
 
@@ -610,7 +611,7 @@ class Net_SMTP
             if (PEAR::isError($result = $this->_socket->enableCrypto(true, STREAM_CRYPTO_METHOD_TLS_CLIENT))) {
                 return $result;
             } elseif ($result !== true) {
-                return PEAR::raiseError('STARTTLS failed');
+                return PEAR::raiseError(lang('startls_failed'));
             }
 
             /* Send EHLO again to recieve the AUTH string from the
@@ -619,7 +620,7 @@ class Net_SMTP
         }
 
         if (empty($this->_esmtp['AUTH'])) {
-            return PEAR::raiseError('SMTP server does not support authentication');
+            return PEAR::raiseError(lang('smtp_not_sopport'));
         }
 
         /* If no method has been specified, get the name of the best
@@ -632,16 +633,16 @@ class Net_SMTP
         } else {
             $method = strtoupper($method);
             if (!array_key_exists($method, $this->auth_methods)) {
-                return PEAR::raiseError("$method is not a supported authentication method");
+                return PEAR::raiseError("$method ".lang('not_support_auth'));
             }
         }
 
         if (!isset($this->auth_methods[$method])) {
-            return PEAR::raiseError("$method is not a supported authentication method");
+            return PEAR::raiseError("$method ".lang('not_support_auth'));
         }
 
         if (!is_callable($this->auth_methods[$method], false)) {
-            return PEAR::raiseError("$method authentication method cannot be called");
+            return PEAR::raiseError("$method ".lang('auth_method_call'));
         }
 
         if (is_array($this->auth_methods[$method])) {
@@ -678,16 +679,16 @@ class Net_SMTP
     function setAuthMethod($name, $callback, $prepend = true)
     {
         if (!is_string($name)) {
-            return PEAR::raiseError('Method name is not a string');
+            return PEAR::raiseError(lang('method_name'));
         }
 
         if (!is_string($callback) && !is_array($callback)) {
-            return PEAR::raiseError('Method callback must be string or array');
+            return PEAR::raiseError(lang('method_callback'));
         }
 
         if (is_array($callback)) {
             if (!is_object($callback[0]) || !is_string($callback[1]))
-                return PEAR::raiseError('Bad mMethod callback array');
+                return PEAR::raiseError(lang('bad_method_call'));
         }
 
         if ($prepend) {
@@ -1031,7 +1032,7 @@ class Net_SMTP
     {
         /* Verify that $data is a supported type. */
         if (!is_string($data) && !is_resource($data)) {
-            return PEAR::raiseError('Expected a string or file resource');
+            return PEAR::raiseError(lang('expect_string'));
         }
 
         /* Start by considering the size of the optional headers string.  We
@@ -1042,7 +1043,7 @@ class Net_SMTP
         if (is_resource($data)) {
             $stat = fstat($data);
             if ($stat === false) {
-                return PEAR::raiseError('Failed to get file size');
+                return PEAR::raiseError(lang('failed_size'));
             }
             $size += $stat['size'];
         } else {
@@ -1056,7 +1057,7 @@ class Net_SMTP
         $limit = (isset($this->_esmtp['SIZE'])) ? $this->_esmtp['SIZE'] : 0;
         if ($limit > 0 && $size >= $limit) {
             $this->disconnect();
-            return PEAR::raiseError('Message size exceeds server limit');
+            return PEAR::raiseError(lang('message_size'));
         }
 
         /* Initiate the DATA command. */

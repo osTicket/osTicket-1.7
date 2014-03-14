@@ -67,6 +67,7 @@
  * @license BSD
  * @package Mail
  */
+require_once(INCLUDE_DIR.'languages/language_control/languages_processor.php');
 class Mail_RFC822 {
 
     /**
@@ -253,7 +254,7 @@ class Mail_RFC822 {
 
             // First check there's a colon at all:
             if (strpos($string, ':') === false) {
-                $this->error = 'Invalid address: ' . $string;
+                $this->error = lang('invalid_adress').': ' . $string;
                 return false;
             }
 
@@ -340,7 +341,7 @@ class Mail_RFC822 {
                 if (isset($parts[$i + 1])) {
                     $string = $string . $char . $parts[$i + 1];
                 } else {
-                    $this->error = 'Invalid address spec. Unclosed bracket or quotes';
+                    $this->error = lang('unclose_bracket');
                     return false;
                 }
             } else {
@@ -406,7 +407,7 @@ class Mail_RFC822 {
         $this->_hasUnclosedBracketsSub($string, $num_angle_end, $chars[1]);
 
         if ($num_angle_start < $num_angle_end) {
-            $this->error = 'Invalid address spec. Unmatched quote or bracket (' . $chars . ')';
+            $this->error = lang('invalid_adress_spe').' (' . $chars . ')';
             return false;
         } else {
             return ($num_angle_start > $num_angle_end);
@@ -457,7 +458,7 @@ class Mail_RFC822 {
 
             // And validate the group part of the name.
             if (!$this->_validatePhrase($groupname)){
-                $this->error = 'Group name did not validate.';
+                $this->error = lang('group_name_not_val');
                 return false;
             } else {
                 // Don't include groups if we are not nesting
@@ -487,7 +488,7 @@ class Mail_RFC822 {
         // Groupname:;
         // Then errors were appearing.
         if (!count($addresses)){
-            $this->error = 'Empty group.';
+            $this->error = lang('empty_group');
             return false;
         }
 
@@ -502,7 +503,7 @@ class Mail_RFC822 {
         for ($i = 0; $i < count($addresses); $i++) {
             if (!$this->validateMailbox($addresses[$i])) {
                 if (empty($this->error)) {
-                    $this->error = 'Validation failed for: ' . $addresses[$i];
+                    $this->error = lang('validation_failed').': ' . $addresses[$i];
                 }
                 return false;
             }

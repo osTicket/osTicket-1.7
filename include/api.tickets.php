@@ -2,6 +2,7 @@
 
 include_once INCLUDE_DIR.'class.api.php';
 include_once INCLUDE_DIR.'class.ticket.php';
+require_once(INCLUDE_DIR.'languages/language_control/languages_processor.php');
 
 class TicketApiController extends ApiController {
 
@@ -34,7 +35,7 @@ class TicketApiController extends ApiController {
 
         //Call parent to Validate the structure
         if(!parent::validate($data, $format))
-            $this->exerr(400, 'Unexpected or invalid data received');
+            $this->exerr(400,lang( 'Unexpected or invalid data received'));
 
         //Nuke attachments IF API files are not allowed.
         if(!$ost->getConfig()->allowAPIAttachments())
@@ -44,7 +45,7 @@ class TicketApiController extends ApiController {
         if($data['attachments'] && is_array($data['attachments'])) {
             foreach($data['attachments'] as &$attachment) {
                 if(!$ost->isFileTypeAllowed($attachment))
-                    $attachment['error'] = 'Invalid file type (ext) for '.Format::htmlchars($attachment['name']);
+                    $attachment['error'] = lang('invalid_file_type').' '.Format::htmlchars($attachment['name']);
                 elseif ($attachment['encoding'] && !strcasecmp($attachment['encoding'], 'base64')) {
                     if(!($attachment['data'] = base64_decode($attachment['data'], true)))
                         $attachment['error'] = sprintf('%s: Poorly encoded base64 data', Format::htmlchars($attachment['name']));
@@ -60,7 +61,7 @@ class TicketApiController extends ApiController {
     function create($format) {
 
         if(!($key=$this->requireApiKey()) || !$key->canCreateTickets())
-            return $this->exerr(401, 'API key not authorized');
+            return $this->exerr(401, lang('api_key_not_aut'));
 
         $ticket = null;
         if(!strcasecmp($format, 'email')) {
@@ -72,7 +73,7 @@ class TicketApiController extends ApiController {
         }
 
         if(!$ticket)
-            return $this->exerr(500, "Unable to create new ticket: unknown error");
+            return $this->exerr(500, lang('cant_create_ticket').': '.lang('unknown_error')));
 
         $this->response(201, $ticket->getExtId());
     }
@@ -96,11 +97,11 @@ class TicketApiController extends ApiController {
             else
                 return $this->exerr(
                         400,
-                        "Unable to create new ticket: validation errors:\n"
+                        lang('cant_create_ticket').": ".lang("validation_errors").":\n"
                         .Format::array_implode(": ", "\n", $errors)
                         );
         } elseif (!$ticket) {
-            return $this->exerr(500, "Unable to create new ticket: unknown error");
+            return $this->exerr(500, lang('cant_create_ticket').': '.lang('unknown_error'));
         }
 
         return $ticket;
@@ -165,7 +166,7 @@ class PipeApiController extends TicketApiController {
         if(($ticket=$pipe->processEmail()))
            return $pipe->response(201, $ticket->getNumber());
 
-        return $pipe->exerr(416, 'Request failed - retry again!');
+        return $pipe->exerr(416, lang('request_failed'));
     }
 }
 

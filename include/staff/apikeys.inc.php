@@ -1,5 +1,5 @@
 <?php
-if(!defined('OSTADMININC') || !$thisstaff->isAdmin()) die('Access Denied');
+if(!defined('OSTADMININC') || !$thisstaff->isAdmin()) die(lang('access_denied'));
 
 $qstr='';
 $sql='SELECT * FROM '.API_KEY_TABLE.' WHERE 1';
@@ -33,17 +33,16 @@ $qstr.='&order='.($order=='DESC'?'ASC':'DESC');
 $query="$sql ORDER BY $order_by LIMIT ".$pageNav->getStart().",".$pageNav->getLimit();
 $res=db_query($query);
 if($res && ($num=db_num_rows($res)))
-    $showing=$pageNav->showing().' API Keys';
+    $showing=$pageNav->showing().' '.lang('api_keys');
 else
-    $showing='No API keys found!';
-
+    $showing=lang('no_api_key_found').'!';
 ?>
 
-<div style="width:700px;padding-top:5px; float:left;">
- <h2>API Keys</h2>
+<div style="width:700;padding-top:5px; float:left;">
+ <h2><?php echo lang('api_keys'); ?></h2>
 </div>
 <div style="float:right;text-align:right;padding-top:5px;padding-right:5px;">
- <b><a href="apikeys.php?a=add" class="Icon newapi">Add New API Key</a></b></div>
+ <b><a href="apikeys.php?a=add" class="Icon newapi"><?php echo lang('add_new_api_key'); ?></a></b></div>
 <div class="clear"></div>
 <form action="apikeys.php" method="POST" name="keys">
  <?php csrf_token(); ?>
@@ -54,11 +53,11 @@ else
     <thead>
         <tr>
             <th width="7">&nbsp;</th>        
-            <th width="320"><a <?php echo $key_sort; ?> href="apikeys.php?<?php echo $qstr; ?>&sort=key">API Key</a></th>
-            <th width="120"><a  <?php echo $ip_sort; ?> href="apikeys.php?<?php echo $qstr; ?>&sort=ip">IP Addr.</a></th>
-            <th width="100"><a  <?php echo $status_sort; ?> href="apikeys.php?<?php echo $qstr; ?>&sort=status">Status</a></th>
-            <th width="150" nowrap><a  <?php echo $date_sort; ?>href="apikeys.php?<?php echo $qstr; ?>&sort=date">Date Added</a></th>
-            <th width="150" nowrap><a  <?php echo $updated_sort; ?>href="apikeys.php?<?php echo $qstr; ?>&sort=updated">Last Updated</a></th>
+            <th width="320"><a <?php echo $key_sort; ?> href="apikeys.php?<?php echo $qstr; ?>&sort=key"><?php echo lang('api_key'); ?></a></th>
+            <th width="120"><a  <?php echo $ip_sort; ?> href="apikeys.php?<?php echo $qstr; ?>&sort=ip"><?php echo lang('ip_addr'); ?></a></th>
+            <th width="100"><a  <?php echo $status_sort; ?> href="apikeys.php?<?php echo $qstr; ?>&sort=status"><?php echo lang('status'); ?></a></th>
+            <th width="150" nowrap><a  <?php echo $date_sort; ?>href="apikeys.php?<?php echo $qstr; ?>&sort=date"><?php echo lang('date_added'); ?></a></th>
+            <th width="150" nowrap><a  <?php echo $updated_sort; ?>href="apikeys.php?<?php echo $qstr; ?>&sort=updated"><?php echo lang('last_update'); ?></a></th>
         </tr>
     </thead>
     <tbody>
@@ -77,7 +76,7 @@ else
                             <?php echo $sel?'checked="checked"':''; ?>> </td>
                 <td>&nbsp;<a href="apikeys.php?id=<?php echo $row['id']; ?>"><?php echo Format::htmlchars($row['apikey']); ?></a></td>
                 <td><?php echo $row['ipaddr']; ?></td>
-                <td><?php echo $row['isactive']?'Active':'<b>Disabled</b>'; ?></td>
+                <td><?php echo $row['isactive']?lang('active'):'<b>'.ucfirst(lang('disabled')).'</b>'; ?></td>
                 <td>&nbsp;<?php echo Format::db_date($row['created']); ?></td>
                 <td>&nbsp;<?php echo Format::db_datetime($row['updated']); ?></td>
             </tr>
@@ -88,12 +87,12 @@ else
      <tr>
         <td colspan="7">
             <?php if($res && $num){ ?>
-            Select:&nbsp;
-            <a id="selectAll" href="#ckb">All</a>&nbsp;&nbsp;
-            <a id="selectNone" href="#ckb">None</a>&nbsp;&nbsp;
-            <a id="selectToggle" href="#ckb">Toggle</a>&nbsp;&nbsp;
+            <?php echo lang('select'); ?>:&nbsp;
+            <a id="selectAll" href="#ckb"><?php echo lang('all'); ?></a>&nbsp;&nbsp;
+            <a id="selectNone" href="#ckb"><?php echo lang('none'); ?></a>&nbsp;&nbsp;
+            <a id="selectToggle" href="#ckb"><?php echo lang('toggle'); ?></a>&nbsp;&nbsp;
             <?php }else{
-                echo 'No API keys found';
+                echo lang('no_api_key_found');
             } ?>
         </td>
      </tr>
@@ -101,39 +100,39 @@ else
 </table>
 <?php
 if($res && $num): //Show options..
-    echo '<div>&nbsp;Page:'.$pageNav->getPageLinks().'&nbsp;</div>';
+    echo '<div>&nbsp;'.lang('page').':'.$pageNav->getPageLinks().'&nbsp;</div>';
 ?>
 <p class="centered" id="actions">
-    <input class="button" type="submit" name="enable" value="Enable" >
-    <input class="button" type="submit" name="disable" value="Disable">
-    <input class="button" type="submit" name="delete" value="Delete">
+    <input class="button" type="submit" name="enable" value="<?php echo lang('enable'); ?>" >
+    <input class="button" type="submit" name="disable" value="<?php echo ucfirst(lang('disable')); ?>">
+    <input class="button" type="submit" name="delete" value="<?php echo lang('delete'); ?>">
 </p>
 <?php
 endif;
 ?>
 </form>
 <div style="display:none;" class="dialog" id="confirm-action">
-    <h3>Please Confirm</h3>
-    <a class="close" href="">&times;</a>
+    <h3><?php echo lang('please_confirm'); ?></h3>
+    <a class="close" href="">X</a>
     <hr/>
     <p class="confirm-action" style="display:none;" id="enable-confirm">
-        Are you sure want to <b>enable</b> selected API keys?
+        <?php echo lang('sure_you_want_to'); ?> <b><?php echo lang('enable'); ?></b> <?php echo lang('selected_api_keys'); ?>?
     </p>
     <p class="confirm-action" style="display:none;" id="disable-confirm">
-        Are you sure want to <b>disable</b>  selected API keys?
+        <?php echo lang('sure_you_want_to'); ?> <b><?php echo lang('disable'); ?></b>  <?php echo lang('selected_api_keys'); ?>?
     </p>
     <p class="confirm-action" style="display:none;" id="delete-confirm">
-        <font color="red"><strong>Are you sure you want to DELETE selected API keys?</strong></font>
-        <br><br>Deleted keys CANNOT be recovered.
+        <font color="red"><strong><?php echo lang('sure_delete_api'); ?>?</strong></font>
+        <br><br><?php echo lang('dkeys_cant_recov'); ?>
     </p>
-    <div>Please confirm to continue.</div>
+    <div><?php echo lang('confirm_to_continue'); ?></div>
     <hr style="margin-top:1em"/>
     <p class="full-width">
         <span class="buttons" style="float:left">
-            <input type="button" value="No, Cancel" class="close">
+            <input type="button" value="<?php echo lang('no_cancel'); ?>" class="close">
         </span>
         <span class="buttons" style="float:right">
-            <input type="button" value="Yes, Do it!" class="confirm">
+            <input type="button" value="<?php echo lang('yes_doit'); ?>!" class="confirm">
         </span>
      </p>
     <div class="clear"></div>

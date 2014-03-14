@@ -13,6 +13,7 @@
 
     vim: expandtab sw=4 ts=4 sts=4:
 **********************************************************************/
+require_once(INCLUDE_DIR.'languages/language_control/languages_processor.php');
 class API {
 
     var $id;
@@ -122,7 +123,7 @@ class API {
     function save($id, $vars, &$errors) {
 
         if(!$id && (!$vars['ipaddr'] || !Validator::is_ip($vars['ipaddr'])))
-            $errors['ipaddr'] = 'Valid IP required';
+            $errors['ipaddr'] = lang('valid_ip_req');
 
         if($errors) return false;
 
@@ -137,7 +138,7 @@ class API {
             if(db_query($sql))
                 return true;
 
-            $errors['err']='Unable to update API key. Internal error occurred';
+            $errors['err']=lang('cant_update_apy');
 
         } else {
             $sql='INSERT INTO '.API_KEY_TABLE.' SET '.$sql
@@ -148,7 +149,7 @@ class API {
             if(db_query($sql) && ($id=db_insert_id()))
                 return $id;
 
-            $errors['err']='Unable to add API key. Try again!';
+            $errors['err']=lang('cant_add_api_try');
         }
 
         return false;

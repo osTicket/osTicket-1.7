@@ -48,6 +48,9 @@
  * @package Mail
  * @version $Revision: 294747 $
  */
+
+require_once(INCLUDE_DIR.'languages/language_control/languages_processor.php');
+
 class Mail_mail extends Mail {
 
     /**
@@ -115,7 +118,7 @@ class Mail_mail extends Mail {
     function send($recipients, $headers, $body)
     {
         if (!is_array($headers)) {
-            return PEAR::raiseError('$headers must be an array');
+            return PEAR::raiseError('$headers '.lang('must_be_array'));
         }
 
         $result = $this->_sanitizeHeaders($headers);
@@ -159,7 +162,7 @@ class Mail_mail extends Mail {
         // If the mail() function returned failure, we need to create a
         // PEAR_Error object and return it instead of the boolean result.
         if ($result === false) {
-            $result = PEAR::raiseError('mail() returned failure');
+            $result = PEAR::raiseError('mail() '.lang('returned_failure'));
         }
 
         return $result;

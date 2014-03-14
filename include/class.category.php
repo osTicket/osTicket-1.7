@@ -13,6 +13,8 @@
     vim: expandtab sw=4 ts=4 sts=4:
 **********************************************************************/
 
+require_once(INCLUDE_DIR.'languages/language_control/languages_processor.php');
+
 class Category {
     var $id;
     var $ht;
@@ -122,17 +124,17 @@ class Category {
       
         //validate
         if($id && $id!=$vars['id'])
-            $errors['err']='Internal error. Try again';
+            $errors['err']=lang('internal_error_try');
       
         if(!$vars['name'])
-            $errors['name']='Category name is required';
+            $errors['name']=lang('cat_name_req');
         elseif(strlen($vars['name'])<3)
-            $errors['name']='Name is too short. 3 chars minimum';
+            $errors['name']=lang('name_is_short');
         elseif(($cid=self::findIdByName($vars['name'])) && $cid!=$id)
-            $errors['name']='Category already exists';
+            $errors['name']=lang('category_exist');
 
         if(!$vars['description'])
-            $errors['description']='Category description is required';
+            $errors['description']=lang('cat_desc_req');
 
         if($errors) return false;
 
@@ -151,14 +153,14 @@ class Category {
             if(db_query($sql))
                 return true;
 
-            $errors['err']='Unable to update FAQ category.';
+            $errors['err']=lang('cant_update_faq');
 
         } else {
             $sql='INSERT INTO '.FAQ_CATEGORY_TABLE.' SET '.$sql.',created=NOW()';
             if(db_query($sql) && ($id=db_insert_id()))
                 return $id;
 
-            $errors['err']='Unable to create FAQ category. Internal error';
+            $errors['err']=lang('cant_create_faq');
         }
 
         return false;

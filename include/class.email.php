@@ -14,6 +14,7 @@
 
 include_once(INCLUDE_DIR.'class.dept.php');
 include_once(INCLUDE_DIR.'class.mailfetch.php');
+require_once(INCLUDE_DIR.'languages/language_control/languages_processor.php');
 
 class Email {
     var $id;
@@ -224,64 +225,64 @@ class Email {
         $vars['email']=trim($vars['email']);
 
         if($id && $id!=$vars['id'])
-            $errors['err']='Internal error. Get technical help.';
+            $errors['err']=lang('internal_error').'. '.lang('get_tech_help');
 
         if(!$vars['email'] || !Validator::is_email($vars['email'])) {
-            $errors['email']='Valid email required';
+            $errors['email']=lang('valid_email_requir');
         }elseif(($eid=Email::getIdByEmail($vars['email'])) && $eid!=$id) {
-            $errors['email']='Email already exists';
+            $errors['email']=lang('email_exist');
         }elseif($cfg && !strcasecmp($cfg->getAdminEmail(), $vars['email'])) {
-            $errors['email']='Email already used as admin email!';
+            $errors['email']=lang('email_used_adm');
         }elseif(Staff::getIdByEmail($vars['email'])) { //make sure the email doesn't belong to any of the staff
-            $errors['email']='Email in use by a staff member';
+            $errors['email']=lang('email_used_staff');
         }
 
         if(!$vars['name'])
-            $errors['name']='Email name required';
+            $errors['name']=lang('email_req');
 
         if($vars['mail_active'] || ($vars['smtp_active'] && $vars['smtp_auth'])) {
             if(!$vars['userid'])
-                $errors['userid']='Username missing';
+                $errors['userid']=lang('user_name_required');
 
             if(!$id && !$vars['passwd'])
-                $errors['passwd']='Password required';
+                $errors['passwd']=lang('pass_req');
             elseif($vars['passwd']
                     && $vars['userid']
                     && !Crypto::encrypt($vars['passwd'], SECRET_SALT, $vars['userid'])
                     )
-                $errors['passwd'] = 'Unable to encrypt password - get technical support';
+                $errors['passwd'] = lang('Unable to encrypt password - get technical support');
         }
 
         if($vars['mail_active']) {
             //Check pop/imapinfo only when enabled.
             if(!function_exists('imap_open'))
-                $errors['mail_active']= 'IMAP doesn\'t exist. PHP must be compiled with IMAP enabled.';
+                $errors['mail_active']= lang('IMAP doesn\'t exist. PHP must be compiled with IMAP enabled.');
             if(!$vars['mail_host'])
-                $errors['mail_host']='Host name required';
+                $errors['mail_host']=lang('host_req');
             if(!$vars['mail_port'])
-                $errors['mail_port']='Port required';
+                $errors['mail_port']=lang('port_req');
             if(!$vars['mail_protocol'])
-                $errors['mail_protocol']='Select protocol';
+                $errors['mail_protocol']=lang('select_protocol');
             if(!$vars['mail_fetchfreq'] || !is_numeric($vars['mail_fetchfreq']))
-                $errors['mail_fetchfreq']='Fetch interval required';
+                $errors['mail_fetchfreq']=lang('fetch_int_req');
             if(!$vars['mail_fetchmax'] || !is_numeric($vars['mail_fetchmax']))
-                $errors['mail_fetchmax']='Maximum emails required';
+                $errors['mail_fetchmax']=lang('max_email_req');
             if(!$vars['dept_id'] || !is_numeric($vars['dept_id']))
-                $errors['dept_id']='You must select a Dept.';
+                $errors['dept_id']=lang('You must select a Dept.');
             if(!$vars['priority_id'])
-                $errors['priority_id']='You must select a priority';
+                $errors['priority_id']=lang('select_priority');
 
             if(!isset($vars['postfetch']))
-                $errors['postfetch']='Indicate what to do with fetched emails';
+                $errors['postfetch']=lang('what_to_do');
             elseif(!strcasecmp($vars['postfetch'],'archive') && !$vars['mail_archivefolder'] )
-                $errors['postfetch']='Valid folder required';
+                $errors['postfetch']=lang('valid_folder_req');
         }
 
         if($vars['smtp_active']) {
             if(!$vars['smtp_host'])
-                $errors['smtp_host']='Host name required';
+                $errors['smtp_host']=lang('host_req');
             if(!$vars['smtp_port'])
-                $errors['smtp_port']='Port required';
+                $errors['smtp_port']=lang('port_req');
         }
 
         //abort on errors

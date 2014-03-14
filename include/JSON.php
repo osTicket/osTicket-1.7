@@ -111,6 +111,8 @@ define('SERVICES_JSON_SUPPRESS_ERRORS', 32);
  * $value = $json->decode($input);
  * </code>
  */
+require_once(INCLUDE_DIR.'languages/language_control/languages_processor.php');
+
 class Services_JSON
 {
    /**
@@ -417,7 +419,7 @@ class Services_JSON
             default:
                 return ($this->use & SERVICES_JSON_SUPPRESS_ERRORS)
                     ? 'null'
-                    : new Services_JSON_Error(gettype($var)." can not be encoded as JSON string");
+                    : new Services_JSON_Error(gettype($var).' '.lang('cant_encode_json'));
         }
     }
 

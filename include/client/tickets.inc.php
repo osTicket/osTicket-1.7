@@ -1,5 +1,5 @@
 <?php
-if(!defined('OSTCLIENTINC') || !is_object($thisclient) || !$thisclient->isValid() || !$cfg->showRelatedTickets()) die('Access Denied');
+if(!defined('OSTCLIENTINC') || !is_object($thisclient) || !$thisclient->isValid() || !$cfg->showRelatedTickets()) die(lang('access_denied'));
 
 $qstr='&'; //Query string collector
 $status=null;
@@ -38,11 +38,13 @@ if($order_by && strpos($order_by,','))
 $x=$sort.'_sort';
 $$x=' class="'.strtolower($order).'" ';
 
-$qselect='SELECT ticket.ticket_id,ticket.ticketID,ticket.dept_id,isanswered, dept.ispublic, ticket.subject, ticket.name, ticket.email '.
+$qselect='SELECT ticket.ticket_id,ticket.ticketID,concat(staff.firstname," ",staff.lastname) as staff_name,team.name as team_name, ticket.staff_id,ticket.team_id,ticket.dept_id,isanswered, dept.ispublic, ticket.subject, ticket.name, ticket.email '.
            ',dept_name,ticket. status, ticket.source, ticket.created ';
 
 $qfrom='FROM '.TICKET_TABLE.' ticket '
-      .' LEFT JOIN '.DEPT_TABLE.' dept ON (ticket.dept_id=dept.dept_id) ';
+      .' LEFT JOIN '.DEPT_TABLE.' dept ON (ticket.dept_id=dept.dept_id) 
+         LEFT JOIN '.STAFF_TABLE.' staff ON (ticket.staff_id=staff.staff_id)
+         LEFT JOIN '.TEAM_TABLE.' team ON (ticket.team_id=team.team_id)';
 
 $qwhere =' WHERE ticket.email='.db_input($thisclient->getEmail());
 
@@ -79,56 +81,66 @@ $qfrom.=' LEFT JOIN '.TICKET_ATTACHMENT_TABLE.' attach ON  ticket.ticket_id=atta
 $qgroup=' GROUP BY ticket.ticket_id';
 
 $query="$qselect $qfrom $qwhere $qgroup ORDER BY $order_by $order LIMIT ".$pageNav->getStart().",".$pageNav->getLimit();
-//echo $query;
+
 $res = db_query($query);
 $showing=($res && db_num_rows($res))?$pageNav->showing():"";
-$showing.=($status)?(' '.ucfirst($status).' Tickets'):' All Tickets';
+$showing.=($status)?(' '.ucfirst($status).' '.lang('tickets')):' '.lang('all_tickets');
 if($search)
     $showing="Search Results: $showing";
 
 $negorder=$order=='DESC'?'ASC':'DESC'; //Negate the sorting
 
 ?>
-<h1>My Tickets</h1>
+
+<h1><?php echo lang('my_tickets'); ?></h1>
 <br>
+<?php if (isset($_SESSION['error'])): ?>
+
+    <p id="sysmsg" class="error">
+        <?php echo lang('invalid_code_or_closed_ticket'); ?>
+    </p>
+    <script type="text/javascript">setTimeout("$('#sysmsg').fadeOut('slow');",1500);</script>
+<?php unset($_SESSION['error']); endif; ?>
+
 <form action="tickets.php" method="get" id="ticketSearchForm">
+
     <input type="hidden" name="a"  value="search">
     <input type="text" name="q" size="20" value="<?php echo Format::htmlchars($_REQUEST['q']); ?>">
     <select name="status">
-        <option value="">&mdash; Any Status &mdash;</option>
+        <option value="">&mdash; <?php echo lang('any_status'); ?> &mdash;</option>
         <option value="open"
-            <?php echo ($status=='open')?'selected="selected"':'';?>>Open (<?php echo $thisclient->getNumOpenTickets(); ?>)</option>
+            <?php echo ($status=='open')?'selected="selected"':'';?>><?php echo lang('open'); ?> (<?php echo $thisclient->getNumOpenTickets(); ?>)</option>
         <?php
         if($thisclient->getNumClosedTickets()) {
             ?>
         <option value="closed"
-            <?php echo ($status=='closed')?'selected="selected"':'';?>>Closed (<?php echo $thisclient->getNumClosedTickets(); ?>)</option>
+            <?php echo ($status=='closed')?'selected="selected"':'';?>><?php echo lang('closed'); ?> (<?php echo $thisclient->getNumClosedTickets(); ?>)</option>
         <?php
         } ?>
     </select>
-    <input type="submit" value="Go">
+    <input type="submit" value="<?php echo lang('go'); ?>">
 </form>
-<a class="refresh" href="<?php echo $_SERVER['REQUEST_URI']; ?>">Refresh</a>
+<a class="refresh" href="<?php echo $_SERVER['REQUEST_URI']; ?>"><?php echo lang('refresh'); ?></a>
 <table id="ticketTable" width="800" border="0" cellspacing="0" cellpadding="0">
     <caption><?php echo $showing; ?></caption>
     <thead>
         <tr>
             <th width="70" nowrap>
-                <a href="tickets.php?sort=ID&order=<?php echo $negorder; ?><?php echo $qstr; ?>" title="Sort By Ticket ID">Ticket #</a>
+                <a href="tickets.php?sort=ID&order=<?php echo $negorder; ?><?php echo $qstr; ?>" title="<?php echo lang('sort_by'); ?> <?php echo lang('tickets_id'); ?>">Ticket #</a>
             </th>
             <th width="100">
-                <a href="tickets.php?sort=date&order=<?php echo $negorder; ?><?php echo $qstr; ?>" title="Sort By Date">Create Date</a>
+                <a href="tickets.php?sort=date&order=<?php echo $negorder; ?><?php echo $qstr; ?>" title="<?php echo lang('sort_by'); ?> <?php echo lang('date'); ?>"><?php echo lang('create_date'); ?></a>
             </th>
             <th width="80">
-                <a href="tickets.php?sort=status&order=<?php echo $negorder; ?><?php echo $qstr; ?>" title="Sort By Status">Status</a>
+                <a href="tickets.php?sort=status&order=<?php echo $negorder; ?><?php echo $qstr; ?>" title="<?php echo lang('sort_by'); ?> <?php echo lang('status'); ?>"><?php echo lang('status'); ?></a>
             </th>
             <th width="300">
-                <a href="tickets.php?sort=subj&order=<?php echo $negorder; ?><?php echo $qstr; ?>" title="Sort By Subject">Subject</a>
+                <a href="tickets.php?sort=subj&order=<?php echo $negorder; ?><?php echo $qstr; ?>" title="<?php echo lang('sort_by'); ?> <?php echo lang('subject'); ?>"><?php echo lang('subject'); ?></a>
             </th>
             <th width="150">
-                <a href="tickets.php?sort=dept&order=<?php echo $negorder; ?><?php echo $qstr; ?>" title="Sort By Department">Department</a>
+                <a href="tickets.php?sort=dept&order=<?php echo $negorder; ?><?php echo $qstr; ?>" title="<?php echo lang('sort_by'); ?> <?php echo lang('department'); ?>"><?php echo lang('department'); ?></a>
             </th>
-            <th width="100">Phone Number</th>
+            <th width="100"><?php echo lang('assigned_to'); ?></th>
         </tr>
     </thead>
     <tbody>
@@ -161,19 +173,28 @@ $negorder=$order=='DESC'?'ASC':'DESC'; //Negate the sorting
                     <a href="tickets.php?id=<?php echo $row['ticketID']; ?>"><?php echo $subject; ?></a>
                 </td>
                 <td>&nbsp;<?php echo Format::truncate($dept,30); ?></td>
-                <td><?php echo $phone; ?></td>
+                <td><?php 
+                    $lc='';
+                    if($row['staff_id'])
+                        $lc=$row['staff_name'];
+                    elseif($row['team_id'])
+                        $lc=$row['team_name'];
+
+                    echo $lc;
+                 ?>
+                </td>
             </tr>
         <?php
         }
 
      } else {
-         echo '<tr><td colspan="7">Your query did not match any records</td></tr>';
+         echo '<tr><td colspan="7">'.lang('query_no-results').'</td></tr>';
      }
     ?>
     </tbody>
 </table>
 <?php
 if($res && $num>0) {
-    echo '<div>&nbsp;Page:'.$pageNav->getPageLinks().'&nbsp;</div>';
+    echo '<div>&nbsp;'.lang('page').':'.$pageNav->getPageLinks().'&nbsp;</div>';
 }
 ?>

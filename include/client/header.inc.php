@@ -1,6 +1,7 @@
 <?php
-$title=($cfg && is_object($cfg) && $cfg->getTitle())?$cfg->getTitle():'osTicket :: Support Ticket System';
+$title=($cfg && is_object($cfg) && $cfg->getTitle())?$cfg->getTitle():'osTicket :: '.lang('support_ticket_syst');
 header("Content-Type: text/html; charset=UTF-8\r\n");
+require_once(INCLUDE_DIR.'languages/language_control/languages_processor.php');
 ?>
 <!DOCTYPE html>
 <head>
@@ -20,10 +21,7 @@ header("Content-Type: text/html; charset=UTF-8\r\n");
 <body>
     <div id="container">
         <div id="header">
-            <a id="logo" href="<?php echo ROOT_PATH; ?>index.php"
-            title="Support Center"><img src="<?php echo ROOT_PATH; ?>logo.php" border=0 alt="<?php
-                echo $ost->getConfig()->getTitle(); ?>"
-                style="height: 5em"></a>
+            <a id="logo" href="<?php echo ROOT_PATH; ?>index.php" title="<?php echo lang('support_center'); ?>"><img src="<?php echo ASSETS_PATH; ?>images/logo.png" border=0 alt="<?php echo lang('support_center'); ?>"></a>
             <p>
              <?php
              if($thisclient && is_object($thisclient) && $thisclient->isValid()) {
@@ -31,13 +29,13 @@ header("Content-Type: text/html; charset=UTF-8\r\n");
                  ?>
                 <?php
                 if($cfg->showRelatedTickets()) {?>
-                <a href="<?php echo ROOT_PATH; ?>tickets.php">My Tickets <b>(<?php echo $thisclient->getNumTickets(); ?>)</b></a> -
+                <a href="<?php echo ROOT_PATH; ?>tickets.php"><?php echo lang('my_tickets'); ?> <b>(<?php echo $thisclient->getNumTickets(); ?>)</b></a> -
                 <?php
                 } ?>
-                <a href="<?php echo ROOT_PATH; ?>logout.php?auth=<?php echo $ost->getLinkToken(); ?>">Log Out</a>
+                <a href="<?php echo ROOT_PATH; ?>logout.php?auth=<?php echo $ost->getLinkToken(); ?>"><?php echo lang('log_out'); ?></a>
              <?php
              }elseif($nav){ ?>
-                 Guest User - <a href="<?php echo ROOT_PATH; ?>login.php">Log In</a>
+                 <?php echo lang('guest_user'); ?> - <a href="<?php echo ROOT_PATH; ?>login.php"><?php echo lang('login'); ?></a>
               <?php
              } ?>
             </p>

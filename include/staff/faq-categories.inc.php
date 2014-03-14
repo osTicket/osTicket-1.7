@@ -2,13 +2,13 @@
 if(!defined('OSTSTAFFINC') || !$thisstaff) die('Access Denied');
 
 ?>
-<h2>Frequently Asked Questions</h2>
+<h2><?php echo lang('freq_asked_quest'); ?></h2>
 <form id="kbSearch" action="kb.php" method="get">
     <input type="hidden" name="a" value="search">
     <div>
         <input id="query" type="text" size="20" name="q" value="<?php echo Format::htmlchars($_REQUEST['q']); ?>">
         <select name="cid" id="cid">
-            <option value="">&mdash; All Categories &mdash;</option>
+            <option value="">&mdash; <?php echo lang('all_categories'); ?> &mdash;</option>
             <?php
             $sql='SELECT category_id, name, count(faq.category_id) as faqs '
                 .' FROM '.FAQ_CATEGORY_TABLE.' cat '
@@ -26,11 +26,11 @@ if(!defined('OSTSTAFFINC') || !$thisstaff) die('Access Denied');
             }
             ?>
         </select>
-        <input id="searchSubmit" type="submit" value="Search">
+        <input id="searchSubmit" type="submit" value="<?php echo lang('search'); ?>">
     </div>
     <div>
         <select name="topicId" style="width:350px;" id="topic-id">
-            <option value="">&mdash; All Help Topics &mdash;</option>
+            <option value="">&mdash; <?php echo lang('all_help_topics'); ?> &mdash;</option>
             <?php
             $sql='SELECT ht.topic_id, CONCAT_WS(" / ", pht.topic, ht.topic) as helptopic, count(faq.topic_id) as faqs '
                 .' FROM '.TOPIC_TABLE.' ht '
@@ -56,7 +56,6 @@ if(!defined('OSTSTAFFINC') || !$thisstaff) die('Access Denied');
 if($_REQUEST['q'] || $_REQUEST['cid'] || $_REQUEST['topicId']) { //Search.
     $sql='SELECT faq.faq_id, question, ispublished, count(attach.file_id) as attachments, count(ft.topic_id) as topics '
         .' FROM '.FAQ_TABLE.' faq '
-        .' LEFT JOIN '.FAQ_CATEGORY_TABLE.' cat ON(cat.category_id=faq.category_id) '
         .' LEFT JOIN '.FAQ_TOPIC_TABLE.' ft ON(ft.faq_id=faq.faq_id) '
         .' LEFT JOIN '.FAQ_ATTACHMENT_TABLE.' attach ON(attach.faq_id=faq.faq_id) '
         .' WHERE 1 ';
@@ -68,29 +67,26 @@ if($_REQUEST['q'] || $_REQUEST['cid'] || $_REQUEST['topicId']) { //Search.
         $sql.=' AND ft.topic_id='.db_input($_REQUEST['topicId']);
 
     if($_REQUEST['q']) {
-        $sql.=" AND (question LIKE ('%".db_input($_REQUEST['q'],false)."%')
-                 OR answer LIKE ('%".db_input($_REQUEST['q'],false)."%')
-                 OR keywords LIKE ('%".db_input($_REQUEST['q'],false)."%')
-                 OR cat.name LIKE ('%".db_input($_REQUEST['q'],false)."%')
-                 OR cat.description LIKE ('%".db_input($_REQUEST['q'],false)."%')
-                 )";
+        $sql.=" AND question LIKE ('%".db_input($_REQUEST['q'],false)."%') 
+                 OR answer LIKE ('%".db_input($_REQUEST['q'],false)."%') 
+                 OR keywords LIKE ('%".db_input($_REQUEST['q'],false)."%') ";
     }
 
-    $sql.=' GROUP BY faq.faq_id ORDER BY question';
+    $sql.=' GROUP BY faq.faq_id';
 
-    echo "<div><strong>Search Results</strong></div><div class='clear'></div>";
+    echo "<div><strong>".lang('search_results')."</strong></div><div class='clear'></div>";
     if(($res=db_query($sql)) && db_num_rows($res)) {
         echo '<div id="faq">
                 <ol>';
         while($row=db_fetch_array($res)) {
             echo sprintf('
                 <li><a href="faq.php?id=%d" class="previewfaq">%s</a> - <span>%s</span></li>',
-                $row['faq_id'],$row['question'],$row['ispublished']?'Published':'Internal');
+                $row['faq_id'],$row['question'],$row['ispublished']?lang('published'):lang('internal'));
         }
         echo '  </ol>
              </div>';
     } else {
-        echo '<strong class="faded">The search did not match any FAQs.</strong>';
+        echo '<strong class="faded">'.lang('no_faqs_match').'</strong>';
     }
 } else { //Category Listing.
     $sql='SELECT cat.category_id, cat.name, cat.description, cat.ispublic, count(faq.faq_id) as faqs '
@@ -99,7 +95,7 @@ if($_REQUEST['q'] || $_REQUEST['cid'] || $_REQUEST['topicId']) { //Search.
         .' GROUP BY cat.category_id '
         .' ORDER BY cat.name';
     if(($res=db_query($sql)) && db_num_rows($res)) {
-        echo '<div>Click on the category to browse FAQs.</div>
+        echo '<div>'.lang('click_categ').'.</div>
                 <ul id="kb">';
         while($row=db_fetch_array($res)) {
 
@@ -108,12 +104,12 @@ if($_REQUEST['q'] || $_REQUEST['cid'] || $_REQUEST['topicId']) { //Search.
                     <h4><a href="kb.php?cid=%d">%s (%d)</a> - <span>%s</span></h4>
                     %s
                 </li>',$row['category_id'],$row['name'],$row['faqs'],
-                ($row['ispublic']?'Public':'Internal'),
+                ($row['ispublic']?lang('public'):lang('internal')),
                 Format::safe_html($row['description']));
         }
         echo '</ul>';
     } else {
-        echo 'NO FAQs found';
+        echo lang('no_faqs_found');
     }
 }
 ?>

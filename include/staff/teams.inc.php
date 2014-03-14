@@ -1,5 +1,5 @@
 <?php
-if(!defined('OSTADMININC') || !$thisstaff || !$thisstaff->isAdmin()) die('Access Denied');
+if(!defined('OSTADMININC') || !$thisstaff || !$thisstaff->isAdmin()) die(lang('access_denied'));
 
 $qstr='';
 $sql='SELECT team.*,count(m.staff_id) as members,CONCAT_WS(" ",lead.firstname,lead.lastname) as team_lead '.
@@ -33,16 +33,16 @@ $qstr.='&order='.($order=='DESC'?'ASC':'DESC');
 $query="$sql GROUP BY team.team_id ORDER BY $order_by";
 $res=db_query($query);
 if($res && ($num=db_num_rows($res)))
-    $showing="Showing 1-$num of $num teams";
+    $showing=lang('showing')." 1-$num of $num ".lang('teams');
 else
-    $showing='No teams found!';
+    $showing=lang('no_team_found');
 
 ?>
 <div style="width:700px;padding-top:5px; float:left;">
- <h2>Teams</h2>
+ <h2><?php echo lang('teams'); ?></h2>
  </div>
 <div style="float:right;text-align:right;padding-top:5px;padding-right:5px;">
-    <b><a href="teams.php?a=add" class="Icon newteam">Add New Team</a></b></div>
+    <b><a href="teams.php?a=add" class="Icon newteam"><?php echo lang('add_new_team'); ?></a></b></div>
 <div class="clear"></div>
 <form action="teams.php" method="POST" name="teams">
  <?php csrf_token(); ?>
@@ -53,12 +53,12 @@ else
     <thead>
         <tr>
             <th width="7px">&nbsp;</th>
-            <th width="250"><a <?php echo $name_sort; ?> href="teams.php?<?php echo $qstr; ?>&sort=name">Team Name</a></th>
-            <th width="80"><a  <?php echo $status_sort; ?> href="teams.php?<?php echo $qstr; ?>&sort=status">Status</a></th>
-            <th width="80"><a  <?php echo $members_sort; ?>href="teams.php?<?php echo $qstr; ?>&sort=members">Members</a></th>
-            <th width="200"><a  <?php echo $lead_sort; ?> href="teams.php?<?php echo $qstr; ?>&sort=lead">Team Lead</a></th>
-            <th width="100"><a  <?php echo $created_sort; ?> href="teams.php?<?php echo $qstr; ?>&sort=created">Created</a></th>
-            <th width="130"><a  <?php echo $updated_sort; ?> href="teams.php?<?php echo $qstr; ?>&sort=updated">Last Updated</a></th>
+            <th width="250"><a <?php echo $name_sort; ?> href="teams.php?<?php echo $qstr; ?>&sort=name"><?php echo lang('team_name') ?></a></th>
+            <th width="80"><a  <?php echo $status_sort; ?> href="teams.php?<?php echo $qstr; ?>&sort=status"><?php echo lang('status')?></a></th>
+            <th width="80"><a  <?php echo $members_sort; ?>href="teams.php?<?php echo $qstr; ?>&sort=members"><?php echo lang('members') ?></a></th>
+            <th width="200"><a  <?php echo $lead_sort; ?> href="teams.php?<?php echo $qstr; ?>&sort=lead"><?php echo lang('team_lead') ?></a></th>
+            <th width="100"><a  <?php echo $created_sort; ?> href="teams.php?<?php echo $qstr; ?>&sort=created"><?php echo lang('created') ?></a></th>
+            <th width="130"><a  <?php echo $updated_sort; ?> href="teams.php?<?php echo $qstr; ?>&sort=updated"><?php echo lang('last_updated') ?></a></th>
         </tr>
     </thead>
     <tbody>
@@ -76,7 +76,7 @@ else
                   <input type="checkbox" class="ckb" name="ids[]" value="<?php echo $row['team_id']; ?>"
                             <?php echo $sel?'checked="checked"':''; ?>> </td>
                 <td><a href="teams.php?id=<?php echo $row['team_id']; ?>"><?php echo $row['name']; ?></a> &nbsp;</td>
-                <td>&nbsp;<?php echo $row['isenabled']?'Active':'<b>Disabled</b>'; ?></td>
+                <td>&nbsp;<?php echo $row['isenabled']?lang('active'):'<b>'.lang('disabled').'</b>'; ?></td>
                 <td style="text-align:right;padding-right:25px">&nbsp;&nbsp;
                     <?php if($row['members']>0) { ?>
                         <a href="staff.php?tid=<?php echo $row['team_id']; ?>"><?php echo $row['members']; ?></a>
@@ -95,10 +95,10 @@ else
      <tr>
         <td colspan="7">
             <?php if($res && $num){ ?>
-            Select:&nbsp;
-            <a id="selectAll" href="#ckb">All</a>&nbsp;&nbsp;
-            <a id="selectNone" href="#ckb">None</a>&nbsp;&nbsp;
-            <a id="selectToggle" href="#ckb">Toggle</a>&nbsp;&nbsp;
+            <?php echo lang('select'); ?>:&nbsp;
+            <a id="selectAll" href="#ckb"><?php echo lang('all'); ?></a>&nbsp;&nbsp;
+            <a id="selectNone" href="#ckb"><?php echo lang('none'); ?></a>&nbsp;&nbsp;
+            <a id="selectToggle" href="#ckb"><?php echo lang('toggle'); ?></a>&nbsp;&nbsp;
             <?php }else{
                 echo 'No teams found!';
             } ?>
@@ -110,36 +110,36 @@ else
 if($res && $num): //Show options..
 ?>
 <p class="centered" id="actions">
-    <input class="button" type="submit" name="enable" value="Enable" >
-    <input class="button" type="submit" name="disable" value="Disable" >
-    <input class="button" type="submit" name="delete" value="Delete" >
+    <input class="button" type="submit" name="enable" value="<?php echo lang('enable'); ?>" >
+    <input class="button" type="submit" name="disable" value="<?php echo ucfirst(lang('disable')); ?>" >
+    <input class="button" type="submit" name="delete" value="<?php echo lang('delete'); ?>" >
 </p>
 <?php
 endif;
 ?>
 </form>
 <div style="display:none;" class="dialog" id="confirm-action">
-    <h3>Please Confirm</h3>
-    <a class="close" href="">&times;</a>
+    <h3><?php echo lang('please_confirm'); ?></h3>
+    <a class="close" href="">X</a>
     <hr/>
     <p class="confirm-action" style="display:none;" id="enable-confirm">
-        Are you sure want to <b>enable</b> selected teams?
+        <?php echo lang('sure_you_want_to'); ?> <b><?php echo lang('enable'); ?></b> <?php echo lang('selected_teams'); ?>?
     </p>
     <p class="confirm-action" style="display:none;" id="disable-confirm">
-        Are you sure want to <b>disable</b> selected teams?
+        <?php echo lang('sure_you_want_to'); ?> <b><?php echo ucfirst(lang('disable')); ?></b> <?php echo lang('selected_teams'); ?>?
     </p>
     <p class="confirm-action" style="display:none;" id="delete-confirm">
-        <font color="red"><strong>Are you sure you want to DELETE selected teams?</strong></font>
-        <br><br>Deleted team CANNOT be recovered.
+        <font color="red"><strong><?php echo lang('sure_delete_teams'); ?>?</strong></font>
+        <br><br><?php echo lang('d_team_cant_recov'); ?>
     </p>
     <div>Please confirm to continue.</div>
     <hr style="margin-top:1em"/>
     <p class="full-width">
         <span class="buttons" style="float:left">
-            <input type="button" value="No, Cancel" class="close">
+            <input type="button" value="<?php echo lang('no_cancel'); ?>" class="close">
         </span>
         <span class="buttons" style="float:right">
-            <input type="button" value="Yes, Do it!" class="confirm">
+            <input type="button" value="<?php echo lang('yes_doit'); ?>!" class="confirm">
         </span>
      </p>
     <div class="clear"></div>

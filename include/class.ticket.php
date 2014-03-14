@@ -30,6 +30,7 @@ include_once(INCLUDE_DIR.'class.variable.php');
 include_once(INCLUDE_DIR.'class.priority.php');
 include_once(INCLUDE_DIR.'class.sla.php');
 include_once(INCLUDE_DIR.'class.canned.php');
+require_once(INCLUDE_DIR.'languages/language_control/languages_processor.php');
 
 class Ticket {
 
@@ -287,7 +288,6 @@ class Ticket {
     }
 
     function getUpdateInfo() {
-        global $cfg;
 
         $info=array('name'  =>  $this->getName(),
                     'email' =>  $this->getEmail(),
@@ -298,10 +298,7 @@ class Ticket {
                     'topicId'   =>  $this->getTopicId(),
                     'priorityId'    =>  $this->getPriorityId(),
                     'slaId' =>  $this->getSLAId(),
-                    'duedate'   =>  $this->getDueDate()
-                        ? Format::userdate($cfg->getDateFormat(),
-                            Misc::db2gmtime($this->getDueDate()))
-                        :'',
+                    'duedate'   =>  $this->getDueDate()?(Format::userdate('m/d/Y', Misc::db2gmtime($this->getDueDate()))):'',
                     'time'  =>  $this->getDueDate()?(Format::userdate('G:i', Misc::db2gmtime($this->getDueDate()))):'',
                     );
 
@@ -690,7 +687,7 @@ class Ticket {
 
     //Close the ticket
     function close() {
-        global $thisstaff;
+        global $thisstaff,$cfg;
 
         $sql='UPDATE '.TICKET_TABLE.' SET closed=NOW(),isoverdue=0, duedate=NULL, updated=NOW(), status='.db_input('closed');
         if($thisstaff) //Give the closing  staff credit.
@@ -706,6 +703,7 @@ class Ticket {
 
         return true;
     }
+
 
     //set status to open on a closed ticket.
     function reopen($isanswered=0) {
@@ -741,9 +739,7 @@ class Ticket {
         if(!$dept || !($email=$dept->getAutoRespEmail()))
             $email =$cfg->getDefaultEmail();
 
-        $options = array(
-            'inreplyto'=>$message->getEmailMessageId(),
-            'references'=>$message->getEmailReferences());
+        $options = array('references'=>$message->getEmailMessageId());
 
         //Send auto response - if enabled.
         if($autorespond && $email && $cfg->autoRespONNewTicket()
@@ -808,8 +804,8 @@ class Ticket {
         global $ost, $cfg;
 
         //Log the limit notice as a warning for admin.
-        $msg=sprintf('Max open tickets (%d) reached  for %s ', $cfg->getMaxOpenTickets(), $this->getEmail());
-        $ost->logWarning('Max. Open Tickets Limit ('.$this->getEmail().')', $msg);
+        $msg=sprintf(lang('maximum_open_tick').' (%d) '.lang('reached_for').' %s ', $cfg->getMaxOpenTickets(), $this->getEmail());
+        $ost->logWarning(lang('max_open_tick_l').' ('.$this->getEmail().')', $msg);
 
         if(!$sendNotice || !$cfg->sendOverLimitNotice()) return true;
 
@@ -833,11 +829,11 @@ class Ticket {
         $client= $this->getClient();
 
         //Alert admin...this might be spammy (no option to disable)...but it is helpful..I think.
-        $alert='Max. open tickets reached for '.$this->getEmail()."\n"
-              .'Open ticket: '.$client->getNumOpenTickets()."\n"
-              .'Max Allowed: '.$cfg->getMaxOpenTickets()."\n\nNotice sent to the user.";
+        $alert=lang('max_open_t_reach').' '.$this->getEmail()."\n"
+              .lang('open_ticket').': '.$client->getNumOpenTickets()."\n"
+              .lang('max_allowed').': '.$cfg->getMaxOpenTickets()."\n\n".lang('notice_to_user');
 
-        $ost->alertAdmin('Overlimit Notice', $alert);
+        $ost->alertAdmin(lang('overlimit_notice'), $alert);
 
         return true;
     }
@@ -892,9 +888,7 @@ class Ticket {
 
             if (!$message)
                 $message = $this->getLastMessage();
-            $options = array(
-                'inreplyto'=>$message->getEmailMessageId(),
-                'references'=>$message->getEmailReferences());
+            $options = array('references' => $message->getEmailMessageId());
             $email->sendAutoReply($this->getEmail(), $msg['subj'], $msg['body'],
                 null, $options);
         }
@@ -910,12 +904,11 @@ class Ticket {
 
         $this->reload();
 
-        $comments = $comments?$comments:'Ticket assignment';
-        $assigner = $thisstaff?$thisstaff:'SYSTEM (Auto Assignment)';
+        $comments = $comments?$comments:lang('ticket_assign');
+        $assigner = $thisstaff?$thisstaff:lang('system_auto_ass');
 
         //Log an internal note - no alerts on the internal note.
-        $note = $this->logNote('Ticket Assigned to '.$assignee->getName(),
-            $comments, $assigner, false);
+        $note = $this->logNote(lang('ticket_assign_to').' '.$assignee->getName(), $comments, $assigner, false);
 
         //See if we need to send alerts
         if(!$alert || !$cfg->alertONAssignment()) return true; //No alerts!
@@ -953,9 +946,7 @@ class Ticket {
 
             //Send the alerts.
             $sentlist=array();
-            $options = array(
-                'inreplyto'=>$note->getEmailMessageId(),
-                'references'=>$note->getEmailReferences());
+            $options = array('references' => $note->getEmailMessageId());
             foreach( $recipients as $k=>$staff) {
                 if(!is_object($staff) || !$staff->isAvailable() || in_array($staff->getEmail(), $sentlist)) continue;
                 $alert = str_replace('%{recipient}', $staff->getFirstName(), $msg['body']);
@@ -1045,6 +1036,13 @@ class Ticket {
             case 'client_link':
                 return sprintf('%s/view.php?t=%s&e=%s&a=%s',
                         $cfg->getBaseUrl(), $this->getNumber(), $this->getEmail(), $this->getAuthToken());
+                break;
+            case 'client_link_ticket':
+                return sprintf('%s/view.php?t=%s&e=%s&a=%s&login=true',
+                        $cfg->getBaseUrl(), $this->getNumber(), $this->getEmail(), $this->getAuthToken());
+
+                /*return sprintf('%s/tickets.php?id=%s',
+                        $cfg->getBaseUrl(), $this->getNumber());*/
                 break;
             case 'staff_link':
                 return sprintf('%s/scp/tickets.php?id=%d', $cfg->getBaseUrl(), $this->getId());
@@ -1164,7 +1162,7 @@ class Ticket {
             $this->selectSLAId();
 
         /*** log the transfer comments as internal note - with alerts disabled - ***/
-        $title='Ticket transfered from '.$currentDept.' to '.$this->getDeptName();
+        $title=lang('ticket_trans_from').' '.$currentDept.' to '.$this->getDeptName();
         $comments=$comments?$comments:$title;
         $note = $this->logNote($title, $comments, $thisstaff, false);
 
@@ -1206,9 +1204,7 @@ class Ticket {
                 $recipients[]= $manager;
 
             $sentlist=array();
-            $options = array(
-                'inreplyto'=>$note->getEmailMessageId(),
-                'references'=>$note->getEmailReferences());
+            $options = array('references' => $note->getEmailMessageId());
             foreach( $recipients as $k=>$staff) {
                 if(!is_object($staff) || !$staff->isAvailable() || in_array($staff->getEmail(), $sentlist)) continue;
                 $alert = str_replace('%{recipient}', $staff->getFirstName(), $msg['body']);
@@ -1305,9 +1301,8 @@ class Ticket {
         //Strip quoted reply...on emailed replies
         if(!strcasecmp($origin, 'Email')
                 && $cfg->stripQuotedReply()
-                && ($tag=$cfg->getReplySeparator())
-                && strpos($vars['message'], $tag))
-            if((list($msg) = explode($tag, $vars['message'], 2)) && trim($msg))
+                && ($tag=$cfg->getReplySeparator()) && strpos($vars['message'], $tag))
+            if(list($msg) = split($tag, $vars['message']))
                 $vars['message'] = $msg;
 
         if(isset($vars['ip']))
@@ -1358,9 +1353,7 @@ class Ticket {
                 $recipients[]=$manager;
 
             $sentlist=array(); //I know it sucks...but..it works.
-            $options = array(
-                'inreplyto'=>$message->getEmailMessageId(),
-                'references'=>$message->getEmailReferences());
+            $options = array('references'=>$message->getEmailMessageId());
             foreach( $recipients as $k=>$staff) {
                 if(!$staff || !$staff->getEmail() || !$staff->isAvailable() || in_array($staff->getEmail(), $sentlist)) continue;
                 $alert = str_replace('%{recipient}', $staff->getFirstName(), $msg['body']);
@@ -1418,9 +1411,7 @@ class Ticket {
                 $msg['body'] ="\n$tag\n\n".$msg['body'];
 
             $attachments =($cfg->emailAttachments() && $files)?$response->getAttachments():array();
-            $options = array(
-                'inreplyto'=>$response->getEmailMessageId(),
-                'references'=>$response->getEmailReferences());
+            $options = array('references' => $response->getEmailMessageId());
             $email->sendAutoReply($this->getEmail(), $msg['subj'], $msg['body'], $attachments,
                 $options);
         }
@@ -1477,12 +1468,9 @@ class Ticket {
 
             //Set attachments if emailing.
             $attachments = $cfg->emailAttachments()?$response->getAttachments():array();
-            $options = array(
-                'inreplyto' => $response->getEmailMessageId(),
-                'references' => $response->getEmailReferences());
+            $options = array('references' => $response->getEmailMessageId());
             //TODO: setup  5 param (options... e.g mid trackable on replies)
-            $email->send($this->getEmail(), $msg['subj'], $msg['body'], $attachments,
-                $options);
+            $email->send($this->getEmail(), $msg['subj'], $msg['body'], $attachments,$options);
         }
 
         return $response;
@@ -1591,9 +1579,7 @@ class Ticket {
                 $recipients[]=$dept->getManager();
 
             $attachments = $note->getAttachments();
-            $options = array(
-                'inreplyto'=>$note->getEmailMessageId(),
-                'references'=>$note->getEmailReferences());
+            $options = array('references' => $note->getEmailMessageId());
             $sentlist=array();
             foreach( $recipients as $k=>$staff) {
                 if(!is_object($staff)
@@ -1641,37 +1627,37 @@ class Ticket {
             return false;
 
         $fields=array();
-        $fields['name']     = array('type'=>'string',   'required'=>1, 'error'=>'Name required');
-        $fields['email']    = array('type'=>'email',    'required'=>1, 'error'=>'Valid email required');
-        $fields['subject']  = array('type'=>'string',   'required'=>1, 'error'=>'Subject required');
-        $fields['topicId']  = array('type'=>'int',      'required'=>1, 'error'=>'Help topic required');
-        $fields['priorityId'] = array('type'=>'int',    'required'=>1, 'error'=>'Priority required');
-        $fields['slaId']    = array('type'=>'int',      'required'=>0, 'error'=>'Select SLA');
-        $fields['phone']    = array('type'=>'phone',    'required'=>0, 'error'=>'Valid phone # required');
-        $fields['duedate']  = array('type'=>'date',     'required'=>0, 'error'=>'Invalid date - must be MM/DD/YY');
+        $fields['name']     = array('type'=>'string',   'required'=>1, 'error'=>lang('name_required'));
+        $fields['email']    = array('type'=>'email',    'required'=>1, 'error'=>lang('valid_email_requir'));
+        $fields['subject']  = array('type'=>'string',   'required'=>1, 'error'=>lang('subject_required'));
+        $fields['topicId']  = array('type'=>'int',      'required'=>1, 'error'=>lang('help_topic_req'));
+        $fields['priorityId'] = array('type'=>'int',    'required'=>1, 'error'=>lang('priority_requir'));
+        $fields['slaId']    = array('type'=>'int',      'required'=>0, 'error'=>lang('select_sla'));
+        $fields['phone']    = array('type'=>'phone',    'required'=>0, 'error'=>lang('valid_phone_req'));
+        $fields['duedate']  = array('type'=>'date',     'required'=>0, 'error'=>lang('invalid_date'));
 
-        $fields['note']     = array('type'=>'text',     'required'=>1, 'error'=>'Reason for the update required');
+        $fields['note']     = array('type'=>'text',     'required'=>1, 'error'=>lang('reason_update'));
 
         if(!Validator::process($fields, $vars, $errors) && !$errors['err'])
-            $errors['err'] = 'Missing or invalid data - check the errors and try again';
+            $errors['err'] = lang('missing_data');
 
         if($vars['duedate']) {
             if($this->isClosed())
                 $errors['duedate']='Due date can NOT be set on a closed ticket';
             elseif(!$vars['time'] || strpos($vars['time'],':')===false)
-                $errors['time']='Select time';
+                $errors['time']=lang('select_time');
             elseif(strtotime($vars['duedate'].' '.$vars['time'])===false)
-                $errors['duedate']='Invalid due date';
+                $errors['duedate']=lang('invalid_duedata');
             elseif(strtotime($vars['duedate'].' '.$vars['time'])<=time())
-                $errors['duedate']='Due date must be in the future';
+                $errors['duedate']=lang('due_date_future');
         }
 
         //Make sure phone extension is valid
         if($vars['phone_ext'] ) {
             if(!is_numeric($vars['phone_ext']) && !$errors['phone'])
-                $errors['phone']='Invalid phone ext.';
+                $errors['phone']=lang('invalid_phone_ext');
             elseif(!$vars['phone']) //make sure they just didn't enter ext without phone #
-                $errors['phone']='Phone number required';
+                $errors['phone']=lang('valid_phone_req');
         }
 
         if($errors) return false;
@@ -1685,7 +1671,6 @@ class Ticket {
             .' ,priority_id='.db_input($vars['priorityId'])
             .' ,topic_id='.db_input($vars['topicId'])
             .' ,sla_id='.db_input($vars['slaId'])
-            .' ,source='.db_input($vars['source'])
             .' ,duedate='.($vars['duedate']?db_input(date('Y-m-d G:i',Misc::dbtime($vars['duedate'].' '.$vars['time']))):'NULL');
 
         if($vars['duedate']) { //We are setting new duedate...
@@ -1698,9 +1683,9 @@ class Ticket {
             return false;
 
         if(!$vars['note'])
-            $vars['note']=sprintf('Ticket Updated by %s', $thisstaff->getName());
+            $vars['note']=sprintf(lang('ticket_updated').' '.lang('by').' %s', $thisstaff->getName());
 
-        $this->logNote('Ticket Updated', $vars['note'], $thisstaff);
+        $this->logNote(lang('ticket_updated'), $vars['note'], $thisstaff);
         $this->reload();
 
         // Reselect SLA if transient
@@ -1866,7 +1851,6 @@ class Ticket {
 
         return db_fetch_array(db_query($sql));
     }
-
     /*
      * The mother of all functions...You break it you fix it!
      *
@@ -1885,9 +1869,9 @@ class Ticket {
 
             //Make sure the email address is not banned
             if(TicketFilter::isBanned($vars['email'])) {
-                $errors['err']='Ticket denied. Error #403';
+                $errors['err']=lang('ticket_denied_err');
                 $errors['errno'] = 403;
-                $ost->logWarning('Ticket denied', 'Banned email - '.$vars['email']);
+                $ost->logWarning(lang('ticket_denied_only'), lang('banned_email').' - '.$vars['email']);
                 return 0;
             }
 
@@ -1911,10 +1895,10 @@ class Ticket {
         // Make sure email contents should not be rejected
         if($ticket_filter
                 && ($filter=$ticket_filter->shouldReject())) {
-            $errors['err']='Ticket denied. Error #403';
+            $errors['err']=lang('ticket_denied_err');
             $errors['errno'] = 403;
-            $ost->logWarning('Ticket denied',
-                    sprintf('Ticket rejected ( %s) by filter "%s"',
+            $ost->logWarning(lang('ticket_denied_only'),
+                    sprintf(lang('ticket_reject').' ( %s) '.lang('by_filter').' "%s"',
                         $vars['email'], $filter->getName()));
 
             return 0;
@@ -1922,30 +1906,30 @@ class Ticket {
 
         $id=0;
         $fields=array();
-        $fields['name']     = array('type'=>'string',   'required'=>1, 'error'=>'Name required');
-        $fields['email']    = array('type'=>'email',    'required'=>1, 'error'=>'Valid email required');
-        $fields['subject']  = array('type'=>'string',   'required'=>1, 'error'=>'Subject required');
-        $fields['message']  = array('type'=>'text',     'required'=>1, 'error'=>'Message required');
+        $fields['name']     = array('type'=>'string',   'required'=>1, 'error'=>lang('name_required'));
+        $fields['email']    = array('type'=>'email',    'required'=>1, 'error'=>lang('valid_email_requir'));
+        $fields['subject']  = array('type'=>'string',   'required'=>1, 'error'=>lang('subject_required'));
+        $fields['message']  = array('type'=>'text',     'required'=>1, 'error'=>lang('message_required'));
         switch (strtolower($origin)) {
             case 'web':
-                $fields['topicId']  = array('type'=>'int',  'required'=>1, 'error'=>'Select help topic');
+                $fields['topicId']  = array('type'=>'int',  'required'=>1, 'error'=>lang('select_help_topic'));
                 break;
             case 'staff':
-                $fields['deptId']   = array('type'=>'int',  'required'=>1, 'error'=>'Dept. required');
-                $fields['topicId']  = array('type'=>'int',  'required'=>1, 'error'=>'Topic required');
-                $fields['duedate']  = array('type'=>'date', 'required'=>0, 'error'=>'Invalid date - must be MM/DD/YY');
+                $fields['deptId']   = array('type'=>'int',  'required'=>1, 'error'=>lang('department_requir'));
+                $fields['topicId']  = array('type'=>'int',  'required'=>1, 'error'=>lang('help_topic_req'));
+                $fields['duedate']  = array('type'=>'date', 'required'=>0, 'error'=>lang('invalid_date'));
             case 'api':
-                $fields['source']   = array('type'=>'string', 'required'=>1, 'error'=>'Indicate source');
+                $fields['source']   = array('type'=>'string', 'required'=>1, 'error'=>lang('indicate_source'));
                 break;
             case 'email':
-                $fields['emailId']  = array('type'=>'int',  'required'=>1, 'error'=>'Email unknown');
+                $fields['emailId']  = array('type'=>'int',  'required'=>1, 'error'=>lang('unknow_email'));
                 break;
             default:
                 # TODO: Return error message
-                $errors['err']=$errors['origin'] = 'Invalid origin given';
+                $errors['err']=$errors['origin'] = lang('inv_origin_given');
         }
-        $fields['priorityId']   = array('type'=>'int',      'required'=>0, 'error'=>'Invalid Priority');
-        $fields['phone']        = array('type'=>'phone',    'required'=>0, 'error'=>'Valid phone # required');
+        $fields['priorityId']   = array('type'=>'int',      'required'=>0, 'error'=>lang('invalid_priority'));
+        $fields['phone']        = array('type'=>'phone',    'required'=>0, 'error'=>lang('valid_phone_req'));
 
         if(!Validator::process($fields, $vars, $errors) && !$errors['err'])
             $errors['err'] ='Missing or invalid data - check the errors and try again';
@@ -1961,11 +1945,11 @@ class Ticket {
         //Make sure the due date is valid
         if($vars['duedate']) {
             if(!$vars['time'] || strpos($vars['time'],':')===false)
-                $errors['time']='Select time';
+                $errors['time']=lang('select_time');
             elseif(strtotime($vars['duedate'].' '.$vars['time'])===false)
-                $errors['duedate']='Invalid due date';
+                $errors['duedate']=lang('invalid_duedata');
             elseif(strtotime($vars['duedate'].' '.$vars['time'])<=time())
-                $errors['duedate']='Due date must be in the future';
+                $errors['duedate']=lang('due_date_future');
         }
 
         //Any error above is fatal.
@@ -2060,9 +2044,9 @@ class Ticket {
 
         //Auto assign staff or team - auto assignment based on filter rules.
         if($vars['staffId'] && !$vars['assignId'])
-             $ticket->assignToStaff($vars['staffId'], 'Auto Assignment');
+             $ticket->assignToStaff($vars['staffId'], lang('auto_assign'));
         if($vars['teamId'] && !$vars['assignId'])
-            $ticket->assignToTeam($vars['teamId'], 'Auto Assignment');
+            $ticket->assignToTeam($vars['teamId'], lang('auto_assign'));
 
         /**********   double check auto-response  ************/
         //Override auto responder if the FROM email is one of the internal emails...loop control.
@@ -2120,7 +2104,7 @@ class Ticket {
             $errors['source']='Invalid source - '.Format::htmlchars($vars['source']);
 
         if(!$vars['issue'])
-            $errors['issue']='Summary of the issue required';
+            $errors['issue']=lang('summary_required');
         else
             $vars['message']=$vars['issue'];
 
@@ -2144,9 +2128,9 @@ class Ticket {
         if($vars['assignId'] && $thisstaff->canAssignTickets()) { //Assign ticket to staff or team.
             $ticket->assign($vars['assignId'], $vars['note']);
         } elseif($vars['note']) { //Not assigned...save optional note if any
-            $ticket->logNote('New Ticket', $vars['note'], $thisstaff, false);
+            $ticket->logNote(lang('new_ticket'), $vars['note'], $thisstaff, false);
         } else { //Not assignment and no internal note - log activity
-            $ticket->logActivity('New Ticket by Staff','Ticket created by staff -'.$thisstaff->getName());
+            $ticket->logActivity(lang('new_ticket_staff'),lang('ticket_creat_staff').' -'.$thisstaff->getName());
         }
 
         $ticket->reload();
@@ -2198,7 +2182,7 @@ class Ticket {
     function checkOverdue() {
 
         $sql='SELECT ticket_id FROM '.TICKET_TABLE.' T1 '
-            .' LEFT JOIN '.SLA_TABLE.' T2 ON (T1.sla_id=T2.id AND T2.isactive=1) '
+            .' INNER JOIN '.SLA_TABLE.' T2 ON (T1.sla_id=T2.id AND T2.isactive=1) '
             .' WHERE status=\'open\' AND isoverdue=0 '
             .' AND ((reopened is NULL AND duedate is NULL AND TIME_TO_SEC(TIMEDIFF(NOW(),T1.created))>=T2.grace_period*3600) '
             .' OR (reopened is NOT NULL AND duedate is NULL AND TIME_TO_SEC(TIMEDIFF(NOW(),reopened))>=T2.grace_period*3600) '
@@ -2208,7 +2192,7 @@ class Ticket {
         if(($res=db_query($sql)) && db_num_rows($res)) {
             while(list($id)=db_fetch_row($res)) {
                 if(($ticket=Ticket::lookup($id)) && $ticket->markOverdue())
-                    $ticket->logActivity('Ticket Marked Overdue', 'Ticket flagged as overdue by the system.');
+                    $ticket->logActivity(lang('marked_overdue'), lang('ticket_flagged'));
             }
         } else {
             //TODO: Trigger escalation on already overdue tickets - make sure last overdue event > grace_period.

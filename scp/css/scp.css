@@ -43,7 +43,7 @@ a {
     color: #555;
 }
 
-#msg_notice { margin: 0; padding: 5px 10px 5px 36px; height: 16px; line-height: 16px; margin-bottom: 10px; border: 1px solid #0a0; background: url('../images/icons/ok.png') 10px 50% no-repeat #e0ffe0; }
+#msg_notice{ margin: 0; padding: 5px 10px 5px 36px; height: 16px; line-height: 16px; margin-bottom: 10px; border: 1px solid #0a0; background: url('../images/icons/ok.png') 10px 50% no-repeat #e0ffe0; }
 
 #msg_warning { margin: 0; padding: 5px 10px 5px 36px; height: 16px; line-height: 16px; margin-bottom: 10px; border: 1px solid #f26522; background: url('../images/icons/alert.png') 10px 50% no-repeat #ffffdd; }
 
@@ -51,7 +51,7 @@ a {
 
 #notice_bar { margin: 0; padding: 5px 10px 5px 36px; height: 16px; line-height: 16px; border: 1px solid #0a0; background: url('../images/icons/ok.png') 10px 50% no-repeat #e0ffe0; }
 
-#warning_bar { margin: 0; padding: 5px 10px 5px 36px; height: 16px; line-height: 16px; border: 1px solid #f26522; background: url('../images/icons/alert.png') 10px 50% no-repeat #ffffdd; }
+#warning_bar { margin: 0; padding: 5px 10px 5px 36px; //height: 16px; line-height: 16px; border: 1px solid #f26522; background: url('../images/icons/alert.png') 10px 50% no-repeat #ffffdd; }
 
 #error_bar { margin: 0; padding: 5px 10px 5px 36px; height: 16px; line-height: 16px; border: 1px solid #a00; background: url('../images/icons/error.png') 10px 50% no-repeat #fff0f0; }
 
@@ -81,7 +81,7 @@ a {
 
 #header p {
     display:block;
-    width:430px;
+    //width:430px;
     float:right;
     margin:10px;
     background:#eee;
@@ -291,9 +291,6 @@ a.newHelpTopic { background:url(../images/icons/new_help_topic.png) }
 a.departments { background:url(../images/icons/list_departments.gif) }
 a.newDepartment { background:url(../images/icons/new_department.gif) }
 
-
-a.pages { background:url(../images/icons/pages.gif) }
-a.newPage { background:url(../images/icons/new_page.gif) }
 
 /* Generic CSS based Icons. use=> <tag class="Icon iconname">text</tag> */
 
@@ -544,6 +541,8 @@ a.print {
 }
 
 .form_table input[type=radio], .form_table input[type=checkbox] {
+    position:relative;
+    top:3px;
     margin-left:0;
     padding-left:0;
 }
@@ -792,6 +791,10 @@ h2 .reload {
 
 #ticket_thread .note th {
     background:#FFE;
+}
+
+#ticket_thread .poll th {
+    background:#BEFFC6;
 }
 
 #ticket_thread table td, #ticket_notes table td {
@@ -1122,7 +1125,7 @@ h2 .reload {
 #faq {
   clear: both;
   margin: 0;
-  padding: 5px 0 10px 5px;
+  padding: 5 0 10px 5px;
 }
 #faq ol {
   font-size: 15px;
@@ -1246,7 +1249,7 @@ time {
 }
 
 .dialog label {
-    width:100px;
+    width:125px;
     display:inline-block;
     text-align:right;
     padding:10px;
@@ -1379,31 +1382,111 @@ ul.progress li.no small {color:red;}
 #bar.error { background: #ffd; text-align: center; color: #a00; font-weight: bold; }
 
 /* Overlay */
-#overlay {
-    display: none;
-    position: fixed;
+#overlay { 
+    display: none; 
+    position: fixed; 
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
     background: #000;
     z-index: 1000;
-    -webkit-transform: translate3d(0,0,0);
+    -webkit-transform: translate3d(0,0,0); 
 }
 
 #loading, #upgrading {
     border:1px solid #2a67ac;
-    padding: 10px 10px 10px 60px;
-    width: 300px;
-    height: 100px;
+    padding: 10px 10px 10px 60px; 
+    width: 300px; 
+    height: 100px; 
     background: rgb( 255, 255, 255) url('../images/FhHRx-Spinner.gif') 10px 50% no-repeat;
-    position: fixed;
-    display: none;
-    z-index: 3000;
+    position: fixed; 
+    display: none; 
+    z-index: 3000; 
 }
 
 #loading h4, #upgrading h4 { margin: 3px 0 0 0; padding: 0; color: #d80; }
 
-input.dp {
-    width: 10em;
+
+
+
+
+/*Paginator*/
+#pg-wraper{
+    margin: auto auto;
+    width: 300px;
 }
+
+#pg-container{
+    float: left;
+    width: 100%;
+    margin:5px 0 5px 0;
+}
+
+#pg-container div{
+    float: left;
+}
+
+#pg-container div span{
+    vertical-align: middle;
+}
+
+#pg-container div span.icon-pg{
+    width: 16px;
+    height: 16px;
+    background: url('../images/sprite-icon.png') center center;
+    display: block;
+    margin-top: 2px;
+    cursor: pointer;
+}
+
+#pg-container div span.icon-pg.seek-first{
+    background-position: -80px -160px;
+}
+
+#pg-container div span.icon-pg.seek-prev{
+    background-position: -48px -160px;;
+}
+
+#pg-container div span.icon-pg.seek-next{
+    background-position: -32px -160px;
+}
+
+#pg-container div span.icon-pg.seek-end{
+    background-position: -64px -160px;
+}
+
+#pg-container div span.icon-pg.disabled{
+   opacity: 0.6;
+   cursor: inherit;
+}
+
+#pg-container div span.ui-separator{
+    height: 18px;
+    border-left: 1px solid #ccc;
+    border-right: 1px solid #ccc;
+    margin: 1px;
+    float: right;
+    width: 0px;
+}
+
+#ticketInfo{
+    margin-bottom: 10px;
+}
+
+.infoTable {
+  background: #F4FAFF;
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+.infoTable th, .infoTable td {
+  text-align: left;
+  vertical-align: top;
+}
+
+.infoTable th{
+    font-weight: bold;
+    font-size: 13px;
+}
+

@@ -1,5 +1,5 @@
 <?php
-if(!defined('OSTADMININC') || !$thisstaff->isAdmin()) die('Access Denied');
+if(!defined('OSTADMININC') || !$thisstaff->isAdmin()) die(lang('access_denied'));
 
 $qstr='';
 $sql='SELECT dept.dept_id,dept_name,email.email_id,email.email,email.name as email_name,ispublic,count(staff.staff_id) as users '.
@@ -35,16 +35,16 @@ $qstr.='&order='.($order=='DESC'?'ASC':'DESC');
 $query="$sql GROUP BY dept.dept_id ORDER BY $order_by";
 $res=db_query($query);
 if($res && ($num=db_num_rows($res)))
-    $showing="Showing 1-$num of $num departments";
+    $showing=lang('showing')." 1-$num ".lang('of')." $num ".lang('departments');
 else
-    $showing='No departments found!';
+    $showing=lang('no_departm_found').'!';
 
 ?>
-<div style="width:700px;padding-top:5px; float:left;">
- <h2>Departments</h2>
+<div style="width:700;padding-top:5px; float:left;">
+ <h2><?php echo lang('departments'); ?></h2>
  </div>
 <div style="float:right;text-align:right;padding-top:5px;padding-right:5px;">
-    <b><a href="departments.php?a=add" class="Icon newDepartment">Add New Department</a></b></div>
+    <b><a href="departments.php?a=add" class="Icon newDepartment"><?php echo lang('add_new_departm'); ?></a></b></div>
 <div class="clear"></div>
 <form action="departments.php" method="POST" name="depts">
  <?php csrf_token(); ?>
@@ -55,11 +55,11 @@ else
     <thead>
         <tr>
             <th width="7px">&nbsp;</th>        
-            <th width="180"><a <?php echo $name_sort; ?> href="departments.php?<?php echo $qstr; ?>&sort=name">Name</a></th>
-            <th width="80"><a  <?php echo $type_sort; ?> href="departments.php?<?php echo $qstr; ?>&sort=type">Type</a></th>
-            <th width="70"><a  <?php echo $users_sort; ?>href="departments.php?<?php echo $qstr; ?>&sort=users">Users</a></th>
-            <th width="300"><a  <?php echo $email_sort; ?> href="departments.php?<?php echo $qstr; ?>&sort=email">Email Address</a></th>
-            <th width="200"><a  <?php echo $manager_sort; ?> href="departments.php?<?php echo $qstr; ?>&sort=manager">Dept. Manager</a></th>
+            <th width="180"><a <?php echo $name_sort; ?> href="departments.php?<?php echo $qstr; ?>&sort=name"><?php echo lang('name'); ?></a></th>
+            <th width="80"><a  <?php echo $type_sort; ?> href="departments.php?<?php echo $qstr; ?>&sort=type"><?php echo lang('type'); ?></a></th>
+            <th width="70"><a  <?php echo $users_sort; ?>href="departments.php?<?php echo $qstr; ?>&sort=users"><?php echo lang('users'); ?></a></th>
+            <th width="300"><a  <?php echo $email_sort; ?> href="departments.php?<?php echo $qstr; ?>&sort=email"><?php echo lang('email_address'); ?></a></th>
+            <th width="200"><a  <?php echo $manager_sort; ?> href="departments.php?<?php echo $qstr; ?>&sort=manager"><?php echo lang('dept_manager'); ?></a></th>
         </tr>
     </thead>
     <tbody>
@@ -74,7 +74,7 @@ else
                     $sel=true;
                 
                 $row['email']=$row['email_name']?($row['email_name'].' &lt;'.$row['email'].'&gt;'):$row['email'];
-                $default=($defaultId==$row['dept_id'])?' <small>(Default)</small>':'';
+                $default=($defaultId==$row['dept_id'])?' <small>('.lang('default').')</small>':'';
                 ?>
             <tr id="<?php echo $row['dept_id']; ?>">
                 <td width=7px>
@@ -82,7 +82,7 @@ else
                             <?php echo $sel?'checked="checked"':''; ?>  <?php echo $default?'disabled="disabled"':''; ?> >
                 </td>
                 <td><a href="departments.php?id=<?php echo $row['dept_id']; ?>"><?php echo $row['dept_name']; ?></a>&nbsp;<?php echo $default; ?></td>
-                <td><?php echo $row['ispublic']?'Public':'<b>Private</b>'; ?></td>
+                <td><?php echo $row['ispublic']?lang('public'):'<b>'.lang('private').'</b>'; ?></td>
                 <td>&nbsp;&nbsp;
                     <b>
                     <?php if($row['users']>0) { ?>
@@ -101,12 +101,14 @@ else
      <tr>
         <td colspan="6">
             <?php if($res && $num){ ?>
-            Select:&nbsp;
-            <a id="selectAll" href="#ckb">All</a>&nbsp;&nbsp;
-            <a id="selectNone" href="#ckb">None</a>&nbsp;&nbsp;
-            <a id="selectToggle" href="#ckb">Toggle</a>&nbsp;&nbsp;
+            <?php echo lang('select'); ?>:&nbsp;
+
+            <a id="selectAll" href="#ckb"><?php echo lang('all'); ?></a>&nbsp;&nbsp;
+            <a id="selectNone" href="#ckb"><?php echo lang('none'); ?></a>&nbsp;&nbsp;
+            <a id="selectToggle" href="#ckb"><?php echo lang('toggle'); ?></a>&nbsp;&nbsp;
+
             <?php }else{
-                echo 'No department found';
+                echo lang('no_departm_found');
             } ?>
         </td>
      </tr>
@@ -116,9 +118,9 @@ else
 if($res && $num): //Show options..
 ?>
 <p class="centered" id="actions">
-    <input class="button" type="submit" name="make_public" value="Make Public" >
-    <input class="button" type="submit" name="make_private" value="Make Private" >
-    <input class="button" type="submit" name="delete" value="Delete Dept(s)" >
+    <input class="button" type="submit" name="make_public" value="<?php echo lang('make_public'); ?>" >
+    <input class="button" type="submit" name="make_private" value="<?php echo lang('make_private'); ?>" >
+    <input class="button" type="submit" name="delete" value="<?php echo lang('delete_dept'); ?>" >
 </p>
 <?php
 endif;
@@ -126,27 +128,27 @@ endif;
 </form>
 
 <div style="display:none;" class="dialog" id="confirm-action">
-    <h3>Please Confirm</h3>
-    <a class="close" href="">&times;</a>
+    <h3><?php echo lang('please_confirm'); ?></h3>
+    <a class="close" href="">X</a>
     <hr/>
     <p class="confirm-action" style="display:none;" id="make_public-confirm">
-        Are you sure want to make selected departments <b>public</b>?
+        <?php echo lang('sure_you_want_to'); ?> <?php echo lang('make_departments'); ?> <b><?php echo lang('publics'); ?></b>?
     </p>
     <p class="confirm-action" style="display:none;" id="make_private-confirm">
-        Are you sure want to make selected departments <b>private</b>?
+        <?php echo lang('sure_you_want_to'); ?> <?php echo lang('make_departments'); ?> <b><?php echo lang('privates'); ?></b>?
     </p>
     <p class="confirm-action" style="display:none;" id="delete-confirm">
-        <font color="red"><strong>Are you sure you want to DELETE selected departments?</strong></font>
-        <br><br>Deleted departments CANNOT be recovered.
+        <font color="red"><strong><?php echo lang('sure_delete_dept'); ?></strong></font>
+        <br><br><?php echo lang('d_dept_cant_recov'); ?>
     </p>
-    <div>Please confirm to continue.</div>
+    <div><?php echo lang('confirm_to_continue'); ?></div>
     <hr style="margin-top:1em"/>
     <p class="full-width">
         <span class="buttons" style="float:left">
-            <input type="button" value="No, Cancel" class="close">
+            <input type="button" value="<?php echo lang('no_cancel'); ?>" class="close">
         </span>
         <span class="buttons" style="float:right">
-            <input type="button" value="Yes, Do it!" class="confirm">
+            <input type="button" value="<?php echo lang('yes_doit'); ?>!" class="confirm">
         </span>
      </p>
     <div class="clear"></div>

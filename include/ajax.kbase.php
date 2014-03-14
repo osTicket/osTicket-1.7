@@ -14,17 +14,17 @@
     vim: expandtab sw=4 ts=4 sts=4:
 **********************************************************************/
 if(!defined('INCLUDE_DIR')) die('!');
-
-
+require_once(INCLUDE_DIR.'languages/language_control/languages_processor.php');
+	    
 class KbaseAjaxAPI extends AjaxController {
-
+    
     function cannedResp($id, $format='') {
         global $thisstaff, $_GET;
 
         include_once(INCLUDE_DIR.'class.canned.php');
 
         if(!$id || !($canned=Canned::lookup($id)) || !$canned->isEnabled())
-            Http::response(404, 'No such premade reply');
+            Http::response(404, lang('no_premade_reply'));
 
         //Load ticket.
         if($_GET['tid']) {
@@ -52,33 +52,32 @@ class KbaseAjaxAPI extends AjaxController {
     }
 
     function faq($id, $format='html') {
-        //XXX: user ajax->getThisStaff() (nolint)
-        global $thisstaff;
+        global $thisstaff; //XXX: user ajax->getThisStaff()
         include_once(INCLUDE_DIR.'class.faq.php');
 
         if(!($faq=FAQ::lookup($id)))
             return null;
 
-        //TODO: $fag->getJSON() for json format. (nolint)
+        //TODO: $fag->getJSON() for json format.
         $resp = sprintf(
                 '<div style="width:650px;">
                  <strong>%s</strong><p>%s</p>
-                 <div class="faded">Last updated %s</div>
+                 <div class="faded">'.lang('last_update').' %s</div>
                  <hr>
-                 <a href="faq.php?id=%d">View</a> | <a href="faq.php?id=%d">Attachments (%s)</a>',
-                $faq->getQuestion(),
+                 <a href="faq.php?id=%d">'.lang('view').'</a> | <a href="faq.php?id=%d">'.lang('attachments').' (%s)</a>',
+                $faq->getQuestion(), 
                 Format::safe_html($faq->getAnswer()),
                 Format::db_daydatetime($faq->getUpdateDate()),
                 $faq->getId(),
                 $faq->getId(),
                 $faq->getNumAttachments());
         if($thisstaff && $thisstaff->canManageFAQ()) {
-            $resp.=sprintf(' | <a href="faq.php?id=%d&a=edit">Edit</a>',$faq->getId());
+            $resp.=sprintf(' | <a href="faq.php?id=%d&a=edit">'.lang('edit').'</a>',$faq->getId());
 
         }
         $resp.='</div>';
 
-        return $resp;
+        return $resp; 
     }
 }
 ?>

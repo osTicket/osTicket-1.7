@@ -17,6 +17,7 @@
 if(!defined('INCLUDE_DIR')) die('403');
 
 include_once(INCLUDE_DIR.'class.ticket.php');
+require_once(INCLUDE_DIR.'languages/language_control/languages_processor.php');
 
 class TicketsAjaxAPI extends AjaxController {
 
@@ -178,11 +179,11 @@ class TicketsAjaxAPI extends AjaxController {
 
         $sql="$select $from $where";
         if(($tickets=db_result(db_query($sql)))) {
-            $result['success'] =sprintf("Search criteria matched %s - <a href='tickets.php?%s'>view</a>",
-                                        ($tickets>1?"$tickets tickets":"$tickets ticket"),
+            $result['success'] =sprintf(lang("search_match")." %s - <a href='tickets.php?%s'>".lang("view")."</a>",
+                                        ($tickets>1?"$tickets ".lang("tickets"):"$tickets ".lang("ticket")),
                                         str_replace(array('&amp;', '&'), array('&', '&amp;'), $_SERVER['QUERY_STRING']));
         } else {
-            $result['fail']='No tickets found matching your search criteria.';
+            $result['fail']=lang('no_tickets_found');
         }
 
         return $this->json_encode($result);
@@ -195,14 +196,14 @@ class TicketsAjaxAPI extends AjaxController {
             return 0;
 
         if(!($ticket = Ticket::lookup($tid)) || !$ticket->checkStaffAccess($thisstaff))
-            return $this->json_encode(array('id'=>0, 'retry'=>false, 'msg'=>'Lock denied!'));
+            return $this->json_encode(array('id'=>0, 'retry'=>false, 'msg'=>lang('lock_denied')));
 
         //is the ticket already locked?
         if($ticket->isLocked() && ($lock=$ticket->getLock()) && !$lock->isExpired()) {
             /*Note: Ticket->acquireLock does the same logic...but we need it here since we need to know who owns the lock up front*/
             //Ticket is locked by someone else.??
             if($lock->getStaffId()!=$thisstaff->getId())
-                return $this->json_encode(array('id'=>0, 'retry'=>false, 'msg'=>'Unable to acquire lock.'));
+                return $this->json_encode(array('id'=>0, 'retry'=>false, 'msg'=>lang('cant_acquire_lock')));
 
             //Ticket already locked by staff...try renewing it.
             $lock->renew(); //New clock baby!
@@ -266,9 +267,9 @@ class TicketsAjaxAPI extends AjaxController {
         $error=$msg=$warn=null;
 
         if($lock && $lock->getStaffId()==$thisstaff->getId())
-            $warn.='&nbsp;<span class="Icon lockedTicket">Ticket is locked by '.$lock->getStaffName().'</span>';
+            $warn.='&nbsp;<span class="Icon lockedTicket">'.lang('ticket_locket_by').' '.$lock->getStaffName().'</span>';
         elseif($ticket->isOverdue())
-            $warn.='&nbsp;<span class="Icon overdueTicket">Marked overdue!</span>';
+            $warn.='&nbsp;<span class="Icon overdueTicket">'.lang('market_overdue').'!</span>';
 
         ob_start();
         echo sprintf(
@@ -287,26 +288,26 @@ class TicketsAjaxAPI extends AjaxController {
         $ticket_state=sprintf('<span>%s</span>',ucfirst($ticket->getStatus()));
         if($ticket->isOpen()) {
             if($ticket->isOverdue())
-                $ticket_state.=' &mdash; <span>Overdue</span>';
+                $ticket_state.=' &mdash; <span>'.lang('overdue').'</span>';
             else
                 $ticket_state.=sprintf(' &mdash; <span>%s</span>',$ticket->getPriority());
         }
 
         echo sprintf('
                 <tr>
-                    <th width="100">Ticket State:</th>
+                    <th width="100">'.lang('ticket_state').':</th>
                     <td>%s</td>
                 </tr>
                 <tr>
-                    <th>Create Date:</th>
+                    <th>'.lang('create_date').':</th>
                     <td>%s</td>
                 </tr>',$ticket_state,
                 Format::db_datetime($ticket->getCreateDate()));
         if($ticket->isClosed()) {
             echo sprintf('
                     <tr>
-                        <th>Close Date:</th>
-                        <td>%s   <span class="faded">by %s</span></td>
+                        <th>'.lang('close_date').':</th>
+                        <td>%s   <span class="faded">'.lang('by').' %s</span></td>
                     </tr>',
                     Format::db_datetime($ticket->getCloseDate()),
                     ($staff?$staff->getName():'staff')
@@ -314,7 +315,7 @@ class TicketsAjaxAPI extends AjaxController {
         } elseif($ticket->getEstDueDate()) {
             echo sprintf('
                     <tr>
-                        <th>Due Date:</th>
+                        <th>'.lang('due_date').':</th>
                         <td>%s</td>
                     </tr>',
                     Format::db_datetime($ticket->getEstDueDate()));
@@ -327,21 +328,21 @@ class TicketsAjaxAPI extends AjaxController {
         if($ticket->isOpen()) {
             echo sprintf('
                     <tr>
-                        <th width="100">Assigned To:</th>
+                        <th width="100">'.lang('assigned_to').':</th>
                         <td>%s</td>
-                    </tr>',$ticket->isAssigned()?implode('/', $ticket->getAssignees()):' <span class="faded">&mdash; Unassigned &mdash;</span>');
+                    </tr>',$ticket->isAssigned()?implode('/', $ticket->getAssignees()):' <span class="faded">&mdash; '.lang('unassigned').' &mdash;</span>');
         }
         echo sprintf(
             '   <tr>
-                    <th width="100">Department:</th>
+                    <th width="100">'.lang('department').':</th>
                     <td>%s</td>
                 </tr>
                 <tr>
-                    <th>Help Topic:</th>
+                    <th>'.lang('help_topic').':</th>
                     <td>%s</td>
                 </tr>
                 <tr>
-                    <th>From:</th>
+                    <th>'.lang('from').':</th>
                     <td>%s <span class="faded">%s</span></td>
                 </tr>',
             Format::htmlchars($ticket->getDeptName()),
@@ -350,23 +351,23 @@ class TicketsAjaxAPI extends AjaxController {
             $ticket->getEmail());
         echo '
             </table>';
-        $options[]=array('action'=>'Thread ('.$ticket->getThreadCount().')','url'=>"tickets.php?id=$tid");
+        $options[]=array('action'=>lang('thread').' ('.$ticket->getThreadCount().')','url'=>"tickets.php?id=$tid");
         if($ticket->getNumNotes())
             $options[]=array('action'=>'Notes ('.$ticket->getNumNotes().')','url'=>"tickets.php?id=$tid#notes");
 
         if($ticket->isOpen())
-            $options[]=array('action'=>'Reply','url'=>"tickets.php?id=$tid#reply");
+            $options[]=array('action'=>lang('reply'),'url'=>"tickets.php?id=$tid#reply");
 
         if($thisstaff->canAssignTickets())
-            $options[]=array('action'=>($ticket->isAssigned()?'Reassign':'Assign'),'url'=>"tickets.php?id=$tid#assign");
+            $options[]=array('action'=>($ticket->isAssigned()?lang('reasisgn'):lang('assign')),'url'=>"tickets.php?id=$tid#assign");
 
         if($thisstaff->canTransferTickets())
-            $options[]=array('action'=>'Transfer','url'=>"tickets.php?id=$tid#transfer");
+            $options[]=array('action'=>lang('transfer'),'url'=>"tickets.php?id=$tid#transfer");
 
-        $options[]=array('action'=>'Post Note','url'=>"tickets.php?id=$tid#note");
+        $options[]=array('action'=>lang('post_note'),'url'=>"tickets.php?id=$tid#note");
 
         if($thisstaff->canEditTickets())
-            $options[]=array('action'=>'Edit Ticket','url'=>"tickets.php?id=$tid&a=edit");
+            $options[]=array('action'=>lang('edit_ticket'),'url'=>"tickets.php?id=$tid&a=edit");
 
         if($options) {
             echo '<ul class="tip_menu">';

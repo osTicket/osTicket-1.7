@@ -1,6 +1,6 @@
     </div>
     <div id="footer">
-        Copyright &copy; 2006-<?php echo date('Y'); ?>&nbsp;osTicket.com. &nbsp;All Rights Reserved.
+        <?php echo lang('copyright'); ?>  &copy; 2006-<?php echo date('Y'); ?>&nbsp;osTicket.com. &nbsp;<?php echo lang('right_reserved'); ?>
     </div>
 <?php
 if(is_object($thisstaff) && $thisstaff->isStaff()) { ?>
@@ -14,8 +14,8 @@ if(is_object($thisstaff) && $thisstaff->isStaff()) { ?>
 </div>
 <div id="overlay"></div>
 <div id="loading">
-    <h4>Please Wait!</h4>
-    <p>Please wait... it will take a second!</p>
+    <h4><?php echo lang('please_wait'); ?></h4>
+    <p><?php echo lang('take_a_second'); ?></p>
 </div>
 </body>
 </html>

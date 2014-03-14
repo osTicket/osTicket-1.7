@@ -16,6 +16,7 @@
 **********************************************************************/
 
 require_once (INCLUDE_DIR.'class.api.php');
+//require_once(INCLUDE_DIR.'languages/language_control/languages_processor.php');
 
 /**
  * AjaxController Class
@@ -31,7 +32,7 @@ class AjaxController extends ApiController {
     function staffOnly() {
         global $thisstaff;
         if(!$thisstaff || !$thisstaff->isValid()) {
-            Http::response(401,'Access Denied. IP '.$_SERVER['REMOTE_ADDR']);
+            Http::response(401,lang('access_denied_ip').' '.$_SERVER['REMOTE_ADDR']);
         }
     }
     /**

@@ -13,6 +13,7 @@
 
     vim: expandtab sw=4 ts=4 sts=4:
 **********************************************************************/
+require_once(INCLUDE_DIR.'languages/language_control/languages_processor.php');
 class Misc {
 
 	function randCode($count=8, $chars=false) {
@@ -123,7 +124,7 @@ class Misc {
 
         ob_start();
         echo sprintf('<select name="%s" id="%s">',$name,$name);
-        echo '<option value="" selected>Time</option>';
+        echo '<option value="" selected>'.lang('time').'</option>';
         for($i=23; $i>=0; $i--) {
             for($minute=45; $minute>=0; $minute-=15) {
                 $sel=($hr==$i && $min==$minute)?'selected="selected"':'';

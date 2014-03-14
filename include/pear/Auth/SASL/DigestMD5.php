@@ -44,6 +44,7 @@
 */
 
 require_once('Auth/SASL/Common.php');
+require_once(INCLUDE_DIR.'languages/language_control/languages_processor.php');
 
 class Auth_SASL_DigestMD5 extends Auth_SASL_Common
 {
@@ -81,7 +82,7 @@ class Auth_SASL_DigestMD5 extends Auth_SASL_Common
                 return sprintf('username="%s"' . $authzid_string  . ',nonce="%s",cnonce="%s",nc=00000001,qop=auth,digest-uri="%s",response=%s,maxbuf=%d', $authcid, $challenge['nonce'], $cnonce, $digest_uri, $response_value, $challenge['maxbuf']);
             }
         } else {
-            return PEAR::raiseError('Invalid digest challenge');
+            return PEAR::raiseError(lang('invalid_digest'));
         }
     }
     

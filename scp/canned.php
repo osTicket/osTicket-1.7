@@ -25,15 +25,15 @@ if(!$thisstaff || !$thisstaff->canManageCannedResponses()) {
 
 $canned=null;
 if($_REQUEST['id'] && !($canned=Canned::lookup($_REQUEST['id'])))
-    $errors['err']='Unknown or invalid canned response ID.';
+    $errors['err']=lang('invalid_canned');
 
 if($_POST && $thisstaff->canManageCannedResponses()) {
     switch(strtolower($_POST['do'])) {
         case 'update':
             if(!$canned) {
-                $errors['err']='Unknown or invalid canned response.';
+                $errors['err']=lang('invalid_canned_resp');
             } elseif($canned->update($_POST, $errors)) {
-                $msg='Canned response updated successfully';
+                $msg=lang('canned_updated');
                 //Delete removed attachments.
                 //XXX: files[] shouldn't be changed under any circumstances.
                 $keepers = $_POST['files']?$_POST['files']:array();
@@ -50,24 +50,24 @@ if($_POST && $thisstaff->canManageCannedResponses()) {
                 $canned->reload();
 
             } elseif(!$errors['err']) {
-                $errors['err']='Error updating canned response. Try again!';
+                $errors['err']=lang('error_update_canned');
             }
             break;
         case 'create':
             if(($id=Canned::create($_POST, $errors))) {
-                $msg='Canned response added successfully';
+                $msg=lang('canned_added');
                 $_REQUEST['a']=null;
                 //Upload attachments
                 if($_FILES['attachments'] && ($c=Canned::lookup($id)) && ($files=AttachmentFile::format($_FILES['attachments'])))
                     $c->uploadAttachments($files);
 
             } elseif(!$errors['err']) {
-                $errors['err']='Unable to add canned response. Correct error(s) below and try again.';
+                $errors['err']=lang('cant_add_canned').' '.lang('correct_errors');
             }
             break;
         case 'mass_process':
             if(!$_POST['ids'] || !is_array($_POST['ids']) || !count($_POST['ids'])) {
-                $errors['err']='You must select at least one canned response';
+                $errors['err']=lang('select_one_canned');
             } else {
                 $count=count($_POST['ids']);
                 switch(strtolower($_POST['a'])) {
@@ -76,11 +76,11 @@ if($_POST && $thisstaff->canManageCannedResponses()) {
                             .' WHERE canned_id IN ('.implode(',', db_input($_POST['ids'])).')';
                         if(db_query($sql) && ($num=db_affected_rows())) {
                             if($num==$count)
-                                $msg = 'Selected canned responses enabled';
+                                $msg = lang('canned_enabled');
                             else
-                                $warn = "$num of $count selected canned responses enabled";
+                                $warn = "$num ".lang('of')." $count ".lang('canned_enabled');
                         } else {
-                            $errors['err'] = 'Unable to enable selected canned responses.';
+                            $errors['err'] = lang('cant_enable_canned');
                         }
                         break;
                     case 'disable':
@@ -88,11 +88,11 @@ if($_POST && $thisstaff->canManageCannedResponses()) {
                             .' WHERE canned_id IN ('.implode(',', db_input($_POST['ids'])).')';
                         if(db_query($sql) && ($num=db_affected_rows())) {
                             if($num==$count)
-                                $msg = 'Selected canned responses disabled';
+                                $msg = lang('canned_disabled');
                             else
-                                $warn = "$num of $count selected canned responses disabled";
+                                $warn = "$num ".lang('of')." $count ".lang('canned_disabled');
                         } else {
-                            $errors['err'] = 'Unable to disable selected canned responses';
+                            $errors['err'] = lang('cant_disable_canned');
                         }
                         break;
                     case 'delete':
@@ -104,19 +104,19 @@ if($_POST && $thisstaff->canManageCannedResponses()) {
                         }
 
                         if($i==$count)
-                            $msg = 'Selected canned responses deleted successfully';
+                            $msg = lang('canned_deleted');
                         elseif($i>0)
-                            $warn="$i of $count selected canned responses deleted";
+                            $warn="$i ".lang('of')." $count ".lang('canned_deleted');
                         elseif(!$errors['err'])
-                            $errors['err'] = 'Unable to delete selected canned responses';
+                            $errors['err'] = lang('cant_delete_canned');
                         break;
                     default:
-                        $errors['err']='Unknown command';
+                        $errors['err']=lang('unknown_command');
                 }
             }
             break;
         default:
-            $errors['err']='Unknown action';
+            $errors['err']=lang('unknown_command');
             break;
     }
 }

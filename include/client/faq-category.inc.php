@@ -1,5 +1,5 @@
 <?php
-if(!defined('OSTCLIENTINC') || !$category || !$category->isPublic()) die('Access Denied');
+if(!defined('OSTCLIENTINC') || !$category || !$category->isPublic()) die(lang('access_denied'));
 ?>
 <h1><strong><?php echo $category->getName() ?></strong></h1>
 <p>
@@ -11,11 +11,10 @@ $sql='SELECT faq.faq_id, question, count(attach.file_id) as attachments '
     .' FROM '.FAQ_TABLE.' faq '
     .' LEFT JOIN '.FAQ_ATTACHMENT_TABLE.' attach ON(attach.faq_id=faq.faq_id) '
     .' WHERE faq.ispublished=1 AND faq.category_id='.db_input($category->getId())
-    .' GROUP BY faq.faq_id '
-    .' ORDER BY question';
+    .' GROUP BY faq.faq_id';
 if(($res=db_query($sql)) && db_num_rows($res)) {
     echo '
-         <h2>Frequently Asked Questions</h2>
+         <h2>'.lang('freq_asked_quest').'</h2>
          <div id="faq">
             <ol>';
     while($row=db_fetch_array($res)) {
@@ -26,8 +25,8 @@ if(($res=db_query($sql)) && db_num_rows($res)) {
     }
     echo '  </ol>
          </div>
-         <p><a class="back" href="index.php">&laquo; Go Back</a></p>';
+         <p><a class="back" href="index.php">&laquo; '.lang('go_back').'</a></p>';
 }else {
-    echo '<strong>Category does not have any FAQs. <a href="index.php">Back To Index</a></strong>';
+    echo '<strong>'.lang('catg_no_have_faqs').' <a href="index.php">'.lang('back_to_index').'</a></strong>';
 }
 ?>

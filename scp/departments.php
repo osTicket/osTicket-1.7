@@ -14,34 +14,36 @@
     vim: expandtab sw=4 ts=4 sts=4:
 **********************************************************************/
 require('admin.inc.php');
+require_once(INCLUDE_DIR.'languages/language_control/languages_processor.php');
+
 $dept=null;
 if($_REQUEST['id'] && !($dept=Dept::lookup($_REQUEST['id'])))
-    $errors['err']='Unknown or invalid department ID.';
+    $errors['err']=lang('invalid_dep_id').'.';
 
 if($_POST){
     switch(strtolower($_POST['do'])){
         case 'update':
             if(!$dept){
-                $errors['err']='Unknown or invalid department.';
+                $errors['err']=lang('invalid_dep').'.';
             }elseif($dept->update($_POST,$errors)){
-                $msg='Department updated successfully';
+                $msg=lang('dep_update_success');
             }elseif(!$errors['err']){
-                $errors['err']='Error updating department. Try again!';
+                $errors['err']=lang('error_upd_departm').'!';
             }
             break;
         case 'create':
             if(($id=Dept::create($_POST,$errors))){
-                $msg=Format::htmlchars($_POST['name']).' added successfully';
+                $msg=Format::htmlchars($_POST['name']).' '. lang('added_succesfully');
                 $_REQUEST['a']=null;
             }elseif(!$errors['err']){
-                $errors['err']='Unable to add department. Correct error(s) below and try again.';
+                $errors['err']=lang('unable_add_departm').' '. lang('correct_errors').' .';
             }
             break;
         case 'mass_process':
             if(!$_POST['ids'] || !is_array($_POST['ids']) || !count($_POST['ids'])) {
-                $errors['err'] = 'You must select at least one department';
+                $errors['err'] = lang('at_least_one').' '. lang('department');
             }elseif(in_array($cfg->getDefaultDeptId(),$_POST['ids'])) {
-                $errors['err'] = 'You can not disable/delete a default department. Remove default Dept. and try again.';
+                $errors['err'] = lang('cant_disab_departm').'.';
             }else{
                 $count=count($_POST['ids']);
                 switch(strtolower($_POST['a'])) {
@@ -50,11 +52,11 @@ if($_POST){
                             .' WHERE dept_id IN ('.implode(',', db_input($_POST['ids'])).')';
                         if(db_query($sql) && ($num=db_affected_rows())){
                             if($num==$count)
-                                $msg='Selected departments made public';
+                                $msg=lang('Spublic_departm');
                             else
-                                $warn="$num of $count selected departments made public";
+                                $warn="$num of $count ".lang('Spublic_departm');
                         } else {
-                            $errors['err']='Unable to make selected department public.';
+                            $errors['err']=lang('error_public_departm').'.';
                         }
                         break;
                     case 'make_private':
@@ -63,11 +65,11 @@ if($_POST){
                             .' AND dept_id!='.db_input($cfg->getDefaultDeptId());
                         if(db_query($sql) && ($num=db_affected_rows())) {
                             if($num==$count)
-                                $msg = 'Selected departments made private';
+                                $msg = lang('private_departm');
                             else
-                                $warn = "$num of $count selected departments made private";
+                                $warn = "$num of $count ".lang('private_departm');
                         } else {
-                            $errors['err'] = 'Unable to make selected department(s) private. Possibly already private!';
+                            $errors['err'] = lang('error_priv_departm').'!';
                         }
                         break;
                     case 'delete':
@@ -76,7 +78,7 @@ if($_POST){
                             .' WHERE dept_id IN ('.implode(',', db_input($_POST['ids'])).')';
                         list($members)=db_fetch_row(db_query($sql));
                         if($members)
-                            $errors['err']='Departments with staff can not be deleted. Move staff first.';
+                            $errors['err']=lang('cant_delete_departm').'.';
                         else {
                             $i=0;
                             foreach($_POST['ids'] as $k=>$v) {
@@ -84,20 +86,20 @@ if($_POST){
                                     $i++;
                             }
                             if($i && $i==$count)
-                                $msg = 'Selected departments deleted successfully';
+                                $msg = lang('delete_dep_succes');
                             elseif($i>0)
-                                $warn = "$i of $count selected departments deleted";
+                                $warn = "$i of $count ".lang('departm_deleted');
                             elseif(!$errors['err'])
-                                $errors['err'] = 'Unable to delete selected departments.';
+                                $errors['err'] = lang('error_delete_departm').'.';
                         }
                         break;
                     default:
-                        $errors['err']='Unknown action - get technical help';
+                        $errors['err']=lang('unknown_action');
                 }
             }
             break;
         default:
-            $errors['err']='Unknown action/command';
+            $errors['err']=lang('unknown_command');
             break;
     }
 }

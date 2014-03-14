@@ -1,5 +1,5 @@
 <?php
-if(!defined('OSTSCPINC') || !$thisstaff) die('Access Denied');
+if(!defined('OSTSCPINC') || !$thisstaff) die(lang('access_denied'));
 
 $qstr='';
 $sql='SELECT cat.category_id, cat.name, cat.ispublic, cat.updated, count(faq.faq_id) as faqs '.
@@ -37,14 +37,14 @@ $res=db_query($query);
 if($res && ($num=db_num_rows($res)))
     $showing=$pageNav->showing().' categories';
 else
-    $showing='No FAQ categories found!';
+    $showing=lang('no_faq_categories');
 
 ?>
-<div style="width:700px;padding-top:5px; float:left;">
- <h2>FAQ Categories</h2>
+<div style="width:700;padding-top:5px; float:left;">
+ <h2><?php echo lang('faq_categories'); ?></h2>
  </div>
 <div style="float:right;text-align:right;padding-top:5px;padding-right:5px;">
-    <b><a href="categories.php?a=add" class="Icon newCategory">Add New Category</a></b></div>
+    <b><a href="categories.php?a=add" class="Icon newCategory"><?php echo lang('add_new_category'); ?></a></b></div>
 <div class="clear"></div>
 <form action="categories.php" method="POST" name="cat">
  <?php csrf_token(); ?>
@@ -55,10 +55,10 @@ else
     <thead>
         <tr>
             <th width="7">&nbsp;</th>
-            <th width="500"><a <?php echo $name_sort; ?> href="categories.php?<?php echo $qstr; ?>&sort=name">Name</a></th>
-            <th width="150"><a  <?php echo $type_sort; ?> href="categories.php?<?php echo $qstr; ?>&sort=type">Type</a></th>
-            <th width="80"><a  <?php echo $faqs_sort; ?> href="categories.php?<?php echo $qstr; ?>&sort=faqs">FAQs</a></th>
-            <th width="150" nowrap><a  <?php echo $updated_sort; ?>href="categories.php?<?php echo $qstr; ?>&sort=updated">Last Updated</a></th>
+            <th width="500"><a <?php echo $name_sort; ?> href="categories.php?<?php echo $qstr; ?>&sort=name"><?php echo lang('name'); ?></a></th>
+            <th width="150"><a  <?php echo $type_sort; ?> href="categories.php?<?php echo $qstr; ?>&sort=type"><?php echo lang('type'); ?></a></th>
+            <th width="80"><a  <?php echo $faqs_sort; ?> href="categories.php?<?php echo $qstr; ?>&sort=faqs"><?php echo lang('faqs'); ?></a></th>
+            <th width="150" nowrap><a  <?php echo $updated_sort; ?>href="categories.php?<?php echo $qstr; ?>&sort=updated"><?php echo lang('last_update'); ?></a></th>
         </tr>
     </thead>
     <tbody>
@@ -81,7 +81,7 @@ else
                             <?php echo $sel?'checked="checked"':''; ?>>
                 </td>
                 <td><a href="categories.php?id=<?php echo $row['category_id']; ?>"><?php echo Format::truncate($row['name'],200); ?></a>&nbsp;</td>
-                <td><?php echo $row['ispublic']?'<b>Public</b>':'Internal'; ?></td>
+                <td><?php echo $row['ispublic']?'<b>'.lang('public').'</b>':lang('internal'); ?></td>
                 <td style="text-align:right;padding-right:25px;"><?php echo $faqs; ?></td>
                 <td>&nbsp;<?php echo Format::db_datetime($row['updated']); ?></td>
             </tr>
@@ -93,11 +93,11 @@ else
         <td colspan="5">
             <?php if($res && $num){ ?>
             Select:&nbsp;
-            <a id="selectAll" href="#ckb">All</a>&nbsp;&nbsp;
-            <a id="selectNone" href="#ckb">None</a>&nbsp;&nbsp;
-            <a id="selectToggle" href="#ckb">Toggle</a>&nbsp;&nbsp;
+            <a id="selectAll" href="#ckb"><?php echo lang('all'); ?></a>&nbsp;&nbsp;
+            <a id="selectNone" href="#ckb"><?php echo lang('none'); ?></a>&nbsp;&nbsp;
+            <a id="selectToggle" href="#ckb"><?php echo lang('toggle'); ?></a>&nbsp;&nbsp;
             <?php }else{
-                echo 'No FAQ categories found.';
+                echo lang('no_faq_categories');
             } ?>
         </td>
      </tr>
@@ -108,36 +108,36 @@ if($res && $num): //Show options..
     echo '<div>&nbsp;Page:'.$pageNav->getPageLinks().'&nbsp;</div>';
 ?>
 <p class="centered" id="actions">
-    <input class="button" type="submit" name="make_public" value="Make Public">
-    <input class="button" type="submit" name="make_private" value="Make Internal">
-    <input class="button" type="submit" name="delete" value="Delete" >
+    <input class="button" type="submit" name="make_public" value="<?php echo lang('make_public'); ?>">
+    <input class="button" type="submit" name="make_private" value="<?php echo lang('make_internal'); ?>">
+    <input class="button" type="submit" name="delete" value="<?php echo lang('delete'); ?>" >
 </p>
 <?php
 endif;
 ?>
 </form>
 <div style="display:none;" class="dialog" id="confirm-action">
-    <h3>Please Confirm</h3>
-    <a class="close" href="">&times;</a>
+    <h3><?php echo lang('please_confirm'); ?></h3>
+    <a class="close" href="">X</a>
     <hr/>
     <p class="confirm-action" style="display:none;" id="make_public-confirm">
-        Are you sure want to make selected categories <b>public</b>?
+       <?php echo lang('s_make_categories'); ?> <b>public</b>?
     </p>
     <p class="confirm-action" style="display:none;" id="make_private-confirm">
-        Are you sure want to make selected categories <b>private</b> (internal)?
+       <?php echo lang('s_make_categories'); ?> <b>private</b> (internal)?
     </p>
     <p class="confirm-action" style="display:none;" id="delete-confirm">
-        <font color="red"><strong>Are you sure you want to DELETE selected categories?</strong></font>
-        <br><br>Deleted entries CANNOT be recovered, including any associated FAQs.
+        <font color="red"><strong><?php echo lang('sure_delete_categ'); ?></strong></font>
+        <br><br><?php echo lang('cant_rec_del_ent'); ?>
     </p>
-    <div>Please confirm to continue.</div>
+    <div><?php echo lang('confirm_to_continue'); ?></div>
     <hr style="margin-top:1em"/>
     <p class="full-width">
         <span class="buttons" style="float:left">
-            <input type="button" value="No, Cancel" class="close">
+            <input type="button" value="<?php echo lang('no_cancel'); ?>" class="close">
         </span>
         <span class="buttons" style="float:right">
-            <input type="button" value="Yes, Do it!" class="confirm">
+            <input type="button" value="<?php echo lang('yes_doit'); ?>!" class="confirm">
         </span>
      </p>
     <div class="clear"></div>

@@ -73,6 +73,7 @@ require_once 'PEAR.php';
  * consist of.
  */
 require_once 'Mail/mimePart.php';
+require_once(INCLUDE_DIR.'languages/language_control/languages_processor.php');
 
 
 /**
@@ -428,7 +429,7 @@ class Mail_mime
         }
 
         if (!strlen($filename)) {
-            $msg = "The supplied filename for the attachment can't be empty";
+            $msg = lang("supplied_filename");
             $err = PEAR::raiseError($msg);
             return $err;
         }
@@ -466,15 +467,15 @@ class Mail_mime
     {
         // Check state of file and raise an error properly
         if (!file_exists($file_name)) {
-            $err = PEAR::raiseError('File not found: ' . $file_name);
+            $err = PEAR::raiseError(lang('file_not_found').': ' . $file_name);
             return $err;
         }
         if (!is_file($file_name)) {
-            $err = PEAR::raiseError('Not a regular file: ' . $file_name);
+            $err = PEAR::raiseError(lang('not_regular_dile').': ' . $file_name);
             return $err;
         }
         if (!is_readable($file_name)) {
-            $err = PEAR::raiseError('File is not readable: ' . $file_name);
+            $err = PEAR::raiseError(lang('file_not_readable').': '. $file_name);
             return $err;
         }
 
@@ -763,7 +764,7 @@ class Mail_mime
     {
         // Check state of file and raise an error properly
         if (file_exists($filename) && !is_writable($filename)) {
-            $err = PEAR::raiseError('File is not writable: ' . $filename);
+            $err = PEAR::raiseError(lang('file_not_writable').': ' . $filename);
             return $err;
         }
 
@@ -773,14 +774,14 @@ class Mail_mime
         }
 
         if (!($fh = fopen($filename, 'ab'))) {
-            $err = PEAR::raiseError('Unable to open file: ' . $filename);
+            $err = PEAR::raiseError(lang('cant_open_file').': ' . $filename);
             return $err;
         }
 
         // Write message headers into file (skipping Content-* headers)
         $head = $this->txtHeaders($headers, $overwrite, true);
         if (fwrite($fh, $head) === false) {
-            $err = PEAR::raiseError('Error writing to file: ' . $filename);
+            $err = PEAR::raiseError(lang('error_write_file').': ' . $filename);
             return $err;
         }
 
@@ -811,7 +812,7 @@ class Mail_mime
     {
         // Check state of file and raise an error properly
         if (file_exists($filename) && !is_writable($filename)) {
-            $err = PEAR::raiseError('File is not writable: ' . $filename);
+            $err = PEAR::raiseError(lang('file_not_writable').': ' . $filename);
             return $err;
         }
 
@@ -821,7 +822,7 @@ class Mail_mime
         }
 
         if (!($fh = fopen($filename, 'ab'))) {
-            $err = PEAR::raiseError('Unable to open file: ' . $filename);
+            $err = PEAR::raiseError(lang('cant_open_file').': ' . $filename);
             return $err;
         }
 

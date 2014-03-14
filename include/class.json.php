@@ -19,6 +19,7 @@
 **********************************************************************/
 
 include_once "JSON.php";
+require_once(INCLUDE_DIR.'languages/language_control/languages_processor.php');
 
 class JsonDataParser {
     function parse($stream) {
@@ -26,10 +27,6 @@ class JsonDataParser {
         while (!feof($stream)) {
             $contents .= fread($stream, 8192);
         }
-        return self::decode($contents);
-    }
-
-    function decode($contents) {
         if (function_exists("json_decode")) {
             return json_decode($contents, true);
         } else {
@@ -41,30 +38,26 @@ class JsonDataParser {
     function lastError() {
         if (function_exists("json_last_error")) {
             $errors = array(
-            JSON_ERROR_NONE => 'No errors',
-            JSON_ERROR_DEPTH => 'Maximum stack depth exceeded',
-            JSON_ERROR_STATE_MISMATCH => 'Underflow or the modes mismatch',
-            JSON_ERROR_CTRL_CHAR => 'Unexpected control character found',
-            JSON_ERROR_SYNTAX => 'Syntax error, malformed JSON',
-            JSON_ERROR_UTF8 => 'Malformed UTF-8 characters, possibly incorrectly encoded'
+            JSON_ERROR_NONE => lang('no_error'),
+            JSON_ERROR_DEPTH => lang('max_stack_depth'),
+            JSON_ERROR_STATE_MISMATCH => lang('underf_modes_mism'),
+            JSON_ERROR_CTRL_CHAR => lang('unexpt_cont_char'),
+            JSON_ERROR_SYNTAX => lang('syntax_error'),
+            JSON_ERROR_UTF8 => lang('malmormed_utf')
             );
             if ($message = $errors[json_last_error()])
                 return $message;
-            return "Unknown error";
+            return lang("unknown_error");
         } else {
             # Doesn't look like Servies_JSON supports errors for decode()
-            return "Unknown JSON parsing error";
+            return lang("unknown_json");
         }
     }
 }
 
 class JsonDataEncoder {
     function encode($var) {
-        if (function_exists('json_encode'))
-            return json_encode($var);
-        else {
-            $decoder = new Services_JSON();
-            return $decoder->encode($var);
-        }
+        $decoder = new Services_JSON();
+        return $decoder->encode($var);
     }
 }
