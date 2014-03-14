@@ -238,7 +238,6 @@ if (!function_exists('updateLanguage')) {
 if (!function_exists('createNewLanguage')) {
     function createNewLanguage($language)
     {
-        Template::copyNewLanguage($language);
         return copy(INCLUDE_DIR.'languages/eng.php',INCLUDE_DIR.'languages/'.$language.'.php');
 
     }
