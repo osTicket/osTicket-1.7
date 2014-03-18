@@ -1,3 +1,66 @@
+osTicket v1.7.7
+===============
+### Enhancements
+  * Departments can have a department if there are no members (osTicket/osTicket-1.8#618)
+  * Clicking off of popup tips will close them (osTicket/osTicket-1.8#645)
+
+### Bugs
+  * Fix stripping of leading zeros from phone numbers (osTicket/osTicket-1.8#622)
+  * Display FAQ modify time rather than category modify time (osTicket/osTicket-1.8#647)
+  * Usernames can have Unicode characters (osTicket/osTicket-1.8#650)
+  * New SLA's default to have alerts enabled (osTicket/osTicket-1.8#654)
+  * Fix crash viewing ticket in the client portal if no departments are public (osTicket/osTicket-1.8#658)
+  * Allow manual update of SLA to a transient SLA (osTicket/osTicket-1.8#663)
+  * Fix upgrade crash from some osTicket 1.6 installations (osTicket/osTicket-1.8#687)
+  * Fix attachments from new ticket by staff to be associated with the response (osTicket/osTicket-1.8#688)
+
+### Performance and Security
+  * Staff can only see closed tickets if they have access via group or primary department (osTicket/osTicket-1.8#623, osTicket/osTicket-1.8#655)
+
+osTicket v1.7.6
+===============
+### Bugs
+  * Retry queries on MySQL error 1213 (osTicket/osTicket-1.8#493)
+  * Client login email is not case-sensitive (1b24bcf)
+  * Fix fetching from more than 10 mail accounts (osTicket/osTicket-1.8#468)
+  * Fix whitespace mangling of Unicode text with non-breaking-spaces (osTicket/osTicket-1.8#502)
+  * Fix delivery issue of emails delivered to group mailboxes (osTicket/osTicket-1.8#510)
+  * Fix dashboard report timeframe (osTicket/osTicket-1.8#520)
+  * Consider the `delivered-to` header in finding the system email (osTicket/osTicket-1.8#535)
+  * Fix email address list parsing on bad MIME headers (osTicket/osTicket-1.8#560)
+  * Fix login issue when upgrading from osTicket 1.6 (osTicket/osTicket-1.8#571)
+  * Fix attachment corruption on some documents like PDFs (osTicket/osTicket-1.8#576)
+
+### Performance and Security
+  * Reuse SMTP connections where possible (osTicket/osTicket-1.8#462)
+  * Enforce max file size for attachments sent via API (osTicket/osTicket-1.8#568)
+
+osTicket v1.7.5
+===============
+### Bugs
+  * Correctly upgrade the ban list from osTicket 1.6 (#869)
+  * Correctly detect ticket number in the subject line without brackets (#873, #877)
+  * Fixup redirects for modern versions of IIS (#874)
+  * Fix case-sensitive login matching on email addresses (#876)
+  * Fix missing argument to `TicketLock::lookup` (#878)
+  * Fix MYSQL constants no longer available in PHP 5.5 (5e8e233)
+  * Fix incorrect queue count for limited users (b692e5e)
+
+osTicket v1.7.4
+===============
+### Enhancements
+  * Allow local unix socket specification (#864)
+
+### Bugs
+  * Fix negative logic issue in ticket ticket filters (#839)
+  * Handle emails with poorly encoded headers (#826, #839)
+  * Properly handle HTML chars in web posts (#851)
+  * Properly handle emails body with inline Content-Disposition parameters (#853)
+  * Fix bug handling custom SQL streams (#854)
+
+### Performance and Security
+  * Ticket counters are significantly faster (#862)
+
 osTicket v1.7.3
 ===============
 ### Enhancements
