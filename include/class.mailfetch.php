@@ -398,10 +398,21 @@ class MailFetcher {
                         array('attachment', 'inline'))) {
                 $filename = $this->findFilename($part->dparameters);
             }
-            // Inline attachments without disposition.
+            // Inline attachments without disposition. NOTE that elseif is
+            // not utilized here b/c ::findFilename may return null
             if (!$filename && $part->ifparameters && $part->parameters
                     && $part->type > 0) {
                 $filename = $this->findFilename($part->parameters);
+            }
+
+            $content_id = ($part->ifid)
+                ? rtrim(ltrim($part->id, '<'), '>') : false;
+
+            // Some mail clients / servers (like Lotus Notes / Domino) will
+            // send images without a filename. For such a case, generate a
+            // random filename for the image
+            if (!$filename && $content_id && $part->type == 5) {
+                $filename = 'image-'.Misc::randCode(4).'.'.strtolower($part->subtype);
             }
 
             if($filename) {
