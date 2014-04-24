@@ -1628,6 +1628,15 @@ class Ticket {
 
     //Print ticket... export the ticket thread as PDF.
     function pdfExport($psize='Letter', $notes=false) {
+        global $thisstaff;
+
+        if (!is_string($psize)) {
+            if ($_SESSION['PAPER_SIZE'])
+                $psize = $_SESSION['PAPER_SIZE'];
+            elseif (!$thisstaff || !($psize = $thisstaff->getDefaultPaperSize()))
+                $psize = 'Letter';
+        }
+
         $pdf = new Ticket2PDF($this, $psize, $notes);
         $name='Ticket-'.$this->getExtId().'.pdf';
         $pdf->Output($name, 'I');
