@@ -1912,7 +1912,7 @@ class Ticket {
             if(TicketFilter::isBanned($vars['email'])) {
                 $errors['err']='Ticket denied. Error #403';
                 $errors['errno'] = 403;
-                $ost->logWarning('Ticket denied', 'Banned email - '.$vars['email']);
+                $ost->logWarning('Ticket denied', 'Banned email - '.$vars['email'], false);
                 return 0;
             }
 
@@ -1925,7 +1925,8 @@ class Ticket {
                 $errors['err']="You've reached the maximum open tickets allowed.";
                 $ost->logWarning('Ticket denied -'.$vars['email'],
                         sprintf('Max open tickets (%d) reached for %s ',
-                            $cfg->getMaxOpenTickets(), $vars['email']));
+                            $cfg->getMaxOpenTickets(), $vars['email']),
+                        false);
 
                 return 0;
             }
@@ -1940,7 +1941,8 @@ class Ticket {
             $errors['errno'] = 403;
             $ost->logWarning('Ticket denied',
                     sprintf('Ticket rejected ( %s) by filter "%s"',
-                        $vars['email'], $filter->getName()));
+                        $vars['email'], $filter->getName()),
+                    false);
 
             return 0;
         }
