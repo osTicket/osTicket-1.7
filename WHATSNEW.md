@@ -1,3 +1,19 @@
+osTicket v1.7.8
+===============
+### Enancements
+  * Quick print drop down on ticket print button
+  * Administrator is no longer notified on rejected tickets
+
+### Bugs
+  * Always notify department manager, even if ticket is automatically assigned
+  * Team and department members be notified on assignment and transfer
+  * Some inline images might not be detected as attachments (osTicket/osTicket-1.8#708)
+  * Ticket Assignment Alert can now be disabled (globally) (osTicket/osTicket-1.8#839)
+  * Ticket Assignment Alerts can now be disabled for teams (osTicket/osTicket-1.8#894)
+  * Assigned Agents (and Team) would not be notified of new note if ticket were closed (osTicket/osTicket-1.8#903)
+  * Fix `web.config` for newly patched IIS servers
+  * banlist: Trim new entries and updates via web form (osTicket/osTicket-1.8#837)
+
 osTicket v1.7.7
 ===============
 ### Enhancements
