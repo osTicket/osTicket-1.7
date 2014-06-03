@@ -889,7 +889,8 @@ class TicketFilter {
             'X-Autoreply'       => 'YES',
             'X-Auto-Response-Suppress' => array('ALL', 'DR', 'RN', 'NRN', 'OOF', 'AutoReply'),
             'X-Autoresponse'    => '',
-            'X-Auto-Reply-From' => ''
+            'X-Auto-Reply-From' => '',
+            'X-AMAZON-MAIL-RELAY-TYPE' => 'NOTIFICATION',
         );
 
         foreach ($auto_headers as $header=>$find) {
