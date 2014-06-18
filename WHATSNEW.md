@@ -1,3 +1,11 @@
+osTicket v1.7.9
+===============
+### Improvements
+  * Properly handle email address personal names with commas (osTicket/osTicket-1.8#940)
+  * Correctly handle email headers with leading tabs (RFC 2047) (osTicket/osTicket-1.8#953)
+  * Handle shameful `X-AMAZON-MAIL-RELAY-TYPE` invented by Amazon
+  * Fix mail header newline corruption with the Suhosin extension (osTicket/osTicket-1.8#442)
+
 osTicket v1.7.8
 ===============
 ### Enancements
