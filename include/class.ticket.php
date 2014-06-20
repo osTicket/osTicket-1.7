@@ -1428,7 +1428,11 @@ class Ticket {
                 $signature='';
 
             $msg = $this->replaceVars($msg->asArray(),
-                array('response' => $response, 'signature' => $signature));
+                    array(
+                        'response' => $response,
+                        'signature' => $signature,
+                        'recipient' => $this->getName(),
+                        ));
 
             if($cfg->stripQuotedReply() && ($tag=$cfg->getReplySeparator()))
                 $msg['body'] ="\n$tag\n\n".$msg['body'];
