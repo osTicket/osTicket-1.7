@@ -24,11 +24,12 @@ class Mailer {
 
     var $ht = array();
     var $attachments = array();
+    var $options = array();
 
     var $smtp = array();
     var $eol="\n";
 
-    function Mailer($email=null, $options=null) {
+    function Mailer($email=null, $options=array()) {
         global $cfg;
 
         if(is_object($email) && $email->isSMTPEnabled() && ($info=$email->getSMTPInfo())) { //is SMTP enabled for the current email?
@@ -45,6 +46,7 @@ class Mailer {
 
         $this->email = $email;
         $this->attachments = array();
+        $this->options = $options;
     }
 
     function getEOL() {
@@ -110,6 +112,13 @@ class Mailer {
                 'X-Mailer' =>'osTicket Mailer'
                );
 
+        // Add in the options passed to the constructor
+        $options = ($options ?: array()) + $this->options;
+
+        if (isset($options['nobounce']) && $options['nobounce'])
+            $headers['Return-Path'] = '<>';
+        elseif (is_a($this->getEmail(), 'Email'))
+            $headers['Return-Path'] = $this->getEmail()->getEmail();
 
         //Bulk.
         if (isset($options['bulk']) && $options['bulk'])
@@ -234,7 +243,7 @@ class Mailer {
     //Emails using native php mail function - if DB connection doesn't exist.
     //Don't use this function if you can help it.
     function sendmail($to, $subject, $message, $from) {
-        $mailer = new Mailer();
+        $mailer = new Mailer(null, array('notice'=>true, 'nobounce'=>true));
         $mailer->setFromAddress($from);
         return $mailer->send($to, $subject, $message);
     }
