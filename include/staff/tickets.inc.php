@@ -194,7 +194,7 @@ if($search):
 
 endif;
 
-$sortOptions=array('date'=>'ticket.created','ID'=>'ticketID','pri'=>'priority_urgency','name'=>'ticket.name',
+$sortOptions=array('date'=>'ticket.created','ID'=>'ticketID*1','pri'=>'priority_urgency','name'=>'ticket.name',
                    'subj'=>'ticket.subject','status'=>'ticket.status','assignee'=>'assigned','staff'=>'staff',
                    'dept'=>'dept_name');
 
