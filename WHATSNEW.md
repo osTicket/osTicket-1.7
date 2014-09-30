@@ -9,6 +9,7 @@ osTicket v1.7.11
   * Fix sorting by ticket number if using sequential numbers
   * Fix corruption of email mailbox if improperly encoded as ISO-8859-1
     without RFC 2047 charset hint (#1332)
+  * Dashboard statistics should use 'period' as the date limiter (#1345)
 
 ### Performance and Security
   * Fix XSS vulnerability in email template management (#1162)
