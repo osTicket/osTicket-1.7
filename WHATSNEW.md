@@ -1,3 +1,18 @@
+osTicket v1.7.11
+================
+### Enhancements
+  * Add new ost-config.php setting, `MAIL_EOL` which permanently defeats the
+    newline corruption on outgoing email via the PHP `mail()` function
+    (#1248)
+
+### Improvements
+  * Fix sorting by ticket number if using sequential numbers
+  * Fix corruption of email mailbox if improperly encoded as ISO-8859-1
+    without RFC 2047 charset hint (#1332)
+
+### Performance and Security
+  * Fix XSS vulnerability in email template management (#1162)
+
 osTicket v1.7.10
 ================
 ### Improvements
