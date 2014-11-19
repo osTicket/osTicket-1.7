@@ -1919,7 +1919,8 @@ class Ticket {
      *
      *  $autorespond and $alertstaff overrides config settings...
      */
-    function create($vars, &$errors, $origin, $autorespond=true, $alertstaff=true) {
+    static function create(&$vars, &$errors, $origin, $autorespond=true,
+            $alertstaff=true) {
         global $ost, $cfg, $thisclient, $_FILES;
 
         // Drop extra whitespace
@@ -2183,7 +2184,8 @@ class Ticket {
         if (!$thisstaff->canAssignTickets())
             unset($vars['assignId']);
 
-        if(!($ticket=Ticket::create($vars, $errors, 'staff', false)))
+        $create_vars = $vars;
+        if(!($ticket=Ticket::create($create_vars, $errors, 'staff', false)))
             return false;
 
         $vars['msgId']=$ticket->getLastMsgId();
@@ -2210,8 +2212,16 @@ class Ticket {
         }
 
         $ticket->reload();
+        $dept = $ticket->getDept();
 
-        if(!$cfg->notifyONNewStaffTicket() || !isset($vars['alertuser']))
+        // See if we need to skip auto-response.
+        $autorespond = isset($create_vars['autorespond'])
+            ? $create_vars['autorespond'] : true;
+
+        if (!$autorespond
+                || !isset($vars['alertuser'])
+                || !$dept->autoRespONNewTicket()
+                || !$cfg->notifyONNewStaffTicket())
             return $ticket; //No alerts.
 
         //Send Notice to user --- if requested AND enabled!!
