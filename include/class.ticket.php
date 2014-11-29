@@ -875,7 +875,11 @@ class Ticket {
             }
         }
 
-        if($this->isClosed()) $this->reopen(); //reopen..
+        // We're also checking autorespond flag because we don't want to
+        // reopen closed tickets on auto-reply from end user. This is not to
+        // confused with autorespond on new message setting
+        if ($autorespond && $this->isClosed())
+            $this->reopen(); //reopen..
 
        /**********   double check auto-response  ************/
         if($autorespond && (Email::getIdByEmail($this->getEmail())))
