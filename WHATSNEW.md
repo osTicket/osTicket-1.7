@@ -7,6 +7,8 @@ osTicket v1.7.12
   * Properly handle alert and auto response flags from API
     (osTicket/osTicket-1.8#1435), thanks @stevepacker
   * Do not reopen tickets for automated responses (osTicket/osTicket-1.8#1529)
+  * Fix release of ticket lock when navigating away from ticket view
+    (osTicket/osTicket-1.8#1552)
   * Forbid disabling the only active administrator (osTicket/osTicket-1.8#1569)
   * Searching for tickets searches to midnight of the end date
     (osTicket/osTicket-1.8#1572), thanks @grintor

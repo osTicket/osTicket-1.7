@@ -888,3 +888,13 @@ if(!$cfg->showNotesInline()) { ?>
     <div class="clear"></div>
 </div>
 <script type="text/javascript" src="js/ticket.js"></script>
+<script type="text/javascript">
+<?php
+    // Set the lock if one exists
+    if ($lock) { ?>
+    autoLock.setLock({
+      id:<?php echo $lock->getId(); ?>,
+      time: <?php echo $cfg->getLockTime(); ?>}, 'acquire');
+<?php } ?>
+});
+</script>
