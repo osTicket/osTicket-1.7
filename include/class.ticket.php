@@ -1959,21 +1959,6 @@ class Ticket {
             }
         }
 
-        //Init ticket filters...
-        $ticket_filter = new TicketFilter($origin, $vars);
-        // Make sure email contents should not be rejected
-        if($ticket_filter
-                && ($filter=$ticket_filter->shouldReject())) {
-            $errors['err']='Ticket denied. Error #403';
-            $errors['errno'] = 403;
-            $ost->logWarning('Ticket denied',
-                    sprintf('Ticket rejected ( %s) by filter "%s"',
-                        $vars['email'], $filter->getName()),
-                    false);
-
-            return 0;
-        }
-
         $id=0;
         $fields=array();
         $fields['name']     = array('type'=>'string',   'required'=>1, 'error'=>'Name required');
@@ -2020,6 +2005,25 @@ class Ticket {
                 $errors['duedate']='Invalid due date';
             elseif(strtotime($vars['duedate'].' '.$vars['time'])<=time())
                 $errors['duedate']='Due date must be in the future';
+        }
+
+        if (!$errors) {
+
+            # Perform ticket filter actions on the new ticket arguments
+            // Init ticket filters...
+            $ticket_filter = new TicketFilter($origin, $vars);
+            if (($ex = $ticket_filter->apply($vars))
+                && (is_a($ex, 'RejectedException')
+            ) {
+                $errors['err']='Ticket denied. Error #403';
+                $errors['errno'] = 403;
+                $ost->logWarning('Ticket denied',
+                        sprintf('Ticket rejected ( %s) by filter "%s"',
+                            $vars['email'], $ex->getRejectingFilter()->getName()),
+                        false);
+
+                return 0;
+            }
         }
 
         //Any error above is fatal.

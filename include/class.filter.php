@@ -112,7 +112,7 @@ class Filter {
     }
 
     function stopOnMatch() {
-        return ($this->ht['stop_on_match']);
+        return ($this->ht['stop_onmatch']);
     }
 
     function matchAllRules() {
@@ -671,7 +671,7 @@ class TicketFilter {
         $res = $this->vars?$this->quickList():$this->getAllActive();
         if($res) {
             while (list($id) = db_fetch_row($res))
-                array_push($this->filters, new Filter($id));
+                $this->filters[] = new Filter($id);
         }
 
         return $this->filters;
@@ -698,35 +698,24 @@ class TicketFilter {
         return $this->short_list;
     }
     /**
-     * Determine if the filters that match the received vars indicate that
-     * the email should be rejected
-     *
-     * Returns FALSE if the email should be acceptable. If the email should
-     * be rejected, the first filter that matches and has reject ticket set is
-     * returned.
-     */
-    function shouldReject() {
-        foreach ($this->getMatchingFilterList() as $filter) {
-            # Set reject if this filter indicates that the email should
-            # be blocked; however, don't unset $reject, because if it
-            # was set by another rule that did not set stopOnMatch(), we
-            # should still honor its configuration
-            if ($filter->rejectOnMatch()) return $filter;
-        }
-        return false;
-    }
-    /**
      * Determine if any filters match the received email, and if so, apply
      * actions defined in those filters to the ticket-to-be-created.
+     *
+     * Returns:
+     * RejectedException if the email should not be acceptable. If the email
+     * should be rejected, the first filter that matches and has reject
+     * ticket set is returned.
      */
     function apply(&$ticket) {
         foreach ($this->getMatchingFilterList() as $filter) {
+            if ($filter->rejectOnMatch())
+                return new RejectedException($filter);
             $filter->apply($ticket, $this->vars);
             if ($filter->stopOnMatch()) break;
         }
     }
 
-    /* static */ function getAllActive() {
+    function getAllActive() {
 
         $sql='SELECT id FROM '.FILTER_TABLE
             .' WHERE isactive=1 '
@@ -953,6 +942,18 @@ class TicketFilter {
         $sources=array('web' => 'Web', 'email' => 'Email', 'phone' => 'Web', 'staff' => 'Web', 'api' => 'API');
 
         return $sources[strtolower($origin)];
+    }
+}
+
+class RejectedException /* extends Exception */ {
+    var $filter;
+
+    function RejectedException($filter) {
+        $this->filter = $filter;
+    }
+
+    function getRejectingFilter() {
+        return $this->filter;
     }
 }
 
