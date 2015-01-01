@@ -1,3 +1,20 @@
+osTicket v1.7.12
+================
+### Improvements
+  * Remove `?:` operator usage as it is not supported until PHP 5.3 (#896)
+  * Consider auto response checkbox and department setting for new ticket by
+    staff (osTicket/osTicket-1.8#1509)
+  * Properly handle alert and auto response flags from API
+    (osTicket/osTicket-1.8#1435), thanks @stevepacker
+  * Do not reopen tickets for automated responses (osTicket/osTicket-1.8#1529)
+  * Forbid disabling the only active administrator (osTicket/osTicket-1.8#1569)
+  * Searching for tickets searches to midnight of the end date
+    (osTicket/osTicket-1.8#1572), thanks @grintor
+  * Fix rejection of tickets by filter, even if a previous matching filter
+    would stop on match (osTicket/osTicket-1.8#1644)
+  * Skip team assignment alert on new ticket if assigned to an agent
+    (a6d81c3)
+
 osTicket v1.7.11
 ================
 ### Enhancements
