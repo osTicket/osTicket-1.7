@@ -51,7 +51,7 @@ class TicketApiController extends ApiController {
                 }
                 if (!$attachment['error']
                         && ($size = $ost->getConfig()->getMaxFileSize())
-                        && ($fsize = $attachment['size'] ?: strlen($attachment['data']))
+                        && ($fsize = $attachment['size'] ? $attachment['size'] : strlen($attachment['data']))
                         && $fsize > $size) {
                     $attachment['error'] = sprintf('File %s (%s) is too big. Maximum of %s allowed',
                             Format::htmlchars($attachment['name']),

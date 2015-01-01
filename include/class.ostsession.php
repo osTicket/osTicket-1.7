@@ -21,7 +21,12 @@ class osTicketSession {
     var $id = '';
 
     function osTicketSession($ttl=0){
-        $this->ttl = $ttl ?: ini_get('session.gc_maxlifetime') ?: SESSION_TTL;
+        foreach (array($ttl, ini_get('session.gc_maxlifetime'), SESSION_TTL) as $T) {
+            if ($T) {
+                $this->ttl = $T;
+                break;
+            }
+        }
 
         // Set osTicket specific session name.
         session_name('OSTSESSID');

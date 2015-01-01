@@ -113,7 +113,8 @@ class Mailer {
                );
 
         // Add in the options passed to the constructor
-        $options = ($options ?: array()) + $this->options;
+        if (!$options) $options = array();
+        $options = += $this->options;
 
         if (isset($options['nobounce']) && $options['nobounce'])
             $headers['Return-Path'] = '<>';
