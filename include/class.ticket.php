@@ -2013,7 +2013,7 @@ class Ticket {
             // Init ticket filters...
             $ticket_filter = new TicketFilter($origin, $vars);
             if (($ex = $ticket_filter->apply($vars))
-                && (is_a($ex, 'RejectedException')
+                && is_a($ex, 'RejectedException')
             ) {
                 $errors['err']='Ticket denied. Error #403';
                 $errors['errno'] = 403;
