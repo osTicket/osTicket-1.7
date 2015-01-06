@@ -155,7 +155,9 @@ class TicketsAjaxAPI extends AjaxController {
         //dates
         $startTime  =($_REQUEST['startDate'] && (strlen($_REQUEST['startDate'])>=8))?strtotime($_REQUEST['startDate']):0;
         $endTime    =($_REQUEST['endDate'] && (strlen($_REQUEST['endDate'])>=8))?strtotime($_REQUEST['endDate']):0;
-		$endTime += (60 * 60 * 24) - 1;	// $endTime should be the last second of the day, not the first like $startTime
+        if ($endTime)
+            // $endTime should be the last second of the day, not the first like $startTime
+            $endTime += (60 * 60 * 24) - 1;
         if( ($startTime && $startTime>time()) or ($startTime>$endTime && $endTime>0))
             $startTime=$endTime=0;
 
