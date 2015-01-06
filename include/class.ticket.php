@@ -1923,7 +1923,7 @@ class Ticket {
      *
      *  $autorespond and $alertstaff overrides config settings...
      */
-    static function create(&$vars, &$errors, $origin, $autorespond=true,
+    function create(&$vars, &$errors, $origin, $autorespond=true,
             $alertstaff=true) {
         global $ost, $cfg, $thisclient, $_FILES;
 
