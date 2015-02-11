@@ -23,6 +23,16 @@ $dest = $_SESSION['_staff']['auth']['dest'];
 $msg = $_SESSION['_staff']['auth']['msg'];
 $msg = $msg?$msg:'Authentication Required';
 if($_POST) {
+    // Check the CSRF token, and ensure that future requests will have to
+    // use a different CSRF token. This will help ward off both parallel and
+    // serial brute force attacks, because new tokens will have to be
+    // requested for each attempt.
+    if (!$ost->checkCSRFToken())
+        Http::response(400, __('Valid CSRF Token Required'));
+
+    // Rotate the CSRF token (original cannot be reused)
+    $ost->getCSRF()->rotate();
+
     //$_SESSION['_staff']=array(); #Uncomment to disable login strikes.
     if(($user=Staff::login($_POST['userid'], $_POST['passwd'], $errors))){
         $dest=($dest && (!strstr($dest,'login.php') && !strstr($dest,'ajax.php')))?$dest:'index.php';
