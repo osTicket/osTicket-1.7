@@ -1,3 +1,19 @@
+osTicket v1.7.13
+================
+### Improvements
+  * Fix handling of some Redmond-specific character set encoding names
+    (osTicket/osTicket-1.8#1698)
+  * Fix regression preventing auto-responses for staff new tickets
+    (osTicket/osTicket-1.8#1712)
+  * Fix missing icon for "add new filter", thanks @Chefkeks
+    (osTicket/osTicket-1.8#1735)
+
+### Performance and Security
+  * Fix generation of random data on Windows® platforms
+    (osTicket/osTicket-1.8#1672)
+  * Fix possible DoS and brute force on login pages
+    (osTicket/osTicket-1.8#1727)
+
 osTicket v1.7.12
 ================
 ### Improvements
