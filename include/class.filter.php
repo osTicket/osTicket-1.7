@@ -386,7 +386,7 @@ class Filter {
                 elseif($vars["rule_w$i"]=='email' && $vars["rule_h$i"]=='equal' && !Validator::is_email($vars["rule_v$i"]))
                     $errors["rule_$i"]='Valid email required for the match type';
                 else //for everything-else...we assume it's valid.
-                    $rules[]=array('w'=>$vars["rule_w$i"],'h'=>$vars["rule_h$i"],'v'=>$vars["rule_v$i"]);
+                    $rules[]=array('w'=>$vars["rule_w$i"],'h'=>$vars["rule_h$i"],'v'=>trim($vars["rule_v$i"]));
             }elseif($vars["rule_v$i"]) {
                 $errors["rule_$i"]='Incomplete selection';
             }
