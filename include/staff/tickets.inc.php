@@ -585,7 +585,7 @@ $negorder=$order=='DESC'?'ASC':'DESC'; //Negate the sorting..
             <label for="assignee">Assigned To:</label>
             <select id="assignee" name="assignee">
                 <option value="">&mdash; Anyone &mdash;</option>
-                <option value="0">&mdash; Unassigned &mdash;</option>
+                <option value="s0">&mdash; Unassigned &mdash;</option>
                 <option value="<?php echo $thisstaff->getId(); ?>">Me</option>
                 <?php
                 if(($users=Staff::getStaffMembers())) {
