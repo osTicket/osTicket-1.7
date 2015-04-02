@@ -1,3 +1,20 @@
+osTicket v1.7.14
+================
+### Improvements
+  * Trim whitespace from filter match data on update (osTicket/osTicket-1.8#1844)
+  * Fix not considering the setting for alert assigned on new message
+    (osTicket/osTicket-1.8#1850)
+  * Fix advanced search for unassigned tickets (osTicket/osTicket-1.8#1857)
+  * Fix incorrect internal/public category setting in drop down for new FAQ
+    (osTicket/osTicket-1.8#1867)
+  * Fix SQL alert with multiple Message-ID headers (osTicket/osTicket-1.8#1920)
+  * Fix missing UTF-8 output encoding header for staff control panel
+    (osTicket/osTicket-1.8#1918)
+
+### Performance and Security
+  * Defer loading of thread email header information when loading ticket thread
+    (osTicket/osTicket-1.8#1900)
+
 osTicket v1.7.13
 ================
 ### Improvements
