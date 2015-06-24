@@ -28,7 +28,7 @@ if($_POST) {
     // serial brute force attacks, because new tokens will have to be
     // requested for each attempt.
     if (!$ost->checkCSRFToken())
-        Http::response(400, __('Valid CSRF Token Required'));
+        Http::response(400, 'Valid CSRF Token Required');
 
     // Rotate the CSRF token (original cannot be reused)
     $ost->getCSRF()->rotate();
