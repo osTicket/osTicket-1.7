@@ -16,7 +16,7 @@
 class Misc {
 
 	function randCode($len=8, $chars=false) {
-        $chars = $chars ?: 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+        $chars = $chars ? $chars : 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
 
         // Determine the number of bits we need
         $char_count = strlen($chars);
