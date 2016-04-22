@@ -14,6 +14,7 @@ $info=($_POST && $errors)?Format::htmlchars($_POST):$info;
 <p>Please fill in the form below to open a new ticket.</p>
 <form id="ticketForm" method="post" action="open.php" enctype="multipart/form-data">
   <?php csrf_token(); ?>
+  <?php activity_token(); ?>
   <input type="hidden" name="a" value="open">
   <table width="800" cellpadding="1" cellspacing="0" border="0">
     <tr>

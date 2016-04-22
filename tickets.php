@@ -28,7 +28,7 @@ if($_REQUEST['id']) {
 }
 
 //Process post...depends on $ticket object above.
-if($_POST && is_object($ticket) && $ticket->getId()):
+if($_POST && is_object($ticket) && $ticket->getId() && !$errors):
     $errors=array();
     switch(strtolower($_POST['a'])){
     case 'reply':
