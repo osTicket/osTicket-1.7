@@ -395,14 +395,14 @@ body {
   background: url('../images/poweredby.png') top left no-repeat;
 }
 #landing_page #new_ticket {
-  margin-top: 40px;
+  margin-top: 10px;
   width: 295px;
   padding-left: 75px;
   float: left;
   background: url('../images/new_ticket_icon.png') top left no-repeat;
 }
 #landing_page #check_status {
-  margin-top: 40px;
+  margin-top: 10px;
   width: 295px;
   padding-left: 75px;
   float: right;
