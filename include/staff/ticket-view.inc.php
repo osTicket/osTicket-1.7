@@ -259,8 +259,10 @@ if($ticket->isOverdue())
         <td width="50%">
             <table cellspacing="0" cellpadding="4" width="100%" border="0">
                 <tr>
-                    <th width="100">Help Topic:</th>
-                    <td><?php echo Format::htmlchars($ticket->getHelpTopic()); ?></td>
+                    <th width="100">Help Topic:</th>                    
+                    <td>
+                     <a href="<?php echo sprintf("%s/scp/kb.php?a=search&topicId=%s", $cfg->getBaseUrl(), $ticket->getTopicId()); ?>">
+                        <?php echo Format::htmlchars($ticket->getTopic()->getName()); ?></a></td>
                 </tr>
                 <tr>
                     <th nowrap>Last Message:</th>
