@@ -205,10 +205,13 @@ class Ticket {
     /* Help topic title  - NOT object -> $topic */
     function getHelpTopic() {
 
-        if(!$this->ht['helptopic'] && ($topic=$this->getTopic()))
+        if(!isset($this->ht['helptopic']) && ($topic=$this->getTopic())) //otherwise, its like, continually refetching the topic!
             $this->ht['helptopic'] = $topic->getName();
 
-        return $this->ht['helptopic'];
+        if(isset($this->ht['helptopic']))
+        	return $this->ht['helptopic'];
+        else 
+        	return '';
     }
 
     function getCreateDate() {
