@@ -153,6 +153,14 @@ if(!($maxfileuploads=ini_get('max_file_uploads')))
             </td>
         </tr>
         <tr>
+            <td width="220">Allow Search on phone numbers</td>
+            <td>
+                <input type="checkbox" name="search_phone" <?php echo $config['search_phone']?'checked="checked"':''; ?>>
+                If enabled, client phone number can be searched and auto-filled
+                on new tickets
+            </td>
+        </tr>
+        <tr>
             <th colspan="2">
                 <em><b>Attachments</b>:  Size and max. uploads setting mainly apply to web tickets.</em>
             </th>
