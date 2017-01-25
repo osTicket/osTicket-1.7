@@ -1055,7 +1055,7 @@ h2 .reload {
   height:auto !important;
   overflow:hidden;
   margin:0;
-  background-image:url(../images/kb_large_folder.png), url(../images/kb_category_bg.png);
+  background-image:url(../assets/default/images/kb_large_folder.png), url(../assets/default/images/kb_category_bg.png);
   background-position:0 50%, bottom left;
   background-repeat:no-repeat, repeat-x;
   border-bottom:1px solid #ddd;
