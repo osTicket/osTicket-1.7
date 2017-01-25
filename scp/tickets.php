@@ -39,7 +39,7 @@ if($_POST && !$errors):
         //More coffee please.
         $errors=array();
         $lock=$ticket->getLock(); //Ticket lock if any
-        $statusKeys=array('open'=>'Open','Reopen'=>'Open','Close'=>'Closed');
+        $statusKeys=array('open'=>'Open','Reopen'=>'Open','Close'=>'Closed','pending'=>'Pending');
         switch(strtolower($_POST['a'])):
         case 'reply':
             if(!$thisstaff->canPostReply())
@@ -512,6 +512,14 @@ if($stats['overdue']) {
 
     if(!$sysnotice && $stats['overdue']>10)
         $sysnotice=$stats['overdue'] .' overdue tickets!';
+}
+
+if($stats['pending']) {
+        $nav->addSubMenu(array('desc'=>'Pending Tickets ('.number_format($stats['pending']).')',
+                               'title'=>'Pending Tickets',
+                               'href'=>'tickets.php?status=pending',
+                               'iconclass'=>'Ticket'),
+                            ($_REQUEST['status']=='pending'));  
 }
 
 if($thisstaff->showAssignedOnly() && $stats['closed']) {
