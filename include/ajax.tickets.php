@@ -241,7 +241,7 @@ class TicketsAjaxAPI extends AjaxController {
     function releaseLock($tid, $id=0) {
         global $thisstaff;
 
-        if($id && is_numeric($id)){ //Lock Id provided!
+        if($tid && is_numeric($tid)){ //Lock Id provided!
 
             $lock = TicketLock::lookup($id, $tid);
             //Already gone?
