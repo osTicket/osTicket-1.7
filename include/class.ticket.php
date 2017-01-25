@@ -1466,6 +1466,9 @@ class Ticket {
 
         if(!$vars['staffId'] && $thisstaff)
             $vars['staffId'] = $thisstaff->getId();
+            
+        if($cfg->autoAssignOnReply() && $this->isOpen() && !$this->isAssigned() && $thisstaff->canAssignTickets())
+            $this->setStaffId($thisstaff->getId()); //Ticket wasn't assigned, staff replying now is assigned.
 
         if(!($response = $this->getThread()->addResponse($vars, $errors)))
             return null;
