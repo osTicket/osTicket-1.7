@@ -196,10 +196,10 @@ class AdminNav extends StaffNav{
                     $subnav[]=array('desc'=>'System&nbsp;Preferences','href'=>'settings.php?t=system','iconclass'=>'preferences');
                     $subnav[]=array('desc'=>'Tickets','href'=>'settings.php?t=tickets','iconclass'=>'ticket-settings');
                     $subnav[]=array('desc'=>'Emails','href'=>'settings.php?t=emails','iconclass'=>'email-settings');
-                    $subnav[]=array('desc'=>'Pages','href'=>'settings.php?t=pages','iconclass'=>'pages');
                     $subnav[]=array('desc'=>'Knowledgebase','href'=>'settings.php?t=kb','iconclass'=>'kb-settings');
                     $subnav[]=array('desc'=>'Autoresponder','href'=>'settings.php?t=autoresp','iconclass'=>'email-autoresponders');
                     $subnav[]=array('desc'=>'Alerts&nbsp;&amp;&nbsp;Notices','href'=>'settings.php?t=alerts','iconclass'=>'alert-settings');
+					$subnav[]=array('desc'=>'LDAP','href'=>'settings.php?t=ldap','iconclass'=>'preferences');
                     break;
                 case 'manage':
                     $subnav[]=array('desc'=>'Help&nbsp;Topics','href'=>'helptopics.php','iconclass'=>'helpTopics');
@@ -207,7 +207,6 @@ class AdminNav extends StaffNav{
                                         'title'=>'Ticket&nbsp;Filters','iconclass'=>'ticketFilters');
                     $subnav[]=array('desc'=>'SLA&nbsp;Plans','href'=>'slas.php','iconclass'=>'sla');
                     $subnav[]=array('desc'=>'API&nbsp;Keys','href'=>'apikeys.php','iconclass'=>'api');
-                    $subnav[]=array('desc'=>'Site&nbsp;Pages', 'href'=>'pages.php','title'=>'Pages','iconclass'=>'pages');
                     break;
                 case 'emails':
                     $subnav[]=array('desc'=>'Emails','href'=>'emails.php', 'title'=>'Email Addresses', 'iconclass'=>'emailSettings');
@@ -276,7 +275,13 @@ class UserNav {
             $navs['new']=array('desc'=>'Open&nbsp;New&nbsp;Ticket','href'=>'open.php','title'=>'');
             if($user && $user->isValid()) {
                 if($cfg && $cfg->showRelatedTickets()) {
-                    $navs['tickets']=array('desc'=>sprintf('My&nbsp;Tickets&nbsp;(%d)',$user->getNumTickets()),
+					
+					$ldapTempTickets=0;
+					if(LDAP::ldapClientAutofill())
+					{
+						$ldapTempTickets=LDAP::getTemporaryTicketNum($user->getEmail());
+					}
+                    $navs['tickets']=array('desc'=>sprintf('My&nbsp;Tickets&nbsp;(%d)',$user->getNumTickets()-$ldapTempTickets),
                                            'href'=>'tickets.php',
                                             'title'=>'Show all tickets');
                 } else {
@@ -285,7 +290,8 @@ class UserNav {
                                            'title'=>'View ticket status');
                 }
             } else {
-                $navs['status']=array('desc'=>'Check Ticket Status','href'=>'view.php','title'=>'');
+		$ldapstatustext=LDAP::ldapClientActive()?'Log&nbsp;In':'Check&nbsp;Ticket&nbsp;Status';
+                $navs['status']=array('desc'=>$ldapstatustext,'href'=>'view.php','title'=>'');
             }
             $this->navs=$navs;
         }
