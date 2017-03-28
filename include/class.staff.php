@@ -60,7 +60,7 @@ class Staff {
 
         $this->ht=db_fetch_array($res);
         $this->id  = $this->ht['staff_id'];
-        $this->teams = $this->ht['teams'] = array();
+        $this->ht['teams'] = $this->GetTeams();
         $this->group = $this->dept = null;
         $this->departments = $this->stats = array();
 
