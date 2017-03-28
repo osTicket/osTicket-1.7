@@ -93,7 +93,7 @@ if($faq) {
 }elseif($_REQUEST['a']=='add' && $thisstaff->canManageFAQ()) {
     $inc='faq.inc.php';
 } elseif($category && $_REQUEST['a']!='search') {
-    $inc='faq-category.inc.php';
+    $inc='kb-category.inc.php';
 }
 $nav->setTabActive('kbase');
 require_once(STAFFINC_DIR.'header.inc.php');
