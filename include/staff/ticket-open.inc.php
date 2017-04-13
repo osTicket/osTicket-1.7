@@ -69,6 +69,9 @@ $info=Format::htmlchars(($errors && $_POST)?$_POST:$info);
                     <option value="" selected >&mdash; Select Source &mdash;</option>
                     <option value="Phone" <?php echo ($info['source']=='Phone')?'selected="selected"':''; ?>>Phone</option>
                     <option value="Email" <?php echo ($info['source']=='Email')?'selected="selected"':''; ?>>Email</option>
+                    <option value="Verbal" <?php echo ($info['source']=='Verbal')?'selected="selected"':''; ?>>Verbal</option>
+                    <option value="Self" <?php echo ($info['source']=='Self')?'selected="selected"':''; ?>>Self</option>
+                    <option value="Online" <?php echo ($info['source']=='Online')?'selected="selected"':''; ?>>Online</option>
                     <option value="Other" <?php echo ($info['source']=='Other')?'selected="selected"':''; ?>>Other</option>
                 </select>
                 &nbsp;<font class="error"><b>*</b>&nbsp;<?php echo $errors['source']; ?></font>
@@ -79,17 +82,19 @@ $info=Format::htmlchars(($errors && $_POST)?$_POST:$info);
                 Department:
             </td>
             <td>
-                <select name="deptId">
-                    <option value="" selected >&mdash; Select Department &mdash;</option>
-                    <?php
-                    if($depts=Dept::getDepartments()) {
-                        foreach($depts as $id =>$name) {
-                            echo sprintf('<option value="%d" %s>%s</option>',
-                                    $id, ($info['deptId']==$id)?'selected="selected"':'',$name);
-                        }
+            <select id="deptId" name="deptId" style="min-width:200px;" onChange="getTopic('findtopicscp.php?dept_id='+this.value)">
+                <option value="" selected >&mdash; Select Department &mdash;</option>
+                <?php
+                if($depts=Dept::getDepartments()) {
+                    foreach($depts as $id =>$name) {
+                        echo sprintf('<option value="%d" %s>%s</option>',
+                                $id, ($info['deptId']==$id)?'selected="selected"':'', $name);
                     }
-                    ?>
-                </select>
+                } else { ?>
+                    <option value="0" >General Inquiry</option>
+                <?php
+                } ?>
+            </select>
                 &nbsp;<font class="error"><b>*</b>&nbsp;<?php echo $errors['deptId']; ?></font>
             </td>
         </tr>
@@ -98,18 +103,29 @@ $info=Format::htmlchars(($errors && $_POST)?$_POST:$info);
             <td width="160" class="required">
                 Help Topic:
             </td>
-            <td>
-                <select name="topicId">
-                    <option value="" selected >&mdash; Select Help Topic &mdash;</option>
-                    <?php
-                    if($topics=Topic::getHelpTopics()) {
-                        foreach($topics as $id =>$name) {
-                            echo sprintf('<option value="%d" %s>%s</option>',
-                                    $id, ($info['topicId']==$id)?'selected="selected"':'',$name);
-                        }
+            <td><span id="topicdiv">
+            <select id="topicId" name="topicId" style="min-width:200px;">
+                <option value="" selected="selected">&mdash; Select a Help Topic &mdash;</option>
+                <?php
+		$topicsbydept=array();
+		if($dept_id=$info["deptId"]) {
+			$query="SELECT topic_id,topic FROM ".TOPIC_TABLE."
+				WHERE isactive=1 AND ispublic=1 AND dept_id = ".$dept_id."
+				ORDER BY topic";
+		$result=db_query($query);
+		while (list($id, $name) = db_fetch_row($result)){$topicsbydept[$id]=$name;}
+	}
+		if($topics=$topicsbydept) {
+                    foreach($topics as $id =>$name) {
+                        echo sprintf('<option value="%d" %s>%s</option>',
+                                $id, ($info['topicId']==$id)?'selected="selected"':'', $name);
                     }
-                    ?>
-                </select>
+                } 
+		else { ?>
+<!--                    <option value="0" >General Inquiry</option>-->
+                <?php
+                } ?>
+            </select></span>
                 &nbsp;<font class="error"><b>*</b>&nbsp;<?php echo $errors['topicId']; ?></font>
             </td>
         </tr>
@@ -270,7 +286,7 @@ $info=Format::htmlchars(($errors && $_POST)?$_POST:$info);
                             </div>
                             <div class="uploads"></div>
                             <div class="file_input">
-                                <input type="file" class="multifile" name="attachments[]" size="30" value="" />
+                                <input type="file" multiple="multiple" class="multifile" name="attachments[]" size="30" value="" />
                             </div>
                         </td>
                     </tr>
@@ -282,8 +298,9 @@ $info=Format::htmlchars(($errors && $_POST)?$_POST:$info);
                 <tr>
                     <td width="100">Ticket Status:</td>
                     <td>
-                        <input type="checkbox" name="ticket_state" value="closed" <?php echo $info['ticket_state']?'checked="checked"':''; ?>>
-                        <b>Close On Response</b>&nbsp;<em>(Only applicable if response is entered)</em>
+                        <label><input type="checkbox" name="ticket_state" value="pending" <?php echo $info['ticket_state']?'checked="checked"':''; ?>><b>Mark as Pending</b></label>&nbsp;&nbsp;&nbsp;&nbsp;
+			<label><input type="checkbox" name="ticket_state" value="closed" <?php echo $info['ticket_state']?'checked="checked"':''; ?>>
+                        <b>Close On Response</b></label>&nbsp;<em>(Only applicable if response is entered)</em>
                     </td>
                 </tr>
             <?php
@@ -329,3 +346,49 @@ $info=Format::htmlchars(($errors && $_POST)?$_POST:$info);
     <input type="button" name="cancel" value="Cancel" onclick='window.location.href="tickets.php"'>
 </p>
 </form>
+<script>
+
+function getXMLHTTP() { //fuction to return the xml http object
+        var xmlhttp=false; 
+        try{
+            xmlhttp=new XMLHttpRequest();
+        }
+        catch(e)    {      
+            try{           
+                xmlhttp= new ActiveXObject("Microsoft.XMLHTTP");
+            }
+            catch(e){
+                try{
+                xmlhttp = new ActiveXObject("Msxml2.XMLHTTP");
+                }
+                catch(e1){
+                    xmlhttp=false;
+                }
+            }
+        }
+
+        return xmlhttp;
+    }
+
+    function getTopic(strURL)
+    {        
+     var req = getXMLHTTP(); // fuction to get xmlhttp object
+     if (req)
+     {
+      req.onreadystatechange = function()
+     {
+      if (req.readyState == 4) { //data is retrieved from server
+       if (req.status == 200) { // which reprents ok status                    
+         document.getElementById('topicdiv').innerHTML=req.responseText;
+      }
+      else
+      {
+         alert("There was a problem while using XMLHTTP:\n");
+      }
+      }            
+      }        
+    req.open("GET", strURL, true); //open url using get method
+    req.send(null);
+     }
+    }
+</script>
